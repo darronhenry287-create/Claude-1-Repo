@@ -1,0 +1,24 @@
+  <section class="section" id="cart-page">
+    <div class="wrap">
+      <h1 style="margin-bottom:2rem">Your Cart</h1>
+
+      <div id="cart-page-empty" class="drawer__empty" hidden>
+        <p style="font-size:1.2rem;font-family:var(--serif)">Your cart is quiet for now.</p>
+        <p style="margin-top:.5rem">Time to rest easy.</p>
+        <a href="collection.html" class="btn btn-clay btn-lg" style="margin-top:1.5rem">Shop the collection</a>
+      </div>
+
+      <div class="cart-page">
+        <div id="cart-page-items"></div>
+        <aside class="cart-summary" id="cart-page-summary">
+          <h3>Order summary</h3>
+          <div class="cart-summary__row"><span>Subtotal</span><span id="cart-page-subtotal">$0.00</span></div>
+          <div class="cart-summary__row"><span>Shipping</span><span class="muted">Calculated at checkout</span></div>
+          <div class="cart-summary__total"><span>Total</span><span id="cart-page-total">$0.00</span></div>
+          <button class="btn btn-primary btn-block btn-lg" data-action="checkout" style="margin-top:1.4rem">Checkout</button>
+          <a href="collection.html" class="btn btn-ghost btn-block" style="margin-top:.6rem">Continue shopping</a>
+          <p class="drawer__note" style="margin-top:1rem">100-night trial · Free returns · Secure checkout</p>
+        </aside>
+      </div>
+    </div>
+  </section>

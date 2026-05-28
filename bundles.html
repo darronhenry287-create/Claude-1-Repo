@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart — SOMNA</title>
-  <meta name="description" content="Your SOMNA cart.">
+  <title>Bundles — SOMNA</title>
+  <meta name="description" content="Save more with SOMNA sleep bundles.">
   <link rel="stylesheet" href="assets/theme.css">
 </head>
 <body>
@@ -29,28 +29,30 @@
   </header>
 
   <main>
-  <section class="section" id="cart-page">
+  <section style="background:var(--cream);padding-block:clamp(2.5rem,5vw,4rem)">
+    <div class="wrap center">
+      <span class="eyebrow">Bundles</span>
+      <h1 style="margin-top:.8rem">Build your perfect night for less.</h1>
+      <p class="lede" style="max-width:520px;margin:1rem auto 0">Save when you bundle the essentials. Every set ships free with our 100-night trial.</p>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="wrap">
-      <h1 style="margin-bottom:2rem">Your Cart</h1>
-
-      <div id="cart-page-empty" class="drawer__empty" hidden>
-        <p style="font-size:1.2rem;font-family:var(--serif)">Your cart is quiet for now.</p>
-        <p style="margin-top:.5rem">Time to rest easy.</p>
-        <a href="collection.html" class="btn btn-clay btn-lg" style="margin-top:1.5rem">Shop the collection</a>
+      <div class="grid products" style="grid-template-columns:repeat(3,1fr)">
+        <article class="card reveal"><div class="card__media"><span class="pill pill-clay card__badge">Save $20</span><div class="card__quick"><button class="btn btn-primary btn-block" data-add data-id="couples-bundle" data-name="Couple's Pillow Bundle" data-price="138">Quick add · $138</button></div><img src="assets/img/bundle.svg" alt="Couple's Pillow Bundle"></div><h3 class="card__title">Couple's Pillow Bundle</h3><div class="card__reviews">2 × The Cloud Pillow</div><div class="card__row"><span class="card__price"><span class="was">$158</span>$138</span></div></article>
+        <article class="card reveal"><div class="card__media"><span class="pill pill-clay card__badge">Save $39</span><div class="card__quick"><button class="btn btn-primary btn-block" data-add data-id="cool-bundle" data-name="Cool Sleeper Bundle" data-price="199">Quick add · $199</button></div><img src="assets/img/sheets.svg" alt="Cool Sleeper Bundle"></div><h3 class="card__title">Cool Sleeper Bundle</h3><div class="card__reviews">Pillow + CloudCool Sheets</div><div class="card__row"><span class="card__price"><span class="was">$238</span>$199</span></div></article>
+        <article class="card reveal"><div class="card__media"><span class="pill pill-clay card__badge">Save $58</span><div class="card__quick"><button class="btn btn-primary btn-block" data-add data-id="complete-set" data-name="The Complete Sleep Set" data-price="259">Quick add · $259</button></div><img src="assets/img/bundle.svg" alt="The Complete Sleep Set"></div><h3 class="card__title">The Complete Sleep Set</h3><div class="card__reviews">Pillow + Duvet + Mask + Sheets</div><div class="card__row"><span class="card__price"><span class="was">$317</span>$259</span></div></article>
       </div>
+    </div>
+  </section>
 
-      <div class="cart-page">
-        <div id="cart-page-items"></div>
-        <aside class="cart-summary" id="cart-page-summary">
-          <h3>Order summary</h3>
-          <div class="cart-summary__row"><span>Subtotal</span><span id="cart-page-subtotal">$0.00</span></div>
-          <div class="cart-summary__row"><span>Shipping</span><span class="muted">Calculated at checkout</span></div>
-          <div class="cart-summary__total"><span>Total</span><span id="cart-page-total">$0.00</span></div>
-          <button class="btn btn-primary btn-block btn-lg" data-action="checkout" style="margin-top:1.4rem">Checkout</button>
-          <a href="collection.html" class="btn btn-ghost btn-block" style="margin-top:.6rem">Continue shopping</a>
-          <p class="drawer__note" style="margin-top:1rem">100-night trial · Free returns · Secure checkout</p>
-        </aside>
-      </div>
+  <section class="section night center">
+    <div class="wrap" style="max-width:620px">
+      <span class="eyebrow">Mix & match</span>
+      <h2 style="margin:1rem 0">Want a custom bundle?</h2>
+      <p class="lede">Add any two items to your cart and we'll apply bundle pricing at checkout.</p>
+      <a href="collection.html" class="btn btn-clay btn-lg" style="margin-top:1.5rem">Shop all products</a>
     </div>
   </section>
 

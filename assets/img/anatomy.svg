@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Inside the Cloud Pillow, layer cutaway">
+  <rect width="600" height="600" fill="#efe6d8"/>
+  <g stroke="#d8c9b2" stroke-width="2">
+    <path d="M90 200c0-30 40-50 210-50s210 20 210 50-94 40-210 40-210-10-210-40Z" fill="#fffdf9"/>
+    <path d="M90 250c0 26 94 38 210 38s210-12 210-38" fill="#dff0f4"/>
+    <path d="M90 250v40c0 26 94 38 210 38s210-12 210-38v-40" fill="#e8f4f7"/>
+    <path d="M90 300v50c0 28 94 42 210 42s210-14 210-42v-50" fill="#f1e6d4"/>
+    <path d="M90 360v40c0 30 94 46 210 46s210-16 210-46v-40" fill="#e6d8bf"/>
+  </g>
+  <g font-family="Hanken Grotesk, sans-serif" font-size="18" fill="#46413a">
+    <circle cx="120" cy="220" r="4" fill="#c08a6a"/><text x="135" y="225">Tencel™ cover</text>
+    <circle cx="120" cy="270" r="4" fill="#7aa0b0"/><text x="135" y="275">CloudCool™ gel</text>
+    <circle cx="120" cy="330" r="4" fill="#c08a6a"/><text x="135" y="335">Adaptive memory core</text>
+    <circle cx="120" cy="395" r="4" fill="#a06b4d"/><text x="135" y="400">Support base</text>
+  </g>
+</svg>

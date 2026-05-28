@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="SOMNA bundle">
+  <rect width="600" height="600" fill="#f1e9dd"/>
+  <ellipse cx="300" cy="470" rx="220" ry="30" fill="#1c1a17" opacity="0.08"/>
+  <rect x="70" y="240" width="200" height="190" rx="22" fill="#e7ecf0" stroke="#cdd6dd" stroke-width="2"/>
+  <rect x="300" y="200" width="230" height="230" rx="22" fill="#f1e6d4" stroke="#d8c9b2" stroke-width="2"/>
+  <path d="M330 320c0-30 24-50 85-50s85 20 85 50-38 40-85 40-85-10-85-40Z" fill="#fffdf9" stroke="#e0d2bd" stroke-width="2"/>
+  <circle cx="160" cy="200" r="46" fill="#efe6f0" stroke="#d8c9d8" stroke-width="2"/>
+</svg>

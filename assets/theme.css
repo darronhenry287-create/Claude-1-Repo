@@ -274,6 +274,8 @@ em, .italic { font-style: italic; }
   aspect-ratio: 1/1; border-radius: var(--radius); overflow: hidden; position: relative;
   background: linear-gradient(150deg, #faf6f0, #e6dccc); margin-bottom: 1rem;
 }
+.card__media img { width: 100%; height: 100%; object-fit: cover; }
+.gallery__main img, .gallery__thumb img { width: 100%; height: 100%; object-fit: cover; }
 .card__badge { position: absolute; top: 1rem; left: 1rem; z-index: 2; }
 .card__quick {
   position: absolute; inset-inline: 1rem; bottom: 1rem; z-index: 2;
@@ -378,6 +380,49 @@ em, .italic { font-style: italic; }
 .sticky-bar__price { font-weight: 600; font-size: 0.9rem; }
 
 /* ============================================================
+   HOW IT WORKS / STEPS
+   ============================================================ */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+.step { text-align: center; padding: 1rem; }
+.step__num { width: 54px; height: 54px; margin: 0 auto 1.2rem; border-radius: 50%; background: var(--ink); color: var(--bone); display: grid; place-items: center; font-family: var(--serif); font-size: 1.4rem; }
+.step h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+.step p { color: var(--muted); font-size: 0.92rem; }
+
+/* ============================================================
+   IMAGE BANNER
+   ============================================================ */
+.image-banner { position: relative; min-height: clamp(320px, 50vh, 480px); display: grid; place-items: center; overflow: hidden; }
+.image-banner__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.image-banner__overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(28,26,23,0.25), rgba(28,26,23,0.55)); }
+.image-banner__content { position: relative; text-align: center; color: var(--white); padding: 2rem; }
+.image-banner__content .display { font-family: var(--serif); }
+
+/* ============================================================
+   WHAT'S IN THE BOX
+   ============================================================ */
+.boxlist { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
+.boxitem { text-align: center; }
+.boxitem .ic { width: 60px; height: 60px; margin: 0 auto 1rem; border-radius: 16px; display: grid; place-items: center; background: var(--white); color: var(--clay-deep); box-shadow: 0 10px 24px -16px rgba(28,26,23,0.5); }
+.boxitem h4 { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; margin-bottom: 0.3rem; }
+.boxitem p { font-size: 0.85rem; color: var(--muted); }
+
+/* ============================================================
+   REVIEW SUMMARY / BREAKDOWN
+   ============================================================ */
+.review-summary { display: grid; grid-template-columns: auto 1fr; gap: clamp(1.5rem,4vw,3rem); align-items: center; max-width: 620px; margin-inline: auto; background: var(--white); border-radius: var(--radius-lg); padding: 1.8rem 2rem; box-shadow: 0 24px 50px -40px rgba(28,26,23,0.5); }
+.review-summary__score { text-align: center; }
+.review-summary__score .num { font-family: var(--serif); font-size: 3rem; line-height: 1; }
+.breakdown { display: grid; gap: 0.5rem; }
+.breakdown__row { display: grid; grid-template-columns: 28px 1fr 38px; gap: 0.7rem; align-items: center; font-size: 0.82rem; color: var(--muted); }
+.breakdown__bar { height: 7px; background: var(--sand); border-radius: 100px; overflow: hidden; }
+.breakdown__bar i { display: block; height: 100%; background: var(--clay); border-radius: 100px; }
+@media (max-width: 680px) {
+  .steps { grid-template-columns: 1fr; }
+  .boxlist { grid-template-columns: 1fr 1fr; }
+  .review-summary { grid-template-columns: 1fr; text-align: center; }
+}
+
+/* ============================================================
    TWILIGHT / NIGHT SECTION
    ============================================================ */
 .night {
@@ -449,6 +494,9 @@ em, .italic { font-style: italic; }
 .footer__col a:hover { color: var(--clay); }
 .footer__bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; flex-wrap: wrap; gap: 1rem; }
 .footer__bottom p { font-size: 0.8rem; color: rgba(246,242,236,0.5); }
+.footer__legal { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+.footer__legal a { font-size: 0.8rem; color: rgba(246,242,236,0.6); transition: color 0.2s; }
+.footer__legal a:hover { color: var(--clay); }
 .footer__socials { display: flex; gap: 1rem; }
 .footer__socials a { width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); display: grid; place-items: center; transition: all 0.25s; }
 .footer__socials a:hover { background: var(--clay); border-color: var(--clay); }

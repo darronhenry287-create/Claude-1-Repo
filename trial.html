@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart — SOMNA</title>
-  <meta name="description" content="Your SOMNA cart.">
+  <title>100-Night Trial — SOMNA</title>
+  <meta name="description" content="Sleep on it for 100 nights, risk-free.">
   <link rel="stylesheet" href="assets/theme.css">
 </head>
 <body>
@@ -29,28 +29,37 @@
   </header>
 
   <main>
-  <section class="section" id="cart-page">
+  <section class="section night center" style="padding-block:clamp(3.5rem,7vw,6rem)">
+    <div class="wrap" style="max-width:680px;position:relative">
+      <span class="eyebrow">Risk-free</span>
+      <h1 class="display" style="color:var(--white);margin:1rem 0">The 100-Night Trial</h1>
+      <p class="lede">Great sleep takes more than one night to judge. So take 100 of them, on us.</p>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="wrap">
-      <h1 style="margin-bottom:2rem">Your Cart</h1>
-
-      <div id="cart-page-empty" class="drawer__empty" hidden>
-        <p style="font-size:1.2rem;font-family:var(--serif)">Your cart is quiet for now.</p>
-        <p style="margin-top:.5rem">Time to rest easy.</p>
-        <a href="collection.html" class="btn btn-clay btn-lg" style="margin-top:1.5rem">Shop the collection</a>
+      <div class="steps">
+        <div class="step reveal"><div class="step__num">1</div><h3>Order & sleep</h3><p>Get your pillow and start sleeping. Give your body a couple of weeks to adjust.</p></div>
+        <div class="step reveal"><div class="step__num">2</div><h3>Not in love?</h3><p>Email care@somna.example any time within 100 nights. No forms, no hassle.</p></div>
+        <div class="step reveal"><div class="step__num">3</div><h3>Free return, full refund</h3><p>We'll arrange a free pickup or return label and refund you in full.</p></div>
       </div>
+    </div>
+  </section>
 
-      <div class="cart-page">
-        <div id="cart-page-items"></div>
-        <aside class="cart-summary" id="cart-page-summary">
-          <h3>Order summary</h3>
-          <div class="cart-summary__row"><span>Subtotal</span><span id="cart-page-subtotal">$0.00</span></div>
-          <div class="cart-summary__row"><span>Shipping</span><span class="muted">Calculated at checkout</span></div>
-          <div class="cart-summary__total"><span>Total</span><span id="cart-page-total">$0.00</span></div>
-          <button class="btn btn-primary btn-block btn-lg" data-action="checkout" style="margin-top:1.4rem">Checkout</button>
-          <a href="collection.html" class="btn btn-ghost btn-block" style="margin-top:.6rem">Continue shopping</a>
-          <p class="drawer__note" style="margin-top:1rem">100-night trial · Free returns · Secure checkout</p>
-        </aside>
+  <section class="section" style="background:var(--cream)">
+    <div class="wrap" style="max-width:760px">
+      <h2 style="margin-bottom:1.2rem">The fine print</h2>
+      <div class="rte">
+        <ul>
+          <li>The trial covers your first Cloud Pillow purchase and runs for 100 nights from delivery.</li>
+          <li>Returns are free within the continental US. International returns may incur a shipping fee.</li>
+          <li>Returned pillows are donated or recycled — never resold — so you can buy with a clear conscience.</li>
+          <li>Bundles are eligible; the trial applies to the full set.</li>
+        </ul>
+        <p>Questions? <a href="contact.html">Contact our team</a> — we're happy to help you find your fit.</p>
       </div>
+      <a href="product.html" class="btn btn-clay btn-lg" style="margin-top:1.5rem">Start your 100 nights</a>
     </div>
   </section>
 

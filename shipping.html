@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart — SOMNA</title>
-  <meta name="description" content="Your SOMNA cart.">
+  <title>Shipping & Returns — SOMNA</title>
+  <meta name="description" content="Shipping and returns policy for SOMNA.">
   <link rel="stylesheet" href="assets/theme.css">
 </head>
 <body>
@@ -29,27 +29,29 @@
   </header>
 
   <main>
-  <section class="section" id="cart-page">
-    <div class="wrap">
-      <h1 style="margin-bottom:2rem">Your Cart</h1>
+  <section style="background:var(--cream);padding-block:clamp(2.5rem,5vw,4rem)">
+    <div class="wrap center"><span class="eyebrow">Policies</span><h1 style="margin-top:.8rem">Shipping & Returns</h1></div>
+  </section>
 
-      <div id="cart-page-empty" class="drawer__empty" hidden>
-        <p style="font-size:1.2rem;font-family:var(--serif)">Your cart is quiet for now.</p>
-        <p style="margin-top:.5rem">Time to rest easy.</p>
-        <a href="collection.html" class="btn btn-clay btn-lg" style="margin-top:1.5rem">Shop the collection</a>
-      </div>
+  <section class="section">
+    <div class="wrap" style="max-width:760px">
+      <p class="form__note" style="margin-bottom:2rem">Last updated: May 2026 · This is a starting template — review with your own policies before launch.</p>
+      <div class="rte">
+        <h2>Shipping</h2>
+        <p>We offer <strong>free 2-day shipping</strong> on all orders over $75 within the continental United States. Orders under $75 ship at a flat rate of $6.95. Most orders are processed and dispatched within 24 hours on business days.</p>
+        <ul>
+          <li><strong>Standard (US):</strong> 2–5 business days</li>
+          <li><strong>Expedited (US):</strong> 1–2 business days (rate shown at checkout)</li>
+          <li><strong>International:</strong> 5–14 business days to 40+ countries; duties and taxes may apply on delivery</li>
+        </ul>
+        <p>You'll receive a tracking link by email as soon as your order ships. If your tracking hasn't updated after 3 business days, <a href="contact.html">contact us</a>.</p>
 
-      <div class="cart-page">
-        <div id="cart-page-items"></div>
-        <aside class="cart-summary" id="cart-page-summary">
-          <h3>Order summary</h3>
-          <div class="cart-summary__row"><span>Subtotal</span><span id="cart-page-subtotal">$0.00</span></div>
-          <div class="cart-summary__row"><span>Shipping</span><span class="muted">Calculated at checkout</span></div>
-          <div class="cart-summary__total"><span>Total</span><span id="cart-page-total">$0.00</span></div>
-          <button class="btn btn-primary btn-block btn-lg" data-action="checkout" style="margin-top:1.4rem">Checkout</button>
-          <a href="collection.html" class="btn btn-ghost btn-block" style="margin-top:.6rem">Continue shopping</a>
-          <p class="drawer__note" style="margin-top:1rem">100-night trial · Free returns · Secure checkout</p>
-        </aside>
+        <h2>Returns & exchanges</h2>
+        <p>Every pillow comes with our <a href="trial.html">100-night trial</a>. If you're not satisfied, email <strong>care@somna.example</strong> within 100 nights of delivery and we'll arrange a free return and full refund. Accessories (sheets, masks) can be returned unused within 30 days.</p>
+        <p>To start a return, include your order number. We'll send a prepaid label or arrange a pickup. Refunds are issued to your original payment method within 5–10 business days of us receiving the item.</p>
+
+        <h2>Damaged or wrong items</h2>
+        <p>If your order arrives damaged or incorrect, email us within 14 days with a photo and we'll make it right immediately — no return required for damaged goods.</p>
       </div>
     </div>
   </section>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Silk Sleep Mask">
+  <rect width="600" height="600" fill="#f0e8f0"/>
+  <ellipse cx="300" cy="450" rx="180" ry="24" fill="#1c1a17" opacity="0.07"/>
+  <path d="M150 280c0-40 60-70 150-70s150 30 150 70-60 80-150 80-150-40-150-80Z" fill="#efe6f0" stroke="#d8c9d8" stroke-width="2"/>
+  <path d="M150 280c40-16 100-24 150-24s110 8 150 24" stroke="#d8c9d8" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M450 280c40 4 70 16 70 16M150 280c-40 4-70 16-70 16" stroke="#d8c9d8" stroke-width="3" fill="none"/>
+</svg>

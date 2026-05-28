@@ -1,0 +1,24 @@
+<section class="image-banner">
+  {%- if section.settings.image != blank -%}
+    <img src="{{ section.settings.image | image_url: width: 2000 }}" alt="{{ section.settings.image.alt | escape }}" class="image-banner__bg" loading="lazy">
+  {%- else -%}
+    <div class="image-banner__bg" style="background:linear-gradient(160deg,var(--twilight-2),var(--twilight-1))"></div>
+  {%- endif -%}
+  <div class="image-banner__overlay"></div>
+  <div class="image-banner__content">
+    <p class="display" style="font-size:clamp(1.8rem,4vw,3rem);max-width:16ch;margin-inline:auto">{{ section.settings.quote }}</p>
+    {%- if section.settings.attribution != blank -%}<p style="margin-top:1rem;letter-spacing:.1em">{{ section.settings.attribution }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image banner",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "quote", "label": "Quote", "default": "The best $89 I've ever spent on sleep." },
+    { "type": "text", "id": "attribution", "label": "Attribution", "default": "— WIRECUTTER" }
+  ],
+  "presets": [ { "name": "Image banner" } ]
+}
+{% endschema %}
