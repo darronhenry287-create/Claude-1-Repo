@@ -46,6 +46,7 @@
       },
       "block_order": ["p1", "p2", "p3"],
       "settings": {
+        "fallback": "somna-lifestyle.jpg",
         "eyebrow": "The problem with pillows",
         "heading": "Your old pillow is working against you.",
         "text": "<p>Flat by midnight. Too hot by 2am. Too high, then too low. The average pillow forgets its shape in 6 months — and your neck pays the price every morning.</p><p>We spent three years and 47 prototypes building one that doesn't.</p>",

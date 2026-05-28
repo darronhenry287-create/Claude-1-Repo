@@ -27,7 +27,7 @@
         "p4": { "type": "point", "settings": { "text": "Support base — the dual-height foundation that never goes flat" } }
       },
       "block_order": ["p1", "p2", "p3", "p4"],
-      "settings": { "eyebrow": "Inside the Cloud", "heading": "Four layers, one perfect night.", "text": "<p>Every layer earns its place — engineered together for support, coolness, and comfort that lasts.</p>", "cta_text": "", "bg": true, "warm": true }
+      "settings": { "fallback": "somna-anatomy.jpg", "eyebrow": "Inside the Cloud", "heading": "Four layers, one perfect night.", "text": "<p>Every layer earns its place — engineered together for support, coolness, and comfort that lasts.</p>", "cta_text": "", "bg": true, "warm": true }
     },
     "banner": {
       "type": "image-banner",

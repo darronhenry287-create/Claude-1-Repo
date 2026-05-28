@@ -11,15 +11,10 @@
           {% render 'product-card', product: product %}
         {%- endfor -%}
       {%- else -%}
-        {%- comment -%} Fallback placeholders for preview/theme editor {%- endcomment -%}
-        {%- for i in (1..3) -%}
-          <article class="card reveal">
-            <div class="card__media">{% render 'pillow-art' %}</div>
-            <h3 class="card__title">The Cloud Pillow</h3>
-            <div class="card__reviews"><span class="star">★★★★★</span> 12,400 reviews</div>
-            <div class="card__row"><span class="card__price">$89</span></div>
-          </article>
-        {%- endfor -%}
+        {%- comment -%} Bundled demo products until a collection is connected {%- endcomment -%}
+        <article class="card reveal"><div class="card__media"><span class="pill pill-clay card__badge">Bestseller</span><img src="{{ 'somna-pdp-1.jpg' | asset_url }}" alt="The Cloud Pillow"></div><h3 class="card__title">The Cloud Pillow</h3><div class="card__reviews"><span class="star">★★★★★</span> 12,400 reviews</div><div class="card__row"><span class="card__price">$89</span></div></article>
+        <article class="card reveal"><div class="card__media"><img src="{{ 'somna-duvet.jpg' | asset_url }}" alt="The Weighted Duvet"></div><h3 class="card__title">The Weighted Duvet</h3><div class="card__reviews"><span class="star">★★★★★</span> 3,108 reviews</div><div class="card__row"><span class="card__price">$129</span></div></article>
+        <article class="card reveal"><div class="card__media"><img src="{{ 'somna-mask.jpg' | asset_url }}" alt="Silk Sleep Mask"></div><h3 class="card__title">Silk Sleep Mask</h3><div class="card__reviews"><span class="star">★★★★☆</span> 980 reviews</div><div class="card__row"><span class="card__price">$39</span></div></article>
       {%- endif -%}
     </div>
   </div>

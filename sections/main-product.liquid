@@ -11,7 +11,7 @@
           {%- if product.featured_image -%}
             <img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.featured_image.alt | escape }}" width="1200" height="1200">
           {%- else -%}
-            <div class="art-stage" style="width:80%">{% render 'pillow-art' %}</div>
+            <img src="{{ 'somna-pdp-1.jpg' | asset_url }}" alt="{{ product.title | escape }}">
           {%- endif -%}
         </div>
         {%- if product.images.size > 1 -%}
@@ -20,6 +20,13 @@
               <button class="gallery__thumb {% if forloop.first %}active{% endif %}" data-full="{{ image | image_url: width: 1200 }}">
                 <img src="{{ image | image_url: width: 240 }}" alt="{{ image.alt | escape }}" width="120" height="120">
               </button>
+            {%- endfor -%}
+          </div>
+        {%- elsif product.featured_image == blank -%}
+          <div class="gallery__thumbs">
+            {%- assign demo = 'somna-pdp-1.jpg,somna-pdp-2.jpg,somna-pdp-3.jpg,somna-pdp-4.jpg' | split: ',' -%}
+            {%- for d in demo -%}
+              <button class="gallery__thumb {% if forloop.first %}active{% endif %}" data-full="{{ d | asset_url }}"><img src="{{ d | asset_url }}" alt="" width="120" height="120"></button>
             {%- endfor -%}
           </div>
         {%- endif -%}
@@ -102,7 +109,7 @@
 <div class="sticky-bar" id="sticky-bar" data-product="{{ product.handle }}">
   <div class="sticky-bar__inner">
     <div class="sticky-bar__info">
-      <div class="sticky-bar__thumb">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 96 }}" alt="" width="48" height="48">{%- endif -%}</div>
+      <div class="sticky-bar__thumb">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 96 }}" alt="" width="48" height="48">{%- else -%}<img src="{{ 'somna-pdp-1.jpg' | asset_url }}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px">{%- endif -%}</div>
       <div><div class="sticky-bar__name">{{ product.title }}</div><div class="sticky-bar__price" id="sticky-price">{{ product.price | money }}</div></div>
     </div>
     <button class="btn btn-clay" data-add data-id="{{ product.handle }}" data-name="{{ product.title | escape }}" data-price="{{ product.price | money_without_currency }}" onclick="document.getElementById('product-form').requestSubmit()">{{ 'products.product.add_to_cart' | t }}</button>

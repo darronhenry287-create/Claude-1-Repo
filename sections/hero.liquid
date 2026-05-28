@@ -1,6 +1,6 @@
-<section class="hero">
-  <div class="hero__inner">
-    <div class="hero__copy">
+<section class="hero-split">
+  <div class="hero-split__copy">
+    <div class="hero-split__inner">
       {%- if section.settings.show_rating -%}
         <div class="hero__rating"><span class="star">★★★★★</span><span class="muted" style="font-size:.85rem">{{ section.settings.rating_text }}</span></div>
       {%- endif -%}
@@ -16,15 +16,13 @@
         {%- endfor -%}
       </ul>
     </div>
-    <div class="hero__visual">
-      <div class="hero__product">
-        {%- if section.settings.image != blank -%}
-          <img src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.image.alt | escape }}">
-        {%- else -%}
-          {% render 'pillow-art' %}
-        {%- endif -%}
-      </div>
-    </div>
+  </div>
+  <div class="hero-split__media">
+    {%- if section.settings.image != blank -%}
+      <img src="{{ section.settings.image | image_url: width: 1600 }}" alt="{{ section.settings.image.alt | escape }}" fetchpriority="high">
+    {%- else -%}
+      <img src="{{ 'somna-hero.jpg' | asset_url }}" alt="Rest, beautifully" fetchpriority="high">
+    {%- endif -%}
   </div>
 </section>
 
@@ -32,7 +30,7 @@
 {
   "name": "Hero",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Product image" },
+    { "type": "image_picker", "id": "image", "label": "Hero image (defaults to bundled photo)" },
     { "type": "checkbox", "id": "show_rating", "label": "Show rating", "default": true },
     { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4.9 · 12,400+ five-star sleepers" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Sleep, engineered." },
