@@ -52,6 +52,7 @@
     }
     function renderCart() {
       bumpCount();
+      renderCartPage();
       const body = $('#cart-body'), foot = $('#cart-foot');
       if (!body) return;
       if (!cart.length) {
@@ -94,6 +95,39 @@
       saveCart(); renderCart(); openDrawer();
     }
 
+    /* Full cart page (cart.html) */
+    function renderCartPage() {
+      const items = $('#cart-page-items');
+      if (!items) return;
+      const empty = $('#cart-page-empty'), summary = $('#cart-page-summary');
+      if (!cart.length) {
+        items.innerHTML = '';
+        if (empty) empty.hidden = false;
+        if (summary) summary.style.display = 'none';
+        return;
+      }
+      if (empty) empty.hidden = true;
+      if (summary) summary.style.display = '';
+      items.innerHTML = cart.map((i, idx) => `
+        <div class="cartline">
+          <div class="cartline__thumb"></div>
+          <div class="cartline__info">
+            <h4>${i.name}</h4>
+            <div class="v">${i.variant || ''}</div>
+            <button class="drawer__remove" data-prm="${idx}">Remove</button>
+          </div>
+          <div class="drawer__qty">
+            <button data-pq="-1" data-i="${idx}">−</button><span>${i.qty}</span><button data-pq="1" data-i="${idx}">+</button>
+          </div>
+          <div class="cartline__price">${money(i.price * i.qty)}</div>
+        </div>`).join('');
+      const total = cartTotal();
+      const subEl = $('#cart-page-subtotal'); if (subEl) subEl.textContent = money(total);
+      const totEl = $('#cart-page-total'); if (totEl) totEl.textContent = money(total);
+      $$('[data-pq]', items).forEach((b) => b.addEventListener('click', () => { cart[+b.dataset.i].qty += +b.dataset.pq; if (cart[+b.dataset.i].qty <= 0) cart.splice(+b.dataset.i, 1); saveCart(); renderCart(); }));
+      $$('[data-prm]', items).forEach((b) => b.addEventListener('click', () => { cart.splice(+b.dataset.prm, 1); saveCart(); renderCart(); }));
+    }
+
     $$('[data-add]').forEach((btn) => btn.addEventListener('click', (e) => {
       e.preventDefault();
       const scope = btn.closest('[data-product]') || document;
@@ -111,6 +145,14 @@
       }
       addToCart({ id, name, price, qty, variant });
     }));
+
+    const drawerFoot = $('#cart-foot');
+    if (drawerFoot && !$('#view-cart-link', drawerFoot)) {
+      const a = document.createElement('a');
+      a.id = 'view-cart-link'; a.href = 'cart.html'; a.className = 'btn btn-ghost btn-block';
+      a.style.marginTop = '0.6rem'; a.textContent = 'View full cart';
+      drawerFoot.appendChild(a);
+    }
 
     renderCart();
   }
@@ -210,11 +252,18 @@
   }, { threshold: 0.12 });
   $$('.reveal').forEach((el) => revealIO.observe(el));
 
-  /* ---------- Newsletter (mock only) ---------- */
-  if (MOCK) $$('.signup').forEach((form) => form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    form.innerHTML = '<p style="font-family:var(--serif);font-size:1.2rem">Welcome to SOMNA ✦ Check your inbox for 10% off.</p>';
-  }));
+  /* ---------- Newsletter + contact (mock only) ---------- */
+  if (MOCK) {
+    $$('.signup').forEach((form) => form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      form.innerHTML = '<p style="font-family:var(--serif);font-size:1.2rem">Welcome to SOMNA ✦ Check your inbox for 10% off.</p>';
+    }));
+    const contact = $('#contact-form');
+    if (contact) contact.addEventListener('submit', (e) => {
+      e.preventDefault();
+      contact.innerHTML = '<div class="note-success">Thanks — your message is on its way. We\'ll reply within one business day.</div>';
+    });
+  }
 
   /* ---------- Init ---------- */
   if (tiers.length) syncTier(tiers.find((t) => t.classList.contains('active')) || tiers[0]);
