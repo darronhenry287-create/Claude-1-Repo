@@ -1,0 +1,14 @@
+<section class="section">
+  <div class="wrap form">
+    <div class="center" style="margin-bottom:2rem"><span class="eyebrow">SOMNA</span><h1 style="margin-top:.8rem">Create account</h1></div>
+    {%- form 'create_customer' -%}
+      {%- if form.errors -%}<div class="errors">{{ form.errors | default_errors }}</div>{%- endif -%}
+      <div class="field"><label>First name</label><input type="text" name="customer[first_name]" autocomplete="given-name"></div>
+      <div class="field"><label>Last name</label><input type="text" name="customer[last_name]" autocomplete="family-name"></div>
+      <div class="field"><label>Email</label><input type="email" name="customer[email]" autocomplete="email" required></div>
+      <div class="field"><label>Password</label><input type="password" name="customer[password]" autocomplete="new-password" required></div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Create account</button>
+    {%- endform -%}
+    <p class="form__note center" style="margin-top:1.5rem">Already have an account? <a href="{{ routes.account_login_url }}">Sign in</a></p>
+  </div>
+</section>
