@@ -1,0 +1,53 @@
+<header class="header">
+  <div class="header__inner">
+    <button class="icon-btn burger" data-action="open-menu" aria-label="{{ 'accessibility.menu' | t }}">{% render 'icon', name: 'menu' %}</button>
+
+    <a href="{{ routes.root_url }}" class="logo">
+      {%- if settings.logo != blank -%}
+        <img src="{{ settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" height="32">
+      {%- else -%}
+        {{ settings.logo_text | default: shop.name }}
+      {%- endif -%}
+    </a>
+
+    <nav class="nav">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <div class="header__actions">
+      <a href="{{ routes.search_url }}" class="icon-btn desktop-only" aria-label="{{ 'accessibility.search' | t }}">{% render 'icon', name: 'search' %}</a>
+      <button class="icon-btn" data-action="open-cart" aria-label="{{ 'accessibility.cart' | t }}">
+        {% render 'icon', name: 'cart' %}
+        <span class="cart-count {% if cart.item_count > 0 %}show{% endif %}">{{ cart.item_count }}</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu__head">
+    <span class="logo">{{ settings.logo_text | default: shop.name }}</span>
+    <button class="icon-btn" data-action="close-menu" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+  </div>
+  <nav>
+    {%- for link in section.settings.menu.links -%}
+      <a href="{{ link.url }}">{{ link.title }}</a>
+    {%- endfor -%}
+  </nav>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

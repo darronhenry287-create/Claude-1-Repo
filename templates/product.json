@@ -1,0 +1,43 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "details": { "type": "accordion", "settings": { "title": "Details & materials", "content": "<p>Adaptive open-cell memory foam core · CloudCool™ phase-change gel layer · removable Tencel™ lyocell cover. CertiPUR-US® certified. Dual-height: 4.5\" / 5.5\". Hypoallergenic and dust-mite resistant.</p>" } },
+        "shipping": { "type": "accordion", "settings": { "title": "Shipping & returns", "content": "<p>Free 2-day shipping on orders over $75. Ships within 24 hours. Sleep on it for 100 nights — if you don't love it, we'll arrange a free return and full refund.</p>" } },
+        "care": { "type": "accordion", "settings": { "title": "Care instructions", "content": "<p>Unzip and machine wash the Tencel cover cold, tumble dry low. Spot clean the foam core only — do not submerge.</p>" } }
+      },
+      "block_order": ["details", "shipping", "care"]
+    },
+    "features": {
+      "type": "feature-grid",
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "title": "Aligns your spine", "text": "Contoured cervical ridge keeps your neck neutral all night." } },
+        "f2": { "type": "feature", "settings": { "title": "Stays cool", "text": "CloudCool™ gel holds the surface ~4°C cooler than memory foam." } },
+        "f3": { "type": "feature", "settings": { "title": "Flips to fit", "text": "Dual-height design — one side for side sleepers, one for back." } },
+        "f4": { "type": "feature", "settings": { "title": "Built to last", "text": "Holds its loft for 5+ years, backed by our warranty." } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"]
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "rv1": { "type": "review", "settings": { "quote": "First morning in years without a neck crick. It genuinely stays cool.", "name": "Jordan M.", "meta": "Verified · Side sleeper" } },
+        "rv2": { "type": "review", "settings": { "quote": "The dual height is genius. We both got the pillow we wanted.", "name": "Alex R.", "meta": "Verified · Back sleeper" } },
+        "rv3": { "type": "review", "settings": { "quote": "Four months in and my chiropractor asked what changed.", "name": "Priya T.", "meta": "Verified · Combination sleeper" } }
+      },
+      "block_order": ["rv1", "rv2", "rv3"],
+      "settings": { "heading": "Loved by sleepers everywhere." }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "qa", "settings": { "question": "How does the 100-night trial work?", "answer": "<p>Sleep on it for 100 nights. If it's not the best pillow you've owned, we'll arrange a free return and full refund.</p>" } },
+        "q2": { "type": "qa", "settings": { "question": "Which firmness should I pick?", "answer": "<p>Medium suits most sleepers. Soft for stomach sleepers, Firm for broad-shouldered side sleepers.</p>" } },
+        "q3": { "type": "qa", "settings": { "question": "Can I cancel my subscription?", "answer": "<p>Anytime, in one click from your account.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3"]
+    }
+  },
+  "order": ["main", "features", "reviews", "faq"]
+}

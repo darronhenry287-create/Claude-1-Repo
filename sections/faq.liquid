@@ -1,0 +1,44 @@
+<section class="section" {% if section.settings.bg %}style="background:var(--cream)"{% endif %}>
+  <div class="wrap faq">
+    <div class="center" style="margin-bottom:2.5rem">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 style="margin-top:.8rem">{{ section.settings.heading }}</h2>
+    </div>
+    <div class="acc">
+      {%- for block in section.blocks -%}
+        <div class="acc__item" {{ block.shopify_attributes }}>
+          <button class="acc__head">{{ block.settings.question }} {% render 'icon', name: 'plus' %}</button>
+          <div class="acc__body"><div class="acc__body-inner">{{ block.settings.answer }}</div></div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    { "type": "checkbox", "id": "bg", "label": "Cream background", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Good to know" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Questions, answered." }
+  ],
+  "blocks": [
+    { "type": "qa", "name": "Q&A", "settings": [
+      { "type": "text", "id": "question", "label": "Question", "default": "How does the 100-night trial work?" },
+      { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Sleep on it for 100 nights. If it's not the best pillow you've owned, we'll arrange a free return and full refund.</p>" }
+    ] }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        { "type": "qa", "settings": { "question": "How does the 100-night trial work?", "answer": "<p>Sleep on it for 100 nights. If it's not the best pillow you've owned, we'll arrange a free return and full refund — no shipping fees.</p>" } },
+        { "type": "qa", "settings": { "question": "Which height should I choose?", "answer": "<p>The Cloud Pillow is dual-height — just flip it. Taller for side sleepers, lower for back and stomach sleepers.</p>" } },
+        { "type": "qa", "settings": { "question": "Is it actually cool, or is that marketing?", "answer": "<p>The CloudCool™ gel is phase-change material that holds the surface ~4°C cooler than standard memory foam.</p>" } },
+        { "type": "qa", "settings": { "question": "How do I wash it?", "answer": "<p>Unzip the Tencel cover and machine wash cold, tumble dry low. Spot clean the foam core only.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

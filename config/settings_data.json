@@ -1,0 +1,19 @@
+{
+  "current": {
+    "color_bg": "#f6f2ec",
+    "color_text": "#1c1a17",
+    "color_accent": "#c08a6a",
+    "heading_scale": 100,
+    "logo_text": "SOMNA",
+    "free_ship_threshold": 75
+  },
+  "presets": {
+    "SOMNA": {
+      "color_bg": "#f6f2ec",
+      "color_text": "#1c1a17",
+      "color_accent": "#c08a6a",
+      "logo_text": "SOMNA",
+      "free_ship_threshold": 75
+    }
+  }
+}

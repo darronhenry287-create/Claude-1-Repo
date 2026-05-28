@@ -1,0 +1,55 @@
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="logo">{{ settings.logo_text | default: shop.name }}</span>
+        <p>{{ section.settings.tagline }}</p>
+      </div>
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'menu' -%}
+          <div class="footer__col" {{ block.shopify_attributes }}>
+            <h4>{{ block.settings.heading }}</h4>
+            {%- for link in block.settings.menu.links -%}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="footer__bottom">
+      <p>© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+      <div class="footer__socials">
+        {%- if section.settings.instagram != blank -%}<a href="{{ section.settings.instagram }}" aria-label="Instagram">{% render 'icon', name: 'instagram' %}</a>{%- endif -%}
+        {%- if section.settings.tiktok != blank -%}<a href="{{ section.settings.tiktok }}" aria-label="TikTok">{% render 'icon', name: 'tiktok' %}</a>{%- endif -%}
+        {%- if section.settings.pinterest != blank -%}<a href="{{ section.settings.pinterest }}" aria-label="Pinterest">{% render 'icon', name: 'pinterest' %}</a>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Sleep, engineered. Premium rest essentials designed in California, loved in 40+ countries." },
+    { "type": "header", "content": "Social" },
+    { "type": "url", "id": "instagram", "label": "Instagram URL" },
+    { "type": "url", "id": "tiktok", "label": "TikTok URL" },
+    { "type": "url", "id": "pinterest", "label": "Pinterest URL" }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
+        { "type": "link_list", "id": "menu", "label": "Menu" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    { "name": "Footer", "blocks": [ { "type": "menu" }, { "type": "menu" }, { "type": "menu" } ] }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,30 @@
+<div class="marquee">
+  <div class="marquee__track">
+    {%- for i in (1..2) -%}
+      <span>
+        {%- for block in section.blocks -%}{{ block.settings.text }}{%- unless forloop.last %}</span><span>{% endunless -%}{%- endfor -%}
+      </span>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Marquee",
+  "blocks": [
+    { "type": "item", "name": "Logo / text", "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Featured in VOGUE" } ] }
+  ],
+  "presets": [
+    {
+      "name": "Marquee",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Featured in VOGUE" } },
+        { "type": "item", "settings": { "text": "As seen in GQ" } },
+        { "type": "item", "settings": { "text": "Wirecutter Pick" } },
+        { "type": "item", "settings": { "text": "Forbes" } },
+        { "type": "item", "settings": { "text": "Architectural Digest" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

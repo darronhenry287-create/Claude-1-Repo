@@ -1,0 +1,136 @@
+<section class="section" style="padding-top:1.5rem">
+  <div class="wrap">
+    <p class="muted" style="font-size:.82rem;margin-bottom:1.5rem">
+      <a href="{{ routes.root_url }}">Home</a> / <a href="{{ collection.url | default: routes.all_products_collection_url }}">Shop</a> / {{ product.title }}
+    </p>
+
+    <div class="pdp" data-product="{{ product.handle }}">
+      <!-- Gallery -->
+      <div class="gallery">
+        <div class="gallery__main" id="gallery-main">
+          {%- if product.featured_image -%}
+            <img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.featured_image.alt | escape }}" width="1200" height="1200">
+          {%- else -%}
+            <div class="art-stage" style="width:80%">{% render 'pillow-art' %}</div>
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="gallery__thumbs">
+            {%- for image in product.images limit: 4 -%}
+              <button class="gallery__thumb {% if forloop.first %}active{% endif %}" data-full="{{ image | image_url: width: 1200 }}">
+                <img src="{{ image | image_url: width: 240 }}" alt="{{ image.alt | escape }}" width="120" height="120">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Buy box -->
+      <div class="pdp__info" id="buy-anchor">
+        {%- if product.metafields.custom.badge -%}<span class="pill pill-clay">{{ product.metafields.custom.badge }}</span>{%- endif -%}
+        <h1>{{ product.title }}</h1>
+        <div class="pdp__rating"><span class="star">★★★★★</span> <span>4.9 · <a href="#reviews" style="text-decoration:underline">12,400 reviews</a></span></div>
+
+        <div class="pdp__price">
+          <span class="now" id="pdp-price-now">{{ product.price | money }}</span>
+          {%- if product.compare_at_price > product.price -%}
+            <span class="was" id="pdp-price-was">{{ product.compare_at_price | money }}</span>
+            <span class="pill pill-clay save">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
+          {%- endif -%}
+        </div>
+
+        <div class="pdp__desc">{{ product.description }}</div>
+
+        {%- form 'product', product, id: 'product-form' -%}
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              <div class="opt-group">
+                <span class="opt-label">{{ option.name }}</span>
+                <div class="opt-row" data-option-index="{{ forloop.index0 }}">
+                  {%- for value in option.values -%}
+                    <button type="button" class="opt {% if option.selected_value == value %}active{% endif %}" data-variant="{{ value | escape }}">{{ value }}</button>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <select name="id" id="variant-id" hidden>
+            {%- for variant in product.variants -%}
+              <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>{{ variant.title }}</option>
+            {%- endfor -%}
+          </select>
+
+          <div class="pdp__buy">
+            <div class="qty">
+              <button type="button" data-step="-">−</button>
+              <input type="number" name="quantity" value="1" min="1" aria-label="{{ 'products.product.quantity' | t }}">
+              <button type="button" data-step="+">+</button>
+            </div>
+            <button type="submit" class="btn btn-clay btn-lg btn-block" data-add
+              data-id="{{ product.handle }}" data-name="{{ product.title | escape }}"
+              data-price="{{ product.price | money_without_currency }}"
+              {% unless product.available %}disabled{% endunless %}>
+              {%- if product.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+            </button>
+          </div>
+          {{ form | payment_button }}
+        {%- endform -%}
+
+        <div class="pdp__trust">
+          <div>{% render 'icon', name: 'trial' %}100-night trial</div>
+          <div>{% render 'icon', name: 'truck' %}Free 2-day shipping</div>
+          <div>{% render 'icon', name: 'shield' %}5-year warranty</div>
+        </div>
+
+        <div class="acc">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'accordion' -%}
+              <div class="acc__item {% if forloop.first %}open{% endif %}" {{ block.shopify_attributes }}>
+                <button class="acc__head">{{ block.settings.title }} {% render 'icon', name: 'plus' %}</button>
+                <div class="acc__body" {% if forloop.first %}style="max-height:400px"{% endif %}><div class="acc__body-inner">{{ block.settings.content }}</div></div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sticky add bar -->
+<div class="sticky-bar" id="sticky-bar" data-product="{{ product.handle }}">
+  <div class="sticky-bar__inner">
+    <div class="sticky-bar__info">
+      <div class="sticky-bar__thumb">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 96 }}" alt="" width="48" height="48">{%- endif -%}</div>
+      <div><div class="sticky-bar__name">{{ product.title }}</div><div class="sticky-bar__price" id="sticky-price">{{ product.price | money }}</div></div>
+    </div>
+    <button class="btn btn-clay" data-add data-id="{{ product.handle }}" data-name="{{ product.title | escape }}" data-price="{{ product.price | money_without_currency }}" onclick="document.getElementById('product-form').requestSubmit()">{{ 'products.product.add_to_cart' | t }}</button>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordion row",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Details & materials" },
+        { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Adaptive memory foam core · CloudCool™ gel · removable Tencel™ cover. CertiPUR-US® certified.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product",
+      "blocks": [
+        { "type": "accordion", "settings": { "title": "Details & materials" } },
+        { "type": "accordion", "settings": { "title": "Shipping & returns", "content": "<p>Free 2-day shipping over $75. 100-night trial with free returns.</p>" } },
+        { "type": "accordion", "settings": { "title": "Care instructions", "content": "<p>Machine wash the Tencel cover cold. Spot clean the foam core only.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

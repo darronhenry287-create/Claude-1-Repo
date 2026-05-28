@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop All — SOMNA</title>
+  <meta name="description" content="Shop the full SOMNA collection of premium sleep essentials.">
+  <link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+
+  <div class="announce">Free shipping over $75 · <strong>100-night risk-free trial</strong> · Ships in 24h</div>
+
+  <header class="header">
+    <div class="header__inner">
+      <button class="icon-btn burger" data-action="open-menu" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <a href="index.html" class="logo">SOMNA</a>
+      <nav class="nav">
+        <a href="product.html">The Cloud Pillow</a>
+        <a href="collection.html">Shop All</a>
+        <a href="index.html#science">The Science</a>
+        <a href="index.html#reviews">Reviews</a>
+      </nav>
+      <div class="header__actions">
+        <button class="icon-btn desktop-only" aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <button class="icon-btn" data-action="open-cart" aria-label="Cart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-count"></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Collection header ===== -->
+  <section style="background:var(--cream);padding-block:clamp(2.5rem,5vw,4rem)">
+    <div class="wrap center">
+      <span class="eyebrow">The collection</span>
+      <h1 style="margin-top:.8rem">Everything for a better night.</h1>
+      <p class="lede" style="max-width:520px;margin:1rem auto 0">Each piece is engineered for one thing: deeper, cooler, more restorative sleep.</p>
+    </div>
+  </section>
+
+  <!-- ===== Product grid ===== -->
+  <section class="section">
+    <div class="wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem">
+        <p class="muted" style="font-size:.88rem">6 products</p>
+        <div class="opt-row">
+          <button class="opt active">All</button>
+          <button class="opt">Pillows</button>
+          <button class="opt">Bedding</button>
+          <button class="opt">Accessories</button>
+        </div>
+      </div>
+
+      <div class="grid products" style="grid-template-columns:repeat(3,1fr)">
+        <article class="card reveal" data-product="cloud-pillow">
+          <div class="card__media">
+            <span class="pill pill-clay card__badge">Bestseller</span>
+            <div class="card__quick"><button class="btn btn-primary btn-block" data-add data-id="cloud-pillow" data-name="The Cloud Pillow" data-price="89">Quick add · $89</button></div>
+            <svg viewBox="0 0 360 260" style="width:78%;margin:auto;height:100%"><path d="M40 150c0-40 30-66 70-66 26 0 36 14 70 14s44-14 70-14c40 0 70 26 70 66 0 34-30 56-70 56-26 0-44-12-70-12s-44 12-70 12c-40 0-70-22-70-56Z" fill="#f1e6d4" stroke="#d8c9b2" stroke-width="1.5"/></svg>
+          </div>
+          <a href="product.html"><h3 class="card__title">The Cloud Pillow</h3></a>
+          <div class="card__reviews"><span class="star">★★★★★</span> 12,400 reviews</div>
+          <div class="card__row"><span class="card__price"><span class="was">$119</span>$89</span></div>
+        </article>
+
+        <article class="card reveal" data-product="weighted-duvet">
+          <div class="card__media">
+            <span class="pill card__badge">New</span>
+            <div class="card__quick"><button class="btn btn-primary btn-block" data-add data-id="weighted-duvet" data-name="The Weighted Duvet" data-price="129">Quick add · $129</button></div>
+            <svg viewBox="0 0 360 260" style="width:78%;margin:auto;height:100%"><rect x="70" y="70" width="220" height="130" rx="22" fill="#e7ecf0" stroke="#cdd6dd" stroke-width="1.5"/><rect x="100" y="100" width="160" height="70" rx="12" fill="#f3f6f8"/></svg>
+          </div>
+          <a href="product.html"><h3 class="card__title">The Weighted Duvet</h3></a>
+          <div class="card__reviews"><span class="star">★★★★★</span> 3,108 reviews</div>
+          <div class="card__row"><span class="card__price">$129</span></div>
+        </article>
+
+        <article class="card reveal" data-product="silk-mask">
+          <div class="card__media">
+            <div class="card__quick"><button class="btn btn-primary btn-block" data-add data-id="silk-mask" data-name="Silk Sleep Mask" data-price="39">Quick add · $39</button></div>
+            <svg viewBox="0 0 360 260" style="width:62%;margin:auto;height:100%"><rect x="120" y="50" width="120" height="160" rx="60" fill="#efe6f0" stroke="#d8c9d8" stroke-width="1.5"/><circle cx="180" cy="90" r="22" fill="#e2d2e8"/></svg>
+          </div>
+          <a href="product.html"><h3 class="card__title">Silk Sleep Mask</h3></a>
+          <div class="card__reviews"><span class="star">★★★★☆</span> 980 reviews</div>
+          <div class="card__row"><span class="card__price">$39</span></div>
+        </article>
+
+        <article class="card reveal" data-product="cooling-sheets">
+          <div class="card__media">
+            <div class="card__quick"><button class="btn btn-primary btn-block" data-add data-id="cooling-sheets" data-name="CloudCool Sheet Set" data-price="149">Quick add · $149</button></div>
+            <svg viewBox="0 0 360 260" style="width:80%;margin:auto;height:100%"><path d="M50 180c0-40 50-70 130-70s130 30 130 70" fill="#e6eef0" stroke="#cdd9dd" stroke-width="1.5"/><path d="M90 180c0-22 40-38 90-38s90 16 90 38" fill="#f2f7f8"/></svg>
+          </div>
+          <a href="product.html"><h3 class="card__title">CloudCool Sheet Set</h3></a>
+          <div class="card__reviews"><span class="star">★★★★★</span> 2,205 reviews</div>
+          <div class="card__row"><span class="card__price">$149</span></div>
+        </article>
+
+        <article class="card reveal" data-product="body-pillow">
+          <div class="card__media">
+            <div class="card__quick"><button class="btn btn-primary btn-block" data-add data-id="body-pillow" data-name="The Cloud Body Pillow" data-price="99">Quick add · $99</button></div>
+            <svg viewBox="0 0 360 260" style="width:70%;margin:auto;height:100%"><rect x="140" y="40" width="80" height="180" rx="40" fill="#f1e6d4" stroke="#d8c9b2" stroke-width="1.5"/></svg>
+          </div>
+          <a href="product.html"><h3 class="card__title">The Cloud Body Pillow</h3></a>
+          <div class="card__reviews"><span class="star">★★★★★</span> 1,540 reviews</div>
+          <div class="card__row"><span class="card__price">$99</span></div>
+        </article>
+
+        <article class="card reveal" data-product="sleep-bundle">
+          <div class="card__media">
+            <span class="pill pill-clay card__badge">Save $58</span>
+            <div class="card__quick"><button class="btn btn-primary btn-block" data-add data-id="sleep-bundle" data-name="The Complete Sleep Set" data-price="259">Quick add · $259</button></div>
+            <svg viewBox="0 0 360 260" style="width:82%;margin:auto;height:100%"><rect x="50" y="90" width="120" height="120" rx="18" fill="#f1e6d4" stroke="#d8c9b2" stroke-width="1.5"/><rect x="190" y="70" width="120" height="140" rx="18" fill="#e7ecf0" stroke="#cdd6dd" stroke-width="1.5"/></svg>
+          </div>
+          <a href="product.html"><h3 class="card__title">The Complete Sleep Set</h3></a>
+          <div class="card__reviews"><span class="star">★★★★★</span> 870 reviews</div>
+          <div class="card__row"><span class="card__price"><span class="was">$317</span>$259</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA band ===== -->
+  <section class="section night center">
+    <div class="wrap" style="max-width:620px">
+      <span class="eyebrow">Not sure where to start?</span>
+      <h2 style="margin:1rem 0">Start with the pillow everyone talks about.</h2>
+      <a href="product.html" class="btn btn-clay btn-lg" style="margin-top:.5rem">Shop The Cloud Pillow</a>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand"><span class="logo">SOMNA</span><p>Sleep, engineered. Premium rest essentials designed in California, loved in 40+ countries.</p></div>
+        <div class="footer__col"><h4>Shop</h4><a href="product.html">The Cloud Pillow</a><a href="collection.html">The Weighted Duvet</a><a href="collection.html">Silk Sleep Mask</a><a href="collection.html">Bundles</a></div>
+        <div class="footer__col"><h4>Support</h4><a href="#">100-Night Trial</a><a href="#">Shipping & Returns</a><a href="#">Warranty</a><a href="#">Contact Us</a></div>
+        <div class="footer__col"><h4>Company</h4><a href="index.html#science">The Science</a><a href="#">Our Story</a><a href="index.html#reviews">Reviews</a><a href="#">Sustainability</a></div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 SOMNA Sleep Co. All rights reserved.</p>
+        <div class="footer__socials">
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12a4 4 0 1 0 4 4V4c1 2 3 3 5 3"/></svg></a>
+          <a href="#" aria-label="Pinterest"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2a10 10 0 0 0-4 19l1-5M9 11a3 3 0 1 1 6 0c0 3-2 5-4 5"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== Cart Drawer ===== -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="cart-drawer" aria-label="Shopping cart">
+    <div class="drawer__head"><h3>Your Cart</h3><button class="icon-btn" data-action="close-cart" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="drawer__body" id="cart-body"></div>
+    <div class="drawer__foot" id="cart-foot">
+      <div class="free-ship" id="free-ship"></div>
+      <div class="drawer__subtotal"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
+      <p class="drawer__note">Shipping & taxes calculated at checkout</p>
+      <button class="btn btn-primary btn-block btn-lg" data-action="checkout">Checkout</button>
+    </div>
+  </aside>
+
+  <!-- ===== Mobile Menu ===== -->
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu__head"><span class="logo">SOMNA</span><button class="icon-btn" data-action="close-menu" aria-label="Close"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <nav><a href="product.html">The Cloud Pillow</a><a href="collection.html">Shop All</a><a href="index.html#science">The Science</a><a href="index.html#reviews">Reviews</a></nav>
+  </div>
+
+  <script>window.SOMNA_MOCK = true;</script>
+  <script src="assets/theme.js"></script>
+</body>
+</html>
