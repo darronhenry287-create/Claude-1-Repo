@@ -12,6 +12,9 @@
 
   /* drawer / menu */
   const overlay = $('#overlay'), drawer = $('#drawer'), menu = $('#menu');
+  // Relocate off-canvas panels to the end of <body> so no section wrapper or
+  // transformed ancestor can break their fixed positioning (= no phantom height).
+  [overlay, drawer, menu].forEach(el => { if (el && el.parentElement !== document.body) document.body.appendChild(el); });
   const openCart = () => { drawer && drawer.classList.add('open'); overlay && overlay.classList.add('open'); document.body.style.overflow = 'hidden'; };
   const closeCart = () => { drawer && drawer.classList.remove('open'); overlay && overlay.classList.remove('open'); document.body.style.overflow = ''; };
   const openMenu = () => { menu && menu.classList.add('open'); document.body.style.overflow = 'hidden'; };
