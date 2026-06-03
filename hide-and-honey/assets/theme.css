@@ -395,7 +395,9 @@ h3 { font-size: clamp(1.3rem, 2.4vw, 1.8rem); }
 .mobile { position: fixed !important; top: 0; left: 0; right: 0; bottom: 0; background-color: #ece0c8 !important; z-index: 9999; transform: translateX(-101%); transition: transform .35s var(--ease); padding: 1.4rem; display: flex; flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 .mobile.open { transform: translateX(0); height: 100vh; height: 100dvh; }
 /* Zero footprint when closed — cannot add page height even if fixed is broken */
-.mobile:not(.open), .drawer:not(.open) { height: 0 !important; max-height: 0 !important; min-height: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; border-top: 0 !important; border-bottom: 0 !important; overflow: hidden !important; }
+.mobile:not(.open), .drawer:not(.open), .overlay:not(.open) { height: 0 !important; max-height: 0 !important; min-height: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; border-top: 0 !important; border-bottom: 0 !important; overflow: hidden !important; }
+.overlay { top: 0; left: 0; right: 0; bottom: 0; }
+.overlay.open { height: 100vh; height: 100dvh; }
 .mobile__head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
 .mobile nav a { display: block; font-family: var(--slab); font-weight: 800; font-size: 1.7rem; padding: 0.6rem 0; border-bottom: 2px solid var(--line); }
 
