@@ -10,18 +10,19 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <div class="topbar">Free shipping over $35 · <strong>90-day money-back guarantee</strong> · Made in small batches</div>
-  <header class="header">
+  <header class="header header--center">
     <div class="header__inner">
-      <button class="iconbtn burger" data-action="open-menu" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="nav--left">
+        <button class="iconbtn burger" data-action="open-menu" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+        <nav class="nav"><a href="collection.html">Shop</a>
+        <a href="ingredients.html">Ingredients</a></nav>
+      </div>
       <a href="index.html" class="logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3s7 8 7 13a7 7 0 0 1-14 0c0-5 7-13 7-13Z"/></svg> HIDE <span class="amp">&amp;</span> HONEY</a>
-      <nav class="nav">
-        <a href="product.html">The Balm</a>
-        <a href="ingredients.html">Ingredients</a>
-        <a href="about.html">Our Story</a>
-        <a href="reviews.html">Reviews</a>
-      </nav>
-      <div class="header__actions">
+      <div class="header__right">
+        <nav class="nav nav--right"><a href="about.html">Our Story</a>
+        <a href="reviews.html">Reviews</a></nav>
         <button class="iconbtn desk" aria-label="Search"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <button class="iconbtn desk" aria-label="Account"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/></svg></button>
         <button class="iconbtn" data-action="open-cart" aria-label="Cart"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg><span class="cartnum"></span></button>
       </div>
     </div>
@@ -68,32 +69,81 @@
           <button class="btn btn-ink btn-block" data-action="checkout">Buy it now</button>
 
           <div class="ptrust">
-            <div><span class="ck">✓</span>90-day guarantee</div>
-            <div><span class="ck">✓</span>Free shipping $35+</div>
-            <div><span class="ck">✓</span>Small-batch made</div>
+            <div><span class="ck"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m5 12 4 4L19 6"/></svg></span>90-day guarantee</div>
+            <div><span class="ck"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m5 12 4 4L19 6"/></svg></span>Free shipping $35+</div>
+            <div><span class="ck"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m5 12 4 4L19 6"/></svg></span>Small-batch made</div>
           </div>
 
           <div class="acc">
             <div class="acc__item open"><button class="acc__head">The full ingredient list <span class="pm">+</span></button><div class="acc__body" style="max-height:300px"><div class="acc__body-inner">Grass-fed beef tallow, raw wildflower honey, golden beeswax, cold-pressed extra-virgin olive oil. That's the entire list — no water, fragrance, preservatives or seed oils.</div></div></div>
-            <div class="acc__item"><button class="acc__head">How to use <span class="pm">+</span></button><div class="acc__body"><div class="acc__body-inner">Warm a pea-sized amount between fingertips and press into damp skin — face, lips, hands, elbows, scars. Morning and night, or whenever skin feels dry.</div></div></div>
-            <div class="acc__item"><button class="acc__head">Shipping &amp; returns <span class="pm">+</span></button><div class="acc__body"><div class="acc__body-inner">Free shipping over $35, ships in 1–2 business days. Not happy? 90-day money-back guarantee — keep the jar.</div></div></div>
+            <div class="acc__item"><button class="acc__head">How to use <span class="pm">+</span></button><div class="acc__body"><div class="acc__body-inner">Warm a pea-sized amount between fingertips and press into damp skin — face, lips, hands, elbows, scars. Morning and night.</div></div></div>
+            <div class="acc__item"><button class="acc__head">Shipping &amp; returns <span class="pm">+</span></button><div class="acc__body"><div class="acc__body-inner">Free shipping over $35, ships in 1–2 business days. 90-day money-back guarantee — keep the jar.</div></div></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="strip"><div class="strip__track"><span>No water</span><span>No fragrance</span><span>No seed oils</span><span>No fillers</span><span>No synthetics</span><span>No water</span><span>No fragrance</span><span>No seed oils</span><span>No fillers</span><span>No synthetics</span></div></div>
+  <!-- NEW PDP 1: Your shelf, simplified -->
+  <section class="section" style="background:var(--cream)">
+    <div class="wrap">
+      <div class="center" style="margin-bottom:3rem"><span class="kicker">One jar replaces a shelf</span><h2 style="margin-top:.7rem">Your bathroom shelf, simplified.</h2></div>
+      <div class="shelf">
+        <div class="shelf__old">
+          <span class="it">Day moisturizer</span><span class="it">Night cream</span><span class="it">Lip balm</span><span class="it">Hand cream</span><span class="it">Cuticle oil</span><span class="it">Body butter</span><span class="it">Scar gel</span>
+        </div>
+        <div class="shelf__arrow">→</div>
+        <div class="shelf__new"><img src="assets/img/jar.svg" alt="The Tallow Balm"><b>One honest jar.</b><p class="muted" style="font-size:.9rem">$24 · lasts months</p></div>
+      </div>
+    </div>
+  </section>
 
-  <!-- ingredients mini -->
+  <!-- NEW PDP 2: What to expect timeline -->
   <section class="section">
     <div class="wrap">
-      <div class="center" style="margin-bottom:3rem"><span class="kicker">What's inside</span><h2 style="margin-top:.7rem">Four honest things.</h2></div>
-      <div class="grid ing-grid">
-        <div class="ing reveal"><img class="ing__art" src="assets/img/cow.svg" alt=""><h3>Beef Tallow</h3><p>Grass-fed, bioidentical nourishment.</p></div>
-        <div class="ing reveal"><img class="ing__art" src="assets/img/honeycomb.svg" alt=""><h3>Raw Honey</h3><p>Humectant that locks in moisture.</p></div>
-        <div class="ing reveal"><img class="ing__art" src="assets/img/bee.svg" alt=""><h3>Beeswax</h3><p>A breathable, protective seal.</p></div>
-        <div class="ing reveal"><img class="ing__art" src="assets/img/olive.svg" alt=""><h3>Olive Oil</h3><p>Vitamin-rich, antioxidant glow.</p></div>
+      <div class="center" style="margin-bottom:3rem"><span class="kicker">What to expect</span><h2 style="margin-top:.7rem">Real skin takes a few nights.</h2></div>
+      <div class="expect">
+        <div class="ecard reveal"><span class="when">Night 1</span><h3>Instantly softer</h3><p>Skin drinks it in. Tightness eases and that just-moisturized feel lasts till morning.</p></div>
+        <div class="ecard reveal"><span class="when">Week 2</span><h3>Calmer &amp; smoother</h3><p>Redness and flaky patches settle. Lips, knuckles and elbows stop cracking.</p></div>
+        <div class="ecard reveal"><span class="when">Week 6</span><h3>A new baseline</h3><p>Your barrier feels resilient and balanced — the kind of skin that needs less, not more.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW PDP 3: Made for every skin -->
+  <section class="section" style="background:var(--cream)">
+    <div class="wrap center">
+      <span class="kicker">Made for every kind of skin</span>
+      <h2 style="margin:.7rem 0 2rem">Dry, oily, sensitive — all welcome.</h2>
+      <div class="skintypes">
+        <span class="skintype"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m5 12 4 4L19 6"/></svg></span>Dry &amp; flaky</span>
+        <span class="skintype"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m5 12 4 4L19 6"/></svg></span>Oily &amp; combination</span>
+        <span class="skintype"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m5 12 4 4L19 6"/></svg></span>Sensitive</span>
+        <span class="skintype"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m5 12 4 4L19 6"/></svg></span>Eczema-prone</span>
+        <span class="skintype"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m5 12 4 4L19 6"/></svg></span>Mature</span>
+        <span class="skintype"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m5 12 4 4L19 6"/></svg></span>Baby-soft</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW PDP 4: Texture / sensory -->
+  <section class="section texture">
+    <div class="wrap">
+      <div class="center" style="margin-bottom:3rem"><span class="kicker">The feel</span><h2 style="margin-top:.7rem">Whipped, not greasy.</h2></div>
+      <div class="texture__grid">
+        <div class="t reveal"><span class="hand">cloud-soft</span><p>Whipped to a buttery balm that melts the second it touches warm skin.</p></div>
+        <div class="t reveal"><span class="hand">sinks right in</span><p>Absorbs to a soft, breathable finish — never sticky or heavy.</p></div>
+        <div class="t reveal"><span class="hand">barely there</span><p>Unscented and clean. A pea-sized scoop is all your whole face needs.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW PDP 5: Bundle upsell -->
+  <section class="section">
+    <div class="wrap">
+      <div class="upsell reveal">
+        <div><span class="kicker" style="color:var(--honey)">Stock up &amp; save</span><h3 style="margin-top:.5rem">Add a second jar, save 25%.</h3><p>One for the bathroom, one for your bag. Free shipping kicks in too.</p></div>
+        <button class="btn btn-honey btn-lg" data-add data-id="trio" data-name="3-Jar Stock-Up" data-price="54" data-img="assets/img/jar.svg">Get 3 jars · $54</button>
       </div>
     </div>
   </section>
@@ -107,14 +157,17 @@
     </div>
   </section>
 
-  <!-- reviews -->
-  <section class="section" id="reviews">
+  <!-- reviews wall -->
+  <section class="section" style="background:var(--cream)" id="reviews">
     <div class="wrap">
-      <div class="center" style="margin-bottom:3rem"><span class="kicker">8,200 five-star reviews</span><h2 style="margin-top:.7rem">Real skin, real results.</h2></div>
-      <div class="grid reviews">
-        <div class="review reveal"><span class="stars">★★★★★</span><p>"My eczema patches calmed down in four days. This $24 jar beat prescription creams."</p><div class="review__by"><div class="review__av">RK</div><div><div class="review__nm">Rachel K.</div><div class="review__mt">Verified buyer</div></div></div></div>
-        <div class="review reveal"><span class="stars">★★★★★</span><p>"The only thing I use now. Skin's never looked better and one jar lasts months."</p><div class="review__by"><div class="review__av">DM</div><div><div class="review__nm">Daniel M.</div><div class="review__mt">Verified buyer</div></div></div></div>
-        <div class="review reveal"><span class="stars">★★★★★</span><p>"Replaced three products with one little jar. Love that I can read the label."</p><div class="review__by"><div class="review__av">ST</div><div><div class="review__nm">Sofia T.</div><div class="review__mt">Verified buyer</div></div></div></div>
+      <div class="wall">
+        <div class="wall__score reveal"><div class="big">4.9</div><div class="stars">★★★★★</div><p>8,200 verified reviews</p></div>
+        <div class="wall__chips">
+          <div class="chip reveal"><span class="stars">★★★★★</span><p>"My eczema calmed down in four days. Beat every prescription cream."</p><span class="who">Rachel K.</span></div>
+          <div class="chip reveal"><span class="stars">★★★★★</span><p>"The only thing I use now. One jar lasts months."</p><span class="who">Daniel M.</span></div>
+          <div class="chip reveal"><span class="stars">★★★★★</span><p>"Replaced three products with one little jar."</p><span class="who">Sofia T.</span></div>
+          <div class="chip reveal"><span class="stars">★★★★★</span><p>"Cracked winter hands, gone in two weeks."</p><span class="who">Jonas B.</span></div>
+        </div>
       </div>
     </div>
   </section>

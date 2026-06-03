@@ -10,50 +10,64 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <div class="topbar">Free shipping over $35 · <strong>90-day money-back guarantee</strong> · Made in small batches</div>
-  <header class="header">
+  <header class="header header--center">
     <div class="header__inner">
-      <button class="iconbtn burger" data-action="open-menu" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="nav--left">
+        <button class="iconbtn burger" data-action="open-menu" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+        <nav class="nav"><a href="collection.html">Shop</a>
+        <a href="ingredients.html">Ingredients</a></nav>
+      </div>
       <a href="index.html" class="logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3s7 8 7 13a7 7 0 0 1-14 0c0-5 7-13 7-13Z"/></svg> HIDE <span class="amp">&amp;</span> HONEY</a>
-      <nav class="nav">
-        <a href="product.html">The Balm</a>
-        <a href="ingredients.html">Ingredients</a>
-        <a href="about.html">Our Story</a>
-        <a href="reviews.html">Reviews</a>
-      </nav>
-      <div class="header__actions">
+      <div class="header__right">
+        <nav class="nav nav--right"><a href="about.html">Our Story</a>
+        <a href="reviews.html">Reviews</a></nav>
         <button class="iconbtn desk" aria-label="Search"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <button class="iconbtn desk" aria-label="Account"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/></svg></button>
         <button class="iconbtn" data-action="open-cart" aria-label="Cart"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg><span class="cartnum"></span></button>
       </div>
     </div>
   </header>
   <main id="main">
   <section class="section dark center" style="padding-block:clamp(4rem,9vw,7rem)">
-    <div class="wrap" style="max-width:740px"><span class="kicker">Our story</span><h1 class="display" style="color:var(--white);margin:1rem 0">We stripped skincare back to honest food.</h1><p class="lede">Hide &amp; Honey started in a farmhouse kitchen, a slow cooker, and a stubborn question: why does skincare need thirty ingredients you can't pronounce?</p></div>
+    <div class="wrap" style="max-width:740px"><span class="kicker">Our story</span><h1 class="display" style="color:var(--white);margin:1rem 0">It started with grandma's tin.</h1><p class="lede">No lab. No focus groups. Just a farmhouse kitchen, a slow cooker, and a stubborn belief that skincare got needlessly complicated.</p></div>
   </section>
 
+  <!-- NEW: brand timeline -->
   <section class="section">
-    <div class="wrap" style="max-width:720px">
-      <div class="rte lede reveal">
-        <p>Our founder grew up on a cattle farm where nothing went to waste. Grandma rendered tallow on the stove and rubbed it into chapped hands, cracked heels, and the family's wind-burned faces all winter long. It just <em>worked</em>.</p>
-        <p>Years later, staring at a bathroom shelf full of half-used creams — each with a label like a chemistry exam — that memory came back. So we went to the kitchen, sourced the best grass-fed tallow and raw honey we could find, and whipped them with beeswax and olive oil until the texture was perfect.</p>
-        <p>Four ingredients. Nothing else. We've never seen a reason to add a fifth.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" style="background:var(--cream)">
     <div class="wrap">
-      <div class="center" style="margin-bottom:3rem"><span class="kicker">What we stand for</span><h2 style="margin-top:.7rem">Honest in every jar.</h2></div>
-      <div class="grid ing-grid">
-        <div class="ing reveal"><img class="ing__art" src="assets/img/honeycomb.svg" alt=""><h3>Real food</h3><p>If we wouldn't put it in our bodies, it doesn't go on our skin.</p></div>
-        <div class="ing reveal"><img class="ing__art" src="assets/img/cow.svg" alt=""><h3>Whole-animal respect</h3><p>Our tallow uses a byproduct of regenerative farms — nothing wasted.</p></div>
-        <div class="ing reveal"><img class="ing__art" src="assets/img/bee.svg" alt=""><h3>Small batches</h3><p>Whipped in small runs for freshness, never mass-produced.</p></div>
-        <div class="ing reveal"><img class="ing__art" src="assets/img/olive.svg" alt=""><h3>Radical honesty</h3><p>The whole formula is on the front of the jar. No fine print.</p></div>
+      <div class="center" style="margin-bottom:3rem"><span class="kicker">How we got here</span><h2 style="margin-top:.7rem">A slow, honest road.</h2></div>
+      <div class="timeline">
+        <div class="tline reveal"><div class="yr">'94</div><h3>The tin by the sink</h3><p>Grandma kept rendered tallow by the kitchen sink — for chapped hands, wind-burned cheeks, scraped knees. It fixed everything.</p></div>
+        <div class="tline reveal"><div class="yr">2021</div><h3>47 messy batches</h3><p>Staring at a shelf of $60 creams we couldn't pronounce, we went back to her recipe — and whipped it 47 times until the texture was perfect.</p></div>
+        <div class="tline reveal"><div class="yr">2022</div><h3>The first 100 jars</h3><p>We hand-filled a hundred jars at the kitchen table and gave them to friends. They came back asking for more — and bringing theirs.</p></div>
+        <div class="tline reveal"><div class="yr">Today</div><h3>8,200 happy faces</h3><p>Same four ingredients. Same small batches. Just a lot more sinks with a jar beside them.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="section cta-band">
+  <!-- NEW: manifesto -->
+  <section class="section manifesto center">
+    <div class="wrap">
+      <span class="kicker">Our promise</span>
+      <h2 style="margin:.8rem 0 0">Four things we'll never do.</h2>
+      <ul class="manifesto__list">
+        <li>We'll never <b>add water</b> to cut costs.</li>
+        <li>We'll never hide behind the word <b>"fragrance."</b></li>
+        <li>We'll never put a <b>fifth ingredient</b> in just to sound fancy.</li>
+        <li>We'll never make a claim our <b>own skin</b> can't back up.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- NEW: pull quote -->
+  <section class="section">
+    <div class="wrap pullquote">
+      <p>"We didn't set out to start a skincare company. We just couldn't go back to <span class="mk">complicated</span> once we'd tried <span class="mk">simple</span>."</p>
+      <div class="by">— Jess, founder</div>
+    </div>
+  </section>
+
+  <section class="section dark cta-band">
     <div class="wrap"><span class="kicker">Come hungry</span><h2 style="margin-top:.7rem">Feed your skin something simple.</h2><a href="product.html" class="btn btn-honey btn-lg" style="margin-top:1.5rem">Shop the Balm</a></div>
   </section>
 

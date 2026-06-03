@@ -1,13 +1,23 @@
 {
   "sections": {
-    "wall": { "type": "reviews-wall", "settings": { "bg": false, "button_text": "" }, "blocks": {
-      "r1": { "type": "review", "settings": { "quote": "My eczema patches calmed down in four days. This $24 jar beat prescription creams.", "name": "Rachel K." } },
-      "r2": { "type": "review", "settings": { "quote": "Skeptical about beef fat on my face — now it's the only thing I use. One jar lasts months.", "name": "Daniel M." } },
-      "r3": { "type": "review", "settings": { "quote": "Replaced my lip balm, hand cream and night moisturizer with one little jar.", "name": "Sofia T." } },
-      "r4": { "type": "review", "settings": { "quote": "Winter wrecks my hands every year. Two weeks of this and the cracks are gone.", "name": "Jonas B." } },
-      "r5": { "type": "review", "settings": { "quote": "The unscented really is scentless. Melts right in.", "name": "Amara L." } },
-      "r6": { "type": "review", "settings": { "quote": "My teenage son uses it without complaining. His skin cleared up too.", "name": "Priya H." } }
-    }, "block_order": ["r1","r2","r3","r4","r5","r6"] }
+    "breakdown": { "type": "reviews-breakdown", "settings": {} },
+    "stats": { "type": "stat-row", "blocks": {
+      "a": { "type": "stat", "settings": { "num": "96%", "label": "would recommend to a friend" } },
+      "b": { "type": "stat", "settings": { "num": "89%", "label": "replaced 2+ products with it" } },
+      "c": { "type": "stat", "settings": { "num": "9/10", "label": "saw softer skin in a week" } }
+    }, "block_order": ["a","b","c"] },
+    "spotlight": { "type": "spotlight", "settings": {} },
+    "masonry": { "type": "reviews-masonry", "blocks": {
+      "r1": { "type": "review", "settings": { "quote": "My eczema patches calmed down in four days. This $24 jar beat prescription creams.", "who": "Rachel K. · Dry skin" } },
+      "r2": { "type": "review", "settings": { "quote": "Now it's the only thing I use. One jar lasts months and a little goes so far.", "who": "Daniel M. · Normal" } },
+      "r3": { "type": "review", "settings": { "quote": "Replaced my lip balm, hand cream and night moisturizer with one little jar.", "who": "Sofia T. · Combination" } },
+      "r4": { "type": "review", "settings": { "quote": "Winter wrecks my hands every year. Two weeks and the cracks are gone.", "who": "Jonas B. · Very dry" } },
+      "r5": { "type": "review", "settings": { "quote": "The unscented really is scentless. Melts right in.", "who": "Amara L. · Sensitive" } },
+      "r6": { "type": "review", "settings": { "quote": "My teenage son uses it without complaining. His skin cleared up too.", "who": "Priya H. · Acne-prone" } },
+      "r7": { "type": "review", "settings": { "quote": "Postpartum my skin went haywire. This was the only thing gentle enough that worked.", "who": "Hannah F. · Sensitive" } },
+      "r8": { "type": "review", "settings": { "quote": "One in my bag, one by the bed, one at my desk. Lips, knuckles, cuticles — everything.", "who": "Theo R. · Normal" } },
+      "r9": { "type": "review", "settings": { "quote": "Finally a label I can actually read. Four things. That's why I trust it.", "who": "Wendy O. · Mature" } }
+    }, "block_order": ["r1","r2","r3","r4","r5","r6","r7","r8","r9"] }
   },
-  "order": ["wall"]
+  "order": ["breakdown", "stats", "spotlight", "masonry"]
 }

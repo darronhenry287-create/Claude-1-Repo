@@ -2,25 +2,23 @@
   "sections": {
     "main": { "type": "main-product", "blocks": {
       "ing": { "type": "accordion", "settings": { "title": "The full ingredient list", "content": "<p>Grass-fed beef tallow, raw wildflower honey, golden beeswax, cold-pressed extra-virgin olive oil. That's the entire list — no water, fragrance, preservatives or seed oils.</p>" } },
-      "use": { "type": "accordion", "settings": { "title": "How to use", "content": "<p>Warm a pea-sized amount between fingertips and press into damp skin — face, lips, hands, elbows, scars. Morning and night, or whenever skin feels dry.</p>" } },
+      "use": { "type": "accordion", "settings": { "title": "How to use", "content": "<p>Warm a pea-sized amount and press into damp skin — face, lips, hands, elbows, scars. Morning and night.</p>" } },
       "ship": { "type": "accordion", "settings": { "title": "Shipping & returns", "content": "<p>Free shipping over $35, ships in 1–2 business days. 90-day money-back guarantee — keep the jar.</p>" } }
     }, "block_order": ["ing","use","ship"] },
-    "diagram": { "type": "ingredient-diagram", "settings": { "kicker": "What's inside", "heading": "Four honest things." }, "blocks": {
-      "n1": { "type": "node", "settings": { "slot": 1, "art_index": 0, "name": "Beef Tallow", "pct": "50%", "text": "Grass-fed & bioidentical." } },
-      "n2": { "type": "node", "settings": { "slot": 2, "art_index": 1, "name": "Raw Honey", "pct": "25%", "text": "Locks moisture in." } },
-      "n3": { "type": "node", "settings": { "slot": 3, "art_index": 2, "name": "Beeswax", "pct": "15%", "text": "A breathable seal." } },
-      "n4": { "type": "node", "settings": { "slot": 4, "art_index": 3, "name": "Olive Oil", "pct": "10%", "text": "Vitamin-rich glow." } }
-    }, "block_order": ["n1","n2","n3","n4"] },
-    "wall": { "type": "reviews-wall", "settings": { "bg": true }, "blocks": {
-      "r1": { "type": "review", "settings": { "quote": "My eczema calmed down in four days.", "name": "Rachel K." } },
-      "r2": { "type": "review", "settings": { "quote": "The only thing I use now.", "name": "Daniel M." } },
-      "r3": { "type": "review", "settings": { "quote": "Replaced three products with one jar.", "name": "Sofia T." } },
-      "r4": { "type": "review", "settings": { "quote": "Cracks gone in two weeks.", "name": "Jonas B." } }
-    }, "block_order": ["r1","r2","r3","r4"] },
-    "faq": { "type": "faq", "blocks": {
-      "q1": { "type": "qa", "settings": { "q": "Does it smell like beef?", "a": "<p>No — triple-rendered and purified, the Unscented balm is virtually scentless.</p>" } },
-      "q2": { "type": "qa", "settings": { "q": "Will it clog my pores?", "a": "<p>Tallow is bioidentical to your skin's oils; most people find it balancing. Patch-test first.</p>" } }
-    }, "block_order": ["q1","q2"] }
+    "shelf": { "type": "shelf-simplified", "settings": {} },
+    "expect": { "type": "results-timeline", "settings": {}, "blocks": {
+      "a": { "type": "stage", "settings": { "when": "Night 1", "title": "Instantly softer", "text": "Skin drinks it in. Tightness eases and that just-moisturized feel lasts till morning." } },
+      "b": { "type": "stage", "settings": { "when": "Week 2", "title": "Calmer & smoother", "text": "Redness and flaky patches settle. Lips, knuckles and elbows stop cracking." } },
+      "c": { "type": "stage", "settings": { "when": "Week 6", "title": "A new baseline", "text": "Your barrier feels resilient and balanced — skin that needs less, not more." } }
+    }, "block_order": ["a","b","c"] },
+    "skin": { "type": "skin-types", "settings": {} },
+    "texture": { "type": "texture-band", "blocks": {
+      "a": { "type": "feel", "settings": { "word": "cloud-soft", "text": "Whipped to a buttery balm that melts the second it touches warm skin." } },
+      "b": { "type": "feel", "settings": { "word": "sinks right in", "text": "Absorbs to a soft, breathable finish — never sticky or heavy." } },
+      "c": { "type": "feel", "settings": { "word": "barely there", "text": "Unscented and clean. A pea-sized scoop is all your whole face needs." } }
+    }, "block_order": ["a","b","c"] },
+    "upsell": { "type": "upsell", "settings": {} },
+    "wall": { "type": "reviews-masonry", "settings": { "bg": true, "kicker": "8,200 five-star reviews", "heading": "Real skin, real results.", "button_text": "" } }
   },
-  "order": ["main", "diagram", "wall", "faq"]
+  "order": ["main", "shelf", "expect", "skin", "texture", "upsell", "wall"]
 }

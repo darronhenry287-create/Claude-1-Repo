@@ -20,20 +20,25 @@ const ic = {
   search:'<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>',
   close:'<svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>',
   drop:'<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3s7 8 7 13a7 7 0 0 1-14 0c0-5 7-13 7-13Z"/></svg>',
+  user:'<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/></svg>',
 };
+const NAV_LEFT = [['collection.html','Shop'],['ingredients.html','Ingredients']];
+const NAV_RIGHT = [['about.html','Our Story'],['reviews.html','Reviews']];
 
 function chrome() {
   return {
     head:`  <div class="topbar">Free shipping over $35 · <strong>90-day money-back guarantee</strong> · Made in small batches</div>
-  <header class="header">
+  <header class="header header--center">
     <div class="header__inner">
-      <button class="iconbtn burger" data-action="open-menu" aria-label="Menu">${ic.menu}</button>
+      <div class="nav--left">
+        <button class="iconbtn burger" data-action="open-menu" aria-label="Menu">${ic.menu}</button>
+        <nav class="nav">${links(NAV_LEFT)}</nav>
+      </div>
       <a href="index.html" class="logo">${ic.drop} HIDE <span class="amp">&amp;</span> HONEY</a>
-      <nav class="nav">
-        ${links(NAV)}
-      </nav>
-      <div class="header__actions">
+      <div class="header__right">
+        <nav class="nav nav--right">${links(NAV_RIGHT)}</nav>
         <button class="iconbtn desk" aria-label="Search">${ic.search}</button>
+        <button class="iconbtn desk" aria-label="Account">${ic.user}</button>
         <button class="iconbtn" data-action="open-cart" aria-label="Cart">${ic.bag}<span class="cartnum"></span></button>
       </div>
     </div>
