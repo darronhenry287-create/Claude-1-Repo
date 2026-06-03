@@ -21,8 +21,7 @@
 </head>
 <body class="template-{{ request.page_type | handle }}">
   <a class="skip" href="#main">{{ 'accessibility.skip' | t }}</a>
-  {% section 'announcement-bar' %}
-  {% section 'header' %}
+  {% sections 'header-group' %}
   <main id="main">{{ content_for_layout }}</main>
   {% sections 'footer-group' %}
   {% render 'cart-drawer' %}
