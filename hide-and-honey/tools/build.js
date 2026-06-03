@@ -1,4 +1,4 @@
-/* HIDE & HONEY static-site builder — wraps src/ partials in shared chrome */
+/* PRAIRIE FAT CO. static-site builder — wraps src/ partials in shared chrome */
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
@@ -34,7 +34,7 @@ function chrome() {
         <button class="iconbtn burger" data-action="open-menu" aria-label="Menu">${ic.menu}</button>
         <nav class="nav">${links(NAV_LEFT)}</nav>
       </div>
-      <a href="index.html" class="logo">${ic.drop} HIDE <span class="amp">&amp;</span> HONEY</a>
+      <a href="index.html" class="logo">PRAIRIE FAT <span class="amp">CO.</span></a>
       <div class="header__right">
         <nav class="nav nav--right">${links(NAV_RIGHT)}</nav>
         <button class="iconbtn desk" aria-label="Search">${ic.search}</button>
@@ -47,7 +47,7 @@ function chrome() {
     <div class="wrap">
       <div class="footer__top">
         <div class="footer__brand">
-          <span class="logo">${ic.drop} HIDE <span class="amp">&amp;</span> HONEY</span>
+          <span class="logo">PRAIRIE FAT <span class="amp">CO.</span></span>
           <p>Honest skin food, made from four simple things. Small-batch, grass-fed, and good for every kind of skin.</p>
         </div>
         ${FOOT.map(([h,l]) => `<div class="footer__col"><h4>${h}</h4>${links(l)}</div>`).join('\n        ')}
@@ -73,7 +73,7 @@ function chrome() {
   </aside>
 
   <div class="mobile" id="menu">
-    <div class="mobile__head"><span class="logo">${ic.drop} HIDE <span class="amp">&amp;</span> HONEY</span><button class="iconbtn" data-action="close-menu" aria-label="Close">${ic.close}</button></div>
+    <div class="mobile__head"><span class="logo">PRAIRIE FAT <span class="amp">CO.</span></span><button class="iconbtn" data-action="close-menu" aria-label="Close">${ic.close}</button></div>
     <nav>
       ${links(MOBILE)}
     </nav>
@@ -107,22 +107,22 @@ ${c.foot}
 }
 
 const PAGES = [
-  ['index.html','home.html','HIDE & HONEY — Beef Tallow Honey Balm. Four ingredients, nothing else.','Whipped grass-fed beef tallow & raw honey balm. Four ingredients, nothing else. 90-day money-back guarantee.'],
-  ['product.html','product.html','The Tallow Balm — HIDE & HONEY','Grass-fed beef tallow, raw honey, beeswax & olive oil. Deeply nourishing, bioidentical skin food.'],
-  ['ingredients.html','ingredients.html','Ingredients — HIDE & HONEY','The four simple, traceable ingredients in every jar.'],
-  ['about.html','about.html','Our Story — HIDE & HONEY','Why we render skincare back down to four honest things.'],
-  ['reviews.html','reviews.html','Reviews — HIDE & HONEY','Thousands of five-star reviews for The Tallow Balm.'],
-  ['collection.html','collection.html','Shop All — HIDE & HONEY','Shop the full HIDE & HONEY range.'],
-  ['bundles.html','bundles.html','Bundles & Save — HIDE & HONEY','Stock up and save on the balm your skin loves.'],
-  ['how-to.html','how-to.html','How to Use — HIDE & HONEY','Get the most from your Tallow Balm.'],
-  ['faq.html','faq.html','FAQ — HIDE & HONEY','Questions about tallow, honey, shipping and returns.'],
-  ['contact.html','contact.html','Contact — HIDE & HONEY','Talk to a real human on our team.'],
-  ['cart.html','cart.html','Your Basket — HIDE & HONEY','Your basket.'],
-  ['trial.html','trial.html','90-Day Guarantee — HIDE & HONEY','Love it or your money back.'],
-  ['shipping.html','shipping.html','Shipping & Returns — HIDE & HONEY','How we ship and how returns work.'],
-  ['refund.html','refund.html','Refund Policy — HIDE & HONEY','Our refund policy.'],
-  ['privacy.html','privacy.html','Privacy Policy — HIDE & HONEY','How we handle your data.'],
-  ['terms.html','terms.html','Terms of Service — HIDE & HONEY','Terms of service.'],
+  ['index.html','home.html','PRAIRIE FAT CO. — Beef Tallow Honey Balm. Four ingredients, nothing else.','Whipped grass-fed beef tallow & raw honey balm. Four ingredients, nothing else. 90-day money-back guarantee.'],
+  ['product.html','product.html','The Tallow Balm — PRAIRIE FAT CO.','Grass-fed beef tallow, raw honey, beeswax & olive oil. Deeply nourishing, bioidentical skin food.'],
+  ['ingredients.html','ingredients.html','Ingredients — PRAIRIE FAT CO.','The four simple, traceable ingredients in every jar.'],
+  ['about.html','about.html','Our Story — PRAIRIE FAT CO.','Why we render skincare back down to four honest things.'],
+  ['reviews.html','reviews.html','Reviews — PRAIRIE FAT CO.','Thousands of five-star reviews for The Tallow Balm.'],
+  ['collection.html','collection.html','Shop All — PRAIRIE FAT CO.','Shop the full PRAIRIE FAT CO. range.'],
+  ['bundles.html','bundles.html','Bundles & Save — PRAIRIE FAT CO.','Stock up and save on the balm your skin loves.'],
+  ['how-to.html','how-to.html','How to Use — PRAIRIE FAT CO.','Get the most from your Tallow Balm.'],
+  ['faq.html','faq.html','FAQ — PRAIRIE FAT CO.','Questions about tallow, honey, shipping and returns.'],
+  ['contact.html','contact.html','Contact — PRAIRIE FAT CO.','Talk to a real human on our team.'],
+  ['cart.html','cart.html','Your Basket — PRAIRIE FAT CO.','Your basket.'],
+  ['trial.html','trial.html','90-Day Guarantee — PRAIRIE FAT CO.','Love it or your money back.'],
+  ['shipping.html','shipping.html','Shipping & Returns — PRAIRIE FAT CO.','How we ship and how returns work.'],
+  ['refund.html','refund.html','Refund Policy — PRAIRIE FAT CO.','Our refund policy.'],
+  ['privacy.html','privacy.html','Privacy Policy — PRAIRIE FAT CO.','How we handle your data.'],
+  ['terms.html','terms.html','Terms of Service — PRAIRIE FAT CO.','Terms of service.'],
 ];
 
 let n = 0;

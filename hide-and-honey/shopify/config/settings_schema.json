@@ -1,9 +1,9 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Hide & Honey",
+    "theme_name": "Prairie Fat Co.",
     "theme_version": "1.0.0",
-    "theme_author": "Hide & Honey Co.",
+    "theme_author": "Prairie Fat Co.",
     "theme_documentation_url": "https://shopify.dev",
     "theme_support_url": "https://shopify.dev"
   },
@@ -25,7 +25,7 @@
   {
     "name": "Brand",
     "settings": [
-      { "type": "text", "id": "logo_text", "label": "Logo text", "default": "HIDE & HONEY" },
+      { "type": "text", "id": "logo_text", "label": "Logo text", "default": "PRAIRIE FAT CO." },
       { "type": "image_picker", "id": "logo", "label": "Logo image (optional)" },
       { "type": "image_picker", "id": "favicon", "label": "Favicon" }
     ]

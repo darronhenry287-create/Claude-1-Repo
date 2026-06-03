@@ -1,11 +1,11 @@
-# HIDE & HONEY — Shopify setup checklist (~10 minutes)
+# PRAIRIE FAT CO. — Shopify setup checklist (~10 minutes)
 
 The theme ships with **default menus and baked-in page content**, so it looks
 complete the moment you upload it. These steps connect the real Shopify pages
 so every link resolves perfectly.
 
 ## 1. Upload the theme
-Online Store → Themes → **Add theme → Upload zip file** → `hide-and-honey-shopify-theme.zip`.
+Online Store → Themes → **Add theme → Upload zip file** → `prairie-fat-co-shopify-theme.zip`.
 Click **Customize** to preview, then **Publish** when ready.
 
 ## 2. Add your product

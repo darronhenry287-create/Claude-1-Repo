@@ -4,16 +4,16 @@
     "color_honey": "#d99323",
     "color_ink": "#2c2114",
     "color_charcoal": "#1c1812",
-    "logo_text": "HIDE & HONEY",
+    "logo_text": "PRAIRIE FAT CO.",
     "free_ship_threshold": 35
   },
   "presets": {
-    "Hide & Honey": {
+    "Prairie Fat Co.": {
       "color_paper": "#ece0c8",
       "color_honey": "#d99323",
       "color_ink": "#2c2114",
       "color_charcoal": "#1c1812",
-      "logo_text": "HIDE & HONEY",
+      "logo_text": "PRAIRIE FAT CO.",
       "free_ship_threshold": 35
     }
   }
