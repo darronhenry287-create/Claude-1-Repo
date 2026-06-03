@@ -169,17 +169,9 @@
   const sb = $('#stickybar'), anchor = $('#buy-anchor');
   if (sb && anchor) new IntersectionObserver(([e]) => sb.classList.toggle('show', !e.isIntersecting && e.boundingClientRect.top < 0), { threshold: 0 }).observe(anchor);
 
-  /* reveal — bulletproof: any pixel in view reveals; nothing stays hidden */
-  document.documentElement.classList.add('js');
-  const io = new IntersectionObserver((en) => en.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin: '0px 0px -5% 0px' });
-  const observeReveals = (scope) => $$('.reveal:not(.in)', scope || document).forEach(el => io.observe(el));
-  observeReveals();
-  // Shopify theme editor injects/reloads sections after load — re-observe them.
-  document.addEventListener('shopify:section:load', (e) => observeReveals(e.target));
-  // Safety net: never leave content invisible (editors, tall sections, no IO).
-  const revealAll = () => $$('.reveal:not(.in)').forEach(el => el.classList.add('in'));
-  window.addEventListener('load', () => setTimeout(revealAll, 1200));
-  if (document.readyState === 'complete') setTimeout(revealAll, 1200);
+  /* Reveal is handled by pure CSS animation now — no JS needed.
+     Belt + suspenders: force-strip any leftover hiding inline styles. */
+  $$('.reveal').forEach(el => { el.style.opacity = ''; el.style.transform = ''; });
 
   /* forms (mock only) */
   if (MOCK) {

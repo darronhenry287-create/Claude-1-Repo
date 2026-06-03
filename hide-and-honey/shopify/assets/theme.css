@@ -367,9 +367,9 @@ h3 { font-size: clamp(1.3rem, 2.4vw, 1.8rem); }
 /* ============================================================
    CART DRAWER + MENU + OVERLAY
    ============================================================ */
-.overlay { position: fixed; inset: 0; background: rgba(28,24,18,0.5); opacity: 0; visibility: hidden; transition: opacity .35s, visibility .35s; z-index: 90; }
+.overlay { position: fixed !important; inset: 0; background: rgba(28,24,18,0.5); opacity: 0; visibility: hidden; transition: opacity .35s, visibility .35s; z-index: 90; }
 .overlay.open { opacity: 1; visibility: visible; }
-.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(420px,92vw); z-index: 95; background: var(--paper); transform: translateX(100%); transition: transform .4s var(--ease); display: flex; flex-direction: column; border-left: 2px solid var(--ink); }
+.drawer { position: fixed !important; top: 0; right: 0; bottom: 0; width: min(420px,92vw); height: 100vh; height: 100dvh; z-index: 9998; background: #ece0c8; transform: translateX(100%); transition: transform .4s var(--ease); display: flex; flex-direction: column; border-left: 2px solid var(--ink); }
 .drawer.open { transform: translateX(0); }
 .drawer__head { display: flex; align-items: center; justify-content: space-between; padding: 1.3rem; border-bottom: 2px solid var(--ink); }
 .drawer__head h3 { font-size: 1.3rem; }
@@ -392,8 +392,7 @@ h3 { font-size: clamp(1.3rem, 2.4vw, 1.8rem); }
 .freebar__track { height: 6px; background: var(--line); border-radius: 100px; margin-top: 0.5rem; overflow: hidden; }
 .freebar__fill { height: 100%; background: var(--honey); border-radius: 100px; transition: width .5s var(--ease); }
 
-.mobile { position: fixed; inset: 0; background: #ece0c8; background: var(--paper, #ece0c8); z-index: 120; transform: translateX(-100%); transition: transform .35s var(--ease); padding: 1.4rem; display: flex; flex-direction: column; overflow-y: auto; isolation: isolate; }
-.mobile::before { content: ''; position: absolute; inset: 0; background: inherit; z-index: -1; }
+.mobile { position: fixed !important; top: 0; left: 0; right: 0; bottom: 0; width: 100vw; height: 100vh; height: 100dvh; background-color: #ece0c8 !important; z-index: 9999; transform: translateX(-100%); transition: transform .35s var(--ease); padding: 1.4rem; display: flex; flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 .mobile.open { transform: translateX(0); }
 .mobile__head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
 .mobile nav a { display: block; font-family: var(--slab); font-weight: 800; font-size: 1.7rem; padding: 0.6rem 0; border-bottom: 2px solid var(--line); }
@@ -421,11 +420,12 @@ h3 { font-size: clamp(1.3rem, 2.4vw, 1.8rem); }
 .note-ok { background: #e7eccd; border: 2px solid var(--olive); color: var(--olive-deep); padding: 1rem; border-radius: 12px; margin-bottom: 1rem; font-weight: 600; }
 
 /* ---- reveal ---- */
-/* Reveal is gated behind .js so content is ALWAYS visible if JS doesn't run
-   or the observer misses a tall section (no more permanent blank space). */
-.reveal { opacity: 1; transform: none; }
-.js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
-.js .reveal.in { opacity: 1; transform: none; }
+/* Reveal — pure CSS, can NEVER leave content invisible.
+   Auto-fades every .reveal element on page load via an animation that
+   always completes (no JS observer dependency). */
+.reveal { opacity: 0; transform: translateY(18px); animation: revealIn .7s .15s cubic-bezier(0.34, 1.2, 0.4, 1) forwards; }
+@keyframes revealIn { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .reveal { animation: none; opacity: 1; transform: none; } }
 
 .skip { position: absolute; left: -9999px; }
 .skip:focus { left: 8px; top: 8px; background: var(--ink); color: var(--cream); padding: 0.6rem 1rem; border-radius: 8px; z-index: 200; }
