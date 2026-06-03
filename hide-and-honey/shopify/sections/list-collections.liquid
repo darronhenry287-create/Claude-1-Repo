@@ -1,0 +1,7 @@
+<section style="background:var(--cream);padding-block:clamp(2.5rem,5vw,4rem)" class="center"><div class="wrap"><span class="kicker">Browse</span><h1 style="margin-top:.7rem">Collections</h1></div></section>
+<section class="section"><div class="wrap"><div class="grid products" style="grid-template-columns:repeat(3,1fr)">
+  {%- for collection in collections -%}
+    <a href="{{ collection.url }}" class="card reveal"><div class="card__media">{%- if collection.featured_image -%}<img src="{{ collection.featured_image | image_url: width: 600 }}" alt="{{ collection.title | escape }}">{%- else -%}<img src="{{ 'hh-jar.svg' | asset_url }}" alt="">{%- endif -%}</div><div class="card__body"><h3 class="card__title">{{ collection.title }}</h3><div class="card__rev">{{ collection.products_count }} products</div></div></a>
+  {%- endfor -%}
+</div></div></section>
+{% schema %}{ "name": "Collections list", "settings": [] }{% endschema %}

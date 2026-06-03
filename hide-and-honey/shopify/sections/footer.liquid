@@ -1,0 +1,58 @@
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="logo">{% render 'icon', name: 'drop' %} {{ settings.logo_text | default: 'HIDE & HONEY' }}</span>
+        <p>{{ section.settings.tagline }}</p>
+      </div>
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="footer__col" {{ block.shopify_attributes }}>
+            <h4>{{ block.settings.heading }}</h4>
+            {%- if block.settings.menu != blank and linklists[block.settings.menu].links.size > 0 -%}
+              {%- for link in linklists[block.settings.menu].links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+            {%- else -%}
+              {{ block.settings.links_fallback }}
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="footer__col"><h4>Shop</h4><a href="/products/the-tallow-balm">The Tallow Balm</a><a href="{{ routes.all_products_collection_url }}">Shop All</a><a href="/pages/bundles">Bundles &amp; Save</a><a href="/pages/reviews">Reviews</a></div>
+        <div class="footer__col"><h4>Learn</h4><a href="/pages/ingredients">Ingredients</a><a href="/pages/our-story">Our Story</a><a href="/pages/faq">FAQ</a><a href="/pages/how-to-use">How to Use</a></div>
+        <div class="footer__col"><h4>Help</h4><a href="/pages/contact">Contact</a><a href="/pages/shipping-returns">Shipping &amp; Returns</a><a href="/pages/guarantee">90-Day Guarantee</a></div>
+      {%- endif -%}
+    </div>
+    <div class="footer__bot">
+      <p>© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+      <div class="footer__legal">
+        {%- if shop.privacy_policy.url -%}<a href="{{ shop.privacy_policy.url }}">{{ shop.privacy_policy.title }}</a>{%- else -%}<a href="/pages/privacy-policy">Privacy</a>{%- endif -%}
+        {%- if shop.terms_of_service.url -%}<a href="{{ shop.terms_of_service.url }}">{{ shop.terms_of_service.title }}</a>{%- else -%}<a href="/pages/terms-of-service">Terms</a>{%- endif -%}
+        {%- if shop.refund_policy.url -%}<a href="{{ shop.refund_policy.url }}">{{ shop.refund_policy.title }}</a>{%- else -%}<a href="/pages/refund-policy">Refund Policy</a>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "textarea", "id": "tagline", "label": "Tagline", "default": "Honest skin food, made from four simple things. Small-batch, grass-fed, and good for every kind of skin." }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Menu column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
+        { "type": "link_list", "id": "menu", "label": "Menu (optional)" },
+        { "type": "html", "id": "links_fallback", "label": "Fallback links (if no menu chosen)", "default": "<a href=\"/products/the-tallow-balm\">The Tallow Balm</a><a href=\"/collections/all\">Shop All</a>" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    { "name": "Footer", "blocks": [ { "type": "column" }, { "type": "column" }, { "type": "column" } ] }
+  ]
+}
+{% endschema %}

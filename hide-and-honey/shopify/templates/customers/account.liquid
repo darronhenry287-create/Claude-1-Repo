@@ -1,0 +1,16 @@
+<section class="section"><div class="wrap">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem">
+    <div><span class="kicker">My account</span><h1 style="margin-top:.6rem">Hi, {{ customer.first_name | default: 'friend' }}</h1></div>
+    <a href="{{ routes.account_logout_url }}" class="btn btn-outline">Sign out</a>
+  </div>
+  <div class="split" style="align-items:start">
+    <div><h3 style="margin-bottom:1rem">Default address</h3>{%- if customer.default_address -%}<p class="muted" style="line-height:1.8">{{ customer.default_address | format_address }}</p>{%- else -%}<p class="muted">No address on file.</p>{%- endif -%}<a href="{{ routes.account_addresses_url }}" class="muted" style="display:inline-block;margin-top:1rem;font-weight:700;text-decoration:underline">Manage addresses →</a></div>
+    <div><h3 style="margin-bottom:1rem">Order history</h3>
+      {%- paginate customer.orders by 10 -%}
+        {%- if customer.orders.size > 0 -%}
+          {%- for order in customer.orders -%}<div class="cline" style="grid-template-columns:1fr auto"><div><a href="{{ order.customer_url }}" style="font-weight:700;text-decoration:underline">{{ order.name }}</a><div class="muted" style="font-size:.82rem">{{ order.created_at | date: '%b %-d, %Y' }} · {{ order.financial_status_label }}</div></div><div class="cline__price">{{ order.total_price | money }}</div></div>{%- endfor -%}
+        {%- else -%}<p class="muted">No orders yet.</p><a href="{{ routes.all_products_collection_url }}" class="btn btn-honey" style="margin-top:1rem">Start shopping</a>{%- endif -%}
+      {%- endpaginate -%}
+    </div>
+  </div>
+</div></section>

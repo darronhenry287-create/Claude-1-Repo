@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "wall": { "type": "reviews-wall", "settings": { "bg": false, "button_text": "" }, "blocks": {
+      "r1": { "type": "review", "settings": { "quote": "My eczema patches calmed down in four days. This $24 jar beat prescription creams.", "name": "Rachel K." } },
+      "r2": { "type": "review", "settings": { "quote": "Skeptical about beef fat on my face — now it's the only thing I use. One jar lasts months.", "name": "Daniel M." } },
+      "r3": { "type": "review", "settings": { "quote": "Replaced my lip balm, hand cream and night moisturizer with one little jar.", "name": "Sofia T." } },
+      "r4": { "type": "review", "settings": { "quote": "Winter wrecks my hands every year. Two weeks of this and the cracks are gone.", "name": "Jonas B." } },
+      "r5": { "type": "review", "settings": { "quote": "The unscented really is scentless. Melts right in.", "name": "Amara L." } },
+      "r6": { "type": "review", "settings": { "quote": "My teenage son uses it without complaining. His skin cleared up too.", "name": "Priya H." } }
+    }, "block_order": ["r1","r2","r3","r4","r5","r6"] }
+  },
+  "order": ["wall"]
+}

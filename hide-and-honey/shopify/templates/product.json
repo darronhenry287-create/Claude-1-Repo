@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "main": { "type": "main-product", "blocks": {
+      "ing": { "type": "accordion", "settings": { "title": "The full ingredient list", "content": "<p>Grass-fed beef tallow, raw wildflower honey, golden beeswax, cold-pressed extra-virgin olive oil. That's the entire list — no water, fragrance, preservatives or seed oils.</p>" } },
+      "use": { "type": "accordion", "settings": { "title": "How to use", "content": "<p>Warm a pea-sized amount between fingertips and press into damp skin — face, lips, hands, elbows, scars. Morning and night, or whenever skin feels dry.</p>" } },
+      "ship": { "type": "accordion", "settings": { "title": "Shipping & returns", "content": "<p>Free shipping over $35, ships in 1–2 business days. 90-day money-back guarantee — keep the jar.</p>" } }
+    }, "block_order": ["ing","use","ship"] },
+    "diagram": { "type": "ingredient-diagram", "settings": { "kicker": "What's inside", "heading": "Four honest things." }, "blocks": {
+      "n1": { "type": "node", "settings": { "slot": 1, "art_index": 0, "name": "Beef Tallow", "pct": "50%", "text": "Grass-fed & bioidentical." } },
+      "n2": { "type": "node", "settings": { "slot": 2, "art_index": 1, "name": "Raw Honey", "pct": "25%", "text": "Locks moisture in." } },
+      "n3": { "type": "node", "settings": { "slot": 3, "art_index": 2, "name": "Beeswax", "pct": "15%", "text": "A breathable seal." } },
+      "n4": { "type": "node", "settings": { "slot": 4, "art_index": 3, "name": "Olive Oil", "pct": "10%", "text": "Vitamin-rich glow." } }
+    }, "block_order": ["n1","n2","n3","n4"] },
+    "wall": { "type": "reviews-wall", "settings": { "bg": true }, "blocks": {
+      "r1": { "type": "review", "settings": { "quote": "My eczema calmed down in four days.", "name": "Rachel K." } },
+      "r2": { "type": "review", "settings": { "quote": "The only thing I use now.", "name": "Daniel M." } },
+      "r3": { "type": "review", "settings": { "quote": "Replaced three products with one jar.", "name": "Sofia T." } },
+      "r4": { "type": "review", "settings": { "quote": "Cracks gone in two weeks.", "name": "Jonas B." } }
+    }, "block_order": ["r1","r2","r3","r4"] },
+    "faq": { "type": "faq", "blocks": {
+      "q1": { "type": "qa", "settings": { "q": "Does it smell like beef?", "a": "<p>No — triple-rendered and purified, the Unscented balm is virtually scentless.</p>" } },
+      "q2": { "type": "qa", "settings": { "q": "Will it clog my pores?", "a": "<p>Tallow is bioidentical to your skin's oils; most people find it balancing. Patch-test first.</p>" } }
+    }, "block_order": ["q1","q2"] }
+  },
+  "order": ["main", "diagram", "wall", "faq"]
+}

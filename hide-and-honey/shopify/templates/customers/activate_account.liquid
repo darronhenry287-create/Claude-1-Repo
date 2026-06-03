@@ -1,0 +1,10 @@
+<section class="section"><div class="wrap form">
+  <div class="center" style="margin-bottom:2rem"><span class="kicker">Hide & Honey</span><h1 style="margin-top:.7rem">Activate account</h1></div>
+  {%- form 'activate_customer_password' -%}
+    {%- if form.errors -%}<div class="note-ok" style="background:#f3dcd2;border-color:var(--rust);color:var(--rust)">{{ form.errors | default_errors }}</div>{%- endif -%}
+    <div class="field"><label>Password</label><input type="password" name="customer[password]" autocomplete="new-password" required></div>
+    <div class="field"><label>Confirm password</label><input type="password" name="customer[password_confirmation]" autocomplete="new-password" required></div>
+    <button type="submit" class="btn btn-honey btn-block btn-lg">Activate account</button>
+    <button type="submit" name="decline" class="btn btn-outline btn-block" style="margin-top:.8rem">Decline invitation</button>
+  {%- endform -%}
+</div></section>

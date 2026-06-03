@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="{{ settings.color_paper }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  {%- if settings.favicon != blank -%}<link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32 }}">{%- endif -%}
+  <title>{{ page_title }}{% unless page_title contains shop.name %} &middot; {{ shop.name }}{% endunless %}</title>
+  {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+  {{ content_for_header }}
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  <style>
+    :root{
+      --paper: {{ settings.color_paper }};
+      --honey: {{ settings.color_honey }};
+      --ink: {{ settings.color_ink }};
+      --charcoal: {{ settings.color_charcoal }};
+    }
+  </style>
+</head>
+<body class="template-{{ request.page_type | handle }}">
+  <a class="skip" href="#main">{{ 'accessibility.skip' | t }}</a>
+  {% sections 'header-group' %}
+  <main id="main">{{ content_for_layout }}</main>
+  {% sections 'footer-group' %}
+  {% render 'cart-drawer' %}
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+</body>
+</html>

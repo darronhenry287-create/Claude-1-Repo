@@ -1,0 +1,21 @@
+<section class="section"><div class="wrap" style="max-width:900px">
+  <h1 style="margin-bottom:2rem">{{ 'cart.title' | t }}</h1>
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post">
+      {%- for item in cart.items -%}
+        <div class="cline">
+          <div class="cline__thumb">{%- if item.image -%}<img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" style="width:100%;height:100%;object-fit:cover">{%- endif -%}</div>
+          <div class="cline__info"><h4 style="font-family:var(--slab)"><a href="{{ item.url }}">{{ item.product.title }}</a></h4><div class="muted" style="font-size:.82rem">{{ item.variant.title | remove: 'Default Title' }}</div><a class="drm" href="{{ item.url_to_remove }}">{{ 'cart.remove' | t }}</a></div>
+          <div class="muted" style="font-weight:700">Qty {{ item.quantity }}</div>
+          <div class="cline__price">{{ item.final_line_price | money }}</div>
+        </div>
+      {%- endfor -%}
+      <div class="csum__total" style="margin-top:2rem"><span>{{ 'cart.subtotal' | t }}</span><span>{{ cart.total_price | money }}</span></div>
+      <p class="dnote" style="text-align:left;margin:.5rem 0 1.5rem">{{ 'cart.taxes_note' | t }}</p>
+      <button type="submit" name="checkout" class="btn btn-honey btn-lg">{{ 'cart.checkout' | t }}</button>
+    </form>
+  {%- else -%}
+    <div class="dempty"><p style="font-family:var(--slab);font-size:1.3rem">{{ 'cart.empty' | t }}</p><a href="{{ routes.all_products_collection_url }}" class="btn btn-honey btn-lg" style="margin-top:1.5rem">Shop the range</a></div>
+  {%- endif -%}
+</div></section>
+{% schema %}{ "name": "Cart", "settings": [] }{% endschema %}

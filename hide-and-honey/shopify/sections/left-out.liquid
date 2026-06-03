@@ -1,0 +1,28 @@
+<section class="section leftout center">
+  <div class="wrap">
+    <span class="kicker">{{ section.settings.kicker }}</span>
+    <h2 style="margin:.8rem 0 0">{{ section.settings.heading }}</h2>
+    <ul class="nasties">
+      {%- assign items = section.settings.nasties | newline_to_br | strip_newlines | split: '<br />' -%}
+      {%- for it in items -%}{%- if it != blank -%}<li>{{ it | strip }}</li>{%- endif -%}{%- endfor -%}
+    </ul>
+    <p class="lede" style="max-width:520px;margin:0 auto 1rem">{{ section.settings.text }}</p>
+    <div class="kept">
+      {%- assign kept = section.settings.kept | split: ',' -%}
+      {%- for k in kept -%}<span>{{ k | strip }}</span>{%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "What we left out",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The honest part" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What we left out." },
+    { "type": "textarea", "id": "nasties", "label": "Crossed-out list (one per line)", "default": "Water\nFragrance\nParabens\nPhenoxyethanol\nSeed oils\nSulfates\nSilicones\nPEGs\nDyes\nMineral oil\nAlcohol\nGlycerin fillers\nCarbomer\nMicroplastics\nFormaldehyde\nTalc\nMystery actives" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "We kept exactly four things — the ones your skin actually knows what to do with." },
+    { "type": "text", "id": "kept", "label": "Kept ingredients (comma separated)", "default": "Beef Tallow, Raw Honey, Beeswax, Olive Oil" }
+  ],
+  "presets": [ { "name": "What we left out" } ]
+}
+{% endschema %}

@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "intro": { "type": "rich-text", "settings": { "center": true, "lede": true, "kicker": "Our story", "heading": "We stripped skincare back to honest food.", "content": "<p>Hide & Honey started in a farmhouse kitchen, a slow cooker, and a stubborn question: why does skincare need thirty ingredients you can't pronounce?</p><p>Our founder grew up on a cattle farm where nothing went to waste. Grandma rendered tallow on the stove and rubbed it into chapped hands all winter. It just worked. Years later, staring at a shelf of half-used creams, that memory came back — so we went to the kitchen and made something simpler.</p><p>Four ingredients. Nothing else. We've never seen a reason to add a fifth.</p>" } },
+    "values": { "type": "ingredient-diagram", "settings": { "kicker": "What we stand for", "heading": "Honest in every jar." }, "blocks": {
+      "n1": { "type": "node", "settings": { "slot": 1, "art_index": 1, "name": "Real food", "pct": "✓", "text": "If we wouldn't eat it, it doesn't go on skin." } },
+      "n2": { "type": "node", "settings": { "slot": 2, "art_index": 0, "name": "Whole-animal", "pct": "✓", "text": "A byproduct of regenerative farms — nothing wasted." } },
+      "n3": { "type": "node", "settings": { "slot": 3, "art_index": 2, "name": "Small batches", "pct": "✓", "text": "Whipped in small runs for freshness." } },
+      "n4": { "type": "node", "settings": { "slot": 4, "art_index": 3, "name": "Radical honesty", "pct": "✓", "text": "The whole formula is on the front of the jar." } }
+    }, "block_order": ["n1","n2","n3","n4"] },
+    "note": { "type": "founder-note" }
+  },
+  "order": ["intro", "values", "note"]
+}
