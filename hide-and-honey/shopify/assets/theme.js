@@ -1,5 +1,5 @@
 /* ============================================================
-   HIDE & HONEY — interactions
+   PRAIRIE FAT CO. — interactions
    Runs in MOCK mode (static preview: window.HH_MOCK = true) or
    LIVE mode (Shopify: native cart, server-rendered values).
    ============================================================ */

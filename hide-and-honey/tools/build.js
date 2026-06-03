@@ -53,7 +53,7 @@ function chrome() {
         ${FOOT.map(([h,l]) => `<div class="footer__col"><h4>${h}</h4>${links(l)}</div>`).join('\n        ')}
       </div>
       <div class="footer__bot">
-        <p>© 2026 Hide &amp; Honey Co. All rights reserved.</p>
+        <p>© 2026 Prairie Fat Co. All rights reserved.</p>
         <div class="footer__legal">${LEGAL.map(([h,t]) => `<a href="${h}">${t}</a>`).join('')}</div>
       </div>
     </div>
