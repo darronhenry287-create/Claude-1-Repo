@@ -4,10 +4,12 @@
 <section class="section">
   <div class="wrap">
     <p class="muted" style="font-weight:600;margin-bottom:1.5rem">{{ collection.products_count }} products</p>
+    {%- paginate collection.products by 12 -%}
     <div class="grid products" style="grid-template-columns:repeat(3,1fr)">
       {%- for product in collection.products -%}{% render 'product-card', product: product %}{%- else -%}<p>No products yet.</p>{%- endfor -%}
     </div>
     {%- if paginate.pages > 1 -%}<div class="center" style="margin-top:3rem">{{ paginate | default_pagination }}</div>{%- endif -%}
+    {%- endpaginate -%}
   </div>
 </section>
 {% schema %}{ "name": "Collection", "settings": [] }{% endschema %}
