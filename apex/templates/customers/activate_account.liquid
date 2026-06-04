@@ -1,0 +1,45 @@
+{%- comment -%} templates/customers/activate_account.liquid — Apex account activation {%- endcomment -%}
+<div class="page-width page-width--narrow apex-customers" style="padding-block:clamp(3rem,2rem + 4vw,5rem)">
+
+  <div class="card bordered apex-customers__card">
+    <h1 class="h3">{{ 'customer.activate_account.title' | t | default: 'Activate your account' }}</h1>
+    <p class="muted" style="margin-bottom:1.4rem">{{ 'customer.activate_account.subtext' | t | default: 'Create a password to activate your account.' }}</p>
+
+    {%- form 'activate_customer_password' -%}
+      {%- if form.errors -%}
+        <div class="apex-customers__error" role="alert">
+          {% render 'icon', icon: 'close' %}
+          <div>{{ form.errors | default_errors }}</div>
+        </div>
+      {%- endif -%}
+
+      <div class="stack apex-customers__fields">
+        <div class="field">
+          <label for="ActivatePassword">{{ 'customer.activate_account.password' | t | default: 'Password' }} <span aria-hidden="true">*</span></label>
+          <input class="input" type="password" id="ActivatePassword" name="customer[password]"
+            autocomplete="new-password" required placeholder="{{ 'customer.activate_account.password_placeholder' | t | default: 'Min. 5 characters' }}">
+        </div>
+        <div class="field">
+          <label for="ActivatePasswordConfirm">{{ 'customer.activate_account.password_confirm' | t | default: 'Confirm password' }} <span aria-hidden="true">*</span></label>
+          <input class="input" type="password" id="ActivatePasswordConfirm" name="customer[password_confirmation]"
+            autocomplete="new-password" required placeholder="{{ 'customer.activate_account.password_confirm_placeholder' | t | default: 'Re-enter password' }}">
+        </div>
+        <button class="btn btn--accent btn--block" type="submit">
+          {{ 'customer.activate_account.submit' | t | default: 'Activate account' }}
+        </button>
+        <a class="btn btn--ghost btn--block" href="{{ routes.account_login_url }}">
+          {{ 'customer.activate_account.cancel' | t | default: 'Cancel' }}
+        </a>
+      </div>
+    {%- endform -%}
+  </div>
+
+</div>
+<style>
+.apex-customers { max-width: 440px; }
+.apex-customers__card { padding: clamp(1.4rem,.8rem + 2vw,2.4rem); }
+.apex-customers__card h1 { margin-bottom: .5rem; }
+.apex-customers__fields { gap: 1rem; }
+.apex-customers__error { display: flex; align-items: flex-start; gap: .6rem; padding: .9rem 1rem; background: color-mix(in srgb, var(--sale) 10%, transparent); color: var(--sale); border-radius: var(--radius-sm); margin-bottom: 1rem; font-size: var(--text-sm); }
+.apex-customers__error svg { width: 1.1rem; height: 1.1rem; flex: none; margin-top: .1em; }
+</style>

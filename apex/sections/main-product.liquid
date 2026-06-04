@@ -132,8 +132,13 @@
                   </script>
 
                   {%- form 'product', product, id: form_id, novalidate: 'novalidate' -%}
-                    {%- comment -%} Real variant id; base.js keeps this in sync on option change. Availability is enforced by the [data-atc] disabled state (managed by base.js), so the id input is never disabled — that would drop it from FormData. {%- endcomment -%}
-                    <input type="hidden" name="id" value="{{ current_variant.id }}">
+                    {%- comment -%}
+                      Single live name="id" — base.js syncs its value on option change, and the
+                      [data-atc] button (not this input) carries the disabled state, so the id is
+                      never dropped from FormData. On no-JS the form still posts to /cart/add with
+                      the first available variant (standard AJAX-form degradation).
+                    {%- endcomment -%}
+                    <input type="hidden" name="id" value="{{ current_variant.id }}" class="apex-product__id">
 
                     {%- unless product.has_only_default_variant -%}
                       <div class="apex-product__options stack">

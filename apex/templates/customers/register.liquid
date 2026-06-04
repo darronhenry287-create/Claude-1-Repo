@@ -1,0 +1,66 @@
+{%- comment -%} templates/customers/register.liquid — Apex customer registration {%- endcomment -%}
+<div class="page-width page-width--narrow apex-customers" style="padding-block:clamp(3rem,2rem + 4vw,5rem)">
+
+  <div class="card bordered apex-customers__card">
+    <h1 class="h3">{{ 'customer.register.title' | t | default: 'Create account' }}</h1>
+
+    {%- form 'create_customer' -%}
+      {%- if form.errors -%}
+        <div class="apex-customers__error" role="alert">
+          {% render 'icon', icon: 'close' %}
+          <div>{{ form.errors | default_errors }}</div>
+        </div>
+      {%- endif -%}
+
+      <div class="stack apex-customers__fields">
+        <div class="grid grid--2">
+          <div class="field">
+            <label for="RegisterFirstName">{{ 'customer.register.first_name' | t | default: 'First name' }}</label>
+            <input class="input" type="text" id="RegisterFirstName" name="customer[first_name]"
+              autocomplete="given-name" value="{{ form.first_name }}"
+              placeholder="{{ 'customer.register.first_name' | t | default: 'First name' }}">
+          </div>
+          <div class="field">
+            <label for="RegisterLastName">{{ 'customer.register.last_name' | t | default: 'Last name' }}</label>
+            <input class="input" type="text" id="RegisterLastName" name="customer[last_name]"
+              autocomplete="family-name" value="{{ form.last_name }}"
+              placeholder="{{ 'customer.register.last_name' | t | default: 'Last name' }}">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="RegisterEmail">{{ 'customer.register.email' | t | default: 'Email' }} <span aria-hidden="true">*</span></label>
+          <input class="input" type="email" id="RegisterEmail" name="customer[email]"
+            autocomplete="email" value="{{ form.email }}" required
+            placeholder="you@example.com">
+        </div>
+
+        <div class="field">
+          <label for="RegisterPassword">{{ 'customer.register.password' | t | default: 'Password' }} <span aria-hidden="true">*</span></label>
+          <input class="input" type="password" id="RegisterPassword" name="customer[password]"
+            autocomplete="new-password" required
+            placeholder="{{ 'customer.register.password_placeholder' | t | default: 'Min. 5 characters' }}">
+        </div>
+
+        <button class="btn btn--accent btn--block" type="submit">
+          {{ 'customer.register.submit' | t | default: 'Create account' }}
+        </button>
+      </div>
+    {%- endform -%}
+
+    <hr class="divider" style="margin-block:1.4rem">
+    <p class="muted" style="font-size:var(--text-sm)">
+      {{ 'customer.register.login' | t | default: 'Already have an account?' }}
+      <a class="link" href="{{ routes.account_login_url }}">{{ 'customer.login.sign_in' | t | default: 'Sign in' }}</a>
+    </p>
+  </div>
+
+</div>
+<style>
+.apex-customers { max-width: 480px; }
+.apex-customers__card { padding: clamp(1.4rem,.8rem + 2vw,2.4rem); }
+.apex-customers__card h1 { margin-bottom: 1.4rem; }
+.apex-customers__fields { gap: 1rem; }
+.apex-customers__error { display: flex; align-items: flex-start; gap: .6rem; padding: .9rem 1rem; background: color-mix(in srgb, var(--sale) 10%, transparent); color: var(--sale); border-radius: var(--radius-sm); margin-bottom: 1rem; font-size: var(--text-sm); }
+.apex-customers__error svg { width: 1.1rem; height: 1.1rem; flex: none; margin-top: .1em; }
+</style>
