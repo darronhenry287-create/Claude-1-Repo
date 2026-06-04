@@ -1,31 +1,31 @@
 {
   "accessibility": {
     "close": "إغلاق",
-    "refresh_page": "يؤدي اختيار تحديد إلى تحديث الصفحة بالكامل.",
-    "skip_to_text": "تخطى إلى المحتوى"
+    "refresh_page": "اختيار تحديد يؤدي إلى تحديث كامل للصفحة.",
+    "skip_to_text": "انتقل إلى المحتوى"
   },
   "general": {
-    "continue_shopping": "متابعة التسوق",
+    "continue_shopping": "مواصلة التسوق",
     "video": {
       "play": "تشغيل الفيديو",
-      "no_video": "لم يتم تعيين رابط فيديو."
+      "no_video": "لم يتم تعيين رابط الفيديو."
     },
     "accessibility": {
       "close": "إغلاق"
     },
     "page": "صفحة {{ page }}",
     "tags": "الوسوم",
-    "search_placeholder": "ابحث عن منتجات…",
+    "search_placeholder": "البحث عن المنتجات…",
     "pagination": {
-      "label": "ترقيم الصفحات",
+      "label": "التصفح",
       "load_more": "تحميل المزيد",
       "next": "التالي",
       "previous": "السابق"
     },
     "search": {
       "search": "بحث",
-      "placeholder": "ابحث عن منتجات…",
-      "prompt": "عمّ تبحث؟",
+      "placeholder": "البحث عن المنتجات…",
+      "prompt": "ما الذي تبحث عنه؟",
       "for": "البحث عن",
       "suggestions": "اقتراحات",
       "products": "المنتجات",
@@ -35,7 +35,7 @@
       "results": "نتائج",
       "view_all": "عرض جميع {{ count }} نتيجة",
       "browse_all": "تصفح جميع المنتجات",
-      "no_results": "لا توجد نتائج لـ "{{ terms }}"",
+      "no_results": "لا توجد نتائج لـ “{{ terms }}”",
       "no_results_for": "لم يتم العثور على نتائج لـ",
       "no_results_detail": "جرّب بحثاً مختلفاً أو تصفح الكتالوج."
     },

@@ -2,10 +2,10 @@
   "accessibility": {
     "close": "Cerrar",
     "refresh_page": "Al elegir una selección se actualiza la página completa.",
-    "skip_to_text": "Ir al contenido"
+    "skip_to_text": "Saltar al contenido"
   },
   "general": {
-    "continue_shopping": "Continuar comprando",
+    "continue_shopping": "Seguir comprando",
     "video": {
       "play": "Reproducir vídeo",
       "no_video": "No se ha establecido ninguna URL de vídeo."
@@ -33,7 +33,7 @@
       "articles": "Artículos",
       "result": "resultado",
       "results": "resultados",
-      "view_all": "Ver todos los {{ count }} resultados",
+      "view_all": "Ver los {{ count }} resultados",
       "browse_all": "Explorar todos los productos",
       "no_results": "Sin resultados para “{{ terms }}”",
       "no_results_for": "No se encontraron resultados para",
@@ -90,7 +90,7 @@
       "note_placeholder": "Instrucciones especiales para tu pedido",
       "subtotal": "Subtotal",
       "summary": "Resumen",
-      "taxes": "Impuestos y gastos de envío calculados en el proceso de pago.",
+      "taxes": "Impuestos y gastos de envío calculados en el pago.",
       "checkout": "Finalizar compra",
       "each": "c/u",
       "original": "Original",
@@ -176,13 +176,13 @@
       "order_number": "Pedido",
       "date": "Fecha",
       "payment_status": "Pago",
-      "fulfillment_status": "Cumplimiento",
+      "fulfillment_status": "Envío",
       "total": "Total"
     },
     "order": {
       "title": "Pedido {{ name }}",
       "date_html": "Realizado el {{ date }}",
-      "fulfilled_at_html": "Cumplido el {{ date }}",
+      "fulfilled_at_html": "Enviado el {{ date }}",
       "summary": "Resumen del pedido",
       "items": "Artículos",
       "quantity": "Cant.",

@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "বন্ধ করুন",
+    "refresh_page": "একটি নির্বাচন করলে সম্পূর্ণ পৃষ্ঠা রিফ্রেশ হবে।",
+    "skip_to_text": "বিষয়বস্তুতে যান"
+  },
+  "general": {
+    "continue_shopping": "কেনাকাটা চালিয়ে যান",
+    "video": {
+      "play": "ভিডিও চালান",
+      "no_video": "কোনো ভিডিও URL সেট করা নেই।"
+    },
+    "accessibility": {
+      "close": "বন্ধ করুন"
+    },
+    "page": "পৃষ্ঠা {{ page }}",
+    "tags": "ট্যাগ",
+    "search_placeholder": "পণ্য খুঁজুন…",
+    "pagination": {
+      "label": "পেজিনেশন",
+      "load_more": "আরও লোড করুন",
+      "next": "পরবর্তী",
+      "previous": "পূর্ববর্তী"
+    },
+    "search": {
+      "search": "খুঁজুন",
+      "placeholder": "পণ্য খুঁজুন…",
+      "prompt": "আপনি কী খুঁজছেন?",
+      "for": "অনুসন্ধান করুন",
+      "suggestions": "পরামর্শ",
+      "products": "পণ্য",
+      "pages": "পৃষ্ঠা",
+      "articles": "নিবন্ধ",
+      "result": "ফলাফল",
+      "results": "ফলাফল",
+      "view_all": "সকল {{ count }} ফলাফল দেখুন",
+      "browse_all": "সকল পণ্য ব্রাউজ করুন",
+      "no_results": ""{{ terms }}" এর জন্য কোনো ফলাফল নেই",
+      "no_results_for": "কোনো ফলাফল পাওয়া যায়নি",
+      "no_results_detail": "অন্য কিছু খুঁজুন অথবা আমাদের ক্যাটালগ ব্রাউজ করুন।"
+    },
+    "slider": {
+      "next": "পরবর্তী স্লাইড",
+      "previous": "পূর্ববর্তী স্লাইড"
+    }
+  },
+  "newsletter": {
+    "label": "ইমেইল",
+    "placeholder": "ইমেইল ঠিকানা",
+    "success": "সাবস্ক্রাইব করার জন্য ধন্যবাদ!"
+  },
+  "payment": {
+    "methods": "গ্রহণযোগ্য পেমেন্ট পদ্ধতি"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "কার্টে যোগ করুন",
+      "buy": "এখনই কিনুন",
+      "choose_options": "বিকল্প বেছে নিন",
+      "from": "থেকে",
+      "in_stock": "স্টকে আছে",
+      "low_stock": "মাত্র {{ quantity }}টি বাকি",
+      "sold_out": "বিক্রি শেষ",
+      "unavailable": "পাওয়া যাচ্ছে না",
+      "quantity": "পরিমাণ",
+      "increase": "পরিমাণ বাড়ান",
+      "decrease": "পরিমাণ কমান",
+      "save": "{{ savings }} সাশ্রয়",
+      "view_full_details": "সম্পূর্ণ বিবরণ দেখুন",
+      "media": {
+        "load_image": "ছবি {{ index }} লোড করুন"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "মেনু"
+    },
+    "cart": {
+      "title": "আপনার কার্ট",
+      "empty": "আপনার কার্ট খালি",
+      "empty_detail": "আপনার জন্য কিছু খুঁজে নেওয়া যাক।",
+      "item": "আইটেম",
+      "items": "আইটেম",
+      "quantity": "পরিমাণ",
+      "increase": "পরিমাণ বাড়ান",
+      "decrease": "পরিমাণ কমান",
+      "remove": "সরান",
+      "note": "অর্ডার নোট যোগ করুন",
+      "note_placeholder": "আপনার অর্ডারের জন্য বিশেষ নির্দেশনা",
+      "subtotal": "সাবটোটাল",
+      "summary": "সারসংক্ষেপ",
+      "taxes": "কর এবং শিপিং চেকআউটে গণনা করা হবে।",
+      "checkout": "চেকআউট",
+      "each": "প্রতিটি",
+      "original": "মূল মূল্য",
+      "free_ship_progress": "বিনামূল্যে শিপিংয়ের জন্য আরও {{ amount }} প্রয়োজন",
+      "free_ship_progress_html": "বিনামূল্যে শিপিংয়ের জন্য আরও <strong>{{ amount }}</strong> প্রয়োজন",
+      "free_ship_unlocked": "আপনি বিনামূল্যে শিপিং আনলক করেছেন!"
+    },
+    "collection": {
+      "count": "{{ count }}টি পণ্য",
+      "products": "পণ্য",
+      "empty": "কোনো পণ্য পাওয়া যায়নি",
+      "empty_detail": "কিছু ফিল্টার সরানোর চেষ্টা করুন।",
+      "filter": "ফিল্টার",
+      "apply": "প্রয়োগ করুন",
+      "clear_filters": "সব পরিষ্কার করুন",
+      "sort_label": "সাজান",
+      "price_from": "থেকে",
+      "price_to": "পর্যন্ত"
+    },
+    "collection_list": {
+      "empty": "দেখানোর জন্য কোনো সংগ্রহ নেই",
+      "products": "পণ্য"
+    },
+    "featured_collection": {
+      "empty": "দেখানোর জন্য কোনো পণ্য নেই"
+    }
+  },
+  "customer": {
+    "log_out": "লগ আউট",
+    "account": {
+      "title": "অ্যাকাউন্ট",
+      "details": "অ্যাকাউন্টের বিবরণ",
+      "return": "অ্যাকাউন্টে ফিরে যান",
+      "view_addresses": "ঠিকানা দেখুন"
+    },
+    "login": {
+      "title": "লগইন",
+      "email": "ইমেইল",
+      "password": "পাসওয়ার্ড",
+      "sign_in": "সাইন ইন করুন",
+      "forgot_password": "পাসওয়ার্ড ভুলে গেছেন?",
+      "no_account": "অ্যাকাউন্ট নেই?",
+      "create_account": "অ্যাকাউন্ট তৈরি করুন",
+      "cancel": "বাতিল করুন"
+    },
+    "register": {
+      "title": "অ্যাকাউন্ট তৈরি করুন",
+      "first_name": "প্রথম নাম",
+      "last_name": "শেষ নাম",
+      "email": "ইমেইল",
+      "password": "পাসওয়ার্ড",
+      "password_placeholder": "কমপক্ষে ৫টি অক্ষর",
+      "submit": "অ্যাকাউন্ট তৈরি করুন",
+      "login": "ইতিমধ্যে অ্যাকাউন্ট আছে? সাইন ইন করুন"
+    },
+    "recover_password": {
+      "title": "পাসওয়ার্ড রিসেট করুন",
+      "subtext": "আমরা আপনাকে রিসেট করতে একটি ইমেইল পাঠাবো।",
+      "submit": "রিসেট ইমেইল পাঠান",
+      "success": "আমরা আপনার পাসওয়ার্ড রিসেট করার লিঙ্ক সহ একটি ইমেইল পাঠিয়েছি।"
+    },
+    "reset_password": {
+      "title": "অ্যাকাউন্ট পাসওয়ার্ড রিসেট করুন",
+      "subtext": "নতুন পাসওয়ার্ড লিখুন।",
+      "password": "পাসওয়ার্ড",
+      "password_confirm": "পাসওয়ার্ড নিশ্চিত করুন",
+      "password_placeholder": "নতুন পাসওয়ার্ড",
+      "submit": "পাসওয়ার্ড রিসেট করুন"
+    },
+    "activate_account": {
+      "title": "অ্যাকাউন্ট সক্রিয় করুন",
+      "subtext": "আপনার অ্যাকাউন্ট সক্রিয় করতে পাসওয়ার্ড তৈরি করুন।",
+      "password": "পাসওয়ার্ড",
+      "password_placeholder": "পাসওয়ার্ড",
+      "password_confirm": "পাসওয়ার্ড নিশ্চিত করুন",
+      "password_confirm_placeholder": "পাসওয়ার্ড নিশ্চিত করুন",
+      "submit": "অ্যাকাউন্ট সক্রিয় করুন",
+      "cancel": "আমন্ত্রণ প্রত্যাখ্যান করুন"
+    },
+    "orders": {
+      "title": "অর্ডারের ইতিহাস",
+      "none": "আপনি এখনও কোনো অর্ডার করেননি।",
+      "order_number": "অর্ডার",
+      "date": "তারিখ",
+      "payment_status": "পেমেন্ট",
+      "fulfillment_status": "পূরণ",
+      "total": "মোট"
+    },
+    "order": {
+      "title": "অর্ডার {{ name }}",
+      "date_html": "{{ date }} তারিখে করা হয়েছে",
+      "fulfilled_at_html": "{{ date }} তারিখে পূরণ হয়েছে",
+      "summary": "অর্ডার সারসংক্ষেপ",
+      "items": "আইটেম",
+      "quantity": "পরিমাণ",
+      "subtotal": "সাবটোটাল",
+      "total": "মোট",
+      "shipping_address": "শিপিং ঠিকানা",
+      "billing_address": "বিলিং ঠিকানা"
+    },
+    "addresses": {
+      "title": "ঠিকানা",
+      "first_name": "প্রথম নাম",
+      "last_name": "শেষ নাম",
+      "company": "কোম্পানি",
+      "address1": "ঠিকানা",
+      "address2": "অ্যাপার্টমেন্ট, স্যুট ইত্যাদি",
+      "city": "শহর",
+      "zip": "পোস্টাল কোড",
+      "country": "দেশ / অঞ্চল",
+      "province": "রাজ্য / প্রদেশ",
+      "phone": "ফোন",
+      "default": "ডিফল্ট",
+      "default_address": "ডিফল্ট ঠিকানা",
+      "add_new": "নতুন ঠিকানা যোগ করুন",
+      "add": "ঠিকানা যোগ করুন",
+      "update": "ঠিকানা আপডেট করুন",
+      "edit": "সম্পাদনা",
+      "delete": "মুছুন",
+      "delete_confirm": "আপনি কি এই ঠিকানা মুছতে চান?",
+      "set_default": "ডিফল্ট হিসেবে সেট করুন",
+      "cancel": "বাতিল করুন",
+      "none": "আপনার কোনো সংরক্ষিত ঠিকানা নেই।"
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "{{ author }} কর্তৃক"
+    },
+    "comments": {
+      "title": "মন্তব্য",
+      "name": "নাম",
+      "email": "ইমেইল",
+      "message": "মন্তব্য",
+      "post": "মন্তব্য পোস্ট করুন",
+      "success": "আপনার মন্তব্য সফলভাবে পোস্ট হয়েছে!",
+      "comments_with_count": "{{ count }}টি মন্তব্য"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "নাম",
+      "email": "ইমেইল",
+      "phone": "ফোন",
+      "phone_placeholder": "ঐচ্ছিক",
+      "message": "বার্তা",
+      "message_placeholder": "আমরা কীভাবে সাহায্য করতে পারি?"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "এটি আপনার {{ value }} গিফট কার্ড!",
+      "remaining_html": "{{ balance }} অবশিষ্ট",
+      "expiry_date": "{{ expiry }} তারিখে মেয়াদ শেষ",
+      "copy_code": "কোড কপি করুন",
+      "shop_link": "কেনাকাটা শুরু করুন",
+      "print_link": "প্রিন্ট করুন"
+    }
+  }
+}

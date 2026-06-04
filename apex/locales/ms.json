@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "Tutup",
+    "refresh_page": "Memilih pilihan akan muat semula keseluruhan halaman.",
+    "skip_to_text": "Langkau ke kandungan"
+  },
+  "general": {
+    "continue_shopping": "Teruskan membeli-belah",
+    "video": {
+      "play": "Main video",
+      "no_video": "URL video belum ditetapkan."
+    },
+    "accessibility": {
+      "close": "Tutup"
+    },
+    "page": "Halaman {{ page }}",
+    "tags": "Tag",
+    "search_placeholder": "Cari produk…",
+    "pagination": {
+      "label": "Halaman",
+      "load_more": "Muatkan lebih banyak",
+      "next": "Seterusnya",
+      "previous": "Sebelumnya"
+    },
+    "search": {
+      "search": "Cari",
+      "placeholder": "Cari produk…",
+      "prompt": "Apa yang anda cari?",
+      "for": "Cari",
+      "suggestions": "Cadangan",
+      "products": "Produk",
+      "pages": "Halaman",
+      "articles": "Artikel",
+      "result": "keputusan",
+      "results": "keputusan",
+      "view_all": "Lihat semua {{ count }} keputusan",
+      "browse_all": "Semak imbas semua produk",
+      "no_results": "Tiada keputusan untuk "{{ terms }}"",
+      "no_results_for": "Tiada keputusan ditemui untuk",
+      "no_results_detail": "Cuba kata kunci lain atau semak imbas katalog kami."
+    },
+    "slider": {
+      "next": "Slaid seterusnya",
+      "previous": "Slaid sebelumnya"
+    }
+  },
+  "newsletter": {
+    "label": "E-mel",
+    "placeholder": "Alamat e-mel",
+    "success": "Terima kasih kerana melanggan!"
+  },
+  "payment": {
+    "methods": "Kaedah pembayaran yang diterima"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Tambah ke troli",
+      "buy": "Beli sekarang",
+      "choose_options": "Pilih pilihan",
+      "from": "Dari",
+      "in_stock": "Ada stok",
+      "low_stock": "Tinggal {{ quantity }} sahaja",
+      "sold_out": "Habis dijual",
+      "unavailable": "Tidak tersedia",
+      "quantity": "Kuantiti",
+      "increase": "Tambah kuantiti",
+      "decrease": "Kurangkan kuantiti",
+      "save": "Jimat {{ savings }}",
+      "view_full_details": "Lihat butiran penuh",
+      "media": {
+        "load_image": "Muatkan imej {{ index }}"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu"
+    },
+    "cart": {
+      "title": "Troli anda",
+      "empty": "Troli anda kosong",
+      "empty_detail": "Mari cari sesuatu untuk anda.",
+      "item": "produk",
+      "items": "produk",
+      "quantity": "Kuantiti",
+      "increase": "Tambah kuantiti",
+      "decrease": "Kurangkan kuantiti",
+      "remove": "Buang",
+      "note": "Tambah nota pesanan",
+      "note_placeholder": "Arahan khas untuk pesanan anda",
+      "subtotal": "Subjumlah",
+      "summary": "Ringkasan",
+      "taxes": "Cukai dan penghantaran dikira semasa daftar keluar.",
+      "checkout": "Daftar keluar",
+      "each": "setiap satu",
+      "original": "Harga asal",
+      "free_ship_progress": "Lagi {{ amount }} untuk penghantaran percuma",
+      "free_ship_progress_html": "Lagi <strong>{{ amount }}</strong> untuk penghantaran percuma",
+      "free_ship_unlocked": "Anda telah membuka penghantaran percuma!"
+    },
+    "collection": {
+      "count": "{{ count }} produk",
+      "products": "produk",
+      "empty": "Tiada produk ditemui",
+      "empty_detail": "Cuba buang beberapa penapis.",
+      "filter": "Tapis",
+      "apply": "Pakai",
+      "clear_filters": "Padamkan semua",
+      "sort_label": "Isih mengikut",
+      "price_from": "Dari",
+      "price_to": "Hingga"
+    },
+    "collection_list": {
+      "empty": "Tiada koleksi untuk ditunjukkan",
+      "products": "produk"
+    },
+    "featured_collection": {
+      "empty": "Tiada produk untuk ditunjukkan"
+    }
+  },
+  "customer": {
+    "log_out": "Log keluar",
+    "account": {
+      "title": "Akaun",
+      "details": "Butiran akaun",
+      "return": "Kembali ke akaun",
+      "view_addresses": "Lihat alamat"
+    },
+    "login": {
+      "title": "Log masuk",
+      "email": "E-mel",
+      "password": "Kata laluan",
+      "sign_in": "Log masuk",
+      "forgot_password": "Terlupa kata laluan?",
+      "no_account": "Belum ada akaun?",
+      "create_account": "Buat akaun",
+      "cancel": "Batal"
+    },
+    "register": {
+      "title": "Buat akaun",
+      "first_name": "Nama pertama",
+      "last_name": "Nama akhir",
+      "email": "E-mel",
+      "password": "Kata laluan",
+      "password_placeholder": "Sekurang-kurangnya 5 aksara",
+      "submit": "Buat akaun",
+      "login": "Sudah ada akaun? Log masuk"
+    },
+    "recover_password": {
+      "title": "Tetapkan semula kata laluan",
+      "subtext": "Kami akan hantar e-mel untuk menetapkan semula.",
+      "submit": "Hantar e-mel tetapan semula",
+      "success": "Kami telah menghantar e-mel dengan pautan untuk menetapkan semula kata laluan anda."
+    },
+    "reset_password": {
+      "title": "Tetapkan semula kata laluan akaun",
+      "subtext": "Masukkan kata laluan baru.",
+      "password": "Kata laluan",
+      "password_confirm": "Sahkan kata laluan",
+      "password_placeholder": "Kata laluan baru",
+      "submit": "Tetapkan semula kata laluan"
+    },
+    "activate_account": {
+      "title": "Aktifkan akaun",
+      "subtext": "Buat kata laluan untuk mengaktifkan akaun anda.",
+      "password": "Kata laluan",
+      "password_placeholder": "Kata laluan",
+      "password_confirm": "Sahkan kata laluan",
+      "password_confirm_placeholder": "Sahkan kata laluan",
+      "submit": "Aktifkan akaun",
+      "cancel": "Tolak jemputan"
+    },
+    "orders": {
+      "title": "Sejarah pesanan",
+      "none": "Anda belum membuat sebarang pesanan.",
+      "order_number": "Pesanan",
+      "date": "Tarikh",
+      "payment_status": "Pembayaran",
+      "fulfillment_status": "Pemenuhan",
+      "total": "Jumlah"
+    },
+    "order": {
+      "title": "Pesanan {{ name }}",
+      "date_html": "Dibuat pada {{ date }}",
+      "fulfilled_at_html": "Dipenuhi {{ date }}",
+      "summary": "Ringkasan pesanan",
+      "items": "Produk",
+      "quantity": "Kuantiti",
+      "subtotal": "Subjumlah",
+      "total": "Jumlah",
+      "shipping_address": "Alamat penghantaran",
+      "billing_address": "Alamat bil"
+    },
+    "addresses": {
+      "title": "Alamat",
+      "first_name": "Nama pertama",
+      "last_name": "Nama akhir",
+      "company": "Syarikat",
+      "address1": "Alamat",
+      "address2": "Apartmen, suite, dll.",
+      "city": "Bandar",
+      "zip": "Poskod",
+      "country": "Negara / Wilayah",
+      "province": "Negeri",
+      "phone": "Telefon",
+      "default": "Lalai",
+      "default_address": "Alamat lalai",
+      "add_new": "Tambah alamat baru",
+      "add": "Tambah alamat",
+      "update": "Kemaskini alamat",
+      "edit": "Edit",
+      "delete": "Padam",
+      "delete_confirm": "Adakah anda pasti mahu memadamkan alamat ini?",
+      "set_default": "Tetapkan sebagai lalai",
+      "cancel": "Batal",
+      "none": "Anda tiada alamat tersimpan."
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "oleh {{ author }}"
+    },
+    "comments": {
+      "title": "Ulasan",
+      "name": "Nama",
+      "email": "E-mel",
+      "message": "Ulasan",
+      "post": "Hantar ulasan",
+      "success": "Ulasan anda telah berjaya disiarkan!",
+      "comments_with_count": "{{ count }} ulasan"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Nama",
+      "email": "E-mel",
+      "phone": "Telefon",
+      "phone_placeholder": "Pilihan",
+      "message": "Mesej",
+      "message_placeholder": "Bagaimana kami boleh membantu?"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Kad hadiah {{ value }} anda!",
+      "remaining_html": "Baki {{ balance }}",
+      "expiry_date": "Tamat tempoh {{ expiry }}",
+      "copy_code": "Salin kod",
+      "shop_link": "Mula membeli-belah",
+      "print_link": "Cetak"
+    }
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "Zamknij",
+    "refresh_page": "Wybranie opcji powoduje pełne odświeżenie strony.",
+    "skip_to_text": "Przejdź do treści"
+  },
+  "general": {
+    "continue_shopping": "Kontynuuj zakupy",
+    "video": {
+      "play": "Odtwórz wideo",
+      "no_video": "Nie ustawiono adresu URL wideo."
+    },
+    "accessibility": {
+      "close": "Zamknij"
+    },
+    "page": "Strona {{ page }}",
+    "tags": "Tagi",
+    "search_placeholder": "Szukaj produktów…",
+    "pagination": {
+      "label": "Paginacja",
+      "load_more": "Załaduj więcej",
+      "next": "Następna",
+      "previous": "Poprzednia"
+    },
+    "search": {
+      "search": "Szukaj",
+      "placeholder": "Szukaj produktów…",
+      "prompt": "Czego szukasz?",
+      "for": "Szukaj",
+      "suggestions": "Sugestie",
+      "products": "Produkty",
+      "pages": "Strony",
+      "articles": "Artykuły",
+      "result": "wynik",
+      "results": "wyniki",
+      "view_all": "Zobacz wszystkie {{ count }} wyniki",
+      "browse_all": "Przeglądaj wszystkie produkty",
+      "no_results": "Brak wyników dla „{{ terms }}"",
+      "no_results_for": "Nie znaleziono wyników dla",
+      "no_results_detail": "Spróbuj innego wyszukiwania lub przejrzyj nasz katalog."
+    },
+    "slider": {
+      "next": "Następny slajd",
+      "previous": "Poprzedni slajd"
+    }
+  },
+  "newsletter": {
+    "label": "E-mail",
+    "placeholder": "Adres e-mail",
+    "success": "Dziękujemy za subskrypcję!"
+  },
+  "payment": {
+    "methods": "Akceptowane metody płatności"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Dodaj do koszyka",
+      "buy": "Kup",
+      "choose_options": "Wybierz opcje",
+      "from": "Od",
+      "in_stock": "Dostępny",
+      "low_stock": "Zostało tylko {{ quantity }}",
+      "sold_out": "Wyprzedany",
+      "unavailable": "Niedostępny",
+      "quantity": "Ilość",
+      "increase": "Zwiększ ilość",
+      "decrease": "Zmniejsz ilość",
+      "save": "Oszczędź {{ savings }}",
+      "view_full_details": "Zobacz pełne szczegóły",
+      "media": {
+        "load_image": "Załaduj obraz {{ index }}"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu"
+    },
+    "cart": {
+      "title": "Twój koszyk",
+      "empty": "Twój koszyk jest pusty",
+      "empty_detail": "Znajdźmy coś dla Ciebie.",
+      "item": "produkt",
+      "items": "produkty",
+      "quantity": "Ilość",
+      "increase": "Zwiększ ilość",
+      "decrease": "Zmniejsz ilość",
+      "remove": "Usuń",
+      "note": "Dodaj notatkę do zamówienia",
+      "note_placeholder": "Specjalne instrukcje dla Twojego zamówienia",
+      "subtotal": "Suma częściowa",
+      "summary": "Podsumowanie",
+      "taxes": "Podatki i koszty wysyłki obliczane przy kasie.",
+      "checkout": "Przejdź do kasy",
+      "each": "szt.",
+      "original": "Cena oryginalna",
+      "free_ship_progress": "Brakuje Ci {{ amount }} do darmowej wysyłki",
+      "free_ship_progress_html": "Brakuje Ci <strong>{{ amount }}</strong> do darmowej wysyłki",
+      "free_ship_unlocked": "Odblokowałeś darmową wysyłkę!"
+    },
+    "collection": {
+      "count": "{{ count }} produktów",
+      "products": "produktów",
+      "empty": "Nie znaleziono produktów",
+      "empty_detail": "Spróbuj usunąć niektóre filtry.",
+      "filter": "Filtruj",
+      "apply": "Zastosuj",
+      "clear_filters": "Wyczyść wszystkie",
+      "sort_label": "Sortuj według",
+      "price_from": "Od",
+      "price_to": "Do"
+    },
+    "collection_list": {
+      "empty": "Brak kolekcji do wyświetlenia",
+      "products": "produktów"
+    },
+    "featured_collection": {
+      "empty": "Brak produktów do wyświetlenia"
+    }
+  },
+  "customer": {
+    "log_out": "Wyloguj",
+    "account": {
+      "title": "Konto",
+      "details": "Szczegóły konta",
+      "return": "Wróć do konta",
+      "view_addresses": "Wyświetl adresy"
+    },
+    "login": {
+      "title": "Zaloguj się",
+      "email": "E-mail",
+      "password": "Hasło",
+      "sign_in": "Zaloguj się",
+      "forgot_password": "Zapomniałeś hasła?",
+      "no_account": "Nie masz konta?",
+      "create_account": "Utwórz konto",
+      "cancel": "Anuluj"
+    },
+    "register": {
+      "title": "Utwórz konto",
+      "first_name": "Imię",
+      "last_name": "Nazwisko",
+      "email": "E-mail",
+      "password": "Hasło",
+      "password_placeholder": "Co najmniej 5 znaków",
+      "submit": "Utwórz konto",
+      "login": "Masz już konto? Zaloguj się"
+    },
+    "recover_password": {
+      "title": "Zresetuj hasło",
+      "subtext": "Wyślemy Ci e-mail, aby je zresetować.",
+      "submit": "Wyślij e-mail resetujący",
+      "success": "Wysłaliśmy Ci e-mail z linkiem do zresetowania hasła."
+    },
+    "reset_password": {
+      "title": "Zresetuj hasło konta",
+      "subtext": "Wprowadź nowe hasło.",
+      "password": "Hasło",
+      "password_confirm": "Potwierdź hasło",
+      "password_placeholder": "Nowe hasło",
+      "submit": "Zresetuj hasło"
+    },
+    "activate_account": {
+      "title": "Aktywuj konto",
+      "subtext": "Utwórz hasło, aby aktywować konto.",
+      "password": "Hasło",
+      "password_placeholder": "Hasło",
+      "password_confirm": "Potwierdź hasło",
+      "password_confirm_placeholder": "Potwierdź hasło",
+      "submit": "Aktywuj konto",
+      "cancel": "Odrzuć zaproszenie"
+    },
+    "orders": {
+      "title": "Historia zamówień",
+      "none": "Nie złożyłeś jeszcze żadnych zamówień.",
+      "order_number": "Zamówienie",
+      "date": "Data",
+      "payment_status": "Płatność",
+      "fulfillment_status": "Realizacja",
+      "total": "Łącznie"
+    },
+    "order": {
+      "title": "Zamówienie {{ name }}",
+      "date_html": "Złożone {{ date }}",
+      "fulfilled_at_html": "Zrealizowane {{ date }}",
+      "summary": "Podsumowanie zamówienia",
+      "items": "Produkty",
+      "quantity": "Ilość",
+      "subtotal": "Suma częściowa",
+      "total": "Łącznie",
+      "shipping_address": "Adres dostawy",
+      "billing_address": "Adres rozliczeniowy"
+    },
+    "addresses": {
+      "title": "Adresy",
+      "first_name": "Imię",
+      "last_name": "Nazwisko",
+      "company": "Firma",
+      "address1": "Adres",
+      "address2": "Mieszkanie, apartament itp.",
+      "city": "Miasto",
+      "zip": "Kod pocztowy",
+      "country": "Kraj / region",
+      "province": "Województwo / prowincja",
+      "phone": "Telefon",
+      "default": "Domyślny",
+      "default_address": "Adres domyślny",
+      "add_new": "Dodaj nowy adres",
+      "add": "Dodaj adres",
+      "update": "Zaktualizuj adres",
+      "edit": "Edytuj",
+      "delete": "Usuń",
+      "delete_confirm": "Czy na pewno chcesz usunąć ten adres?",
+      "set_default": "Ustaw jako domyślny",
+      "cancel": "Anuluj",
+      "none": "Nie masz zapisanych adresów."
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "autor: {{ author }}"
+    },
+    "comments": {
+      "title": "Komentarze",
+      "name": "Imię",
+      "email": "E-mail",
+      "message": "Komentarz",
+      "post": "Opublikuj komentarz",
+      "success": "Twój komentarz został pomyślnie opublikowany!",
+      "comments_with_count": "{{ count }} komentarze"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Imię",
+      "email": "E-mail",
+      "phone": "Telefon",
+      "phone_placeholder": "Opcjonalnie",
+      "message": "Wiadomość",
+      "message_placeholder": "Jak możemy pomóc?"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Oto Twoja karta podarunkowa o wartości {{ value }}!",
+      "remaining_html": "{{ balance }} pozostało",
+      "expiry_date": "Ważna do {{ expiry }}",
+      "copy_code": "Kopiuj kod",
+      "shop_link": "Zacznij zakupy",
+      "print_link": "Drukuj"
+    }
+  }
+}

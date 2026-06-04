@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "Isara",
+    "refresh_page": "Ang pagpili ng isang opsyon ay magre-refresh ng buong pahina.",
+    "skip_to_text": "Lumaktaw sa nilalaman"
+  },
+  "general": {
+    "continue_shopping": "Magpatuloy sa pamimili",
+    "video": {
+      "play": "I-play ang video",
+      "no_video": "Walang nakatakdang URL ng video."
+    },
+    "accessibility": {
+      "close": "Isara"
+    },
+    "page": "Pahina {{ page }}",
+    "tags": "Mga tag",
+    "search_placeholder": "Maghanap ng mga produkto…",
+    "pagination": {
+      "label": "Pahina",
+      "load_more": "Mag-load ng higit pa",
+      "next": "Susunod",
+      "previous": "Nakaraan"
+    },
+    "search": {
+      "search": "Maghanap",
+      "placeholder": "Maghanap ng mga produkto…",
+      "prompt": "Ano ang hinahanap mo?",
+      "for": "Maghanap ng",
+      "suggestions": "Mga mungkahi",
+      "products": "Mga produkto",
+      "pages": "Mga pahina",
+      "articles": "Mga artikulo",
+      "result": "resulta",
+      "results": "mga resulta",
+      "view_all": "Tingnan ang lahat ng {{ count }} resulta",
+      "browse_all": "I-browse ang lahat ng produkto",
+      "no_results": "Walang resulta para sa "{{ terms }}"",
+      "no_results_for": "Walang nahanap na resulta para sa",
+      "no_results_detail": "Subukan ang ibang paghahanap o i-browse ang aming katalogo."
+    },
+    "slider": {
+      "next": "Susunod na slide",
+      "previous": "Nakaraang slide"
+    }
+  },
+  "newsletter": {
+    "label": "Email",
+    "placeholder": "Email address",
+    "success": "Salamat sa pag-subscribe!"
+  },
+  "payment": {
+    "methods": "Mga tinatanggap na paraan ng pagbabayad"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Idagdag sa cart",
+      "buy": "Bumili",
+      "choose_options": "Pumili ng mga opsyon",
+      "from": "Mula sa",
+      "in_stock": "May stock",
+      "low_stock": "{{ quantity }} na lang ang natitira",
+      "sold_out": "Ubos na",
+      "unavailable": "Hindi available",
+      "quantity": "Dami",
+      "increase": "Dagdagan ang dami",
+      "decrease": "Bawasan ang dami",
+      "save": "Makatipid ng {{ savings }}",
+      "view_full_details": "Tingnan ang buong detalye",
+      "media": {
+        "load_image": "I-load ang larawan {{ index }}"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu"
+    },
+    "cart": {
+      "title": "Iyong cart",
+      "empty": "Walang laman ang iyong cart",
+      "empty_detail": "Hanapin natin ang isang bagay para sa iyo.",
+      "item": "aytem",
+      "items": "mga aytem",
+      "quantity": "Dami",
+      "increase": "Dagdagan ang dami",
+      "decrease": "Bawasan ang dami",
+      "remove": "Alisin",
+      "note": "Magdagdag ng tala sa order",
+      "note_placeholder": "Mga espesyal na tagubilin para sa iyong order",
+      "subtotal": "Subtotal",
+      "summary": "Buod",
+      "taxes": "Ang buwis at pagpapadala ay kakalkulahin sa checkout.",
+      "checkout": "Mag-checkout",
+      "each": "bawat isa",
+      "original": "Orihinal",
+      "free_ship_progress": "{{ amount }} pa para sa libreng pagpapadala",
+      "free_ship_progress_html": "<strong>{{ amount }}</strong> pa para sa libreng pagpapadala",
+      "free_ship_unlocked": "Na-unlock mo na ang libreng pagpapadala!"
+    },
+    "collection": {
+      "count": "{{ count }} produkto",
+      "products": "mga produkto",
+      "empty": "Walang nahanap na produkto",
+      "empty_detail": "Subukang alisin ang ilang filter.",
+      "filter": "Filter",
+      "apply": "Ilapat",
+      "clear_filters": "I-clear lahat",
+      "sort_label": "Pagbukud-bukurin ayon sa",
+      "price_from": "Mula sa",
+      "price_to": "Hanggang"
+    },
+    "collection_list": {
+      "empty": "Walang koleksyon na ipapakita",
+      "products": "mga produkto"
+    },
+    "featured_collection": {
+      "empty": "Walang produkto na ipapakita"
+    }
+  },
+  "customer": {
+    "log_out": "Mag-log out",
+    "account": {
+      "title": "Account",
+      "details": "Mga detalye ng account",
+      "return": "Bumalik sa account",
+      "view_addresses": "Tingnan ang mga address"
+    },
+    "login": {
+      "title": "Mag-log in",
+      "email": "Email",
+      "password": "Password",
+      "sign_in": "Mag-sign in",
+      "forgot_password": "Nakalimutan ang password?",
+      "no_account": "Wala pang account?",
+      "create_account": "Gumawa ng account",
+      "cancel": "Kanselahin"
+    },
+    "register": {
+      "title": "Gumawa ng account",
+      "first_name": "Pangalan",
+      "last_name": "Apelyido",
+      "email": "Email",
+      "password": "Password",
+      "password_placeholder": "Hindi bababa sa 5 karakter",
+      "submit": "Gumawa ng account",
+      "login": "May account na? Mag-sign in"
+    },
+    "recover_password": {
+      "title": "I-reset ang iyong password",
+      "subtext": "Magpapadala kami ng email para i-reset ito.",
+      "submit": "Magpadala ng reset na email",
+      "success": "Nagpadala kami ng email na may link para i-reset ang iyong password."
+    },
+    "reset_password": {
+      "title": "I-reset ang password ng account",
+      "subtext": "Maglagay ng bagong password.",
+      "password": "Password",
+      "password_confirm": "Kumpirmahin ang password",
+      "password_placeholder": "Bagong password",
+      "submit": "I-reset ang password"
+    },
+    "activate_account": {
+      "title": "I-activate ang account",
+      "subtext": "Gumawa ng password para ma-activate ang iyong account.",
+      "password": "Password",
+      "password_placeholder": "Password",
+      "password_confirm": "Kumpirmahin ang password",
+      "password_confirm_placeholder": "Kumpirmahin ang password",
+      "submit": "I-activate ang account",
+      "cancel": "Tanggihan ang imbitasyon"
+    },
+    "orders": {
+      "title": "Kasaysayan ng order",
+      "none": "Wala ka pang naibigay na order.",
+      "order_number": "Order",
+      "date": "Petsa",
+      "payment_status": "Bayad",
+      "fulfillment_status": "Katuparan",
+      "total": "Kabuuan"
+    },
+    "order": {
+      "title": "Order {{ name }}",
+      "date_html": "Inilagay noong {{ date }}",
+      "fulfilled_at_html": "Natupad {{ date }}",
+      "summary": "Buod ng order",
+      "items": "Mga aytem",
+      "quantity": "Dami",
+      "subtotal": "Subtotal",
+      "total": "Kabuuan",
+      "shipping_address": "Address ng pagpapadala",
+      "billing_address": "Address ng pagsingil"
+    },
+    "addresses": {
+      "title": "Mga address",
+      "first_name": "Pangalan",
+      "last_name": "Apelyido",
+      "company": "Kumpanya",
+      "address1": "Address",
+      "address2": "Apartment, suite, atbp.",
+      "city": "Lungsod",
+      "zip": "Zip / Postal code",
+      "country": "Bansa / Rehiyon",
+      "province": "Lalawigan",
+      "phone": "Telepono",
+      "default": "Default",
+      "default_address": "Default na address",
+      "add_new": "Magdagdag ng bagong address",
+      "add": "Idagdag ang address",
+      "update": "I-update ang address",
+      "edit": "I-edit",
+      "delete": "Tanggalin",
+      "delete_confirm": "Sigurado ka bang gusto mong tanggalin ang address na ito?",
+      "set_default": "Itakda bilang default",
+      "cancel": "Kanselahin",
+      "none": "Wala kang nakatagong mga address."
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "ni {{ author }}"
+    },
+    "comments": {
+      "title": "Mga komento",
+      "name": "Pangalan",
+      "email": "Email",
+      "message": "Komento",
+      "post": "Mag-post ng komento",
+      "success": "Matagumpay na na-post ang iyong komento!",
+      "comments_with_count": "{{ count }} komento"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Pangalan",
+      "email": "Email",
+      "phone": "Telepono",
+      "phone_placeholder": "Opsyonal",
+      "message": "Mensahe",
+      "message_placeholder": "Paano namin matutulungan kayo?"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Narito ang iyong gift card na {{ value }}!",
+      "remaining_html": "Natitira {{ balance }}",
+      "expiry_date": "Mag-e-expire {{ expiry }}",
+      "copy_code": "Kopyahin ang code",
+      "shop_link": "Magsimulang mamili",
+      "print_link": "I-print"
+    }
+  }
+}

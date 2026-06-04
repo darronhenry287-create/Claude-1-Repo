@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "Aizvērt",
+    "refresh_page": "Opcijas izvēle izraisa pilnu lapas atsvaidzināšanu.",
+    "skip_to_text": "Pāriet uz saturu"
+  },
+  "general": {
+    "continue_shopping": "Turpināt iepirkšanos",
+    "video": {
+      "play": "Atskaņot video",
+      "no_video": "Video URL nav norādīts."
+    },
+    "accessibility": {
+      "close": "Aizvērt"
+    },
+    "page": "Lapa {{ page }}",
+    "tags": "Tagi",
+    "search_placeholder": "Meklēt produktus…",
+    "pagination": {
+      "label": "Lapošana",
+      "load_more": "Ielādēt vairāk",
+      "next": "Nākamā",
+      "previous": "Iepriekšējā"
+    },
+    "search": {
+      "search": "Meklēt",
+      "placeholder": "Meklēt produktus…",
+      "prompt": "Ko jūs meklējat?",
+      "for": "Meklēt",
+      "suggestions": "Ieteikumi",
+      "products": "Produkti",
+      "pages": "Lapas",
+      "articles": "Raksti",
+      "result": "rezultāts",
+      "results": "rezultāti",
+      "view_all": "Skatīt visus {{ count }} rezultātus",
+      "browse_all": "Pārlūkot visus produktus",
+      "no_results": "Nav rezultātu meklēšanai „{{ terms }}”",
+      "no_results_for": "Nav atrasts neviens rezultāts meklēšanai",
+      "no_results_detail": "Mēģiniet citu meklēšanu vai pārlūkojiet mūsu katalogu."
+    },
+    "slider": {
+      "next": "Nākamais slaids",
+      "previous": "Iepriekšējais slaids"
+    }
+  },
+  "newsletter": {
+    "label": "E-pasts",
+    "placeholder": "E-pasta adrese",
+    "success": "Paldies par abonēšanu!"
+  },
+  "payment": {
+    "methods": "Pieņemtās maksāšanas metodes"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Pievienot grozam",
+      "buy": "Pirkt",
+      "choose_options": "Izvēlēties opcijas",
+      "from": "No",
+      "in_stock": "Noliktavā",
+      "low_stock": "Atlicis tikai {{ quantity }}",
+      "sold_out": "Izpārdots",
+      "unavailable": "Nav pieejams",
+      "quantity": "Daudzums",
+      "increase": "Palielināt daudzumu",
+      "decrease": "Samazināt daudzumu",
+      "save": "Ietaupiet {{ savings }}",
+      "view_full_details": "Skatīt pilnu informāciju",
+      "media": {
+        "load_image": "Ielādēt attēlu {{ index }}"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Izvēlne"
+    },
+    "cart": {
+      "title": "Jūsu grozs",
+      "empty": "Jūsu grozs ir tukšs",
+      "empty_detail": "Atradīsim jums ko piemērotu.",
+      "item": "prece",
+      "items": "preces",
+      "quantity": "Daudzums",
+      "increase": "Palielināt daudzumu",
+      "decrease": "Samazināt daudzumu",
+      "remove": "Noņemt",
+      "note": "Pievienot piezīmi pasūtījumam",
+      "note_placeholder": "Īpaši norādījumi jūsu pasūtījumam",
+      "subtotal": "Starpsumma",
+      "summary": "Kopsavilkums",
+      "taxes": "Nodokļi un piegāde tiek aprēķināti pie kases.",
+      "checkout": "Kasa",
+      "each": "gab.",
+      "original": "Sākotnējā cena",
+      "free_ship_progress": "Vēl {{ amount }} līdz bezmaksas piegādei",
+      "free_ship_progress_html": "Vēl <strong>{{ amount }}</strong> līdz bezmaksas piegādei",
+      "free_ship_unlocked": "Jūs esat atbloķējis bezmaksas piegādi!"
+    },
+    "collection": {
+      "count": "{{ count }} produkti",
+      "products": "produkti",
+      "empty": "Produkti nav atrasti",
+      "empty_detail": "Mēģiniet noņemt dažus filtrus.",
+      "filter": "Filtrs",
+      "apply": "Lietot",
+      "clear_filters": "Notīrīt visu",
+      "sort_label": "Kārtot pēc",
+      "price_from": "No",
+      "price_to": "Līdz"
+    },
+    "collection_list": {
+      "empty": "Nav kolekciju, ko rādīt",
+      "products": "produkti"
+    },
+    "featured_collection": {
+      "empty": "Nav produktu, ko rādīt"
+    }
+  },
+  "customer": {
+    "log_out": "Iziet",
+    "account": {
+      "title": "Konts",
+      "details": "Konta informācija",
+      "return": "Atgriezties kontā",
+      "view_addresses": "Skatīt adreses"
+    },
+    "login": {
+      "title": "Pieteikties",
+      "email": "E-pasts",
+      "password": "Parole",
+      "sign_in": "Pieteikties",
+      "forgot_password": "Aizmirsāt paroli?",
+      "no_account": "Nav konta?",
+      "create_account": "Izveidot kontu",
+      "cancel": "Atcelt"
+    },
+    "register": {
+      "title": "Izveidot kontu",
+      "first_name": "Vārds",
+      "last_name": "Uzvārds",
+      "email": "E-pasts",
+      "password": "Parole",
+      "password_placeholder": "Vismaz 5 rakstzīmes",
+      "submit": "Izveidot kontu",
+      "login": "Jau ir konts? Piesakieties"
+    },
+    "recover_password": {
+      "title": "Atjaunot paroli",
+      "subtext": "Mēs nosūtīsim jums e-pastu paroles atiestatīšanai.",
+      "submit": "Sūtīt atiestatīšanas e-pastu",
+      "success": "Mēs nosūtījām jums e-pastu ar saiti paroles atiestatīšanai."
+    },
+    "reset_password": {
+      "title": "Atiestatīt konta paroli",
+      "subtext": "Ievadiet jaunu paroli.",
+      "password": "Parole",
+      "password_confirm": "Apstiprināt paroli",
+      "password_placeholder": "Jaunā parole",
+      "submit": "Atiestatīt paroli"
+    },
+    "activate_account": {
+      "title": "Aktivizēt kontu",
+      "subtext": "Izveidojiet paroli, lai aktivizētu savu kontu.",
+      "password": "Parole",
+      "password_placeholder": "Parole",
+      "password_confirm": "Apstiprināt paroli",
+      "password_confirm_placeholder": "Apstiprināt paroli",
+      "submit": "Aktivizēt kontu",
+      "cancel": "Noraidīt ielūgumu"
+    },
+    "orders": {
+      "title": "Pasūtījumu vēsture",
+      "none": "Jūs vēl neesat veicis nevienu pasūtījumu.",
+      "order_number": "Pasūtījums",
+      "date": "Datums",
+      "payment_status": "Maksājums",
+      "fulfillment_status": "Izpilde",
+      "total": "Kopā"
+    },
+    "order": {
+      "title": "Pasūtījums {{ name }}",
+      "date_html": "Veikts {{ date }}",
+      "fulfilled_at_html": "Izpildīts {{ date }}",
+      "summary": "Pasūtījuma kopsavilkums",
+      "items": "Preces",
+      "quantity": "Daud.",
+      "subtotal": "Starpsumma",
+      "total": "Kopā",
+      "shipping_address": "Piegādes adrese",
+      "billing_address": "Rēķina adrese"
+    },
+    "addresses": {
+      "title": "Adreses",
+      "first_name": "Vārds",
+      "last_name": "Uzvārds",
+      "company": "Uzņēmums",
+      "address1": "Adrese",
+      "address2": "Dzīvoklis, stāvs u.c.",
+      "city": "Pilsēta",
+      "zip": "Pasta indekss",
+      "country": "Valsts / reģions",
+      "province": "Novads / apgabals",
+      "phone": "Tālrunis",
+      "default": "Noklusējuma",
+      "default_address": "Noklusējuma adrese",
+      "add_new": "Pievienot jaunu adresi",
+      "add": "Pievienot adresi",
+      "update": "Atjaunināt adresi",
+      "edit": "Rediģēt",
+      "delete": "Dzēst",
+      "delete_confirm": "Vai tiešām vēlaties dzēst šo adresi?",
+      "set_default": "Iestatīt kā noklusējuma",
+      "cancel": "Atcelt",
+      "none": "Jums nav saglabātu adrešu."
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "autors: {{ author }}"
+    },
+    "comments": {
+      "title": "Komentāri",
+      "name": "Vārds",
+      "email": "E-pasts",
+      "message": "Komentārs",
+      "post": "Publicēt komentāru",
+      "success": "Jūsu komentārs tika veiksmīgi publicēts!",
+      "comments_with_count": "{{ count }} komentāri"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Vārds",
+      "email": "E-pasts",
+      "phone": "Tālrunis",
+      "phone_placeholder": "Neobligāts",
+      "message": "Ziņojums",
+      "message_placeholder": "Kā mēs varam jums palīdzēt?"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Lūk, jūsu {{ value }} dāvanu karte!",
+      "remaining_html": "{{ balance }} atlikums",
+      "expiry_date": "Derīguma termiņš {{ expiry }}",
+      "copy_code": "Kopēt kodu",
+      "shop_link": "Sākt iepirkšanos",
+      "print_link": "Drukāt"
+    }
+  }
+}

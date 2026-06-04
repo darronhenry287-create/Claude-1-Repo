@@ -35,7 +35,7 @@
       "results": "találat",
       "view_all": "Mind a {{ count }} találat megtekintése",
       "browse_all": "Összes termék böngészése",
-      "no_results": "Nincs találat a következőre: „{{ terms }}"",
+      "no_results": "Nincs találat a következőre: „{{ terms }}”",
       "no_results_for": "Nem található találat a következőre:",
       "no_results_detail": "Próbáljon más keresést, vagy böngéssze katalógusunkat."
     },

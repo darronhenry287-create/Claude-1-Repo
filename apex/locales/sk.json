@@ -35,7 +35,7 @@
       "results": "výsledky",
       "view_all": "Zobraziť všetkých {{ count }} výsledkov",
       "browse_all": "Prehľadávať všetky produkty",
-      "no_results": "Žiadne výsledky pre „{{ terms }}"",
+      "no_results": "Žiadne výsledky pre “{{ terms }}”",
       "no_results_for": "Nenašli sa žiadne výsledky pre",
       "no_results_detail": "Skúste iné hľadanie alebo si prezrite náš katalóg."
     },

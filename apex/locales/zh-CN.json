@@ -35,7 +35,7 @@
       "results": "条结果",
       "view_all": "查看全部 {{ count }} 条结果",
       "browse_all": "浏览所有商品",
-      "no_results": "未找到"{{ terms }}"的相关结果",
+      "no_results": "未找到“{{ terms }}”的相关结果",
       "no_results_for": "未找到相关结果",
       "no_results_detail": "请尝试其他搜索词或浏览我们的商品目录。"
     },
