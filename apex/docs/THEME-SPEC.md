@@ -72,3 +72,30 @@ Effects: `--shadow-card --shadow-pop --ease --dur`.
 - Don’t modify base.css/base.js/css-variables/snippets owned by the foundation
   unless explicitly asked; add new files only at your assigned paths.
 - No AI/model identifiers anywhere.
+
+---
+
+## ⚠️ LIQUID CORRECTNESS RULES (MUST — enforced by Shopify theme-check)
+
+These caused real bugs; follow them exactly.
+
+1. **Never pipe a filter *inside* a filter argument.** A filter argument value is a
+   single variable/literal — a `|` inside it is parsed as a NEW top-level filter.
+   - ❌ `{{ img | image_tag: alt: x | escape, widths: '...' }}`  (SyntaxError)
+   - ❌ `{{ img | image_tag: ... , alt: x | escape }}`  (escapes the WHOLE <img> → visible text)
+   - ❌ `{{ 'key' | t: amount: n | money }}`  (money applies to the t output)
+   - ✅ Precompute first: `{%- assign alt = x -%}{{ img | image_tag: alt: alt }}`
+   - **`image_tag` already HTML-escapes `alt`** — pass the raw value, never `| escape`.
+2. **No nested `{{ }}` inside a filter-argument string.** Use `capture`/`assign`.
+   - ❌ `image_tag: style: 'width:{{ s.w }}px'`  → ✅ `{%- capture st -%}width:{{ s.w }}px{%- endcapture -%}… style: st`
+3. **Only real Shopify filters.** Do NOT invent `ternary`, `structured_data`,
+   `qr_code`, etc. Use `{% if %}`/`{% liquid %}` for conditionals; hand-write JSON-LD.
+4. **Use `{% liquid %}` for ≥2 consecutive `{% %}` tags** (avoids LiquidTag warnings).
+5. **Every `<img>` needs width+height** (or use `image_tag`, which adds them). For art-directed `<picture>`, add `width="{{ image.width }}" height="{{ image.height }}"`.
+6. **No unused `{% assign %}`.** Remove anything you don't output.
+7. Validate yourself: the theme must pass `theme-check` with **0 errors, 0 warnings**.
+
+## Buy-area contract (for funnel sections with add-to-cart)
+Copy the compact pattern from `sections/featured-product.liquid` (an `<apex-product-form>`
+with the `data-variants` JSON, `name="id"`, `[data-option-index]` inputs, `[data-price]`,
+`[data-atc]`+`[data-atc-label]`, qty, `{{ form | payment_button }}`). Don't reinvent it.
