@@ -1,0 +1,19 @@
+{%- comment -%}
+  Usage: {% render 'rating', product: product %}  (reads product.metafields.reviews.rating)
+  or:    {% render 'rating', value: 4.8, count: 120 %}
+{%- endcomment -%}
+{%- liquid
+  if product and product.metafields.reviews.rating != blank
+    assign value = product.metafields.reviews.rating.value.rating | default: product.metafields.reviews.rating.value
+    assign count = product.metafields.reviews.rating_count.value
+  endif
+  assign value = value | default: 0 | plus: 0.0
+  assign full = value | round
+-%}
+{%- if value > 0 -%}
+  <span class="rating" role="img" aria-label="{{ value }} out of 5 stars">
+    <span class="rating__stars" aria-hidden="true">{% for i in (1..5) %}{% if i <= full %}★{% else %}☆{% endif %}{% endfor %}</span>
+    <span class="rating__value">{{ value }}</span>
+    {%- if count -%}<span class="rating__count">({{ count }})</span>{%- endif -%}
+  </span>
+{%- endif -%}

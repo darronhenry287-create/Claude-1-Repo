@@ -1,0 +1,70 @@
+{%- comment -%}
+  Injects global design tokens from theme settings + emits one CSS class per
+  colour scheme (.color-scheme-N) mapped onto Apex's variable names.
+  Rendered once in <head> by layout/theme.liquid.
+{%- endcomment -%}
+{%- liquid
+  assign hf = settings.heading_font
+  assign bf = settings.body_font
+-%}
+{% style %}
+  {{ hf | font_face: font_display: 'swap' }}
+  {{ bf | font_face: font_display: 'swap' }}
+  {%- assign hf_bold = hf | font_modify: 'weight', 'bolder' -%}
+  {%- if hf_bold -%}{{ hf_bold | font_face: font_display: 'swap' }}{%- endif -%}
+  {%- assign bf_bold = bf | font_modify: 'weight', 'bold' -%}
+  {%- if bf_bold -%}{{ bf_bold | font_face: font_display: 'swap' }}{%- endif -%}
+
+  :root {
+    --font-heading: {{ hf.family }}, {{ hf.fallback_families }};
+    --font-body: {{ bf.family }}, {{ bf.fallback_families }};
+    --font-heading-weight: {{ settings.heading_weight | default: 800 }};
+    --font-body-weight: {{ bf.weight | default: 400 }};
+    --type-base: {{ settings.body_font_size | default: 100 | divided_by: 100.0 }}rem;
+    --type-scale: {{ settings.type_scale | default: 122 | divided_by: 100.0 }};
+    --heading-letter-spacing: {{ settings.heading_letter_spacing | default: -20 | divided_by: 1000.0 }}em;
+    --heading-line-height: {{ settings.heading_line_height | default: 108 | divided_by: 100.0 }};
+    --body-line-height: {{ settings.body_line_height | default: 165 | divided_by: 100.0 }};
+
+    --page-width: {{ settings.page_width | default: 1280 }}px;
+    --gutter: {{ settings.gutter_mobile | default: 16 }}px;
+    --section-gap: {{ settings.section_spacing | default: 72 }}px;
+    --section-gap-tight: {{ settings.section_spacing | default: 72 | times: 0.6 | round }}px;
+
+    --radius-btn: {{ settings.button_radius | default: 10 }}px;
+    --radius-card: {{ settings.card_radius | default: 16 }}px;
+    --radius-input: {{ settings.input_radius | default: 10 }}px;
+    --radius: {{ settings.card_radius | default: 16 }}px;
+    --radius-pill: {% if settings.button_radius >= 40 %}999px{% else %}{{ settings.button_radius | default: 10 | plus: 12 }}px{% endif %};
+    --border-width: {{ settings.border_width | default: 1 }}px;
+    --shadow-card: 0 1px 2px rgba(17,24,39,{{ settings.shadow_opacity | default: 8 | divided_by: 100.0 }}), 0 18px 40px -24px rgba(17,24,39,{{ settings.shadow_opacity | default: 8 | times: 3 | divided_by: 100.0 }});
+
+    --dur: {{ settings.anim_duration | default: 500 }}ms;
+    --reveal-distance: {{ settings.anim_distance | default: 24 }}px;
+    {% if settings.button_uppercase %}--btn-transform: uppercase;{% else %}--btn-transform: none;{% endif %}
+  }
+  @media (min-width: 750px){ :root { --gutter: {{ settings.gutter_desktop | default: 40 }}px; } }
+  .btn { text-transform: var(--btn-transform); letter-spacing: {% if settings.button_uppercase %}.06em{% else %}0{% endif %}; }
+  {% unless settings.animations_enabled %}.reveal{opacity:1;transform:none;}{% endunless %}
+
+  {%- for scheme in settings.color_schemes -%}
+    {%- assign s = scheme.settings -%}
+    .color-{{ scheme.id }} {
+      --bg: {{ s.background }};
+      {% if s.background_gradient != blank %}--bg-gradient: {{ s.background_gradient }};{% endif %}
+      --bg-alt: {{ s.bg_alt | default: s.background }};
+      --card: {{ s.card | default: s.background }};
+      --text: {{ s.text }};
+      --text-muted: {{ s.text | color_mix: s.background, 62 }};
+      --border: {{ s.border | default: s.text }};
+      --accent: {{ s.accent }};
+      --accent-text: {{ s.on_accent | default: '#ffffff' }};
+      --btn: {{ s.button | default: s.accent }};
+      --btn-text: {{ s.button_label | default: s.on_accent }};
+      --btn-secondary-text: {{ s.secondary_button_label | default: s.text }};
+      --shadow-rgb: {{ s.shadow | default: '#0b1220' | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    }
+    .color-{{ scheme.id }} { background-color: var(--bg); color: var(--text); }
+    {% if s.background_gradient != blank %}.color-{{ scheme.id }}.gradient { background: var(--bg-gradient); }{% endif %}
+  {%- endfor -%}
+{% endstyle %}
