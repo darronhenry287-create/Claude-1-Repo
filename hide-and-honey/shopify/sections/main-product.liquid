@@ -3,15 +3,15 @@
     <p class="muted" style="font-size:.82rem;font-weight:600;margin-bottom:1.4rem"><a href="{{ routes.root_url }}">Home</a> / <a href="{{ collection.url | default: routes.all_products_collection_url }}">Shop</a> / {{ product.title }}</p>
     <div class="pdp" data-product="{{ product.handle }}">
       <div class="pgallery">
-        <div class="pgallery__main" id="pg-main">
-          {%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 1000 }}" alt="{{ product.featured_image.alt | escape }}">
+        <div class="pgallery__main{% if product.featured_image %} has-photo{% endif %}" id="pg-main">
+          {%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.featured_image.alt | escape }}">
           {%- else -%}<img src="{{ 'hh-jar.svg' | asset_url }}" alt="{{ product.title | escape }}">{%- endif -%}
           <div class="pgallery__seal"><div class="seal"><span><span class="big">90</span><small>DAY GUARANTEE</small></span></div></div>
         </div>
         {%- if product.images.size > 1 -%}
-          <div class="pgallery__thumbs">
-            {%- for image in product.images limit: 4 -%}
-              <button class="pthumb {% if forloop.first %}active{% endif %}"><img src="{{ image | image_url: width: 240 }}" data-full="{{ image | image_url: width: 1000 }}" alt="{{ image.alt | escape }}"></button>
+          <div class="pgallery__thumbs has-photo">
+            {%- for image in product.images -%}
+              <button class="pthumb has-photo {% if image == product.featured_image %}active{% endif %}"><img src="{{ image | image_url: width: 300 }}" data-full="{{ image | image_url: width: 1200 }}" alt="{{ image.alt | escape }}"></button>
             {%- endfor -%}
           </div>
         {%- elsif product.featured_image == blank -%}

@@ -158,8 +158,8 @@
   /* gallery */
   $$('.pthumb').forEach(t => t.addEventListener('click', () => {
     $$('.pthumb').forEach(x => x.classList.remove('active')); t.classList.add('active');
-    const main = $('#pg-main'), img = $('img', t);
-    if (main && img) main.innerHTML = `<img src="${img.dataset.full || img.src}" alt="">`;
+    const main = $('#pg-main'), thumb = $('img', t), mainImg = main && main.querySelector('img');
+    if (mainImg && thumb) mainImg.src = thumb.dataset.full || thumb.src;
   }));
 
   /* accordions */
