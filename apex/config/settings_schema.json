@@ -2215,6 +2215,30 @@
         "id": "enable_age_check",
         "label": "Age verification",
         "default": false
+      },
+      {
+        "type": "text",
+        "id": "age_check_heading",
+        "label": "Age gate heading",
+        "default": "Are you 18 or older?"
+      },
+      {
+        "type": "text",
+        "id": "age_check_text",
+        "label": "Age gate text",
+        "default": "You must be of legal age to enter this store."
+      },
+      {
+        "type": "text",
+        "id": "age_check_yes",
+        "label": "Confirm label",
+        "default": "Yes, I am"
+      },
+      {
+        "type": "text",
+        "id": "age_check_no",
+        "label": "Decline label",
+        "default": "No"
       }
     ]
   }

@@ -232,6 +232,71 @@
   const header = $('[data-header-sticky]');
   if (header) { const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8); onScroll(); on(window, 'scroll', onScroll, { passive: true }); }
 
+  /* --------------------------------------------------------- quick view */
+  on(document, 'click', async e => {
+    const q = e.target.closest('[data-quick-view]'); if (!q) return; e.preventDefault();
+    const handle = q.dataset.quickView, modal = $('#quick-view-modal'); if (!handle || !modal) return;
+    const box = $('[data-quick-view-body]', modal); q.setAttribute('aria-busy', 'true');
+    try {
+      const r = await fetch(`/products/${handle}?section_id=quick-view`); const html = await r.text();
+      const tmp = document.createElement('div'); tmp.innerHTML = html;
+      const frag = tmp.querySelector('[data-quick-view-content]') || tmp;
+      box.innerHTML = frag.innerHTML; bindReveal(box); openPanel(modal);
+    } catch { location.href = '/products/' + handle; }
+    finally { q.removeAttribute('aria-busy'); }
+  });
+
+  /* --------------------------------------------------- recently viewed */
+  try {
+    const pj = $('#apex-pdp-product');
+    if (pj) {
+      const p = JSON.parse(pj.textContent);
+      let r = JSON.parse(localStorage.getItem('apex-recent') || '[]').filter(x => x.handle !== p.handle);
+      r.unshift(p); localStorage.setItem('apex-recent', JSON.stringify(r.slice(0, 12)));
+    }
+  } catch {}
+  $$('[data-recently-viewed]').forEach(el => {
+    let r; try { r = JSON.parse(localStorage.getItem('apex-recent') || '[]'); } catch { r = []; }
+    r = r.filter(x => x.handle !== el.dataset.exclude).slice(0, parseInt(el.dataset.limit) || 4);
+    if (!r.length) { const sec = el.closest('[data-rv-section]'); if (sec) sec.hidden = true; return; }
+    el.innerHTML = r.map(p => `<a class="product-card" href="${p.url}"><div class="product-card__media card--hover"><div class="media media--square"><img src="${p.image}" alt="" loading="lazy" width="400" height="400"></div></div><div class="product-card__info"><h3 class="product-card__title h5">${p.title}</h3><span class="price"><span class="price__current">${p.price}</span></span></div></a>`).join('');
+  });
+
+  /* --------------------------------------------------- cart recommendations */
+  async function loadCartReco() {
+    const box = $('[data-cart-reco]'); if (!box) return;
+    const pid = box.dataset.product, lim = parseInt(box.dataset.limit) || 4;
+    if (!pid) { box.innerHTML = ''; return; }
+    try {
+      const r = await fetch(`/recommendations/products.json?product_id=${pid}&limit=${lim}&intent=related`);
+      const items = ((await r.json()).products || []).slice(0, lim);
+      box.innerHTML = items.map(p => `<a class="apex-cart-reco__item" href="${p.url}">${p.featured_image ? `<img src="${p.featured_image}&width=120" alt="" width="52" height="52" loading="lazy">` : '<span></span>'}<span class="apex-cart-reco__info"><span class="apex-cart-reco__title">${p.title}</span><span class="price"><span class="price__current">${money(p.price)}</span></span></span>${p.variants && p.variants[0] ? `<button class="btn btn--sm btn--secondary" data-quick-add="${p.variants[0].id}" aria-label="Add ${p.title}">+</button>` : ''}</a>`).join('');
+    } catch {}
+  }
+  loadCartReco();
+  document.addEventListener('cart:added', loadCartReco);
+
+  /* --------------------------------------------------- back to top */
+  if (window.APEX && window.APEX.backToTop && window.APEX.backToTop !== 'none') {
+    const b = document.createElement('button');
+    b.className = 'apex-totop apex-totop--' + window.APEX.backToTop; b.type = 'button';
+    b.setAttribute('aria-label', 'Back to top');
+    b.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>';
+    document.body.appendChild(b);
+    on(b, 'click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    const tg = () => b.classList.toggle('is-visible', window.scrollY > 600); tg(); on(window, 'scroll', tg, { passive: true });
+  }
+
+  /* --------------------------------------------------- age verification */
+  const ageGate = $('#apex-age-gate');
+  if (ageGate && !localStorage.getItem('apex-age-ok') && !(window.Shopify && window.Shopify.designMode)) {
+    ageGate.classList.add('is-open'); lock();
+    on(ageGate, 'click', e => {
+      if (e.target.closest('[data-age-yes]')) { localStorage.setItem('apex-age-ok', '1'); ageGate.classList.remove('is-open'); unlock(); }
+      else if (e.target.closest('[data-age-no]')) { ageGate.querySelector('[data-age-deny]')?.removeAttribute('hidden'); }
+    });
+  }
+
   /* ---------------------------------------------------------------- init    */
   const init = (root) => { bindReveal(root); bindMarquee(root); };
   init(document);

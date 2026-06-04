@@ -111,7 +111,8 @@
           "shadow": "#10204d"
         }
       }
-    }
+    },
+    "enable_quick_view": true
   },
   "presets": {
     "Apex — Universal": {

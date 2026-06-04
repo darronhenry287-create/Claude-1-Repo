@@ -14,6 +14,7 @@
   id="product-{{ section.id }}"
   data-product-section>
   <div class="page-width">
+    {% render 'breadcrumb' %}
     <div class="apex-product__grid reveal">
 
       {%- comment -%} ----------------------------- MEDIA GALLERY ----------------------------- {%- endcomment -%}
@@ -415,6 +416,9 @@
 })();
 {% endjavascript %}
 
+<script type="application/json" id="apex-pdp-product">
+{"handle":{{ product.handle | json }},"title":{{ product.title | json }},"url":{{ product.url | json }},"price":{{ product.price | money | json }},"image":{% if product.featured_media %}{{ product.featured_media | image_url: width: 400 | prepend: 'https:' | json }}{% else %}""{% endif %}}
+</script>
 {% schema %}
 {
   "name": "Product",

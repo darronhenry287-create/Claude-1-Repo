@@ -45,6 +45,13 @@
         {%- endfor -%}
       </div>
 
+      {%- if settings.cart_recommendations and cart.items.first -%}
+        <div class="apex-cart-reco-wrap">
+          <p class="apex-cart-reco__heading">{{ settings.cart_reco_heading | default: 'You may also like' }}</p>
+          <div class="apex-cart-reco" data-cart-reco data-product="{{ cart.items.first.product_id }}" data-limit="{{ settings.cart_reco_limit | default: 4 }}"></div>
+        </div>
+      {%- endif -%}
+
       <div class="drawer__foot">
         {%- if settings.cart_note -%}
           <details style="margin-bottom:.8rem"><summary class="link" style="font-size:var(--text-sm)">{{ 'sections.cart.note' | t | default: 'Add order note' }}</summary>

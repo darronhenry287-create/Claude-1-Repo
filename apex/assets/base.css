@@ -445,3 +445,37 @@ body { letter-spacing: var(--body-letter-spacing, 0); }
 .hover-overlay .product-card__media:hover::after { opacity: calc(var(--overlay-default, .3) * .5); }
 .focus-none :focus-visible { box-shadow: none; outline: 0; }
 .marquee__track { animation-duration: var(--marquee-speed, 30s); }
+
+/* ============================ FEATURES (v1.3) ============================== */
+/* quick view */
+.product-card__qv { position: absolute; top: .7rem; right: .7rem; z-index: 3; width: 2.4rem; height: 2.4rem; display: grid; place-items: center; border-radius: var(--radius-pill); background: var(--card); color: var(--text); box-shadow: var(--shadow-card); opacity: 0; transform: translateY(-4px); transition: opacity .2s var(--ease), transform .2s var(--ease); }
+.product-card__media:hover .product-card__qv, .product-card__qv:focus-visible { opacity: 1; transform: none; }
+.product-card__qv svg { width: 1.1rem; height: 1.1rem; }
+.apex-qv-modal__box { max-width: 880px; width: 100%; padding: 0; position: relative; }
+.apex-qv-modal__close { position: absolute; top: .7rem; right: .7rem; z-index: 4; background: var(--card); box-shadow: var(--shadow-card); }
+.apex-qv { display: grid; grid-template-columns: 1fr 1fr; }
+.apex-qv__media { border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
+.apex-qv__info { padding: clamp(1.5rem, 3vw, 2.5rem); align-content: start; }
+.apex-qv__desc { font-size: var(--text-sm); color: var(--text-muted); }
+@media (max-width: 749px) { .apex-qv { grid-template-columns: 1fr; } .apex-qv__media { border-radius: var(--radius-lg) var(--radius-lg) 0 0; } }
+/* cart recommendations */
+.apex-cart-reco-wrap { padding: 1rem var(--gutter); border-top: var(--border-width) solid var(--border); }
+.apex-cart-reco__heading { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); margin-bottom: .6rem; font-weight: 700; }
+.apex-cart-reco { display: grid; gap: .5rem; }
+.apex-cart-reco__item { display: grid; grid-template-columns: 52px 1fr auto; gap: .7rem; align-items: center; }
+.apex-cart-reco__item img { border-radius: var(--radius-sm); background: var(--bg-alt); }
+.apex-cart-reco__title { font-size: var(--text-sm); font-weight: 600; display: block; }
+.apex-cart-reco__info .price { font-size: var(--text-sm); }
+/* back to top */
+.apex-totop { position: fixed; right: 1.2rem; bottom: 1.2rem; z-index: 70; width: 2.8rem; height: 2.8rem; display: grid; place-items: center; border-radius: var(--radius-pill); background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-pop); border: 0; opacity: 0; transform: translateY(10px); pointer-events: none; transition: opacity .3s var(--ease), transform .3s var(--ease); }
+.apex-totop.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+.apex-totop--bar { border-radius: var(--radius); }
+/* age gate */
+.apex-age-gate { position: fixed; inset: 0; z-index: 200; display: none; place-items: center; padding: 1.5rem; background: color-mix(in srgb, var(--text) 55%, transparent); backdrop-filter: blur(6px); }
+.apex-age-gate.is-open { display: grid; }
+.apex-age-gate__box { background: var(--bg); color: var(--text); border-radius: var(--radius-lg); padding: clamp(1.8rem, 4vw, 3rem); max-width: 440px; text-align: center; display: grid; gap: .8rem; justify-items: center; box-shadow: var(--shadow-pop); }
+.apex-age-gate__logo { max-height: 48px; width: auto; }
+/* breadcrumb */
+.apex-breadcrumb { display: flex; flex-wrap: wrap; gap: .5rem; font-size: var(--text-sm); color: var(--text-muted); margin-bottom: 1.2rem; }
+.apex-breadcrumb a:hover { color: var(--accent); }
+.apex-breadcrumb [aria-current] { color: var(--text); }

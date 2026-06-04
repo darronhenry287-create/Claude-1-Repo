@@ -1,0 +1,18 @@
+{%- comment -%} Render on product/collection/page/article templates; gated by settings.show_breadcrumbs. {%- endcomment -%}
+{%- if settings.show_breadcrumbs -%}
+  <nav class="apex-breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a>
+    {%- case template.name -%}
+      {%- when 'product' -%}
+        {%- if collection.url != blank -%}<span aria-hidden="true">/</span><a href="{{ collection.url }}">{{ collection.title }}</a>{%- endif -%}
+        <span aria-hidden="true">/</span><span aria-current="page">{{ product.title }}</span>
+      {%- when 'collection' -%}
+        <span aria-hidden="true">/</span><span aria-current="page">{{ collection.title }}</span>
+      {%- when 'page' -%}
+        <span aria-hidden="true">/</span><span aria-current="page">{{ page.title }}</span>
+      {%- when 'article' -%}
+        <span aria-hidden="true">/</span><a href="{{ blog.url }}">{{ blog.title }}</a>
+        <span aria-hidden="true">/</span><span aria-current="page">{{ article.title }}</span>
+    {%- endcase -%}
+  </nav>
+{%- endif -%}

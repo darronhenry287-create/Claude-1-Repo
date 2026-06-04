@@ -8,6 +8,7 @@
   style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px;--cols:{{ cols }};--cols-m:{{ cols_m }}"
   id="collection-{{ section.id }}">
   <div class="page-width">
+    {% render 'breadcrumb' %}
     <header class="section-head{% if s.heading_alignment == 'center' %} section-head--center{% endif %} reveal">
       <h1 class="h2">{{ collection.title | default: 'Collection' }}</h1>
       {%- if s.show_description and collection.description != blank -%}
