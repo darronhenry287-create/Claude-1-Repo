@@ -146,6 +146,18 @@
         .then(() => { sessionStorage.setItem('aeon-open-cart', '1'); window.location.reload(); })
         .catch(() => { window.location.href = btn.getAttribute('href') || '/cart'; });
     }));
+
+    /* Cart line quantity changes (drawer +/− steppers) — AJAX then reopen drawer */
+    document.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-action="cart-change"]'); if (!b) return;
+      e.preventDefault();
+      const line = b.dataset.line, qty = b.dataset.qty;
+      b.setAttribute('aria-busy', 'true');
+      fetch('/cart/change.js', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ line: Number(line), quantity: Number(qty) }) })
+        .then(r => { if (!r.ok) throw new Error('change failed'); return r.json(); })
+        .then(() => { sessionStorage.setItem('aeon-open-cart', '1'); window.location.reload(); })
+        .catch(() => { window.location.href = '/cart/change?line=' + line + '&quantity=' + qty; });
+    });
   }
 
   /* ---- purchase tiers ---- */
