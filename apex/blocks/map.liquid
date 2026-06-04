@@ -1,0 +1,95 @@
+<div class="apex-tb-map" {{ block.shopify_attributes }}>
+  {%- if block.settings.embed_url != blank -%}
+    <div class="apex-tb-map__frame media" style="--ratio:{{ block.settings.aspect_ratio }}">
+      <iframe
+        src="{{ block.settings.embed_url | escape }}"
+        width="600"
+        height="450"
+        style="border:0;width:100%;height:100%;display:block"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="{{ block.settings.title | default: 'Map' | escape }}"
+      ></iframe>
+    </div>
+  {%- else -%}
+    <div class="apex-tb-map__placeholder media" style="--ratio:{{ block.settings.aspect_ratio }}">
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      <p class="apex-tb-map__hint muted">Add a Google Maps embed URL in the block settings.</p>
+    </div>
+  {%- endif -%}
+</div>
+{% stylesheet %}
+.apex-tb-map__frame,
+.apex-tb-map__placeholder {
+  position: relative;
+  padding-bottom: var(--ratio, 56.25%);
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+}
+.apex-tb-map__frame iframe,
+.apex-tb-map__placeholder .placeholder-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.apex-tb-map__hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9rem;
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Map",
+  "settings": [
+    {
+      "type": "text",
+      "id": "embed_url",
+      "label": "Google Maps embed URL",
+      "info": "From Google Maps → Share → Embed a map → copy the src URL only."
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Accessible title",
+      "default": "Our location"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Aspect ratio",
+      "default": "56.25%",
+      "options": [
+        {
+          "value": "56.25%",
+          "label": "16:9"
+        },
+        {
+          "value": "42.86%",
+          "label": "21:9 (cinematic)"
+        },
+        {
+          "value": "75%",
+          "label": "4:3"
+        },
+        {
+          "value": "100%",
+          "label": "1:1 (square)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Map"
+    }
+  ]
+}
+{% endschema %}

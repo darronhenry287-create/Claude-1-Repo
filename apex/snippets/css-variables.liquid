@@ -69,9 +69,37 @@
     --input-border: {{ settings.input_border_width | default: 1 }}px;
     --header-h: {{ settings.header_height | default: 68 }}px;
     --form-label-transform: {% if settings.form_label_uppercase %}uppercase{% else %}none{% endif %};
+    --h4: calc(1.2rem * {{ settings.heading_h4_scale | default: 100 | divided_by: 100.0 }});
+    --h5: calc(1rem * {{ settings.heading_h5_scale | default: 100 | divided_by: 100.0 }});
+    --subheading-size: {{ settings.subheading_size | default: 110 | divided_by: 100.0 }};
+    --rte-gap: {{ settings.paragraph_spacing | default: 16 }}px;
+    --rte-measure: {{ settings.rte_measure | default: 68 }}ch;
+    --link-offset: {{ settings.link_underline_offset | default: 3 }}px;
+    --btn-min: {{ settings.button_min_width | default: 0 }}px;
+    --btn-gap: {{ settings.button_icon_gap | default: 8 }}px;
+    --btn-hover-scale: {{ settings.button_hover_scale | default: 100 | divided_by: 100.0 }};
+    --accent-2: {{ settings.accent_2 | default: '#0ea5a3' }};
+    --gradient-angle: {{ settings.gradient_angle | default: 135 }}deg;
+    --overlay-color: {{ settings.overlay_color | default: '#0b1220' }};
+    --overlay-default: {{ settings.overlay_default | default: 30 | divided_by: 100.0 }};
+    --link-hover: {{ settings.link_hover_color | default: '#1f3fd0' }};
+    --success: {{ settings.success_color | default: '#16a34a' }};
+    --sale: {{ settings.sale_color | default: '#e0364f' }};
+    --logo-h: {{ settings.logo_max_height | default: 40 }}px;
+    --header-pad: {{ settings.header_padding | default: 16 }}px;
+    --dropdown-radius: {{ settings.dropdown_radius | default: 12 }}px;
+    --footer-pad: {{ settings.footer_padding | default: 56 }}px;
+    --cart-w: {{ settings.cart_drawer_width | default: 440 }}px;
+    --hover-zoom: {{ settings.hover_scale_amount | default: 105 | divided_by: 100.0 }};
+    --card-lift: {{ settings.card_lift_amount | default: 4 }}px;
+    --card-price-size: {{ settings.card_price_size | default: 100 | divided_by: 100.0 }};
+    --card-title-lines: {{ settings.card_title_lines | default: 2 }};
+    --glass-blur: {{ settings.glass_blur | default: 12 }}px;
+    --divider-thickness: {{ settings.divider_thickness | default: 1 }}px;
+    --marquee-speed: {{ settings.marquee_speed | default: 30 }}s;
+    --stagger-delay: {{ settings.stagger_delay | default: 80 }}ms;
   }
   @media (min-width: 750px){ :root { --gutter: {{ settings.gutter_desktop | default: 40 }}px; } }
-  .btn { text-transform: var(--btn-transform); letter-spacing: {% if settings.button_uppercase %}.06em{% else %}0{% endif %}; }
   {% unless settings.animations_enabled %}.reveal{opacity:1;transform:none;}{% endunless %}
 
   {%- for scheme in settings.color_schemes -%}

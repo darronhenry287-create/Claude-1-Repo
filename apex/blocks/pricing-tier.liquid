@@ -1,0 +1,133 @@
+{%- liquid
+  assign features_raw = block.settings.features
+  assign feature_lines = features_raw | newline_to_br | split: '<br />'
+-%}
+<div class="apex-tb-pricing{% if block.settings.highlighted %} apex-tb-pricing--highlighted{% endif %}" {{ block.shopify_attributes }}>
+  {%- if block.settings.badge != blank -%}
+    <span class="badge apex-tb-pricing__badge">{{ block.settings.badge | escape }}</span>
+  {%- endif -%}
+  <div class="apex-tb-pricing__head stack">
+    {%- if block.settings.plan_name != blank -%}
+      <p class="apex-tb-pricing__plan eyebrow">{{ block.settings.plan_name | escape }}</p>
+    {%- endif -%}
+    <p class="apex-tb-pricing__price h2" style="font-family:var(--font-heading);font-weight:var(--font-heading-weight)">{{ block.settings.price | escape }}</p>
+    {%- if block.settings.period != blank -%}
+      <p class="muted" style="font-size:var(--text-sm);margin-top:-.5rem">{{ block.settings.period | escape }}</p>
+    {%- endif -%}
+  </div>
+  {%- if features_raw != blank -%}
+    <ul class="apex-tb-pricing__features stack">
+      {%- for line in feature_lines -%}
+        {%- assign feat = line | strip -%}
+        {%- if feat != blank -%}
+          <li class="apex-tb-pricing__feature">
+            <span class="apex-tb-pricing__check" aria-hidden="true">{%- render 'icon', icon: 'check' -%}</span>
+            <span>{{ feat | escape }}</span>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+  {%- if block.settings.button_label != blank -%}
+    <a href="{{ block.settings.button_url }}" class="btn{% if block.settings.highlighted %} btn--accent{% else %} btn--secondary{% endif %} btn--block">{{ block.settings.button_label | escape }}</a>
+  {%- endif -%}
+</div>
+{% stylesheet %}
+.apex-tb-pricing {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  padding: 2rem;
+  background: var(--card);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-card);
+}
+.apex-tb-pricing--highlighted {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+.apex-tb-pricing__badge {
+  position: absolute;
+  top: -1px;
+  right: 1.4rem;
+  transform: translateY(-50%);
+}
+.apex-tb-pricing__features { padding: 0; border-top: var(--border-width) solid var(--border); padding-top: 1.2rem; }
+.apex-tb-pricing__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  font-size: .95rem;
+}
+.apex-tb-pricing__check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: .15rem;
+  color: var(--accent);
+}
+.apex-tb-pricing__check svg { width: 100%; height: 100%; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Pricing tier",
+  "settings": [
+    {
+      "type": "text",
+      "id": "plan_name",
+      "label": "Plan name",
+      "default": "Pro"
+    },
+    {
+      "type": "text",
+      "id": "price",
+      "label": "Price",
+      "default": "$49"
+    },
+    {
+      "type": "text",
+      "id": "period",
+      "label": "Billing period",
+      "default": "per month"
+    },
+    {
+      "type": "textarea",
+      "id": "features",
+      "label": "Features (one per line)",
+      "default": "Unlimited products\nPriority support\nAdvanced analytics\nCustom domain"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Get started"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "highlighted",
+      "label": "Highlighted (accent border)",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge text (e.g. Most popular)",
+      "default": ""
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pricing tier"
+    }
+  ]
+}
+{% endschema %}

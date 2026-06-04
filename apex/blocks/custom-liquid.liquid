@@ -1,0 +1,21 @@
+<div class="apex-tb-custom-liquid" {{ block.shopify_attributes }}>
+  {{ block.settings.code }}
+</div>
+{% schema %}
+{
+  "name": "Custom Liquid",
+  "settings": [
+    {
+      "type": "liquid",
+      "id": "code",
+      "label": "Liquid code",
+      "default": ""
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Liquid"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,70 @@
+{%- liquid
+  assign rows_raw = block.settings.rows
+  assign rows = rows_raw | newline_to_br | split: '<br />'
+-%}
+<div class="apex-tb-table" {{ block.shopify_attributes }}>
+  {%- if block.settings.caption != blank -%}
+    <p class="apex-tb-table__caption h5" style="font-family:var(--font-heading);font-weight:var(--font-heading-weight)">{{ block.settings.caption | escape }}</p>
+  {%- endif -%}
+  <table class="apex-tb-table__el">
+    <tbody>
+      {%- for row in rows -%}
+        {%- assign row_clean = row | strip -%}
+        {%- if row_clean != blank -%}
+          {%- assign cols = row_clean | split: '|' -%}
+          <tr class="apex-tb-table__row">
+            <th class="apex-tb-table__label" scope="row">{{ cols[0] | strip | escape }}</th>
+            <td class="apex-tb-table__value">{{ cols[1] | strip | escape }}</td>
+          </tr>
+        {%- endif -%}
+      {%- endfor -%}
+    </tbody>
+  </table>
+</div>
+{% stylesheet %}
+.apex-tb-table { overflow-x: auto; }
+.apex-tb-table__caption { margin-bottom: .85rem; }
+.apex-tb-table__el {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .94rem;
+}
+.apex-tb-table__row { border-bottom: var(--border-width) solid var(--border); }
+.apex-tb-table__row:last-child { border-bottom: none; }
+.apex-tb-table__label,
+.apex-tb-table__value {
+  padding: .7rem .6rem;
+  text-align: left;
+  vertical-align: top;
+}
+.apex-tb-table__label {
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  width: 40%;
+}
+.apex-tb-table__value { color: var(--text-muted); }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Spec table",
+  "settings": [
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Table caption (optional)"
+    },
+    {
+      "type": "textarea",
+      "id": "rows",
+      "label": "Rows (Label | Value, one per line)",
+      "default": "Material | 100% organic cotton\nWeight | 180 gsm\nFit | Regular\nCare | Machine wash cold\nMade in | Portugal"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spec table"
+    }
+  ]
+}
+{% endschema %}

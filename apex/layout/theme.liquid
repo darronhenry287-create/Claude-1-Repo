@@ -15,8 +15,8 @@
 
   {{ content_for_header }}
 
-  {% render 'css-variables' %}
   {{ 'base.css' | asset_url | stylesheet_tag }}
+  {% render 'css-variables' %}
   {%- if settings.hover_lift == false -%}<style>.card--hover:hover{transform:none!important}</style>{%- endif -%}
 
   <script>
@@ -31,7 +31,7 @@
   <script src="{{ 'base.js' | asset_url }}" defer></script>
 </head>
 
-<body class="color-scheme-1 template-{{ request.page_type | handle }} btn-{{ settings.button_style | default: 'solid' }} btnhover-{{ settings.button_hover | default: 'lift' }} card-{{ settings.card_style | default: 'border' }} cardhover-{{ settings.card_hover | default: 'lift' }} shadow-{{ settings.shadow_style | default: 'soft' }} input-{{ settings.input_style | default: 'outline' }} link-{{ settings.link_style | default: 'underline' }} menu-{{ settings.menu_style | default: 'underline' }}{% if settings.button_shadow %} has-btn-shadow{% endif %}{% if settings.header_border == false %} no-header-border{% endif %}">
+<body class="color-scheme-1 template-{{ request.page_type | handle }} btn-{{ settings.button_style | default: 'solid' }} btnhover-{{ settings.button_hover | default: 'lift' }} card-{{ settings.card_style | default: 'border' }} cardhover-{{ settings.card_hover | default: 'lift' }} shadow-{{ settings.shadow_style | default: 'soft' }} input-{{ settings.input_style | default: 'outline' }} link-{{ settings.link_style | default: 'underline' }} menu-{{ settings.menu_style | default: 'underline' }}{% if settings.button_shadow %} has-btn-shadow{% endif %}{% if settings.header_border == false %} no-header-border{% endif %} focus-{{ settings.focus_style | default: 'ring' }} imgfilter-{{ settings.image_filter | default: 'none' }} sbtn-{{ settings.secondary_button_style | default: 'outline' }} footer-{{ settings.footer_layout | default: 'columns' }} bq-{{ settings.blockquote_style | default: 'bordered' }}{% if settings.gradient_buttons %} grad-btns{% endif %}{% if settings.button_full_mobile %} btn-fullmobile{% endif %}{% if settings.dropcap %} has-dropcap{% endif %}{% if settings.hover_overlay %} hover-overlay{% endif %}{% if settings.sticky_shrink %} header-shrink{% endif %}{% if settings.rounded_images == false %} square-images{% endif %}">
   <a class="skip-to-content" href="#MainContent">{{ 'accessibility.skip_to_text' | t | default: 'Skip to content' }}</a>
 
   {% sections 'header-group' %}

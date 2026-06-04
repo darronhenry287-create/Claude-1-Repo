@@ -1,0 +1,87 @@
+{%- liquid
+  assign pct = block.settings.percent
+-%}
+<div class="apex-tb-progress" {{ block.shopify_attributes }}>
+  {%- if block.settings.label != blank -%}
+    <div class="apex-tb-progress__header">
+      <span class="apex-tb-progress__label">{{ block.settings.label | escape }}</span>
+      <span class="apex-tb-progress__value muted">{{ pct }}%</span>
+    </div>
+  {%- endif -%}
+  <div class="apex-tb-progress__track" role="progressbar" aria-valuenow="{{ pct }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ block.settings.label | escape }}">
+    <div class="apex-tb-progress__fill" style="--pct:{{ pct }}%"></div>
+  </div>
+</div>
+{% stylesheet %}
+.apex-tb-progress { display: grid; gap: .5rem; }
+.apex-tb-progress__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: .93rem;
+}
+.apex-tb-progress__track {
+  height: .65rem;
+  background: var(--bg-alt);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+.apex-tb-progress__fill {
+  height: 100%;
+  width: var(--pct, 0%);
+  background: var(--accent);
+  border-radius: var(--radius-pill);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform .8s var(--ease);
+}
+.apex-tb-progress--revealed .apex-tb-progress__fill {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .apex-tb-progress__fill { transition: none; transform: scaleX(1); }
+}
+{% endstylesheet %}
+{% javascript %}
+(function () {
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('apex-tb-progress--revealed');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.apex-tb-progress').forEach(function (el) {
+    io.observe(el);
+  });
+})();
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Progress bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Customer satisfaction"
+    },
+    {
+      "type": "range",
+      "id": "percent",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Percentage",
+      "default": 85
+    }
+  ],
+  "presets": [
+    {
+      "name": "Progress bar"
+    }
+  ]
+}
+{% endschema %}

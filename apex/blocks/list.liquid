@@ -1,0 +1,69 @@
+<div class="apex-tb-list rte" data-marker="{{ block.settings.marker }}" {{ block.shopify_attributes }}>
+  {{ block.settings.items }}
+</div>
+{% stylesheet %}
+.apex-tb-list[data-marker="disc"] ul { list-style: disc; }
+.apex-tb-list[data-marker="decimal"] ol { list-style: decimal; }
+.apex-tb-list[data-marker="check"] ul { list-style: none; padding-left: 0; }
+.apex-tb-list[data-marker="check"] ul li { display: flex; gap: .6em; align-items: baseline; }
+.apex-tb-list[data-marker="check"] ul li::before {
+  content: "";
+  display: inline-block;
+  flex-shrink: 0;
+  width: .85em;
+  height: .85em;
+  margin-top: .15em;
+  background-color: var(--accent);
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+.apex-tb-list[data-marker="arrow"] ul { list-style: none; padding-left: 0; }
+.apex-tb-list[data-marker="arrow"] ul li { display: flex; gap: .6em; align-items: baseline; }
+.apex-tb-list[data-marker="arrow"] ul li::before {
+  content: "→";
+  color: var(--accent);
+  flex-shrink: 0;
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "List",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "items",
+      "label": "List items",
+      "info": "Use the editor's list tool to create bullet or numbered lists.",
+      "default": "<ul><li>First item in your list</li><li>Second item in your list</li><li>Third item in your list</li></ul>"
+    },
+    {
+      "type": "select",
+      "id": "marker",
+      "label": "Marker style",
+      "default": "disc",
+      "options": [
+        {
+          "value": "disc",
+          "label": "Bullet (disc)"
+        },
+        {
+          "value": "decimal",
+          "label": "Numbered"
+        },
+        {
+          "value": "check",
+          "label": "Checkmark"
+        },
+        {
+          "value": "arrow",
+          "label": "Arrow"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "List"
+    }
+  ]
+}
+{% endschema %}
