@@ -41,20 +41,15 @@
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body {
   font-family: var(--sans);
-  background: var(--paper);
+  /* kraft-paper grain baked into the background — no fixed overlay, never
+     affects layout (this is what kept SOMNA free of phantom page height) */
+  background-color: var(--paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
   color: var(--ink);
   line-height: 1.65;
   font-size: 16px;
   overflow-x: hidden;
-  position: relative;
 }
-/* paper grain overlay */
-body::before {
-  content: ''; position: fixed; inset: 0; z-index: 1; pointer-events: none;
-  opacity: 0.5; mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
-}
-body > * { position: relative; z-index: 2; }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
@@ -80,11 +75,7 @@ h3 { font-size: clamp(1.3rem, 2.4vw, 1.8rem); }
 /* ---- Layout ---- */
 .wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gap); }
 .section { padding-block: clamp(3.5rem, 8vw, 7rem); }
-.shopify-section, section.section { min-height: 0 !important; }
 .shopify-section { display: block; }
-/* Newsletter clamp — never balloons in editor preview */
-section.section.dark.cta-band { min-height: 0 !important; max-height: none; }
-section.section.dark.cta-band .wrap { padding-block: 0; }
 
 .center { text-align: center; }
 .grid { display: grid; gap: var(--gap); }
@@ -373,10 +364,10 @@ section.section.dark.cta-band .wrap { padding-block: 0; }
 /* ============================================================
    CART DRAWER + MENU + OVERLAY
    ============================================================ */
-.overlay { position: fixed !important; inset: 0; background: rgba(28,24,18,0.5); opacity: 0; visibility: hidden; transition: opacity .35s, visibility .35s; z-index: 90; }
+.overlay { position: fixed; inset: 0; background: rgba(28,24,18,0.5); backdrop-filter: blur(2px); opacity: 0; visibility: hidden; transition: opacity .35s, visibility .35s; z-index: 90; }
 .overlay.open { opacity: 1; visibility: visible; }
-.drawer { position: fixed !important; top: 0; right: 0; bottom: 0; width: min(420px,92vw); z-index: 9998; background: #ece0c8; transform: translateX(101%); transition: transform .4s var(--ease); display: flex; flex-direction: column; border-left: 2px solid var(--ink); }
-.drawer.open { transform: translateX(0); height: 100vh; height: 100dvh; }
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(420px,92vw); z-index: 95; background: #ece0c8; transform: translateX(100%); transition: transform .4s var(--ease); display: flex; flex-direction: column; border-left: 2px solid var(--ink); }
+.drawer.open { transform: translateX(0); }
 .drawer__head { display: flex; align-items: center; justify-content: space-between; padding: 1.3rem; border-bottom: 2px solid var(--ink); }
 .drawer__head h3 { font-size: 1.3rem; }
 .drawer__body { flex: 1; overflow-y: auto; padding: 1.3rem; }
@@ -398,12 +389,8 @@ section.section.dark.cta-band .wrap { padding-block: 0; }
 .freebar__track { height: 6px; background: var(--line); border-radius: 100px; margin-top: 0.5rem; overflow: hidden; }
 .freebar__fill { height: 100%; background: var(--honey); border-radius: 100px; transition: width .5s var(--ease); }
 
-.mobile { position: fixed !important; top: 0; left: 0; right: 0; bottom: 0; background-color: #ece0c8 !important; z-index: 9999; transform: translateX(-101%); transition: transform .35s var(--ease); padding: 1.4rem; display: flex; flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-.mobile.open { transform: translateX(0); height: 100vh; height: 100dvh; }
-/* Zero footprint when closed — cannot add page height even if fixed is broken */
-.mobile:not(.open), .drawer:not(.open), .overlay:not(.open) { height: 0 !important; max-height: 0 !important; min-height: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; border-top: 0 !important; border-bottom: 0 !important; overflow: hidden !important; }
-.overlay { top: 0; left: 0; right: 0; bottom: 0; }
-.overlay.open { height: 100vh; height: 100dvh; }
+.mobile { position: fixed; inset: 0; background: #ece0c8; z-index: 80; transform: translateX(-100%); transition: transform .35s var(--ease); padding: 1.4rem; display: flex; flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.mobile.open { transform: translateX(0); }
 .mobile__head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
 .mobile nav a { display: block; font-family: var(--slab); font-weight: 800; font-size: 1.7rem; padding: 0.6rem 0; border-bottom: 2px solid var(--line); }
 
