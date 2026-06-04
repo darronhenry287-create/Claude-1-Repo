@@ -8,7 +8,7 @@
     "continue_shopping": "המשך בקנייה",
     "video": {
       "play": "הפעל וידאו",
-      "no_video": "לא הוגדר כתובת URL לוידאו."
+      "no_video": "לא הוגדרה כתובת URL לסרטון."
     },
     "accessibility": {
       "close": "סגור"
@@ -35,7 +35,7 @@
       "results": "תוצאות",
       "view_all": "הצג את כל {{ count }} התוצאות",
       "browse_all": "עיין בכל המוצרים",
-      "no_results": "אין תוצאות עבור "{{ terms }}"",
+      "no_results": "אין תוצאות עבור “{{ terms }}”",
       "no_results_for": "לא נמצאו תוצאות עבור",
       "no_results_detail": "נסה חיפוש אחר או עיין בקטלוג שלנו."
     },
