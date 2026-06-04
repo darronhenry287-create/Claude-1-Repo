@@ -177,7 +177,7 @@
   // cart line qty/remove via /cart/change.js
   on(document, 'click', async e => {
     const a = e.target.closest('[data-cart-change]'); if (!a) return; e.preventDefault();
-    try { await fetch('/cart/change.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ line: +a.dataset.line, quantity: +a.dataset.cartChange }) }); refreshCart(); }
+    try { await fetch('/cart/change.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ line: +a.dataset.line, quantity: +a.dataset.cartChange }) }); if (document.body.classList.contains('template-cart')) { location.reload(); } else { refreshCart(); } }
     catch { location.href = '/cart'; }
   });
 

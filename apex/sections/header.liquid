@@ -41,8 +41,8 @@
       {%- endif -%}
 
       <div class="header__actions">
-        {%- if section.settings.show_search -%}<button class="icon-btn" data-open="search-drawer" aria-label="{{ 'general.search' | t | default: 'Search' }}">{% render 'icon', icon: 'search' %}</button>{%- endif -%}
-        {%- if section.settings.show_account and shop.customer_accounts_enabled -%}<a class="icon-btn" href="{{ routes.account_url }}" aria-label="{{ 'customer.account' | t | default: 'Account' }}">{% render 'icon', icon: 'user' %}</a>{%- endif -%}
+        {%- if section.settings.show_search -%}<button class="icon-btn" data-open="search-drawer" aria-label="{{ 'general.search.search' | t | default: 'Search' }}">{% render 'icon', icon: 'search' %}</button>{%- endif -%}
+        {%- if section.settings.show_account and shop.customer_accounts_enabled -%}<a class="icon-btn" href="{{ routes.account_url }}" aria-label="{{ 'customer.account.title' | t | default: 'Account' }}">{% render 'icon', icon: 'user' %}</a>{%- endif -%}
         <button class="icon-btn" data-open="cart-drawer" aria-label="{{ 'sections.cart.title' | t | default: 'Cart' }}">
           {% render 'icon', icon: 'bag' %}
           <span class="count-bubble" data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
@@ -71,7 +71,7 @@
 {%- comment -%} search drawer {%- endcomment -%}
 {%- if section.settings.show_search -%}
 <apex-search id="search-drawer" class="drawer drawer--right color-{{ section.settings.color_scheme }}" aria-hidden="true" role="dialog" aria-modal="true">
-  <div class="drawer__head"><strong>{{ 'general.search' | t | default: 'Search' }}</strong><button class="icon-btn" data-close="search-drawer" aria-label="Close">{% render 'icon', icon: 'close' %}</button></div>
+  <div class="drawer__head"><strong>{{ 'general.search.search' | t | default: 'Search' }}</strong><button class="icon-btn" data-close="search-drawer" aria-label="Close">{% render 'icon', icon: 'close' %}</button></div>
   <div class="drawer__body">
     <form action="{{ routes.search_url }}" method="get" role="search" class="input-group">
       <input type="search" name="q" placeholder="{{ 'general.search_placeholder' | t | default: 'Search products…' }}" autocomplete="off">
