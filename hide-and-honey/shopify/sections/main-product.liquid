@@ -47,7 +47,6 @@
             <div class="qty"><button type="button" data-step="-">−</button><input type="number" name="quantity" value="1" min="1" aria-label="{{ 'products.product.quantity' | t }}"><button type="button" data-step="+">+</button></div>
             <button type="submit" class="btn btn-honey btn-lg btn-block" {% unless product.available %}disabled{% endunless %}>{% if product.available %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</button>
           </div>
-          {{ form | payment_button }}
         {%- endform -%}
 
         <div class="ptrust">
