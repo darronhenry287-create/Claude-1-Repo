@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "Funga",
+    "refresh_page": "Kuchagua chaguo husababisha upakiaji kamili wa ukurasa.",
+    "skip_to_text": "Ruka hadi kwenye maudhui"
+  },
+  "general": {
+    "continue_shopping": "Endelea kununua",
+    "video": {
+      "play": "Cheza video",
+      "no_video": "Hakuna URL ya video iliyowekwa."
+    },
+    "accessibility": {
+      "close": "Funga"
+    },
+    "page": "Ukurasa {{ page }}",
+    "tags": "Lebo",
+    "search_placeholder": "Tafuta bidhaa…",
+    "pagination": {
+      "label": "Uorodheshaji",
+      "load_more": "Pakia zaidi",
+      "next": "Inayofuata",
+      "previous": "Iliyotangulia"
+    },
+    "search": {
+      "search": "Tafuta",
+      "placeholder": "Tafuta bidhaa…",
+      "prompt": "Unatafuta nini?",
+      "for": "Tafuta",
+      "suggestions": "Mapendekezo",
+      "products": "Bidhaa",
+      "pages": "Kurasa",
+      "articles": "Makala",
+      "result": "matokeo",
+      "results": "matokeo",
+      "view_all": "Tazama matokeo yote {{ count }}",
+      "browse_all": "Vinjari bidhaa zote",
+      "no_results": "Hakuna matokeo ya “{{ terms }}”",
+      "no_results_for": "Hakuna matokeo yaliyopatikana kwa",
+      "no_results_detail": "Jaribu utafutaji tofauti au vinjari katalogi yetu."
+    },
+    "slider": {
+      "next": "Slaidi inayofuata",
+      "previous": "Slaidi iliyotangulia"
+    }
+  },
+  "newsletter": {
+    "label": "Barua pepe",
+    "placeholder": "Anwani ya barua pepe",
+    "success": "Asante kwa kujisajili!"
+  },
+  "payment": {
+    "methods": "Njia za malipo zinazokubaliwa"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Ongeza kwenye kikapu",
+      "buy": "Nunua",
+      "choose_options": "Chagua chaguzi",
+      "from": "Kuanzia",
+      "in_stock": "Ipo stokuni",
+      "low_stock": "{{ quantity }} tu zilizobaki",
+      "sold_out": "Imeisha",
+      "unavailable": "Haipatikani",
+      "quantity": "Idadi",
+      "increase": "Ongeza idadi",
+      "decrease": "Punguza idadi",
+      "save": "Okoa {{ savings }}",
+      "view_full_details": "Tazama maelezo kamili",
+      "media": {
+        "load_image": "Pakia picha {{ index }}"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menyu"
+    },
+    "cart": {
+      "title": "Kikapu chako",
+      "empty": "Kikapu chako kiko tupu",
+      "empty_detail": "Hebu tukupate kitu.",
+      "item": "bidhaa",
+      "items": "bidhaa",
+      "quantity": "Idadi",
+      "increase": "Ongeza idadi",
+      "decrease": "Punguza idadi",
+      "remove": "Ondoa",
+      "note": "Ongeza kumbuka la agizo",
+      "note_placeholder": "Maelekezo maalum kwa agizo lako",
+      "subtotal": "Jumla ndogo",
+      "summary": "Muhtasari",
+      "taxes": "Kodi na usafirishaji huhesabiwa wakati wa malipo.",
+      "checkout": "Lipia",
+      "each": "kila moja",
+      "original": "Asili",
+      "free_ship_progress": "Uko mbali na {{ amount }} kupata usafirishaji bure",
+      "free_ship_progress_html": "Uko mbali na <strong>{{ amount }}</strong> kupata usafirishaji bure",
+      "free_ship_unlocked": "Umefungua usafirishaji bure!"
+    },
+    "collection": {
+      "count": "Bidhaa {{ count }}",
+      "products": "bidhaa",
+      "empty": "Hakuna bidhaa zilizopatikana",
+      "empty_detail": "Jaribu kuondoa baadhi ya vichujio.",
+      "filter": "Chuja",
+      "apply": "Tekeleza",
+      "clear_filters": "Futa yote",
+      "sort_label": "Panga kwa",
+      "price_from": "Kuanzia",
+      "price_to": "Hadi"
+    },
+    "collection_list": {
+      "empty": "Hakuna makusanyo ya kuonyesha",
+      "products": "bidhaa"
+    },
+    "featured_collection": {
+      "empty": "Hakuna bidhaa za kuonyesha"
+    }
+  },
+  "customer": {
+    "log_out": "Toka",
+    "account": {
+      "title": "Akaunti",
+      "details": "Maelezo ya akaunti",
+      "return": "Rudi kwenye akaunti",
+      "view_addresses": "Tazama anwani"
+    },
+    "login": {
+      "title": "Ingia",
+      "email": "Barua pepe",
+      "password": "Nywila",
+      "sign_in": "Ingia",
+      "forgot_password": "Umesahau nywila yako?",
+      "no_account": "Huna akaunti?",
+      "create_account": "Fungua akaunti",
+      "cancel": "Ghairi"
+    },
+    "register": {
+      "title": "Fungua akaunti",
+      "first_name": "Jina la kwanza",
+      "last_name": "Jina la mwisho",
+      "email": "Barua pepe",
+      "password": "Nywila",
+      "password_placeholder": "Angalau herufi 5",
+      "submit": "Fungua akaunti",
+      "login": "Tayari una akaunti? Ingia"
+    },
+    "recover_password": {
+      "title": "Weka upya nywila yako",
+      "subtext": "Tutakutumia barua pepe kukusaidia kuiweka upya.",
+      "submit": "Tuma barua pepe ya kuweka upya",
+      "success": "Tumekutumia barua pepe yenye kiungo cha kuweka upya nywila yako."
+    },
+    "reset_password": {
+      "title": "Weka upya nywila ya akaunti",
+      "subtext": "Weka nywila mpya.",
+      "password": "Nywila",
+      "password_confirm": "Thibitisha nywila",
+      "password_placeholder": "Nywila mpya",
+      "submit": "Weka upya nywila"
+    },
+    "activate_account": {
+      "title": "Amilisha akaunti",
+      "subtext": "Unda nywila yako kuamilisha akaunti yako.",
+      "password": "Nywila",
+      "password_placeholder": "Nywila",
+      "password_confirm": "Thibitisha nywila",
+      "password_confirm_placeholder": "Thibitisha nywila",
+      "submit": "Amilisha akaunti",
+      "cancel": "Kataa mwaliko"
+    },
+    "orders": {
+      "title": "Historia ya maagizo",
+      "none": "Bado hujaweka agizo lolote.",
+      "order_number": "Agizo",
+      "date": "Tarehe",
+      "payment_status": "Malipo",
+      "fulfillment_status": "Utimilifu",
+      "total": "Jumla"
+    },
+    "order": {
+      "title": "Agizo {{ name }}",
+      "date_html": "Liwekwa tarehe {{ date }}",
+      "fulfilled_at_html": "Lilitimizwa {{ date }}",
+      "summary": "Muhtasari wa agizo",
+      "items": "Bidhaa",
+      "quantity": "Idadi",
+      "subtotal": "Jumla ndogo",
+      "total": "Jumla",
+      "shipping_address": "Anwani ya usafirishaji",
+      "billing_address": "Anwani ya malipo"
+    },
+    "addresses": {
+      "title": "Anwani",
+      "first_name": "Jina la kwanza",
+      "last_name": "Jina la mwisho",
+      "company": "Kampuni",
+      "address1": "Anwani",
+      "address2": "Ghorofa, suite, n.k.",
+      "city": "Mji",
+      "zip": "Msimbo wa posta",
+      "country": "Nchi / Mkoa",
+      "province": "Jimbo / Mkoa",
+      "phone": "Simu",
+      "default": "Chaguo-msingi",
+      "default_address": "Anwani ya chaguo-msingi",
+      "add_new": "Ongeza anwani mpya",
+      "add": "Ongeza anwani",
+      "update": "Sasisha anwani",
+      "edit": "Hariri",
+      "delete": "Futa",
+      "delete_confirm": "Je, una uhakika unataka kufuta anwani hii?",
+      "set_default": "Weka kama chaguo-msingi",
+      "cancel": "Ghairi",
+      "none": "Huna anwani zilizohifadhiwa."
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "na {{ author }}"
+    },
+    "comments": {
+      "title": "Maoni",
+      "name": "Jina",
+      "email": "Barua pepe",
+      "message": "Maoni",
+      "post": "Chapisha maoni",
+      "success": "Maoni yako yamechapishwa kwa mafanikio!",
+      "comments_with_count": "Maoni {{ count }}"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Jina",
+      "email": "Barua pepe",
+      "phone": "Simu",
+      "phone_placeholder": "Hiari",
+      "message": "Ujumbe",
+      "message_placeholder": "Tunaweza kukusaidiaje?"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Hii hapa kadi yako ya zawadi ya {{ value }}!",
+      "remaining_html": "{{ balance }} zilizobaki",
+      "expiry_date": "Inaisha {{ expiry }}",
+      "copy_code": "Nakili msimbo",
+      "shop_link": "Anza kununua",
+      "print_link": "Chapisha"
+    }
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "Vala",
+    "refresh_page": "Ukukhetha inketho kubangela ukushesha kabusha kwekhasi lonke.",
+    "skip_to_text": "Yeqa uye esigabeni"
+  },
+  "general": {
+    "continue_shopping": "Qhubeka ukuthenga",
+    "video": {
+      "play": "Dlala ividiyo",
+      "no_video": "Ayikho i-URL yevidiyo esetiwe."
+    },
+    "accessibility": {
+      "close": "Vala"
+    },
+    "page": "Ikhasi {{ page }}",
+    "tags": "Amalebula",
+    "search_placeholder": "Sesha imikhiqizo…",
+    "pagination": {
+      "label": "Ukuphejula",
+      "load_more": "Layisha okunye",
+      "next": "Okulandelayo",
+      "previous": "Okwandulela"
+    },
+    "search": {
+      "search": "Sesha",
+      "placeholder": "Sesha imikhiqizo…",
+      "prompt": "Ufuna ini?",
+      "for": "Sesha",
+      "suggestions": "Iziphakamiso",
+      "products": "Imikhiqizo",
+      "pages": "Amakhasi",
+      "articles": "Izindaba",
+      "result": "umphumela",
+      "results": "imiphumela",
+      "view_all": "Bona yonke imiphumela engu-{{ count }}",
+      "browse_all": "Phequlula imikhiqizo yonke",
+      "no_results": "Ayikho imiphumela ye-\"{{ terms }}\"",
+      "no_results_for": "Ayikatholakali imiphumela ye",
+      "no_results_detail": "Zama ukusesha okunye noma phequlula uhlu lwethu."
+    },
+    "slider": {
+      "next": "Islayidi esilandelayo",
+      "previous": "Islayidi esandulela"
+    }
+  },
+  "newsletter": {
+    "label": "I-imeyili",
+    "placeholder": "Ikheli le-imeyili",
+    "success": "Siyabonga ngokubhalisela!"
+  },
+  "payment": {
+    "methods": "Izindlela zokukhokha ezimukelwayo"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Engeza ebhasikidini",
+      "buy": "Thenga",
+      "choose_options": "Khetha izinketho",
+      "from": "Kusukela",
+      "in_stock": "Isitokini",
+      "low_stock": "Kusekhona {{ quantity }} kuphela",
+      "sold_out": "Kuthengisiwe",
+      "unavailable": "Akutholakali",
+      "quantity": "Inani",
+      "increase": "Khulisa inani",
+      "decrease": "Nciphisa inani",
+      "save": "Onga {{ savings }}",
+      "view_full_details": "Bona imininingwane yonke",
+      "media": {
+        "load_image": "Layisha isithombe {{ index }}"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Imenyu"
+    },
+    "cart": {
+      "title": "Ibhasikidi lakho",
+      "empty": "Ibhasikidi lakho likhala",
+      "empty_detail": "Ake sikutholele okuthile.",
+      "item": "into",
+      "items": "izinto",
+      "quantity": "Inani",
+      "increase": "Khulisa inani",
+      "decrease": "Nciphisa inani",
+      "remove": "Susa",
+      "note": "Engeza inothi le-oda",
+      "note_placeholder": "Imiyalelo ekhethekile ye-oda lakho",
+      "subtotal": "Isibalelo esiphelele",
+      "summary": "Isifinqo",
+      "taxes": "Izintela nezindleko zokuthumela zibalwa ekukhokheleni.",
+      "checkout": "Khokha",
+      "each": "ngakunye",
+      "original": "Okwangempela",
+      "free_ship_progress": "Usele {{ amount }} ukuthola ukuthunyelelwa kwamahhala",
+      "free_ship_progress_html": "Usele <strong>{{ amount }}</strong> ukuthola ukuthunyelelwa kwamahhala",
+      "free_ship_unlocked": "Uthole ukuthunyelelwa kwamahhala!"
+    },
+    "collection": {
+      "count": "Imikhiqizo engu-{{ count }}",
+      "products": "imikhiqizo",
+      "empty": "Ayitholakali imikhiqizo",
+      "empty_detail": "Zama ukususa ezinye izihluzi.",
+      "filter": "Hluza",
+      "apply": "Faka",
+      "clear_filters": "Sula konke",
+      "sort_label": "Hlunga ngokwe",
+      "price_from": "Kusukela",
+      "price_to": "Kuya"
+    },
+    "collection_list": {
+      "empty": "Ayikho iziqoqo zokubonisa",
+      "products": "imikhiqizo"
+    },
+    "featured_collection": {
+      "empty": "Ayikho imikhiqizo yokubonisa"
+    }
+  },
+  "customer": {
+    "log_out": "Phuma",
+    "account": {
+      "title": "I-akhawunti",
+      "details": "Imininingwane ye-akhawunti",
+      "return": "Buyela ku-akhawunti",
+      "view_addresses": "Bona amakheli"
+    },
+    "login": {
+      "title": "Ngena",
+      "email": "I-imeyili",
+      "password": "Iphasiwedi",
+      "sign_in": "Ngena",
+      "forgot_password": "Ukhohliwe iphasiwedi yakho?",
+      "no_account": "Awunayo i-akhawunti?",
+      "create_account": "Yenza i-akhawunti",
+      "cancel": "Khansela"
+    },
+    "register": {
+      "title": "Yenza i-akhawunti",
+      "first_name": "Igama lokuqala",
+      "last_name": "Isibongo",
+      "email": "I-imeyili",
+      "password": "Iphasiwedi",
+      "password_placeholder": "Okungenani izinhlamvu ezingu-5",
+      "submit": "Yenza i-akhawunti",
+      "login": "Sewunazo i-akhawunti? Ngena"
+    },
+    "recover_password": {
+      "title": "Setha kabusha iphasiwedi yakho",
+      "subtext": "Sizokuthumelela i-imeyili ukuze uyisethelele kabusha.",
+      "submit": "Thumela i-imeyili yokusethela kabusha",
+      "success": "Sikuthumelele i-imeyili enalo ixhuma lokusethela kabusha iphasiwedi yakho."
+    },
+    "reset_password": {
+      "title": "Sethela kabusha iphasiwedi ye-akhawunti",
+      "subtext": "Faka iphasiwedi entsha.",
+      "password": "Iphasiwedi",
+      "password_confirm": "Qinisekisa iphasiwedi",
+      "password_placeholder": "Iphasiwedi entsha",
+      "submit": "Sethela kabusha iphasiwedi"
+    },
+    "activate_account": {
+      "title": "Sebenzisa i-akhawunti",
+      "subtext": "Yenza iphasiwedi yakho ukuze usebenzise i-akhawunti yakho.",
+      "password": "Iphasiwedi",
+      "password_placeholder": "Iphasiwedi",
+      "password_confirm": "Qinisekisa iphasiwedi",
+      "password_confirm_placeholder": "Qinisekisa iphasiwedi",
+      "submit": "Sebenzisa i-akhawunti",
+      "cancel": "Nqaba isimemo"
+    },
+    "orders": {
+      "title": "Umlando we-oda",
+      "none": "Awukaki oda.",
+      "order_number": "I-oda",
+      "date": "Usuku",
+      "payment_status": "Inkokhelo",
+      "fulfillment_status": "Ukugcwaliswa",
+      "total": "Isamba"
+    },
+    "order": {
+      "title": "I-oda {{ name }}",
+      "date_html": "Kakhishwe ngo-{{ date }}",
+      "fulfilled_at_html": "Kugcwaliswe {{ date }}",
+      "summary": "Isifinqo se-oda",
+      "items": "Izinto",
+      "quantity": "Inani",
+      "subtotal": "Isibalelo esiphelele",
+      "total": "Isamba",
+      "shipping_address": "Ikheli lokuthumela",
+      "billing_address": "Ikheli lokukhokha"
+    },
+    "addresses": {
+      "title": "Amakheli",
+      "first_name": "Igama lokuqala",
+      "last_name": "Isibongo",
+      "company": "Inkampani",
+      "address1": "Ikheli",
+      "address2": "Indlu, suite, njl.njl.",
+      "city": "Idolobha",
+      "zip": "Ikhodi yeposi",
+      "country": "Izwe / Isifunda",
+      "province": "Isifundazwe / Isifunda",
+      "phone": "Ucingo",
+      "default": "Okuzenzakalelayo",
+      "default_address": "Ikheli eliyisisekelo",
+      "add_new": "Engeza ikheli elisha",
+      "add": "Engeza ikheli",
+      "update": "Buyekeza ikheli",
+      "edit": "Hlela",
+      "delete": "Susa",
+      "delete_confirm": "Uqinisekile ukuthi ufuna ukususa leli kheli?",
+      "set_default": "Seta njengokuzenzakalelayo",
+      "cancel": "Khansela",
+      "none": "Awunalo amakheli agciniwayo."
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "ngu-{{ author }}"
+    },
+    "comments": {
+      "title": "Amazwana",
+      "name": "Igama",
+      "email": "I-imeyili",
+      "message": "Amazwana",
+      "post": "Thumela amazwana",
+      "success": "Amazwana akho athunyelelwe ngempumelelo!",
+      "comments_with_count": "Amazwana angu-{{ count }}"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Igama",
+      "email": "I-imeyili",
+      "phone": "Ucingo",
+      "phone_placeholder": "Okukhethwa",
+      "message": "Umlayezo",
+      "message_placeholder": "Singakusiza kanjani?"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Nangu ikhadi lakho lesipho le-{{ value }}!",
+      "remaining_html": "{{ balance }} esishiyekile",
+      "expiry_date": "Iphelelwa yisikhathi ngo-{{ expiry }}",
+      "copy_code": "Kopisha ikhodi",
+      "shop_link": "Qala ukuthenga",
+      "print_link": "Phrinta"
+    }
+  }
+}

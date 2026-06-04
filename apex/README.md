@@ -190,3 +190,19 @@ fall short) — all colour-scheme aware and editable in the customizer:
 - **guarantee** — satisfaction-guarantee strip with badge, points and signature.
 
 Ready-made templates: **`page.advertorial`** and **`page.listicle`** compose these into complete funnel pages.
+
+## Final inventory (v1.2)
+
+- **79 sections** (62 merchandising) — incl. the advertorial/funnel pack and
+  video-slider, video-testimonials, instagram-feed, social-reviews, press-quotes,
+  photo-grid, shoppable-image, board (bento), benefits-carousel, timeline,
+  spec-table, size-guide, faq-categories, comparison-bars, highlight-banner …
+- **25 nestable theme blocks** (`blocks/`) + a `flexible` host section
+  (text, heading, image, button, icon-box, group, columns, accordion, video,
+  countdown, social-icons, stat, price, product, quote, checklist, logo, spacer,
+  divider …) rendered via `{% render block %}` with `@theme` + `@app` support.
+- **128 wired theme settings** across 21 groups (colours/schemes, typography,
+  buttons, product cards, badges, header, cart, animations, effects, social …).
+- **53 locales** — English + 52 translations (incl. ja, ko, zh-CN/TW, ar, he,
+  fa, hi, ru, de, fr, es, pt-BR …), all key-matched to `en.default.json`.
+- **14 KB JS** (no jQuery), **~26 KB base CSS**, **0 theme-check errors/warnings**.

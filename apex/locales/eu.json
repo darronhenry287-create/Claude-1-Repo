@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "Itxi",
+    "refresh_page": "Aukera bat hautatzeak orriaren birkarga osoa eragiten du.",
+    "skip_to_text": "Joan edukira"
+  },
+  "general": {
+    "continue_shopping": "Erosketak jarraitu",
+    "video": {
+      "play": "Bideoa erreproduzitu",
+      "no_video": "Ez da bideoaren URLrik ezarri."
+    },
+    "accessibility": {
+      "close": "Itxi"
+    },
+    "page": "{{ page }}. orria",
+    "tags": "Etiketak",
+    "search_placeholder": "Bilatu produktuak…",
+    "pagination": {
+      "label": "Orrikapena",
+      "load_more": "Gehiago kargatu",
+      "next": "Hurrengoa",
+      "previous": "Aurrekoa"
+    },
+    "search": {
+      "search": "Bilatu",
+      "placeholder": "Bilatu produktuak…",
+      "prompt": "Zer bilatzen ari zara?",
+      "for": "Bilatu",
+      "suggestions": "Iradokizunak",
+      "products": "Produktuak",
+      "pages": "Orriak",
+      "articles": "Artikuluak",
+      "result": "emaitza",
+      "results": "emaitzak",
+      "view_all": "Ikusi {{ count }} emaitza guztiak",
+      "browse_all": "Arakatu produktu guztiak",
+      "no_results": "Ez da emaitzarik aurkitu “{{ terms }}” bilaketarako",
+      "no_results_for": "Ez da emaitzarik aurkitu honetarako:",
+      "no_results_detail": "Saiatu beste bilaketa batekin edo arakatu gure katalogoa."
+    },
+    "slider": {
+      "next": "Hurrengo diapositiba",
+      "previous": "Aurreko diapositiba"
+    }
+  },
+  "newsletter": {
+    "label": "Posta elektronikoa",
+    "placeholder": "Posta elektronikoaren helbidea",
+    "success": "Eskerrik asko harpidetzagatik!"
+  },
+  "payment": {
+    "methods": "Onartutako ordainketa metodoak"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Saskira gehitu",
+      "buy": "Erosi",
+      "choose_options": "Aukeratu aukerak",
+      "from": "Hemendik",
+      "in_stock": "Izakinen",
+      "low_stock": "{{ quantity }} besterik ez dago",
+      "sold_out": "Agortuta",
+      "unavailable": "Erabilgarri ez",
+      "quantity": "Kantitatea",
+      "increase": "Kantitatea handitu",
+      "decrease": "Kantitatea txikitu",
+      "save": "{{ savings }} aurreztu",
+      "view_full_details": "Xehetasun guztiak ikusi",
+      "media": {
+        "load_image": "{{ index }}. irudia kargatu"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menua"
+    },
+    "cart": {
+      "title": "Zure saskia",
+      "empty": "Zure saskia hutsik dago",
+      "empty_detail": "Zerbait aurkitzen lagunduko dizugu.",
+      "item": "elementua",
+      "items": "elementuak",
+      "quantity": "Kantitatea",
+      "increase": "Kantitatea handitu",
+      "decrease": "Kantitatea txikitu",
+      "remove": "Kendu",
+      "note": "Gehitu ohar bat eskaerari",
+      "note_placeholder": "Zure eskaeraren argibide bereziak",
+      "subtotal": "Azpitotala",
+      "summary": "Laburpena",
+      "taxes": "Zergak eta bidalketa kutxan kalkulatzen dira.",
+      "checkout": "Ordaindu",
+      "each": "bakoitza",
+      "original": "Jatorrizkoa",
+      "free_ship_progress": "{{ amount }} falta zaizu doan bidalketarako",
+      "free_ship_progress_html": "<strong>{{ amount }}</strong> falta zaizu doan bidalketarako",
+      "free_ship_unlocked": "Doan bidalketa lortu duzu!"
+    },
+    "collection": {
+      "count": "{{ count }} produktu",
+      "products": "produktuak",
+      "empty": "Ez da produkturik aurkitu",
+      "empty_detail": "Saiatu iragazki batzuk kentzen.",
+      "filter": "Iragazki",
+      "apply": "Aplikatu",
+      "clear_filters": "Garbitu guztia",
+      "sort_label": "Ordenatu honen arabera",
+      "price_from": "Hemendik",
+      "price_to": "Hona arte"
+    },
+    "collection_list": {
+      "empty": "Ez dago erakusteko bildumik",
+      "products": "produktuak"
+    },
+    "featured_collection": {
+      "empty": "Ez dago erakusteko produkturik"
+    }
+  },
+  "customer": {
+    "log_out": "Saioa itxi",
+    "account": {
+      "title": "Kontua",
+      "details": "Kontuaren xehetasunak",
+      "return": "Itzuli kontura",
+      "view_addresses": "Ikusi helbideak"
+    },
+    "login": {
+      "title": "Hasi saioa",
+      "email": "Posta elektronikoa",
+      "password": "Pasahitza",
+      "sign_in": "Hasi saioa",
+      "forgot_password": "Pasahitza ahaztu duzu?",
+      "no_account": "Ez duzu konturik?",
+      "create_account": "Sortu kontua",
+      "cancel": "Utzi"
+    },
+    "register": {
+      "title": "Sortu kontua",
+      "first_name": "Izena",
+      "last_name": "Abizena",
+      "email": "Posta elektronikoa",
+      "password": "Pasahitza",
+      "password_placeholder": "Gutxienez 5 karaktere",
+      "submit": "Sortu kontua",
+      "login": "Jada kontu bat duzu? Hasi saioa"
+    },
+    "recover_password": {
+      "title": "Berrezarri pasahitza",
+      "subtext": "Berrezartzeko mezu elektroniko bat bidaliko dizugu.",
+      "submit": "Bidali berrezartzeko mezua",
+      "success": "Zure pasahitza berrezartzeko esteka duen mezu elektroniko bat bidali dizugu."
+    },
+    "reset_password": {
+      "title": "Berrezarri kontuaren pasahitza",
+      "subtext": "Sartu pasahitz berri bat.",
+      "password": "Pasahitza",
+      "password_confirm": "Berretsi pasahitza",
+      "password_placeholder": "Pasahitz berria",
+      "submit": "Berrezarri pasahitza"
+    },
+    "activate_account": {
+      "title": "Aktibatu kontua",
+      "subtext": "Sortu pasahitza zure kontua aktibatzeko.",
+      "password": "Pasahitza",
+      "password_placeholder": "Pasahitza",
+      "password_confirm": "Berretsi pasahitza",
+      "password_confirm_placeholder": "Berretsi pasahitza",
+      "submit": "Aktibatu kontua",
+      "cancel": "Uko egin gonbitari"
+    },
+    "orders": {
+      "title": "Eskaeren historia",
+      "none": "Oraindik ez duzu eskaera bat egin.",
+      "order_number": "Eskaera",
+      "date": "Data",
+      "payment_status": "Ordainketa",
+      "fulfillment_status": "Betetze egoera",
+      "total": "Guztira"
+    },
+    "order": {
+      "title": "{{ name }} eskaera",
+      "date_html": "{{ date }}(e)an egina",
+      "fulfilled_at_html": "{{ date }}(e)an betea",
+      "summary": "Eskaeraren laburpena",
+      "items": "Elementuak",
+      "quantity": "Kop.",
+      "subtotal": "Azpitotala",
+      "total": "Guztira",
+      "shipping_address": "Bidalketa helbidea",
+      "billing_address": "Fakturazio helbidea"
+    },
+    "addresses": {
+      "title": "Helbideak",
+      "first_name": "Izena",
+      "last_name": "Abizena",
+      "company": "Enpresa",
+      "address1": "Helbidea",
+      "address2": "Apartamentua, suite, etab.",
+      "city": "Hiria",
+      "zip": "Posta kodea",
+      "country": "Herrialdea / Eskualdea",
+      "province": "Probintzia / Estatua",
+      "phone": "Telefonoa",
+      "default": "Lehenetsia",
+      "default_address": "Helbide lehenetsia",
+      "add_new": "Gehitu helbide berria",
+      "add": "Gehitu helbidea",
+      "update": "Eguneratu helbidea",
+      "edit": "Editatu",
+      "delete": "Ezabatu",
+      "delete_confirm": "Ziur zaude helbide hau ezabatu nahi duzula?",
+      "set_default": "Ezarri lehenetsi gisa",
+      "cancel": "Utzi",
+      "none": "Ez duzu gordetako helbiderik."
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "{{ author }}(e)k idatzia"
+    },
+    "comments": {
+      "title": "Iruzkinak",
+      "name": "Izena",
+      "email": "Posta elektronikoa",
+      "message": "Iruzkina",
+      "post": "Argitaratu iruzkina",
+      "success": "Zure iruzkina arrakastaz argitaratu da!",
+      "comments_with_count": "{{ count }} iruzkin"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Izena",
+      "email": "Posta elektronikoa",
+      "phone": "Telefonoa",
+      "phone_placeholder": "Hautazkoa",
+      "message": "Mezua",
+      "message_placeholder": "Nola lagun dezakegu?"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Hemen duzu zure {{ value }}-ko opari txartela!",
+      "remaining_html": "{{ balance }} gelditzen da",
+      "expiry_date": "{{ expiry }}(e)an iraungitzen da",
+      "copy_code": "Kopiatu kodea",
+      "shop_link": "Hasi erosketak",
+      "print_link": "Inprimatu"
+    }
+  }
+}

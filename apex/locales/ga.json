@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "Dún",
+    "refresh_page": "Má roghnaítear rogha, déantar an leathanach iomlán a athnuachan.",
+    "skip_to_text": "Téigh go dtí an t-ábhar"
+  },
+  "general": {
+    "continue_shopping": "Lean ar aghaidh ag siopadóireacht",
+    "video": {
+      "play": "Seinn físeán",
+      "no_video": "Níl URL físeáin socraithe."
+    },
+    "accessibility": {
+      "close": "Dún"
+    },
+    "page": "Leathanach {{ page }}",
+    "tags": "Clibeanna",
+    "search_placeholder": "Cuardaigh táirgí…",
+    "pagination": {
+      "label": "Leathanú",
+      "load_more": "Luchtaigh níos mó",
+      "next": "Ar aghaidh",
+      "previous": "Ar ais"
+    },
+    "search": {
+      "search": "Cuardaigh",
+      "placeholder": "Cuardaigh táirgí…",
+      "prompt": "Cad atá á lorg agat?",
+      "for": "Cuardaigh",
+      "suggestions": "Moltaí",
+      "products": "Táirgí",
+      "pages": "Leathanaigh",
+      "articles": "Ailt",
+      "result": "toradh",
+      "results": "torthaí",
+      "view_all": "Féach ar gach {{ count }} toradh",
+      "browse_all": "Brabhsáil gach táirge",
+      "no_results": "Gan torthaí do \"{{ terms }}\"",
+      "no_results_for": "Níor aimsíodh aon torthaí do",
+      "no_results_detail": "Bain triail as cuardach difriúil nó brabhsáil ár gcatalóg."
+    },
+    "slider": {
+      "next": "An sleamhnán seo chugainn",
+      "previous": "An sleamhnán roimhe"
+    }
+  },
+  "newsletter": {
+    "label": "Ríomhphost",
+    "placeholder": "Seoladh ríomhphoist",
+    "success": "Go raibh maith agat as liostáil!"
+  },
+  "payment": {
+    "methods": "Modhanna íocaíochta glactha"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Cuir sa chiseán",
+      "buy": "Ceannaigh",
+      "choose_options": "Roghnaigh roghanna",
+      "from": "Ó",
+      "in_stock": "I stoc",
+      "low_stock": "{{ quantity }} fágtha amháin",
+      "sold_out": "Díolta amach",
+      "unavailable": "Níl sé ar fáil",
+      "quantity": "Cainníocht",
+      "increase": "Méadaigh cainníocht",
+      "decrease": "Laghdaigh cainníocht",
+      "save": "Sábháil {{ savings }}",
+      "view_full_details": "Féach ar gach sonra",
+      "media": {
+        "load_image": "Luchtaigh íomhá {{ index }}"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Roghchlár"
+    },
+    "cart": {
+      "title": "Do chiseán",
+      "empty": "Tá do chiseán folamh",
+      "empty_detail": "Faighimis rud éigin duit.",
+      "item": "mír",
+      "items": "míreanna",
+      "quantity": "Cainníocht",
+      "increase": "Méadaigh cainníocht",
+      "decrease": "Laghdaigh cainníocht",
+      "remove": "Bain",
+      "note": "Cuir nóta le hordú",
+      "note_placeholder": "Treoracha speisialta do d'ordú",
+      "subtotal": "Fo-iomlán",
+      "summary": "Achoimre",
+      "taxes": "Ríomhtar cánacha agus postas ag seiceáil amach.",
+      "checkout": "Seiceáil amach",
+      "each": "an ceann",
+      "original": "Bunpraghas",
+      "free_ship_progress": "Tá {{ amount }} uait le haghaidh postais saor in aisce",
+      "free_ship_progress_html": "Tá <strong>{{ amount }}</strong> uait le haghaidh postais saor in aisce",
+      "free_ship_unlocked": "D'oscail tú postas saor in aisce!"
+    },
+    "collection": {
+      "count": "{{ count }} táirge",
+      "products": "táirgí",
+      "empty": "Níor aimsíodh aon táirge",
+      "empty_detail": "Bain triail as cuid de na scagairí a bhaint.",
+      "filter": "Scag",
+      "apply": "Cuir i bhfeidhm",
+      "clear_filters": "Glan uile",
+      "sort_label": "Sórtáil de réir",
+      "price_from": "Ó",
+      "price_to": "Go"
+    },
+    "collection_list": {
+      "empty": "Níl aon bhailiúcháin le taispeáint",
+      "products": "táirgí"
+    },
+    "featured_collection": {
+      "empty": "Níl aon táirgí le taispeáint"
+    }
+  },
+  "customer": {
+    "log_out": "Logáil amach",
+    "account": {
+      "title": "Cuntas",
+      "details": "Sonraí cuntais",
+      "return": "Fill ar chuntas",
+      "view_addresses": "Féach ar sheoltaí"
+    },
+    "login": {
+      "title": "Logáil isteach",
+      "email": "Ríomhphost",
+      "password": "Pasfhocal",
+      "sign_in": "Sínigh isteach",
+      "forgot_password": "Ar dhearmad do phasfhocal?",
+      "no_account": "Níl cuntas agat?",
+      "create_account": "Cruthaigh cuntas",
+      "cancel": "Cealaigh"
+    },
+    "register": {
+      "title": "Cruthaigh cuntas",
+      "first_name": "Céadainm",
+      "last_name": "Sloinne",
+      "email": "Ríomhphost",
+      "password": "Pasfhocal",
+      "password_placeholder": "5 carachtar ar a laghad",
+      "submit": "Cruthaigh cuntas",
+      "login": "An bhfuil cuntas agat cheana féin? Sínigh isteach"
+    },
+    "recover_password": {
+      "title": "Athshocraigh do phasfhocal",
+      "subtext": "Seolfaimid ríomhphost chugat chun é a athshocrú.",
+      "submit": "Seol ríomhphost athshocraithe",
+      "success": "Sheol muid ríomhphost chugat le nasc chun do phasfhocal a athshocrú."
+    },
+    "reset_password": {
+      "title": "Athshocraigh pasfhocal cuntais",
+      "subtext": "Iontráil pasfhocal nua.",
+      "password": "Pasfhocal",
+      "password_confirm": "Deimhnigh pasfhocal",
+      "password_placeholder": "Pasfhocal nua",
+      "submit": "Athshocraigh pasfhocal"
+    },
+    "activate_account": {
+      "title": "Gníomhachtaigh cuntas",
+      "subtext": "Cruthaigh do phasfhocal chun do chuntas a ghníomhachtú.",
+      "password": "Pasfhocal",
+      "password_placeholder": "Pasfhocal",
+      "password_confirm": "Deimhnigh pasfhocal",
+      "password_confirm_placeholder": "Deimhnigh pasfhocal",
+      "submit": "Gníomhachtaigh cuntas",
+      "cancel": "Diúltaigh cuireadh"
+    },
+    "orders": {
+      "title": "Stair orduithe",
+      "none": "Níor chuir tú aon ordú fós.",
+      "order_number": "Ordú",
+      "date": "Dáta",
+      "payment_status": "Íocaíocht",
+      "fulfillment_status": "Comhlíonadh",
+      "total": "Iomlán"
+    },
+    "order": {
+      "title": "Ordú {{ name }}",
+      "date_html": "Curtha ar {{ date }}",
+      "fulfilled_at_html": "Comhlíonta {{ date }}",
+      "summary": "Achoimre ar ordú",
+      "items": "Míreanna",
+      "quantity": "Cainníocht",
+      "subtotal": "Fo-iomlán",
+      "total": "Iomlán",
+      "shipping_address": "Seoladh seachadta",
+      "billing_address": "Seoladh billeála"
+    },
+    "addresses": {
+      "title": "Seoltaí",
+      "first_name": "Céadainm",
+      "last_name": "Sloinne",
+      "company": "Cuideachta",
+      "address1": "Seoladh",
+      "address2": "Árasán, sraith, srl.",
+      "city": "Cathair",
+      "zip": "Cód poist",
+      "country": "Tír / Réigiún",
+      "province": "Cúige / Stát",
+      "phone": "Fón",
+      "default": "Réamhshocraithe",
+      "default_address": "Seoladh réamhshocraithe",
+      "add_new": "Cuir seoladh nua leis",
+      "add": "Cuir seoladh leis",
+      "update": "Nuashonraigh seoladh",
+      "edit": "Cuir in eagar",
+      "delete": "Scrios",
+      "delete_confirm": "An bhfuil tú cinnte gur mian leat an seoladh seo a scriosadh?",
+      "set_default": "Socraigh mar réamhshocrú",
+      "cancel": "Cealaigh",
+      "none": "Níl aon seoltaí sábháilte agat."
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "le {{ author }}"
+    },
+    "comments": {
+      "title": "Tráchtanna",
+      "name": "Ainm",
+      "email": "Ríomhphost",
+      "message": "Trácht",
+      "post": "Postáil trácht",
+      "success": "Postáladh do thrácht go rathúil!",
+      "comments_with_count": "{{ count }} trácht"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Ainm",
+      "email": "Ríomhphost",
+      "phone": "Fón",
+      "phone_placeholder": "Roghnach",
+      "message": "Teachtaireacht",
+      "message_placeholder": "Conas is féidir linn cabhrú?"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Seo é do chárta bronntanais {{ value }}!",
+      "remaining_html": "{{ balance }} fágtha",
+      "expiry_date": "Rachaidh sé in éag {{ expiry }}",
+      "copy_code": "Cóipeáil cód",
+      "shop_link": "Tosaigh ag siopadóireacht",
+      "print_link": "Priontáil"
+    }
+  }
+}
