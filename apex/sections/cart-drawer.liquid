@@ -25,7 +25,7 @@
         {%- for item in cart.items -%}
           <div class="line-item" data-line-key="{{ item.key }}">
             <a href="{{ item.url }}" class="line-item__media media media--square">
-              {%- if item.image -%}{{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: item.title | escape }}{%- endif -%}
+              {%- if item.image -%}{{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: item.title }}{%- endif -%}
             </a>
             <div class="line-item__info">
               <a href="{{ item.url }}" style="font-weight:600">{{ item.product.title }}</a>

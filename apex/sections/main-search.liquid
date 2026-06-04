@@ -83,7 +83,7 @@
                     {%- for article in article_results -%}
                       <li class="apex-search__result">
                         <a href="{{ article.url }}" class="media" aria-hidden="true" tabindex="-1">
-                          {%- if article.image -%}{{ article.image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120,180,240', sizes: '96px', alt: article.image.alt | escape }}{%- else -%}{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}{%- endif -%}
+                          {%- if article.image -%}{{ article.image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120,180,240', sizes: '96px', alt: article.image.alt }}{%- else -%}{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}{%- endif -%}
                         </a>
                         <div>
                           <h3 class="apex-search__result-title"><a href="{{ article.url }}">{{ article.title }}</a></h3>
@@ -128,7 +128,7 @@
                     {%- for article in article_results -%}
                       <li class="apex-search__result">
                         <a href="{{ article.url }}" class="media" aria-hidden="true" tabindex="-1">
-                          {%- if article.image -%}{{ article.image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120,180,240', sizes: '96px', alt: article.image.alt | escape }}{%- else -%}{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}{%- endif -%}
+                          {%- if article.image -%}{{ article.image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120,180,240', sizes: '96px', alt: article.image.alt }}{%- else -%}{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}{%- endif -%}
                         </a>
                         <div>
                           <h3 class="apex-search__result-title"><a href="{{ article.url }}">{{ article.title }}</a></h3>

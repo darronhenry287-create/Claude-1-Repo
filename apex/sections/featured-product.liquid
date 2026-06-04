@@ -14,7 +14,7 @@
       <div class="apex-featured-product__media">
         {%- if product != blank and product.featured_media -%}
           <div class="media media--{{ s.image_ratio }}{% if s.image_ratio == 'adapt' %} media--contain{% endif %} media--round">
-            {{ product.featured_media | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400,600,800,1000,1200', sizes: '(min-width:990px) 50vw, 100vw', alt: product.featured_media.alt | escape }}
+            {{ product.featured_media | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400,600,800,1000,1200', sizes: '(min-width:990px) 50vw, 100vw', alt: product.featured_media.alt }}
           </div>
         {%- else -%}
           <div class="media media--square media--round">{{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>

@@ -36,7 +36,7 @@
               <li class="apex-bundle__item cluster card bordered" style="padding:.8rem 1rem" {{ block.shopify_attributes }}>
                 <div class="apex-bundle__item-media media media--square" style="width:4rem;height:4rem;border-radius:var(--radius-sm);flex:none;overflow:hidden">
                   {%- if bprod.featured_media -%}
-                    {{ bprod.featured_media | image_url: width: 100 | image_tag: loading: 'lazy', alt: bprod.title | escape }}
+                    {{ bprod.featured_media | image_url: width: 100 | image_tag: loading: 'lazy', alt: bprod.title }}
                   {%- else -%}
                     {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
                   {%- endif -%}

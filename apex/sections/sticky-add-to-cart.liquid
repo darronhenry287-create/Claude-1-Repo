@@ -16,7 +16,7 @@
     <div class="sticky-atc__inner">
       {%- if s.show_image and featured -%}
         <div class="apex-sticky__thumb media media--square">
-          {{ featured | image_url: width: 120 | image_tag: loading: 'lazy', alt: product.title | escape }}
+          {{ featured | image_url: width: 120 | image_tag: loading: 'lazy', alt: product.title }}
         </div>
       {%- endif -%}
 

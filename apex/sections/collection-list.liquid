@@ -40,9 +40,9 @@
           <a class="apex-collection-list__card{% if card_style == 'card' %} card card--hover{% else %} card--hover{% endif %}" href="{{ url }}" {{ block.shopify_attributes }}>
             <div class="apex-collection-list__media media {{ ratio_class }}">
               {%- if block.settings.custom_image != blank -%}
-                {{ block.settings.custom_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300,400,600,800', sizes: '(min-width:990px) 25vw, 50vw', alt: title | escape }}
+                {{ block.settings.custom_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300,400,600,800', sizes: '(min-width:990px) 25vw, 50vw', alt: title }}
               {%- elsif col.featured_image != blank -%}
-                {{ col.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300,400,600,800', sizes: '(min-width:990px) 25vw, 50vw', alt: col.featured_image.alt | escape }}
+                {{ col.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300,400,600,800', sizes: '(min-width:990px) 25vw, 50vw', alt: col.featured_image.alt }}
               {%- else -%}
                 {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg' }}
               {%- endif -%}

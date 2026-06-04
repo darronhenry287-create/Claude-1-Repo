@@ -62,7 +62,7 @@
                         class="apex-product__thumb media media--square{% if forloop.first %} is-active{% endif %}"
                         data-media-target="{{ media.id }}"
                         aria-label="{{ 'products.product.media.load_image' | t: index: forloop.index | default: 'Show image' }}">
-                        {{ media.preview_image | image_url: width: 200 | image_tag: loading: 'lazy', widths: '120,200,300', sizes: '90px', alt: media.alt | escape }}
+                        {{ media.preview_image | image_url: width: 200 | image_tag: loading: 'lazy', widths: '120,200,300', sizes: '90px', alt: media.alt }}
                         {%- if media.media_type != 'image' -%}<span class="apex-product__thumb-badge" aria-hidden="true">{% render 'icon', icon: 'plus' %}</span>{%- endif -%}
                       </button>
                     </li>
@@ -286,7 +286,7 @@
                       {%- for rec in recommendations.products limit: block.settings.limit -%}
                         <div class="apex-product__complementary-item card">
                           <a class="line-item__media media media--square" href="{{ rec.url }}">
-                            {%- if rec.featured_media -%}{{ rec.featured_media | image_url: width: 160 | image_tag: loading: 'lazy', alt: rec.featured_media.alt | escape }}{%- endif -%}
+                            {%- if rec.featured_media -%}{{ rec.featured_media | image_url: width: 160 | image_tag: loading: 'lazy', alt: rec.featured_media.alt }}{%- endif -%}
                           </a>
                           <div class="apex-product__complementary-info">
                             <a href="{{ rec.url }}" style="font-weight:600">{{ rec.title }}</a>

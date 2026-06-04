@@ -34,7 +34,7 @@
               <footer class="apex-testimonials__footer">
                 {%- if block.settings.avatar != blank -%}
                   <div class="apex-testimonials__avatar media media--round media--square">
-                    {{ block.settings.avatar | image_url: width: 120 | image_tag: loading: 'lazy', alt: block.settings.author | escape }}
+                    {{ block.settings.avatar | image_url: width: 120 | image_tag: loading: 'lazy', alt: block.settings.author }}
                   </div>
                 {%- else -%}
                   <div class="apex-testimonials__avatar apex-testimonials__avatar--placeholder">

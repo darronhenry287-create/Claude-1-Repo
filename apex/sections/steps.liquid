@@ -26,7 +26,7 @@
             <div class="apex-steps__visual">
               {%- if bs.image != blank -%}
                 <div class="apex-steps__img media media--square media--round">
-                  {{ bs.image | image_url: width: 400 | image_tag: loading: 'lazy', alt: bs.heading | escape }}
+                  {{ bs.image | image_url: width: 400 | image_tag: loading: 'lazy', alt: bs.heading }}
                 </div>
               {%- elsif bs.icon != blank and bs.icon != 'none' -%}
                 <div class="apex-steps__icon-wrap" aria-hidden="true">

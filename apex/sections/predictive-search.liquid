@@ -38,7 +38,7 @@
                 <a class="apex-predictive__item" href="{{ product.url }}" role="option">
                   <span class="apex-predictive__media media media--square">
                     {%- if product.featured_media -%}
-                      {{ product.featured_media | image_url: width: 100 | image_tag: loading: 'lazy', widths: '50,100', sizes: '50px', alt: product.featured_media.alt | escape }}
+                      {{ product.featured_media | image_url: width: 100 | image_tag: loading: 'lazy', widths: '50,100', sizes: '50px', alt: product.featured_media.alt }}
                     {%- else -%}
                       {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}

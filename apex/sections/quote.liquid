@@ -24,7 +24,7 @@
             <footer class="apex-quote__attribution" {{ block.shopify_attributes }}>
               {%- if block.settings.avatar != blank -%}
                 <div class="apex-quote__avatar media media--round media--square">
-                  {{ block.settings.avatar | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60,80,120', sizes: '48px', alt: block.settings.name | escape }}
+                  {{ block.settings.avatar | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60,80,120', sizes: '48px', alt: block.settings.name }}
                 </div>
               {%- endif -%}
               <div class="apex-quote__attr-text">

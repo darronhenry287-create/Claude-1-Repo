@@ -27,7 +27,7 @@
             </div>
           {%- elsif block.settings.image != blank -%}
             <div class="media media--{{ img_ratio }} media--round apex-multicolumn__img">
-              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300,400,600', sizes: '(min-width:990px) 25vw, 50vw', alt: block.settings.image.alt | escape }}
+              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300,400,600', sizes: '(min-width:990px) 25vw, 50vw', alt: block.settings.image.alt }}
             </div>
           {%- elsif block.settings.icon == blank and block.settings.image == blank -%}
             <div class="apex-multicolumn__icon">

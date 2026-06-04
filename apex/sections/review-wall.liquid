@@ -37,7 +37,7 @@
           <div class="apex-review-wall__card card" {{ block.shopify_attributes }}>
             {%- if block.settings.image != blank -%}
               <div class="apex-review-wall__img media media--landscape">
-                {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.author | escape }}
+                {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.author }}
               </div>
             {%- endif -%}
             <div class="apex-review-wall__body">

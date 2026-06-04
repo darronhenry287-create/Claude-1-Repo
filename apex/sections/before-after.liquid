@@ -24,7 +24,7 @@
         {%- comment -%} After image (bottom layer, full width) {%- endcomment -%}
         <div class="apex-before-after__after" aria-label="{{ s.after_label | default: 'After' | escape }}">
           {%- if s.after_image != blank -%}
-            {{ s.after_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width:990px) 80vw, 100vw', alt: s.after_label | escape }}
+            {{ s.after_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width:990px) 80vw, 100vw', alt: s.after_label }}
           {%- else -%}
             {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
           {%- endif -%}
@@ -34,7 +34,7 @@
         {%- comment -%} Before image (top layer, clipped) {%- endcomment -%}
         <div class="apex-before-after__before" aria-label="{{ s.before_label | default: 'Before' | escape }}">
           {%- if s.before_image != blank -%}
-            {{ s.before_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width:990px) 80vw, 100vw', alt: s.before_label | escape }}
+            {{ s.before_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width:990px) 80vw, 100vw', alt: s.before_label }}
           {%- else -%}
             {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
           {%- endif -%}

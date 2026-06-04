@@ -46,7 +46,7 @@
               <li class="line-item apex-cart__line" data-line-key="{{ item.key }}">
                 <a href="{{ item.url }}" class="line-item__media media media--square" aria-label="{{ item.product.title | escape }}">
                   {%- if item.image -%}
-                    {{ item.image | image_url: width: 200 | image_tag: loading: 'lazy', widths: '120,160,200', sizes: '80px', alt: item.title | escape }}
+                    {{ item.image | image_url: width: 200 | image_tag: loading: 'lazy', widths: '120,160,200', sizes: '80px', alt: item.title }}
                   {%- else -%}
                     {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
                   {%- endif -%}
