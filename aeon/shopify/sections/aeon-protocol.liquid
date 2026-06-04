@@ -1,0 +1,65 @@
+<section class="section">
+  <div class="wrap wrap--wide">
+    <div class="lab__grid">
+      <div class="reveal">
+        {%- if section.settings.quality_kicker != blank -%}
+          <div class="kicker">{{ section.settings.quality_kicker }}</div>
+          <h2 style="margin:1rem 0 1rem">{{ section.settings.quality_heading }}</h2>
+          <p class="lede" style="margin-bottom:1rem">{{ section.settings.quality_lede }}</p>
+          <p class="muted" style="margin-bottom:1.4rem">{{ section.settings.quality_sub }}</p>
+          <button class="btn btn-ghost" data-action="open-coa">{{ section.settings.coa_label }}</button>
+        {%- endif -%}
+      </div>
+      <div class="reveal">
+        <div class="kicker">{{ section.settings.kicker }}</div>
+        <h2 style="margin:1rem 0 1.2rem">{{ section.settings.heading }}</h2>
+        <div class="proto-steps">
+          {%- for block in section.blocks -%}
+            <div class="proto-step" {{ block.shopify_attributes }}>
+              <span class="proto-step__n"></span>
+              <div>
+                <h4>{{ block.settings.title }}</h4>
+                <p>{{ block.settings.text }}</p>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Protocol (How to take it)",
+  "settings": [
+    { "type": "text", "id": "quality_kicker", "label": "Quality kicker (blank to hide left col)", "default": "// 05 — Quality" },
+    { "type": "text", "id": "quality_heading", "label": "Quality heading", "default": "The dose is only half the story." },
+    { "type": "textarea", "id": "quality_lede", "label": "Quality lede", "default": "NMN purity varies wildly across the market. A high number on the label means nothing without a test behind it." },
+    { "type": "textarea", "id": "quality_sub", "label": "Quality subtext", "default": "Every AEON lot is assayed by an ISO 17025-accredited lab for purity, identity, heavy metals and microbials — and we publish it." },
+    { "type": "text", "id": "coa_label", "label": "COA button label", "default": "View certificate of analysis" },
+    { "type": "text", "id": "kicker", "label": "Protocol kicker", "default": "// 06 — Protocol" },
+    { "type": "text", "id": "heading", "label": "Protocol heading", "default": "How to take it." }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "1000 mg each morning" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Two capsules with water — timing is flexible, consistency is not." }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Protocol",
+      "blocks": [
+        { "type": "step", "settings": { "title": "1000 mg each morning", "text": "Two capsules with water — timing is flexible, consistency is not." } },
+        { "type": "step", "settings": { "title": "Stack if you like", "text": "Many pair NMN with resveratrol or TMG as a methyl donor." } },
+        { "type": "step", "settings": { "title": "Reassess at 90 days", "text": "Give NAD⁺ time to build before you judge how you feel.†" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
