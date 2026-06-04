@@ -61,7 +61,11 @@
           }
         }
       },
-      "block_order": ["li-1", "li-2", "li-3"]
+      "block_order": [
+        "li-1",
+        "li-2",
+        "li-3"
+      ]
     },
     "lst-comparison": {
       "type": "comparison",
@@ -133,7 +137,14 @@
           }
         }
       },
-      "block_order": ["cf-1", "cf-2", "cf-3", "cf-4", "cf-5", "cf-6"]
+      "block_order": [
+        "cf-1",
+        "cf-2",
+        "cf-3",
+        "cf-4",
+        "cf-5",
+        "cf-6"
+      ]
     },
     "lst-guarantee": {
       "type": "guarantee",
@@ -176,7 +187,12 @@
           }
         }
       },
-      "block_order": ["gp-1", "gp-2", "gp-3", "gp-4"]
+      "block_order": [
+        "gp-1",
+        "gp-2",
+        "gp-3",
+        "gp-4"
+      ]
     },
     "lst-offer": {
       "type": "offer-banner",
@@ -194,18 +210,28 @@
       "blocks": {
         "oc-1": {
           "type": "urgency_chip",
-          "settings": { "text": "Reader exclusive" }
+          "settings": {
+            "text": "Reader exclusive"
+          }
         },
         "oc-2": {
           "type": "urgency_chip",
-          "settings": { "text": "Free shipping" }
+          "settings": {
+            "text": "Free shipping"
+          }
         },
         "oc-3": {
           "type": "urgency_chip",
-          "settings": { "text": "60-day guarantee" }
+          "settings": {
+            "text": "60-day guarantee"
+          }
         }
       },
-      "block_order": ["oc-1", "oc-2", "oc-3"]
+      "block_order": [
+        "oc-1",
+        "oc-2",
+        "oc-3"
+      ]
     },
     "lst-newsletter": {
       "type": "newsletter",

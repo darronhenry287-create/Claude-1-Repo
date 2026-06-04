@@ -172,3 +172,21 @@ Open it in any browser to see the design system, colour schemes, and component c
 - Token variables (`--bg`, `--accent`, `--radius-card`, etc.) are documented in `assets/base.css` and injected per scheme by `snippets/css-variables.liquid`.
 - `base.js` JS hook points are documented in `docs/THEME-SPEC.md`.
 - Do not modify `assets/base.css`, `assets/base.js`, or `snippets/css-variables.liquid` unless you intend to affect every section globally.
+
+## Funnel / landing-page pack
+
+Long-form, advertorial-style sales pages (the area where most universal themes
+fall short) — all colour-scheme aware and editable in the customizer:
+
+- **advertorial-header** — sponsored/editorial article header (label, byline, avatar, date, read-time, hero).
+- **advertorial-content** — flexible long-form body with 11 block types: heading, paragraph, image, image+text, pull-quote, callout, checklist, button, divider, stat, video, product-CTA.
+- **listicle** — numbered "N reasons…" list with per-item image, rating, pros/cons and CTA.
+- **content-sidebar** — long-form content beside a **sticky product buy card** (full variant picker + add-to-cart).
+- **offer-banner** — limited-time offer with a live countdown, price and CTA.
+- **pros-cons** — scorecard with pros/cons columns + overall score & verdict.
+- **review-spotlight** — one large featured testimonial with avatar, rating, stat and CTA.
+- **floating-cta** — page-level sticky CTA bar that appears on scroll.
+- **trust-bar** — payment icons + guarantee/shipping/returns strip.
+- **guarantee** — satisfaction-guarantee strip with badge, points and signature.
+
+Ready-made templates: **`page.advertorial`** and **`page.listicle`** compose these into complete funnel pages.

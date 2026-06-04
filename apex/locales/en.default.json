@@ -42,9 +42,13 @@
     "placeholder": "Email address",
     "success": "Thanks for subscribing!"
   },
+  "payment": {
+    "methods": "Accepted payment methods"
+  },
   "products": {
     "product": {
       "add_to_cart": "Add to cart",
+      "buy": "Purchase",
       "choose_options": "Choose options",
       "from": "From",
       "in_stock": "In stock",

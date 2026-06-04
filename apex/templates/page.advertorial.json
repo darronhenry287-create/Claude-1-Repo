@@ -72,7 +72,8 @@
         },
         "blk-divider": {
           "type": "divider",
-          "settings": {}
+          "settings": {
+          }
         },
         "blk-stat": {
           "type": "stat",
@@ -143,7 +144,12 @@
           }
         }
       },
-      "block_order": ["gp-1", "gp-2", "gp-3", "gp-4"]
+      "block_order": [
+        "gp-1",
+        "gp-2",
+        "gp-3",
+        "gp-4"
+      ]
     },
     "adv-offer": {
       "type": "offer-banner",
@@ -161,18 +167,28 @@
       "blocks": {
         "oc-1": {
           "type": "urgency_chip",
-          "settings": { "text": "Limited stock" }
+          "settings": {
+            "text": "Limited stock"
+          }
         },
         "oc-2": {
           "type": "urgency_chip",
-          "settings": { "text": "Free shipping included" }
+          "settings": {
+            "text": "Free shipping included"
+          }
         },
         "oc-3": {
           "type": "urgency_chip",
-          "settings": { "text": "60-day guarantee" }
+          "settings": {
+            "text": "60-day guarantee"
+          }
         }
       },
-      "block_order": ["oc-1", "oc-2", "oc-3"]
+      "block_order": [
+        "oc-1",
+        "oc-2",
+        "oc-3"
+      ]
     },
     "adv-faq": {
       "type": "faq",
@@ -217,7 +233,12 @@
           }
         }
       },
-      "block_order": ["fq-1", "fq-2", "fq-3", "fq-4"]
+      "block_order": [
+        "fq-1",
+        "fq-2",
+        "fq-3",
+        "fq-4"
+      ]
     },
     "adv-newsletter": {
       "type": "newsletter",
