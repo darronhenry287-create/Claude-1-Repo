@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "Pechar",
+    "refresh_page": "Seleccionar unha opción produce un refresco completo da páxina.",
+    "skip_to_text": "Ir ao contido"
+  },
+  "general": {
+    "continue_shopping": "Continuar comprando",
+    "video": {
+      "play": "Reproducir vídeo",
+      "no_video": "Non se definiu ningunha URL de vídeo."
+    },
+    "accessibility": {
+      "close": "Pechar"
+    },
+    "page": "Páxina {{ page }}",
+    "tags": "Etiquetas",
+    "search_placeholder": "Buscar produtos…",
+    "pagination": {
+      "label": "Páxinación",
+      "load_more": "Cargar máis",
+      "next": "Seguinte",
+      "previous": "Anterior"
+    },
+    "search": {
+      "search": "Buscar",
+      "placeholder": "Buscar produtos…",
+      "prompt": "Que estás buscando?",
+      "for": "Buscar",
+      "suggestions": "Suxestións",
+      "products": "Produtos",
+      "pages": "Páxinas",
+      "articles": "Artigos",
+      "result": "resultado",
+      "results": "resultados",
+      "view_all": "Ver os {{ count }} resultados",
+      "browse_all": "Explorar todos os produtos",
+      "no_results": "Sen resultados para “{{ terms }}”",
+      "no_results_for": "Non se atoparon resultados para",
+      "no_results_detail": "Proba cunha busca diferente ou explora o noso catálogo."
+    },
+    "slider": {
+      "next": "Diapositiva seguinte",
+      "previous": "Diapositiva anterior"
+    }
+  },
+  "newsletter": {
+    "label": "Correo electrónico",
+    "placeholder": "Enderezo de correo electrónico",
+    "success": "Grazas por subscribirte!"
+  },
+  "payment": {
+    "methods": "Métodos de pago aceptados"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Engadir ao carriño",
+      "buy": "Comprar",
+      "choose_options": "Escoller opcións",
+      "from": "Desde",
+      "in_stock": "En stock",
+      "low_stock": "Só quedan {{ quantity }}",
+      "sold_out": "Esgotado",
+      "unavailable": "Non dispoñible",
+      "quantity": "Cantidade",
+      "increase": "Aumentar cantidade",
+      "decrease": "Diminuír cantidade",
+      "save": "Aforra {{ savings }}",
+      "view_full_details": "Ver todos os detalles",
+      "media": {
+        "load_image": "Cargar imaxe {{ index }}"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menú"
+    },
+    "cart": {
+      "title": "O teu carriño",
+      "empty": "O teu carriño está baleiro",
+      "empty_detail": "Imos atopar algo para ti.",
+      "item": "artigo",
+      "items": "artigos",
+      "quantity": "Cantidade",
+      "increase": "Aumentar cantidade",
+      "decrease": "Diminuír cantidade",
+      "remove": "Eliminar",
+      "note": "Engadir nota ao pedido",
+      "note_placeholder": "Instrucións especiais para o teu pedido",
+      "subtotal": "Subtotal",
+      "summary": "Resumo",
+      "taxes": "Os impostos e o envío calcúlanse na caixa.",
+      "checkout": "Tramitar pedido",
+      "each": "cada un",
+      "original": "Orixinal",
+      "free_ship_progress": "Fáltanche {{ amount }} para o envío gratuíto",
+      "free_ship_progress_html": "Fáltanche <strong>{{ amount }}</strong> para o envío gratuíto",
+      "free_ship_unlocked": "Conseguiches o envío gratuíto!"
+    },
+    "collection": {
+      "count": "{{ count }} produtos",
+      "products": "produtos",
+      "empty": "Non se atoparon produtos",
+      "empty_detail": "Proba a eliminar algúns filtros.",
+      "filter": "Filtrar",
+      "apply": "Aplicar",
+      "clear_filters": "Borrar todo",
+      "sort_label": "Ordenar por",
+      "price_from": "Desde",
+      "price_to": "Ata"
+    },
+    "collection_list": {
+      "empty": "Non hai coleccións que mostrar",
+      "products": "produtos"
+    },
+    "featured_collection": {
+      "empty": "Non hai produtos que mostrar"
+    }
+  },
+  "customer": {
+    "log_out": "Pechar sesión",
+    "account": {
+      "title": "Conta",
+      "details": "Detalles da conta",
+      "return": "Volver á conta",
+      "view_addresses": "Ver enderezos"
+    },
+    "login": {
+      "title": "Iniciar sesión",
+      "email": "Correo electrónico",
+      "password": "Contrasinal",
+      "sign_in": "Iniciar sesión",
+      "forgot_password": "Esqueceu o contrasinal?",
+      "no_account": "Non tes conta?",
+      "create_account": "Crear conta",
+      "cancel": "Cancelar"
+    },
+    "register": {
+      "title": "Crear conta",
+      "first_name": "Nome",
+      "last_name": "Apelidos",
+      "email": "Correo electrónico",
+      "password": "Contrasinal",
+      "password_placeholder": "Polo menos 5 caracteres",
+      "submit": "Crear conta",
+      "login": "Xa tes conta? Inicia sesión"
+    },
+    "recover_password": {
+      "title": "Restablecer o contrasinal",
+      "subtext": "Enviarémosche un correo para restablecelo.",
+      "submit": "Enviar correo de restablecemento",
+      "success": "Enviámosche un correo cunha ligazón para restablecer o contrasinal."
+    },
+    "reset_password": {
+      "title": "Restablecer o contrasinal da conta",
+      "subtext": "Introduce un novo contrasinal.",
+      "password": "Contrasinal",
+      "password_confirm": "Confirmar contrasinal",
+      "password_placeholder": "Novo contrasinal",
+      "submit": "Restablecer contrasinal"
+    },
+    "activate_account": {
+      "title": "Activar conta",
+      "subtext": "Crea o teu contrasinal para activar a túa conta.",
+      "password": "Contrasinal",
+      "password_placeholder": "Contrasinal",
+      "password_confirm": "Confirmar contrasinal",
+      "password_confirm_placeholder": "Confirmar contrasinal",
+      "submit": "Activar conta",
+      "cancel": "Rexeitar invitación"
+    },
+    "orders": {
+      "title": "Historial de pedidos",
+      "none": "Aínda non realizaches ningún pedido.",
+      "order_number": "Pedido",
+      "date": "Data",
+      "payment_status": "Pago",
+      "fulfillment_status": "Entrega",
+      "total": "Total"
+    },
+    "order": {
+      "title": "Pedido {{ name }}",
+      "date_html": "Realizado o {{ date }}",
+      "fulfilled_at_html": "Enviado o {{ date }}",
+      "summary": "Resumo do pedido",
+      "items": "Artigos",
+      "quantity": "Cantidade",
+      "subtotal": "Subtotal",
+      "total": "Total",
+      "shipping_address": "Enderezo de envío",
+      "billing_address": "Enderezo de facturación"
+    },
+    "addresses": {
+      "title": "Enderezos",
+      "first_name": "Nome",
+      "last_name": "Apelidos",
+      "company": "Empresa",
+      "address1": "Enderezo",
+      "address2": "Apartamento, suite, etc.",
+      "city": "Cidade",
+      "zip": "Código postal",
+      "country": "País / Rexión",
+      "province": "Provincia / Estado",
+      "phone": "Teléfono",
+      "default": "Por defecto",
+      "default_address": "Enderezo por defecto",
+      "add_new": "Engadir un novo enderezo",
+      "add": "Engadir enderezo",
+      "update": "Actualizar enderezo",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "delete_confirm": "Seguro que queres eliminar este enderezo?",
+      "set_default": "Establecer como predeterminado",
+      "cancel": "Cancelar",
+      "none": "Non tes enderezos gardados."
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "por {{ author }}"
+    },
+    "comments": {
+      "title": "Comentarios",
+      "name": "Nome",
+      "email": "Correo electrónico",
+      "message": "Comentario",
+      "post": "Publicar comentario",
+      "success": "O teu comentario publicouse correctamente!",
+      "comments_with_count": "{{ count }} comentarios"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Nome",
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "phone_placeholder": "Opcional",
+      "message": "Mensaxe",
+      "message_placeholder": "Como podemos axudarche?"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Aquí está a túa tarxeta regalo de {{ value }}!",
+      "remaining_html": "{{ balance }} restante",
+      "expiry_date": "Caduca o {{ expiry }}",
+      "copy_code": "Copiar código",
+      "shop_link": "Comezar a comprar",
+      "print_link": "Imprimir"
+    }
+  }
+}

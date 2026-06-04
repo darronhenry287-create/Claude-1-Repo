@@ -35,7 +35,7 @@
       "results": "tulosta",
       "view_all": "Näytä kaikki {{ count }} tulosta",
       "browse_all": "Selaa kaikkia tuotteita",
-      "no_results": "Ei tuloksia haulle "{{ terms }}"",
+      "no_results": "Ei tuloksia haulle \"{{ terms }}\"",
       "no_results_for": "Tuloksia ei löytynyt haulle",
       "no_results_detail": "Kokeile toista hakua tai selaa katalogiamme."
     },

@@ -35,7 +35,7 @@
       "results": "risultati",
       "view_all": "Visualizza tutti i {{ count }} risultati",
       "browse_all": "Esplora tutti i prodotti",
-      "no_results": "Nessun risultato per "{{ terms }}"",
+      "no_results": "Nessun risultato per “{{ terms }}”",
       "no_results_for": "Nessun risultato trovato per",
       "no_results_detail": "Prova una ricerca diversa o sfoglia il nostro catalogo."
     },

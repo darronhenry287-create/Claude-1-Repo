@@ -35,7 +35,7 @@
       "results": "mga resulta",
       "view_all": "Tingnan ang lahat ng {{ count }} resulta",
       "browse_all": "I-browse ang lahat ng produkto",
-      "no_results": "Walang resulta para sa "{{ terms }}"",
+      "no_results": "Walang resulta para sa “{{ terms }}”",
       "no_results_for": "Walang nahanap na resulta para sa",
       "no_results_detail": "Subukan ang ibang paghahanap o i-browse ang aming katalogo."
     },

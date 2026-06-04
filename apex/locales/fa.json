@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "بستن",
+    "refresh_page": "انتخاب یک گزینه باعث بارگذاری مجدد کامل صفحه می‌شود.",
+    "skip_to_text": "رفتن به محتوا"
+  },
+  "general": {
+    "continue_shopping": "ادامه خرید",
+    "video": {
+      "play": "پخش ویدیو",
+      "no_video": "آدرس ویدیو تنظیم نشده است."
+    },
+    "accessibility": {
+      "close": "بستن"
+    },
+    "page": "صفحه {{ page }}",
+    "tags": "برچسب‌ها",
+    "search_placeholder": "جستجوی محصولات…",
+    "pagination": {
+      "label": "صفحه‌بندی",
+      "load_more": "بارگذاری بیشتر",
+      "next": "بعدی",
+      "previous": "قبلی"
+    },
+    "search": {
+      "search": "جستجو",
+      "placeholder": "جستجوی محصولات…",
+      "prompt": "دنبال چه چیزی می‌گردید؟",
+      "for": "جستجو برای",
+      "suggestions": "پیشنهادها",
+      "products": "محصولات",
+      "pages": "صفحات",
+      "articles": "مقالات",
+      "result": "نتیجه",
+      "results": "نتایج",
+      "view_all": "مشاهده همه {{ count }} نتیجه",
+      "browse_all": "مرور همه محصولات",
+      "no_results": "نتیجه‌ای برای “{{ terms }}” یافت نشد",
+      "no_results_for": "نتیجه‌ای برای این عبارت پیدا نشد:",
+      "no_results_detail": "جستجوی دیگری امتحان کنید یا کاتالوگ ما را مرور کنید."
+    },
+    "slider": {
+      "next": "اسلاید بعدی",
+      "previous": "اسلاید قبلی"
+    }
+  },
+  "newsletter": {
+    "label": "ایمیل",
+    "placeholder": "آدرس ایمیل",
+    "success": "از اشتراک شما متشکریم!"
+  },
+  "payment": {
+    "methods": "روش‌های پرداخت پذیرفته‌شده"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "افزودن به سبد",
+      "buy": "خرید",
+      "choose_options": "انتخاب گزینه‌ها",
+      "from": "از",
+      "in_stock": "موجود در انبار",
+      "low_stock": "فقط {{ quantity }} عدد باقی مانده",
+      "sold_out": "ناموجود",
+      "unavailable": "در دسترس نیست",
+      "quantity": "تعداد",
+      "increase": "افزایش تعداد",
+      "decrease": "کاهش تعداد",
+      "save": "صرفه‌جویی {{ savings }}",
+      "view_full_details": "مشاهده جزئیات کامل",
+      "media": {
+        "load_image": "بارگذاری تصویر {{ index }}"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "منو"
+    },
+    "cart": {
+      "title": "سبد خرید",
+      "empty": "سبد خرید شما خالی است",
+      "empty_detail": "بیایید چیزی برای شما پیدا کنیم.",
+      "item": "کالا",
+      "items": "کالاها",
+      "quantity": "تعداد",
+      "increase": "افزایش تعداد",
+      "decrease": "کاهش تعداد",
+      "remove": "حذف",
+      "note": "افزودن یادداشت به سفارش",
+      "note_placeholder": "دستورالعمل‌های خاص برای سفارش شما",
+      "subtotal": "جمع جزء",
+      "summary": "خلاصه",
+      "taxes": "مالیات و هزینه ارسال در هنگام پرداخت محاسبه می‌شود.",
+      "checkout": "پرداخت",
+      "each": "هر عدد",
+      "original": "قیمت اصلی",
+      "free_ship_progress": "{{ amount }} تا ارسال رایگان فاصله دارید",
+      "free_ship_progress_html": "<strong>{{ amount }}</strong> تا ارسال رایگان فاصله دارید",
+      "free_ship_unlocked": "ارسال رایگان برای شما فعال شد!"
+    },
+    "collection": {
+      "count": "{{ count }} محصول",
+      "products": "محصولات",
+      "empty": "محصولی یافت نشد",
+      "empty_detail": "برخی فیلترها را حذف کنید.",
+      "filter": "فیلتر",
+      "apply": "اعمال",
+      "clear_filters": "پاک کردن همه",
+      "sort_label": "مرتب‌سازی بر اساس",
+      "price_from": "از",
+      "price_to": "تا"
+    },
+    "collection_list": {
+      "empty": "مجموعه‌ای برای نمایش وجود ندارد",
+      "products": "محصولات"
+    },
+    "featured_collection": {
+      "empty": "محصولی برای نمایش وجود ندارد"
+    }
+  },
+  "customer": {
+    "log_out": "خروج از حساب",
+    "account": {
+      "title": "حساب کاربری",
+      "details": "جزئیات حساب",
+      "return": "بازگشت به حساب",
+      "view_addresses": "مشاهده آدرس‌ها"
+    },
+    "login": {
+      "title": "ورود",
+      "email": "ایمیل",
+      "password": "رمز عبور",
+      "sign_in": "ورود",
+      "forgot_password": "رمز عبور خود را فراموش کرده‌اید؟",
+      "no_account": "حساب کاربری ندارید؟",
+      "create_account": "ایجاد حساب",
+      "cancel": "انصراف"
+    },
+    "register": {
+      "title": "ایجاد حساب",
+      "first_name": "نام",
+      "last_name": "نام خانوادگی",
+      "email": "ایمیل",
+      "password": "رمز عبور",
+      "password_placeholder": "حداقل ۵ کاراکتر",
+      "submit": "ایجاد حساب",
+      "login": "قبلاً حساب دارید؟ وارد شوید"
+    },
+    "recover_password": {
+      "title": "بازیابی رمز عبور",
+      "subtext": "یک ایمیل برای بازنشانی رمز برای شما ارسال می‌کنیم.",
+      "submit": "ارسال ایمیل بازنشانی",
+      "success": "ایمیلی حاوی لینک بازنشانی رمز عبور برای شما ارسال شد."
+    },
+    "reset_password": {
+      "title": "بازنشانی رمز عبور حساب",
+      "subtext": "رمز عبور جدیدی وارد کنید.",
+      "password": "رمز عبور",
+      "password_confirm": "تأیید رمز عبور",
+      "password_placeholder": "رمز عبور جدید",
+      "submit": "بازنشانی رمز عبور"
+    },
+    "activate_account": {
+      "title": "فعال‌سازی حساب",
+      "subtext": "برای فعال کردن حساب خود رمز عبور بسازید.",
+      "password": "رمز عبور",
+      "password_placeholder": "رمز عبور",
+      "password_confirm": "تأیید رمز عبور",
+      "password_confirm_placeholder": "تأیید رمز عبور",
+      "submit": "فعال‌سازی حساب",
+      "cancel": "رد دعوت"
+    },
+    "orders": {
+      "title": "تاریخچه سفارش‌ها",
+      "none": "هنوز هیچ سفارشی ثبت نکرده‌اید.",
+      "order_number": "سفارش",
+      "date": "تاریخ",
+      "payment_status": "پرداخت",
+      "fulfillment_status": "وضعیت تحویل",
+      "total": "مجموع"
+    },
+    "order": {
+      "title": "سفارش {{ name }}",
+      "date_html": "ثبت شده در {{ date }}",
+      "fulfilled_at_html": "تحویل داده شده {{ date }}",
+      "summary": "خلاصه سفارش",
+      "items": "کالاها",
+      "quantity": "تعداد",
+      "subtotal": "جمع جزء",
+      "total": "مجموع",
+      "shipping_address": "آدرس ارسال",
+      "billing_address": "آدرس صورت‌حساب"
+    },
+    "addresses": {
+      "title": "آدرس‌ها",
+      "first_name": "نام",
+      "last_name": "نام خانوادگی",
+      "company": "شرکت",
+      "address1": "آدرس",
+      "address2": "آپارتمان، واحد و غیره",
+      "city": "شهر",
+      "zip": "کد پستی",
+      "country": "کشور / منطقه",
+      "province": "استان / ایالت",
+      "phone": "تلفن",
+      "default": "پیش‌فرض",
+      "default_address": "آدرس پیش‌فرض",
+      "add_new": "افزودن آدرس جدید",
+      "add": "افزودن آدرس",
+      "update": "بروزرسانی آدرس",
+      "edit": "ویرایش",
+      "delete": "حذف",
+      "delete_confirm": "آیا مطمئن هستید که می‌خواهید این آدرس را حذف کنید؟",
+      "set_default": "تنظیم به عنوان پیش‌فرض",
+      "cancel": "انصراف",
+      "none": "هیچ آدرس ذخیره‌شده‌ای ندارید."
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "نوشته {{ author }}"
+    },
+    "comments": {
+      "title": "نظرات",
+      "name": "نام",
+      "email": "ایمیل",
+      "message": "نظر",
+      "post": "ارسال نظر",
+      "success": "نظر شما با موفقیت ثبت شد!",
+      "comments_with_count": "{{ count }} نظر"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "نام",
+      "email": "ایمیل",
+      "phone": "تلفن",
+      "phone_placeholder": "اختیاری",
+      "message": "پیام",
+      "message_placeholder": "چگونه می‌توانیم کمک کنیم؟"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "کارت هدیه {{ value }} شما اینجاست!",
+      "remaining_html": "{{ balance }} باقی‌مانده",
+      "expiry_date": "انقضا {{ expiry }}",
+      "copy_code": "کپی کد",
+      "shop_link": "شروع به خرید",
+      "print_link": "چاپ"
+    }
+  }
+}

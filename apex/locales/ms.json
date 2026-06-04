@@ -35,7 +35,7 @@
       "results": "keputusan",
       "view_all": "Lihat semua {{ count }} keputusan",
       "browse_all": "Semak imbas semua produk",
-      "no_results": "Tiada keputusan untuk "{{ terms }}"",
+      "no_results": "Tiada keputusan untuk “{{ terms }}”",
       "no_results_for": "Tiada keputusan ditemui untuk",
       "no_results_detail": "Cuba kata kunci lain atau semak imbas katalog kami."
     },

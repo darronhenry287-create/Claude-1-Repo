@@ -35,7 +35,7 @@
       "results": "kết quả",
       "view_all": "Xem tất cả {{ count }} kết quả",
       "browse_all": "Duyệt tất cả sản phẩm",
-      "no_results": "Không có kết quả cho "{{ terms }}"",
+      "no_results": "“{{ terms }}” không có kết quả nào",
       "no_results_for": "Không tìm thấy kết quả cho",
       "no_results_detail": "Hãy thử từ khóa khác hoặc duyệt danh mục của chúng tôi."
     },

@@ -35,7 +35,7 @@
       "results": "hasil",
       "view_all": "Lihat semua {{ count }} hasil",
       "browse_all": "Jelajahi semua produk",
-      "no_results": "Tidak ada hasil untuk "{{ terms }}"",
+      "no_results": "Tidak ada hasil untuk “{{ terms }}”",
       "no_results_for": "Tidak ditemukan hasil untuk",
       "no_results_detail": "Coba kata kunci lain atau jelajahi katalog kami."
     },

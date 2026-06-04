@@ -7,7 +7,7 @@
   "general": {
     "continue_shopping": "ช้อปปิ้งต่อ",
     "video": {
-      "play": "เล่นวิดีโอ",
+      "play": "เล่นวีดีโอ",
       "no_video": "ไม่ได้ตั้งค่า URL วิดีโอ"
     },
     "accessibility": {
@@ -35,7 +35,7 @@
       "results": "ผลลัพธ์",
       "view_all": "ดูผลลัพธ์ทั้งหมด {{ count }} รายการ",
       "browse_all": "เรียกดูสินค้าทั้งหมด",
-      "no_results": "ไม่พบผลลัพธ์สำหรับ "{{ terms }}"",
+      "no_results": "ไม่พบผลลัพธ์สำหรับ “{{ terms }}”",
       "no_results_for": "ไม่พบผลลัพธ์สำหรับ",
       "no_results_detail": "ลองใช้คำค้นหาอื่น หรือเรียกดูสินค้าของเรา"
     },

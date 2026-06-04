@@ -35,7 +35,7 @@
       "results": "resultaten",
       "view_all": "Alle {{ count }} resultaten bekijken",
       "browse_all": "Alle producten bekijken",
-      "no_results": "Geen resultaten voor "{{ terms }}"",
+      "no_results": "Geen resultaten voor “{{ terms }}”",
       "no_results_for": "Geen resultaten gevonden voor",
       "no_results_detail": "Probeer een andere zoekopdracht of blader door onze catalogus."
     },

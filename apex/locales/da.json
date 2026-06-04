@@ -35,7 +35,7 @@
       "results": "resultater",
       "view_all": "Se alle {{ count }} resultater",
       "browse_all": "Gennemse alle produkter",
-      "no_results": "Ingen resultater for "{{ terms }}"",
+      "no_results": "“Ingen resultater for “{{ terms }}””",
       "no_results_for": "Ingen resultater fundet for",
       "no_results_detail": "Prøv en anden søgning, eller gennemse vores katalog."
     },
