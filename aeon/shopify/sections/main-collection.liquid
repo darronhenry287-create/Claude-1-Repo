@@ -5,7 +5,7 @@
 
 <section class="pagehead">
   <div class="wrap wrap--wide">
-    <div class="kicker">{{ section.settings.kicker | default: '// Shop' }}</div>
+    <div class="kicker">{{ section.settings.kicker | default: 'Shop' }}</div>
     <h1>{{ collection.title | default: 'The longevity stack.' }}</h1>
     {%- if collection.description != blank -%}
       <div class="lede rte" style="max-width:54ch">{{ collection.description }}</div>
@@ -44,7 +44,7 @@
   "name": "Collection",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "// Shop" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Shop" },
     { "type": "textarea", "id": "subtext", "label": "Fallback lede (used when collection has no description)" }
   ],
   "presets": [

@@ -3,7 +3,7 @@
     "pagehead": {
       "type": "aeon-pagehead",
       "settings": {
-        "kicker": "// Privacy",
+        "kicker": "Privacy",
         "heading": "Privacy policy.",
         "subtext": ""
       }

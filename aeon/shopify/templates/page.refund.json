@@ -3,7 +3,7 @@
     "pagehead": {
       "type": "aeon-pagehead",
       "settings": {
-        "kicker": "// Refund Policy",
+        "kicker": "Refund Policy",
         "heading": "Refund policy.",
         "subtext": ""
       }

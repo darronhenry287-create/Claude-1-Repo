@@ -1,6 +1,6 @@
 <section class="pagehead">
   <div class="wrap wrap--wide">
-    <div class="kicker">// {{ section.settings.kicker | default: 'The Journal' }}</div>
+    <div class="kicker">{{ section.settings.kicker | default: 'The Journal' }}</div>
     <h1>{{ blog.title }}</h1>
     {%- if section.settings.subtext != blank -%}
       <p class="lede" style="max-width:50ch;margin-top:.8rem">{{ section.settings.subtext }}</p>

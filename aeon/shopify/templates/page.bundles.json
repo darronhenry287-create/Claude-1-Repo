@@ -3,7 +3,7 @@
     "pagehead": {
       "type": "aeon-pagehead",
       "settings": {
-        "kicker": "// Subscribe & Save",
+        "kicker": "Subscribe & Save",
         "heading": "Longevity is a subscription, not a sprint.",
         "subtext": "NAD⁺ support only compounds if you stay consistent. So we make consistency cheaper: subscribe and save up to 30%, shipped on your schedule. Skip, pause or cancel anytime."
       }
@@ -17,7 +17,7 @@
       },
       "block_order": ["t1", "t2", "t3"],
       "settings": {
-        "kicker": "// 09 — Choose your supply",
+        "kicker": "Choose your supply",
         "heading": "Commit to the protocol, save more.",
         "lede": "Subscribe and save up to 25%. Skip, pause or cancel anytime."
       }
@@ -31,7 +31,7 @@
       },
       "block_order": ["q1", "q2", "q3"],
       "settings": {
-        "kicker": "// Subscription FAQ",
+        "kicker": "Subscription FAQ",
         "heading": "The fine print, in plain words.",
         "footer_label": ""
       }

@@ -3,7 +3,7 @@
     "pagehead": {
       "type": "aeon-pagehead",
       "settings": {
-        "kicker": "// Contact",
+        "kicker": "Contact",
         "heading": "Real humans. Fast answers.",
         "subtext": "Questions about NMN, your protocol, an order, or the science? Our team replies within one business day."
       }

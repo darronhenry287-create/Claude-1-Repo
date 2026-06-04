@@ -3,7 +3,7 @@
     "pagehead": {
       "type": "aeon-pagehead",
       "settings": {
-        "kicker": "// AEON"
+        "kicker": "AEON"
       }
     },
     "main": {

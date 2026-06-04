@@ -3,7 +3,7 @@
     "pagehead": {
       "type": "aeon-pagehead",
       "settings": {
-        "kicker": "// Shipping & Returns",
+        "kicker": "Shipping & Returns",
         "heading": "Shipping & returns.",
         "subtext": ""
       }

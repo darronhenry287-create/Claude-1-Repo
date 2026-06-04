@@ -34,7 +34,7 @@ const ic = {
   user:'<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/></svg>',
   check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
 };
-const LOGO_MARK = '<svg class="logo__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true"><polygon points="12,2.5 20,7 20,17 12,21.5 4,17 4,7" stroke="#2bf0c4" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="2.5" r="1.7" fill="#2bf0c4"/><circle cx="20" cy="17" r="1.7" fill="#2bf0c4"/><circle cx="4" cy="17" r="1.7" fill="#2bf0c4"/></svg>';
+const LOGO_MARK = '<svg class="logo__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true"><polygon points="12,2.5 20,7 20,17 12,21.5 4,17 4,7" stroke="#2f5bff" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="2.5" r="1.7" fill="#2f5bff"/><circle cx="20" cy="17" r="1.7" fill="#2f5bff"/><circle cx="4" cy="17" r="1.7" fill="#2f5bff"/></svg>';
 const LOGO = `<a href="index.html" class="logo">${LOGO_MARK}AEON</a>`;
 
 function tickerHTML() {
@@ -134,7 +134,7 @@ function shell({ title, desc, body }) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title}</title>
   <meta name="description" content="${desc}">
-  <meta name="theme-color" content="#07080b">
+  <meta name="theme-color" content="#ffffff">
   <script>document.documentElement.classList.add('js');</script>
   <link rel="stylesheet" href="assets/theme.css">
 </head>

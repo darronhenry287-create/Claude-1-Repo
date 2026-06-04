@@ -3,7 +3,7 @@
     "pagehead": {
       "type": "aeon-pagehead",
       "settings": {
-        "kicker": "// FAQ",
+        "kicker": "FAQ",
         "heading": "Common questions.",
         "subtext": "NMN, NAD⁺, dosing, testing, shipping and subscriptions — answered plainly."
       }
@@ -17,7 +17,7 @@
       },
       "block_order": ["q1", "q2", "q3"],
       "settings": {
-        "kicker": "// The molecule",
+        "kicker": "The molecule",
         "heading": "",
         "footer_label": ""
       }
@@ -32,7 +32,7 @@
       },
       "block_order": ["q4", "q5", "q6", "q7"],
       "settings": {
-        "kicker": "// Dosing & results",
+        "kicker": "Dosing & results",
         "heading": "",
         "footer_label": ""
       }
@@ -46,7 +46,7 @@
       },
       "block_order": ["q8", "q9", "q10"],
       "settings": {
-        "kicker": "// Quality & testing",
+        "kicker": "Quality & testing",
         "heading": "",
         "footer_label": ""
       }
@@ -60,7 +60,7 @@
       },
       "block_order": ["q11", "q12", "q13"],
       "settings": {
-        "kicker": "// Orders & shipping",
+        "kicker": "Orders & shipping",
         "heading": "",
         "footer_label": "Talk to our team →"
       }

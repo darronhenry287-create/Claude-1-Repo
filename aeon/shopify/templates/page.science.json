@@ -3,7 +3,7 @@
     "pagehead": {
       "type": "aeon-pagehead",
       "settings": {
-        "kicker": "// The Science",
+        "kicker": "The Science",
         "heading": "NMN, NAD⁺ & the biology of aging.",
         "subtext": "NAD⁺ isn't a trend — it's one of the most studied molecules in longevity research. Here's what it does, why it declines, and how NMN fits in. With the citations to back it up."
       }
@@ -11,7 +11,7 @@
     "decline": {
       "type": "aeon-decline",
       "settings": {
-        "kicker": "// 02 — The decline",
+        "kicker": "The decline",
         "heading": "Why levels fall.",
         "lede": "Production slows and consumption climbs. By midlife, NAD⁺ can sit at roughly half its youthful level — a shift researchers link to many hallmarks of aging.",
         "stat": "−50",
@@ -27,7 +27,7 @@
       },
       "block_order": ["n1", "n2", "n3"],
       "settings": {
-        "kicker": "// 03 — The pathway",
+        "kicker": "The pathway",
         "heading": "From capsule to coenzyme.",
         "lede": ""
       }
@@ -44,7 +44,7 @@
       },
       "block_order": ["e1", "e2", "e3", "e4", "e5", "e6"],
       "settings": {
-        "kicker": "// 04 — The evidence",
+        "kicker": "The evidence",
         "heading": "Selected research.",
         "disclaim": "† These summaries are educational and simplified. NMN research is ongoing; effects vary by individual, dose and duration. Nothing here is a claim that AEON diagnoses, treats, cures or prevents any disease. Always consult your physician."
       }
@@ -59,7 +59,7 @@
       },
       "block_order": ["a1", "a2", "a3", "a4"],
       "settings": {
-        "kicker": "// 05 — Quality",
+        "kicker": "Quality",
         "heading": "The dose is only half the story.",
         "lede": "NMN purity varies wildly across the market. A high number on the label means nothing without a test behind it."
       }

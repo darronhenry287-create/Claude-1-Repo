@@ -3,7 +3,7 @@
     "pagehead": {
       "type": "aeon-pagehead",
       "settings": {
-        "kicker": "// Terms",
+        "kicker": "Terms",
         "heading": "Terms of service.",
         "subtext": ""
       }

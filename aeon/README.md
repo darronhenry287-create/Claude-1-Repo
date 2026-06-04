@@ -9,10 +9,10 @@ Deliberately unlike the other two stores in this repo:
 | | SOMNA | PRAIRIE FAT CO. | **AEON** |
 |---|---|---|---|
 | Niche | Sleep / bedding | Tallow skincare | **Longevity supplement** |
-| Mood | Calm neutral-luxe | Warm earthy artisan | **Dark clinical "lab instrument"** |
-| Background | Light cream | Light kraft | **Near-black, cool** |
-| Type | Fraunces + Hanken | Bitter + Mulish | **Space Grotesk + Inter + JetBrains Mono** |
-| Accent | Clay + twilight | Honey + olive | **Aqua-mint + electric lime** |
+| Mood | Calm neutral-luxe | Warm earthy artisan | **Clean clinical, modern-pharma** |
+| Background | Light cream | Light kraft | **White, airy** |
+| Type | Fraunces + Hanken | Bitter + Mulish | **Plus Jakarta Sans + Inter** |
+| Accent | Clay + twilight | Honey + olive | **Cobalt blue** |
 | Signature sections | hero-split, steps | story-timeline, recipe | **NAD⁺ decline chart, molecular pathway, lab COA, spec sheet** |
 
 ## What's here
@@ -21,7 +21,7 @@ Deliberately unlike the other two stores in this repo:
 aeon/
 ├── index.html, product.html, science.html, …   ← built static preview (15 pages)
 ├── assets/
-│   ├── theme.css        ← the dark-biotech design system (self-contained)
+│   ├── theme.css        ← the clean-clinical design system (self-contained)
 │   ├── theme.js         ← cart, NAD⁺ gauge, scroll-reveal, COA modal, sticky bar
 │   └── img/             ← brand vector art (bottle, capsule, NAD⁺ molecule, lab seal)
 ├── src/                 ← page-body partials (edit these)
