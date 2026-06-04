@@ -124,6 +124,29 @@
         ? `You're <strong>${money(rem)}</strong> from free shipping<div class="freebar__track"><div class="freebar__fill" style="width:${pct}%"></div></div>`
         : `<strong>✦ Free shipping unlocked!</strong><div class="freebar__track"><div class="freebar__fill" style="width:100%"></div></div>`;
     }
+
+    /* If a previous click added to cart and reloaded, open the drawer now */
+    if (sessionStorage.getItem('pf-open-cart') === '1') { sessionStorage.removeItem('pf-open-cart'); openCart(); }
+
+    /* Bundle / quick add-to-cart buttons: add to the cart (no checkout redirect) */
+    $$('[data-bundle-add]').forEach(btn => btn.addEventListener('click', (e) => {
+      const id = Number(btn.dataset.bundleAdd);
+      if (!id) return; // let the link fall back
+      e.preventDefault();
+      const qty = parseInt(btn.dataset.bundleQty || '1', 10) || 1;
+      const discount = btn.dataset.bundleDiscount;
+      btn.setAttribute('aria-busy', 'true');
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ items: [{ id: id, quantity: qty }] })
+      }).then(r => { if (!r.ok) throw new Error('add failed'); return r.json(); })
+        .then(() => {
+          if (discount) { window.location.href = '/discount/' + encodeURIComponent(discount) + '?redirect=' + encodeURIComponent('/cart'); }
+          else { sessionStorage.setItem('pf-open-cart', '1'); window.location.reload(); }
+        })
+        .catch(() => { window.location.href = btn.getAttribute('href') || '/cart'; });
+    }));
   }
 
   /* options */

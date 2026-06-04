@@ -2,16 +2,16 @@
   <div class="wrap">
     {%- assign up_product = section.settings.product | default: product -%}
     {%- assign up_qty = section.settings.quantity | default: 3 -%}
-    {%- if section.settings.button_link != blank -%}
-      {%- assign up_href = section.settings.button_link -%}
-    {%- elsif up_product != blank and up_product.selected_or_first_available_variant -%}
-      {%- capture up_href -%}{{ routes.cart_url }}/{{ up_product.selected_or_first_available_variant.id }}:{{ up_qty }}{% if section.settings.discount_code != blank %}?discount={{ section.settings.discount_code | url_encode }}{% endif %}{%- endcapture -%}
-    {%- else -%}
-      {%- assign up_href = routes.all_products_collection_url -%}
-    {%- endif -%}
+    {%- assign up_variant = up_product.selected_or_first_available_variant -%}
     <div class="upsell reveal">
       <div><span class="kicker" style="color:var(--honey)">{{ section.settings.kicker }}</span><h3 style="margin-top:.5rem">{{ section.settings.heading }}</h3><p>{{ section.settings.text }}</p></div>
-      <a href="{{ up_href }}" class="btn btn-honey btn-lg">{{ section.settings.button_text }}</a>
+      {%- if section.settings.button_link != blank -%}
+        <a href="{{ section.settings.button_link }}" class="btn btn-honey btn-lg">{{ section.settings.button_text }}</a>
+      {%- elsif up_variant -%}
+        <a href="{{ routes.cart_url }}" class="btn btn-honey btn-lg" data-bundle-add="{{ up_variant.id }}" data-bundle-qty="{{ up_qty }}"{% if section.settings.discount_code != blank %} data-bundle-discount="{{ section.settings.discount_code | escape }}"{% endif %}>{{ section.settings.button_text }}</a>
+      {%- else -%}
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn-honey btn-lg">{{ section.settings.button_text }}</a>
+      {%- endif -%}
     </div>
   </div>
 </section>
