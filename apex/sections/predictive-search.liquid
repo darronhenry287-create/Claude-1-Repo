@@ -34,7 +34,6 @@
           <p class="apex-predictive__heading">{{ 'general.search.products' | t | default: 'Products' }}</p>
           <ul role="list" class="apex-predictive__list">
             {%- for product in products -%}
-              {%- assign v = product.selected_or_first_available_variant -%}
               <li>
                 <a class="apex-predictive__item" href="{{ product.url }}" role="option">
                   <span class="apex-predictive__media media media--square">
@@ -89,9 +88,22 @@
 {
   "name": "Predictive search",
   "settings": [
-    { "type": "paragraph", "content": "Renders live search suggestions. Add a search input wrapped in <apex-search> (see header) to use it." },
-    { "type": "checkbox", "id": "show_queries", "label": "Show search term suggestions", "default": true },
-    { "type": "checkbox", "id": "show_vendor", "label": "Show product vendor", "default": false }
+    {
+      "type": "paragraph",
+      "content": "Renders live search suggestions. Add a search input wrapped in <apex-search> (see header) to use it."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_queries",
+      "label": "Show search term suggestions",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show product vendor",
+      "default": false
+    }
   ]
 }
 {% endschema %}

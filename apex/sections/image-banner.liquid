@@ -93,16 +93,29 @@
   "name": "Image banner",
   "tag": "section",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Background image" },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
     {
       "type": "select",
       "id": "height",
       "label": "Banner height",
       "default": "md",
       "options": [
-        { "value": "sm", "label": "Small" },
-        { "value": "md", "label": "Medium" },
-        { "value": "lg", "label": "Large" }
+        {
+          "value": "sm",
+          "label": "Small"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        }
       ]
     },
     {
@@ -111,15 +124,56 @@
       "label": "Content alignment",
       "default": "center",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
       ]
     },
-    { "type": "range", "id": "overlay_opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "label": "Image overlay", "default": 35 },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 0 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 0 }
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Image overlay",
+      "default": 35
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    }
   ],
   "blocks": [
     {
@@ -127,7 +181,12 @@
       "name": "Eyebrow",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "text", "label": "Text", "default": "Limited time offer" }
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Limited time offer"
+        }
       ]
     },
     {
@@ -135,7 +194,12 @@
       "name": "Heading",
       "limit": 1,
       "settings": [
-        { "type": "inline_richtext", "id": "text", "label": "Heading", "default": "Up to 30% off this weekend." }
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Heading",
+          "default": "Up to 30% off this weekend."
+        }
       ]
     },
     {
@@ -143,7 +207,12 @@
       "name": "Text",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "text", "label": "Subtext", "default": "Shop the sale before it ends." }
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Subtext",
+          "default": "Shop the sale before it ends."
+        }
       ]
     },
     {
@@ -151,10 +220,27 @@
       "name": "Buttons",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "button_1", "label": "Button 1 label", "default": "Shop the sale" },
-        { "type": "url", "id": "button_1_url", "label": "Button 1 link" },
-        { "type": "text", "id": "button_2", "label": "Button 2 label" },
-        { "type": "url", "id": "button_2_url", "label": "Button 2 link" }
+        {
+          "type": "text",
+          "id": "button_1",
+          "label": "Button 1 label",
+          "default": "Shop the sale"
+        },
+        {
+          "type": "url",
+          "id": "button_1_url",
+          "label": "Button 1 link"
+        },
+        {
+          "type": "text",
+          "id": "button_2",
+          "label": "Button 2 label"
+        },
+        {
+          "type": "url",
+          "id": "button_2_url",
+          "label": "Button 2 link"
+        }
       ]
     }
   ],
@@ -162,10 +248,18 @@
     {
       "name": "Image banner",
       "blocks": [
-        { "type": "eyebrow" },
-        { "type": "heading" },
-        { "type": "text" },
-        { "type": "buttons" }
+        {
+          "type": "eyebrow"
+        },
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "buttons"
+        }
       ]
     }
   ]

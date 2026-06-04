@@ -13,16 +13,98 @@
 {
   "name": "Announcement bar",
   "settings": [
-    { "type": "checkbox", "id": "marquee", "label": "Scroll messages (marquee)", "default": true },
-    { "type": "range", "id": "speed", "min": 10, "max": 60, "step": 5, "unit": "s", "label": "Scroll speed", "default": 30 },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-5" }
+    {
+      "type": "checkbox",
+      "id": "marquee",
+      "label": "Scroll messages (marquee)",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Scroll speed",
+      "default": 30
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-5"
+    }
   ],
   "blocks": [
-    { "type": "message", "name": "Message", "settings": [
-      { "type": "text", "id": "text", "label": "Text", "default": "Free shipping over $50" },
-      { "type": "select", "id": "icon", "label": "Icon", "default": "truck", "options": [ {"value":"none","label":"None"},{"value":"truck","label":"Truck"},{"value":"shield","label":"Shield"},{"value":"leaf","label":"Leaf"},{"value":"star","label":"Star"},{"value":"return","label":"Returns"} ] }
-    ]}
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free shipping over $50"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "truck",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "return",
+              "label": "Returns"
+            }
+          ]
+        }
+      ]
+    }
   ],
-  "presets": [ { "name": "Announcement bar", "blocks": [ {"type":"message"}, {"type":"message","settings":{"text":"30-day easy returns","icon":"return"}}, {"type":"message","settings":{"text":"Rated 4.9 by 10,000+ customers","icon":"star"}} ] } ]
+  "presets": [
+    {
+      "name": "Announcement bar",
+      "blocks": [
+        {
+          "type": "message"
+        },
+        {
+          "type": "message",
+          "settings": {
+            "text": "30-day easy returns",
+            "icon": "return"
+          }
+        },
+        {
+          "type": "message",
+          "settings": {
+            "text": "Rated 4.9 by 10,000+ customers",
+            "icon": "star"
+          }
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

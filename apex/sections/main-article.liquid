@@ -11,7 +11,7 @@
           fetchpriority: 'high',
           widths: '750,1000,1200,1600,1800',
           sizes: '100vw',
-          alt: article.image.alt | escape,
+          alt: article.image.alt,
           class: 'apex-article-hero__img' }}
     </div>
   {%- endif -%}
@@ -173,7 +173,12 @@
   "name": "Article",
   "tag": "section",
   "settings": [
-    { "type": "checkbox", "id": "show_hero_image", "label": "Show hero image", "default": true },
+    {
+      "type": "checkbox",
+      "id": "show_hero_image",
+      "label": "Show hero image",
+      "default": true
+    },
     {
       "type": "range",
       "id": "hero_height",
@@ -184,18 +189,73 @@
       "label": "Hero image height",
       "default": 55
     },
-    { "type": "checkbox", "id": "show_tags", "label": "Show tags", "default": true },
-    { "type": "checkbox", "id": "show_date", "label": "Show date", "default": true },
-    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": true },
-    { "type": "checkbox", "id": "show_read_time", "label": "Show read time", "default": true },
-    { "type": "checkbox", "id": "show_share", "label": "Show share buttons", "default": true },
-    { "type": "checkbox", "id": "show_prev_next", "label": "Show previous/next navigation", "default": true },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 72 }
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "Show tags",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show author",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_read_time",
+      "label": "Show read time",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share",
+      "label": "Show share buttons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_prev_next",
+      "label": "Show previous/next navigation",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
   ],
   "presets": [
-    { "name": "Article" }
+    {
+      "name": "Article"
+    }
   ]
 }
 {% endschema %}

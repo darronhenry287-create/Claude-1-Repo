@@ -103,37 +103,182 @@
   "tag": "section",
   "class": "shopify-section--collection-list",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
-    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Shop by category" },
-    { "type": "text", "id": "subheading", "label": "Subheading" },
-    { "type": "select", "id": "heading_alignment", "label": "Heading alignment", "default": "left", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ] },
-    { "type": "text", "id": "shop_all_label", "label": "\"Shop all\" label", "default": "Shop all" },
-    { "type": "url", "id": "shop_all_url", "label": "\"Shop all\" link" },
-    { "type": "header", "content": "Layout" },
-    { "type": "select", "id": "card_style", "label": "Card style", "default": "overlay", "options": [ { "value": "overlay", "label": "Overlay (text on image)" }, { "value": "minimal", "label": "Minimal (text below)" }, { "value": "card", "label": "Bordered card" } ] },
-    { "type": "select", "id": "image_ratio", "label": "Image ratio", "default": "square", "options": [ { "value": "square", "label": "Square (1:1)" }, { "value": "portrait", "label": "Portrait (3:4)" }, { "value": "landscape", "label": "Landscape (4:3)" }, { "value": "wide", "label": "Wide (16:9)" } ] },
-    { "type": "range", "id": "columns", "min": 2, "max": 5, "step": 1, "label": "Columns", "default": 3 },
-    { "type": "checkbox", "id": "show_count", "label": "Show product count", "default": false },
-    { "type": "header", "content": "Section" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 72 }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by category"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "shop_all_label",
+      "label": "\"Shop all\" label",
+      "default": "Shop all"
+    },
+    {
+      "type": "url",
+      "id": "shop_all_url",
+      "label": "\"Shop all\" link"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "default": "overlay",
+      "options": [
+        {
+          "value": "overlay",
+          "label": "Overlay (text on image)"
+        },
+        {
+          "value": "minimal",
+          "label": "Minimal (text below)"
+        },
+        {
+          "value": "card",
+          "label": "Bordered card"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "default": "square",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "wide",
+          "label": "Wide (16:9)"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Columns",
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "show_count",
+      "label": "Show product count",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    }
   ],
   "blocks": [
     {
       "type": "collection",
       "name": "Collection",
       "settings": [
-        { "type": "collection", "id": "collection", "label": "Collection" },
-        { "type": "image_picker", "id": "custom_image", "label": "Custom image", "info": "Overrides the collection image." },
-        { "type": "text", "id": "custom_title", "label": "Custom title", "info": "Overrides the collection title." }
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom image",
+          "info": "Overrides the collection image."
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom title",
+          "info": "Overrides the collection title."
+        }
       ]
     }
   ],
   "presets": [
     {
       "name": "Collection list",
-      "blocks": [ { "type": "collection" }, { "type": "collection" }, { "type": "collection" } ]
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
     }
   ]
 }

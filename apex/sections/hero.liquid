@@ -10,8 +10,8 @@
       {%- if s.video_url != blank -%}
         <video autoplay muted loop playsinline {% if s.image %}poster="{{ s.image | image_url: width: 1600 }}"{% endif %}><source src="{{ s.video_url }}" type="video/mp4"></video>
       {%- else -%}
-        {%- if s.image_mobile != blank -%}<picture><source media="(max-width:749px)" srcset="{{ s.image_mobile | image_url: width: 900 }}"><img src="{{ s.image | image_url: width: 2000 }}" alt="{{ s.image.alt | escape }}" loading="{{ s.loading | default: 'eager' }}" fetchpriority="high"></picture>
-        {%- else -%}{{ s.image | image_url: width: 2000 | image_tag: sizes: '100vw', widths: '600,900,1200,1600,2000', alt: s.image.alt | escape, fetchpriority: 'high' }}{%- endif -%}
+        {%- if s.image_mobile != blank -%}<picture><source media="(max-width:749px)" srcset="{{ s.image_mobile | image_url: width: 900 }}"><img src="{{ s.image | image_url: width: 2000 }}" width="{{ s.image.width }}" height="{{ s.image.height }}" alt="{{ s.image.alt | escape }}" loading="eager" fetchpriority="high"></picture>
+        {%- else -%}{{ s.image | image_url: width: 2000 | image_tag: sizes: '100vw', widths: '600,900,1200,1600,2000', alt: s.image.alt, fetchpriority: 'high' }}{%- endif -%}
       {%- endif -%}
     </div>
   {%- endif -%}
@@ -55,22 +55,214 @@
   "name": "Hero",
   "tag": "section",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Background image" },
-    { "type": "image_picker", "id": "image_mobile", "label": "Mobile image" },
-    { "type": "text", "id": "video_url", "label": "Background video (MP4 URL)" },
-    { "type": "select", "id": "height", "label": "Height", "default": "lg", "options": [ {"value":"sm","label":"Small"},{"value":"md","label":"Medium"},{"value":"lg","label":"Large"},{"value":"full","label":"Full screen"} ] },
-    { "type": "select", "id": "content_position", "label": "Content position", "default": "left", "options": [ {"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"} ] },
-    { "type": "select", "id": "text_align", "label": "Text alignment", "default": "left", "options": [ {"value":"left","label":"Left"},{"value":"center","label":"Center"} ] },
-    { "type": "range", "id": "overlay_opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "label": "Image overlay", "default": 30 },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Background video (MP4 URL)"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "default": "lg",
+      "options": [
+        {
+          "value": "sm",
+          "label": "Small"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "full",
+          "label": "Full screen"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Image overlay",
+      "default": 30
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
   ],
   "blocks": [
-    { "type": "subheading", "name": "Subheading", "limit": 1, "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "New collection" } ] },
-    { "type": "heading", "name": "Heading", "limit": 1, "settings": [ { "type": "inline_richtext", "id": "text", "label": "Heading", "default": "Built different." }, { "type": "range", "id": "size", "min": 2, "max": 6, "step": 0.5, "unit": "rem", "label": "Max size", "default": 4 } ] },
-    { "type": "text", "name": "Text", "limit": 1, "settings": [ { "type": "richtext", "id": "text", "label": "Text", "default": "<p>A theme that adapts to any brand. Edit everything from the customizer.</p>" } ] },
-    { "type": "rating", "name": "Rating", "limit": 1, "settings": [ { "type": "text", "id": "value", "label": "Rating", "default": "4.9" }, { "type": "text", "id": "count", "label": "Count", "default": "10,000+" } ] },
-    { "type": "buttons", "name": "Buttons", "limit": 1, "settings": [ { "type": "text", "id": "button_1", "label": "Button 1", "default": "Shop now" }, { "type": "url", "id": "button_1_url", "label": "Button 1 link" }, { "type": "text", "id": "button_2", "label": "Button 2" }, { "type": "url", "id": "button_2_url", "label": "Button 2 link" } ] }
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "New collection"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Heading",
+          "default": "Built different."
+        },
+        {
+          "type": "range",
+          "id": "size",
+          "min": 2,
+          "max": 6,
+          "step": 0.5,
+          "unit": "rem",
+          "label": "Max size",
+          "default": 4
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>A theme that adapts to any brand. Edit everything from the customizer.</p>"
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "Rating",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Rating",
+          "default": "4.9"
+        },
+        {
+          "type": "text",
+          "id": "count",
+          "label": "Count",
+          "default": "10,000+"
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "Buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_1",
+          "label": "Button 1",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "button_1_url",
+          "label": "Button 1 link"
+        },
+        {
+          "type": "text",
+          "id": "button_2",
+          "label": "Button 2"
+        },
+        {
+          "type": "url",
+          "id": "button_2_url",
+          "label": "Button 2 link"
+        }
+      ]
+    }
   ],
-  "presets": [ { "name": "Hero", "blocks": [ {"type":"subheading"},{"type":"heading"},{"type":"text"},{"type":"buttons"} ] } ]
+  "presets": [
+    {
+      "name": "Hero",
+      "blocks": [
+        {
+          "type": "subheading"
+        },
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "buttons"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

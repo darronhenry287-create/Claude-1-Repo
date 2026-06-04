@@ -167,44 +167,168 @@
   "name": "Collage",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
-    { "type": "inline_richtext", "id": "heading", "label": "Heading" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 72 }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
   ],
   "blocks": [
     {
       "type": "image",
       "name": "Image tile",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "select", "id": "size", "label": "Tile size", "default": "small", "options": [ {"value":"large","label":"Large"}, {"value":"small","label":"Small"} ] },
-        { "type": "text", "id": "caption", "label": "Caption" },
-        { "type": "text", "id": "button_label", "label": "Button label" },
-        { "type": "url", "id": "button_url", "label": "Button link" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Tile size",
+          "default": "small",
+          "options": [
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button link"
+        }
       ]
     },
     {
       "type": "product",
       "name": "Product tile",
       "settings": [
-        { "type": "product", "id": "product", "label": "Product" },
-        { "type": "select", "id": "size", "label": "Tile size", "default": "small", "options": [ {"value":"large","label":"Large"}, {"value":"small","label":"Small"} ] },
-        { "type": "text", "id": "caption", "label": "Caption overlay" },
-        { "type": "text", "id": "button_label", "label": "Button label" },
-        { "type": "url", "id": "button_url", "label": "Button link" }
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Tile size",
+          "default": "small",
+          "options": [
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption overlay"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button link"
+        }
       ]
     },
     {
       "type": "video",
       "name": "Video tile",
       "settings": [
-        { "type": "text", "id": "video_url", "label": "Video URL (MP4)" },
-        { "type": "select", "id": "size", "label": "Tile size", "default": "large", "options": [ {"value":"large","label":"Large"}, {"value":"small","label":"Small"} ] },
-        { "type": "text", "id": "caption", "label": "Caption" },
-        { "type": "text", "id": "button_label", "label": "Button label" },
-        { "type": "url", "id": "button_url", "label": "Button link" }
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "Video URL (MP4)"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Tile size",
+          "default": "large",
+          "options": [
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button link"
+        }
       ]
     }
   ],
@@ -212,9 +336,26 @@
     {
       "name": "Collage",
       "blocks": [
-        { "type": "image", "settings": { "size": "large", "caption": "New arrivals" } },
-        { "type": "image", "settings": { "size": "small", "caption": "Best sellers" } },
-        { "type": "product", "settings": { "size": "small" } }
+        {
+          "type": "image",
+          "settings": {
+            "size": "large",
+            "caption": "New arrivals"
+          }
+        },
+        {
+          "type": "image",
+          "settings": {
+            "size": "small",
+            "caption": "Best sellers"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "size": "small"
+          }
+        }
       ]
     }
   ]

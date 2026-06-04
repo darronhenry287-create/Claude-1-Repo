@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>{{ 'gift_cards.issued.title' | t: value: gift_card.initial_value | money_without_trailing_zeros, shop: shop.name | default: 'Your gift card' }}</title>
+  <title>{%- assign gc_value = gift_card.initial_value | money_without_trailing_zeros -%}{{ 'gift_cards.issued.title' | t: value: gc_value }}</title>
   {{ content_for_header }}
   <link rel="stylesheet" href="{{ 'base.css' | asset_url }}">
   <style>
@@ -52,7 +52,7 @@
       </a>
     {%- endif -%}
 
-    {{ gift_card.qr_identifier | qr_code: width: 180, height: 180, class: 'gift-card__qr' }}
+    
 
     <div>
       <button class="gift-card__copy" onclick="copyCode()" aria-label="{{ 'gift_cards.issued.copy_code' | t | default: 'Copy code' }}">

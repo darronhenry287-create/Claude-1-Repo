@@ -3,10 +3,28 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": { "type": "vendor", "settings": {} },
-        "title": { "type": "title", "settings": { "size": "medium" } },
-        "rating": { "type": "rating", "settings": {} },
-        "price": { "type": "price", "settings": { "show_save": true } },
+        "vendor": {
+          "type": "vendor",
+          "settings": {
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "size": "medium"
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_save": true
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -26,7 +44,11 @@
             "text_3": "Secure checkout"
           }
         },
-        "description": { "type": "description", "settings": {} },
+        "description": {
+          "type": "description",
+          "settings": {
+          }
+        },
         "collapsible_shipping": {
           "type": "collapsible",
           "settings": {

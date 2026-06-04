@@ -120,26 +120,102 @@
   "name": "Pricing table",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Simple pricing" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Choose the plan that works for you" },
-    { "type": "text", "id": "text", "label": "Subtext", "default": "No hidden fees. Cancel any time." },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 72 }
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Simple pricing"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Choose the plan that works for you"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Subtext",
+      "default": "No hidden fees. Cancel any time."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
   ],
   "blocks": [
     {
       "type": "tier",
       "name": "Pricing tier",
       "settings": [
-        { "type": "text", "id": "name", "label": "Plan name", "default": "Starter" },
-        { "type": "text", "id": "price", "label": "Price (e.g. $29)", "default": "$29" },
-        { "type": "text", "id": "period", "label": "Period (e.g. /month)", "default": "/month" },
-        { "type": "textarea", "id": "features", "label": "Features (one per line)", "default": "Up to 5 products\nBasic analytics\nEmail support\n1 user account" },
-        { "type": "text", "id": "button_label", "label": "Button label", "default": "Get started" },
-        { "type": "url", "id": "button_url", "label": "Button link" },
-        { "type": "checkbox", "id": "highlighted", "label": "Highlight this plan", "default": false },
-        { "type": "text", "id": "badge", "label": "Badge text (e.g. Most popular)" }
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Plan name",
+          "default": "Starter"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price (e.g. $29)",
+          "default": "$29"
+        },
+        {
+          "type": "text",
+          "id": "period",
+          "label": "Period (e.g. /month)",
+          "default": "/month"
+        },
+        {
+          "type": "textarea",
+          "id": "features",
+          "label": "Features (one per line)",
+          "default": "Up to 5 products\nBasic analytics\nEmail support\n1 user account"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Get started"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button link"
+        },
+        {
+          "type": "checkbox",
+          "id": "highlighted",
+          "label": "Highlight this plan",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge text (e.g. Most popular)"
+        }
       ]
     }
   ],
@@ -147,9 +223,40 @@
     {
       "name": "Pricing table",
       "blocks": [
-        { "type": "tier", "settings": { "name": "Starter", "price": "$19", "period": "/month", "features": "Up to 5 products\nBasic analytics\nEmail support\n1 user account", "button_label": "Get started", "highlighted": false } },
-        { "type": "tier", "settings": { "name": "Pro", "price": "$49", "period": "/month", "features": "Unlimited products\nAdvanced analytics\nPriority support\n5 user accounts\nCustom domain", "button_label": "Start free trial", "highlighted": true, "badge": "Most popular" } },
-        { "type": "tier", "settings": { "name": "Enterprise", "price": "$99", "period": "/month", "features": "Everything in Pro\nDedicated account manager\nSLA guarantee\nUnlimited users\nWhite-label option", "button_label": "Contact sales", "highlighted": false } }
+        {
+          "type": "tier",
+          "settings": {
+            "name": "Starter",
+            "price": "$19",
+            "period": "/month",
+            "features": "Up to 5 products\nBasic analytics\nEmail support\n1 user account",
+            "button_label": "Get started",
+            "highlighted": false
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "name": "Pro",
+            "price": "$49",
+            "period": "/month",
+            "features": "Unlimited products\nAdvanced analytics\nPriority support\n5 user accounts\nCustom domain",
+            "button_label": "Start free trial",
+            "highlighted": true,
+            "badge": "Most popular"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "name": "Enterprise",
+            "price": "$99",
+            "period": "/month",
+            "features": "Everything in Pro\nDedicated account manager\nSLA guarantee\nUnlimited users\nWhite-label option",
+            "button_label": "Contact sales",
+            "highlighted": false
+          }
+        }
       ]
     }
   ]

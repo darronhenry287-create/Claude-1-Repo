@@ -124,28 +124,115 @@
   "name": "Comparison table",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "How we compare" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "We outperform the competition" },
-    { "type": "checkbox", "id": "center_header", "label": "Center header", "default": true },
-    { "type": "text", "id": "our_brand", "label": "Your brand name", "default": "Our Brand" },
-    { "type": "text", "id": "brand_badge", "label": "Brand badge text", "default": "Best" },
-    { "type": "text", "id": "competitor_1", "label": "Competitor 1 name", "default": "Brand A" },
-    { "type": "text", "id": "competitor_2", "label": "Competitor 2 name", "default": "Brand B" },
-    { "type": "text", "id": "competitor_3", "label": "Competitor 3 name (optional)" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 72 }
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "How we compare"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "We outperform the competition"
+    },
+    {
+      "type": "checkbox",
+      "id": "center_header",
+      "label": "Center header",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "our_brand",
+      "label": "Your brand name",
+      "default": "Our Brand"
+    },
+    {
+      "type": "text",
+      "id": "brand_badge",
+      "label": "Brand badge text",
+      "default": "Best"
+    },
+    {
+      "type": "text",
+      "id": "competitor_1",
+      "label": "Competitor 1 name",
+      "default": "Brand A"
+    },
+    {
+      "type": "text",
+      "id": "competitor_2",
+      "label": "Competitor 2 name",
+      "default": "Brand B"
+    },
+    {
+      "type": "text",
+      "id": "competitor_3",
+      "label": "Competitor 3 name (optional)"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
   ],
   "blocks": [
     {
       "type": "feature",
       "name": "Feature row",
       "settings": [
-        { "type": "text", "id": "feature", "label": "Feature label", "default": "Premium materials" },
-        { "type": "text", "id": "us_value", "label": "Our brand value (yes / no / custom text)", "default": "yes" },
-        { "type": "text", "id": "comp1_value", "label": "Competitor 1 value (yes/no/text)", "default": "no" },
-        { "type": "text", "id": "comp2_value", "label": "Competitor 2 value (yes/no/text)", "default": "no" },
-        { "type": "text", "id": "comp3_value", "label": "Competitor 3 value (yes/no/text)", "default": "no" }
+        {
+          "type": "text",
+          "id": "feature",
+          "label": "Feature label",
+          "default": "Premium materials"
+        },
+        {
+          "type": "text",
+          "id": "us_value",
+          "label": "Our brand value (yes / no / custom text)",
+          "default": "yes"
+        },
+        {
+          "type": "text",
+          "id": "comp1_value",
+          "label": "Competitor 1 value (yes/no/text)",
+          "default": "no"
+        },
+        {
+          "type": "text",
+          "id": "comp2_value",
+          "label": "Competitor 2 value (yes/no/text)",
+          "default": "no"
+        },
+        {
+          "type": "text",
+          "id": "comp3_value",
+          "label": "Competitor 3 value (yes/no/text)",
+          "default": "no"
+        }
       ]
     }
   ],
@@ -153,11 +240,56 @@
     {
       "name": "Comparison table",
       "blocks": [
-        { "type": "feature", "settings": { "feature": "Premium materials", "us_value": "yes", "comp1_value": "no", "comp2_value": "no", "comp3_value": "no" } },
-        { "type": "feature", "settings": { "feature": "30-day money-back guarantee", "us_value": "yes", "comp1_value": "no", "comp2_value": "yes", "comp3_value": "no" } },
-        { "type": "feature", "settings": { "feature": "Free shipping", "us_value": "yes", "comp1_value": "no", "comp2_value": "no", "comp3_value": "no" } },
-        { "type": "feature", "settings": { "feature": "Lifetime warranty", "us_value": "yes", "comp1_value": "no", "comp2_value": "no", "comp3_value": "no" } },
-        { "type": "feature", "settings": { "feature": "24/7 customer support", "us_value": "yes", "comp1_value": "no", "comp2_value": "yes", "comp3_value": "no" } }
+        {
+          "type": "feature",
+          "settings": {
+            "feature": "Premium materials",
+            "us_value": "yes",
+            "comp1_value": "no",
+            "comp2_value": "no",
+            "comp3_value": "no"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature": "30-day money-back guarantee",
+            "us_value": "yes",
+            "comp1_value": "no",
+            "comp2_value": "yes",
+            "comp3_value": "no"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature": "Free shipping",
+            "us_value": "yes",
+            "comp1_value": "no",
+            "comp2_value": "no",
+            "comp3_value": "no"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature": "Lifetime warranty",
+            "us_value": "yes",
+            "comp1_value": "no",
+            "comp2_value": "no",
+            "comp3_value": "no"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature": "24/7 customer support",
+            "us_value": "yes",
+            "comp1_value": "no",
+            "comp2_value": "yes",
+            "comp3_value": "no"
+          }
+        }
       ]
     }
   ]

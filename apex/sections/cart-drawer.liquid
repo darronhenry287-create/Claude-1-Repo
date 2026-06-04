@@ -14,7 +14,7 @@
         {%- if settings.cart_free_shipping_bar -%}
           <div class="ship-bar" style="margin-bottom:1.2rem">
             {%- if remaining > 0 -%}
-              <p class="muted" style="font-size:var(--text-sm)">{{ 'sections.cart.free_ship_progress' | t: amount: remaining | money | default: 'You are {{ amount }} away from free shipping' }}</p>
+              <p class="muted" style="font-size:var(--text-sm)">{%- assign remaining_money = remaining | money -%}{{ 'sections.cart.free_ship_progress_html' | t: amount: remaining_money }}</p>
             {%- else -%}
               <p style="font-size:var(--text-sm);font-weight:600">{% render 'icon', icon: 'check' %} {{ 'sections.cart.free_ship_unlocked' | t | default: 'Free shipping unlocked!' }}</p>
             {%- endif -%}
@@ -68,5 +68,10 @@
   </div>
 </aside>
 {% schema %}
-{ "name": "Cart drawer", "settings": [] }
+{
+  "name": "Cart drawer",
+  "settings": [
+
+  ]
+}
 {% endschema %}

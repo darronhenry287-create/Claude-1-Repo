@@ -203,16 +203,30 @@
   "tag": "section",
   "class": "shopify-section--main-search",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Search" },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Search"
+    },
     {
       "type": "select",
       "id": "search_types",
       "label": "Searchable content",
       "default": "product,article,page",
       "options": [
-        { "value": "product", "label": "Products only" },
-        { "value": "product,article", "label": "Products + articles" },
-        { "value": "product,article,page", "label": "Products, articles + pages" }
+        {
+          "value": "product",
+          "label": "Products only"
+        },
+        {
+          "value": "product,article",
+          "label": "Products + articles"
+        },
+        {
+          "value": "product,article,page",
+          "label": "Products, articles + pages"
+        }
       ]
     },
     {
@@ -221,19 +235,82 @@
       "label": "Results layout",
       "default": "tabs",
       "options": [
-        { "value": "tabs", "label": "Tabbed by type" },
-        { "value": "combined", "label": "Combined" }
+        {
+          "value": "tabs",
+          "label": "Tabbed by type"
+        },
+        {
+          "value": "combined",
+          "label": "Combined"
+        }
       ]
     },
-    { "type": "header", "content": "Product grid" },
-    { "type": "range", "id": "columns_desktop", "min": 2, "max": 5, "step": 1, "label": "Columns on desktop", "default": 4 },
-    { "type": "range", "id": "columns_mobile", "min": 1, "max": 2, "step": 1, "label": "Columns on mobile", "default": 2 },
-    { "type": "range", "id": "per_page", "min": 8, "max": 48, "step": 4, "label": "Results per page", "default": 24 },
-    { "type": "header", "content": "Section" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 48 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 72 }
+    {
+      "type": "header",
+      "content": "Product grid"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 2,
+      "step": 1,
+      "label": "Columns on mobile",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "per_page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "label": "Results per page",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    }
   ],
-  "presets": [ { "name": "Search results" } ]
+  "presets": [
+    {
+      "name": "Search results"
+    }
+  ]
 }
 {% endschema %}

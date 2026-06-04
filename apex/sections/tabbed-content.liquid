@@ -1,6 +1,5 @@
 {%- liquid
   assign s = section.settings
-  assign first_tab_id = section.blocks[0].id
 -%}
 <section class="apex-tabbed color-{{ s.color_scheme }}"
   style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
@@ -82,21 +81,73 @@
   "name": "Tabbed content",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Learn more" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Everything you need to know" },
-    { "type": "checkbox", "id": "center_header", "label": "Center header", "default": false },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 72 }
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Learn more"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Everything you need to know"
+    },
+    {
+      "type": "checkbox",
+      "id": "center_header",
+      "label": "Center header",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
   ],
   "blocks": [
     {
       "type": "tab",
       "name": "Tab",
       "settings": [
-        { "type": "text", "id": "title", "label": "Tab title", "default": "Our story" },
-        { "type": "richtext", "id": "content", "label": "Tab content", "default": "<p>Share your brand story, product details, sustainability mission, or anything your customers want to know. This tab keeps things organised and easy to navigate.</p>" },
-        { "type": "image_picker", "id": "image", "label": "Tab image (optional)" }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab title",
+          "default": "Our story"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Tab content",
+          "default": "<p>Share your brand story, product details, sustainability mission, or anything your customers want to know. This tab keeps things organised and easy to navigate.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Tab image (optional)"
+        }
       ]
     }
   ],
@@ -104,9 +155,27 @@
     {
       "name": "Tabbed content",
       "blocks": [
-        { "type": "tab", "settings": { "title": "Our story", "content": "<p>We started with a simple idea: make the best possible product and stand behind it completely. Every item we sell reflects that commitment.</p>" } },
-        { "type": "tab", "settings": { "title": "Materials", "content": "<p>We source only the finest sustainable materials, rigorously tested to meet our standards for quality, durability, and environmental responsibility.</p>" } },
-        { "type": "tab", "settings": { "title": "Shipping & returns", "content": "<p>Free shipping on orders over $50. We ship within 24 hours on business days. If you're not satisfied, returns are easy within 30 days.</p>" } }
+        {
+          "type": "tab",
+          "settings": {
+            "title": "Our story",
+            "content": "<p>We started with a simple idea: make the best possible product and stand behind it completely. Every item we sell reflects that commitment.</p>"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "title": "Materials",
+            "content": "<p>We source only the finest sustainable materials, rigorously tested to meet our standards for quality, durability, and environmental responsibility.</p>"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "title": "Shipping & returns",
+            "content": "<p>Free shipping on orders over $50. We ship within 24 hours on business days. If you're not satisfied, returns are easy within 30 days.</p>"
+          }
+        }
       ]
     }
   ]

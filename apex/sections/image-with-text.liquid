@@ -86,15 +86,25 @@
   "name": "Image with text",
   "tag": "section",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
     {
       "type": "select",
       "id": "image_position",
       "label": "Image position",
       "default": "left",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "right", "label": "Right" }
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
       ]
     },
     {
@@ -103,9 +113,18 @@
       "label": "Image ratio",
       "default": "square",
       "options": [
-        { "value": "square", "label": "Square (1:1)" },
-        { "value": "portrait", "label": "Portrait (3:4)" },
-        { "value": "landscape", "label": "Landscape (4:3)" }
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape (4:3)"
+        }
       ]
     },
     {
@@ -114,14 +133,46 @@
       "label": "Vertical alignment",
       "default": "center",
       "options": [
-        { "value": "start", "label": "Top" },
-        { "value": "center", "label": "Middle" },
-        { "value": "end", "label": "Bottom" }
+        {
+          "value": "start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Middle"
+        },
+        {
+          "value": "end",
+          "label": "Bottom"
+        }
       ]
     },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 72 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
   ],
   "blocks": [
     {
@@ -129,7 +180,12 @@
       "name": "Eyebrow",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "text", "label": "Text", "default": "Why choose us" }
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Why choose us"
+        }
       ]
     },
     {
@@ -137,7 +193,12 @@
       "name": "Heading",
       "limit": 1,
       "settings": [
-        { "type": "inline_richtext", "id": "text", "label": "Heading", "default": "Designed to perform. Built to last." }
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Heading",
+          "default": "Designed to perform. Built to last."
+        }
       ]
     },
     {
@@ -145,7 +206,12 @@
       "name": "Text",
       "limit": 1,
       "settings": [
-        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Every detail has been considered. From material selection to final finish, we hold every product to the highest standard so you can rely on it every day.</p>" }
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Every detail has been considered. From material selection to final finish, we hold every product to the highest standard so you can rely on it every day.</p>"
+        }
       ]
     },
     {
@@ -166,10 +232,27 @@
       "name": "Buttons",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "button_1", "label": "Button 1 label", "default": "Shop the collection" },
-        { "type": "url", "id": "button_1_url", "label": "Button 1 link" },
-        { "type": "text", "id": "button_2", "label": "Button 2 label" },
-        { "type": "url", "id": "button_2_url", "label": "Button 2 link" }
+        {
+          "type": "text",
+          "id": "button_1",
+          "label": "Button 1 label",
+          "default": "Shop the collection"
+        },
+        {
+          "type": "url",
+          "id": "button_1_url",
+          "label": "Button 1 link"
+        },
+        {
+          "type": "text",
+          "id": "button_2",
+          "label": "Button 2 label"
+        },
+        {
+          "type": "url",
+          "id": "button_2_url",
+          "label": "Button 2 link"
+        }
       ]
     }
   ],
@@ -177,11 +260,21 @@
     {
       "name": "Image with text",
       "blocks": [
-        { "type": "eyebrow" },
-        { "type": "heading" },
-        { "type": "text" },
-        { "type": "list" },
-        { "type": "button" }
+        {
+          "type": "eyebrow"
+        },
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "list"
+        },
+        {
+          "type": "button"
+        }
       ]
     }
   ]

@@ -12,26 +12,47 @@
       "blocks": {
         "sub-1": {
           "type": "subheading",
-          "settings": { "text": "Universal DTC" }
+          "settings": {
+            "text": "Universal DTC"
+          }
         },
         "head-1": {
           "type": "heading",
-          "settings": { "text": "Built for brands that move fast.", "size": 4.5 }
+          "settings": {
+            "text": "Built for brands that move fast.",
+            "size": 4.5
+          }
         },
         "text-1": {
           "type": "text",
-          "settings": { "text": "<p>One theme. Any product category. Unlimited customisation from the Shopify editor.</p>" }
+          "settings": {
+            "text": "<p>One theme. Any product category. Unlimited customisation from the Shopify editor.</p>"
+          }
         },
         "rating-1": {
           "type": "rating",
-          "settings": { "value": "4.9", "count": "12,000+ reviews" }
+          "settings": {
+            "value": "4.9",
+            "count": "12,000+ reviews"
+          }
         },
         "btns-1": {
           "type": "buttons",
-          "settings": { "button_1": "Shop now", "button_1_url": "/collections/all", "button_2": "See features", "button_2_url": "/pages/about" }
+          "settings": {
+            "button_1": "Shop now",
+            "button_1_url": "/collections/all",
+            "button_2": "See features",
+            "button_2_url": "/pages/about"
+          }
         }
       },
-      "block_order": ["sub-1", "head-1", "text-1", "rating-1", "btns-1"]
+      "block_order": [
+        "sub-1",
+        "head-1",
+        "text-1",
+        "rating-1",
+        "btns-1"
+      ]
     },
     "icon-bar-main": {
       "type": "icon-bar",
@@ -44,22 +65,43 @@
       "blocks": {
         "ib-1": {
           "type": "item",
-          "settings": { "icon": "truck", "title": "Free Shipping", "subtitle": "On orders over $50" }
+          "settings": {
+            "icon": "truck",
+            "title": "Free Shipping",
+            "subtitle": "On orders over $50"
+          }
         },
         "ib-2": {
           "type": "item",
-          "settings": { "icon": "shield", "title": "2-Year Guarantee", "subtitle": "Quality backed by warranty" }
+          "settings": {
+            "icon": "shield",
+            "title": "2-Year Guarantee",
+            "subtitle": "Quality backed by warranty"
+          }
         },
         "ib-3": {
           "type": "item",
-          "settings": { "icon": "return", "title": "30-Day Returns", "subtitle": "No questions asked" }
+          "settings": {
+            "icon": "return",
+            "title": "30-Day Returns",
+            "subtitle": "No questions asked"
+          }
         },
         "ib-4": {
           "type": "item",
-          "settings": { "icon": "leaf", "title": "Sustainably Made", "subtitle": "Responsible materials" }
+          "settings": {
+            "icon": "leaf",
+            "title": "Sustainably Made",
+            "subtitle": "Responsible materials"
+          }
         }
       },
-      "block_order": ["ib-1", "ib-2", "ib-3", "ib-4"]
+      "block_order": [
+        "ib-1",
+        "ib-2",
+        "ib-3",
+        "ib-4"
+      ]
     },
     "logo-list-main": {
       "type": "logo-list",
@@ -70,13 +112,39 @@
         "padding_bottom": 56
       },
       "blocks": {
-        "ll-1": { "type": "logo", "settings": {} },
-        "ll-2": { "type": "logo", "settings": {} },
-        "ll-3": { "type": "logo", "settings": {} },
-        "ll-4": { "type": "logo", "settings": {} },
-        "ll-5": { "type": "logo", "settings": {} }
+        "ll-1": {
+          "type": "logo",
+          "settings": {
+          }
+        },
+        "ll-2": {
+          "type": "logo",
+          "settings": {
+          }
+        },
+        "ll-3": {
+          "type": "logo",
+          "settings": {
+          }
+        },
+        "ll-4": {
+          "type": "logo",
+          "settings": {
+          }
+        },
+        "ll-5": {
+          "type": "logo",
+          "settings": {
+          }
+        }
       },
-      "block_order": ["ll-1", "ll-2", "ll-3", "ll-4", "ll-5"]
+      "block_order": [
+        "ll-1",
+        "ll-2",
+        "ll-3",
+        "ll-4",
+        "ll-5"
+      ]
     },
     "featured-collection-main": {
       "type": "featured-collection",
@@ -105,22 +173,36 @@
       "blocks": {
         "iwt-sub": {
           "type": "subheading",
-          "settings": { "text": "Our story" }
+          "settings": {
+            "text": "Our story"
+          }
         },
         "iwt-head": {
           "type": "heading",
-          "settings": { "text": "Crafted with obsessive attention to detail." }
+          "settings": {
+            "text": "Crafted with obsessive attention to detail."
+          }
         },
         "iwt-text": {
           "type": "text",
-          "settings": { "text": "<p>Every product we make starts with a simple question: can we make it better? We obsess over materials, ergonomics, and sustainability until the answer is yes.</p>" }
+          "settings": {
+            "text": "<p>Every product we make starts with a simple question: can we make it better? We obsess over materials, ergonomics, and sustainability until the answer is yes.</p>"
+          }
         },
         "iwt-btns": {
           "type": "buttons",
-          "settings": { "button_1": "Our mission", "button_1_url": "/pages/about" }
+          "settings": {
+            "button_1": "Our mission",
+            "button_1_url": "/pages/about"
+          }
         }
       },
-      "block_order": ["iwt-sub", "iwt-head", "iwt-text", "iwt-btns"]
+      "block_order": [
+        "iwt-sub",
+        "iwt-head",
+        "iwt-text",
+        "iwt-btns"
+      ]
     },
     "multicolumn-main": {
       "type": "multicolumn",
@@ -132,22 +214,43 @@
       "blocks": {
         "mc-1": {
           "type": "column",
-          "settings": { "icon": "truck", "heading": "Free shipping", "text": "<p>Free standard shipping on all orders over $50. Express options available at checkout.</p>" }
+          "settings": {
+            "icon": "truck",
+            "heading": "Free shipping",
+            "text": "<p>Free standard shipping on all orders over $50. Express options available at checkout.</p>"
+          }
         },
         "mc-2": {
           "type": "column",
-          "settings": { "icon": "shield", "heading": "Quality guarantee", "text": "<p>Every product is rigorously tested. If it doesn't meet your expectations, we'll make it right.</p>" }
+          "settings": {
+            "icon": "shield",
+            "heading": "Quality guarantee",
+            "text": "<p>Every product is rigorously tested. If it doesn't meet your expectations, we'll make it right.</p>"
+          }
         },
         "mc-3": {
           "type": "column",
-          "settings": { "icon": "return", "heading": "Easy returns", "text": "<p>Changed your mind? No problem. Return any item within 30 days for a full refund.</p>" }
+          "settings": {
+            "icon": "return",
+            "heading": "Easy returns",
+            "text": "<p>Changed your mind? No problem. Return any item within 30 days for a full refund.</p>"
+          }
         },
         "mc-4": {
           "type": "column",
-          "settings": { "icon": "leaf", "heading": "Eco-conscious", "text": "<p>Packaging is 100% recyclable and we plant a tree for every order shipped worldwide.</p>" }
+          "settings": {
+            "icon": "leaf",
+            "heading": "Eco-conscious",
+            "text": "<p>Packaging is 100% recyclable and we plant a tree for every order shipped worldwide.</p>"
+          }
         }
       },
-      "block_order": ["mc-1", "mc-2", "mc-3", "mc-4"]
+      "block_order": [
+        "mc-1",
+        "mc-2",
+        "mc-3",
+        "mc-4"
+      ]
     },
     "collage-main": {
       "type": "collage",
@@ -161,18 +264,30 @@
       "blocks": {
         "col-1": {
           "type": "image",
-          "settings": { "size": "large", "caption": "Summer collection" }
+          "settings": {
+            "size": "large",
+            "caption": "Summer collection"
+          }
         },
         "col-2": {
           "type": "image",
-          "settings": { "size": "small", "caption": "Detail matters" }
+          "settings": {
+            "size": "small",
+            "caption": "Detail matters"
+          }
         },
         "col-3": {
           "type": "product",
-          "settings": { "size": "small" }
+          "settings": {
+            "size": "small"
+          }
         }
       },
-      "block_order": ["col-1", "col-2", "col-3"]
+      "block_order": [
+        "col-1",
+        "col-2",
+        "col-3"
+      ]
     },
     "stats-main": {
       "type": "stats",
@@ -187,22 +302,43 @@
       "blocks": {
         "st-1": {
           "type": "stat",
-          "settings": { "number": "250K", "suffix": "+", "label": "Happy customers" }
+          "settings": {
+            "number": "250K",
+            "suffix": "+",
+            "label": "Happy customers"
+          }
         },
         "st-2": {
           "type": "stat",
-          "settings": { "number": "4.9", "suffix": "★", "label": "Average rating" }
+          "settings": {
+            "number": "4.9",
+            "suffix": "★",
+            "label": "Average rating"
+          }
         },
         "st-3": {
           "type": "stat",
-          "settings": { "number": "98", "suffix": "%", "label": "Would recommend" }
+          "settings": {
+            "number": "98",
+            "suffix": "%",
+            "label": "Would recommend"
+          }
         },
         "st-4": {
           "type": "stat",
-          "settings": { "number": "72", "suffix": "h", "label": "Average dispatch time" }
+          "settings": {
+            "number": "72",
+            "suffix": "h",
+            "label": "Average dispatch time"
+          }
         }
       },
-      "block_order": ["st-1", "st-2", "st-3", "st-4"]
+      "block_order": [
+        "st-1",
+        "st-2",
+        "st-3",
+        "st-4"
+      ]
     },
     "testimonials-main": {
       "type": "testimonials",
@@ -243,7 +379,11 @@
           }
         }
       },
-      "block_order": ["tm-1", "tm-2", "tm-3"]
+      "block_order": [
+        "tm-1",
+        "tm-2",
+        "tm-3"
+      ]
     },
     "comparison-main": {
       "type": "comparison",
@@ -262,26 +402,57 @@
       "blocks": {
         "cf-1": {
           "type": "row",
-          "settings": { "feature": "Premium materials", "us": true, "comp_1": false, "comp_2": false }
+          "settings": {
+            "feature": "Premium materials",
+            "us": true,
+            "comp_1": false,
+            "comp_2": false
+          }
         },
         "cf-2": {
           "type": "row",
-          "settings": { "feature": "2-year warranty", "us": true, "comp_1": false, "comp_2": true }
+          "settings": {
+            "feature": "2-year warranty",
+            "us": true,
+            "comp_1": false,
+            "comp_2": true
+          }
         },
         "cf-3": {
           "type": "row",
-          "settings": { "feature": "Free shipping", "us": true, "comp_1": true, "comp_2": false }
+          "settings": {
+            "feature": "Free shipping",
+            "us": true,
+            "comp_1": true,
+            "comp_2": false
+          }
         },
         "cf-4": {
           "type": "row",
-          "settings": { "feature": "30-day returns", "us": true, "comp_1": false, "comp_2": false }
+          "settings": {
+            "feature": "30-day returns",
+            "us": true,
+            "comp_1": false,
+            "comp_2": false
+          }
         },
         "cf-5": {
           "type": "row",
-          "settings": { "feature": "Sustainable packaging", "us": true, "comp_1": false, "comp_2": false }
+          "settings": {
+            "feature": "Sustainable packaging",
+            "us": true,
+            "comp_1": false,
+            "comp_2": false
+          }
         }
       },
-      "block_order": ["cf-1", "cf-2", "cf-3", "cf-4", "cf-5"]
+      "block_order": [
+        "cf-1",
+        "cf-2",
+        "cf-3",
+        "cf-4",
+        "cf-5"
+      ]
     },
     "steps-main": {
       "type": "steps",
@@ -297,18 +468,34 @@
       "blocks": {
         "sp-1": {
           "type": "step",
-          "settings": { "icon": "check", "heading": "Pick your product", "text": "Browse our curated selection and choose what fits your needs." }
+          "settings": {
+            "icon": "check",
+            "heading": "Pick your product",
+            "text": "Browse our curated selection and choose what fits your needs."
+          }
         },
         "sp-2": {
           "type": "step",
-          "settings": { "icon": "star", "heading": "Checkout securely", "text": "Pay with any method. Your data is always protected." }
+          "settings": {
+            "icon": "star",
+            "heading": "Checkout securely",
+            "text": "Pay with any method. Your data is always protected."
+          }
         },
         "sp-3": {
           "type": "step",
-          "settings": { "icon": "truck", "heading": "Fast delivery", "text": "Orders ship the same day when placed before 2 PM." }
+          "settings": {
+            "icon": "truck",
+            "heading": "Fast delivery",
+            "text": "Orders ship the same day when placed before 2 PM."
+          }
         }
       },
-      "block_order": ["sp-1", "sp-2", "sp-3"]
+      "block_order": [
+        "sp-1",
+        "sp-2",
+        "sp-3"
+      ]
     },
     "bundle-main": {
       "type": "bundle",
@@ -327,18 +514,34 @@
       "blocks": {
         "bd-1": {
           "type": "product",
-          "settings": { "title": "Core item", "desc": "The foundation of the set", "price": "$39.00" }
+          "settings": {
+            "title": "Core item",
+            "desc": "The foundation of the set",
+            "price": "$39.00"
+          }
         },
         "bd-2": {
           "type": "product",
-          "settings": { "title": "Companion piece", "desc": "Works even better together", "price": "$29.00" }
+          "settings": {
+            "title": "Companion piece",
+            "desc": "Works even better together",
+            "price": "$29.00"
+          }
         },
         "bd-3": {
           "type": "product",
-          "settings": { "title": "Bonus add-on", "desc": "Completes the experience", "price": "$19.00" }
+          "settings": {
+            "title": "Bonus add-on",
+            "desc": "Completes the experience",
+            "price": "$19.00"
+          }
         }
       },
-      "block_order": ["bd-1", "bd-2", "bd-3"]
+      "block_order": [
+        "bd-1",
+        "bd-2",
+        "bd-3"
+      ]
     },
     "faq-main": {
       "type": "faq",
@@ -377,7 +580,12 @@
           }
         }
       },
-      "block_order": ["fq-1", "fq-2", "fq-3", "fq-4"]
+      "block_order": [
+        "fq-1",
+        "fq-2",
+        "fq-3",
+        "fq-4"
+      ]
     },
     "newsletter-main": {
       "type": "newsletter",

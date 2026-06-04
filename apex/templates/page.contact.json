@@ -12,18 +12,29 @@
       "blocks": {
         "sub": {
           "type": "subheading",
-          "settings": { "text": "Support" }
+          "settings": {
+            "text": "Support"
+          }
         },
         "head": {
           "type": "heading",
-          "settings": { "text": "Get in touch", "size": 3.5 }
+          "settings": {
+            "text": "Get in touch",
+            "size": 3.5
+          }
         },
         "text": {
           "type": "text",
-          "settings": { "text": "<p>We're here to help. Reach us any time and we'll respond within 24 hours.</p>" }
+          "settings": {
+            "text": "<p>We're here to help. Reach us any time and we'll respond within 24 hours.</p>"
+          }
         }
       },
-      "block_order": ["sub", "head", "text"]
+      "block_order": [
+        "sub",
+        "head",
+        "text"
+      ]
     },
     "contact": {
       "type": "contact-form",
@@ -41,5 +52,8 @@
       }
     }
   },
-  "order": ["hero", "contact"]
+  "order": [
+    "hero",
+    "contact"
+  ]
 }

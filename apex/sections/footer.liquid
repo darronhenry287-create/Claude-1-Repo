@@ -41,24 +41,101 @@
 {
   "name": "Footer",
   "settings": [
-    { "type": "checkbox", "id": "payment_icons", "label": "Show payment icons", "default": true },
-    { "type": "text", "id": "copyright", "label": "Copyright note", "default": "All rights reserved." },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" }
+    {
+      "type": "checkbox",
+      "id": "payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright note",
+      "default": "All rights reserved."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    }
   ],
   "blocks": [
-    { "type": "brand", "name": "Brand", "limit": 1, "settings": [
-      { "type": "text", "id": "heading", "label": "Brand name", "default": "Apex" },
-      { "type": "textarea", "id": "text", "label": "Text", "default": "A flagship store, built on the Apex theme." }
-    ]},
-    { "type": "menu", "name": "Menu column", "settings": [
-      { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
-      { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
-    ]},
-    { "type": "newsletter", "name": "Newsletter", "limit": 1, "settings": [
-      { "type": "text", "id": "heading", "label": "Heading", "default": "Stay in the loop" },
-      { "type": "textarea", "id": "text", "label": "Text", "default": "Get launches and offers first." }
-    ]}
+    {
+      "type": "brand",
+      "name": "Brand",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Brand name",
+          "default": "Apex"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "A flagship store, built on the Apex theme."
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "footer"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Stay in the loop"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Get launches and offers first."
+        }
+      ]
+    }
   ],
-  "presets": [ { "name": "Footer", "blocks": [ {"type":"brand"}, {"type":"menu"}, {"type":"menu"}, {"type":"newsletter"} ] } ]
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        {
+          "type": "brand"
+        },
+        {
+          "type": "menu"
+        },
+        {
+          "type": "menu"
+        },
+        {
+          "type": "newsletter"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

@@ -145,35 +145,120 @@
   "name": "Steps",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Simple process" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "How it works" },
-    { "type": "checkbox", "id": "center_header", "label": "Center header", "default": true },
-    { "type": "checkbox", "id": "show_connector", "label": "Show step connectors", "default": true },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 72 }
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Simple process"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How it works"
+    },
+    {
+      "type": "checkbox",
+      "id": "center_header",
+      "label": "Center header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_connector",
+      "label": "Show step connectors",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
   ],
   "blocks": [
     {
       "type": "step",
       "name": "Step",
       "settings": [
-        { "type": "text", "id": "custom_number", "label": "Custom step number (leave blank for auto)" },
-        { "type": "image_picker", "id": "image", "label": "Step image" },
         {
-          "type": "select", "id": "icon", "label": "Icon (if no image)", "default": "check",
+          "type": "text",
+          "id": "custom_number",
+          "label": "Custom step number (leave blank for auto)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Step image"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon (if no image)",
+          "default": "check",
           "options": [
-            { "value": "none", "label": "None" },
-            { "value": "check", "label": "Check" },
-            { "value": "truck", "label": "Truck" },
-            { "value": "shield", "label": "Shield" },
-            { "value": "leaf", "label": "Leaf" },
-            { "value": "star", "label": "Star" },
-            { "value": "return", "label": "Return" }
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            }
           ]
         },
-        { "type": "text", "id": "heading", "label": "Step heading", "default": "Choose your plan" },
-        { "type": "textarea", "id": "text", "label": "Step description", "default": "Browse our selection and pick what works best for you. No complicated decisions." }
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Step heading",
+          "default": "Choose your plan"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Step description",
+          "default": "Browse our selection and pick what works best for you. No complicated decisions."
+        }
       ]
     }
   ],
@@ -181,9 +266,30 @@
     {
       "name": "Steps",
       "blocks": [
-        { "type": "step", "settings": { "icon": "check", "heading": "Choose your plan", "text": "Browse our selection and pick what works best for you." } },
-        { "type": "step", "settings": { "icon": "star", "heading": "Place your order", "text": "Checkout securely in under a minute with your preferred payment method." } },
-        { "type": "step", "settings": { "icon": "truck", "heading": "Fast delivery", "text": "We ship the same day on orders placed before 2 PM." } }
+        {
+          "type": "step",
+          "settings": {
+            "icon": "check",
+            "heading": "Choose your plan",
+            "text": "Browse our selection and pick what works best for you."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "star",
+            "heading": "Place your order",
+            "text": "Checkout securely in under a minute with your preferred payment method."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "truck",
+            "heading": "Fast delivery",
+            "text": "We ship the same day on orders placed before 2 PM."
+          }
+        }
       ]
     }
   ]

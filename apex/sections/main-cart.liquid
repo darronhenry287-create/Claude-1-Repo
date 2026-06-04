@@ -218,17 +218,76 @@
   "tag": "section",
   "class": "shopify-section--main-cart",
   "settings": [
-    { "type": "header", "content": "Upsell" },
-    { "type": "paragraph", "content": "Shown below the cart. Requires \"Show cart upsell\" enabled in Theme settings → Cart." },
-    { "type": "checkbox", "id": "show_upsell", "label": "Show upsell row", "default": true },
-    { "type": "text", "id": "upsell_heading", "label": "Upsell heading", "default": "You may also like" },
-    { "type": "collection", "id": "upsell_collection", "label": "Upsell collection", "info": "Leave empty to use automatic product recommendations." },
-    { "type": "range", "id": "upsell_count", "min": 2, "max": 8, "step": 1, "label": "Products to show", "default": 4 },
-    { "type": "header", "content": "Section" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 48 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 72 }
+    {
+      "type": "header",
+      "content": "Upsell"
+    },
+    {
+      "type": "paragraph",
+      "content": "Shown below the cart. Requires \"Show cart upsell\" enabled in Theme settings → Cart."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_upsell",
+      "label": "Show upsell row",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "upsell_heading",
+      "label": "Upsell heading",
+      "default": "You may also like"
+    },
+    {
+      "type": "collection",
+      "id": "upsell_collection",
+      "label": "Upsell collection",
+      "info": "Leave empty to use automatic product recommendations."
+    },
+    {
+      "type": "range",
+      "id": "upsell_count",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "label": "Products to show",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    }
   ],
-  "presets": [ { "name": "Cart page" } ]
+  "presets": [
+    {
+      "name": "Cart page"
+    }
+  ]
 }
 {% endschema %}

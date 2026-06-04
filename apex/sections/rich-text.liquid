@@ -45,14 +45,20 @@
     {
       "type": "range",
       "id": "padding_top",
-      "min": 0, "max": 160, "step": 4, "unit": "px",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
       "label": "Padding top",
       "default": 72
     },
     {
       "type": "range",
       "id": "padding_bottom",
-      "min": 0, "max": 160, "step": 4, "unit": "px",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
       "label": "Padding bottom",
       "default": 72
     }
@@ -63,7 +69,12 @@
       "name": "Eyebrow",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "text", "label": "Text", "default": "Our story" }
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Our story"
+        }
       ]
     },
     {
@@ -71,8 +82,22 @@
       "name": "Heading",
       "limit": 1,
       "settings": [
-        { "type": "inline_richtext", "id": "text", "label": "Heading", "default": "We make things that matter." },
-        { "type": "range", "id": "size", "min": 2, "max": 5, "step": 0.25, "unit": "rem", "label": "Max size", "default": 3 }
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Heading",
+          "default": "We make things that matter."
+        },
+        {
+          "type": "range",
+          "id": "size",
+          "min": 2,
+          "max": 5,
+          "step": 0.25,
+          "unit": "rem",
+          "label": "Max size",
+          "default": 3
+        }
       ]
     },
     {
@@ -80,7 +105,12 @@
       "name": "Text",
       "limit": 1,
       "settings": [
-        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Quality over everything. Every product we make is designed to last, built with care, and backed by our commitment to your satisfaction.</p>" }
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Quality over everything. Every product we make is designed to last, built with care, and backed by our commitment to your satisfaction.</p>"
+        }
       ]
     },
     {
@@ -88,10 +118,28 @@
       "name": "Buttons",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "button_1", "label": "Button 1 label", "default": "Shop now" },
-        { "type": "url", "id": "button_1_url", "label": "Button 1 link" },
-        { "type": "text", "id": "button_2", "label": "Button 2 label", "default": "Learn more" },
-        { "type": "url", "id": "button_2_url", "label": "Button 2 link" }
+        {
+          "type": "text",
+          "id": "button_1",
+          "label": "Button 1 label",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "button_1_url",
+          "label": "Button 1 link"
+        },
+        {
+          "type": "text",
+          "id": "button_2",
+          "label": "Button 2 label",
+          "default": "Learn more"
+        },
+        {
+          "type": "url",
+          "id": "button_2_url",
+          "label": "Button 2 link"
+        }
       ]
     }
   ],
@@ -99,10 +147,18 @@
     {
       "name": "Rich text",
       "blocks": [
-        { "type": "eyebrow" },
-        { "type": "heading" },
-        { "type": "text" },
-        { "type": "buttons" }
+        {
+          "type": "eyebrow"
+        },
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "buttons"
+        }
       ]
     }
   ]

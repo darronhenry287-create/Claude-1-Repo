@@ -82,37 +82,104 @@
       "label": "Separator",
       "default": "·",
       "options": [
-        { "value": "·", "label": "Dot (·)" },
-        { "value": "/", "label": "Slash (/)" },
-        { "value": "—", "label": "Dash (—)" },
-        { "value": "✦", "label": "Star (✦)" },
-        { "value": "|", "label": "Pipe (|)" }
+        {
+          "value": "·",
+          "label": "Dot (·)"
+        },
+        {
+          "value": "/",
+          "label": "Slash (/)"
+        },
+        {
+          "value": "—",
+          "label": "Dash (—)"
+        },
+        {
+          "value": "✦",
+          "label": "Star (✦)"
+        },
+        {
+          "value": "|",
+          "label": "Pipe (|)"
+        }
       ]
     },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 40 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 40 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 40
+    }
   ],
   "blocks": [
     {
       "type": "item",
       "name": "Item",
       "settings": [
-        { "type": "text", "id": "text", "label": "Text", "default": "Free shipping" },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free shipping"
+        },
         {
           "type": "select",
           "id": "icon",
           "label": "Icon (optional)",
           "default": "",
           "options": [
-            { "value": "", "label": "None" },
-            { "value": "star", "label": "Star" },
-            { "value": "truck", "label": "Truck" },
-            { "value": "shield", "label": "Shield" },
-            { "value": "leaf", "label": "Leaf" },
-            { "value": "return", "label": "Return" },
-            { "value": "check", "label": "Check" },
-            { "value": "bag", "label": "Bag" }
+            {
+              "value": "",
+              "label": "None"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "bag",
+              "label": "Bag"
+            }
           ]
         }
       ]
@@ -122,10 +189,34 @@
     {
       "name": "Marquee text",
       "blocks": [
-        { "type": "item", "settings": { "text": "Free shipping on orders over $50", "icon": "truck" } },
-        { "type": "item", "settings": { "text": "60-day easy returns", "icon": "return" } },
-        { "type": "item", "settings": { "text": "Sustainably sourced materials", "icon": "leaf" } },
-        { "type": "item", "settings": { "text": "Quality guaranteed", "icon": "shield" } }
+        {
+          "type": "item",
+          "settings": {
+            "text": "Free shipping on orders over $50",
+            "icon": "truck"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "60-day easy returns",
+            "icon": "return"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Sustainably sourced materials",
+            "icon": "leaf"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Quality guaranteed",
+            "icon": "shield"
+          }
+        }
       ]
     }
   ]

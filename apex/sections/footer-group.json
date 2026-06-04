@@ -5,14 +5,48 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "brand": { "type": "brand", "settings": { "heading": "Apex", "text": "A flagship store, built on the Apex theme — fast, flexible, and beautiful out of the box." } },
-        "shop": { "type": "menu", "settings": { "heading": "Shop", "menu": "footer" } },
-        "help": { "type": "menu", "settings": { "heading": "Help", "menu": "footer" } },
-        "news": { "type": "newsletter", "settings": { "heading": "Stay in the loop", "text": "Launches, offers and stories — first." } }
+        "brand": {
+          "type": "brand",
+          "settings": {
+            "heading": "Apex",
+            "text": "A flagship store, built on the Apex theme — fast, flexible, and beautiful out of the box."
+          }
+        },
+        "shop": {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop",
+            "menu": "footer"
+          }
+        },
+        "help": {
+          "type": "menu",
+          "settings": {
+            "heading": "Help",
+            "menu": "footer"
+          }
+        },
+        "news": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Stay in the loop",
+            "text": "Launches, offers and stories — first."
+          }
+        }
       },
-      "block_order": ["brand", "shop", "help", "news"],
-      "settings": { "payment_icons": true, "color_scheme": "scheme-2" }
+      "block_order": [
+        "brand",
+        "shop",
+        "help",
+        "news"
+      ],
+      "settings": {
+        "payment_icons": true,
+        "color_scheme": "scheme-2"
+      }
     }
   },
-  "order": ["footer"]
+  "order": [
+    "footer"
+  ]
 }

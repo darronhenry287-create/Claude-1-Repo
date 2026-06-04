@@ -107,16 +107,32 @@
   "name": "Blog",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Our journal" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Latest articles" },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Our journal"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Latest articles"
+    },
     {
       "type": "select",
       "id": "heading_align",
       "label": "Heading alignment",
       "default": "left",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" }
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
       ]
     },
     {
@@ -137,16 +153,61 @@
       "label": "Articles per page",
       "default": 9
     },
-    { "type": "checkbox", "id": "show_tags", "label": "Show tags", "default": true },
-    { "type": "checkbox", "id": "show_excerpt", "label": "Show excerpt", "default": true },
-    { "type": "checkbox", "id": "show_date", "label": "Show date", "default": true },
-    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": false },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 72 }
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "Show tags",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "Show excerpt",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show author",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
   ],
   "presets": [
-    { "name": "Blog index" }
+    {
+      "name": "Blog index"
+    }
   ]
 }
 {% endschema %}

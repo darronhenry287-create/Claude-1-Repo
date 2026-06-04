@@ -23,7 +23,7 @@
 
           <div class="apex-slideshow__media">
             {%- if bs.image != blank -%}
-              {{ bs.image | image_url: width: 2000 | image_tag: loading: forloop.first | ternary: 'eager', 'lazy', widths: '600,900,1200,1600,2000', sizes: '100vw', alt: bs.image.alt | escape, fetchpriority: forloop.first | ternary: 'high', 'auto' }}
+              {%- assign sl = 'lazy' -%}{%- assign sp = 'auto' -%}{%- if forloop.first -%}{%- assign sl = 'eager' -%}{%- assign sp = 'high' -%}{%- endif -%}{{ bs.image | image_url: width: 2000 | image_tag: loading: sl, fetchpriority: sp, widths: '600,900,1200,1600,2000', sizes: '100vw', alt: bs.image.alt }}
             {%- else -%}
               {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
@@ -232,33 +232,145 @@
       "label": "Slide height",
       "default": "md",
       "options": [
-        { "value": "sm", "label": "Small" },
-        { "value": "md", "label": "Medium" },
-        { "value": "lg", "label": "Large" },
-        { "value": "full", "label": "Full screen" }
+        {
+          "value": "sm",
+          "label": "Small"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "full",
+          "label": "Full screen"
+        }
       ]
     },
-    { "type": "checkbox", "id": "autoplay", "label": "Auto-advance slides", "default": false },
-    { "type": "range", "id": "autoplay_speed", "min": 3, "max": 10, "step": 1, "unit": "s", "label": "Auto-advance speed", "default": 5 },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 0 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 0 }
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-advance slides",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Auto-advance speed",
+      "default": 5
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    }
   ],
   "blocks": [
     {
       "type": "slide",
       "name": "Slide",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Background image" },
-        { "type": "range", "id": "overlay_opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "label": "Image overlay opacity", "default": 35 },
-        { "type": "select", "id": "text_position", "label": "Content position", "default": "center", "options": [ {"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"} ] },
-        { "type": "text", "id": "eyebrow", "label": "Eyebrow text" },
-        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Our latest collection" },
-        { "type": "text", "id": "text", "label": "Subtext", "default": "Thoughtfully designed for everyday life." },
-        { "type": "text", "id": "button_1", "label": "Button 1 label", "default": "Shop now" },
-        { "type": "url", "id": "button_1_url", "label": "Button 1 link" },
-        { "type": "text", "id": "button_2", "label": "Button 2 label" },
-        { "type": "url", "id": "button_2_url", "label": "Button 2 link" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background image"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "%",
+          "label": "Image overlay opacity",
+          "default": 35
+        },
+        {
+          "type": "select",
+          "id": "text_position",
+          "label": "Content position",
+          "default": "center",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow text"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Our latest collection"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Subtext",
+          "default": "Thoughtfully designed for everyday life."
+        },
+        {
+          "type": "text",
+          "id": "button_1",
+          "label": "Button 1 label",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "button_1_url",
+          "label": "Button 1 link"
+        },
+        {
+          "type": "text",
+          "id": "button_2",
+          "label": "Button 2 label"
+        },
+        {
+          "type": "url",
+          "id": "button_2_url",
+          "label": "Button 2 link"
+        }
       ]
     }
   ],
@@ -266,8 +378,22 @@
     {
       "name": "Slideshow",
       "blocks": [
-        { "type": "slide", "settings": { "heading": "New season. New standards.", "text": "Explore the collection crafted for those who care about quality.", "button_1": "Shop now" } },
-        { "type": "slide", "settings": { "heading": "Designed for real life.", "text": "Every product built to perform beautifully, every single day.", "button_1": "Explore" } }
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "New season. New standards.",
+            "text": "Explore the collection crafted for those who care about quality.",
+            "button_1": "Shop now"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "Designed for real life.",
+            "text": "Every product built to perform beautifully, every single day.",
+            "button_1": "Explore"
+          }
+        }
       ]
     }
   ]

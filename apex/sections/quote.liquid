@@ -99,9 +99,32 @@
   "name": "Quote",
   "tag": "section",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 80 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 80 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    }
   ],
   "blocks": [
     {
@@ -109,8 +132,18 @@
       "name": "Rating",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "value", "label": "Rating value (e.g. 4.9)", "default": "4.9" },
-        { "type": "text", "id": "count", "label": "Review count label", "default": "from 12,000+ customers" }
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Rating value (e.g. 4.9)",
+          "default": "4.9"
+        },
+        {
+          "type": "text",
+          "id": "count",
+          "label": "Review count label",
+          "default": "from 12,000+ customers"
+        }
       ]
     },
     {
@@ -131,9 +164,23 @@
       "name": "Attribution",
       "limit": 1,
       "settings": [
-        { "type": "image_picker", "id": "avatar", "label": "Avatar image" },
-        { "type": "text", "id": "name", "label": "Name", "default": "Alex M." },
-        { "type": "text", "id": "title", "label": "Title / description", "default": "Verified customer" }
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Alex M."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title / description",
+          "default": "Verified customer"
+        }
       ]
     }
   ],
@@ -141,9 +188,15 @@
     {
       "name": "Quote",
       "blocks": [
-        { "type": "rating" },
-        { "type": "quote" },
-        { "type": "attribution" }
+        {
+          "type": "rating"
+        },
+        {
+          "type": "quote"
+        },
+        {
+          "type": "attribution"
+        }
       ]
     }
   ]

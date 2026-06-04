@@ -63,10 +63,38 @@
   "name": "Icon bar",
   "tag": "section",
   "settings": [
-    { "type": "checkbox", "id": "show_dividers", "label": "Show dividers between items", "default": true },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 40 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 40 }
+    {
+      "type": "checkbox",
+      "id": "show_dividers",
+      "label": "Show dividers between items",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 40
+    }
   ],
   "blocks": [
     {
@@ -74,18 +102,49 @@
       "name": "Trust item",
       "settings": [
         {
-          "type": "select", "id": "icon", "label": "Icon", "default": "truck",
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "truck",
           "options": [
-            { "value": "truck", "label": "Truck (shipping)" },
-            { "value": "shield", "label": "Shield (security)" },
-            { "value": "leaf", "label": "Leaf (eco)" },
-            { "value": "return", "label": "Return (returns)" },
-            { "value": "star", "label": "Star (quality)" },
-            { "value": "check", "label": "Check (guarantee)" }
+            {
+              "value": "truck",
+              "label": "Truck (shipping)"
+            },
+            {
+              "value": "shield",
+              "label": "Shield (security)"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf (eco)"
+            },
+            {
+              "value": "return",
+              "label": "Return (returns)"
+            },
+            {
+              "value": "star",
+              "label": "Star (quality)"
+            },
+            {
+              "value": "check",
+              "label": "Check (guarantee)"
+            }
           ]
         },
-        { "type": "text", "id": "title", "label": "Title", "default": "Free Shipping" },
-        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "On orders over $50" }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "On orders over $50"
+        }
       ]
     }
   ],
@@ -93,10 +152,38 @@
     {
       "name": "Icon bar",
       "blocks": [
-        { "type": "item", "settings": { "icon": "truck", "title": "Free Shipping", "subtitle": "On orders over $50" } },
-        { "type": "item", "settings": { "icon": "shield", "title": "Secure Payments", "subtitle": "256-bit SSL encryption" } },
-        { "type": "item", "settings": { "icon": "return", "title": "30-Day Returns", "subtitle": "No questions asked" } },
-        { "type": "item", "settings": { "icon": "star", "title": "Top Rated", "subtitle": "4.9 / 5 from 10,000+ reviews" } }
+        {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "title": "Free Shipping",
+            "subtitle": "On orders over $50"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "title": "Secure Payments",
+            "subtitle": "256-bit SSL encryption"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "return",
+            "title": "30-Day Returns",
+            "subtitle": "No questions asked"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "star",
+            "title": "Top Rated",
+            "subtitle": "4.9 / 5 from 10,000+ reviews"
+          }
+        }
       ]
     }
   ]

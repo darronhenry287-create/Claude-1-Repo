@@ -15,7 +15,7 @@
 
       <a href="{{ routes.root_url }}" class="header__logo" style="margin-{% if section.settings.layout == 'center' %}inline:auto{% else %}right:auto{% endif %}">
         {%- if settings.logo != blank -%}
-          {{ settings.logo | image_url: width: 600 | image_tag: widths: '150,300,450,600', style: 'width:{{ settings.logo_width }}px', alt: shop.name | escape }}
+          {%- capture logo_style -%}width:{{ settings.logo_width }}px{%- endcapture -%}{{ settings.logo | image_url: width: 600 | image_tag: widths: '150,300,450,600', style: logo_style, alt: shop.name }}
         {%- else -%}{{ shop.name }}{%- endif -%}
       </a>
 
@@ -86,12 +86,52 @@
 {
   "name": "Header",
   "settings": [
-    { "type": "select", "id": "layout", "label": "Layout", "options": [ {"value":"left","label":"Logo left, nav right"}, {"value":"center","label":"Logo center"} ], "default": "left" },
-    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
-    { "type": "checkbox", "id": "sticky", "label": "Sticky header", "default": true },
-    { "type": "checkbox", "id": "show_search", "label": "Show search", "default": true },
-    { "type": "checkbox", "id": "show_account", "label": "Show account", "default": true },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "left",
+          "label": "Logo left, nav right"
+        },
+        {
+          "value": "center",
+          "label": "Logo center"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "Sticky header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "Show account",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
   ]
 }
 {% endschema %}
