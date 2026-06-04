@@ -36,6 +36,7 @@
             <apex-countdown
               class="apex-offer-banner__countdown"
               data-end="{{ s.end_datetime }}"
+              {% if s.hide_when_ended %}data-hide-on-end{% endif %}
               aria-live="polite"
               aria-label="Offer countdown timer">
               <div class="apex-offer-banner__unit">
@@ -148,7 +149,6 @@
   padding-top: .3rem;
 }
 .apex-offer-banner__countdown[data-ended] .apex-offer-banner__digits { color: var(--text-muted); }
-[data-offer-hide-ended][data-ended] { display: none !important; }
 .apex-offer-banner__cta { display: flex; }
 .apex-offer-banner__product {
   display: flex;
