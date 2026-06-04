@@ -59,7 +59,7 @@
               </script>
 
               {%- form 'product', product, id: form_id, novalidate: 'novalidate' -%}
-                <input type="hidden" name="id" value="{{ current_variant.id }}" {% unless current_variant.available %}disabled{% endunless %}>
+                <input type="hidden" name="id" value="{{ current_variant.id }}">
 
                 {%- unless product.has_only_default_variant -%}
                   <div class="apex-featured-product__options stack">

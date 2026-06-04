@@ -132,8 +132,8 @@
                   </script>
 
                   {%- form 'product', product, id: form_id, novalidate: 'novalidate' -%}
-                    {%- comment -%} Real variant id; base.js keeps this in sync on option change {%- endcomment -%}
-                    <input type="hidden" name="id" value="{{ current_variant.id }}" {% unless current_variant.available %}disabled{% endunless %}>
+                    {%- comment -%} Real variant id; base.js keeps this in sync on option change. Availability is enforced by the [data-atc] disabled state (managed by base.js), so the id input is never disabled — that would drop it from FormData. {%- endcomment -%}
+                    <input type="hidden" name="id" value="{{ current_variant.id }}">
 
                     {%- unless product.has_only_default_variant -%}
                       <div class="apex-product__options stack">
