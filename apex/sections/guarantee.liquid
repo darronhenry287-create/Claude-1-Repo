@@ -1,0 +1,281 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-guarantee color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="guarantee-{{ section.id }}">
+  <div class="page-width">
+    <div class="apex-guarantee__inner reveal{% if s.layout == 'centered' %} apex-guarantee__inner--centered{% endif %}">
+
+      {%- comment -%} Badge / seal area {%- endcomment -%}
+      <div class="apex-guarantee__badge">
+        {%- if s.badge_image != blank -%}
+          {%- assign badge_alt = s.badge_image.alt -%}
+          {{ s.badge_image | image_url: width: 400 | image_tag: loading: 'lazy', widths: '200,300,400', sizes: '180px', alt: badge_alt, class: 'apex-guarantee__badge-img' }}
+        {%- else -%}
+          <span class="apex-guarantee__badge-icon" aria-hidden="true">{% render 'icon', icon: 'shield' %}</span>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Text content {%- endcomment -%}
+      <div class="apex-guarantee__content stack">
+
+        {%- if s.heading != blank -%}
+          <h2 class="apex-guarantee__heading balance">{{ s.heading }}</h2>
+        {%- endif -%}
+
+        {%- if s.text != blank -%}
+          <div class="apex-guarantee__text rte">{{ s.text }}</div>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <ul class="apex-guarantee__points stack">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'point' and block.settings.text != blank -%}
+                <li class="apex-guarantee__point cluster" {{ block.shopify_attributes }}>
+                  <span class="apex-guarantee__point-icon" aria-hidden="true">
+                    {% render 'icon', icon: block.settings.icon %}
+                  </span>
+                  <span class="apex-guarantee__point-text">{{ block.settings.text }}</span>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if s.signature_line != blank -%}
+          <p class="apex-guarantee__signature muted">{{ s.signature_line }}</p>
+        {%- endif -%}
+
+      </div>
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-guarantee__inner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+}
+.apex-guarantee__inner--centered {
+  grid-template-columns: 1fr;
+  text-align: center;
+  justify-items: center;
+}
+.apex-guarantee__badge {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.apex-guarantee__badge-img {
+  width: clamp(100px, 14vw, 180px);
+  height: auto;
+  display: block;
+}
+.apex-guarantee__badge-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(80px, 12vw, 140px);
+  height: clamp(80px, 12vw, 140px);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+}
+.apex-guarantee__badge-icon svg {
+  width: 52%;
+  height: 52%;
+}
+.apex-guarantee__content { gap: 1rem; }
+.apex-guarantee__heading { font-size: clamp(1.4rem, 1rem + 2vw, 2rem); }
+.apex-guarantee__text { font-size: 1.05rem; line-height: 1.7; }
+.apex-guarantee__points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: .7rem;
+}
+.apex-guarantee__point { gap: .75rem; align-items: flex-start; font-size: .95rem; line-height: 1.5; }
+.apex-guarantee__point-icon {
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-top: .05rem;
+}
+.apex-guarantee__point-icon svg { width: 1rem; height: 1rem; }
+.apex-guarantee__signature {
+  font-style: italic;
+  font-size: .9rem;
+  border-top: var(--border-width) solid var(--border);
+  padding-top: .8rem;
+  margin-top: .4rem;
+}
+.apex-guarantee__inner--centered .apex-guarantee__points { align-items: center; }
+.apex-guarantee__inner--centered .apex-guarantee__signature { text-align: center; }
+@media (max-width: 640px) {
+  .apex-guarantee__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
+  .apex-guarantee__points { align-items: center; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Guarantee",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "split",
+      "options": [
+        { "value": "split", "label": "Badge left, text right" },
+        { "value": "centered", "label": "Centered" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Badge / seal"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_image",
+      "label": "Badge image",
+      "info": "Upload a custom seal/badge. Leave blank to use the shield icon."
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "60-Day Money-Back Guarantee"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Supporting text",
+      "default": "<p>We stand behind every product we sell. If you're not completely satisfied within 60 days of your purchase, contact us and we'll refund every penny — no forms to fill out, no awkward conversations.</p>"
+    },
+    {
+      "type": "text",
+      "id": "signature_line",
+      "label": "Signature line",
+      "default": "— The founding team",
+      "info": "Optional. Appears below the points, styled as a signature."
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Guarantee point",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "check",
+          "options": [
+            { "value": "check", "label": "Check" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "star", "label": "Star" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "return", "label": "Return" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "bag", "label": "Bag" },
+            { "value": "user", "label": "User" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Point text",
+          "default": "Full refund within 60 days — no questions asked"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Guarantee",
+      "settings": {
+        "layout": "split",
+        "heading": "60-Day Money-Back Guarantee",
+        "text": "<p>We stand behind every product we sell. If you're not completely satisfied within 60 days of your purchase, contact us and we'll refund every penny — no forms to fill out, no awkward conversations.</p>",
+        "signature_line": "— The founding team"
+      },
+      "blocks": [
+        {
+          "type": "point",
+          "settings": {
+            "icon": "check",
+            "text": "Full refund within 60 days — no questions asked"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "icon": "return",
+            "text": "Free return shipping on all orders"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "icon": "shield",
+            "text": "2-year product warranty included"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "icon": "star",
+            "text": "Rated 4.9/5 by over 12,000 customers"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

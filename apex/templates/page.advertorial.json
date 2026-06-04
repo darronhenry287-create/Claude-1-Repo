@@ -1,0 +1,245 @@
+{
+  "sections": {
+    "adv-header": {
+      "type": "advertorial-header",
+      "settings": {
+        "label": "SPONSORED",
+        "headline": "The Simple Habit That Helped Over 100,000 People Finally Feel Their Best",
+        "subheadline": "Scientists and everyday customers agree: this is the approach that actually works — and it starts today.",
+        "author_name": "Jordan M., Health & Wellness Editor",
+        "publish_date": "June 2025",
+        "read_time": "5 min read",
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 40
+      }
+    },
+    "adv-content-1": {
+      "type": "advertorial-content",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 40
+      },
+      "blocks": {
+        "blk-head-1": {
+          "type": "heading",
+          "settings": {
+            "level": "h2",
+            "text": "Why thousands of people are making the switch"
+          }
+        },
+        "blk-para-1": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>It starts with a simple idea: what if the product you use every day was actually working <em>with</em> your body, not against it? That's the premise behind the approach that's quietly taken over wellness communities worldwide — and the results are hard to ignore.</p>"
+          }
+        },
+        "blk-img-text": {
+          "type": "image_text",
+          "settings": {
+            "image_side": "left",
+            "text": "<p><strong>Backed by independent research</strong>, the formulation has been refined over three years of real-world testing. The result is a product that delivers consistent, measurable results — without the compromises you'd expect at this price point.</p><p>We spoke with customers across the country and the story was the same: within the first few weeks, they noticed a meaningful difference. By month two, they couldn't imagine going back.</p>"
+          }
+        },
+        "blk-quote-1": {
+          "type": "quote",
+          "settings": {
+            "text": "I've tried everything on the market. Nothing came close until I found this. Two months in and I feel like a different person.",
+            "attribution": "Sam K., verified customer, Austin TX"
+          }
+        },
+        "blk-head-2": {
+          "type": "heading",
+          "settings": {
+            "level": "h3",
+            "text": "What sets this apart from the rest"
+          }
+        },
+        "blk-checklist": {
+          "type": "checklist",
+          "settings": {
+            "items": "Third-party tested for purity and potency\nNo artificial colours, flavours, or fillers\nSustainably manufactured in certified facilities\nFull ingredient transparency — no proprietary blends\n60-day money-back guarantee, no questions asked"
+          }
+        },
+        "blk-callout": {
+          "type": "callout",
+          "settings": {
+            "icon": "shield",
+            "title": "Our promise to you",
+            "text": "<p>Every batch is tested before it ships. If you're not completely satisfied within 60 days, we'll refund every penny — no forms, no hassle.</p>"
+          }
+        },
+        "blk-divider": {
+          "type": "divider",
+          "settings": {}
+        },
+        "blk-stat": {
+          "type": "stat",
+          "settings": {
+            "number": "94%",
+            "label": "of customers would recommend to a friend"
+          }
+        },
+        "blk-btn": {
+          "type": "button",
+          "settings": {
+            "label": "Claim your discount — today only",
+            "style": "accent"
+          }
+        }
+      },
+      "block_order": [
+        "blk-head-1",
+        "blk-para-1",
+        "blk-img-text",
+        "blk-quote-1",
+        "blk-head-2",
+        "blk-checklist",
+        "blk-callout",
+        "blk-divider",
+        "blk-stat",
+        "blk-btn"
+      ]
+    },
+    "adv-guarantee": {
+      "type": "guarantee",
+      "settings": {
+        "layout": "split",
+        "heading": "60-Day Money-Back Guarantee",
+        "text": "<p>We stand behind every product we sell. If you're not completely satisfied within 60 days of your purchase, contact us and we'll refund every penny — no forms to fill out, no awkward conversations.</p>",
+        "signature_line": "— The founding team",
+        "color_scheme": "scheme-2",
+        "padding_top": 72,
+        "padding_bottom": 72
+      },
+      "blocks": {
+        "gp-1": {
+          "type": "point",
+          "settings": {
+            "icon": "check",
+            "text": "Full refund within 60 days — no questions asked"
+          }
+        },
+        "gp-2": {
+          "type": "point",
+          "settings": {
+            "icon": "return",
+            "text": "Free return shipping on all orders"
+          }
+        },
+        "gp-3": {
+          "type": "point",
+          "settings": {
+            "icon": "shield",
+            "text": "2-year product warranty included"
+          }
+        },
+        "gp-4": {
+          "type": "point",
+          "settings": {
+            "icon": "star",
+            "text": "Rated 4.9 / 5 by over 12,000 verified customers"
+          }
+        }
+      },
+      "block_order": ["gp-1", "gp-2", "gp-3", "gp-4"]
+    },
+    "adv-offer": {
+      "type": "offer-banner",
+      "settings": {
+        "heading": "Limited-time offer — save 30% today only",
+        "text": "<p>This exclusive discount is available for a limited time only. Don't miss out — stock is running low and this price won't last.</p>",
+        "price_text": "From $39 — was $55",
+        "end_datetime": "2026-12-31T23:59",
+        "hide_when_ended": false,
+        "button_label": "Claim your discount now",
+        "color_scheme": "scheme-4",
+        "padding_top": 72,
+        "padding_bottom": 72
+      },
+      "blocks": {
+        "oc-1": {
+          "type": "urgency_chip",
+          "settings": { "text": "Limited stock" }
+        },
+        "oc-2": {
+          "type": "urgency_chip",
+          "settings": { "text": "Free shipping included" }
+        },
+        "oc-3": {
+          "type": "urgency_chip",
+          "settings": { "text": "60-day guarantee" }
+        }
+      },
+      "block_order": ["oc-1", "oc-2", "oc-3"]
+    },
+    "adv-faq": {
+      "type": "faq",
+      "settings": {
+        "subheading": "Common questions",
+        "heading": "Everything you need to know",
+        "text": "Can't find an answer? Contact our support team anytime.",
+        "center_header": true,
+        "two_column": false,
+        "single_open": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 72,
+        "padding_bottom": 72
+      },
+      "blocks": {
+        "fq-1": {
+          "type": "item",
+          "settings": {
+            "question": "How quickly will I see results?",
+            "answer": "<p>Most customers report a noticeable difference within the first 2–3 weeks of consistent use. Individual results can vary based on lifestyle and usage habits.</p>"
+          }
+        },
+        "fq-2": {
+          "type": "item",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>We offer a full 60-day money-back guarantee. If you're not satisfied for any reason, contact our support team and we'll process a refund promptly — no questions asked.</p>"
+          }
+        },
+        "fq-3": {
+          "type": "item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Standard shipping takes 3–5 business days within the contiguous US. Express options are available at checkout. We ship to over 50 countries worldwide.</p>"
+          }
+        },
+        "fq-4": {
+          "type": "item",
+          "settings": {
+            "question": "Is this tested and safe to use?",
+            "answer": "<p>Yes. Every batch is independently third-party tested for purity, potency, and safety before it ships. We publish our certificates of analysis on request.</p>"
+          }
+        }
+      },
+      "block_order": ["fq-1", "fq-2", "fq-3", "fq-4"]
+    },
+    "adv-newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "subheading": "Stay in the loop",
+        "heading": "Get exclusive deals and early access",
+        "description": "Join our community of wellness-focused customers. New releases, exclusive discounts, and zero spam.",
+        "placeholder": "Enter your email address",
+        "button_label": "Subscribe",
+        "disclaimer": "By subscribing you agree to our Privacy Policy. Unsubscribe at any time.",
+        "color_scheme": "scheme-3",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": [
+    "adv-header",
+    "adv-content-1",
+    "adv-guarantee",
+    "adv-offer",
+    "adv-faq",
+    "adv-newsletter"
+  ]
+}
