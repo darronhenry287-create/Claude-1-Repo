@@ -1,0 +1,10 @@
+# Apex — Shopify Theme Check config
+root: "."
+ignore:
+  - "demo/**"
+  - "docs/**"
+  - "*.zip"
+# External video is provided by merchants as a URL on purpose (hero/video sections),
+# so the "serve from Shopify CDN" suggestion does not apply.
+RemoteAsset:
+  enabled: false

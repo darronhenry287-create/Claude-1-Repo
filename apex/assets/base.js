@@ -33,13 +33,40 @@
   let overlay = $('#apex-overlay');
   if (!overlay) { overlay = document.createElement('div'); overlay.id = 'apex-overlay'; overlay.className = 'overlay'; document.body.appendChild(overlay); }
   const openEls = new Set();
-  const lock = () => document.documentElement.style.setProperty('overflow', 'hidden');
-  const unlock = () => document.documentElement.style.removeProperty('overflow');
-  function openPanel(el) { if (!el) return; el.classList.add('is-open'); el.setAttribute('aria-hidden', 'false'); overlay.classList.add('is-open'); openEls.add(el); lock(); const f = el.querySelector('[autofocus],input,button'); f && f.focus({ preventScroll: true }); }
-  function closePanel(el) { if (!el) return; el.classList.remove('is-open'); el.setAttribute('aria-hidden', 'true'); openEls.delete(el); if (!openEls.size) { overlay.classList.remove('is-open'); unlock(); } }
+  let lastFocus = null;
+  const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+  const lock = () => { document.documentElement.style.overflow = 'hidden'; };
+  const unlock = () => { document.documentElement.style.overflow = ''; };
+  function openPanel(el) {
+    if (!el || el.classList.contains('is-open')) return;
+    lastFocus = document.activeElement;
+    el.classList.add('is-open'); el.setAttribute('aria-hidden', 'false');
+    overlay.classList.add('is-open'); openEls.add(el); lock();
+    const f = el.querySelector(FOCUSABLE); (f || el).focus({ preventScroll: true });
+  }
+  function closePanel(el) {
+    if (!el) return;
+    el.classList.remove('is-open'); el.setAttribute('aria-hidden', 'true'); openEls.delete(el);
+    if (!openEls.size) {
+      overlay.classList.remove('is-open'); unlock();
+      if (lastFocus && lastFocus.focus) { lastFocus.focus({ preventScroll: true }); }
+      lastFocus = null;
+    }
+  }
   function closeAll() { [...openEls].forEach(closePanel); }
   on(overlay, 'click', closeAll);
-  on(document, 'keydown', e => { if (e.key === 'Escape') closeAll(); });
+  on(document, 'keydown', e => {
+    if (e.key === 'Escape') { closeAll(); return; }
+    if (e.key !== 'Tab' || !openEls.size) return;
+    // focus trap within the topmost open panel
+    const panel = [...openEls].pop();
+    const items = [...panel.querySelectorAll(FOCUSABLE)].filter(x => x.offsetParent !== null);
+    if (!items.length) return;
+    const first = items[0], last = items[items.length - 1];
+    if (!panel.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+    else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
   on(document, 'click', e => {
     const o = e.target.closest('[data-open]'); if (o) { e.preventDefault(); openPanel($('#' + o.dataset.open)); }
     const c = e.target.closest('[data-close]'); if (c) { e.preventDefault(); closePanel(c.closest('.drawer,.modal') || $('#' + c.dataset.close)); }

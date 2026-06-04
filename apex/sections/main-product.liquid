@@ -306,6 +306,9 @@
               {%- when 'custom_liquid' -%}
                 <div class="apex-product__custom" {{ block.shopify_attributes }}>{{ block.settings.custom_liquid }}</div>
 
+              {%- when '@app' -%}
+                {%- render block -%}
+
             {%- endcase -%}
           {%- endfor -%}
         </div>
@@ -890,6 +893,9 @@
           "label": "Custom Liquid"
         }
       ]
+    },
+    {
+      "type": "@app"
     }
   ],
   "presets": [
