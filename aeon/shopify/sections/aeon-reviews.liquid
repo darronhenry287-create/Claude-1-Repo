@@ -1,0 +1,67 @@
+<section class="section">
+  <div class="wrap wrap--wide">
+    <div class="reviews-head reveal">
+      <div class="bigscore">
+        <div class="n">{{ section.settings.score }}</div>
+        <div>
+          <div class="stars" style="font-size:1.1rem">★★★★★</div>
+          <div class="muted" style="font-size:.85rem;margin-top:.3rem">{{ section.settings.count_label }}</div>
+        </div>
+      </div>
+      {%- if section.settings.all_reviews_link != blank -%}
+        <a href="{{ section.settings.all_reviews_link }}" class="btn btn-ghost">{{ section.settings.all_reviews_label }}</a>
+      {%- endif -%}
+    </div>
+    <div class="review-grid reveal">
+      {%- for block in section.blocks -%}
+        <div class="rev" {{ block.shopify_attributes }}>
+          <div class="rev__top">
+            <span class="stars">{{ block.settings.stars }}</span>
+            {%- if block.settings.verified -%}
+              <span class="rev__v">✓ verified</span>
+            {%- endif -%}
+          </div>
+          <p>"{{ block.settings.text }}"</p>
+          <div class="rev__by"><b>{{ block.settings.author }}</b></div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Reviews",
+  "settings": [
+    { "type": "text", "id": "score", "label": "Score", "default": "4.9" },
+    { "type": "text", "id": "count_label", "label": "Count label", "default": "9,217 verified reviews" },
+    { "type": "url", "id": "all_reviews_link", "label": "All reviews link" },
+    { "type": "text", "id": "all_reviews_label", "label": "All reviews button label", "default": "Read all reviews →" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "stars", "label": "Stars", "default": "★★★★★" },
+        { "type": "checkbox", "id": "verified", "label": "Verified badge", "default": true },
+        { "type": "textarea", "id": "text", "label": "Review text", "default": "Three months in and the afternoon crash is just… gone." },
+        { "type": "text", "id": "author", "label": "Author", "default": "Daniel R. · on subscription" }
+      ]
+    }
+  ],
+  "max_blocks": 16,
+  "presets": [
+    {
+      "name": "Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "Three months in and the afternoon crash is just… gone. I checked my NAD⁺ with a test kit and it actually moved.", "author": "Daniel R. · on subscription" } },
+        { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "I switched from a 250mg brand. The fact that AEON publishes a COA for my exact lot is why I'll never go back.", "author": "Priya M." } },
+        { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "Clean capsules, no weird aftertaste, no fillers. Energy is steadier and my training recovery improved.", "author": "Marcus T." } },
+        { "type": "review", "settings": { "stars": "★★★★☆", "verified": true, "text": "Took about a month to notice, but the steady focus is real. Wish the 6-month shipped a little faster.", "author": "Elena V." } },
+        { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "My doctor was skeptical until I showed her the third-party testing. Now she recommends it to other patients.", "author": "Dr. Wong, via patient" } },
+        { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "68 and keeping up with my grandkids again. The 1000mg dose is what sold me — most are half that.", "author": "Robert H." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

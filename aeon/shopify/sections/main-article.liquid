@@ -1,0 +1,42 @@
+<section class="pagehead">
+  <div class="wrap wrap--wide">
+    <div class="kicker">{{ article.published_at | date: '%B %-d, %Y' }}</div>
+    <h1>{{ article.title }}</h1>
+    {%- if article.author != blank -%}
+      <p class="lede" style="margin-top:.8rem;font-size:.95rem">By {{ article.author }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap" style="max-width:760px">
+    {%- if article.image -%}
+      <div style="margin-bottom:2.5rem;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line)">
+        <img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.title | escape }}" width="1200" height="630" style="width:100%;height:auto;display:block" loading="lazy">
+      </div>
+    {%- endif -%}
+    <div class="prose">{{ article.content }}</div>
+    {%- if section.settings.show_tags and article.tags.size > 0 -%}
+      <div style="margin-top:2.5rem;display:flex;flex-wrap:wrap;gap:.5rem">
+        {%- for tag in article.tags -%}
+          <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="chip chip--mint">{{ tag }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+    <p style="margin-top:3rem;border-top:1px solid var(--line);padding-top:1.5rem">
+      <a href="{{ blog.url }}" class="muted" style="font-weight:600;font-size:.9rem">← Back to {{ blog.title }}</a>
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": [
+    { "type": "checkbox", "id": "show_tags", "label": "Show article tags", "default": true }
+  ],
+  "presets": [
+    { "name": "Article" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,149 @@
+<footer class="footer">
+  <div class="wrap wrap--wide">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="{{ routes.root_url }}" class="logo" aria-label="{{ shop.name }}">
+          <svg class="logo__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true"><polygon points="12,2.5 20,7 20,17 12,21.5 4,17 4,7" stroke="#2bf0c4" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="2.5" r="1.7" fill="#2bf0c4"/><circle cx="20" cy="17" r="1.7" fill="#2bf0c4"/><circle cx="4" cy="17" r="1.7" fill="#2bf0c4"/></svg>
+          AEON
+        </a>
+        <p>{{ section.settings.tagline }}</p>
+        <div class="footer__newsletter">
+          {% form 'customer' %}
+            {%- if form.posted_successfully? -%}
+              <p class="note-ok">{{ 'newsletter.success' | t }}</p>
+            {%- else -%}
+              <div class="signup">
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <input type="email" name="contact[email]" id="footer-email"
+                       placeholder="{{ 'sections.footer.newsletter_label' | t }}"
+                       aria-label="{{ 'sections.footer.newsletter_label' | t }}"
+                       required autocomplete="email">
+                <button class="btn btn-mint" type="submit">{{ 'sections.footer.newsletter_button' | t }}</button>
+              </div>
+            {%- endif -%}
+          {% endform %}
+        </div>
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="footer__col" {{ block.shopify_attributes }}>
+            <h4>{{ block.settings.heading }}</h4>
+            {%- if block.settings.menu != blank and linklists[block.settings.menu].links.size > 0 -%}
+              {%- for link in linklists[block.settings.menu].links -%}
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              {%- endfor -%}
+            {%- else -%}
+              {{ block.settings.links_fallback }}
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="footer__col">
+          <h4>Shop</h4>
+          <a href="/products/aeon-nmn-1000">AEON NMN 1000</a>
+          <a href="/collections/all">Shop All</a>
+          <a href="/pages/subscribe-save">Subscribe &amp; Save</a>
+          <a href="/pages/guarantee">60-Night Guarantee</a>
+        </div>
+        <div class="footer__col">
+          <h4>Science</h4>
+          <a href="/pages/science">How NMN Works</a>
+          <a href="/pages/science">The Research</a>
+          <a href="/pages/faq">FAQ</a>
+          <a href="/pages/about">Our Standards</a>
+        </div>
+        <div class="footer__col">
+          <h4>Support</h4>
+          <a href="/pages/contact">Contact</a>
+          <a href="/pages/shipping-returns">Shipping &amp; Returns</a>
+          <a href="/pages/guarantee">Guarantee</a>
+          <a href="{{ routes.cart_url }}">Cart</a>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <p class="footer__disclaimer">† These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Consult your physician before beginning any supplement, especially if pregnant, nursing, or taking medication. AEON is a fictional demo storefront created for design purposes.</p>
+
+    <div class="footer__bot">
+      <p>© {{ 'now' | date: '%Y' }} AEON Labs. All rights reserved.</p>
+      <div class="footer__legal">
+        {%- if shop.privacy_policy.url -%}
+          <a href="{{ shop.privacy_policy.url }}">{{ shop.privacy_policy.title }}</a>
+        {%- else -%}
+          <a href="/pages/privacy-policy">Privacy</a>
+        {%- endif -%}
+        {%- if shop.terms_of_service.url -%}
+          <a href="{{ shop.terms_of_service.url }}">{{ shop.terms_of_service.title }}</a>
+        {%- else -%}
+          <a href="/pages/terms-of-service">Terms</a>
+        {%- endif -%}
+        {%- if shop.refund_policy.url -%}
+          <a href="{{ shop.refund_policy.url }}">{{ shop.refund_policy.title }}</a>
+        {%- else -%}
+          <a href="/pages/refund-policy">Refund Policy</a>
+        {%- endif -%}
+        <a href="/pages/shipping-returns">Shipping</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Brand tagline",
+      "default": "Pharmaceutical-grade NMN to rebuild the NAD⁺ your cells run on. Third-party tested, nothing hidden."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Link column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Column heading", "default": "Shop" },
+        { "type": "link_list", "id": "menu", "label": "Menu (optional)" },
+        {
+          "type": "html",
+          "id": "links_fallback",
+          "label": "Fallback links (if no menu selected)",
+          "default": "<a href=\"/collections/all\">Shop All</a><a href=\"/pages/faq\">FAQ</a>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "heading": "Shop",
+            "links_fallback": "<a href=\"/products/aeon-nmn-1000\">AEON NMN 1000</a><a href=\"/collections/all\">Shop All</a><a href=\"/pages/subscribe-save\">Subscribe &amp; Save</a><a href=\"/pages/guarantee\">60-Night Guarantee</a>"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "heading": "Science",
+            "links_fallback": "<a href=\"/pages/science\">How NMN Works</a><a href=\"/pages/science\">The Research</a><a href=\"/pages/faq\">FAQ</a><a href=\"/pages/about\">Our Standards</a>"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "heading": "Support",
+            "links_fallback": "<a href=\"/pages/contact\">Contact</a><a href=\"/pages/shipping-returns\">Shipping &amp; Returns</a><a href=\"/pages/guarantee\">Guarantee</a>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

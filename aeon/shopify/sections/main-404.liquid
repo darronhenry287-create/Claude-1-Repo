@@ -1,0 +1,31 @@
+<section class="section" style="min-height:60vh;display:grid;place-items:center;text-align:center">
+  <div class="wrap" style="max-width:540px">
+    <div class="kicker" style="justify-content:center;margin-bottom:1.5rem">// 404</div>
+    <h1 style="font-size:clamp(4rem,12vw,8rem);line-height:1;margin-bottom:1.2rem;color:var(--mint)">404</h1>
+    <p class="lede" style="margin-bottom:2rem">{{ section.settings.message }}</p>
+    <a href="{{ routes.root_url }}" class="btn btn-mint btn-lg">{{ section.settings.button_label }}</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404 page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Message",
+      "default": "That page doesn't exist — but your longevity protocol does. Let's get you back on track."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Back to home"
+    }
+  ],
+  "presets": [
+    { "name": "404 page" }
+  ]
+}
+{% endschema %}

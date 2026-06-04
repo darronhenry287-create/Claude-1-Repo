@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "pagehead": {
+      "type": "aeon-pagehead",
+      "settings": {
+        "kicker": "// Contact",
+        "heading": "Real humans. Fast answers.",
+        "subtext": "Questions about NMN, your protocol, an order, or the science? Our team replies within one business day."
+      }
+    },
+    "main": {
+      "type": "main-contact",
+      "settings": {
+        "email_text": "care@aeonlabs.example — answered within one business day.",
+        "hours_text": "Mon–Fri, 9 am–6 pm ET. Orders ship within 24 hours on business days."
+      }
+    }
+  },
+  "order": ["pagehead", "main"]
+}

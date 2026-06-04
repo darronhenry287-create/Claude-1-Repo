@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "settings": {
+        "message": "That page doesn't exist — but your longevity protocol does. Let's get you back on track.",
+        "button_label": "Back to home"
+      }
+    }
+  },
+  "order": ["main"]
+}

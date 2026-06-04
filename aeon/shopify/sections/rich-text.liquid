@@ -1,0 +1,58 @@
+<section class="section">
+  <div class="wrap" style="max-width:760px">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'heading' -%}
+          <h2 style="margin-bottom:1rem">{{ block.settings.heading }}</h2>
+        {%- when 'text' -%}
+          <div class="prose">{{ block.settings.content }}</div>
+        {%- when 'button' -%}
+          {%- if block.settings.button_label != blank -%}
+            <p style="margin-top:1.6rem">
+              <a href="{{ block.settings.button_url }}" class="btn btn-ghost">{{ block.settings.button_label }}</a>
+            </p>
+          {%- endif -%}
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Rich text",
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Section heading" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Add your content here.</p>" }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Learn more" },
+        { "type": "url", "id": "button_url", "label": "Button URL" }
+      ]
+    }
+  ],
+  "settings": [],
+  "presets": [
+    {
+      "name": "Rich text",
+      "blocks": [
+        { "type": "heading" },
+        { "type": "text" }
+      ]
+    }
+  ]
+}
+{% endschema %}

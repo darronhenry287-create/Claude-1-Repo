@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "kicker": "The Journal",
+        "subtext": "Research, protocols, and longevity science — explained plainly.",
+        "articles_per_page": 9
+      }
+    }
+  },
+  "order": ["main"]
+}
