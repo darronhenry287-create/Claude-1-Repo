@@ -1,0 +1,160 @@
+{%- liquid
+  assign s = section.settings
+  assign source_blog = blogs[s.blog]
+  assign col_class = 'grid--3'
+  if s.columns == 2
+    assign col_class = 'grid--2'
+  elsif s.columns == 4
+    assign col_class = 'grid--4'
+  endif
+-%}
+<section class="apex-blog-posts color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px">
+  <div class="page-width">
+
+    {%- if s.heading != blank or s.subheading != blank -%}
+      <div class="section-head{% if s.heading_align == 'center' %} section-head--center{% endif %} reveal">
+        {%- if s.subheading != blank -%}<p class="eyebrow eyebrow--pill">{{ s.subheading }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if source_blog != blank -%}
+      <div class="grid {{ col_class }}">
+        {%- for article in source_blog.articles limit: s.limit -%}
+          <article class="apex-blog-card card card--hover reveal{% if forloop.index > 1 %} reveal--delay-{{ forloop.index | modulo: 3 | plus: 1 }}{% endif %}">
+            <a class="apex-blog-card__media media media--landscape" href="{{ article.url }}" tabindex="-1" aria-hidden="true">
+              {%- if article.image -%}
+                {{ article.image | image_url: width: 800 | image_tag:
+                    loading: 'lazy',
+                    widths: '400,600,800',
+                    sizes: '(min-width:990px) 33vw, (min-width:750px) 50vw, 100vw',
+                    alt: article.image.alt | escape }}
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </a>
+            <div class="apex-blog-card__body stack">
+              {%- if article.tags.size > 0 -%}
+                <div class="cluster">
+                  {%- for tag in article.tags limit: 2 -%}
+                    <a class="badge" href="{{ source_blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+              <h3 class="apex-blog-card__title h4 balance">
+                <a href="{{ article.url }}">{{ article.title }}</a>
+              </h3>
+              {%- if article.excerpt_or_content != blank -%}
+                <p class="muted apex-blog-card__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 110 }}</p>
+              {%- endif -%}
+              <div class="cluster apex-blog-card__meta">
+                <span class="muted" style="font-size:var(--text-sm)">
+                  <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%b %d, %Y' }}</time>
+                </span>
+                <span class="muted" style="font-size:var(--text-sm)">{{ article.author }}</span>
+              </div>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="grid {{ col_class }}">
+        {%- for i in (1..s.limit) -%}
+          <article class="apex-blog-card card card--hover reveal{% if forloop.index > 1 %} reveal--delay-{{ forloop.index | modulo: 3 | plus: 1 }}{% endif %}">
+            <div class="apex-blog-card__media media media--landscape">
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+            <div class="apex-blog-card__body stack">
+              <span class="badge">Guides</span>
+              <h3 class="apex-blog-card__title h4">Sample Article Title</h3>
+              <p class="muted apex-blog-card__excerpt">Discover the story behind this product and how it fits into your life every day.</p>
+              <div class="cluster apex-blog-card__meta">
+                <span class="muted" style="font-size:var(--text-sm)">Jun 1, 2025</span>
+                <span class="muted" style="font-size:var(--text-sm)">The Team</span>
+              </div>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if s.button_label != blank -%}
+      <div class="apex-blog-posts__cta center reveal" style="margin-top:clamp(1.6rem,1rem + 2vw,2.6rem)">
+        <a class="btn btn--secondary" href="{{ source_blog.url | default: s.button_url | default: '/blogs/news' }}">
+          {{ s.button_label }}
+          {% render 'icon', icon: 'arrow-right' %}
+        </a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+{% stylesheet %}
+.apex-blog-card { position: relative; }
+.apex-blog-card__media { display: block; border-radius: var(--radius-card) var(--radius-card) 0 0; overflow: hidden; }
+.apex-blog-card__media img { transition: transform .4s var(--ease); }
+.apex-blog-card:hover .apex-blog-card__media img { transform: scale(1.04); }
+.apex-blog-card__body { padding: 1.4rem 1.4rem 1.6rem; gap: .7rem; flex: 1; }
+.apex-blog-card__title a { color: inherit; }
+.apex-blog-card__title a:hover { color: var(--accent); }
+.apex-blog-card__title a::after { content: ""; position: absolute; inset: 0; }
+.apex-blog-card__excerpt { font-size: var(--text-sm); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.apex-blog-card__meta { gap: .8rem; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Blog posts",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "From the journal" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Latest stories" },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Heading alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Number of articles",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns (desktop)",
+      "default": 3
+    },
+    { "type": "text", "id": "button_label", "label": "View-all label", "default": "View all articles" },
+    { "type": "url", "id": "button_url", "label": "View-all link" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 72 }
+  ],
+  "presets": [
+    {
+      "name": "Blog posts",
+      "settings": {
+        "heading": "Latest stories",
+        "subheading": "From the journal",
+        "limit": 3,
+        "columns": 3,
+        "button_label": "View all articles"
+      }
+    }
+  ]
+}
+{% endschema %}

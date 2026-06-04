@@ -1,0 +1,133 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-marquee-text color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="marquee-text-{{ section.id }}">
+  <div class="apex-marquee-text__outer reveal marquee" style="--marquee-speed:{{ s.speed }}s" aria-hidden="true">
+    <div class="marquee__track apex-marquee-text__track">
+      {%- comment -%}Duplicate items to fill the track for seamless loop{%- endcomment -%}
+      {%- for i in (1..2) -%}
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'item' -%}
+              <span class="apex-marquee-text__item" {{ block.shopify_attributes }}>
+                {%- if block.settings.icon != blank -%}
+                  <span class="apex-marquee-text__icon">{% render 'icon', icon: block.settings.icon %}</span>
+                {%- endif -%}
+                <span class="apex-marquee-text__label">{{ block.settings.text }}</span>
+                <span class="apex-marquee-text__sep" aria-hidden="true">{{ s.separator }}</span>
+              </span>
+          {%- endcase -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+  <span class="visually-hidden">
+    {%- for block in section.blocks -%}{{ block.settings.text }}{% unless forloop.last %} · {% endunless %}{%- endfor -%}
+  </span>
+</section>
+{% stylesheet %}
+.apex-marquee-text { overflow: hidden; }
+.apex-marquee-text__outer { overflow: hidden; }
+.apex-marquee-text__track {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  font-size: clamp(1.8rem, 1rem + 3vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: var(--heading-letter-spacing);
+  white-space: nowrap;
+  align-items: center;
+  gap: 0;
+}
+.apex-marquee-text__item {
+  display: inline-flex;
+  align-items: center;
+  gap: .6em;
+  padding-right: .1em;
+}
+.apex-marquee-text__icon {
+  display: inline-flex;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.apex-marquee-text__icon svg {
+  width: .85em;
+  height: .85em;
+}
+.apex-marquee-text__sep {
+  margin-left: .5em;
+  color: var(--accent);
+  font-size: .75em;
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Marquee text",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "s",
+      "label": "Scroll speed",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "separator",
+      "label": "Separator",
+      "default": "·",
+      "options": [
+        { "value": "·", "label": "Dot (·)" },
+        { "value": "/", "label": "Slash (/)" },
+        { "value": "—", "label": "Dash (—)" },
+        { "value": "✦", "label": "Star (✦)" },
+        { "value": "|", "label": "Pipe (|)" }
+      ]
+    },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Free shipping" },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon (optional)",
+          "default": "",
+          "options": [
+            { "value": "", "label": "None" },
+            { "value": "star", "label": "Star" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "return", "label": "Return" },
+            { "value": "check", "label": "Check" },
+            { "value": "bag", "label": "Bag" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee text",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Free shipping on orders over $50", "icon": "truck" } },
+        { "type": "item", "settings": { "text": "60-day easy returns", "icon": "return" } },
+        { "type": "item", "settings": { "text": "Sustainably sourced materials", "icon": "leaf" } },
+        { "type": "item", "settings": { "text": "Quality guaranteed", "icon": "shield" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

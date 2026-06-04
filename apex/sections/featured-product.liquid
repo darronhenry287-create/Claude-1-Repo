@@ -1,0 +1,162 @@
+{%- liquid
+  assign s = section.settings
+  assign product = s.product
+  assign current_variant = product.selected_or_first_available_variant
+  assign form_id = 'featured-product-form-' | append: section.id
+-%}
+<section class="apex-featured-product color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="featured-product-{{ section.id }}">
+  <div class="page-width">
+    <div class="apex-featured-product__grid reveal{% if s.media_position == 'right' %} apex-featured-product__grid--reverse{% endif %}">
+
+      {%- comment -%} -------- media -------- {%- endcomment -%}
+      <div class="apex-featured-product__media">
+        {%- if product != blank and product.featured_media -%}
+          <div class="media media--{{ s.image_ratio }}{% if s.image_ratio == 'adapt' %} media--contain{% endif %} media--round">
+            {{ product.featured_media | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400,600,800,1000,1200', sizes: '(min-width:990px) 50vw, 100vw', alt: product.featured_media.alt | escape }}
+          </div>
+        {%- else -%}
+          <div class="media media--square media--round">{{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} -------- compact buy area -------- {%- endcomment -%}
+      <div class="apex-featured-product__info">
+        <div class="stack">
+          {%- if s.eyebrow != blank -%}<p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>{%- endif -%}
+
+          {%- if s.show_vendor and product.vendor != blank -%}
+            <p class="muted apex-featured-product__vendor">{{ product.vendor }}</p>
+          {%- endif -%}
+
+          <h2 class="apex-featured-product__title">
+            <a href="{{ product.url | default: '#' }}">{{ product.title | default: 'Example product' }}</a>
+          </h2>
+
+          {%- if s.show_rating -%}{% render 'rating', product: product %}{%- endif -%}
+
+          <div class="apex-featured-product__price" data-price>{% render 'price', product: product %}</div>
+
+          {%- if s.show_description and product.description != blank -%}
+            <div class="rte muted apex-featured-product__desc">{{ product.description | strip_html | truncatewords: 40 }}</div>
+          {%- endif -%}
+
+          {%- if product != blank -%}
+            <apex-product-form class="apex-featured-product__form stack">
+              <script type="application/json" data-variants>
+                [
+                  {%- for v in product.variants -%}
+                    {
+                      "id": {{ v.id | json }},
+                      "price": {{ v.price | json }},
+                      "compare_at_price": {{ v.compare_at_price | default: 0 | json }},
+                      "available": {{ v.available | json }},
+                      "options": [{{ v.option1 | json }}{% if product.options.size > 1 %}, {{ v.option2 | json }}{% endif %}{% if product.options.size > 2 %}, {{ v.option3 | json }}{% endif %}]
+                    }{%- unless forloop.last -%},{%- endunless -%}
+                  {%- endfor -%}
+                ]
+              </script>
+
+              {%- form 'product', product, id: form_id, novalidate: 'novalidate' -%}
+                <input type="hidden" name="id" value="{{ current_variant.id }}" {% unless current_variant.available %}disabled{% endunless %}>
+
+                {%- unless product.has_only_default_variant -%}
+                  <div class="apex-featured-product__options stack">
+                    {%- for option in product.options_with_values -%}
+                      {%- assign opt_index = forloop.index0 -%}
+                      <fieldset class="apex-featured-product__option">
+                        <legend class="apex-featured-product__option-label">{{ option.name }}</legend>
+                        <div class="apex-featured-product__swatches">
+                          {%- for value in option.values -%}
+                            {%- assign input_id = section.id | append: '-' | append: opt_index | append: '-' | append: forloop.index0 -%}
+                            <input type="radio"
+                              class="apex-product__radio visually-hidden"
+                              id="{{ input_id }}"
+                              name="option-{{ section.id }}-{{ opt_index }}"
+                              value="{{ value | escape }}"
+                              data-option-index="{{ opt_index }}"
+                              {% if option.selected_value == value %}checked{% endif %}>
+                            <label for="{{ input_id }}" class="apex-product__chip" title="{{ value | escape }}">{{ value }}</label>
+                          {%- endfor -%}
+                        </div>
+                      </fieldset>
+                    {%- endfor -%}
+                  </div>
+                {%- endunless -%}
+
+                <div class="apex-featured-product__buy" data-atc-anchor>
+                  {%- if s.show_quantity -%}
+                    <div class="qty">
+                      <button type="button" data-dir="down" aria-label="{{ 'products.product.decrease' | t | default: 'Decrease quantity' }}">{% render 'icon', icon: 'minus' %}</button>
+                      <input type="number" name="quantity" value="1" min="1" inputmode="numeric" aria-label="{{ 'products.product.quantity' | t | default: 'Quantity' }}">
+                      <button type="button" data-dir="up" aria-label="{{ 'products.product.increase' | t | default: 'Increase quantity' }}">{% render 'icon', icon: 'plus' %}</button>
+                    </div>
+                  {%- endif -%}
+                  <button type="submit" name="add"
+                    class="btn btn--accent btn--lg apex-featured-product__atc"
+                    data-atc
+                    data-label="{{ 'products.product.add_to_cart' | t | default: 'Add to cart' }}"
+                    {% unless current_variant.available %}disabled{% endunless %}>
+                    <span data-atc-label>{% if current_variant.available %}{{ 'products.product.add_to_cart' | t | default: 'Add to cart' }}{% else %}{{ 'products.product.sold_out' | t | default: 'Sold out' }}{% endif %}</span>
+                  </button>
+                </div>
+
+                {%- if s.show_dynamic_checkout -%}{{ form | payment_button }}{%- endif -%}
+              {%- endform -%}
+            </apex-product-form>
+          {%- endif -%}
+
+          {%- if s.show_link -%}
+            <a class="link apex-featured-product__link" href="{{ product.url | default: '#' }}">{{ 'products.product.view_full_details' | t | default: 'View full details' }} {% render 'icon', icon: 'arrow-right' %}</a>
+          {%- endif -%}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-featured-product__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 1rem + 3vw, 3.5rem); align-items: center; }
+.apex-featured-product__grid--reverse .apex-featured-product__media { order: 2; }
+.apex-featured-product__title { font-size: var(--h2); line-height: 1.05; }
+.apex-featured-product__vendor { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .08em; }
+.apex-featured-product__price { font-size: 1.3rem; }
+.apex-featured-product__option { border: 0; padding: 0; margin: 0; }
+.apex-featured-product__option-label { font-size: var(--text-sm); font-weight: 600; margin-bottom: .5rem; padding: 0; }
+.apex-featured-product__swatches { display: flex; flex-wrap: wrap; gap: .5rem; }
+.apex-featured-product__buy { display: flex; gap: .7rem; align-items: stretch; flex-wrap: wrap; }
+.apex-featured-product__buy .qty { flex: none; }
+.apex-featured-product__atc { flex: 1; min-width: 12rem; }
+.apex-featured-product__form .shopify-payment-button { margin-top: .2rem; }
+@media (max-width: 990px) {
+  .apex-featured-product__grid { grid-template-columns: 1fr; }
+  .apex-featured-product__grid--reverse .apex-featured-product__media { order: 0; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Featured product",
+  "tag": "section",
+  "class": "shopify-section--featured-product",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Featured" },
+    { "type": "header", "content": "Media" },
+    { "type": "select", "id": "media_position", "label": "Media position", "default": "left", "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ] },
+    { "type": "select", "id": "image_ratio", "label": "Image ratio", "default": "square", "options": [ { "value": "adapt", "label": "Adapt to image" }, { "value": "square", "label": "Square (1:1)" }, { "value": "portrait", "label": "Portrait (3:4)" }, { "value": "landscape", "label": "Landscape (4:3)" } ] },
+    { "type": "header", "content": "Details" },
+    { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": false },
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating", "default": true },
+    { "type": "checkbox", "id": "show_description", "label": "Show description", "default": true },
+    { "type": "checkbox", "id": "show_quantity", "label": "Show quantity selector", "default": false },
+    { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show dynamic checkout buttons", "default": false },
+    { "type": "checkbox", "id": "show_link", "label": "Show 'view full details' link", "default": true },
+    { "type": "header", "content": "Section" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 72 }
+  ],
+  "presets": [ { "name": "Featured product" } ]
+}
+{% endschema %}

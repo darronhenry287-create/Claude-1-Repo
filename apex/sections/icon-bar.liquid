@@ -1,0 +1,104 @@
+{%- liquid
+  assign s = section.settings
+  assign block_count = section.blocks | size
+-%}
+<section class="apex-icon-bar color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="icon-bar-{{ section.id }}">
+  <div class="page-width">
+    <div class="apex-icon-bar__list reveal" style="--item-count:{{ block_count }}">
+      {%- for block in section.blocks -%}
+        {%- assign bs = block.settings -%}
+        <div class="apex-icon-bar__item{% if s.show_dividers and forloop.last == false %} apex-icon-bar__item--divided{% endif %}" {{ block.shopify_attributes }}>
+          <div class="apex-icon-bar__icon" aria-hidden="true">
+            {% render 'icon', icon: bs.icon %}
+          </div>
+          <div class="apex-icon-bar__text">
+            {%- if bs.title != blank -%}<strong class="apex-icon-bar__title">{{ bs.title }}</strong>{%- endif -%}
+            {%- if bs.subtitle != blank -%}<span class="apex-icon-bar__subtitle muted">{{ bs.subtitle }}</span>{%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-icon-bar__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(1.2rem, 2.5vw, 2.5rem);
+}
+.apex-icon-bar__item {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  flex: 1 1 auto;
+  min-width: 150px;
+  max-width: calc(100% / max(var(--item-count, 4), 2) - 2.5rem);
+}
+.apex-icon-bar__item--divided {
+  padding-right: clamp(1.2rem, 2.5vw, 2.5rem);
+  border-right: var(--border-width) solid var(--border);
+}
+.apex-icon-bar__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.4rem;
+  height: 2.4rem;
+  color: var(--accent);
+}
+.apex-icon-bar__icon svg { width: 100%; height: 100%; }
+.apex-icon-bar__text { display: flex; flex-direction: column; gap: .1rem; }
+.apex-icon-bar__title { font-size: .95rem; font-weight: 700; line-height: 1.2; }
+.apex-icon-bar__subtitle { font-size: var(--text-sm); line-height: 1.4; }
+@media (max-width: 600px) {
+  .apex-icon-bar__item { max-width: 100%; min-width: 44%; }
+  .apex-icon-bar__item--divided { border-right: none; padding-right: 0; border-bottom: var(--border-width) solid var(--border); padding-bottom: clamp(1rem, 2vw, 1.6rem); }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Icon bar",
+  "tag": "section",
+  "settings": [
+    { "type": "checkbox", "id": "show_dividers", "label": "Show dividers between items", "default": true },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Trust item",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icon", "default": "truck",
+          "options": [
+            { "value": "truck", "label": "Truck (shipping)" },
+            { "value": "shield", "label": "Shield (security)" },
+            { "value": "leaf", "label": "Leaf (eco)" },
+            { "value": "return", "label": "Return (returns)" },
+            { "value": "star", "label": "Star (quality)" },
+            { "value": "check", "label": "Check (guarantee)" }
+          ]
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Free Shipping" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "On orders over $50" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon bar",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "truck", "title": "Free Shipping", "subtitle": "On orders over $50" } },
+        { "type": "item", "settings": { "icon": "shield", "title": "Secure Payments", "subtitle": "256-bit SSL encryption" } },
+        { "type": "item", "settings": { "icon": "return", "title": "30-Day Returns", "subtitle": "No questions asked" } },
+        { "type": "item", "settings": { "icon": "star", "title": "Top Rated", "subtitle": "4.9 / 5 from 10,000+ reviews" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

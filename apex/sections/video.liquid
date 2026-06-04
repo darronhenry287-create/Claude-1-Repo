@@ -1,0 +1,156 @@
+{%- liquid
+  assign s = section.settings
+  assign modal_id = 'video-modal-' | append: section.id
+
+  assign video_type = 'mp4'
+  if s.video_url contains 'youtube.com' or s.video_url contains 'youtu.be'
+    assign video_type = 'youtube'
+    assign youtube_id = s.video_url | split: 'v=' | last | split: '&' | first
+    if s.video_url contains 'youtu.be/'
+      assign youtube_id = s.video_url | split: 'youtu.be/' | last | split: '?' | first
+    endif
+  elsif s.video_url contains 'vimeo.com'
+    assign video_type = 'vimeo'
+    assign vimeo_id = s.video_url | split: 'vimeo.com/' | last | split: '?' | first
+  endif
+-%}
+<section class="apex-video color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px">
+  <div class="page-width">
+
+    {%- if s.heading != blank or s.subheading != blank -%}
+      <div class="section-head{% if s.heading_align == 'center' %} section-head--center{% endif %} reveal">
+        {%- if s.subheading != blank -%}<p class="eyebrow eyebrow--pill">{{ s.subheading }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="apex-video__stage reveal" style="border-radius:var(--radius-card);overflow:hidden">
+      {%- if s.video_url != blank -%}
+        <button class="apex-video__trigger media media--wide"
+          data-open="{{ modal_id }}"
+          aria-label="{{ s.play_label | default: 'Play video' }}">
+          {%- if s.cover_image != blank -%}
+            {{ s.cover_image | image_url: width: 1600 | image_tag:
+                loading: 'lazy',
+                widths: '600,900,1200,1600',
+                sizes: '(min-width:1280px) 1280px, 100vw',
+                alt: s.cover_image.alt | default: s.heading | escape }}
+          {%- else -%}
+            <div class="media media--wide">
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {%- endif -%}
+          <span class="apex-video__play" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24" aria-hidden="true"><path d="M8 5.1v13.8L19 12Z"/></svg>
+          </span>
+        </button>
+      {%- else -%}
+        <div class="media media--wide">
+          {%- if s.cover_image != blank -%}
+            {{ s.cover_image | image_url: width: 1600 | image_tag:
+                loading: 'lazy',
+                widths: '600,900,1200,1600',
+                sizes: '(min-width:1280px) 1280px, 100vw',
+                alt: s.cover_image.alt | escape }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if s.caption != blank -%}
+      <p class="apex-video__caption muted center">{{ s.caption }}</p>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{%- if s.video_url != blank -%}
+  <div class="overlay" id="{{ modal_id }}-overlay" data-close="{{ modal_id }}"></div>
+  <div class="modal" id="{{ modal_id }}" role="dialog" aria-modal="true" aria-label="{{ s.heading | default: 'Video' | escape }}">
+    <div class="modal__box apex-video__modal-box">
+      <button class="apex-video__close icon-btn" data-close="{{ modal_id }}" aria-label="Close video">
+        {% render 'icon', icon: 'close' %}
+      </button>
+      <div class="apex-video__embed media media--wide">
+        {%- if video_type == 'youtube' -%}
+          <iframe
+            src="https://www.youtube.com/embed/{{ youtube_id }}?autoplay=1&rel=0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            title="{{ s.heading | default: 'Video' | escape }}"
+            loading="lazy">
+          </iframe>
+        {%- elsif video_type == 'vimeo' -%}
+          <iframe
+            src="https://player.vimeo.com/video/{{ vimeo_id }}?autoplay=1"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            title="{{ s.heading | default: 'Video' | escape }}"
+            loading="lazy">
+          </iframe>
+        {%- else -%}
+          <video controls autoplay playsinline
+            {% if s.cover_image != blank %}poster="{{ s.cover_image | image_url: width: 1200 }}"{% endif %}>
+            <source src="{{ s.video_url }}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+{% stylesheet %}
+.apex-video__stage { cursor: default; }
+.apex-video__trigger { width: 100%; text-align: left; padding: 0; border: none; background: none; cursor: pointer; position: relative; display: block; }
+.apex-video__trigger img { transition: transform .5s var(--ease); }
+.apex-video__trigger:hover img { transform: scale(1.03); }
+.apex-video__play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 5rem; height: 5rem; background: rgba(255,255,255,.18); border: 2px solid rgba(255,255,255,.7); border-radius: var(--radius-pill); display: grid; place-items: center; color: #fff; backdrop-filter: blur(6px); transition: background .25s, transform .25s var(--ease); }
+.apex-video__trigger:hover .apex-video__play { background: rgba(255,255,255,.28); transform: translate(-50%, -50%) scale(1.08); }
+.apex-video__play svg { width: 1.8rem; height: 1.8rem; margin-left: .2em; }
+.apex-video__caption { margin-top: 1rem; font-size: var(--text-sm); }
+.apex-video__modal-box { max-width: min(900px, 94vw); background: #000; padding: 0; border-radius: var(--radius-card); overflow: hidden; }
+.apex-video__close { position: absolute; top: .8rem; right: .8rem; z-index: 2; background: rgba(0,0,0,.5); color: #fff; border-radius: var(--radius-pill); }
+.apex-video__close:hover { background: rgba(0,0,0,.75); }
+.apex-video__embed { width: 100%; }
+.apex-video__embed iframe, .apex-video__embed video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Video",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "subheading", "label": "Subheading" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "See it in action" },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Heading alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    { "type": "image_picker", "id": "cover_image", "label": "Cover image (poster)" },
+    { "type": "text", "id": "video_url", "label": "Video URL (YouTube, Vimeo or MP4)", "info": "Paste a YouTube, Vimeo, or direct MP4 URL. Leave blank to show the cover image only." },
+    { "type": "text", "id": "play_label", "label": "Play button label (accessibility)", "default": "Play video" },
+    { "type": "text", "id": "caption", "label": "Caption (below video)" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 72 }
+  ],
+  "presets": [
+    {
+      "name": "Video",
+      "settings": {
+        "heading": "See it in action",
+        "subheading": "Behind the brand",
+        "heading_align": "center"
+      }
+    }
+  ]
+}
+{% endschema %}

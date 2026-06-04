@@ -1,0 +1,139 @@
+{%- liquid
+  assign s = section.settings
+  assign cols = s.columns_desktop
+  assign cols_m = s.columns_mobile
+  assign ratio_class = 'media--square'
+  case s.image_ratio
+    when 'portrait'
+      assign ratio_class = 'media--portrait'
+    when 'landscape'
+      assign ratio_class = 'media--landscape'
+    when 'wide'
+      assign ratio_class = 'media--wide'
+  endcase
+
+  comment
+    Source: "all" uses Shopify's paginated `collections`; "selected" lets the
+    merchant pick & order a subset via the list setting.
+  endcomment
+-%}
+<section class="apex-list-collections color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px;--cols:{{ cols }};--cols-m:{{ cols_m }}"
+  id="list-collections-{{ section.id }}">
+  <div class="page-width">
+    {%- if s.heading != blank or s.subheading != blank -%}
+      <header class="section-head{% if s.heading_alignment == 'center' %} section-head--center{% endif %} reveal">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h1 class="h2 balance">{{ s.heading }}</h1>{%- endif -%}
+        {%- if s.subheading != blank -%}<p class="subtitle">{{ s.subheading }}</p>{%- endif -%}
+      </header>
+    {%- endif -%}
+
+    {%- if s.source == 'selected' and s.collection_list.count > 0 -%}
+      <div class="apex-list-collections__grid grid reveal">
+        {%- for collection in s.collection_list -%}
+          <a class="apex-collection-tile card--hover" href="{{ collection.url }}">
+            <div class="apex-collection-tile__media media {{ ratio_class }}">
+              {%- if collection.featured_image -%}
+                {{ collection.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300,400,600,800', sizes: '(min-width:990px) 33vw, 50vw', alt: collection.featured_image.alt | escape }}
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <div class="apex-collection-tile__overlay">
+              <span class="apex-collection-tile__title">{{ collection.title }}</span>
+              {%- if s.show_count -%}<span class="apex-collection-tile__count">{{ collection.products_count }} {{ 'sections.collection_list.products' | t | default: 'products' }}</span>{%- endif -%}
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      {%- paginate collections by s.per_page -%}
+        {%- if collections.size > 0 -%}
+          <div class="apex-list-collections__grid grid reveal">
+            {%- for collection in collections -%}
+              <a class="apex-collection-tile card--hover" href="{{ collection.url }}">
+                <div class="apex-collection-tile__media media {{ ratio_class }}">
+                  {%- if collection.featured_image -%}
+                    {{ collection.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300,400,600,800', sizes: '(min-width:990px) 33vw, 50vw', alt: collection.featured_image.alt | escape }}
+                  {%- else -%}
+                    {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="apex-collection-tile__overlay">
+                  <span class="apex-collection-tile__title">{{ collection.title }}</span>
+                  {%- if s.show_count -%}<span class="apex-collection-tile__count">{{ collection.products_count }} {{ 'sections.collection_list.products' | t | default: 'products' }}</span>{%- endif -%}
+                </div>
+              </a>
+            {%- endfor -%}
+          </div>
+
+          {%- if paginate.pages > 1 -%}
+            <nav class="apex-list-collections__pagination cluster" role="navigation" aria-label="{{ 'general.pagination.label' | t | default: 'Pagination' }}">
+              {%- if paginate.previous -%}<a class="btn btn--ghost btn--sm" href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t | default: 'Previous' }}">{% render 'icon', icon: 'arrow-left' %}</a>{%- endif -%}
+              {%- for part in paginate.parts -%}
+                {%- if part.is_link -%}
+                  <a class="btn btn--ghost btn--sm" href="{{ part.url }}">{{ part.title }}</a>
+                {%- elsif part.title == paginate.current_page -%}
+                  <span class="btn btn--sm" aria-current="page">{{ part.title }}</span>
+                {%- else -%}
+                  <span class="muted apex-list-collections__gap">{{ part.title }}</span>
+                {%- endif -%}
+              {%- endfor -%}
+              {%- if paginate.next -%}<a class="btn btn--ghost btn--sm" href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t | default: 'Next' }}">{% render 'icon', icon: 'arrow-right' %}</a>{%- endif -%}
+            </nav>
+          {%- endif -%}
+        {%- else -%}
+          <div class="apex-list-collections__empty center reveal">
+            <p class="muted">{{ 'sections.collection_list.empty' | t | default: 'No collections found.' }}</p>
+          </div>
+        {%- endif -%}
+      {%- endpaginate -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+.apex-list-collections__grid { grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); }
+.apex-collection-tile { position: relative; display: block; }
+.apex-collection-tile__media { border-radius: var(--radius-card); overflow: hidden; background: var(--bg-alt); }
+.apex-collection-tile__media img { transition: transform .5s var(--ease); }
+.apex-collection-tile:hover .apex-collection-tile__media img { transform: scale(1.05); }
+.apex-collection-tile__overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.2rem; background: linear-gradient(to top, rgba(8,12,20,.62), rgba(8,12,20,0) 55%); color: #fff; border-radius: var(--radius-card); }
+.apex-collection-tile__title { font-family: var(--font-heading); font-weight: 700; font-size: 1.15rem; }
+.apex-collection-tile__title::after { content: ""; position: absolute; inset: 0; }
+.apex-collection-tile__count { font-size: var(--text-sm); opacity: .85; }
+.apex-list-collections__pagination { justify-content: center; margin-top: clamp(2rem, 4vw, 3rem); flex-wrap: wrap; }
+.apex-list-collections__gap { padding-inline: .4rem; }
+.apex-list-collections__empty { padding-block: clamp(2.5rem, 6vw, 4rem); }
+@media (max-width: 990px) { .apex-list-collections__grid { grid-template-columns: repeat(min(var(--cols, 3), 2), minmax(0, 1fr)); } }
+@media (max-width: 600px) { .apex-list-collections__grid { grid-template-columns: repeat(var(--cols-m, 1), minmax(0, 1fr)); } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Collections list",
+  "tag": "section",
+  "class": "shopify-section--main-list-collections",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Shop by collection" },
+    { "type": "text", "id": "subheading", "label": "Subheading" },
+    { "type": "select", "id": "heading_alignment", "label": "Heading alignment", "default": "left", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ] },
+    { "type": "header", "content": "Collections" },
+    { "type": "select", "id": "source", "label": "Source", "default": "all", "options": [ { "value": "all", "label": "All collections" }, { "value": "selected", "label": "Selected collections" } ] },
+    { "type": "collection_list", "id": "collection_list", "label": "Selected collections", "info": "Used when source is \"Selected collections\"." },
+    { "type": "checkbox", "id": "show_count", "label": "Show product count", "default": true },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "image_ratio", "label": "Image ratio", "default": "square", "options": [ { "value": "square", "label": "Square (1:1)" }, { "value": "portrait", "label": "Portrait (3:4)" }, { "value": "landscape", "label": "Landscape (4:3)" }, { "value": "wide", "label": "Wide (16:9)" } ] },
+    { "type": "range", "id": "columns_desktop", "min": 2, "max": 5, "step": 1, "label": "Columns on desktop", "default": 3 },
+    { "type": "range", "id": "columns_mobile", "min": 1, "max": 2, "step": 1, "label": "Columns on mobile", "default": 1 },
+    { "type": "range", "id": "per_page", "min": 4, "max": 24, "step": 2, "label": "Collections per page", "default": 12 },
+    { "type": "header", "content": "Section" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 72 }
+  ],
+  "presets": [ { "name": "Collections list" } ]
+}
+{% endschema %}

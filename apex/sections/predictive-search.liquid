@@ -1,0 +1,97 @@
+{%- comment -%}
+  Fragment rendered by the Section Rendering API. base.js' <apex-search>
+  fetches /search/suggest?q=…&section_id=predictive-search and copies the
+  innerHTML of [data-results] into the live results container. No colour
+  scheme / padding here — it inherits the surrounding drawer/modal scheme.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign products = predictive_search.resources.products
+  assign queries = predictive_search.resources.queries
+-%}
+<div class="apex-predictive" data-results role="listbox" aria-label="{{ 'general.search.suggestions' | t | default: 'Search suggestions' }}">
+  {%- if predictive_search.performed -%}
+    {%- if products.size > 0 or queries.size > 0 -%}
+
+      {%- if s.show_queries and queries.size > 0 -%}
+        <div class="apex-predictive__group">
+          <p class="apex-predictive__heading">{{ 'general.search.suggestions' | t | default: 'Suggestions' }}</p>
+          <ul role="list" class="apex-predictive__queries">
+            {%- for query in queries limit: 4 -%}
+              <li>
+                <a class="apex-predictive__query" href="{{ query.url }}" role="option">
+                  {% render 'icon', icon: 'search' %}
+                  <span>{{ query.styled_text }}</span>
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      {%- if products.size > 0 -%}
+        <div class="apex-predictive__group">
+          <p class="apex-predictive__heading">{{ 'general.search.products' | t | default: 'Products' }}</p>
+          <ul role="list" class="apex-predictive__list">
+            {%- for product in products -%}
+              {%- assign v = product.selected_or_first_available_variant -%}
+              <li>
+                <a class="apex-predictive__item" href="{{ product.url }}" role="option">
+                  <span class="apex-predictive__media media media--square">
+                    {%- if product.featured_media -%}
+                      {{ product.featured_media | image_url: width: 100 | image_tag: loading: 'lazy', widths: '50,100', sizes: '50px', alt: product.featured_media.alt | escape }}
+                    {%- else -%}
+                      {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- endif -%}
+                  </span>
+                  <span class="apex-predictive__info">
+                    {%- if s.show_vendor and product.vendor != blank -%}<span class="apex-predictive__vendor">{{ product.vendor }}</span>{%- endif -%}
+                    <span class="apex-predictive__title">{{ product.title }}</span>
+                    {% render 'price', product: product %}
+                  </span>
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+
+        <a class="btn btn--secondary btn--block btn--sm apex-predictive__all" href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}&type=product">
+          {{ 'general.search.view_all' | t: terms: predictive_search.terms | default: 'View all results' }}
+          {% render 'icon', icon: 'arrow-right' %}
+        </a>
+      {%- endif -%}
+
+    {%- else -%}
+      <p class="apex-predictive__empty muted">{{ 'general.search.no_results' | t: terms: predictive_search.terms | default: 'No results found.' }}</p>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+{% stylesheet %}
+.apex-predictive { display: grid; gap: 1rem; }
+.apex-predictive__group { display: grid; gap: .5rem; }
+.apex-predictive__heading { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 700; }
+.apex-predictive__queries { display: grid; gap: .15rem; }
+.apex-predictive__query { display: flex; align-items: center; gap: .6rem; padding: .5rem .6rem; border-radius: var(--radius-sm); font-size: var(--text-sm); transition: background .15s; }
+.apex-predictive__query:hover { background: var(--bg-alt); color: var(--accent); }
+.apex-predictive__query svg { width: 1rem; height: 1rem; color: var(--text-muted); }
+.apex-predictive__list { display: grid; gap: .25rem; }
+.apex-predictive__item { display: flex; align-items: center; gap: .8rem; padding: .5rem .6rem; border-radius: var(--radius-sm); transition: background .15s; }
+.apex-predictive__item:hover { background: var(--bg-alt); }
+.apex-predictive__media { width: 48px; height: 48px; flex: none; border-radius: var(--radius-sm); }
+.apex-predictive__info { display: grid; gap: .1rem; min-width: 0; }
+.apex-predictive__vendor { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
+.apex-predictive__title { font-weight: 600; font-size: var(--text-sm); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.apex-predictive__item .price { font-size: var(--text-sm); }
+.apex-predictive__all { margin-top: .2rem; }
+.apex-predictive__empty { padding: .6rem; font-size: var(--text-sm); }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Predictive search",
+  "settings": [
+    { "type": "paragraph", "content": "Renders live search suggestions. Add a search input wrapped in <apex-search> (see header) to use it." },
+    { "type": "checkbox", "id": "show_queries", "label": "Show search term suggestions", "default": true },
+    { "type": "checkbox", "id": "show_vendor", "label": "Show product vendor", "default": false }
+  ]
+}
+{% endschema %}

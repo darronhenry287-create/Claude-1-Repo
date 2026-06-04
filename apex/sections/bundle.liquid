@@ -1,0 +1,149 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-bundle color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px">
+  <div class="page-width">
+
+    <div class="apex-bundle__layout">
+      <div class="apex-bundle__media reveal">
+        {%- if s.image != blank -%}
+          {{ s.image | image_url: width: 900 | image_tag:
+              loading: 'lazy',
+              widths: '400,600,900',
+              sizes: '(min-width:990px) 50vw, 100vw',
+              alt: s.image.alt | default: s.heading | escape,
+              class: 'apex-bundle__img',
+              style: 'border-radius:var(--radius-card)' }}
+        {%- else -%}
+          <div class="media media--square" style="border-radius:var(--radius-card)">
+            {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="apex-bundle__content stack reveal reveal--delay-1">
+        {%- if s.subheading != blank -%}<p class="eyebrow eyebrow--pill">{{ s.subheading }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+        {%- if s.description != blank -%}<div class="rte subtitle">{{ s.description }}</div>{%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <ul class="apex-bundle__items stack" style="gap:.7rem">
+            {%- for block in section.blocks -%}
+              {%- liquid
+                assign bprod = all_products[block.settings.product]
+              -%}
+              <li class="apex-bundle__item cluster card bordered" style="padding:.8rem 1rem" {{ block.shopify_attributes }}>
+                <div class="apex-bundle__item-media media media--square" style="width:4rem;height:4rem;border-radius:var(--radius-sm);flex:none;overflow:hidden">
+                  {%- if bprod.featured_media -%}
+                    {{ bprod.featured_media | image_url: width: 100 | image_tag: loading: 'lazy', alt: bprod.title | escape }}
+                  {%- else -%}
+                    {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="stack" style="gap:.15rem;flex:1">
+                  <span class="apex-bundle__item-title" style="font-weight:600;font-size:.92rem">
+                    {{ bprod.title | default: block.settings.title }}
+                  </span>
+                  {%- if block.settings.desc != blank -%}
+                    <span class="muted" style="font-size:var(--text-sm)">{{ block.settings.desc }}</span>
+                  {%- endif -%}
+                </div>
+                <span class="price" style="flex:none">
+                  {%- if bprod != blank -%}
+                    {{ bprod.price | money }}
+                  {%- elsif block.settings.price != blank -%}
+                    {{ block.settings.price }}
+                  {%- endif -%}
+                </span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        <div class="apex-bundle__pricing cluster">
+          {%- if s.total_price != blank -%}
+            <span class="apex-bundle__total h4">{{ s.total_price }}</span>
+          {%- endif -%}
+          {%- if s.compare_price != blank -%}
+            <s class="price__compare">{{ s.compare_price }}</s>
+          {%- endif -%}
+          {%- if s.badge != blank -%}
+            <span class="badge badge--sale">{{ s.badge }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- if s.button_label != blank -%}
+          <div>
+            <a class="btn btn--accent btn--lg" href="{{ s.button_url | default: '#' }}">
+              {{ s.button_label }}
+              {% render 'icon', icon: 'arrow-right' %}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+  </div>
+</section>
+{% stylesheet %}
+.apex-bundle__layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem,1.4rem + 4vw,5rem); align-items: center; }
+@media (max-width: 900px) { .apex-bundle__layout { grid-template-columns: 1fr; } }
+.apex-bundle__img { width: 100%; height: auto; }
+.apex-bundle__content { gap: 1.2rem; }
+.apex-bundle__item { transition: border-color .2s; }
+.apex-bundle__item:hover { border-color: var(--accent); }
+.apex-bundle__item-media { background: var(--bg-alt); }
+.apex-bundle__pricing { gap: .8rem; align-items: baseline; }
+.apex-bundle__total { color: var(--accent); }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Bundle",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Limited offer" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The complete kit" },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Everything you need in one bundle. Save when you buy together.</p>" },
+    { "type": "image_picker", "id": "image", "label": "Bundle image" },
+    { "type": "text", "id": "total_price", "label": "Bundle price", "default": "$89.00" },
+    { "type": "text", "id": "compare_price", "label": "Compare-at price", "default": "$120.00" },
+    { "type": "text", "id": "badge", "label": "Badge text", "default": "Save 26%" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Add bundle to cart" },
+    { "type": "url", "id": "button_url", "label": "Button link" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 72 }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Bundle item",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "title", "label": "Title (if no product)", "default": "Item name" },
+        { "type": "text", "id": "desc", "label": "Short description" },
+        { "type": "text", "id": "price", "label": "Price (if no product)", "default": "$29.00" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle",
+      "settings": {
+        "heading": "The complete kit",
+        "subheading": "Limited offer",
+        "total_price": "$89.00",
+        "compare_price": "$120.00",
+        "badge": "Save 26%",
+        "button_label": "Add bundle to cart"
+      },
+      "blocks": [
+        { "type": "product", "settings": { "title": "Core Item", "desc": "The foundation", "price": "$39.00" } },
+        { "type": "product", "settings": { "title": "Add-on", "desc": "Takes it further", "price": "$29.00" } },
+        { "type": "product", "settings": { "title": "Bonus", "desc": "Completes the set", "price": "$19.00" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
