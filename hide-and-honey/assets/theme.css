@@ -80,6 +80,12 @@ h3 { font-size: clamp(1.3rem, 2.4vw, 1.8rem); }
 /* ---- Layout ---- */
 .wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gap); }
 .section { padding-block: clamp(3.5rem, 8vw, 7rem); }
+.shopify-section, section.section { min-height: 0 !important; }
+.shopify-section { display: block; }
+/* Newsletter clamp — never balloons in editor preview */
+section.section.dark.cta-band { min-height: 0 !important; max-height: none; }
+section.section.dark.cta-band .wrap { padding-block: 0; }
+
 .center { text-align: center; }
 .grid { display: grid; gap: var(--gap); }
 
