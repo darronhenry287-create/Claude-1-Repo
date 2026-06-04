@@ -1,0 +1,201 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-main-article color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px">
+
+  {%- if s.show_hero_image and article.image -%}
+    <div class="apex-article-hero full-bleed" style="max-height:{{ s.hero_height }}vh;overflow:hidden">
+      {{ article.image | image_url: width: 1800 | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          widths: '750,1000,1200,1600,1800',
+          sizes: '100vw',
+          alt: article.image.alt | escape,
+          class: 'apex-article-hero__img' }}
+    </div>
+  {%- endif -%}
+
+  <div class="page-width page-width--narrow">
+
+    <header class="apex-article-header reveal stack">
+      {%- if s.show_tags and article.tags.size > 0 -%}
+        <div class="cluster">
+          {%- for tag in article.tags -%}
+            <a class="badge" href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      <h1 class="balance">{{ article.title }}</h1>
+      <div class="cluster apex-article-meta">
+        {%- if s.show_date -%}
+          <span class="muted" style="font-size:var(--text-sm)">
+            <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time>
+          </span>
+        {%- endif -%}
+        {%- if s.show_author -%}
+          <span class="muted" style="font-size:var(--text-sm)">{{ 'blogs.article.by_author' | t: author: article.author | default: article.author }}</span>
+        {%- endif -%}
+        {%- if s.show_read_time -%}
+          {%- assign words = article.content | strip_html | split: ' ' | size -%}
+          {%- assign mins = words | divided_by: 200 | plus: 1 -%}
+          <span class="muted" style="font-size:var(--text-sm)">{{ mins }} min read</span>
+        {%- endif -%}
+      </div>
+    </header>
+
+    <div class="rte apex-article-content reveal reveal--delay-1">
+      {{ article.content }}
+    </div>
+
+    {%- if s.show_tags and article.tags.size > 0 -%}
+      <div class="apex-article-tags cluster reveal">
+        <span class="muted" style="font-size:var(--text-sm)">Tags:</span>
+        {%- for tag in article.tags -%}
+          <a class="badge" href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if s.show_share -%}
+      <div class="apex-article-share cluster reveal">
+        <span style="font-size:var(--text-sm);font-weight:600">Share:</span>
+        <a class="btn btn--ghost btn--sm btn--pill"
+          href="https://twitter.com/intent/tweet?text={{ article.title | url_encode }}&url={{ shop.url }}{{ article.url | url_encode }}"
+          target="_blank" rel="noopener" aria-label="Share on X">
+          {% render 'icon', icon: 'x' %}
+        </a>
+        <a class="btn btn--ghost btn--sm btn--pill"
+          href="https://www.facebook.com/sharer.php?u={{ shop.url }}{{ article.url | url_encode }}"
+          target="_blank" rel="noopener" aria-label="Share on Facebook">
+          {% render 'icon', icon: 'facebook' %}
+        </a>
+      </div>
+    {%- endif -%}
+
+    {%- if s.show_prev_next -%}
+      <nav class="apex-article-nav reveal" aria-label="Article navigation">
+        {%- if blog.previous_article -%}
+          <a class="apex-article-nav__item" href="{{ blog.previous_article.url }}">
+            <span class="eyebrow">{% render 'icon', icon: 'arrow-left' %} Previous</span>
+            <span class="apex-article-nav__title">{{ blog.previous_article.title }}</span>
+          </a>
+        {%- else -%}
+          <span></span>
+        {%- endif -%}
+        {%- if blog.next_article -%}
+          <a class="apex-article-nav__item apex-article-nav__item--next" href="{{ blog.next_article.url }}">
+            <span class="eyebrow">Next {% render 'icon', icon: 'arrow-right' %}</span>
+            <span class="apex-article-nav__title">{{ blog.next_article.title }}</span>
+          </a>
+        {%- else -%}
+          <span></span>
+        {%- endif -%}
+      </nav>
+    {%- endif -%}
+
+    {%- if blog.comments_enabled? -%}
+      <div class="apex-article-comments reveal">
+        <h2 class="h4" style="margin-bottom:1.6rem">
+          {{ 'blogs.comments.comments_with_count' | t: count: article.comments_count | default: 'Comments' }}
+        </h2>
+
+        {%- if article.comments_count > 0 -%}
+          <div class="stack" style="gap:1.6rem;margin-bottom:2.4rem">
+            {%- for comment in article.comments -%}
+              <div class="card bordered" style="padding:1.4rem" id="comment-{{ comment.id }}">
+                <div class="cluster" style="margin-bottom:.7rem">
+                  <strong>{{ comment.author }}</strong>
+                  <span class="muted" style="font-size:var(--text-sm)">
+                    <time datetime="{{ comment.created_at | date: '%Y-%m-%d' }}">{{ comment.created_at | date: '%B %d, %Y' }}</time>
+                  </span>
+                </div>
+                <p>{{ comment.content }}</p>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- form 'new_comment', article -%}
+          <h3 class="h5" style="margin-bottom:1.2rem">{{ 'blogs.comments.title' | t | default: 'Leave a comment' }}</h3>
+          {%- if form.posted_successfully? -%}
+            <p class="apex-article-comments__success" role="status">{{ 'blogs.comments.success' | t | default: 'Your comment has been posted.' }}</p>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <p class="apex-article-comments__error" role="alert">{{ form.errors | default_errors }}</p>
+          {%- endif -%}
+          <div class="stack" style="gap:1rem">
+            <div class="grid grid--2">
+              <div class="field">
+                <label for="comment-author">{{ 'blogs.comments.name' | t | default: 'Name' }} <span aria-hidden="true">*</span></label>
+                <input class="input" type="text" id="comment-author" name="comment[author]"
+                  value="{{ form.author }}" required autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="comment-email">{{ 'blogs.comments.email' | t | default: 'Email' }} <span aria-hidden="true">*</span></label>
+                <input class="input" type="email" id="comment-email" name="comment[email]"
+                  value="{{ form.email }}" required autocomplete="email">
+              </div>
+            </div>
+            <div class="field">
+              <label for="comment-body">{{ 'blogs.comments.message' | t | default: 'Comment' }} <span aria-hidden="true">*</span></label>
+              <textarea class="input" id="comment-body" name="comment[body]" required>{{ form.body }}</textarea>
+            </div>
+            <div>
+              <button class="btn btn--accent" type="submit">{{ 'blogs.comments.post' | t | default: 'Post comment' }}</button>
+            </div>
+          </div>
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+{% stylesheet %}
+.apex-article-hero { margin-bottom: clamp(2rem, 1.4rem + 2vw, 3rem); }
+.apex-article-hero__img { width: 100%; height: 100%; object-fit: cover; }
+.apex-article-header { gap: .9rem; padding-block: clamp(1.6rem, 1rem + 2vw, 2.8rem) clamp(1.2rem, .8rem + 1vw, 2rem); }
+.apex-article-meta { gap: 1rem; }
+.apex-article-content { margin-top: clamp(1rem, .8rem + .8vw, 1.6rem); }
+.apex-article-tags { margin-top: 2.4rem; padding-top: 1.6rem; border-top: var(--border-width) solid var(--border); }
+.apex-article-share { margin-top: 1.6rem; }
+.apex-article-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: clamp(2rem, 1.4rem + 2vw, 3rem); padding-top: 1.6rem; border-top: var(--border-width) solid var(--border); }
+.apex-article-nav__item { display: grid; gap: .4rem; padding: 1rem; border-radius: var(--radius-card); border: var(--border-width) solid var(--border); transition: border-color .2s, background .2s; }
+.apex-article-nav__item:hover { border-color: var(--accent); background: var(--bg-alt); }
+.apex-article-nav__item--next { text-align: right; }
+.apex-article-nav__title { font-weight: 600; font-size: .95rem; }
+.apex-article-comments { margin-top: clamp(2.4rem, 1.6rem + 3vw, 4rem); padding-top: 2rem; border-top: var(--border-width) solid var(--border); }
+.apex-article-comments__success { color: var(--success); padding: 1rem; background: color-mix(in srgb, var(--success) 10%, transparent); border-radius: var(--radius-sm); margin-bottom: 1.2rem; }
+.apex-article-comments__error { color: var(--sale); padding: 1rem; background: color-mix(in srgb, var(--sale) 10%, transparent); border-radius: var(--radius-sm); margin-bottom: 1.2rem; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Article",
+  "tag": "section",
+  "settings": [
+    { "type": "checkbox", "id": "show_hero_image", "label": "Show hero image", "default": true },
+    {
+      "type": "range",
+      "id": "hero_height",
+      "min": 30,
+      "max": 75,
+      "step": 5,
+      "unit": "vh",
+      "label": "Hero image height",
+      "default": 55
+    },
+    { "type": "checkbox", "id": "show_tags", "label": "Show tags", "default": true },
+    { "type": "checkbox", "id": "show_date", "label": "Show date", "default": true },
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": true },
+    { "type": "checkbox", "id": "show_read_time", "label": "Show read time", "default": true },
+    { "type": "checkbox", "id": "show_share", "label": "Show share buttons", "default": true },
+    { "type": "checkbox", "id": "show_prev_next", "label": "Show previous/next navigation", "default": true },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding bottom", "default": 72 }
+  ],
+  "presets": [
+    { "name": "Article" }
+  ]
+}
+{% endschema %}

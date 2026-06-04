@@ -1,0 +1,110 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-rich-text color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="rich-text-{{ section.id }}">
+  <div class="page-width page-width--narrow">
+    <div class="apex-rich-text__inner reveal stack center">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'eyebrow' -%}
+            <p class="eyebrow eyebrow--pill" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+          {%- when 'heading' -%}
+            <h2 class="balance" style="font-size:clamp(1.9rem,1.2rem + 3vw,{{ block.settings.size }}rem)" {{ block.shopify_attributes }}>{{ block.settings.text }}</h2>
+          {%- when 'text' -%}
+            <div class="rte subtitle" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+          {%- when 'buttons' -%}
+            <div class="cluster" style="justify-content:center" {{ block.shopify_attributes }}>
+              {%- if block.settings.button_1 != blank -%}
+                <a class="btn btn--accent btn--lg" href="{{ block.settings.button_1_url }}">{{ block.settings.button_1 }}</a>
+              {%- endif -%}
+              {%- if block.settings.button_2 != blank -%}
+                <a class="btn btn--secondary btn--lg" href="{{ block.settings.button_2_url }}">{{ block.settings.button_2 }}</a>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-rich-text__inner { max-width: 52ch; margin-inline: auto; gap: 1.4rem; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Rich text",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0, "max": 160, "step": 4, "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0, "max": 160, "step": 4, "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "eyebrow",
+      "name": "Eyebrow",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Our story" }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        { "type": "inline_richtext", "id": "text", "label": "Heading", "default": "We make things that matter." },
+        { "type": "range", "id": "size", "min": 2, "max": 5, "step": 0.25, "unit": "rem", "label": "Max size", "default": 3 }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Quality over everything. Every product we make is designed to last, built with care, and backed by our commitment to your satisfaction.</p>" }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "Buttons",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "button_1", "label": "Button 1 label", "default": "Shop now" },
+        { "type": "url", "id": "button_1_url", "label": "Button 1 link" },
+        { "type": "text", "id": "button_2", "label": "Button 2 label", "default": "Learn more" },
+        { "type": "url", "id": "button_2_url", "label": "Button 2 link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich text",
+      "blocks": [
+        { "type": "eyebrow" },
+        { "type": "heading" },
+        { "type": "text" },
+        { "type": "buttons" }
+      ]
+    }
+  ]
+}
+{% endschema %}
