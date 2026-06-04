@@ -7,13 +7,88 @@
 {
   "name": "Button",
   "settings": [
-    { "type": "text", "id": "label", "label": "Label", "default": "Shop now" },
-    { "type": "url", "id": "url", "label": "URL" },
-    { "type": "select", "id": "style", "label": "Style", "default": "accent", "options": [{"value":"accent","label":"Accent"},{"value":"secondary","label":"Secondary"},{"value":"ghost","label":"Ghost"}] },
-    { "type": "select", "id": "size", "label": "Size", "default": "md", "options": [{"value":"sm","label":"Small"},{"value":"md","label":"Medium"},{"value":"lg","label":"Large"}] },
-    { "type": "checkbox", "id": "pill", "label": "Pill shape", "default": false },
-    { "type": "select", "id": "align", "label": "Alignment", "default": "left", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}] }
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "URL"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "default": "accent",
+      "options": [
+        {
+          "value": "accent",
+          "label": "Accent"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        },
+        {
+          "value": "ghost",
+          "label": "Ghost"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "label": "Size",
+      "default": "md",
+      "options": [
+        {
+          "value": "sm",
+          "label": "Small"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "pill",
+      "label": "Pill shape",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    }
   ],
-  "presets": [ { "name": "Button" } ]
+  "presets": [
+    {
+      "name": "Button"
+    }
+  ]
 }
 {% endschema %}

@@ -20,14 +20,80 @@
 {
   "name": "Quote",
   "settings": [
-    { "type": "textarea", "id": "quote", "label": "Quote", "default": "This product completely changed my routine. I can’t imagine going back." },
-    { "type": "select", "id": "size", "label": "Text size", "default": "lede", "options": [{"value":"lede","label":"Large"},{"value":"h4","label":"Heading"},{"value":"","label":"Body"}] },
-    { "type": "text", "id": "author", "label": "Author name", "default": "Jane D." },
-    { "type": "text", "id": "role", "label": "Role / company", "default": "Verified buyer" },
-    { "type": "image_picker", "id": "author_image", "label": "Author avatar (optional)" },
-    { "type": "range", "id": "max_width", "min": 30, "max": 80, "step": 5, "unit": "ch", "label": "Max width", "default": 60 },
-    { "type": "select", "id": "align", "label": "Alignment", "default": "left", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"}] }
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "This product completely changed my routine. I can’t imagine going back."
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "label": "Text size",
+      "default": "lede",
+      "options": [
+        {
+          "value": "lede",
+          "label": "Large"
+        },
+        {
+          "value": "h4",
+          "label": "Heading"
+        },
+        {
+          "value": "",
+          "label": "Body"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "Author name",
+      "default": "Jane D."
+    },
+    {
+      "type": "text",
+      "id": "role",
+      "label": "Role / company",
+      "default": "Verified buyer"
+    },
+    {
+      "type": "image_picker",
+      "id": "author_image",
+      "label": "Author avatar (optional)"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "ch",
+      "label": "Max width",
+      "default": 60
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    }
   ],
-  "presets": [ { "name": "Quote" } ]
+  "presets": [
+    {
+      "name": "Quote"
+    }
+  ]
 }
 {% endschema %}

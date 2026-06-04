@@ -10,12 +10,55 @@
 {
   "name": "Stat",
   "settings": [
-    { "type": "text", "id": "prefix", "label": "Prefix (e.g. $)", "default": "" },
-    { "type": "text", "id": "number", "label": "Number / value", "default": "10K+" },
-    { "type": "text", "id": "suffix", "label": "Suffix (e.g. %)", "default": "" },
-    { "type": "text", "id": "label", "label": "Label", "default": "Happy customers" },
-    { "type": "select", "id": "align", "label": "Alignment", "default": "center", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}] }
+    {
+      "type": "text",
+      "id": "prefix",
+      "label": "Prefix (e.g. $)",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "number",
+      "label": "Number / value",
+      "default": "10K+"
+    },
+    {
+      "type": "text",
+      "id": "suffix",
+      "label": "Suffix (e.g. %)",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Happy customers"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    }
   ],
-  "presets": [ { "name": "Stat" } ]
+  "presets": [
+    {
+      "name": "Stat"
+    }
+  ]
 }
 {% endschema %}

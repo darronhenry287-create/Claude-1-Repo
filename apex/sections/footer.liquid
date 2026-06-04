@@ -7,7 +7,7 @@
             <div class="footer__col footer__col--brand" {{ block.shopify_attributes }}>
               {%- if block.settings.heading != blank -%}<div class="header__logo" style="margin-bottom:.8rem">{{ block.settings.heading }}</div>{%- endif -%}
               {%- if block.settings.text != blank -%}<p class="muted" style="max-width:34ch">{{ block.settings.text }}</p>{%- endif -%}
-              {%- assign socials = 'instagram,tiktok,facebook,youtube,x' | split: ',' -%}
+              {%- assign socials = 'instagram,tiktok,facebook,youtube,x,pinterest,linkedin,threads,snapchat,whatsapp' | split: ',' -%}
               <div class="cluster" style="margin-top:1.2rem">
                 {%- for s in socials -%}{%- assign key = 'social_' | append: s -%}{%- assign url = settings[key] -%}{%- if url != blank -%}<a class="icon-btn bordered" href="{{ url }}" aria-label="{{ s }}" style="width:2.4rem;height:2.4rem">{% render 'icon', icon: s %}</a>{%- endif -%}{%- endfor -%}
               </div>

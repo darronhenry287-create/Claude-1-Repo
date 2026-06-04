@@ -29,13 +29,79 @@
 {
   "name": "Checklist",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading (optional)", "default": "What's included" },
-    { "type": "select", "id": "heading_size", "label": "Heading size", "default": "h4", "options": [{"value":"h3","label":"Large"},{"value":"h4","label":"Medium"},{"value":"h5","label":"Small"}] },
-    { "type": "textarea", "id": "items", "label": "Items (one per line)", "default": "Free shipping on all orders\n30-day money-back guarantee\nLifetime customer support\nEco-friendly packaging" },
-    { "type": "range", "id": "gap", "min": 4, "max": 32, "step": 4, "unit": "px", "label": "Heading gap", "default": 12 },
-    { "type": "range", "id": "item_gap", "min": 4, "max": 24, "step": 2, "unit": "px", "label": "Item gap", "default": 10 },
-    { "type": "select", "id": "align", "label": "Alignment", "default": "left", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"}] }
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (optional)",
+      "default": "What's included"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "h4",
+      "options": [
+        {
+          "value": "h3",
+          "label": "Large"
+        },
+        {
+          "value": "h4",
+          "label": "Medium"
+        },
+        {
+          "value": "h5",
+          "label": "Small"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "items",
+      "label": "Items (one per line)",
+      "default": "Free shipping on all orders\n30-day money-back guarantee\nLifetime customer support\nEco-friendly packaging"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 4,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "label": "Heading gap",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "item_gap",
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Item gap",
+      "default": 10
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    }
   ],
-  "presets": [ { "name": "Checklist" } ]
+  "presets": [
+    {
+      "name": "Checklist"
+    }
+  ]
 }
 {% endschema %}

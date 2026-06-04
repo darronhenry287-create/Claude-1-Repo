@@ -1,0 +1,119 @@
+{%- liquid
+  assign show_heading = false
+  if block.settings.heading != blank
+    assign show_heading = true
+  endif
+-%}
+<div class="apex-tb-accordion" {{ block.shopify_attributes }}>
+  {%- if show_heading -%}
+    <p class="{{ block.settings.heading_size }} apex-tb-accordion__title" style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);margin-bottom:1rem">{{ block.settings.heading | escape }}</p>
+  {%- endif -%}
+  <div class="accordion"{% if block.settings.single_open %} data-accordion-single{% endif %}>
+    {%- for b in block.blocks -%}
+      {%- render b -%}
+    {%- else -%}
+      <details class="accordion__item">
+        <summary class="accordion__head">
+          <span>{{ block.settings.item1_q | escape }}</span>
+          <span class="accordion__icon" aria-hidden="true"></span>
+        </summary>
+        <div class="accordion__body rte">{{ block.settings.item1_a }}</div>
+      </details>
+      <details class="accordion__item">
+        <summary class="accordion__head">
+          <span>{{ block.settings.item2_q | escape }}</span>
+          <span class="accordion__icon" aria-hidden="true"></span>
+        </summary>
+        <div class="accordion__body rte">{{ block.settings.item2_a }}</div>
+      </details>
+    {%- endfor -%}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Accordion",
+  "blocks": [
+    {
+      "type": "@theme"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading (optional)",
+      "default": "Frequently asked questions"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "h3",
+      "options": [
+        {
+          "value": "h2",
+          "label": "Large"
+        },
+        {
+          "value": "h3",
+          "label": "Medium"
+        },
+        {
+          "value": "h4",
+          "label": "Small"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "single_open",
+      "label": "Only one item open at a time",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Fallback items (shown when no child blocks added)"
+    },
+    {
+      "type": "text",
+      "id": "item1_q",
+      "label": "Question 1",
+      "default": "What makes this product special?"
+    },
+    {
+      "type": "richtext",
+      "id": "item1_a",
+      "label": "Answer 1",
+      "default": "<p>Enter your answer here.</p>"
+    },
+    {
+      "type": "text",
+      "id": "item2_q",
+      "label": "Question 2",
+      "default": "How does shipping work?"
+    },
+    {
+      "type": "richtext",
+      "id": "item2_a",
+      "label": "Answer 2",
+      "default": "<p>Enter your answer here.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Accordion",
+      "blocks": [
+        {
+          "type": "accordion-item"
+        },
+        {
+          "type": "accordion-item"
+        },
+        {
+          "type": "accordion-item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

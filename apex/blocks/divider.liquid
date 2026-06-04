@@ -1,0 +1,41 @@
+<div class="apex-tb-divider" style="padding-block:{{ block.settings.spacing }}px" {{ block.shopify_attributes }}>
+  <hr class="divider" style="border-color:{{ block.settings.color }};height:{{ block.settings.thickness }}px;background:{{ block.settings.color }}">
+</div>
+{% schema %}
+{
+  "name": "Divider",
+  "settings": [
+    {
+      "type": "range",
+      "id": "spacing",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Vertical spacing",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "thickness",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "label": "Thickness",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Color",
+      "default": "#e1e4ea"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Divider"
+    }
+  ]
+}
+{% endschema %}

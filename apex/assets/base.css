@@ -358,3 +358,46 @@ textarea { min-height: 8rem; resize: vertical; }
 
 /* shopify editor niceties */
 .shopify-section-group-header-group { position: relative; z-index: 30; }
+
+/* ============================================================================
+   SETTINGS-DRIVEN OVERRIDES
+   Consume tokens from css-variables + body modifier classes (set in
+   theme.liquid from theme settings). Appended last so it wins cleanly.
+   ========================================================================== */
+.btn { font-weight: var(--btn-weight, 700); letter-spacing: var(--btn-letter-spacing, .01em); text-transform: var(--btn-transform, none); border-width: var(--btn-border, 1px); padding: var(--btn-py, .95em) var(--btn-px, 1.6em); }
+.btn--sm { padding: calc(var(--btn-py, 15px) * .62) calc(var(--btn-px, 26px) * .66); }
+.btn--lg { padding: calc(var(--btn-py, 15px) * 1.18) calc(var(--btn-px, 26px) * 1.22); }
+.has-btn-shadow .btn { box-shadow: 0 8px 20px -8px color-mix(in srgb, var(--accent) 60%, transparent); }
+.btn-outline .btn { background: transparent; color: var(--text); border-color: var(--border); }
+.btn-outline .btn--accent { color: var(--accent); border-color: var(--accent); }
+.btn-soft .btn--accent { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent); }
+.btnhover-none .btn:hover { transform: none; box-shadow: none; }
+.btnhover-grow .btn:hover { transform: scale(1.04); }
+.btnhover-fill .btn--accent:hover { background: var(--text); color: var(--bg); }
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5 { text-transform: var(--heading-transform, none); }
+.eyebrow { font-family: var(--font-accent, var(--font-body)); letter-spacing: var(--accent-letter-spacing, .14em); text-transform: var(--accent-transform, uppercase); }
+body { letter-spacing: var(--body-letter-spacing, 0); }
+.price { font-weight: var(--price-weight, 700); }
+.header__nav a { font-size: calc(.92rem * var(--nav-size, 1)); }
+.header__bar { min-height: var(--header-h, 4.2rem); }
+.no-header-border .header { border-bottom: 0; }
+.menu-highlight .header__nav a::after, .menu-plain .header__nav a::after { display: none; }
+.menu-highlight .header__nav a:hover { background: var(--bg-alt); border-radius: var(--radius-sm); padding-inline: .5rem; }
+.badge { border-radius: var(--badge-radius, 999px); text-transform: var(--badge-transform, uppercase); font-size: calc(var(--text-xs) * var(--badge-scale, 1)); }
+.product-card__info { text-align: var(--card-align, left); }
+.product-card__title { font-size: calc(.98rem * var(--card-title-size, 1)); }
+.product-card__media img { transition: transform .5s var(--ease); }
+.cardhover-zoom .product-card__media:hover img { transform: scale(1.05); }
+.cardhover-none .product-card__media.card--hover:hover { transform: none; box-shadow: none; }
+.card-shadow .product-card__media, .card-shadow .card { border: 0; box-shadow: var(--shadow-card); }
+.card-plain .product-card__media, .card-plain .card { border: 0; box-shadow: none; }
+.product-card__media, .media--round { border-radius: var(--image-corner, var(--radius-card)); }
+.input, input, textarea, select { border-width: var(--input-border, 1px); }
+.input-filled .input, .input-filled input, .input-filled textarea, .input-filled select { background: var(--bg-alt); border-color: transparent; }
+.input-underline .input, .input-underline input, .input-underline select { border-radius: 0; background: transparent; padding-inline: 0; border-width: 0 0 var(--input-border, 1px) 0; }
+.field > label { text-transform: var(--form-label-transform, none); }
+.shadow-hard { --shadow-card: 0 5px 0 -1px var(--border); }
+.shadow-none { --shadow-card: none; }
+.link-none .rte a { text-decoration: none; }
+.link-hover .rte a { text-decoration: none; }
+.link-hover .rte a:hover { text-decoration: underline; }

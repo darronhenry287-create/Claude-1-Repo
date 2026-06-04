@@ -31,7 +31,7 @@
   <script src="{{ 'base.js' | asset_url }}" defer></script>
 </head>
 
-<body class="color-scheme-1 template-{{ request.page_type | handle }}">
+<body class="color-scheme-1 template-{{ request.page_type | handle }} btn-{{ settings.button_style | default: 'solid' }} btnhover-{{ settings.button_hover | default: 'lift' }} card-{{ settings.card_style | default: 'border' }} cardhover-{{ settings.card_hover | default: 'lift' }} shadow-{{ settings.shadow_style | default: 'soft' }} input-{{ settings.input_style | default: 'outline' }} link-{{ settings.link_style | default: 'underline' }} menu-{{ settings.menu_style | default: 'underline' }}{% if settings.button_shadow %} has-btn-shadow{% endif %}{% if settings.header_border == false %} no-header-border{% endif %}">
   <a class="skip-to-content" href="#MainContent">{{ 'accessibility.skip_to_text' | t | default: 'Skip to content' }}</a>
 
   {% sections 'header-group' %}

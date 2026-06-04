@@ -13,11 +13,60 @@
 {
   "name": "Image",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "select", "id": "ratio", "label": "Ratio", "default": "landscape", "options": [{"value":"square","label":"Square"},{"value":"portrait","label":"Portrait"},{"value":"landscape","label":"Landscape"},{"value":"wide","label":"Wide (16:9)"}] },
-    { "type": "range", "id": "max_width", "min": 160, "max": 1200, "step": 40, "unit": "px", "label": "Max width", "default": 800 },
-    { "type": "range", "id": "radius", "min": 0, "max": 40, "step": 2, "unit": "px", "label": "Corner radius", "default": 12 }
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Ratio",
+      "default": "landscape",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape"
+        },
+        {
+          "value": "wide",
+          "label": "Wide (16:9)"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 160,
+      "max": 1200,
+      "step": 40,
+      "unit": "px",
+      "label": "Max width",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 12
+    }
   ],
-  "presets": [ { "name": "Image" } ]
+  "presets": [
+    {
+      "name": "Image"
+    }
+  ]
 }
 {% endschema %}

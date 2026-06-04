@@ -1,4 +1,10 @@
-<div class="apex-tb-icon-box stack" style="gap:{{ block.settings.gap }}px;text-align:{{ block.settings.align }};align-items:{{ block.settings.align == 'center' ? 'center' : 'flex-start' }}" {{ block.shopify_attributes }}>
+{%- liquid
+  assign ai = 'flex-start'
+  if block.settings.align == 'center'
+    assign ai = 'center'
+  endif
+-%}
+<div class="apex-tb-icon-box stack" style="gap:{{ block.settings.gap }}px;text-align:{{ block.settings.align }};align-items:{{ ai }}" {{ block.shopify_attributes }}>
   {%- if block.settings.icon != blank -%}
     <span class="apex-tb-icon-box__icon" style="width:{{ block.settings.icon_size }}px;height:{{ block.settings.icon_size }}px;display:inline-flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);border-radius:{{ block.settings.icon_radius }}px;flex-shrink:0">
       {%- render 'icon', icon: block.settings.icon -%}
@@ -20,15 +26,149 @@
 {
   "name": "Icon box",
   "settings": [
-    { "type": "select", "id": "icon", "label": "Icon", "default": "shield", "options": [{"value":"star","label":"Star"},{"value":"check","label":"Check"},{"value":"truck","label":"Truck"},{"value":"shield","label":"Shield"},{"value":"leaf","label":"Leaf"},{"value":"return","label":"Return"},{"value":"cart","label":"Cart"},{"value":"bag","label":"Bag"},{"value":"user","label":"User"},{"value":"search","label":"Search"},{"value":"plus","label":"Plus"},{"value":"arrow-right","label":"Arrow right"},{"value":"chevron-right","label":"Chevron right"}] },
-    { "type": "range", "id": "icon_size", "min": 32, "max": 96, "step": 4, "unit": "px", "label": "Icon size", "default": 56 },
-    { "type": "range", "id": "icon_radius", "min": 0, "max": 48, "step": 4, "unit": "px", "label": "Icon corner radius", "default": 16 },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Free shipping" },
-    { "type": "select", "id": "heading_size", "label": "Heading size", "default": "h4", "options": [{"value":"h3","label":"Large"},{"value":"h4","label":"Medium"},{"value":"h5","label":"Small"}] },
-    { "type": "text", "id": "text", "label": "Supporting text", "default": "On all orders over $50." },
-    { "type": "range", "id": "gap", "min": 8, "max": 32, "step": 4, "unit": "px", "label": "Inner gap", "default": 16 },
-    { "type": "select", "id": "align", "label": "Alignment", "default": "left", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"}] }
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Icon",
+      "default": "shield",
+      "options": [
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "return",
+          "label": "Return"
+        },
+        {
+          "value": "cart",
+          "label": "Cart"
+        },
+        {
+          "value": "bag",
+          "label": "Bag"
+        },
+        {
+          "value": "user",
+          "label": "User"
+        },
+        {
+          "value": "search",
+          "label": "Search"
+        },
+        {
+          "value": "plus",
+          "label": "Plus"
+        },
+        {
+          "value": "arrow-right",
+          "label": "Arrow right"
+        },
+        {
+          "value": "chevron-right",
+          "label": "Chevron right"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 32,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "icon_radius",
+      "min": 0,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "label": "Icon corner radius",
+      "default": 16
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Free shipping"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "h4",
+      "options": [
+        {
+          "value": "h3",
+          "label": "Large"
+        },
+        {
+          "value": "h4",
+          "label": "Medium"
+        },
+        {
+          "value": "h5",
+          "label": "Small"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Supporting text",
+      "default": "On all orders over $50."
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "label": "Inner gap",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    }
   ],
-  "presets": [ { "name": "Icon box" } ]
+  "presets": [
+    {
+      "name": "Icon box"
+    }
+  ]
 }
 {% endschema %}

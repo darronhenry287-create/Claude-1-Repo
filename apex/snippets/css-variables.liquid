@@ -14,6 +14,8 @@
   {%- if hf_bold -%}{{ hf_bold | font_face: font_display: 'swap' }}{%- endif -%}
   {%- assign bf_bold = bf | font_modify: 'weight', 'bold' -%}
   {%- if bf_bold -%}{{ bf_bold | font_face: font_display: 'swap' }}{%- endif -%}
+  {%- assign af = settings.accent_font -%}
+  {%- if af and af != bf and af != hf -%}{{ af | font_face: font_display: 'swap' }}{%- endif -%}
 
   :root {
     --font-heading: {{ hf.family }}, {{ hf.fallback_families }};
@@ -41,7 +43,32 @@
 
     --dur: {{ settings.anim_duration | default: 500 }}ms;
     --reveal-distance: {{ settings.anim_distance | default: 24 }}px;
-    {% if settings.button_uppercase %}--btn-transform: uppercase;{% else %}--btn-transform: none;{% endif %}
+    {% if settings.button_uppercase or settings.button_transform == 'uppercase' %}--btn-transform: uppercase;{% else %}--btn-transform: none;{% endif %}
+    --btn-weight: {{ settings.button_weight | default: 700 }};
+    --btn-letter-spacing: {{ settings.button_letter_spacing | default: 1 | divided_by: 100.0 }}em;
+    --btn-border: {{ settings.button_border_width | default: 1 }}px;
+    --btn-px: {{ settings.button_padding_x | default: 26 }}px;
+    --btn-py: {{ settings.button_padding_y | default: 15 }}px;
+    --heading-transform: {{ settings.heading_transform | default: 'none' }};
+    --h1: calc(clamp(2.3rem, 1.4rem + 3.6vw, 3.8rem) * {{ settings.heading_h1_scale | default: 100 | divided_by: 100.0 }});
+    --h2: calc(clamp(1.8rem, 1.2rem + 2.4vw, 2.7rem) * {{ settings.heading_h2_scale | default: 100 | divided_by: 100.0 }});
+    --h3: calc(clamp(1.35rem, 1.1rem + 1.1vw, 1.7rem) * {{ settings.heading_h3_scale | default: 100 | divided_by: 100.0 }});
+    --font-accent: {{ settings.accent_font.family | default: hf.family }}, {{ settings.accent_font.fallback_families | default: 'sans-serif' }};
+    --accent-letter-spacing: {{ settings.accent_letter_spacing | default: 14 | divided_by: 100.0 }}em;
+    --accent-transform: {{ settings.accent_transform | default: 'uppercase' }};
+    --body-letter-spacing: {{ settings.body_letter_spacing | default: 0 | divided_by: 100.0 }}em;
+    --price-weight: {{ settings.price_weight | default: 700 }};
+    --nav-size: {{ settings.nav_font_size | default: 100 | divided_by: 100.0 }};
+    --card-align: {{ settings.card_text_align | default: 'left' }};
+    --card-gap: {{ settings.card_gap | default: 24 }}px;
+    --card-title-size: {{ settings.card_text_size | default: 100 | divided_by: 100.0 }};
+    --badge-radius: {% if settings.badge_shape == 'square' %}4px{% elsif settings.badge_shape == 'soft' %}8px{% else %}999px{% endif %};
+    --badge-transform: {% if settings.badge_uppercase %}uppercase{% else %}none{% endif %};
+    --badge-scale: {{ settings.badge_size | default: 100 | divided_by: 100.0 }};
+    --image-corner: {{ settings.image_corner | default: 12 }}px;
+    --input-border: {{ settings.input_border_width | default: 1 }}px;
+    --header-h: {{ settings.header_height | default: 68 }}px;
+    --form-label-transform: {% if settings.form_label_uppercase %}uppercase{% else %}none{% endif %};
   }
   @media (min-width: 750px){ :root { --gutter: {{ settings.gutter_desktop | default: 40 }}px; } }
   .btn { text-transform: var(--btn-transform); letter-spacing: {% if settings.button_uppercase %}.06em{% else %}0{% endif %}; }

@@ -9,11 +9,48 @@
 {
   "name": "Price",
   "settings": [
-    { "type": "product", "id": "product", "label": "Product (optional)" },
-    { "type": "number", "id": "price", "label": "Price (pence/cents, fallback)", "default": 2999 },
-    { "type": "number", "id": "compare_at", "label": "Compare-at price (fallback)", "default": 4999 },
-    { "type": "select", "id": "align", "label": "Alignment", "default": "left", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}] }
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product (optional)"
+    },
+    {
+      "type": "number",
+      "id": "price",
+      "label": "Price (pence/cents, fallback)",
+      "default": 2999
+    },
+    {
+      "type": "number",
+      "id": "compare_at",
+      "label": "Compare-at price (fallback)",
+      "default": 4999
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    }
   ],
-  "presets": [ { "name": "Price" } ]
+  "presets": [
+    {
+      "name": "Price"
+    }
+  ]
 }
 {% endschema %}
