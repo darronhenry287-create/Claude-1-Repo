@@ -35,7 +35,7 @@
                 loading: 'lazy',
                 widths: '600,900,1200,1600',
                 sizes: '(min-width:1280px) 1280px, 100vw',
-                alt: s.cover_image.alt | default: s.heading | escape }}
+                alt: s.cover_image.alt }}
           {%- else -%}
             <div class="media media--wide">
               {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -52,7 +52,7 @@
                 loading: 'lazy',
                 widths: '600,900,1200,1600',
                 sizes: '(min-width:1280px) 1280px, 100vw',
-                alt: s.cover_image.alt | escape }}
+                alt: s.cover_image.alt }}
           {%- else -%}
             {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
           {%- endif -%}
