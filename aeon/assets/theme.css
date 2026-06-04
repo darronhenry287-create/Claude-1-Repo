@@ -635,6 +635,35 @@ em { font-style: normal; color: var(--mint); }
 .modal__head { position: sticky; top: 0; background: var(--panel); display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 1.4rem; border-bottom: 1px solid var(--line); }
 
 /* ============================================================
+   STAT BAR / "by the numbers"
+   ============================================================ */
+.statbar { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; }
+.stat { background: var(--bg); padding: 1.7rem 1.5rem; }
+.stat__n { font-family: var(--mono); font-weight: 700; font-size: clamp(1.9rem, 3.4vw, 2.7rem); color: var(--text); line-height: 1; letter-spacing: -0.02em; }
+.stat__n em { color: var(--mint); }
+.stat__l { font-size: 0.82rem; color: var(--muted); margin-top: .55rem; line-height: 1.4; }
+
+/* ============================================================
+   GUARANTEE BAND
+   ============================================================ */
+.guarantee { display: flex; gap: clamp(1.5rem, 4vw, 3rem); align-items: center; flex-wrap: wrap; justify-content: center; text-align: center; padding: clamp(2rem, 5vw, 3.2rem); }
+.guarantee__seal { width: 130px; flex-shrink: 0; }
+.guarantee__body { max-width: 46ch; }
+.guarantee__body h2 { margin-bottom: .7rem; }
+.guarantee__body p { color: var(--muted); }
+@media (min-width: 720px) { .guarantee { text-align: left; justify-content: flex-start; } .guarantee__body { flex: 1; min-width: 280px; } }
+
+/* ============================================================
+   TIMELINE / roadmap (first 90 days)
+   ============================================================ */
+.timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: var(--gap); margin-top: 2.5rem; }
+.phase { border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--panel); padding: 1.6rem; position: relative; overflow: hidden; }
+.phase__bar { height: 3px; border-radius: 3px; background: linear-gradient(90deg, var(--mint), rgba(43,240,196,0.05)); margin-bottom: 1.2rem; }
+.phase__day { font-family: var(--mono); font-size: 0.7rem; color: var(--mint); letter-spacing: 0.12em; text-transform: uppercase; }
+.phase h4 { font-family: var(--display); font-size: 1.12rem; margin: .55rem 0 .45rem; }
+.phase p { font-size: 0.88rem; color: var(--muted); }
+
+/* ============================================================
    REVEAL ANIMATION (pure CSS, JS only toggles .in)
    ============================================================ */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }

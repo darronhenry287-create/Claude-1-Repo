@@ -1,0 +1,25 @@
+<svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NMN veggie capsule">
+  <defs>
+    <linearGradient id="capTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#222a33"/><stop offset="1" stop-color="#141a21"/>
+    </linearGradient>
+    <linearGradient id="capBot" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2bf0c4" stop-opacity="0.85"/><stop offset="1" stop-color="#14b896" stop-opacity="0.85"/>
+    </linearGradient>
+    <radialGradient id="capGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#2bf0c4" stop-opacity="0.35"/><stop offset="1" stop-color="#2bf0c4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="130" cy="130" r="110" fill="url(#capGlow)"/>
+  <g transform="rotate(-38 130 130)">
+    <!-- lower (mint) half -->
+    <path d="M70 130 a48 48 0 0 0 48 48 h0 v-96 h0 a48 48 0 0 0 -48 48 Z" fill="url(#capBot)"/>
+    <rect x="118" y="82" width="72" height="96" fill="url(#capBot)"/>
+    <!-- upper (graphite) half -->
+    <path d="M190 130 a48 48 0 0 1 -48 48 h-24 v-96 h24 a48 48 0 0 1 48 48 Z" fill="url(#capTop)" stroke="#3a434f" stroke-width="1.5"/>
+    <!-- seam -->
+    <rect x="116" y="80" width="6" height="100" fill="#0b0e13" opacity="0.5"/>
+    <!-- highlight -->
+    <rect x="84" y="92" width="8" height="50" rx="4" fill="#ffffff" opacity="0.18"/>
+  </g>
+</svg>
