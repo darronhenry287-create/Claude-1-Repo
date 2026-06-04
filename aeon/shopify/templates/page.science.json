@@ -1,0 +1,87 @@
+{
+  "sections": {
+    "pagehead": {
+      "type": "aeon-pagehead",
+      "settings": {
+        "kicker": "// The Science",
+        "heading": "NMN, NAD⁺ & the biology of aging.",
+        "subtext": "NAD⁺ isn't a trend — it's one of the most studied molecules in longevity research. Here's what it does, why it declines, and how NMN fits in. With the citations to back it up."
+      }
+    },
+    "decline": {
+      "type": "aeon-decline",
+      "settings": {
+        "kicker": "// 02 — The decline",
+        "heading": "Why levels fall.",
+        "lede": "Production slows and consumption climbs. By midlife, NAD⁺ can sit at roughly half its youthful level — a shift researchers link to many hallmarks of aging.",
+        "stat": "−50",
+        "stat_caption": "approximate NAD⁺ decline, age 20 → 50."
+      }
+    },
+    "pathway": {
+      "type": "aeon-pathway",
+      "blocks": {
+        "n1": { "type": "node", "settings": { "step_label": "NMN", "molecule": "molecule", "title": "Precursor in", "text": "NMN is absorbed and taken up by cells — the direct building block one step from NAD⁺." } },
+        "n2": { "type": "node", "settings": { "step_label": "NMNAT", "molecule": "molecule", "title": "Conversion", "text": "The enzyme NMNAT converts NMN into NAD⁺ inside the cell — fast and efficient." } },
+        "n3": { "type": "node", "settings": { "step_label": "NAD⁺", "molecule": "capsule", "title": "Function out", "text": "Restored NAD⁺ powers energy, sirtuins and repair — the work of cellular maintenance.†" } }
+      },
+      "block_order": ["n1", "n2", "n3"],
+      "settings": {
+        "kicker": "// 03 — The pathway",
+        "heading": "From capsule to coenzyme.",
+        "lede": ""
+      }
+    },
+    "evidence": {
+      "type": "aeon-evidence",
+      "blocks": {
+        "e1": { "type": "study", "settings": { "source": "SCIENCE", "meta": "RCT · n=80", "text": "NMN supplementation over weeks significantly increased blood NAD⁺ levels in adults and was well-tolerated.", "cite": "— Yoshino et al., Science (2021)" } },
+        "e2": { "type": "study", "settings": { "source": "CELL METABOLISM", "meta": "preclinical", "text": "Long-term oral NMN raised NAD⁺ and mitigated age-associated declines in energy metabolism and insulin sensitivity in mice.", "cite": "— Mills et al., Cell Metabolism (2016)" } },
+        "e3": { "type": "study", "settings": { "source": "NATURE REVIEWS", "meta": "review", "text": "Declining NAD⁺ is implicated across hallmarks of aging; precursors like NMN and NR are leading restoration strategies.", "cite": "— Covarrubias et al., Nat. Rev. MCB (2021)" } },
+        "e4": { "type": "study", "settings": { "source": "FRONTIERS", "meta": "human · n=66", "text": "NMN improved measures of physical performance (walking, fatigue) in middle-aged and older adults in a controlled trial.", "cite": "— Igarashi et al., (2022)" } },
+        "e5": { "type": "study", "settings": { "source": "CELL", "meta": "mechanism", "text": "Sirtuin activity is NAD⁺-dependent; restoring NAD⁺ reactivates these longevity-associated enzymes.", "cite": "— Imai & Guarente, Cell (2014)" } },
+        "e6": { "type": "study", "settings": { "source": "SAFETY", "meta": "review", "text": "Human trials to date report NMN is generally safe and well-tolerated at studied doses.", "cite": "— multiple, see references" } }
+      },
+      "block_order": ["e1", "e2", "e3", "e4", "e5", "e6"],
+      "settings": {
+        "kicker": "// 04 — The evidence",
+        "heading": "Selected research.",
+        "disclaim": "† These summaries are educational and simplified. NMN research is ongoing; effects vary by individual, dose and duration. Nothing here is a claim that AEON diagnoses, treats, cures or prevents any disease. Always consult your physician."
+      }
+    },
+    "coa": {
+      "type": "aeon-coa",
+      "blocks": {
+        "a1": { "type": "assay", "settings": { "name": "NMN purity (HPLC)", "result": "99.6%" } },
+        "a2": { "type": "assay", "settings": { "name": "Heavy metals", "result": "< limits" } },
+        "a3": { "type": "assay", "settings": { "name": "Microbial", "result": "Pass" } },
+        "a4": { "type": "assay", "settings": { "name": "Identity", "result": "Conforms" } }
+      },
+      "block_order": ["a1", "a2", "a3", "a4"],
+      "settings": {
+        "kicker": "// 05 — Quality",
+        "heading": "The dose is only half the story.",
+        "lede": "NMN purity varies wildly across the market. A high number on the label means nothing without a test behind it."
+      }
+    },
+    "protocol": {
+      "type": "aeon-protocol",
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "1000 mg each morning", "text": "Two capsules with water — timing is flexible, consistency is not." } },
+        "s2": { "type": "step", "settings": { "title": "Stack if you like", "text": "Many pair NMN with resveratrol or TMG as a methyl donor." } },
+        "s3": { "type": "step", "settings": { "title": "Reassess at 90 days", "text": "Give NAD⁺ time to build before you judge how you feel.†" } }
+      },
+      "block_order": ["s1", "s2", "s3"],
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "aeon-newsletter",
+      "settings": {
+        "kicker": "Ready when you are",
+        "heading": "Put the science to work.",
+        "text": "1000 mg of tested NMN, backed by a 60-night guarantee."
+      }
+    }
+  },
+  "order": ["pagehead", "decline", "pathway", "evidence", "coa", "protocol", "newsletter"]
+}

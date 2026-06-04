@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "pagehead": {
+      "type": "aeon-pagehead",
+      "settings": {
+        "kicker": "// Reviews",
+        "heading": "9,217 people, one molecule.",
+        "subtext": "Verified reviews from the AEON community. Real protocols, real timelines — including the honest middle."
+      }
+    },
+    "reviews": {
+      "type": "aeon-reviews",
+      "blocks": {
+        "rv1": { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "Three months in and the 2pm crash is gone. I track my NAD⁺ with an at-home kit and it genuinely moved. The published COA is what made me trust it.", "author": "Daniel R. · 3-month subscriber" } },
+        "rv2": { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "I'm a pharmacist. I scrutinize labels for a living. AEON is one of the only NMN products I'd actually recommend — dose and testing are both right.", "author": "Priya M." } },
+        "rv3": { "type": "review", "settings": { "stars": "★★★★☆", "verified": true, "text": "Took a solid month before I noticed anything, so manage expectations. But the steady, all-day focus is real now. Knocked a star for the wait, not the product.", "author": "Elena V." } },
+        "rv4": { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "Clean capsules, zero aftertaste, no fillers. Recovery between training days improved more than I expected at 47.", "author": "Marcus T. · athlete" } },
+        "rv5": { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "My doctor was skeptical until I showed her the third-party report. Now she's the one telling other patients about it.", "author": "Sandra K." } },
+        "rv6": { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "68 years old and keeping up with the grandkids again. Most brands are 250mg — the full 1000mg is why I chose AEON.", "author": "Robert H." } },
+        "rv7": { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "The subscription is effortless — shows up every 90 days, skipped once with two taps. Set-and-forget longevity.", "author": "Aisha N." } },
+        "rv8": { "type": "review", "settings": { "stars": "★★★★☆", "verified": true, "text": "Great product, would love a powder option for stacking. Capsules are clean and easy to swallow though.", "author": "Tom B." } },
+        "rv9": { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "I've tried four NMN brands. This is the first where I actually felt the difference in energy by week three.", "author": "Lena F." } },
+        "rv10": { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "Transparent, potent, no nonsense. The QR-to-COA on the bottle is a brilliant touch.", "author": "Hiro K." } },
+        "rv11": { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "My partner and I both take it now. Mornings are easier and the 6-month plan made it affordable.", "author": "Grace & Sam" } },
+        "rv12": { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "As a longevity-clinic patient, this is the NMN my practitioner approved. Quality you can verify yourself.", "author": "Victor A." } }
+      },
+      "block_order": ["rv1", "rv2", "rv3", "rv4", "rv5", "rv6", "rv7", "rv8", "rv9", "rv10", "rv11", "rv12"],
+      "settings": {
+        "score": "4.9",
+        "count_label": "based on 9,217 verified reviews",
+        "all_reviews_label": "Join them — shop AEON NMN"
+      }
+    }
+  },
+  "order": ["pagehead", "reviews"]
+}
