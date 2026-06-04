@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "subheading": "Our journal",
+        "heading": "Latest articles",
+        "heading_align": "left",
+        "columns": 3,
+        "per_page": 9,
+        "show_tags": true,
+        "show_excerpt": true,
+        "show_date": true,
+        "show_author": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": ["main"]
+}

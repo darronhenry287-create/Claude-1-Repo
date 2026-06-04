@@ -4,16 +4,17 @@
   assign remaining = threshold | minus: cart.total_price
 
   comment
-    Optional upsell source: an explicit collection wins, otherwise fall back to
-    product recommendations seeded from the first cart line. Recommendations
-    only resolve on the live storefront, so we guard for both.
+    Optional upsell source: a merchant-chosen collection, otherwise Shopify
+    product recommendations when they have resolved for this request. The grid
+    is rendered only when products actually exist, so both paths degrade safely.
   endcomment
-  assign upsell_products = empty
+  assign upsell_products = null
   if s.upsell_collection != blank
     assign upsell_products = s.upsell_collection.products
-  elsif cart.item_count > 0 and recommendations.performed and recommendations.products_count > 0
+  elsif recommendations.performed and recommendations.products_count > 0
     assign upsell_products = recommendations.products
   endif
+  assign upsell_size = upsell_products.size | default: 0
 -%}
 <section class="apex-cart color-{{ s.color_scheme }}"
   style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
@@ -149,7 +150,7 @@
         </aside>
       </form>
 
-      {%- if s.show_upsell and settings.cart_upsell and upsell_products != empty and upsell_products.size > 0 -%}
+      {%- if s.show_upsell and settings.cart_upsell and upsell_size > 0 -%}
         <div class="apex-cart__upsell reveal">
           <div class="section-head section-head--center">
             <h2 class="h3">{{ s.upsell_heading | default: 'You may also like' }}</h2>

@@ -1,0 +1,45 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "height": "sm",
+        "content_position": "center",
+        "text_align": "center",
+        "overlay_opacity": 35,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "sub": {
+          "type": "subheading",
+          "settings": { "text": "Support" }
+        },
+        "head": {
+          "type": "heading",
+          "settings": { "text": "Get in touch", "size": 3.5 }
+        },
+        "text": {
+          "type": "text",
+          "settings": { "text": "<p>We're here to help. Reach us any time and we'll respond within 24 hours.</p>" }
+        }
+      },
+      "block_order": ["sub", "head", "text"]
+    },
+    "contact": {
+      "type": "contact-form",
+      "settings": {
+        "subheading": "Contact us",
+        "heading": "We'd love to hear from you",
+        "layout": "two-col",
+        "info_heading": "Reach out",
+        "info_text": "<p>Our customer support team is available Monday–Friday, 9 AM–6 PM EST. We aim to respond to every message within one business day.</p>",
+        "show_phone": true,
+        "submit_label": "Send message",
+        "color_scheme": "scheme-1",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": ["hero", "contact"]
+}

@@ -92,6 +92,31 @@
       const fallback = btn.closest('apex-product-form').querySelector('.apex-sticky__fallback-form');
       if (fallback) fallback.requestSubmit ? fallback.requestSubmit() : fallback.submit();
     });
+
+    // Mirror the variant the shopper picked on the PDP: base.js dispatches a
+    // bubbling `variant:change`, so update this bar's price, the fallback id,
+    // and the button availability to match.
+    document.addEventListener('variant:change', (e) => {
+      const v = e.detail && e.detail.variant;
+      const bar = document.querySelector('.apex-sticky');
+      if (!bar) return;
+      const fallbackId = bar.querySelector('.apex-sticky__fallback-form [name=id]');
+      const priceEl = bar.querySelector('[data-price]');
+      const btn = bar.querySelector('.apex-sticky__atc');
+      const money = (c) => (window.Shopify && Shopify.formatMoney) ? Shopify.formatMoney(c, window.APEX && window.APEX.moneyFormat) : '$' + (c / 100).toFixed(2);
+      if (v && fallbackId) fallbackId.value = v.id;
+      if (priceEl && v) {
+        priceEl.innerHTML = v.compare_at_price > v.price
+          ? '<span class="price price--sale"><span class="price__current">' + money(v.price) + '</span> <s class="price__compare">' + money(v.compare_at_price) + '</s></span>'
+          : '<span class="price"><span class="price__current">' + money(v.price) + '</span></span>';
+      }
+      if (btn) {
+        const ok = v && v.available;
+        btn.disabled = !ok;
+        const lbl = btn.querySelector('[data-atc-label]');
+        if (lbl) lbl.textContent = !v ? 'Unavailable' : ok ? (btn.dataset.label || 'Add to cart') : 'Sold out';
+      }
+    });
   })();
   {% endjavascript %}
 {%- endif -%}

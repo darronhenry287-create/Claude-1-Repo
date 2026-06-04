@@ -22,18 +22,26 @@
           <div class="apex-product__gallery" data-gallery>
             <div class="apex-product__stage">
               {%- for media in product.media -%}
+                {%- liquid
+                  assign img_loading = 'lazy'
+                  assign img_priority = 'auto'
+                  if forloop.first
+                    assign img_loading = 'eager'
+                    assign img_priority = 'high'
+                  endif
+                -%}
                 <div class="apex-product__viewport media media--{{ s.image_ratio }}{% if s.image_ratio == 'adapt' %} media--contain{% endif %}{% unless forloop.first %} hidden{% endunless %}"
                   data-media-id="{{ media.id }}"
                   data-media-view>
                   {%- case media.media_type -%}
                     {%- when 'image' -%}
                       {{ media | image_url: width: 1400 | image_tag:
-                        loading: forloop.first | default: false,
+                        loading: img_loading,
                         widths: '400,600,800,1000,1200,1400',
                         sizes: '(min-width: 990px) 50vw, 100vw',
                         alt: media.alt | escape,
                         class: 'apex-product__image',
-                        fetchpriority: forloop.first | replace: 'true', 'high' | replace: 'false', 'auto' }}
+                        fetchpriority: img_priority }}
                     {%- when 'video', 'external_video' -%}
                       {{ media | media_tag: image_size: '1400x', controls: true, preload: 'metadata' }}
                     {%- when 'model' -%}
@@ -85,11 +93,12 @@
                 <h1 class="apex-product__title{% if block.settings.size == 'large' %} h1{% else %} h2{% endif %}" {{ block.shopify_attributes }}>{{ product.title | default: 'Product title' }}</h1>
 
               {%- when 'price' -%}
-                <div class="apex-product__price" data-price {{ block.shopify_attributes }}>
-                  {% render 'price', product: product %}
+                {%- comment -%} [data-price] wraps only the price so base.js can replace its innerHTML on variant change without clobbering the badge. {%- endcomment -%}
+                <div class="apex-product__price-row" {{ block.shopify_attributes }}>
+                  <span class="apex-product__price" data-price>{% render 'price', product: product %}</span>
                   {%- if block.settings.show_save and current_variant.compare_at_price > current_variant.price -%}
                     {%- assign off = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price -%}
-                    <span class="badge badge--sale apex-product__save">{{ 'products.product.save_html' | t: percent: off | default: 'Save' }} {{ off }}%</span>
+                    <span class="badge badge--sale apex-product__save">{{ 'products.product.save' | t: percent: off | default: 'Save' }} {{ off }}%</span>
                   {%- endif -%}
                 </div>
 
@@ -328,7 +337,7 @@
 .apex-product__info-inner { gap: 1.1rem; }
 .apex-product__vendor a { color: var(--accent); }
 .apex-product__title { line-height: 1.05; }
-.apex-product__price { display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; font-size: 1.35rem; }
+.apex-product__price-row { display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; font-size: 1.35rem; }
 .apex-product__rating { display: inline-flex; }
 .apex-product__option { border: 0; padding: 0; margin: 0; }
 .apex-product__option-label { display: flex; gap: .5rem; align-items: baseline; font-size: var(--text-sm); font-weight: 600; margin-bottom: .55rem; padding: 0; }
