@@ -1,0 +1,100 @@
+{%- comment -%}
+  AEON — Cart page (live). Mirrors aeon/src/cart.html .cartpage layout.
+  Rendered SERVER-SIDE from cart.items. Steppers + remove use /cart/change links
+  (no JS required); checkout posts to /cart with name="checkout".
+  #freebar (data-threshold/data-total) is enhanced by theme.js LIVE handler.
+{%- endcomment -%}
+{%- assign threshold_cents = settings.free_shipping_threshold | default: 50 | times: 100 -%}
+
+<section class="pagehead">
+  <div class="wrap wrap--wide">
+    <div class="kicker">// Cart</div>
+    <h1>Your cart.</h1>
+  </div>
+</section>
+
+<section class="section" style="padding-top:2rem">
+  <div class="wrap wrap--wide">
+    <div class="cartpage">
+      <!-- line items -->
+      <div>
+        <div id="cart-page-empty"{% if cart.item_count > 0 %} hidden{% endif %}>
+          <div class="panel" style="padding:3rem;text-align:center">
+            <p class="lede" style="margin-bottom:.4rem">{{ 'sections.cart.empty' | t }}</p>
+            <p class="muted" style="margin-bottom:1.5rem">Longevity starts with one capsule.</p>
+            <a href="{{ routes.all_products_collection_url }}" class="btn btn-mint btn-lg">Shop AEON NMN</a>
+          </div>
+        </div>
+
+        <div id="cart-page-items">
+          {%- if cart.item_count > 0 -%}
+            {%- for item in cart.items -%}
+              <div class="cline" data-line="{{ forloop.index }}">
+                <div class="cline__thumb">
+                  {%- if item.image -%}
+                    <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:contain">
+                  {%- else -%}
+                    <img src="{{ 'aeon-bottle.svg' | asset_url }}" alt="{{ item.product.title | escape }}" width="80" height="80" loading="lazy">
+                  {%- endif -%}
+                </div>
+                <div class="cline__info">
+                  <h4 style="font-family:var(--display)"><a href="{{ item.url }}">{{ item.product.title }}</a></h4>
+                  {%- assign vtitle = item.variant.title | remove: 'Default Title' -%}
+                  {%- if vtitle != blank -%}
+                    <div class="v muted" style="font-size:.78rem;font-family:var(--mono)">{{ vtitle }}</div>
+                  {%- endif -%}
+                  {%- if item.original_line_price > item.final_line_price -%}
+                    <div class="mint" style="font-size:.75rem;margin-top:.2rem">{{ 'sections.cart.subtotal' | t }} saved {{ item.original_line_price | minus: item.final_line_price | money }}</div>
+                  {%- endif -%}
+                  <a class="drm" href="{{ item.url_to_remove }}" data-line="{{ forloop.index }}" data-action="remove-item">{{ 'sections.cart.remove' | t }}</a>
+                </div>
+                <div class="dqty">
+                  <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity={{ item.quantity | minus: 1 }}" aria-label="Decrease quantity" data-line="{{ forloop.index }}" data-qty="{{ item.quantity | minus: 1 }}" data-action="cart-change">−</a>
+                  <span>{{ item.quantity }}</span>
+                  <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity={{ item.quantity | plus: 1 }}" aria-label="Increase quantity" data-line="{{ forloop.index }}" data-qty="{{ item.quantity | plus: 1 }}" data-action="cart-change">+</a>
+                </div>
+                <div class="cline__price">{{ item.final_line_price | money }}</div>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- summary -->
+      <div id="cart-page-sum"{% if cart.item_count == 0 %} style="display:none"{% endif %}>
+        <div class="csum">
+          <h3>Order summary</h3>
+          {%- if settings.enable_free_shipping_bar -%}
+            <div class="freebar" id="freebar"
+                 data-threshold="{{ threshold_cents }}"
+                 data-total="{{ cart.total_price }}"></div>
+          {%- endif -%}
+          <div class="csum__row"><span>{{ 'sections.cart.subtotal' | t }}</span><span id="cart-page-sub" class="mono">{{ cart.total_price | money }}</span></div>
+          <div class="csum__row"><span>Shipping</span><span class="mint">Free over ${{ settings.free_shipping_threshold | default: 50 }}</span></div>
+          <div class="csum__row total"><span>Total</span><span id="cart-page-total">{{ cart.total_price | money }}</span></div>
+
+          <form action="{{ routes.cart_url }}" method="post">
+            <button type="submit" name="checkout" class="btn btn-mint btn-block btn-lg" style="margin-top:1.2rem"{% if cart.item_count == 0 %} disabled{% endif %}>{{ 'sections.cart.checkout' | t }}</button>
+          </form>
+          <a href="{{ routes.all_products_collection_url }}" class="btn btn-ghost btn-block" style="margin-top:.6rem">Continue shopping</a>
+
+          <p class="dnote muted" style="font-size:.75rem;text-align:center;margin-top:.9rem">{{ 'sections.cart.taxes_note' | t }}</p>
+          <div class="trustline" style="margin-top:1rem;justify-content:center">
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 8 8 10 4.6-2 8-5 8-10V6Z"/><path d="M9 12l2 2 4-4"/></svg>60-night guarantee</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "tag": "section",
+  "settings": [],
+  "presets": [
+    { "name": "Cart" }
+  ]
+}
+{% endschema %}

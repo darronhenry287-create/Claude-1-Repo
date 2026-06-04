@@ -1,0 +1,40 @@
+<section class="section section--tight">
+  <div class="wrap wrap--wide reveal">
+    <div class="statbar">
+      {%- for block in section.blocks -%}
+        <div class="stat" {{ block.shopify_attributes }}>
+          <div class="stat__n">{{ block.settings.number }}<em>{{ block.settings.suffix }}</em></div>
+          <div class="stat__l">{{ block.settings.label }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Stat bar",
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "50" },
+        { "type": "text", "id": "suffix", "label": "Suffix (em)", "default": "M+" },
+        { "type": "text", "id": "label", "label": "Label", "default": "capsules shipped" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Stat bar",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "50", "suffix": "M+", "label": "capsules shipped" } },
+        { "type": "stat", "settings": { "number": "≥99", "suffix": "%", "label": "assayed β-NMN purity" } },
+        { "type": "stat", "settings": { "number": "100", "suffix": "%", "label": "batches third-party tested" } },
+        { "type": "stat", "settings": { "number": "60", "suffix": "-night", "label": "money-back guarantee" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

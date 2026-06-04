@@ -1,0 +1,86 @@
+<section class="section section--hair">
+  <div class="wrap wrap--wide">
+    <div class="spec__grid">
+      <div class="reveal">
+        <div class="kicker">{{ section.settings.kicker }}</div>
+        <h2 style="margin:1rem 0 1rem">{{ section.settings.heading }}</h2>
+        <p class="lede" style="margin-bottom:1.6rem">{{ section.settings.lede }}</p>
+        <div class="zero">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'zero' -%}
+              <div class="zero__item" {{ block.shopify_attributes }}>
+                <span class="zero__x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+                {{ block.settings.label }}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="specsheet reveal">
+        <div class="specsheet__head">
+          <span class="t">{{ section.settings.spec_title }}</span>
+          <span class="b">{{ section.settings.spec_lot }}</span>
+        </div>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'specrow' -%}
+            <div class="specrow{% if block.settings.highlight %} hl{% endif %}" {{ block.shopify_attributes }}>
+              <span class="k">{{ block.settings.key }}</span>
+              <span class="v">{% if block.settings.highlight %}<em>{{ block.settings.value }}</em>{% else %}{{ block.settings.value }}{% endif %}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Formula / Spec",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "// 03 — The formula" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Two capsules. Nothing hidden." },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "Every spec on the bottle, verified by an independent lab. No proprietary blends, no fairy dust — just a clinically meaningful dose of pure NMN." },
+    { "type": "text", "id": "spec_title", "label": "Specsheet title", "default": "Supplement spec" },
+    { "type": "text", "id": "spec_lot", "label": "Specsheet lot", "default": "LOT AE-2026-0418" }
+  ],
+  "blocks": [
+    {
+      "type": "zero",
+      "name": "Zero item",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "No fillers" }
+      ]
+    },
+    {
+      "type": "specrow",
+      "name": "Spec row",
+      "settings": [
+        { "type": "text", "id": "key", "label": "Key", "default": "NMN (β-Nicotinamide Mononucleotide)" },
+        { "type": "text", "id": "value", "label": "Value", "default": "1000 mg" },
+        { "type": "checkbox", "id": "highlight", "label": "Highlight row (mint em)", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Formula / Spec",
+      "blocks": [
+        { "type": "zero", "settings": { "label": "No fillers" } },
+        { "type": "zero", "settings": { "label": "No mag. stearate" } },
+        { "type": "zero", "settings": { "label": "Non-GMO" } },
+        { "type": "zero", "settings": { "label": "Gluten-free" } },
+        { "type": "zero", "settings": { "label": "Vegan caps" } },
+        { "type": "zero", "settings": { "label": "No artificials" } },
+        { "type": "specrow", "settings": { "key": "NMN (β-Nicotinamide Mononucleotide)", "value": "1000 mg", "highlight": true } },
+        { "type": "specrow", "settings": { "key": "Capsules per bottle", "value": "120 veggie", "highlight": false } },
+        { "type": "specrow", "settings": { "key": "Servings per bottle", "value": "60", "highlight": false } },
+        { "type": "specrow", "settings": { "key": "Serving size", "value": "2 capsules", "highlight": false } },
+        { "type": "specrow", "settings": { "key": "Assayed purity", "value": "99.6%", "highlight": true } },
+        { "type": "specrow", "settings": { "key": "Capsule", "value": "vegetable cellulose", "highlight": false } },
+        { "type": "specrow", "settings": { "key": "Other ingredients", "value": "none", "highlight": false } },
+        { "type": "specrow", "settings": { "key": "Tested by", "value": "ISO 17025 lab", "highlight": false } }
+      ]
+    }
+  ]
+}
+{% endschema %}

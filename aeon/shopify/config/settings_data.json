@@ -1,0 +1,28 @@
+{
+  "current": {
+    "color_background": "#07080b",
+    "color_surface": "#101319",
+    "color_accent_mint": "#2bf0c4",
+    "color_accent_volt": "#c9ff4d",
+    "color_text": "#eef1f7",
+    "color_muted": "#99a2b4",
+    "enable_free_shipping_bar": true,
+    "free_shipping_threshold": 50,
+    "cart_type": "drawer",
+    "products_per_page": 12
+  },
+  "presets": {
+    "AEON": {
+      "color_background": "#07080b",
+      "color_surface": "#101319",
+      "color_accent_mint": "#2bf0c4",
+      "color_accent_volt": "#c9ff4d",
+      "color_text": "#eef1f7",
+      "color_muted": "#99a2b4",
+      "enable_free_shipping_bar": true,
+      "free_shipping_threshold": 50,
+      "cart_type": "drawer",
+      "products_per_page": 12
+    }
+  }
+}

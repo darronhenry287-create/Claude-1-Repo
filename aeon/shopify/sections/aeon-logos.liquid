@@ -1,0 +1,40 @@
+<div class="logostrip">
+  <div class="wrap wrap--wide">
+    <div class="logostrip__inner">
+      <span class="kicker k--muted k--plain">{{ section.settings.label }}</span>
+      {%- for block in section.blocks -%}
+        <span {{ block.shopify_attributes }}>{{ block.settings.name }}</span>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Logo strip",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Built on research from" }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Harvard" }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Logo strip",
+      "blocks": [
+        { "type": "logo", "settings": { "name": "Harvard" } },
+        { "type": "logo", "settings": { "name": "Nature" } },
+        { "type": "logo", "settings": { "name": "Cell Metab." } },
+        { "type": "logo", "settings": { "name": "NIH" } },
+        { "type": "logo", "settings": { "name": "Sinclair Lab" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

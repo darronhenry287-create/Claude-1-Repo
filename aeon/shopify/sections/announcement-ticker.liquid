@@ -1,0 +1,66 @@
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    {%- comment -%}First pass{%- endcomment -%}
+    {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+        <span {{ block.shopify_attributes }}>
+          {%- if block.settings.highlight != blank -%}<b>{{ block.settings.highlight }}</b> {%- endif -%}
+          {{- block.settings.text -}}
+        </span>
+      {%- endfor -%}
+    {%- else -%}
+      <span><b>≥99%</b> purity β-NMN</span>
+      <span><b>1000MG</b> per serving</span>
+      <span>Third-party tested</span>
+      <span><b>FREE</b> shipping over $50</span>
+      <span><b>60-NIGHT</b> money-back guarantee</span>
+      <span>Vegan · Non-GMO · No fillers</span>
+    {%- endif -%}
+    {%- comment -%}Second pass — seamless loop duplicate{%- endcomment -%}
+    {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+        <span>
+          {%- if block.settings.highlight != blank -%}<b>{{ block.settings.highlight }}</b> {%- endif -%}
+          {{- block.settings.text -}}
+        </span>
+      {%- endfor -%}
+    {%- else -%}
+      <span><b>≥99%</b> purity β-NMN</span>
+      <span><b>1000MG</b> per serving</span>
+      <span>Third-party tested</span>
+      <span><b>FREE</b> shipping over $50</span>
+      <span><b>60-NIGHT</b> money-back guarantee</span>
+      <span>Vegan · Non-GMO · No fillers</span>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement ticker",
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Ticker item",
+      "settings": [
+        { "type": "text", "id": "highlight", "label": "Highlight text (bold, mint)", "info": "Shown bold in mint. Leave blank for no highlight." },
+        { "type": "text", "id": "text", "label": "Message text", "default": "Third-party tested" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Announcement ticker",
+      "blocks": [
+        { "type": "message", "settings": { "highlight": "≥99%", "text": "purity β-NMN" } },
+        { "type": "message", "settings": { "highlight": "1000MG", "text": "per serving" } },
+        { "type": "message", "settings": { "highlight": "", "text": "Third-party tested" } },
+        { "type": "message", "settings": { "highlight": "FREE", "text": "shipping over $50" } },
+        { "type": "message", "settings": { "highlight": "60-NIGHT", "text": "money-back guarantee" } },
+        { "type": "message", "settings": { "highlight": "", "text": "Vegan · Non-GMO · No fillers" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

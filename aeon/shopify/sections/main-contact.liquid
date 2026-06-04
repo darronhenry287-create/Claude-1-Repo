@@ -1,0 +1,100 @@
+<section class="section" style="padding-top:2.5rem">
+  <div class="wrap">
+    <div class="spec__grid">
+
+      <div class="reveal">
+        {%- form 'contact', id: 'contact-form' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="note-ok" style="margin-bottom:1.4rem">Message received — a member of our team will reply within one business day.</div>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <div class="note-ok" style="background:rgba(255,122,107,0.08);border-color:rgba(255,122,107,0.4);color:var(--ember);margin-bottom:1.4rem">
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+          <div class="panel" style="padding:1.8rem">
+            <div class="field">
+              <label for="contact-name">Name</label>
+              <input id="contact-name" type="text" name="contact[name]" value="{{ form.name }}" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="contact-email">Email</label>
+              <input id="contact-email" type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="contact-topic">Topic</label>
+              <select id="contact-topic" name="contact[topic]">
+                <option>About my order</option>
+                <option>Subscription &amp; billing</option>
+                <option>NMN / dosing question</option>
+                <option>Wholesale / partnerships</option>
+                <option>Something else</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" name="contact[body]" required>{{ form.body }}</textarea>
+            </div>
+            <button class="btn btn-mint btn-block btn-lg" type="submit">Send message</button>
+          </div>
+        {%- endform -%}
+      </div>
+
+      <div class="reveal">
+        <div class="kicker" style="margin-bottom:1rem">// Other ways to reach us</div>
+        <h2 style="margin:0 0 1.4rem">We're around.</h2>
+        <div class="panel" style="padding:1.4rem;margin-bottom:1rem">
+          <h3 style="font-size:1.05rem;margin-bottom:.4rem">Email</h3>
+          <p class="muted" style="font-size:.95rem">{{ section.settings.email_text }}</p>
+        </div>
+        <div class="panel" style="padding:1.4rem;margin-bottom:1rem">
+          <h3 style="font-size:1.05rem;margin-bottom:.4rem">Hours</h3>
+          <p class="muted" style="font-size:.95rem">{{ section.settings.hours_text }}</p>
+        </div>
+        <div class="panel" style="padding:1.4rem">
+          <h3 style="font-size:1.05rem;margin-bottom:.4rem">Quick links</h3>
+          <p class="muted" style="font-size:.95rem">
+            <a href="{{ section.settings.link_faq_url }}" class="mint" style="text-decoration:underline;text-underline-offset:3px">Browse the FAQ</a>
+            &nbsp;·&nbsp;
+            <a href="{{ section.settings.link_shipping_url }}" class="mint" style="text-decoration:underline;text-underline-offset:3px">Shipping &amp; returns</a>
+            &nbsp;·&nbsp;
+            <a href="{{ section.settings.link_guarantee_url }}" class="mint" style="text-decoration:underline;text-underline-offset:3px">60-night guarantee</a>
+          </p>
+        </div>
+        {%- if page.content != blank -%}
+          <div class="prose" style="margin-top:2rem">{{ page.content }}</div>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "email_text",
+      "label": "Email info text",
+      "default": "care@aeonlabs.example — answered within one business day."
+    },
+    {
+      "type": "text",
+      "id": "hours_text",
+      "label": "Hours info text",
+      "default": "Mon–Fri, 9 am–6 pm ET. Orders ship within 24 hours on business days."
+    },
+    {
+      "type": "header",
+      "content": "Quick links"
+    },
+    { "type": "url", "id": "link_faq_url", "label": "FAQ page URL" },
+    { "type": "url", "id": "link_shipping_url", "label": "Shipping & returns URL" },
+    { "type": "url", "id": "link_guarantee_url", "label": "Guarantee URL" }
+  ],
+  "presets": [
+    { "name": "Contact form" }
+  ]
+}
+{% endschema %}

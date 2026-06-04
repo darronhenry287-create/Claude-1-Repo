@@ -1,0 +1,198 @@
+{%- comment -%}
+  AEON — Product page (PDP)
+  JS hooks consumed by theme.js (LIVE mode):
+    .gallery > #pg-main + .gallery__thumbs > .pthumb (each holds full <img>)
+    .tier[data-price][data-compare][data-variant-id][data-label] + .tier__radio  (middle = .tier.active)
+    hidden <select id="variant-id" name="id"> listing ALL variants
+    #p-now / #p-was  price spans, #sticky-price in #stickybar, #buy-anchor sentinel
+    .qty steppers, .acc accordions, [data-action="open-coa"]
+  Add to cart is a REAL {% form 'product', product %} that posts to /cart/add.
+{%- endcomment -%}
+
+{%- assign p = product -%}
+{%- assign fallback_svgs = 'aeon-bottle.svg,aeon-capsule.svg,aeon-molecule.svg,aeon-seal.svg' | split: ',' -%}
+{%- assign current_variant = p.selected_or_first_available_variant -%}
+
+<section class="section" style="padding-top:1.6rem">
+  <div class="wrap wrap--wide">
+    <div class="kicker k--muted" style="margin-bottom:1rem">
+      <a href="{{ collection.url | default: routes.all_products_collection_url }}" style="color:var(--muted)">Shop</a>
+      &nbsp;/&nbsp; {{ p.title }}
+    </div>
+
+    <div class="pdp" data-product>
+      <!-- gallery -->
+      <div class="gallery">
+        {%- if p.media.size > 0 -%}
+          {%- assign featured = p.selected_or_first_available_variant.featured_media | default: p.featured_media -%}
+          <div class="gallery__main" id="pg-main">
+            <img src="{{ featured | image_url: width: 1200 }}" alt="{{ featured.alt | default: p.title | escape }}">
+          </div>
+          <div class="gallery__thumbs">
+            {%- for media in p.media -%}
+              <div class="pthumb{% if media == featured %} active{% endif %}">
+                <img src="{{ media | image_url: width: 1200 }}" alt="{{ media.alt | default: p.title | escape }}">
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <div class="gallery__main" id="pg-main">
+            <img src="{{ fallback_svgs[0] | asset_url }}" alt="{{ p.title | escape }}">
+          </div>
+          <div class="gallery__thumbs">
+            {%- for svg in fallback_svgs -%}
+              <div class="pthumb{% if forloop.first %} active{% endif %}">
+                <img src="{{ svg | asset_url }}" alt="{{ p.title | escape }}">
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- buy box -->
+      <div class="buybox">
+        <div class="kicker">{{ p.type | default: 'β-Nicotinamide Mononucleotide' }}</div>
+        <h1>{{ p.title }}</h1>
+        <div class="rating-row">
+          <span class="stars">★★★★★</span> {{ section.settings.rating_text | default: '4.9 · 9,217 reviews' }}
+          {%- if p.available -%} · <span class="mint">In stock</span>{%- else -%} · <span class="faint">Sold out</span>{%- endif -%}
+        </div>
+        {%- if p.description != blank -%}
+          <div class="buybox__sub rte" style="margin-top:1rem">{{ p.description }}</div>
+        {%- else -%}
+          <p class="buybox__sub" style="margin-top:1rem">The highest-dose, fully-tested NMN we could make. 1000&nbsp;mg per serving to rebuild the NAD⁺ your cells run on — and a published COA for every bottle.</p>
+        {%- endif -%}
+
+        {%- form 'product', p, id: 'product-form' -%}
+          {%- comment -%} Render each sellable variant as a clickable tier. Middle one = active default. {%- endcomment -%}
+          {%- assign sellable = p.variants -%}
+          {%- assign mid_index = sellable.size | minus: 1 | divided_by: 2 -%}
+          <div class="optline">
+            <span class="lbl">{{ section.settings.tiers_label | default: 'Choose your supply' }}</span>
+            <div class="buytiers">
+              {%- for variant in sellable -%}
+                {%- assign is_mid = false -%}
+                {%- if forloop.index0 == mid_index -%}{%- assign is_mid = true -%}{%- endif -%}
+                <div class="tier{% if is_mid %} active{% endif %}{% unless variant.available %} sold-out{% endunless %}"
+                     data-price="{{ variant.price | divided_by: 100.0 }}"
+                     {%- if variant.compare_at_price > variant.price %} data-compare="{{ variant.compare_at_price | divided_by: 100.0 }}"{%- endif %}
+                     data-variant-id="{{ variant.id }}"
+                     data-label="{{ variant.title | escape }}">
+                  {%- if variant.compare_at_price > variant.price -%}
+                    {%- assign pct = variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price -%}
+                    <span class="tier__flag">Best value · −{{ pct }}%</span>
+                  {%- endif -%}
+                  <span class="tier__radio"></span>
+                  <div class="tier__main">
+                    <div class="t">{{ variant.title }}</div>
+                    <div class="d">
+                      {%- if variant.available -%}{{ p.metafields.custom.servings | default: '120 capsules' }}{%- else -%}Sold out{%- endif -%}
+                    </div>
+                  </div>
+                  <div class="tier__price">
+                    <div class="p">{{ variant.price | money }}</div>
+                    {%- assign servings = section.settings.servings_per_unit | default: 60 -%}
+                    {%- assign per_serving = variant.price | divided_by: servings -%}
+                    <div class="u">{{ per_serving | money }}/serving</div>
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+
+          <div class="buybox__price">
+            <span class="now" id="p-now">{{ current_variant.price | money }}</span>
+            <span class="was" id="p-was"{% unless current_variant.compare_at_price > current_variant.price %} style="display:none"{% endunless %}>{{ current_variant.compare_at_price | money }}</span>
+          </div>
+
+          {%- comment -%} Hidden select listing ALL variants — theme.js sets value to clicked tier's data-variant-id {%- endcomment -%}
+          <select name="id" id="variant-id" hidden>
+            {%- for variant in p.variants -%}
+              <option value="{{ variant.id }}"{% if variant == current_variant %} selected{% endif %}{% unless variant.available %} disabled{% endunless %}>{{ variant.title }}</option>
+            {%- endfor -%}
+          </select>
+
+          <div class="qtyrow">
+            <div class="qty">
+              <button type="button" data-step="-" aria-label="Decrease quantity">−</button>
+              <input type="number" name="quantity" value="1" min="1" aria-label="Quantity">
+              <button type="button" data-step="+" aria-label="Increase quantity">+</button>
+            </div>
+            <button type="submit" name="add" class="btn btn-mint btn-lg" style="flex:1"{% unless p.available %} disabled{% endunless %}>
+              {%- if p.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+            </button>
+          </div>
+        {%- endform -%}
+        <span id="buy-anchor"></span>
+
+        <div class="trustline">
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 8 8 10 4.6-2 8-5 8-10V6Z"/><path d="M9 12l2 2 4-4"/></svg>60-night guarantee</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h13v8H3zM16 10h3l2 3v2h-5z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>Free shipping over ${{ settings.free_shipping_threshold | default: 50 }}</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>≥99% lab-verified</div>
+        </div>
+
+        <!-- product accordions (section blocks) -->
+        <div class="pacc acc">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'collapsible' -%}
+              <div class="acc__item{% if forloop.first %} open{% endif %}" {{ block.shopify_attributes }}>
+                <button type="button" class="acc__head">{{ block.settings.heading }}<span class="acc__icon"></span></button>
+                <div class="acc__body"{% if forloop.first %} style="max-height:600px"{% endif %}>{{ block.settings.content }}</div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- sticky add-to-cart bar -->
+<div class="stickybar" id="stickybar">
+  <div class="stickybar__inner">
+    <div class="stickybar__info">
+      {%- if p.featured_media -%}
+        <img src="{{ p.featured_media | image_url: width: 96 }}" alt="" style="width:34px;height:44px;object-fit:contain">
+      {%- else -%}
+        <img src="{{ fallback_svgs[0] | asset_url }}" alt="" style="width:34px;height:44px">
+      {%- endif -%}
+      <div><div class="nm">{{ p.title }}</div><div class="pr" id="sticky-price">{{ current_variant.price | money }}</div></div>
+    </div>
+    <button type="button" class="btn btn-mint" onclick="document.getElementById('product-form').requestSubmit()"{% unless p.available %} disabled{% endunless %}>
+      {%- if p.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+    </button>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4.9 · 9,217 reviews" },
+    { "type": "text", "id": "tiers_label", "label": "Supply selector label", "default": "Choose your supply" },
+    { "type": "number", "id": "servings_per_unit", "label": "Servings per bottle (for per-serving price)", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "collapsible",
+      "name": "Collapsible row",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Details & dosage" },
+        { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Each bottle contains 120 vegetable capsules — a 60-day supply at the full serving.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product",
+      "blocks": [
+        { "type": "collapsible", "settings": { "heading": "Details & dosage", "content": "<p>Each bottle contains 120 vegetable capsules — a 60-day supply at the full serving. Serving size: 2 capsules (1000&nbsp;mg NMN). Take once daily, ideally in the morning, with or without food.</p>" } },
+        { "type": "collapsible", "settings": { "heading": "Ingredients", "content": "<p>β-Nicotinamide Mononucleotide (NMN) 1000&nbsp;mg, vegetable cellulose capsule. That's it — no fillers, no magnesium stearate, no flow agents, no artificial anything. Non-GMO, gluten-free, vegan.</p>" } },
+        { "type": "collapsible", "settings": { "heading": "Testing & quality", "content": "<p>Manufactured in a cGMP facility and tested by an ISO 17025-accredited lab for purity, identity, heavy metals and microbials. A certificate of analysis is published for every lot. <button type=\"button\" class=\"mint\" data-action=\"open-coa\" style=\"text-decoration:underline\">View sample COA</button>.</p>" } },
+        { "type": "collapsible", "settings": { "heading": "Shipping & returns", "content": "<p>Free carbon-neutral shipping over $50; ships within 24 hours. Subscriptions ship automatically — skip, pause or cancel anytime. Backed by our 60-night money-back guarantee.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

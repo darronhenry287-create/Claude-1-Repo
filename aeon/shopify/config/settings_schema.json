@@ -1,0 +1,58 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "AEON",
+    "theme_version": "1.0.0",
+    "theme_author": "AEON Labs",
+    "theme_documentation_url": "https://shopify.dev",
+    "theme_support_url": "https://shopify.dev"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_background", "label": "Background", "default": "#07080b" },
+      { "type": "color", "id": "color_surface", "label": "Surface (cards / panels)", "default": "#101319" },
+      { "type": "color", "id": "color_accent_mint", "label": "Accent — Mint", "default": "#2bf0c4" },
+      { "type": "color", "id": "color_accent_volt", "label": "Accent — Volt", "default": "#c9ff4d" },
+      { "type": "color", "id": "color_text", "label": "Body text", "default": "#eef1f7" },
+      { "type": "color", "id": "color_muted", "label": "Muted / secondary text", "default": "#99a2b4" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      { "type": "header", "content": "Fonts load via CSS (Inter + JetBrains Mono). No Google Fonts picker required." },
+      { "type": "font_picker", "id": "font_header", "label": "Heading font (optional override)", "default": "inter_n7" },
+      { "type": "font_picker", "id": "font_body", "label": "Body font (optional override)", "default": "inter_n4" }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      { "type": "checkbox", "id": "enable_free_shipping_bar", "label": "Show free shipping progress bar", "default": true },
+      { "type": "number", "id": "free_shipping_threshold", "label": "Free shipping threshold ($)", "default": 50 },
+      { "type": "select", "id": "cart_type", "label": "Cart type", "options": [ { "value": "drawer", "label": "Drawer" }, { "value": "page", "label": "Page" } ], "default": "drawer" }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      { "type": "url", "id": "social_instagram", "label": "Instagram URL" },
+      { "type": "url", "id": "social_twitter", "label": "X / Twitter URL" },
+      { "type": "url", "id": "social_youtube", "label": "YouTube URL" },
+      { "type": "url", "id": "social_tiktok", "label": "TikTok URL" }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Favicon image" }
+    ]
+  },
+  {
+    "name": "Product grid",
+    "settings": [
+      { "type": "range", "id": "products_per_page", "label": "Products per page", "min": 4, "max": 24, "step": 4, "default": 12 }
+    ]
+  }
+]

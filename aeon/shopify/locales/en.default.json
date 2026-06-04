@@ -1,0 +1,132 @@
+{
+  "general": {
+    "page": "Page {{ page }}",
+    "search": "Search",
+    "menu": "Menu",
+    "close": "Close",
+    "cart": "Cart"
+  },
+  "accessibility": {
+    "skip": "Skip to content",
+    "close": "Close",
+    "cart": "Cart",
+    "menu": "Menu",
+    "search": "Search"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "buy_it_now": "Buy it now",
+      "sold_out": "Sold out",
+      "quantity": "Quantity",
+      "from": "From",
+      "subscribe_save": "Subscribe & Save",
+      "one_time": "One-time purchase"
+    },
+    "general": {
+      "vendor": "Vendor",
+      "sku": "SKU"
+    }
+  },
+  "sections": {
+    "cart": {
+      "title": "Your Cart",
+      "empty": "Your cart is empty.",
+      "subtotal": "Subtotal",
+      "checkout": "Secure checkout",
+      "remove": "Remove",
+      "taxes_note": "Shipping & taxes calculated at checkout",
+      "free_shipping_message": "You qualify for free shipping!",
+      "free_shipping_progress": "Add {{ amount }} more for free shipping"
+    },
+    "header": {
+      "shop": "Shop",
+      "the_science": "The Science",
+      "reviews": "Reviews",
+      "about": "About"
+    },
+    "footer": {
+      "newsletter_label": "Email for the protocol guide",
+      "newsletter_button": "Join",
+      "tagline": "Pharmaceutical-grade NMN to rebuild the NAD⁺ your cells run on. Third-party tested, nothing hidden."
+    },
+    "announcement_ticker": {
+      "purity": "purity β-NMN",
+      "serving": "per serving",
+      "tested": "Third-party tested",
+      "shipping": "shipping over $50",
+      "guarantee": "money-back guarantee",
+      "clean": "Vegan · Non-GMO · No fillers"
+    }
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty.",
+    "subtotal": "Subtotal",
+    "checkout": "Secure checkout",
+    "remove": "Remove",
+    "taxes_note": "Shipping & taxes calculated at checkout"
+  },
+  "newsletter": {
+    "label": "Email address",
+    "button": "Subscribe",
+    "success": "Thanks for subscribing."
+  },
+  "404": {
+    "title": "Page not found",
+    "subtext": "The page you were looking for does not exist.",
+    "link": "Continue shopping"
+  },
+  "customer": {
+    "login": {
+      "title": "Log in",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Log in",
+      "forgot_password": "Forgot your password?",
+      "guest": "Continue as guest"
+    },
+    "register": {
+      "title": "Create account",
+      "submit": "Create account"
+    },
+    "recover_password": {
+      "title": "Reset your password",
+      "subtext": "We will send you an email to reset your password.",
+      "submit": "Submit",
+      "success": "We've sent you an email with a link to update your password."
+    },
+    "orders": {
+      "title": "Order history",
+      "none": "You haven't placed any orders yet."
+    },
+    "account": {
+      "title": "My account",
+      "details": "Account details"
+    },
+    "addresses": {
+      "title": "Your addresses",
+      "add_new": "Add a new address",
+      "edit_address": "Edit address",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "company": "Company",
+      "address1": "Address 1",
+      "address2": "Address 2",
+      "city": "City",
+      "country": "Country",
+      "province": "State / Province",
+      "zip": "ZIP / Postal code",
+      "phone": "Phone",
+      "submit": "Add address",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "default": "Default"
+    }
+  },
+  "paginate": {
+    "previous": "Previous",
+    "next": "Next"
+  }
+}

@@ -1,0 +1,40 @@
+{%- comment -%}
+  AEON product card — usage: {% render 'product-card', product: product %}
+  Markup mirrors aeon/src/collection.html .pcard. Quick-add uses data-bundle-add (theme.js LIVE handler).
+{%- endcomment -%}
+<div class="pcard" data-product>
+  <div class="pcard__img">
+    {%- if product.compare_at_price > product.price -%}
+      {%- assign pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+      <span class="pcard__tag">Save {{ pct }}%</span>
+    {%- elsif product.metafields.custom.badge != blank -%}
+      <span class="pcard__tag">{{ product.metafields.custom.badge }}</span>
+    {%- elsif product.tags.size > 0 -%}
+      <span class="pcard__tag">{{ product.tags.first }}</span>
+    {%- endif -%}
+    {%- if product.featured_media -%}
+      <img src="{{ product.featured_media | image_url: width: 600 }}" alt="{{ product.featured_media.alt | default: product.title | escape }}" loading="lazy" width="600" height="600">
+    {%- else -%}
+      <img src="{{ 'aeon-bottle.svg' | asset_url }}" alt="{{ product.title | escape }}" loading="lazy">
+    {%- endif -%}
+  </div>
+  <div class="pcard__body">
+    <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    {%- if product.description != blank -%}
+      <p class="sub">{{ product.description | strip_html | truncate: 70 }}</p>
+    {%- endif -%}
+    <div class="rating-row" style="font-size:.8rem"><span class="stars">★★★★★</span> {{ product.metafields.reviews.rating | default: '4.9' }}</div>
+    <div class="pcard__foot">
+      <span class="pcard__price">
+        {%- if product.compare_at_price > product.price -%}<span class="was" style="color:var(--faint);text-decoration:line-through;font-weight:400;margin-right:.4rem">{{ product.compare_at_price | money }}</span>{%- endif -%}
+        {{ product.price | money }}
+      </span>
+      {%- assign add_variant = product.selected_or_first_available_variant -%}
+      {%- if product.available -%}
+        <a href="{{ product.url }}" class="btn btn-mint btn-sm" data-bundle-add="{{ add_variant.id }}">View</a>
+      {%- else -%}
+        <a href="{{ product.url }}" class="btn btn-ghost btn-sm">Sold out</a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
