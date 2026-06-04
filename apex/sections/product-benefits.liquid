@@ -1,0 +1,347 @@
+{%- liquid
+  assign s = section.settings
+  assign layout = s.layout
+-%}
+<section class="apex-product-benefits color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="product-benefits-{{ section.id }}">
+  <div class="page-width">
+
+    {%- if s.heading != blank or s.eyebrow != blank -%}
+      <div class="section-head{% if s.center_header %} section-head--center{% endif %} reveal">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+        {%- if s.subheading != blank -%}<p class="subtitle balance">{{ s.subheading }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if layout == 'grid' -%}
+      <div class="apex-product-benefits__grid reveal" style="--cols:{{ s.columns }}">
+        {%- for block in section.blocks -%}
+          {%- assign bs = block.settings -%}
+          <div class="apex-product-benefits__card{% if s.card_style %} card{% endif %}" {{ block.shopify_attributes }}>
+            <div class="apex-product-benefits__media">
+              {%- if bs.image != blank -%}
+                <div class="media media--square media--round">
+                  {{ bs.image | image_url: width: 480 | image_tag: loading: 'lazy', widths: '240,360,480', sizes: '(min-width:990px) 20vw, 40vw', alt: bs.image.alt }}
+                </div>
+              {%- elsif bs.icon != blank -%}
+                <div class="apex-product-benefits__icon">
+                  {% render 'icon', icon: bs.icon %}
+                </div>
+              {%- else -%}
+                <div class="apex-product-benefits__icon">
+                  {% render 'icon', icon: 'star' %}
+                </div>
+              {%- endif -%}
+            </div>
+            <div class="apex-product-benefits__body stack">
+              {%- if bs.heading != blank -%}<h3 class="h4">{{ bs.heading }}</h3>{%- endif -%}
+              {%- if bs.text != blank -%}<div class="rte muted">{{ bs.text }}</div>{%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+    {%- else -%}
+      <div class="apex-product-benefits__rows reveal">
+        {%- for block in section.blocks -%}
+          {%- assign bs = block.settings -%}
+          {%- assign is_even = forloop.index0 | modulo: 2 -%}
+          <div class="apex-product-benefits__row{% if is_even == 1 and s.alternate %} apex-product-benefits__row--flip{% endif %}" {{ block.shopify_attributes }}>
+            <div class="apex-product-benefits__row-media">
+              {%- if bs.image != blank -%}
+                <div class="media media--portrait media--round">
+                  {{ bs.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400,600,800', sizes: '(min-width:990px) 44vw, 90vw', alt: bs.image.alt }}
+                </div>
+              {%- elsif bs.icon != blank -%}
+                <div class="apex-product-benefits__icon-lg">
+                  {% render 'icon', icon: bs.icon %}
+                </div>
+              {%- else -%}
+                <div class="media media--portrait media--round">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              {%- endif -%}
+            </div>
+            <div class="apex-product-benefits__row-body stack">
+              {%- if bs.eyebrow != blank -%}<p class="eyebrow eyebrow--pill">{{ bs.eyebrow }}</p>{%- endif -%}
+              {%- if bs.heading != blank -%}<h3 class="h3 balance">{{ bs.heading }}</h3>{%- endif -%}
+              {%- if bs.text != blank -%}<div class="rte muted">{{ bs.text }}</div>{%- endif -%}
+              {%- if bs.link_label != blank -%}
+                <a class="link" href="{{ bs.link_url }}">{{ bs.link_label }} {% render 'icon', icon: 'arrow-right' %}</a>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+{% stylesheet %}
+/* -- grid layout -- */
+.apex-product-benefits__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), 1fr);
+  gap: var(--gutter);
+}
+.apex-product-benefits__card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.apex-product-benefits__card.card { padding: clamp(1.2rem,1rem + 2vw,2rem); }
+.apex-product-benefits__icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  flex: none;
+}
+.apex-product-benefits__icon svg { width: 1.6rem; height: 1.6rem; }
+.apex-product-benefits__media .media { max-width: 6rem; }
+.apex-product-benefits__body { gap: .5rem; }
+
+/* -- row layout -- */
+.apex-product-benefits__rows { display: grid; gap: clamp(3rem,5vw,5rem); }
+.apex-product-benefits__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem,4vw,4rem);
+  align-items: center;
+}
+.apex-product-benefits__row--flip .apex-product-benefits__row-media { order: 2; }
+.apex-product-benefits__row--flip .apex-product-benefits__row-body { order: 1; }
+.apex-product-benefits__row-body { gap: 1rem; }
+.apex-product-benefits__icon-lg {
+  width: 100%;
+  aspect-ratio: 3/4;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--accent) 10%, var(--bg-alt));
+  color: var(--accent);
+}
+.apex-product-benefits__icon-lg svg { width: 5rem; height: 5rem; }
+
+@media (max-width: 990px) {
+  .apex-product-benefits__grid { grid-template-columns: repeat(min(var(--cols,3),2),1fr); }
+  .apex-product-benefits__row { grid-template-columns: 1fr; }
+  .apex-product-benefits__row--flip .apex-product-benefits__row-media { order: 0; }
+  .apex-product-benefits__row--flip .apex-product-benefits__row-body { order: 0; }
+}
+@media (max-width: 600px) {
+  .apex-product-benefits__grid { grid-template-columns: 1fr; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Product benefits",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What makes it different"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "center_header",
+      "label": "Center header",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "rows",
+      "options": [
+        {
+          "value": "rows",
+          "label": "Alternating rows"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "alternate",
+      "label": "Alternate image side (rows layout)",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns (grid layout)",
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "card_style",
+      "label": "Show card background (grid layout)",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon (if no image)",
+          "default": "star",
+          "options": [
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "bag",
+              "label": "Bag"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow (rows layout)"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Ingredient benefit"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "<p>Explain how this ingredient or feature directly benefits the customer and what makes it unique to your formulation.</p>"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product benefits",
+      "settings": {
+        "layout": "rows",
+        "heading": "Formulated with purpose"
+      },
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "eyebrow": "Key ingredient",
+            "heading": "Clinically proven actives",
+            "text": "<p>Every active ingredient is backed by peer-reviewed research and dosed at efficacy levels — not cosmetic amounts added just to appear on the label.</p>",
+            "icon": "shield"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "eyebrow": "Sustainability",
+            "heading": "Clean, conscious sourcing",
+            "text": "<p>Ingredients are ethically sourced from certified suppliers. Our packaging is made from post-consumer recycled materials whenever possible.</p>",
+            "icon": "leaf"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "eyebrow": "Results",
+            "heading": "Noticeable difference in 30 days",
+            "text": "<p>In a third-party user study, 94% of participants reported visible improvement within four weeks of consistent use.</p>",
+            "icon": "star"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

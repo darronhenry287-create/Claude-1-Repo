@@ -1,0 +1,36 @@
+{%- liquid
+  assign img = block.settings.image
+  assign lnk = block.settings.url
+  assign w = block.settings.width
+-%}
+<div class="apex-tb-logo" style="text-align:{{ block.settings.align }}" {{ block.shopify_attributes }}>
+  {%- if lnk != blank -%}
+    <a href="{{ lnk }}" class="apex-tb-logo__link" aria-label="{{ block.settings.label | default: 'Visit link' | escape }}">
+  {%- endif -%}
+  {%- if img != blank -%}
+    {{ img | image_url: width: 600 | image_tag: loading: 'lazy', widths: '120,200,300,400,600', sizes: '(min-width:990px) 20vw, 40vw', alt: img.alt, width: w, height: img.height | times: w | divided_by: img.width, style: 'width:100%;height:auto;max-width:' | append: w | append: 'px;display:inline-block' }}
+  {%- else -%}
+    {{ 'logo' | placeholder_svg_tag: 'placeholder-svg', 'apex-tb-logo__placeholder' }}
+  {%- endif -%}
+  {%- if lnk != blank -%}
+    </a>
+  {%- endif -%}
+</div>
+{% stylesheet %}
+.apex-tb-logo__link { display: inline-block; }
+.apex-tb-logo__link:hover { opacity: .8; }
+.apex-tb-logo__placeholder { width: 120px; height: 40px; display: inline-block; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Logo",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Logo image" },
+    { "type": "range", "id": "width", "min": 60, "max": 400, "step": 10, "unit": "px", "label": "Max width", "default": 160 },
+    { "type": "url", "id": "url", "label": "Link URL (optional)" },
+    { "type": "text", "id": "label", "label": "Link aria-label", "default": "Brand website" },
+    { "type": "select", "id": "align", "label": "Alignment", "default": "left", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}] }
+  ],
+  "presets": [ { "name": "Logo" } ]
+}
+{% endschema %}

@@ -1,0 +1,235 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-alternating-features color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="alternating-features-{{ section.id }}">
+  <div class="page-width">
+
+    {%- if s.eyebrow != blank or s.heading != blank -%}
+      <div class="section-head section-head--center reveal">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+        {%- if s.subheading != blank -%}<p class="subtitle balance">{{ s.subheading }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="apex-af__rows">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign row_index = forloop.index0
+          assign is_even = row_index | modulo: 2
+        -%}
+        <div class="apex-af__row{% if is_even == 0 %} apex-af__row--normal{% else %} apex-af__row--reversed{% endif %}" {{ block.shopify_attributes }}>
+
+          <div class="apex-af__media reveal reveal--zoom">
+            <div class="media media--{{ s.image_ratio }} media--round">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400,600,800,1000,1200', sizes: '(min-width:990px) 50vw, 100vw', alt: block.settings.image.alt }}
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+          </div>
+
+          <div class="apex-af__content reveal stack">
+            {%- if block.settings.eyebrow != blank -%}
+              <p class="eyebrow eyebrow--pill">{{ block.settings.eyebrow }}</p>
+            {%- endif -%}
+            {%- if block.settings.heading != blank -%}
+              <h3 class="balance">{{ block.settings.heading }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <div class="rte subtitle">{{ block.settings.text }}</div>
+            {%- endif -%}
+            {%- if block.settings.checklist != blank -%}
+              {%- assign items = block.settings.checklist | split: '|' -%}
+              <ul class="apex-af__checklist stack">
+                {%- for item in items -%}
+                  {%- assign item_text = item | strip -%}
+                  {%- if item_text != blank -%}
+                    <li class="apex-af__check-item">
+                      <span class="apex-af__check-icon">{% render 'icon', icon: 'check' %}</span>
+                      <span>{{ item_text }}</span>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+            {%- if block.settings.button_label != blank -%}
+              <div class="cluster">
+                <a class="btn btn--accent" href="{{ block.settings.button_url }}">{{ block.settings.button_label }}</a>
+              </div>
+            {%- endif -%}
+          </div>
+
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+{% stylesheet %}
+.apex-af__rows { display: grid; gap: clamp(3rem, 2rem + 4vw, 5.5rem); }
+.apex-af__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 1.5rem + 4vw, 5rem);
+  align-items: center;
+}
+.apex-af__row--reversed .apex-af__media { order: 2; }
+.apex-af__row--reversed .apex-af__content { order: 1; }
+.apex-af__content { gap: 1.4rem; }
+.apex-af__checklist { gap: .75rem; list-style: none; padding: 0; }
+.apex-af__check-item { display: flex; align-items: flex-start; gap: .7rem; line-height: 1.5; }
+.apex-af__check-icon { flex: none; width: 1.25rem; height: 1.25rem; display: grid; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); margin-top: .15rem; }
+.apex-af__check-icon svg { width: .75rem; height: .75rem; }
+@media (max-width: 749px) {
+  .apex-af__row { grid-template-columns: 1fr; }
+  .apex-af__row--reversed .apex-af__media { order: 0; }
+  .apex-af__row--reversed .apex-af__content { order: 0; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Alternating features",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "default": "square",
+      "options": [
+        { "value": "square", "label": "Square (1:1)" },
+        { "value": "portrait", "label": "Portrait (3:4)" },
+        { "value": "landscape", "label": "Landscape (4:3)" }
+      ]
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Feature row",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "A feature worth talking about"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Body text",
+          "default": "<p>Explain what makes this feature valuable to your customer. Be specific, clear, and focus on the outcome.</p>"
+        },
+        {
+          "type": "textarea",
+          "id": "checklist",
+          "label": "Checklist items (separate with |)",
+          "default": "Precision-engineered components | Built for long-term use | Backed by our guarantee"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Alternating features",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "eyebrow": "Step 01",
+            "heading": "Effortless setup from day one",
+            "text": "<p>Get up and running in minutes. Our intuitive onboarding guides you through every step so there's nothing to figure out on your own.</p>",
+            "checklist": "Works out of the box | No technical knowledge needed | 24/7 support included",
+            "button_label": "Learn more"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "eyebrow": "Step 02",
+            "heading": "Performance that scales with you",
+            "text": "<p>Whether you're just starting out or handling thousands of orders, our system adapts to your needs without slowing down.</p>",
+            "checklist": "Handles high-volume demand | Automatic optimisation | Real-time analytics",
+            "button_label": "See the numbers"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "eyebrow": "Step 03",
+            "heading": "Support that actually answers",
+            "text": "<p>A real team, not a bot. Our specialists are available around the clock to help you get the most from your investment.</p>",
+            "checklist": "Live chat and email | Average response under 2 minutes | Dedicated account manager",
+            "button_label": "Contact us"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

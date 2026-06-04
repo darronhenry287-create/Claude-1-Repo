@@ -1,0 +1,197 @@
+{%- liquid
+  assign s = section.settings
+  assign cols = s.columns | default: 3
+-%}
+<section class="apex-store-features color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="store-features-{{ section.id }}">
+  <div class="page-width">
+
+    {%- if s.heading != blank or s.eyebrow != blank -%}
+      <div class="section-head{% if s.center_header %} section-head--center{% endif %} reveal">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+        {%- if s.subheading != blank -%}<p class="subtitle balance">{{ s.subheading }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="apex-store-features__grid reveal" style="--sf-cols:{{ cols }}">
+      {%- for block in section.blocks -%}
+        {%- assign bs = block.settings -%}
+        <div class="apex-store-features__item card card--hover" {{ block.shopify_attributes }}>
+          <div class="apex-store-features__media">
+            {%- if bs.image != blank -%}
+              <div class="media media--landscape">
+                {{ bs.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '480,640,900', sizes: '(min-width:990px) 33vw, 90vw', alt: bs.image.alt }}
+              </div>
+            {%- else -%}
+              <div class="media media--landscape">
+                {{ 'collection-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            {%- endif -%}
+          </div>
+          <div class="apex-store-features__body stack">
+            {%- if bs.heading != blank -%}<h3 class="h4">{{ bs.heading }}</h3>{%- endif -%}
+            {%- if bs.text != blank -%}<div class="rte muted">{{ bs.text }}</div>{%- endif -%}
+            {%- if bs.link_label != blank -%}
+              <a class="link" href="{{ bs.link_url }}">{{ bs.link_label }} {% render 'icon', icon: 'arrow-right' %}</a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+{% stylesheet %}
+.apex-store-features__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--sf-cols, 3), 1fr);
+  gap: var(--gutter);
+}
+.apex-store-features__item {
+  display: flex;
+  flex-direction: column;
+}
+.apex-store-features__media { flex: none; }
+.apex-store-features__media .media { border-radius: 0; }
+.apex-store-features__body {
+  flex: 1;
+  gap: .75rem;
+  padding: clamp(1.2rem,1rem + 2vw,2rem);
+}
+@media (max-width: 990px) {
+  .apex-store-features__grid { grid-template-columns: repeat(min(var(--sf-cols,3),2),1fr); }
+}
+@media (max-width: 600px) {
+  .apex-store-features__grid { grid-template-columns: 1fr; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Store features",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Everything you need"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "center_header",
+      "label": "Center header",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns per row",
+      "default": 3
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Feature image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Feature name"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "<p>Describe this feature and what value it delivers to your customers in a clear, benefit-led sentence.</p>"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Store features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "heading": "Expert curation",
+            "text": "<p>Every product in our range is hand-selected by in-house specialists who test for quality before anything reaches your door.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "heading": "Same-day dispatch",
+            "text": "<p>Orders placed before 2 pm ship the same business day. Track your parcel in real time from our warehouse to your address.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "heading": "Loyalty rewards",
+            "text": "<p>Earn points on every purchase and redeem them for discounts, early access, and exclusive member-only releases.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

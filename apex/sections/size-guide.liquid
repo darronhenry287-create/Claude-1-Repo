@@ -1,0 +1,431 @@
+{%- liquid
+  assign s = section.settings
+  assign modal_id = 'size-guide-modal-' | append: section.id
+-%}
+<section class="apex-size-guide color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="size-guide-{{ section.id }}">
+  <div class="page-width">
+    <div class="apex-size-guide__trigger-wrap reveal">
+      {%- if s.eyebrow != blank -%}<p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>{%- endif -%}
+      {%- if s.heading != blank -%}<p class="apex-size-guide__heading h5">{{ s.heading }}</p>{%- endif -%}
+      <button class="btn{% if s.button_style == 'ghost' %} btn--ghost{% elsif s.button_style == 'secondary' %} btn--secondary{% else %} btn--accent{% endif %}" type="button" data-open="{{ modal_id }}" aria-haspopup="dialog">
+        {%- if s.button_icon != blank -%}{% render 'icon', icon: s.button_icon %}{%- endif -%}
+        {{ s.button_label | default: 'Size guide' }}
+      </button>
+    </div>
+  </div>
+</section>
+
+<div id="{{ modal_id }}" class="modal apex-size-guide__modal" role="dialog" aria-modal="true" aria-labelledby="sg-title-{{ section.id }}" hidden>
+  <div class="apex-size-guide__modal-inner">
+    <div class="apex-size-guide__modal-head">
+      <h2 class="h4" id="sg-title-{{ section.id }}">{{ s.modal_heading | default: 'Size guide' }}</h2>
+      <button class="apex-size-guide__close btn btn--ghost btn--sm" type="button" data-close="{{ modal_id }}" aria-label="Close size guide">{% render 'icon', icon: 'close' %}</button>
+    </div>
+
+    {%- if s.fit_notes != blank -%}
+      <div class="apex-size-guide__fit-notes rte">{{ s.fit_notes }}</div>
+    {%- endif -%}
+
+    {%- assign row_blocks = section.blocks | where: 'type', 'row' -%}
+    {%- assign header_blocks = section.blocks | where: 'type', 'header' -%}
+
+    {%- if header_blocks.size > 0 or row_blocks.size > 0 -%}
+      <div class="apex-size-guide__table-wrap">
+        <table class="apex-size-guide__table" role="table">
+          {%- if header_blocks.size > 0 -%}
+            <thead>
+              {%- for block in header_blocks -%}
+                <tr>
+                  <th class="apex-size-guide__th" scope="col">{{ block.settings.col_1 }}</th>
+                  {%- if block.settings.col_2 != blank -%}<th class="apex-size-guide__th" scope="col">{{ block.settings.col_2 }}</th>{%- endif -%}
+                  {%- if block.settings.col_3 != blank -%}<th class="apex-size-guide__th" scope="col">{{ block.settings.col_3 }}</th>{%- endif -%}
+                  {%- if block.settings.col_4 != blank -%}<th class="apex-size-guide__th" scope="col">{{ block.settings.col_4 }}</th>{%- endif -%}
+                  {%- if block.settings.col_5 != blank -%}<th class="apex-size-guide__th" scope="col">{{ block.settings.col_5 }}</th>{%- endif -%}
+                </tr>
+              {%- endfor -%}
+            </thead>
+          {%- endif -%}
+          <tbody>
+            {%- for block in row_blocks -%}
+              <tr class="apex-size-guide__tr" {{ block.shopify_attributes }}>
+                <td class="apex-size-guide__td apex-size-guide__td--label">{{ block.settings.col_1 }}</td>
+                {%- if block.settings.col_2 != blank -%}<td class="apex-size-guide__td">{{ block.settings.col_2 }}</td>{%- endif -%}
+                {%- if block.settings.col_3 != blank -%}<td class="apex-size-guide__td">{{ block.settings.col_3 }}</td>{%- endif -%}
+                {%- if block.settings.col_4 != blank -%}<td class="apex-size-guide__td">{{ block.settings.col_4 }}</td>{%- endif -%}
+                {%- if block.settings.col_5 != blank -%}<td class="apex-size-guide__td">{{ block.settings.col_5 }}</td>{%- endif -%}
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    {%- endif -%}
+
+    {%- if s.model_note != blank -%}
+      <p class="apex-size-guide__model-note muted">{{ s.model_note }}</p>
+    {%- endif -%}
+  </div>
+</div>
+<div class="overlay" data-close="{{ modal_id }}" hidden></div>
+
+{% stylesheet %}
+/* trigger */
+.apex-size-guide__trigger-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+/* modal overlay */
+.apex-size-guide__modal {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+.apex-size-guide__modal:not([hidden]) { pointer-events: auto; }
+.apex-size-guide__modal-inner {
+  background: var(--bg);
+  color: var(--text);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  width: 100%;
+  max-width: 680px;
+  max-height: 90svh;
+  overflow-y: auto;
+  padding: clamp(1.4rem,2vw,2.4rem);
+  display: grid;
+  gap: 1.4rem;
+  box-shadow: var(--shadow-pop);
+  transform: translateY(100%);
+  transition: transform .38s var(--ease);
+}
+.apex-size-guide__modal:not([hidden]) .apex-size-guide__modal-inner { transform: translateY(0); }
+@media (min-width: 600px) {
+  .apex-size-guide__modal { align-items: center; }
+  .apex-size-guide__modal-inner { border-radius: var(--radius-lg); transform: translateY(20px) scale(.97); opacity: 0; }
+  .apex-size-guide__modal:not([hidden]) .apex-size-guide__modal-inner { transform: translateY(0) scale(1); opacity: 1; }
+}
+.apex-size-guide__modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.apex-size-guide__close { flex: none; }
+.apex-size-guide__fit-notes { font-size: .94rem; }
+/* table */
+.apex-size-guide__table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-card);
+}
+.apex-size-guide__table {
+  width: 100%;
+  min-width: 360px;
+  border-collapse: collapse;
+}
+.apex-size-guide__th {
+  padding: .8rem 1.1rem;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-align: left;
+  background: var(--bg-alt);
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+.apex-size-guide__tr:nth-child(even) .apex-size-guide__td {
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+}
+.apex-size-guide__tr:last-child .apex-size-guide__td { border-bottom: none; }
+.apex-size-guide__td {
+  padding: .75rem 1.1rem;
+  font-size: .92rem;
+  border-bottom: var(--border-width) solid var(--border);
+  vertical-align: middle;
+}
+.apex-size-guide__td--label {
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--accent);
+}
+.apex-size-guide__model-note {
+  font-size: var(--text-sm);
+  border-top: var(--border-width) solid var(--border);
+  padding-top: 1rem;
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Size guide",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Inline label (optional)"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Size guide"
+    },
+    {
+      "type": "select",
+      "id": "button_icon",
+      "label": "Button icon",
+      "default": "return",
+      "options": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "return",
+          "label": "Ruler"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "user",
+          "label": "User"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "default": "ghost",
+      "options": [
+        {
+          "value": "accent",
+          "label": "Accent"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        },
+        {
+          "value": "ghost",
+          "label": "Ghost"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "modal_heading",
+      "label": "Modal heading",
+      "default": "Size guide"
+    },
+    {
+      "type": "richtext",
+      "id": "fit_notes",
+      "label": "Fit notes (above table)",
+      "default": "<p>Measurements are in centimetres unless noted. If you're between sizes, we recommend sizing up for a relaxed fit or sizing down for a tailored look.</p>"
+    },
+    {
+      "type": "text",
+      "id": "model_note",
+      "label": "Model note (below table)",
+      "default": "Model is 178 cm / 70 kg and wears size M."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "header",
+      "name": "Table header row",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "col_1",
+          "label": "Column 1 heading",
+          "default": "Size"
+        },
+        {
+          "type": "text",
+          "id": "col_2",
+          "label": "Column 2 heading",
+          "default": "Chest (cm)"
+        },
+        {
+          "type": "text",
+          "id": "col_3",
+          "label": "Column 3 heading",
+          "default": "Waist (cm)"
+        },
+        {
+          "type": "text",
+          "id": "col_4",
+          "label": "Column 4 heading",
+          "default": "Hip (cm)"
+        },
+        {
+          "type": "text",
+          "id": "col_5",
+          "label": "Column 5 heading"
+        }
+      ]
+    },
+    {
+      "type": "row",
+      "name": "Size row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "col_1",
+          "label": "Size label",
+          "default": "S"
+        },
+        {
+          "type": "text",
+          "id": "col_2",
+          "label": "Column 2 value",
+          "default": "86–91"
+        },
+        {
+          "type": "text",
+          "id": "col_3",
+          "label": "Column 3 value",
+          "default": "71–76"
+        },
+        {
+          "type": "text",
+          "id": "col_4",
+          "label": "Column 4 value",
+          "default": "91–96"
+        },
+        {
+          "type": "text",
+          "id": "col_5",
+          "label": "Column 5 value"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Size guide",
+      "settings": {
+        "button_label": "Size guide",
+        "modal_heading": "Find your fit"
+      },
+      "blocks": [
+        {
+          "type": "header",
+          "settings": {
+            "col_1": "Size",
+            "col_2": "Chest (cm)",
+            "col_3": "Waist (cm)",
+            "col_4": "Hip (cm)",
+            "col_5": "Int. length (cm)"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "col_1": "XS",
+            "col_2": "80–85",
+            "col_3": "65–70",
+            "col_4": "86–91",
+            "col_5": "74"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "col_1": "S",
+            "col_2": "86–91",
+            "col_3": "71–76",
+            "col_4": "91–96",
+            "col_5": "76"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "col_1": "M",
+            "col_2": "92–97",
+            "col_3": "77–82",
+            "col_4": "97–102",
+            "col_5": "78"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "col_1": "L",
+            "col_2": "98–104",
+            "col_3": "83–89",
+            "col_4": "103–109",
+            "col_5": "79"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "col_1": "XL",
+            "col_2": "105–112",
+            "col_3": "90–97",
+            "col_4": "110–117",
+            "col_5": "80"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "col_1": "2XL",
+            "col_2": "113–121",
+            "col_3": "98–106",
+            "col_4": "118–126",
+            "col_5": "81"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

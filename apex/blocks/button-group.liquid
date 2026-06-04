@@ -1,0 +1,25 @@
+<div class="apex-tb-button-group cluster" style="justify-content:{{ block.settings.align }}" {{ block.shopify_attributes }}>
+  <a href="{{ block.settings.url_1 }}" class="btn btn--{{ block.settings.style_1 }}{% if block.settings.pill %} btn--pill{% endif %}">{{ block.settings.label_1 | escape }}</a>
+  {%- if block.settings.label_2 != blank -%}
+    <a href="{{ block.settings.url_2 }}" class="btn btn--{{ block.settings.style_2 }}{% if block.settings.pill %} btn--pill{% endif %}">{{ block.settings.label_2 | escape }}</a>
+  {%- endif -%}
+</div>
+{% schema %}
+{
+  "name": "Button group",
+  "settings": [
+    { "type": "header", "content": "Primary button" },
+    { "type": "text", "id": "label_1", "label": "Label", "default": "Get started" },
+    { "type": "url", "id": "url_1", "label": "URL" },
+    { "type": "select", "id": "style_1", "label": "Style", "default": "accent", "options": [{"value":"accent","label":"Accent"},{"value":"secondary","label":"Secondary"},{"value":"ghost","label":"Ghost"}] },
+    { "type": "header", "content": "Secondary button (optional)" },
+    { "type": "text", "id": "label_2", "label": "Label", "default": "Learn more" },
+    { "type": "url", "id": "url_2", "label": "URL" },
+    { "type": "select", "id": "style_2", "label": "Style", "default": "ghost", "options": [{"value":"accent","label":"Accent"},{"value":"secondary","label":"Secondary"},{"value":"ghost","label":"Ghost"}] },
+    { "type": "header", "content": "Layout" },
+    { "type": "checkbox", "id": "pill", "label": "Pill shape", "default": false },
+    { "type": "select", "id": "align", "label": "Alignment", "default": "flex-start", "options": [{"value":"flex-start","label":"Left"},{"value":"center","label":"Center"},{"value":"flex-end","label":"Right"}] }
+  ],
+  "presets": [ { "name": "Button group" } ]
+}
+{% endschema %}

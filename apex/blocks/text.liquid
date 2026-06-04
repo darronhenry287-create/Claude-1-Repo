@@ -1,0 +1,13 @@
+<div class="apex-tb-text" {{ block.shopify_attributes }} style="text-align:{{ block.settings.align }}">
+  {{ block.settings.text }}
+</div>
+{% schema %}
+{
+  "name": "Text",
+  "settings": [
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Add your text here. Drag blocks to rearrange.</p>" },
+    { "type": "select", "id": "align", "label": "Alignment", "default": "left", "options": [ {"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"} ] }
+  ],
+  "presets": [ { "name": "Text" } ]
+}
+{% endschema %}

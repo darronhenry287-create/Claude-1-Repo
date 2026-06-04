@@ -1,0 +1,321 @@
+{%- liquid
+  assign s = section.settings
+  assign show_competitor = s.show_competitor
+-%}
+<section class="apex-comparison-bars color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="comparison-bars-{{ section.id }}">
+  <div class="page-width{% if s.narrow %} page-width--narrow{% endif %}">
+    <div class="reveal">
+
+      {%- if s.heading != blank or s.eyebrow != blank -%}
+        <div class="section-head{% if s.center_header %} section-head--center{% endif %}">
+          {%- if s.eyebrow != blank -%}<p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>{%- endif -%}
+          {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+          {%- if s.subheading != blank -%}<p class="subtitle balance">{{ s.subheading }}</p>{%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if show_competitor -%}
+        <div class="apex-comparison-bars__legend">
+          <span class="apex-comparison-bars__legend-item apex-comparison-bars__legend-item--us">
+            <span class="apex-comparison-bars__legend-dot" aria-hidden="true"></span>
+            {{ s.brand_name | default: 'Our Brand' }}
+          </span>
+          <span class="apex-comparison-bars__legend-item apex-comparison-bars__legend-item--them">
+            <span class="apex-comparison-bars__legend-dot" aria-hidden="true"></span>
+            {{ s.competitor_name | default: 'Others' }}
+          </span>
+        </div>
+      {%- endif -%}
+
+      <div class="apex-comparison-bars__rows">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign bs = block.settings
+            assign us_pct = bs.our_value | default: 80
+            assign them_pct = bs.competitor_value | default: 50
+          -%}
+          <div class="apex-comparison-bars__row" {{ block.shopify_attributes }}>
+            <div class="apex-comparison-bars__meta">
+              <span class="apex-comparison-bars__label">{{ bs.label }}</span>
+              <span class="apex-comparison-bars__values">
+                <strong class="apex-comparison-bars__val apex-comparison-bars__val--us">{{ us_pct }}%</strong>
+                {%- if show_competitor -%}<span class="apex-comparison-bars__val apex-comparison-bars__val--them">{{ them_pct }}%</span>{%- endif -%}
+              </span>
+            </div>
+            <div class="apex-comparison-bars__track-wrap">
+              <div class="apex-comparison-bars__track">
+                <div class="apex-comparison-bars__bar apex-comparison-bars__bar--us" style="--target:{{ us_pct }}%" role="progressbar" aria-valuenow="{{ us_pct }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ bs.label }}: {{ us_pct }}%"></div>
+              </div>
+              {%- if show_competitor -%}
+                <div class="apex-comparison-bars__track apex-comparison-bars__track--them">
+                  <div class="apex-comparison-bars__bar apex-comparison-bars__bar--them" style="--target:{{ them_pct }}%" role="progressbar" aria-valuenow="{{ them_pct }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ s.competitor_name | default: 'Others' }}: {{ them_pct }}%"></div>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-comparison-bars__legend {
+  display: flex;
+  gap: 1.6rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.apex-comparison-bars__legend-item {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  font-size: .9rem;
+  font-weight: 600;
+}
+.apex-comparison-bars__legend-dot {
+  width: .75rem;
+  height: .75rem;
+  border-radius: var(--radius-pill);
+  flex: none;
+}
+.apex-comparison-bars__legend-item--us .apex-comparison-bars__legend-dot { background: var(--accent); }
+.apex-comparison-bars__legend-item--them .apex-comparison-bars__legend-dot { background: var(--border); }
+
+.apex-comparison-bars__rows { display: grid; gap: 1.8rem; }
+.apex-comparison-bars__row {}
+.apex-comparison-bars__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: .6rem;
+}
+.apex-comparison-bars__label {
+  font-weight: 600;
+  font-size: .95rem;
+}
+.apex-comparison-bars__values {
+  display: flex;
+  gap: .8rem;
+  flex-shrink: 0;
+}
+.apex-comparison-bars__val {
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+.apex-comparison-bars__val--us { color: var(--accent); }
+.apex-comparison-bars__val--them { color: var(--text-muted); }
+
+.apex-comparison-bars__track-wrap { display: grid; gap: .4rem; }
+.apex-comparison-bars__track {
+  height: .72rem;
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+.apex-comparison-bars__track--them { height: .5rem; }
+.apex-comparison-bars__bar {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  width: 0;
+  transition: width .9s var(--ease);
+}
+.apex-comparison-bars__bar--us {
+  background: var(--accent);
+}
+.apex-comparison-bars__bar--them {
+  background: color-mix(in srgb, var(--text-muted) 55%, transparent);
+}
+/* animate when in view */
+.reveal.is-visible .apex-comparison-bars__bar,
+.apex-comparison-bars__bar.is-visible {
+  width: var(--target, 0%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .apex-comparison-bars__bar { transition: none; width: var(--target, 0%); }
+}
+{% endstylesheet %}
+{% javascript %}
+(function () {
+  var section = document.getElementById('comparison-bars-{{ section.id }}');
+  if (!section) return;
+  var bars = section.querySelectorAll('.apex-comparison-bars__bar');
+  if (!bars.length) return;
+
+  function animate() {
+    bars.forEach(function (bar) { bar.style.width = bar.style.getPropertyValue('--target') || '0%'; });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { animate(); io.disconnect(); }
+    }, { threshold: 0.2 });
+    io.observe(section);
+  } else {
+    animate();
+  }
+})();
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Comparison bars",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Why choose us"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How we measure up"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "center_header",
+      "label": "Center header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "narrow",
+      "label": "Narrow layout",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_competitor",
+      "label": "Show competitor comparison bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Your brand name",
+      "default": "Our Brand"
+    },
+    {
+      "type": "text",
+      "id": "competitor_name",
+      "label": "Competitor label",
+      "default": "Industry average"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "metric",
+      "name": "Metric",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Metric label",
+          "default": "Ingredient purity"
+        },
+        {
+          "type": "range",
+          "id": "our_value",
+          "label": "Our brand score (%)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 95
+        },
+        {
+          "type": "range",
+          "id": "competitor_value",
+          "label": "Competitor score (%)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 55
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison bars",
+      "blocks": [
+        {
+          "type": "metric",
+          "settings": {
+            "label": "Ingredient purity",
+            "our_value": 97,
+            "competitor_value": 62
+          }
+        },
+        {
+          "type": "metric",
+          "settings": {
+            "label": "Customer satisfaction",
+            "our_value": 94,
+            "competitor_value": 71
+          }
+        },
+        {
+          "type": "metric",
+          "settings": {
+            "label": "Packaging sustainability",
+            "our_value": 88,
+            "competitor_value": 40
+          }
+        },
+        {
+          "type": "metric",
+          "settings": {
+            "label": "Clinically tested formulas",
+            "our_value": 100,
+            "competitor_value": 45
+          }
+        },
+        {
+          "type": "metric",
+          "settings": {
+            "label": "Repeat purchase rate",
+            "our_value": 82,
+            "competitor_value": 54
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

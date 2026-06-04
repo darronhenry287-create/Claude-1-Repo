@@ -1,0 +1,21 @@
+<div class="apex-tb-stat" style="text-align:{{ block.settings.align }}" {{ block.shopify_attributes }}>
+  <p class="apex-tb-stat__number h2" style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);color:var(--accent);line-height:1">
+    {%- if block.settings.prefix != blank -%}<span class="apex-tb-stat__prefix">{{ block.settings.prefix | escape }}</span>{%- endif -%}{{ block.settings.number | escape }}{%- if block.settings.suffix != blank -%}<span class="apex-tb-stat__suffix">{{ block.settings.suffix | escape }}</span>{%- endif -%}
+  </p>
+  {%- if block.settings.label != blank -%}
+    <p class="muted" style="margin-top:.4rem;font-size:var(--text-sm);font-weight:600;text-transform:uppercase;letter-spacing:.08em">{{ block.settings.label | escape }}</p>
+  {%- endif -%}
+</div>
+{% schema %}
+{
+  "name": "Stat",
+  "settings": [
+    { "type": "text", "id": "prefix", "label": "Prefix (e.g. $)", "default": "" },
+    { "type": "text", "id": "number", "label": "Number / value", "default": "10K+" },
+    { "type": "text", "id": "suffix", "label": "Suffix (e.g. %)", "default": "" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Happy customers" },
+    { "type": "select", "id": "align", "label": "Alignment", "default": "center", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}] }
+  ],
+  "presets": [ { "name": "Stat" } ]
+}
+{% endschema %}

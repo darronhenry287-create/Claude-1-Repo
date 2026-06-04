@@ -1,0 +1,234 @@
+{%- liquid
+  assign s = section.settings
+  assign has_bg = false
+  if s.bg_image != blank
+    assign has_bg = true
+  endif
+-%}
+<section class="apex-highlight-banner color-{{ s.color_scheme }}{% if has_bg %} apex-highlight-banner--has-bg{% endif %}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px;--overlay:{{ s.overlay_opacity | divided_by: 100.0 }};--align:{{ s.text_align }}"
+  id="highlight-banner-{{ section.id }}">
+
+  {%- if has_bg -%}
+    <div class="apex-highlight-banner__bg" aria-hidden="true">
+      {{ s.bg_image | image_url: width: 2000 | image_tag: loading: 'lazy', widths: '800,1200,1600,2000', sizes: '100vw', alt: s.bg_image.alt }}
+      {%- if s.overlay_opacity > 0 -%}<span class="apex-highlight-banner__overlay"></span>{%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="page-width apex-highlight-banner__wrap">
+    <div class="apex-highlight-banner__content reveal">
+
+      {%- if s.eyebrow != blank -%}
+        <p class="eyebrow{% if s.eyebrow_pill %} eyebrow--pill{% endif %}">{{ s.eyebrow }}</p>
+      {%- endif -%}
+
+      {%- if s.heading != blank -%}
+        <h2 class="apex-highlight-banner__heading balance" style="font-size:clamp(2rem,1rem + 4vw,{{ s.heading_size }}rem)">{{ s.heading }}</h2>
+      {%- endif -%}
+
+      {%- if s.text != blank -%}
+        <div class="apex-highlight-banner__text subtitle balance">{{ s.text }}</div>
+      {%- endif -%}
+
+      {%- if s.button_1 != blank or s.button_2 != blank -%}
+        <div class="cluster apex-highlight-banner__btns">
+          {%- if s.button_1 != blank -%}
+            <a class="btn btn--accent btn--lg" href="{{ s.button_1_url }}">{{ s.button_1 }}</a>
+          {%- endif -%}
+          {%- if s.button_2 != blank -%}
+            <a class="btn btn--secondary btn--lg" href="{{ s.button_2_url }}">{{ s.button_2 }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-highlight-banner {
+  position: relative;
+  overflow: hidden;
+}
+.apex-highlight-banner__bg {
+  position: absolute;
+  inset: 0;
+}
+.apex-highlight-banner__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.apex-highlight-banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: var(--overlay, 0.4);
+}
+.apex-highlight-banner__wrap {
+  position: relative;
+  width: 100%;
+}
+.apex-highlight-banner__content {
+  display: grid;
+  gap: 1.4rem;
+  max-width: 44rem;
+  text-align: var(--align, center);
+}
+.apex-highlight-banner[style*="center"] .apex-highlight-banner__content { margin-inline: auto; }
+.apex-highlight-banner[style*="right"] .apex-highlight-banner__content { margin-left: auto; }
+.apex-highlight-banner--has-bg .apex-highlight-banner__content { color: #fff; }
+.apex-highlight-banner--has-bg .apex-highlight-banner__text { color: rgba(255,255,255,.85); }
+.apex-highlight-banner__heading {
+  line-height: 1.04;
+  font-weight: var(--font-heading-weight);
+  letter-spacing: var(--heading-letter-spacing);
+}
+.apex-highlight-banner__btns {
+  justify-content: var(--align, center);
+}
+.apex-highlight-banner--has-bg .btn--secondary {
+  --_bg: transparent;
+  --_fg: #fff;
+  border-color: rgba(255,255,255,.55);
+}
+.apex-highlight-banner--has-bg .btn--secondary:hover {
+  border-color: #fff;
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Highlight banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 85,
+      "step": 5,
+      "unit": "%",
+      "label": "Image overlay",
+      "default": 45
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Content alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Limited time"
+    },
+    {
+      "type": "checkbox",
+      "id": "eyebrow_pill",
+      "label": "Eyebrow pill style",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our biggest sale of the year — ends soon."
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 2,
+      "max": 6,
+      "step": 0.5,
+      "unit": "rem",
+      "label": "Max heading size",
+      "default": 4
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Supporting text",
+      "default": "<p>Up to 40% off across our full range. Free shipping on every order, no minimum spend required.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_1",
+      "label": "Button 1 label",
+      "default": "Shop the sale"
+    },
+    {
+      "type": "url",
+      "id": "button_1_url",
+      "label": "Button 1 link"
+    },
+    {
+      "type": "text",
+      "id": "button_2",
+      "label": "Button 2 label"
+    },
+    {
+      "type": "url",
+      "id": "button_2_url",
+      "label": "Button 2 link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-5"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 96
+    }
+  ],
+  "presets": [
+    {
+      "name": "Highlight banner",
+      "settings": {
+        "eyebrow": "New launch",
+        "heading": "Introducing our most advanced formula yet.",
+        "text": "<p>Three years of research, clinically validated results. Available now with free shipping on your first order.</p>",
+        "button_1": "Shop now",
+        "button_2": "Learn more"
+      }
+    }
+  ]
+}
+{% endschema %}

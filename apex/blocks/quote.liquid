@@ -1,0 +1,33 @@
+<figure class="apex-tb-quote" style="text-align:{{ block.settings.align }};max-width:{{ block.settings.max_width }}ch;margin-inline:auto" {{ block.shopify_attributes }}>
+  <blockquote class="apex-tb-quote__text">
+    <p class="{{ block.settings.size }}">{{ block.settings.quote | escape }}</p>
+  </blockquote>
+  {%- if block.settings.author != blank -%}
+    <figcaption class="apex-tb-quote__attribution muted" style="margin-top:.9rem;font-size:var(--text-sm);font-weight:600">
+      {%- if block.settings.author_image != blank -%}
+        {%- assign qalt = block.settings.author -%}
+        <span class="apex-tb-quote__avatar" style="width:2.4rem;height:2.4rem;display:inline-block;border-radius:50%;overflow:hidden;vertical-align:middle;margin-right:.5rem">{{ block.settings.author_image | image_url: width: 80 | image_tag: loading: 'lazy', width: 40, height: 40, alt: qalt }}</span>
+      {%- endif -%}
+      {{ block.settings.author | escape }}{%- if block.settings.role != blank -%}, <span style="font-weight:400">{{ block.settings.role | escape }}</span>{%- endif -%}
+    </figcaption>
+  {%- endif -%}
+</figure>
+{% stylesheet %}
+.apex-tb-quote { border: 0; }
+.apex-tb-quote__text p { font-style: italic; line-height: 1.5; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Quote",
+  "settings": [
+    { "type": "textarea", "id": "quote", "label": "Quote", "default": "This product completely changed my routine. I can’t imagine going back." },
+    { "type": "select", "id": "size", "label": "Text size", "default": "lede", "options": [{"value":"lede","label":"Large"},{"value":"h4","label":"Heading"},{"value":"","label":"Body"}] },
+    { "type": "text", "id": "author", "label": "Author name", "default": "Jane D." },
+    { "type": "text", "id": "role", "label": "Role / company", "default": "Verified buyer" },
+    { "type": "image_picker", "id": "author_image", "label": "Author avatar (optional)" },
+    { "type": "range", "id": "max_width", "min": 30, "max": 80, "step": 5, "unit": "ch", "label": "Max width", "default": 60 },
+    { "type": "select", "id": "align", "label": "Alignment", "default": "left", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"}] }
+  ],
+  "presets": [ { "name": "Quote" } ]
+}
+{% endschema %}
