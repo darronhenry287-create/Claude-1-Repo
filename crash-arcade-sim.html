@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ascent — Crash Arcade Simulation (Demo Points)</title>
+<style>
+  /* ============================================================
+     DESIGN TOKENS  —  sleek dark "iGaming dashboard" palette
+     ============================================================ */
+  :root{
+    --bg:#070a12;
+    --bg-soft:#0b1020;
+    --panel:#121829;
+    --panel-2:#0e1322;
+    --border:#222b42;
+    --border-soft:#1a2236;
+    --text:#e8edf8;
+    --muted:#8a94ad;
+    --muted-2:#566079;
+    --green:#21e58b;
+    --green-deep:#10b46e;
+    --purple:#9b6bff;
+    --purple-deep:#6c3cff;
+    --gold:#ffcf4d;
+    --red:#ff4d6a;
+    --blue-grey:#46577d;
+    --shadow:0 18px 50px rgba(0,0,0,.55);
+    --radius:18px;
+    --mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:var(--sans);
+    color:var(--text);
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(108,60,255,.18), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(33,229,139,.12), transparent 55%),
+      var(--bg);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{ max-width:1140px; margin:0 auto; padding:22px 18px 40px; }
+
+  /* ---------- Header ---------- */
+  .topbar{ display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:16px; flex-wrap:wrap; }
+  .brand{ display:flex; align-items:center; gap:12px; }
+  .logo{
+    width:42px; height:42px; border-radius:12px; display:grid; place-items:center;
+    background:linear-gradient(135deg,var(--purple),var(--green));
+    box-shadow:0 8px 24px rgba(108,60,255,.45); font-size:22px;
+  }
+  .brand h1{ font-size:19px; margin:0; letter-spacing:.3px; }
+  .brand p{ margin:2px 0 0; font-size:12px; color:var(--muted); }
+  .badges{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .badge{
+    font-size:12px; font-weight:600; padding:7px 12px; border-radius:999px;
+    border:1px solid var(--border); background:var(--panel-2); color:var(--muted);
+  }
+  .badge b{ color:var(--text); font-family:var(--mono); }
+  .badge.rtp{ color:var(--green); border-color:rgba(33,229,139,.3); }
+
+  /* ---------- Past rounds ticker ---------- */
+  .ticker{
+    display:flex; gap:8px; align-items:center; padding:10px 12px; margin-bottom:14px;
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    border:1px solid var(--border); border-radius:14px; overflow-x:auto; scrollbar-width:none;
+  }
+  .ticker::-webkit-scrollbar{ display:none; }
+  .ticker .lbl{ font-size:11px; text-transform:uppercase; letter-spacing:1.4px; color:var(--muted-2); white-space:nowrap; padding-right:4px; }
+  .pill{
+    font-family:var(--mono); font-size:13px; font-weight:700; padding:6px 12px; border-radius:10px;
+    white-space:nowrap; border:1px solid transparent; animation:pop .35s ease;
+  }
+  @keyframes pop{ from{ transform:scale(.7); opacity:0; } to{ transform:scale(1); opacity:1; } }
+  .pill.low{  color:#aebbd6; background:rgba(70,87,125,.22); border-color:rgba(70,87,125,.5); }
+  .pill.mid{  color:#c7adff; background:rgba(108,60,255,.18); border-color:rgba(155,107,255,.5); }
+  .pill.high{ color:var(--gold); background:rgba(255,207,77,.12); border-color:rgba(255,207,77,.5); }
+
+  /* ---------- Main grid ---------- */
+  .main{ display:grid; grid-template-columns:1fr 330px; gap:16px; align-items:start; }
+  @media (max-width:860px){ .main{ grid-template-columns:1fr; } }
+
+  /* ---------- Stage / canvas ---------- */
+  .stage{
+    position:relative; height:clamp(360px,54vh,560px);
+    background:linear-gradient(180deg,#0b1122,#080c17);
+    border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+  }
+  #game-canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .overlay{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none; text-align:center; }
+  #mult{
+    font-family:var(--mono); font-weight:800; font-size:clamp(48px,9vw,104px); line-height:1;
+    letter-spacing:-1px; color:#fff; text-shadow:0 0 28px rgba(255,255,255,.35);
+    transition:color .15s ease;
+  }
+  #mult.win{ color:var(--green); text-shadow:0 0 34px rgba(33,229,139,.55); }
+  #mult.crash{ color:var(--red); text-shadow:0 0 38px rgba(255,77,106,.6); }
+  #status{ margin-top:10px; font-size:14px; letter-spacing:.4px; color:var(--muted); min-height:20px; font-weight:600; }
+  #status .em{ color:var(--text); }
+  .flash{ position:absolute; inset:0; background:var(--red); opacity:0; pointer-events:none; }
+  .flash.go{ animation:flash .5s ease; }
+  @keyframes flash{ 0%{opacity:.32;} 100%{opacity:0;} }
+  /* countdown progress bar */
+  .cd-track{ position:absolute; left:0; right:0; bottom:0; height:4px; background:rgba(255,255,255,.06); }
+  .cd-fill{ height:100%; width:0%; background:linear-gradient(90deg,var(--purple),var(--green)); transition:width .1s linear; }
+
+  /* ---------- Control panel ---------- */
+  .panel{ background:linear-gradient(180deg,var(--panel),var(--panel-2)); border:1px solid var(--border); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); }
+  .balance{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:4px; }
+  .balance .k{ font-size:12px; text-transform:uppercase; letter-spacing:1.4px; color:var(--muted-2); }
+  .balance .v{ font-family:var(--mono); font-size:30px; font-weight:800; }
+  .balance .v .pts{ font-size:13px; color:var(--muted); font-weight:600; margin-left:5px; }
+  .hr{ height:1px; background:var(--border-soft); margin:16px 0; }
+
+  .field{ margin-bottom:14px; }
+  .field label{ display:block; font-size:12px; color:var(--muted); margin-bottom:7px; font-weight:600; }
+  .input{
+    display:flex; align-items:center; gap:8px; background:var(--bg-soft);
+    border:1px solid var(--border); border-radius:12px; padding:0 12px;
+  }
+  .input:focus-within{ border-color:var(--purple); box-shadow:0 0 0 3px rgba(108,60,255,.18); }
+  .input input{
+    flex:1; background:transparent; border:0; outline:0; color:var(--text);
+    font-family:var(--mono); font-size:18px; font-weight:700; padding:12px 0; width:100%;
+  }
+  .input .suffix{ color:var(--muted); font-family:var(--mono); font-weight:700; font-size:14px; }
+  .input input:disabled{ opacity:.5; }
+  .quick{ display:flex; gap:6px; margin-top:8px; }
+  .quick button{
+    flex:1; padding:8px 0; font-size:12px; font-weight:700; color:var(--muted);
+    background:var(--bg-soft); border:1px solid var(--border); border-radius:9px; cursor:pointer;
+    transition:.15s;
+  }
+  .quick button:hover{ color:var(--text); border-color:var(--purple); }
+  .quick button:disabled{ opacity:.4; cursor:not-allowed; }
+
+  .action{
+    width:100%; padding:16px; border:0; border-radius:14px; cursor:pointer;
+    font-size:16px; font-weight:800; letter-spacing:.3px; color:#06140d;
+    transition:transform .08s ease, filter .15s ease, background .2s ease; margin-top:4px;
+  }
+  .action:active{ transform:translateY(1px) scale(.995); }
+  .action.lock{ background:linear-gradient(135deg,var(--purple),var(--purple-deep)); color:#fff; box-shadow:0 10px 26px rgba(108,60,255,.4); }
+  .action.cancel{ background:#1c2438; color:var(--muted); box-shadow:none; border:1px solid var(--border); }
+  .action.secure{ background:linear-gradient(135deg,var(--green),var(--green-deep)); box-shadow:0 10px 26px rgba(33,229,139,.4); }
+  .action.done{ background:#15241b; color:var(--green); border:1px solid rgba(33,229,139,.4); }
+  .action.idle{ background:#141a2b; color:var(--muted-2); cursor:not-allowed; }
+  .action:disabled{ cursor:not-allowed; }
+
+  .toast{ margin-top:12px; min-height:18px; font-size:13px; font-weight:700; text-align:center; opacity:0; transition:opacity .2s; }
+  .toast.show{ opacity:1; }
+  .toast.win{ color:var(--green); }
+  .toast.lose{ color:var(--red); }
+  .toast.warn{ color:var(--gold); }
+
+  .meta{ display:flex; justify-content:space-between; font-size:12px; color:var(--muted-2); margin-top:14px; }
+  .meta button{ background:none; border:0; color:var(--muted); font-size:12px; cursor:pointer; text-decoration:underline; }
+  .meta button:hover{ color:var(--text); }
+
+  .footnote{ text-align:center; color:var(--muted-2); font-size:12px; margin-top:22px; line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===== Header ===== -->
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">🚀</div>
+      <div>
+        <h1>ASCENT</h1>
+        <p>Crash-style arcade simulation · virtual points only</p>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge">Instant pop <b id="b-instant">1.0%</b></span>
+      <span class="badge rtp">RTP ≈ <b id="b-rtp">98.0%</b></span>
+      <span class="badge">Edge ≈ <b id="b-edge">2.0%</b></span>
+    </div>
+  </div>
+
+  <!-- ===== Past rounds ticker ===== -->
+  <div class="ticker" id="ticker">
+    <span class="lbl">Past&nbsp;rounds</span>
+  </div>
+
+  <!-- ===== Main ===== -->
+  <div class="main">
+
+    <!-- Stage -->
+    <div class="stage">
+      <canvas id="game-canvas"></canvas>
+      <div class="overlay">
+        <div id="mult">1.00x</div>
+        <div id="status">Waiting for next round…</div>
+      </div>
+      <div class="flash" id="flash"></div>
+      <div class="cd-track"><div class="cd-fill" id="cd-fill"></div></div>
+    </div>
+
+    <!-- Controls -->
+    <div class="panel">
+      <div class="balance">
+        <span class="k">Balance</span>
+        <span class="v"><span id="balance">1,000</span><span class="pts">pts</span></span>
+      </div>
+      <div class="hr"></div>
+
+      <div class="field">
+        <label for="bet">Lock points</label>
+        <div class="input">
+          <input id="bet" type="number" inputmode="numeric" min="1" step="10" value="100" />
+          <span class="suffix">pts</span>
+        </div>
+        <div class="quick">
+          <button data-bet="half">½</button>
+          <button data-bet="double">2×</button>
+          <button data-bet="100">+100</button>
+          <button data-bet="max">Max</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="auto">Auto-secure at multiplier <span style="color:var(--muted-2)">(blank = manual)</span></label>
+        <div class="input">
+          <input id="auto" type="number" inputmode="decimal" min="1.01" step="0.01" value="2.00" />
+          <span class="suffix">x</span>
+        </div>
+      </div>
+
+      <button class="action lock" id="action">Lock Points</button>
+      <div class="toast" id="toast"></div>
+
+      <div class="meta">
+        <span id="round-info">Round #0</span>
+        <button id="reset">Reset demo</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="footnote">
+    Arcade physics demo for research / game-feel study. Uses <b>virtual demo points</b> with no monetary value —
+    no deposits, withdrawals, payments or real-money mechanics of any kind.<br>
+    The crash multiplier is generated locally with a provably-fair-style formula; tweak <code>CONFIG</code> in the source to study the math.
+  </p>
+</div>
+
+<script>
+"use strict";
+/* ============================================================================
+   ASCENT — Crash-style arcade simulation
+   ----------------------------------------------------------------------------
+   100% client-side. Demo points only. No networking, no money.
+
+   MATH ENGINE
+   -----------
+   Each round picks a hidden "crash point" the moment it starts:
+
+     1) With probability `instantCrashChance` the round instantly pops at 1.00x
+        (the classic house-edge "instant crash").
+
+     2) Otherwise:  crashPoint = payoutNumerator / (100 - E),  E ~ Uniform[0,100)
+        This is a Pareto-style tail where  P(crash >= m) ≈ (numerator/100) / m,
+        so a fixed cash-out at m returns  m · P(crash>=m) ≈ numerator/100  on
+        average. Combined with the instant-crash chance:
+
+            RTP  ≈ (payoutNumerator / 100) · (1 - instantCrashChance)
+
+        Defaults below give RTP ≈ 0.99 · 0.99 ≈ 98.0%  (house edge ≈ 2.0%).
+        • For ~99% RTP: payoutNumerator = 100 and instantCrashChance = 0.01
+        • For ~97% RTP: keep numerator 99 and set instantCrashChance = 0.02
+   ============================================================================ */
+  const CONFIG = {
+    startingBalance:   1000,
+    instantCrashChance:0.01,   // 1% instant pop at 1.00x
+    payoutNumerator:   99,     // numerator in 99/(100-E)
+    maxCrashCap:       1000,   // safety cap on extreme multipliers
+    growthRate:        0.15,   // exponential growth constant (per second)
+    waitMs:            5000,   // countdown between rounds
+    crashHoldMs:       3000,   // how long the crash result is shown
+    historyMax:        18      // crashes kept for the ticker
+  };
+
+  /* ---------- State machine ---------- */
+  const PHASE = { WAITING:"WAITING", RUNNING:"RUNNING", CRASHED:"CRASHED" };
+  const game = {
+    phase: PHASE.WAITING,
+    balance: CONFIG.startingBalance,
+    bet: 0, hasBet:false, hasCashedOut:false, cashedOutAt:0, autoSecure:0,
+    multiplier: 1.0, crashPoint: 1.0, elapsed:0,
+    roundStart:0, phaseEnd:0, roundNo:0,
+    history: [], particles: [], particlesSpawned:false
+  };
+
+  /* ---------- DOM ---------- */
+  const $ = (id)=>document.getElementById(id);
+  const canvas=$("game-canvas"), ctx=canvas.getContext("2d");
+  const elMult=$("mult"), elStatus=$("status"), elBalance=$("balance"),
+        elAction=$("action"), elToast=$("toast"), elTicker=$("ticker"),
+        elBet=$("bet"), elAuto=$("auto"), elCd=$("cd-fill"),
+        elFlash=$("flash"), elRound=$("round-info");
+
+  /* ---------- Engine ---------- */
+  function generateCrashPoint(){
+    if (Math.random() < CONFIG.instantCrashChance) return 1.00;          // instant pop
+    const E = Math.random() * 100;                                       // [0,100)
+    let crash = CONFIG.payoutNumerator / (100 - E);
+    crash = Math.floor(crash * 100) / 100;                               // truncate 2dp
+    return Math.min(Math.max(crash, 1.01), CONFIG.maxCrashCap);          // non-instant >= 1.01
+  }
+  // multiplier(t) = e^(rate·t)  → exponential, not linear
+  const multAt   = (t)=> Math.exp(CONFIG.growthRate * t);
+  const timeFor  = (m)=> Math.log(m) / CONFIG.growthRate;
+
+  /* ---------- Helpers ---------- */
+  const fmt = (n)=> Math.floor(n).toLocaleString("en-US");
+  function saveBalance(){ try{ localStorage.setItem("ascent_balance", String(game.balance)); }catch(e){} }
+  function loadBalance(){
+    try{ const v=parseInt(localStorage.getItem("ascent_balance"),10);
+         if(Number.isFinite(v) && v>=0) game.balance=v; }catch(e){}
+  }
+  let toastTimer=null;
+  function toast(msg,kind){
+    elToast.textContent=msg; elToast.className="toast show "+(kind||"");
+    clearTimeout(toastTimer); toastTimer=setTimeout(()=>elToast.classList.remove("show"),2600);
+  }
+
+  /* ---------- Betting actions ---------- */
+  function clampBet(v){ if(!Number.isFinite(v)) return 0; return Math.max(0, Math.min(Math.floor(v), game.balance)); }
+  function parseAuto(){
+    const v=parseFloat(elAuto.value);
+    return (Number.isFinite(v) && v>=1.01) ? Math.floor(v*100)/100 : 0;   // 0 = manual
+  }
+
+  function placeBet(){
+    if(game.phase!==PHASE.WAITING || game.hasBet) return;
+    const amt=clampBet(parseInt(elBet.value,10));
+    if(amt<=0){ toast("Enter points to lock","warn"); return; }
+    if(amt>game.balance){ toast("Not enough points","warn"); return; }
+    game.bet=amt; game.hasBet=true; game.balance-=amt; game.autoSecure=parseAuto();
+    saveBalance(); updateUI();
+    toast("Locked "+fmt(amt)+" pts"+(game.autoSecure?(" · auto @ "+game.autoSecure.toFixed(2)+"x"):""),"warn");
+  }
+  function cancelBet(){
+    if(game.phase!==PHASE.WAITING || !game.hasBet) return;
+    game.balance+=game.bet; game.bet=0; game.hasBet=false; saveBalance(); updateUI();
+    toast("Bet cancelled","warn");
+  }
+  function cashOut(multiplier, isAuto){
+    if(!game.hasBet || game.hasCashedOut || game.phase!==PHASE.RUNNING) return;
+    game.hasCashedOut=true; game.cashedOutAt=multiplier;
+    const payout=Math.floor(game.bet*multiplier);
+    const profit=payout-game.bet;
+    game.balance+=payout; saveBalance();
+    elMult.classList.add("win");
+    toast((isAuto?"Auto-secured":"Secured")+" @ "+multiplier.toFixed(2)+"x · +"+fmt(profit)+" pts","win");
+    updateUI();
+  }
+  function onAction(){
+    if(game.phase===PHASE.WAITING){ game.hasBet ? cancelBet() : placeBet(); }
+    else if(game.phase===PHASE.RUNNING && game.hasBet && !game.hasCashedOut){ cashOut(game.multiplier,false); }
+  }
+
+  /* ---------- Phase transitions ---------- */
+  function startRound(now){
+    game.phase=PHASE.RUNNING; game.roundNo++;
+    game.crashPoint=generateCrashPoint();
+    game.roundStart=now; game.elapsed=0; game.multiplier=1.0;
+    game.hasCashedOut=false; game.particles.length=0; game.particlesSpawned=false;
+    elMult.classList.remove("crash","win");
+    updateUI();
+  }
+  function crashRound(now){
+    game.phase=PHASE.CRASHED; game.phaseEnd=now+CONFIG.crashHoldMs;
+    game.multiplier=game.crashPoint; game.elapsed=timeFor(game.crashPoint);
+    // record + render ticker
+    game.history.unshift(game.crashPoint);
+    if(game.history.length>CONFIG.historyMax) game.history.pop();
+    renderTicker();
+    // settle
+    if(game.hasBet && !game.hasCashedOut){
+      toast("Crashed @ "+game.crashPoint.toFixed(2)+"x · -"+fmt(game.bet)+" pts","lose");
+    }
+    elMult.classList.remove("win"); elMult.classList.add("crash");
+    elFlash.classList.remove("go"); void elFlash.offsetWidth; elFlash.classList.add("go");
+    updateUI();
+  }
+  function enterWaiting(now){
+    game.phase=PHASE.WAITING; game.phaseEnd=now+CONFIG.waitMs;
+    game.bet=0; game.hasBet=false; game.hasCashedOut=false; game.cashedOutAt=0;
+    game.multiplier=1.0; game.elapsed=0;
+    elMult.classList.remove("crash","win");
+    updateUI();
+  }
+
+  /* ---------- Update ---------- */
+  function update(now){
+    if(game.phase===PHASE.WAITING){
+      if(now>=game.phaseEnd) startRound(now);
+    } else if(game.phase===PHASE.RUNNING){
+      game.elapsed=(now-game.roundStart)/1000;
+      game.multiplier=multAt(game.elapsed);
+      // auto-secure fires only if it would occur before the crash
+      if(game.hasBet && !game.hasCashedOut && game.autoSecure>=1.01 &&
+         game.autoSecure<=game.crashPoint && game.multiplier>=game.autoSecure){
+        cashOut(game.autoSecure,true);
+      }
+      if(game.multiplier>=game.crashPoint){ crashRound(now); }
+    } else { // CRASHED
+      if(now>=game.phaseEnd) enterWaiting(now);
+    }
+  }
+
+  /* ---------- Rendering ---------- */
+  let DPR=1;
+  function resize(){
+    DPR=window.devicePixelRatio||1;
+    const r=canvas.getBoundingClientRect();
+    canvas.width=Math.round(r.width*DPR); canvas.height=Math.round(r.height*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  window.addEventListener("resize",resize);
+
+  const PAD={l:14,r:22,t:22,b:18};
+  function drawGrid(w,h,mMax){
+    ctx.save();
+    ctx.strokeStyle="rgba(255,255,255,.045)"; ctx.lineWidth=1;
+    ctx.fillStyle="rgba(255,255,255,.18)"; ctx.font="11px ui-monospace,monospace";
+    const rows=4;
+    for(let i=0;i<=rows;i++){
+      const y=PAD.t+(h-PAD.t-PAD.b)*(i/rows);
+      ctx.beginPath(); ctx.moveTo(PAD.l,y); ctx.lineTo(w-PAD.r,y); ctx.stroke();
+      const m=1+(mMax-1)*(1-i/rows);
+      ctx.fillText(m.toFixed(2)+"x", w-PAD.r-4-ctx.measureText(m.toFixed(2)+"x").width, y-4);
+    }
+    for(let i=0;i<=6;i++){
+      const x=PAD.l+(w-PAD.l-PAD.r)*(i/6);
+      ctx.beginPath(); ctx.moveTo(x,PAD.t); ctx.lineTo(x,h-PAD.b); ctx.stroke();
+    }
+    ctx.restore();
+  }
+  function drawCurve(w,h){
+    const crashed=game.phase===PHASE.CRASHED;
+    const elapsed=Math.max(game.elapsed,0.0001);
+    const headM=game.multiplier;
+    const tMax=Math.max(elapsed*1.12,2.2);          // view headroom
+    const mMax=Math.max(headM*1.18,1.7);
+    const plotW=w-PAD.l-PAD.r, plotH=h-PAD.t-PAD.b;
+    const X=(t)=>PAD.l+(t/tMax)*plotW;
+    const Y=(m)=>PAD.t+plotH-((m-1)/(mMax-1))*plotH;
+
+    drawGrid(w,h,mMax);
+
+    const N=130, pts=[];
+    for(let i=0;i<=N;i++){ const t=(i/N)*elapsed; pts.push([X(t),Y(multAt(t))]); }
+    const hx=pts[N][0], hy=pts[N][1];
+    const line=crashed?"#ff4d6a":"#9b6bff";
+    const glow=crashed?"rgba(255,77,106,.85)":"rgba(155,107,255,.85)";
+
+    // filled area under curve
+    const grad=ctx.createLinearGradient(0,PAD.t,0,h-PAD.b);
+    grad.addColorStop(0, crashed?"rgba(255,77,106,.28)":"rgba(155,107,255,.28)");
+    grad.addColorStop(1,"rgba(155,107,255,0)");
+    ctx.beginPath(); ctx.moveTo(pts[0][0],h-PAD.b);
+    for(const p of pts) ctx.lineTo(p[0],p[1]);
+    ctx.lineTo(hx,h-PAD.b); ctx.closePath(); ctx.fillStyle=grad; ctx.fill();
+
+    // glowing stroke
+    ctx.save(); ctx.shadowColor=glow; ctx.shadowBlur=18;
+    ctx.strokeStyle=line; ctx.lineWidth=3.5; ctx.lineJoin="round"; ctx.lineCap="round";
+    ctx.beginPath(); ctx.moveTo(pts[0][0],pts[0][1]);
+    for(const p of pts) ctx.lineTo(p[0],p[1]);
+    ctx.stroke(); ctx.restore();
+
+    if(!crashed){
+      // glowing rocket head
+      const dx=pts[N][0]-pts[N-1][0], dy=pts[N][1]-pts[N-1][1];
+      const ang=Math.atan2(dy,dx);
+      ctx.save();
+      const g2=ctx.createRadialGradient(hx,hy,0,hx,hy,26);
+      g2.addColorStop(0,"rgba(255,255,255,.95)"); g2.addColorStop(.4,"rgba(155,107,255,.6)"); g2.addColorStop(1,"rgba(155,107,255,0)");
+      ctx.fillStyle=g2; ctx.beginPath(); ctx.arc(hx,hy,26,0,Math.PI*2); ctx.fill();
+      ctx.translate(hx,hy); ctx.rotate(ang+Math.PI/4);
+      ctx.font="28px serif"; ctx.textAlign="center"; ctx.textBaseline="middle";
+      ctx.fillText("🚀",0,0);
+      ctx.restore();
+    } else {
+      drawParticles(hx,hy);
+    }
+  }
+  function drawParticles(hx,hy){
+    if(!game.particlesSpawned){
+      game.particlesSpawned=true;
+      for(let i=0;i<26;i++){
+        const a=Math.random()*Math.PI*2, sp=1.5+Math.random()*4.5;
+        game.particles.push({x:hx,y:hy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-1,life:1});
+      }
+    }
+    ctx.save();
+    for(const p of game.particles){
+      p.x+=p.vx; p.y+=p.vy; p.vy+=0.12; p.vx*=0.98; p.life-=0.018;
+      if(p.life<=0) continue;
+      ctx.globalAlpha=Math.max(p.life,0);
+      ctx.fillStyle= p.life>0.5? "#ffce4d":"#ff4d6a";
+      ctx.beginPath(); ctx.arc(p.x,p.y,3*p.life+0.5,0,Math.PI*2); ctx.fill();
+    }
+    ctx.restore();
+  }
+  function render(){
+    const w=canvas.clientWidth, h=canvas.clientHeight;
+    ctx.clearRect(0,0,w,h);
+    if(game.phase===PHASE.RUNNING || game.phase===PHASE.CRASHED) drawCurve(w,h);
+    else { drawGrid(w,h,2.0); }
+  }
+
+  /* ---------- UI sync ---------- */
+  function updateUI(){
+    elBalance.textContent=fmt(game.balance);
+    elRound.textContent="Round #"+game.roundNo;
+    const waiting=game.phase===PHASE.WAITING;
+    elBet.disabled = !waiting || game.hasBet;
+    elAuto.disabled= !waiting || game.hasBet;
+    document.querySelectorAll(".quick button").forEach(b=>b.disabled=!waiting||game.hasBet);
+
+    if(game.phase===PHASE.WAITING){
+      elAction.disabled=false;
+      if(game.hasBet){ elAction.className="action cancel"; elAction.textContent="Cancel · "+fmt(game.bet)+" pts locked"; }
+      else { elAction.className="action lock"; elAction.textContent="Lock Points"; }
+    } else if(game.phase===PHASE.RUNNING){
+      if(game.hasBet && !game.hasCashedOut){
+        elAction.disabled=false; elAction.className="action secure";
+        elAction.textContent="Secure "+fmt(game.bet*game.multiplier)+" @ "+game.multiplier.toFixed(2)+"x";
+      } else if(game.hasCashedOut){
+        elAction.disabled=true; elAction.className="action done";
+        elAction.textContent="Secured ✓ @ "+game.cashedOutAt.toFixed(2)+"x";
+      } else {
+        elAction.disabled=true; elAction.className="action idle";
+        elAction.textContent="No points locked";
+      }
+    } else { // CRASHED
+      elAction.disabled=true; elAction.className="action idle"; elAction.textContent="Round over";
+    }
+  }
+  function pillClass(m){ return m<2 ? "low" : (m<10 ? "mid" : "high"); }
+  function renderTicker(){
+    [...elTicker.querySelectorAll(".pill")].forEach(p=>p.remove());
+    const show=game.history.slice(0,6);   // last 6 (newest first)
+    for(const m of show){
+      const s=document.createElement("span");
+      s.className="pill "+pillClass(m); s.textContent=m.toFixed(2)+"x";
+      elTicker.appendChild(s);
+    }
+  }
+  function renderOverlay(now){
+    if(game.phase===PHASE.WAITING){
+      const remain=Math.max(0,game.phaseEnd-now);
+      elMult.textContent=Math.ceil(remain/1000)+"";
+      elStatus.innerHTML="Waiting for next round… <span class='em'>place your points</span>";
+      elCd.style.width=(100*(1-remain/CONFIG.waitMs)).toFixed(1)+"%";
+    } else if(game.phase===PHASE.RUNNING){
+      elMult.textContent=game.multiplier.toFixed(2)+"x";
+      elStatus.innerHTML = game.hasCashedOut
+        ? "Secured @ <span class='em'>"+game.cashedOutAt.toFixed(2)+"x</span>"
+        : (game.hasBet ? "In play — <span class='em'>"+fmt(game.bet*game.multiplier)+" pts</span>" : "Round live");
+      elCd.style.width="0%";
+    } else { // CRASHED
+      elMult.textContent=game.crashPoint.toFixed(2)+"x";
+      elStatus.innerHTML="💥 <span class='em'>CRASHED</span>";
+      elCd.style.width="0%";
+    }
+  }
+
+  /* ---------- Main loop ---------- */
+  function loop(now){
+    update(now);
+    render();
+    renderOverlay(now);
+    if(game.phase===PHASE.RUNNING) updateUI();   // live button/payout
+    requestAnimationFrame(loop);
+  }
+
+  /* ---------- Wire up ---------- */
+  elAction.addEventListener("click",onAction);
+  document.addEventListener("keydown",(e)=>{ if(e.code==="Space"){ e.preventDefault(); onAction(); } });
+  $("reset").addEventListener("click",()=>{
+    game.balance=CONFIG.startingBalance; saveBalance(); updateUI(); toast("Demo points reset","warn");
+  });
+  document.querySelectorAll(".quick button").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      let v=parseInt(elBet.value,10)||0; const k=btn.dataset.bet;
+      if(k==="half") v=Math.floor(v/2);
+      else if(k==="double") v=v*2;
+      else if(k==="100") v=v+100;
+      else if(k==="max") v=game.balance;
+      elBet.value=Math.max(1,Math.min(v,game.balance));
+    });
+  });
+
+  // header math readout
+  (function showMath(){
+    const rtp=(CONFIG.payoutNumerator/100)*(1-CONFIG.instantCrashChance);
+    $("b-instant").textContent=(CONFIG.instantCrashChance*100).toFixed(1)+"%";
+    $("b-rtp").textContent=(rtp*100).toFixed(1)+"%";
+    $("b-edge").textContent=((1-rtp)*100).toFixed(1)+"%";
+  })();
+
+  /* ---------- Boot ---------- */
+  loadBalance(); resize();
+  game.phase=PHASE.WAITING; game.phaseEnd=performance.now()+CONFIG.waitMs;
+  updateUI(); renderTicker();
+  requestAnimationFrame(loop);
+</script>
+</body>
+</html>
