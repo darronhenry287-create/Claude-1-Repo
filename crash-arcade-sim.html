@@ -63,6 +63,12 @@
   }
   .badge b{ color:var(--text); font-family:var(--mono); }
   .badge.rtp{ color:var(--green); border-color:rgba(33,229,139,.3); }
+  button.badge.sound{
+    cursor:pointer; font-family:inherit; font-size:15px; line-height:1; padding:6px 11px;
+    transition:border-color .15s ease, transform .08s ease;
+  }
+  button.badge.sound:hover{ border-color:var(--purple); }
+  button.badge.sound:active{ transform:scale(.94); }
 
   /* ---------- Past rounds ticker ---------- */
   .ticker{
@@ -90,6 +96,7 @@
     position:relative; height:clamp(360px,54vh,560px);
     background:linear-gradient(180deg,#0b1122,#080c17);
     border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+    will-change:transform;
   }
   #game-canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
   .overlay{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none; text-align:center; }
@@ -98,6 +105,10 @@
     letter-spacing:-1px; color:#fff; text-shadow:0 0 28px rgba(255,255,255,.35);
     transition:color .15s ease;
   }
+  /* multiplier colour tiers — white → green → purple → gold, glow intensifies */
+  #mult.t2{ color:var(--green);  text-shadow:0 0 30px rgba(33,229,139,.55); }
+  #mult.t3{ color:var(--purple); text-shadow:0 0 36px rgba(155,107,255,.7), 0 0 80px rgba(155,107,255,.35); }
+  #mult.t4{ color:var(--gold);   text-shadow:0 0 34px rgba(255,207,77,.8), 0 0 90px rgba(255,207,77,.45); }
   #mult.win{ color:var(--green); text-shadow:0 0 34px rgba(33,229,139,.55); }
   #mult.crash{ color:var(--red); text-shadow:0 0 38px rgba(255,77,106,.6); }
   #status{ margin-top:10px; font-size:14px; letter-spacing:.4px; color:var(--muted); min-height:20px; font-weight:600; }
@@ -115,6 +126,12 @@
   .balance .k{ font-size:12px; text-transform:uppercase; letter-spacing:1.4px; color:var(--muted-2); }
   .balance .v{ font-family:var(--mono); font-size:30px; font-weight:800; }
   .balance .v .pts{ font-size:13px; color:var(--muted); font-weight:600; margin-left:5px; }
+  .balance .v.bump{ animation:bump .7s ease; }
+  @keyframes bump{
+    0%{ transform:scale(1); }
+    30%{ transform:scale(1.1); color:var(--green); text-shadow:0 0 18px rgba(33,229,139,.55); }
+    100%{ transform:scale(1); }
+  }
   .hr{ height:1px; background:var(--border-soft); margin:16px 0; }
 
   .field{ margin-bottom:14px; }
@@ -130,6 +147,7 @@
   }
   .input .suffix{ color:var(--muted); font-family:var(--mono); font-weight:700; font-size:14px; }
   .input input:disabled{ opacity:.5; }
+  .input.sm input{ font-size:14px; padding:9px 0; }
   .quick{ display:flex; gap:6px; margin-top:8px; }
   .quick button{
     flex:1; padding:8px 0; font-size:12px; font-weight:700; color:var(--muted);
@@ -138,6 +156,11 @@
   }
   .quick button:hover{ color:var(--text); border-color:var(--purple); }
   .quick button:disabled{ opacity:.4; cursor:not-allowed; }
+
+  .checkrow{ display:flex; align-items:center; gap:9px; margin-bottom:14px; }
+  .checkrow input[type=checkbox]{ width:17px; height:17px; accent-color:var(--purple); cursor:pointer; margin:0; flex:none; }
+  .checkrow label{ margin:0; cursor:pointer; font-size:12px; color:var(--muted); font-weight:600; line-height:1.4; }
+  .checkrow label b{ color:var(--text); }
 
   .action{
     width:100%; padding:16px; border:0; border-radius:14px; cursor:pointer;
@@ -158,9 +181,54 @@
   .toast.lose{ color:var(--red); }
   .toast.warn{ color:var(--gold); }
 
+  /* ---------- Session stats ---------- */
+  .stats-title{ font-size:11px; text-transform:uppercase; letter-spacing:1.4px; color:var(--muted-2); margin-bottom:9px; font-weight:700; }
+  .stats-title span{ text-transform:none; letter-spacing:0; font-weight:600; }
+  .stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .stat{ background:var(--bg-soft); border:1px solid var(--border-soft); border-radius:11px; padding:9px 10px; min-width:0; }
+  .stat .sk{ display:block; font-size:10px; text-transform:uppercase; letter-spacing:.8px; color:var(--muted-2); margin-bottom:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .stat .sv{ font-family:var(--mono); font-size:15px; font-weight:800; color:var(--text); }
+  .sv.pos{ color:var(--green); }
+  .sv.neg{ color:var(--red); }
+
   .meta{ display:flex; justify-content:space-between; font-size:12px; color:var(--muted-2); margin-top:14px; }
   .meta button{ background:none; border:0; color:var(--muted); font-size:12px; cursor:pointer; text-decoration:underline; }
   .meta button:hover{ color:var(--text); }
+
+  /* ---------- Research / strategy lab ---------- */
+  .research{ margin-top:16px; }
+  .r-top{ display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; }
+  .r-title{ font-weight:800; font-size:15px; letter-spacing:.3px; }
+  .r-sub{ color:var(--muted); font-size:12px; margin-top:5px; max-width:560px; line-height:1.55; }
+  .r-sub code{ font-family:var(--mono); color:var(--purple); font-size:11px; }
+  .r-controls{ display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap; }
+  .r-controls .field{ margin:0; }
+  .r-controls .field label{ margin-bottom:5px; }
+  .r-controls .input{ width:128px; }
+  .btn-sim{
+    padding:11px 20px; border:0; border-radius:12px; cursor:pointer; font-family:inherit;
+    font-weight:800; font-size:13px; letter-spacing:.3px; color:#fff;
+    background:linear-gradient(135deg,var(--purple),var(--purple-deep));
+    box-shadow:0 8px 20px rgba(108,60,255,.35);
+    transition:transform .08s ease, filter .15s ease;
+  }
+  .btn-sim:hover{ filter:brightness(1.1); }
+  .btn-sim:active{ transform:translateY(1px); }
+  .r-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:16px; }
+  @media (max-width:700px){ .r-stats{ grid-template-columns:repeat(2,1fr); } }
+  .histo{
+    display:flex; gap:8px; align-items:stretch; height:132px; margin-top:12px;
+    padding:12px 12px 8px; background:var(--bg-soft); border:1px solid var(--border-soft); border-radius:12px;
+  }
+  .hcol{ flex:1; display:flex; flex-direction:column; min-width:0; }
+  .hpct{ height:14px; font-size:10px; color:var(--muted); text-align:center; font-family:var(--mono); margin-bottom:3px; white-space:nowrap; overflow:hidden; }
+  .hwrap{ flex:1; display:flex; align-items:flex-end; }
+  .hbar{ width:100%; border-radius:5px 5px 2px 2px; }
+  .hbar.low{ background:linear-gradient(180deg,#5b6f9c,#39476b); }
+  .hbar.mid{ background:linear-gradient(180deg,var(--purple),var(--purple-deep)); }
+  .hbar.high{ background:linear-gradient(180deg,var(--gold),#c79a26); }
+  .hlbl{ font-size:10px; color:var(--muted-2); text-align:center; margin-top:6px; font-family:var(--mono); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .r-note{ margin-top:10px; font-size:11px; color:var(--muted-2); }
 
   .footnote{ text-align:center; color:var(--muted-2); font-size:12px; margin-top:22px; line-height:1.6; }
 </style>
@@ -178,6 +246,7 @@
       </div>
     </div>
     <div class="badges">
+      <button class="badge sound" id="sound-toggle" type="button" aria-label="Toggle sound">🔊</button>
       <span class="badge">Instant pop <b id="b-instant">1.0%</b></span>
       <span class="badge rtp">RTP ≈ <b id="b-rtp">98.0%</b></span>
       <span class="badge">Edge ≈ <b id="b-edge">2.0%</b></span>
@@ -193,7 +262,7 @@
   <div class="main">
 
     <!-- Stage -->
-    <div class="stage">
+    <div class="stage" id="stage">
       <canvas id="game-canvas"></canvas>
       <div class="overlay">
         <div id="mult">1.00x</div>
@@ -207,7 +276,7 @@
     <div class="panel">
       <div class="balance">
         <span class="k">Balance</span>
-        <span class="v"><span id="balance">1,000</span><span class="pts">pts</span></span>
+        <span class="v" id="bal-wrap"><span id="balance">1,000</span><span class="pts">pts</span></span>
       </div>
       <div class="hr"></div>
 
@@ -233,13 +302,64 @@
         </div>
       </div>
 
+      <div class="checkrow">
+        <input type="checkbox" id="autobet" />
+        <label for="autobet">Auto-rebet — <b>re-lock the same stake</b> at the start of each round</label>
+      </div>
+
       <button class="action lock" id="action">Lock Points</button>
       <div class="toast" id="toast"></div>
+
+      <div class="hr"></div>
+      <div class="stats-title">Session stats <span>· stored locally</span></div>
+      <div class="stats">
+        <div class="stat"><span class="sk" title="Rounds where you locked points">Rounds</span><span class="sv" id="st-rounds">0</span></div>
+        <div class="stat"><span class="sk">Wins</span><span class="sv" id="st-wins">0</span></div>
+        <div class="stat"><span class="sk">Win rate</span><span class="sv" id="st-rate">—</span></div>
+        <div class="stat"><span class="sk">Best secured</span><span class="sv" id="st-best">—</span></div>
+        <div class="stat"><span class="sk">Net P/L</span><span class="sv" id="st-net">0</span></div>
+        <div class="stat"><span class="sk">Streak</span><span class="sv" id="st-streak">—</span></div>
+      </div>
 
       <div class="meta">
         <span id="round-info">Round #0</span>
         <button id="reset">Reset demo</button>
       </div>
+    </div>
+  </div>
+
+  <!-- ===== Research / strategy lab ===== -->
+  <div class="panel research">
+    <div class="r-top">
+      <div>
+        <div class="r-title">🧪 Strategy Lab — headless simulator</div>
+        <div class="r-sub">
+          Runs the <b>exact same</b> <code>generateCrashPoint()</code> engine N times with a flat-stake,
+          fixed cash-out strategy and reports the realized numbers. Sandbox readout only —
+          your demo balance is never touched.
+        </div>
+      </div>
+      <div class="r-controls">
+        <div class="field">
+          <label for="sim-n">Rounds (N)</label>
+          <div class="input sm"><input id="sim-n" type="number" inputmode="numeric" min="100" max="1000000" step="1000" value="10000" /></div>
+        </div>
+        <div class="field">
+          <label for="sim-target">Cash-out at</label>
+          <div class="input sm"><input id="sim-target" type="number" inputmode="decimal" min="1.01" step="0.01" value="2.00" /><span class="suffix">x</span></div>
+        </div>
+        <button class="btn-sim" id="sim-run" type="button">Simulate ▸</button>
+      </div>
+    </div>
+    <div id="sim-out" hidden>
+      <div class="r-stats">
+        <div class="stat"><span class="sk">Realized RTP</span><span class="sv" id="sim-rtp">—</span></div>
+        <div class="stat"><span class="sk">Reached target</span><span class="sv" id="sim-hit">—</span></div>
+        <div class="stat"><span class="sk">Average crash</span><span class="sv" id="sim-avg">—</span></div>
+        <div class="stat"><span class="sk">Max crash seen</span><span class="sv" id="sim-max">—</span></div>
+      </div>
+      <div class="histo" id="histo"></div>
+      <div class="r-note" id="sim-note"></div>
     </div>
   </div>
 
@@ -292,6 +412,7 @@
     phase: PHASE.WAITING,
     balance: CONFIG.startingBalance,
     bet: 0, hasBet:false, hasCashedOut:false, cashedOutAt:0, autoSecure:0,
+    autoBet:false, lastStake:0,
     multiplier: 1.0, crashPoint: 1.0, elapsed:0,
     roundStart:0, phaseEnd:0, roundNo:0,
     history: [], particles: [], particlesSpawned:false
@@ -303,7 +424,9 @@
   const elMult=$("mult"), elStatus=$("status"), elBalance=$("balance"),
         elAction=$("action"), elToast=$("toast"), elTicker=$("ticker"),
         elBet=$("bet"), elAuto=$("auto"), elCd=$("cd-fill"),
-        elFlash=$("flash"), elRound=$("round-info");
+        elFlash=$("flash"), elRound=$("round-info"),
+        elStage=$("stage"), elSound=$("sound-toggle"), elAutoBet=$("autobet"),
+        elBalWrap=$("bal-wrap"), elSimN=$("sim-n"), elSimTarget=$("sim-target");
 
   /* ---------- Engine ---------- */
   function generateCrashPoint(){
@@ -330,6 +453,206 @@
     clearTimeout(toastTimer); toastTimer=setTimeout(()=>elToast.classList.remove("show"),2600);
   }
 
+  /* ============================================================
+     SOUND — 100% synthesized via Web Audio API (no audio files).
+     The AudioContext is created lazily and resumed on the first
+     user gesture; every call is guarded so audio can never break
+     the game loop.
+     ============================================================ */
+  const sound = { enabled:true, ctx:null, master:null, riser:null };
+  (function loadSoundPref(){
+    try{ const v=localStorage.getItem("ascent_sound"); if(v!==null) sound.enabled=(v==="1"); }catch(e){}
+  })();
+  function saveSoundPref(){ try{ localStorage.setItem("ascent_sound", sound.enabled?"1":"0"); }catch(e){} }
+  function unlockAudio(){
+    if(!sound.enabled) return;
+    try{
+      if(!sound.ctx){
+        const AC=window.AudioContext||window.webkitAudioContext;
+        if(!AC) return;
+        sound.ctx=new AC();
+        sound.master=sound.ctx.createGain();
+        sound.master.gain.value=0.5;
+        sound.master.connect(sound.ctx.destination);
+      }
+      if(sound.ctx.state==="suspended") sound.ctx.resume().catch(()=>{});
+    }catch(e){ sound.ctx=null; sound.master=null; }
+  }
+  const audible=()=> !!(sound.enabled && sound.ctx && sound.master && sound.ctx.state==="running");
+
+  // Continuous "engine" tone whose pitch climbs with the multiplier.
+  function updateRiser(m){
+    if(!audible()) return;
+    try{
+      const c=sound.ctx;
+      if(!sound.riser){
+        const o=c.createOscillator(), f=c.createBiquadFilter(), g=c.createGain();
+        o.type="sawtooth";
+        f.type="lowpass"; f.frequency.value=1100; f.Q.value=0.7;
+        g.gain.setValueAtTime(0.0001,c.currentTime);
+        g.gain.setTargetAtTime(0.05,c.currentTime,0.1);
+        o.connect(f); f.connect(g); g.connect(sound.master);
+        o.start();
+        sound.riser={o,g};
+      }
+      const freq=Math.min(110*Math.pow(Math.max(m,1),0.65),1700);
+      sound.riser.o.frequency.setTargetAtTime(freq,sound.ctx.currentTime,0.06);
+    }catch(e){}
+  }
+  function stopRiser(){
+    const r=sound.riser; sound.riser=null;
+    if(!r||!sound.ctx) return;
+    try{
+      const t=sound.ctx.currentTime;
+      r.g.gain.cancelScheduledValues(t);
+      r.g.gain.setTargetAtTime(0.0001,t,0.05);
+      r.o.stop(t+0.4);
+    }catch(e){}
+  }
+  // Pleasant little major arpeggio for securing points.
+  function playChime(){
+    if(!audible()) return;
+    try{
+      const c=sound.ctx, t=c.currentTime;
+      [523.25,659.25,783.99,1046.5].forEach((f,i)=>{
+        const o=c.createOscillator(), g=c.createGain();
+        o.type="sine"; o.frequency.value=f;
+        o.connect(g); g.connect(sound.master);
+        const s=t+i*0.07;
+        g.gain.setValueAtTime(0.0001,s);
+        g.gain.exponentialRampToValueAtTime(0.13,s+0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001,s+0.38);
+        o.start(s); o.stop(s+0.42);
+      });
+    }catch(e){}
+  }
+  // Filtered noise burst + low thump on crash.
+  function playExplosion(){
+    if(!audible()) return;
+    try{
+      const c=sound.ctx, t=c.currentTime;
+      const len=Math.floor(c.sampleRate*0.5);
+      const buf=c.createBuffer(1,len,c.sampleRate);
+      const d=buf.getChannelData(0);
+      for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,1.8);
+      const src=c.createBufferSource(); src.buffer=buf;
+      const f=c.createBiquadFilter(); f.type="lowpass";
+      f.frequency.setValueAtTime(2400,t);
+      f.frequency.exponentialRampToValueAtTime(120,t+0.45);
+      const g=c.createGain();
+      g.gain.setValueAtTime(0.5,t);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+0.5);
+      src.connect(f); f.connect(g); g.connect(sound.master);
+      src.start(t);
+      const o=c.createOscillator(), g2=c.createGain();
+      o.type="sine";
+      o.frequency.setValueAtTime(120,t);
+      o.frequency.exponentialRampToValueAtTime(36,t+0.4);
+      g2.gain.setValueAtTime(0.4,t);
+      g2.gain.exponentialRampToValueAtTime(0.0001,t+0.45);
+      o.connect(g2); g2.connect(sound.master);
+      o.start(t); o.stop(t+0.5);
+    }catch(e){}
+  }
+  // Soft countdown tick (higher pitch on the final second).
+  function playTick(final){
+    if(!audible()) return;
+    try{
+      const c=sound.ctx, t=c.currentTime;
+      const o=c.createOscillator(), g=c.createGain();
+      o.type="sine"; o.frequency.value= final?1318.5:880;
+      g.gain.setValueAtTime(0.06,t);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+0.09);
+      o.connect(g); g.connect(sound.master);
+      o.start(t); o.stop(t+0.11);
+    }catch(e){}
+  }
+  function renderSoundBtn(){
+    elSound.textContent=sound.enabled?"🔊":"🔇";
+    elSound.setAttribute("aria-pressed",sound.enabled?"true":"false");
+    elSound.title=sound.enabled?"Sound on — click to mute":"Sound off — click to unmute";
+  }
+  // Audio unlock on first gesture (browsers require this).
+  document.addEventListener("pointerdown",unlockAudio);
+  document.addEventListener("keydown",unlockAudio);
+  // Don't leave the riser droning when the tab is hidden (rAF pauses).
+  document.addEventListener("visibilitychange",()=>{ if(document.hidden) stopRiser(); });
+
+  /* ============================================================
+     SESSION STATS — persisted locally alongside the balance.
+     ============================================================ */
+  const stats = { rounds:0, wins:0, best:0, net:0, streak:0 };
+  function loadStats(){
+    try{
+      const s=JSON.parse(localStorage.getItem("ascent_stats")||"null");
+      if(s && typeof s==="object"){
+        for(const k of ["rounds","wins","best","net","streak"]){
+          if(Number.isFinite(s[k])) stats[k]=s[k];
+        }
+      }
+    }catch(e){}
+  }
+  function saveStats(){ try{ localStorage.setItem("ascent_stats", JSON.stringify(stats)); }catch(e){} }
+  function resetStats(){ stats.rounds=0; stats.wins=0; stats.best=0; stats.net=0; stats.streak=0; saveStats(); renderStats(); }
+  function recordWin(mult,profit){
+    stats.rounds++; stats.wins++; stats.net+=profit;
+    if(mult>stats.best) stats.best=mult;
+    stats.streak = stats.streak>=0 ? stats.streak+1 : 1;
+    saveStats(); renderStats();
+  }
+  function recordLoss(stake){
+    stats.rounds++; stats.net-=stake;
+    stats.streak = stats.streak<=0 ? stats.streak-1 : -1;
+    saveStats(); renderStats();
+  }
+  function renderStats(){
+    try{
+      $("st-rounds").textContent=String(stats.rounds);
+      $("st-wins").textContent=String(stats.wins);
+      $("st-rate").textContent=stats.rounds ? (stats.wins/stats.rounds*100).toFixed(1)+"%" : "—";
+      $("st-best").textContent=stats.best>0 ? stats.best.toFixed(2)+"x" : "—";
+      const n=$("st-net"), net=Math.trunc(stats.net);
+      n.textContent=(net>0?"+":"")+net.toLocaleString("en-US");
+      n.className="sv "+(net>0?"pos":net<0?"neg":"");
+      const s=$("st-streak");
+      s.textContent=stats.streak>0 ? stats.streak+"W" : stats.streak<0 ? (-stats.streak)+"L" : "—";
+      s.className="sv "+(stats.streak>0?"pos":stats.streak<0?"neg":"");
+    }catch(e){}
+  }
+
+  /* ---------- Balance count-up animation ---------- */
+  const balAnim={ active:false, from:0, to:0, start:0, dur:700 };
+  function animateBalance(from,to){
+    balAnim.active=true; balAnim.from=from; balAnim.to=to; balAnim.start=performance.now();
+    try{
+      elBalWrap.classList.remove("bump");
+      void elBalWrap.offsetWidth;
+      elBalWrap.classList.add("bump");
+    }catch(e){}
+  }
+  elBalWrap.addEventListener("animationend",()=>elBalWrap.classList.remove("bump"));
+  function renderBalance(now){
+    if(!balAnim.active) return;
+    const k=Math.min((now-balAnim.start)/balAnim.dur,1);
+    const e=1-Math.pow(1-k,3);                       // ease-out cubic
+    elBalance.textContent=fmt(balAnim.from+(balAnim.to-balAnim.from)*e);
+    if(k>=1){ balAnim.active=false; elBalance.textContent=fmt(game.balance); }
+  }
+
+  /* ---------- Screen shake ---------- */
+  const shake={ until:0, dur:420, mag:9 };
+  function triggerShake(now){ shake.until=now+shake.dur; }
+  function applyShake(now){
+    try{
+      if(now<shake.until){
+        const k=(shake.until-now)/shake.dur, m=shake.mag*k*k;
+        elStage.style.transform="translate("+((Math.random()*2-1)*m).toFixed(1)+"px,"+((Math.random()*2-1)*m).toFixed(1)+"px)";
+      } else if(elStage.style.transform){
+        elStage.style.transform="";
+      }
+    }catch(e){}
+  }
+
   /* ---------- Betting actions ---------- */
   function clampBet(v){ if(!Number.isFinite(v)) return 0; return Math.max(0, Math.min(Math.floor(v), game.balance)); }
   function parseAuto(){
@@ -337,17 +660,20 @@
     return (Number.isFinite(v) && v>=1.01) ? Math.floor(v*100)/100 : 0;   // 0 = manual
   }
 
-  function placeBet(){
+  function placeBet(amount,isAuto){
     if(game.phase!==PHASE.WAITING || game.hasBet) return;
-    const amt=clampBet(parseInt(elBet.value,10));
-    if(amt<=0){ toast("Enter points to lock","warn"); return; }
-    if(amt>game.balance){ toast("Not enough points","warn"); return; }
+    const amt=clampBet(amount);
+    if(amt<=0){ if(!isAuto) toast("Enter points to lock","warn"); return; }
+    if(amt>game.balance){ if(!isAuto) toast("Not enough points","warn"); return; }
+    balAnim.active=false;
     game.bet=amt; game.hasBet=true; game.balance-=amt; game.autoSecure=parseAuto();
+    game.lastStake=amt;
     saveBalance(); updateUI();
-    toast("Locked "+fmt(amt)+" pts"+(game.autoSecure?(" · auto @ "+game.autoSecure.toFixed(2)+"x"):""),"warn");
+    toast((isAuto?"Auto-locked ":"Locked ")+fmt(amt)+" pts"+(game.autoSecure?(" · auto @ "+game.autoSecure.toFixed(2)+"x"):""),"warn");
   }
   function cancelBet(){
     if(game.phase!==PHASE.WAITING || !game.hasBet) return;
+    balAnim.active=false;
     game.balance+=game.bet; game.bet=0; game.hasBet=false; saveBalance(); updateUI();
     toast("Bet cancelled","warn");
   }
@@ -356,14 +682,30 @@
     game.hasCashedOut=true; game.cashedOutAt=multiplier;
     const payout=Math.floor(game.bet*multiplier);
     const profit=payout-game.bet;
+    const before=game.balance;
     game.balance+=payout; saveBalance();
+    recordWin(multiplier,profit);
+    stopRiser(); playChime();
+    animateBalance(before,game.balance);
     elMult.classList.add("win");
     toast((isAuto?"Auto-secured":"Secured")+" @ "+multiplier.toFixed(2)+"x · +"+fmt(profit)+" pts","win");
     updateUI();
   }
   function onAction(){
-    if(game.phase===PHASE.WAITING){ game.hasBet ? cancelBet() : placeBet(); }
+    if(game.phase===PHASE.WAITING){ game.hasBet ? cancelBet() : placeBet(parseInt(elBet.value,10),false); }
     else if(game.phase===PHASE.RUNNING && game.hasBet && !game.hasCashedOut){ cashOut(game.multiplier,false); }
+  }
+  // Auto-rebet: re-lock the previous stake at the start of the betting window.
+  function tryAutoRebet(){
+    if(game.phase!==PHASE.WAITING || game.hasBet || !game.autoBet) return;
+    const stake=game.lastStake;
+    if(!(stake>0)) return;
+    if(stake>game.balance){
+      game.autoBet=false; elAutoBet.checked=false;
+      toast("Auto-rebet disabled — balance below stake","lose");
+      return;
+    }
+    placeBet(stake,true);
   }
 
   /* ---------- Phase transitions ---------- */
@@ -372,29 +714,34 @@
     game.crashPoint=generateCrashPoint();
     game.roundStart=now; game.elapsed=0; game.multiplier=1.0;
     game.hasCashedOut=false; game.particles.length=0; game.particlesSpawned=false;
-    elMult.classList.remove("crash","win");
+    exhaust.length=0;
+    elMult.classList.remove("crash","win","t2","t3","t4");
     updateUI();
   }
   function crashRound(now){
     game.phase=PHASE.CRASHED; game.phaseEnd=now+CONFIG.crashHoldMs;
     game.multiplier=game.crashPoint; game.elapsed=timeFor(game.crashPoint);
+    stopRiser(); playExplosion(); triggerShake(now);
     // record + render ticker
     game.history.unshift(game.crashPoint);
     if(game.history.length>CONFIG.historyMax) game.history.pop();
     renderTicker();
     // settle
     if(game.hasBet && !game.hasCashedOut){
+      recordLoss(game.bet);
       toast("Crashed @ "+game.crashPoint.toFixed(2)+"x · -"+fmt(game.bet)+" pts","lose");
     }
-    elMult.classList.remove("win"); elMult.classList.add("crash");
+    elMult.classList.remove("win","t2","t3","t4"); elMult.classList.add("crash");
     elFlash.classList.remove("go"); void elFlash.offsetWidth; elFlash.classList.add("go");
     updateUI();
   }
   function enterWaiting(now){
     game.phase=PHASE.WAITING; game.phaseEnd=now+CONFIG.waitMs;
     game.bet=0; game.hasBet=false; game.hasCashedOut=false; game.cashedOutAt=0;
-    game.multiplier=1.0; game.elapsed=0;
-    elMult.classList.remove("crash","win");
+    game.multiplier=1.0; game.elapsed=0; cdLastSec=-1;
+    stopRiser();
+    elMult.classList.remove("crash","win","t2","t3","t4");
+    tryAutoRebet();
     updateUI();
   }
 
@@ -405,6 +752,7 @@
     } else if(game.phase===PHASE.RUNNING){
       game.elapsed=(now-game.roundStart)/1000;
       game.multiplier=multAt(game.elapsed);
+      if(!game.hasCashedOut) updateRiser(game.multiplier);   // tone stops at cash-out / crash
       // auto-secure fires only if it would occur before the crash
       if(game.hasBet && !game.hasCashedOut && game.autoSecure>=1.01 &&
          game.autoSecure<=game.crashPoint && game.multiplier>=game.autoSecure){
@@ -426,6 +774,71 @@
   }
   window.addEventListener("resize",resize);
 
+  /* --- starfield (parallax, slow drift; accelerates with the multiplier) --- */
+  const stars=[];
+  function initStars(){
+    stars.length=0;
+    for(let i=0;i<110;i++){
+      stars.push({
+        x:Math.random(), y:Math.random(),
+        z:0.25+Math.random()*0.75,            // depth → speed + brightness
+        r:0.4+Math.random()*1.3,
+        tw:Math.random()*Math.PI*2,           // twinkle phase
+        ts:0.5+Math.random()*1.5              // twinkle speed
+      });
+    }
+  }
+  function drawStars(w,h,now,dt){
+    const speed = game.phase===PHASE.RUNNING
+      ? 0.012+Math.min(game.multiplier,25)*0.004
+      : 0.006;                                 // normalized canvas-widths per second
+    ctx.save();
+    for(const s of stars){
+      s.x-=speed*s.z*dt;
+      if(s.x<0){ s.x+=1; s.y=Math.random(); }
+      const a=(0.18+0.5*s.z)*(0.7+0.3*Math.sin(now/1000*s.ts+s.tw));
+      ctx.globalAlpha=Math.max(0,Math.min(a*0.55,0.6));
+      ctx.fillStyle= s.z>0.8 ? "#cfd8ff" : "#8a94ad";
+      const px=s.x*w, py=s.y*h, pr=s.r*(0.6+s.z*0.8);
+      const streak=speed*w*0.06*s.z;           // gentle motion streak at high speed
+      if(streak>2.5){
+        ctx.fillRect(px,py-pr*0.5,streak,pr);
+      } else {
+        ctx.beginPath(); ctx.arc(px,py,pr,0,Math.PI*2); ctx.fill();
+      }
+    }
+    ctx.restore();
+  }
+
+  /* --- rocket exhaust trail --- */
+  const exhaust=[];
+  function spawnExhaust(x,y,ang){
+    for(let i=0;i<2;i++){
+      const sp=50+Math.random()*70, j=(Math.random()-0.5)*0.9;
+      exhaust.push({
+        x,y,
+        vx:-Math.cos(ang+j)*sp, vy:-Math.sin(ang+j)*sp,
+        life:0.5+Math.random()*0.3, max:0.8,
+        r:1+Math.random()*1.8
+      });
+    }
+    if(exhaust.length>260) exhaust.splice(0,exhaust.length-260);
+  }
+  function drawExhaust(dt){
+    ctx.save();
+    for(let i=exhaust.length-1;i>=0;i--){
+      const p=exhaust[i];
+      p.life-=dt;
+      if(p.life<=0){ exhaust.splice(i,1); continue; }
+      p.x+=p.vx*dt; p.y+=p.vy*dt; p.vx*=0.985; p.vy*=0.985;
+      const k=Math.min(p.life/p.max,1);
+      ctx.globalAlpha=k*0.85;
+      ctx.fillStyle= k>0.66 ? "#ffd9a0" : (k>0.33 ? "#b08cff" : "#5a4a9f");
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r*(0.5+k),0,Math.PI*2); ctx.fill();
+    }
+    ctx.restore();
+  }
+
   const PAD={l:14,r:22,t:22,b:18};
   function drawGrid(w,h,mMax){
     ctx.save();
@@ -444,7 +857,7 @@
     }
     ctx.restore();
   }
-  function drawCurve(w,h){
+  function drawCurve(w,h,dt){
     const crashed=game.phase===PHASE.CRASHED;
     const elapsed=Math.max(game.elapsed,0.0001);
     const headM=game.multiplier;
@@ -478,9 +891,12 @@
     ctx.stroke(); ctx.restore();
 
     if(!crashed){
-      // glowing rocket head
       const dx=pts[N][0]-pts[N-1][0], dy=pts[N][1]-pts[N-1][1];
       const ang=Math.atan2(dy,dx);
+      // exhaust trail streams out behind the rocket
+      spawnExhaust(hx-Math.cos(ang)*16, hy-Math.sin(ang)*16, ang);
+      drawExhaust(dt);
+      // glowing rocket head
       ctx.save();
       const g2=ctx.createRadialGradient(hx,hy,0,hx,hy,26);
       g2.addColorStop(0,"rgba(255,255,255,.95)"); g2.addColorStop(.4,"rgba(155,107,255,.6)"); g2.addColorStop(1,"rgba(155,107,255,0)");
@@ -490,6 +906,7 @@
       ctx.fillText("🚀",0,0);
       ctx.restore();
     } else {
+      drawExhaust(dt);          // let any leftover exhaust fade out
       drawParticles(hx,hy);
     }
   }
@@ -511,16 +928,17 @@
     }
     ctx.restore();
   }
-  function render(){
+  function render(now,dt){
     const w=canvas.clientWidth, h=canvas.clientHeight;
     ctx.clearRect(0,0,w,h);
-    if(game.phase===PHASE.RUNNING || game.phase===PHASE.CRASHED) drawCurve(w,h);
+    drawStars(w,h,now,dt);
+    if(game.phase===PHASE.RUNNING || game.phase===PHASE.CRASHED) drawCurve(w,h,dt);
     else { drawGrid(w,h,2.0); }
   }
 
   /* ---------- UI sync ---------- */
   function updateUI(){
-    elBalance.textContent=fmt(game.balance);
+    if(!balAnim.active) elBalance.textContent=fmt(game.balance);
     elRound.textContent="Round #"+game.roundNo;
     const waiting=game.phase===PHASE.WAITING;
     elBet.disabled = !waiting || game.hasBet;
@@ -556,31 +974,118 @@
       elTicker.appendChild(s);
     }
   }
+  function setMultTier(t){
+    elMult.classList.toggle("t2",t===2);
+    elMult.classList.toggle("t3",t===3);
+    elMult.classList.toggle("t4",t===4);
+  }
+  let cdLastSec=-1;
   function renderOverlay(now){
     if(game.phase===PHASE.WAITING){
       const remain=Math.max(0,game.phaseEnd-now);
-      elMult.textContent=Math.ceil(remain/1000)+"";
+      const sec=Math.ceil(remain/1000);
+      if(sec!==cdLastSec){
+        cdLastSec=sec;
+        if(sec>0 && sec<=Math.ceil(CONFIG.waitMs/1000)) playTick(sec<=1);
+      }
+      setMultTier(0);
+      elMult.textContent=sec+"";
       elStatus.innerHTML="Waiting for next round… <span class='em'>place your points</span>";
       elCd.style.width=(100*(1-remain/CONFIG.waitMs)).toFixed(1)+"%";
     } else if(game.phase===PHASE.RUNNING){
-      elMult.textContent=game.multiplier.toFixed(2)+"x";
+      const m=game.multiplier;
+      setMultTier(m>=10?4 : m>=4?3 : m>=2?2 : 0);
+      elMult.textContent=m.toFixed(2)+"x";
       elStatus.innerHTML = game.hasCashedOut
         ? "Secured @ <span class='em'>"+game.cashedOutAt.toFixed(2)+"x</span>"
         : (game.hasBet ? "In play — <span class='em'>"+fmt(game.bet*game.multiplier)+" pts</span>" : "Round live");
       elCd.style.width="0%";
     } else { // CRASHED
+      setMultTier(0);
       elMult.textContent=game.crashPoint.toFixed(2)+"x";
       elStatus.innerHTML="💥 <span class='em'>CRASHED</span>";
       elCd.style.width="0%";
     }
   }
 
+  /* ============================================================
+     STRATEGY LAB — headless Monte-Carlo over the SAME engine.
+     Flat 1-pt stake, fixed cash-out target. Sandbox only:
+     never reads or writes the player's balance or stats.
+     ============================================================ */
+  const SIM_BUCKETS=[
+    {lbl:"1–1.5x", hi:1.5,      cls:"low"},
+    {lbl:"1.5–2x", hi:2,        cls:"low"},
+    {lbl:"2–3x",   hi:3,        cls:"mid"},
+    {lbl:"3–5x",   hi:5,        cls:"mid"},
+    {lbl:"5–10x",  hi:10,       cls:"mid"},
+    {lbl:"10–50x", hi:50,       cls:"high"},
+    {lbl:"50x+",   hi:Infinity, cls:"high"}
+  ];
+  function runSimulation(){
+    try{
+      let N=parseInt(elSimN.value,10);
+      if(!Number.isFinite(N)) N=10000;
+      N=Math.max(100,Math.min(N,1000000));
+      elSimN.value=N;
+      let target=parseFloat(elSimTarget.value);
+      if(!Number.isFinite(target)||target<1.01) target=2;
+      target=Math.floor(target*100)/100;
+      elSimTarget.value=target.toFixed(2);
+
+      let ret=0, hits=0, sum=0, max=0;
+      const counts=new Array(SIM_BUCKETS.length).fill(0);
+      for(let i=0;i<N;i++){
+        const c=generateCrashPoint();
+        sum+=c; if(c>max) max=c;
+        if(c>=target){ ret+=target; hits++; }
+        for(let b=0;b<SIM_BUCKETS.length;b++){ if(c<SIM_BUCKETS[b].hi){ counts[b]++; break; } }
+      }
+      $("sim-rtp").textContent=(ret/N*100).toFixed(2)+"%";
+      $("sim-hit").textContent=(hits/N*100).toFixed(2)+"%";
+      $("sim-avg").textContent=(sum/N).toFixed(2)+"x";
+      $("sim-max").textContent=max.toFixed(2)+"x";
+      renderHisto(counts,N);
+      $("sim-note").textContent="Flat 1-pt stake, fixed cash-out @ "+target.toFixed(2)+"x over "
+        +N.toLocaleString("en-US")+" simulated rounds · sandbox only — demo balance untouched.";
+      $("sim-out").hidden=false;
+    }catch(e){ toast("Simulation error","warn"); }
+  }
+  function renderHisto(counts,N){
+    const elH=$("histo");
+    elH.innerHTML="";
+    const maxC=Math.max.apply(null,counts.concat(1));
+    SIM_BUCKETS.forEach((b,i)=>{
+      const c=counts[i], pct=c/N*100;
+      const col=document.createElement("div"); col.className="hcol";
+      col.title=b.lbl+" — "+c.toLocaleString("en-US")+" rounds ("+pct.toFixed(2)+"%)";
+      const hp=document.createElement("div"); hp.className="hpct";
+      hp.textContent= pct>=0.1 ? pct.toFixed(1)+"%" : (c>0 ? "<0.1%" : "");
+      const hw=document.createElement("div"); hw.className="hwrap";
+      const bar=document.createElement("div"); bar.className="hbar "+b.cls;
+      bar.style.height=(c>0 ? Math.max(c/maxC*100,2) : 0).toFixed(1)+"%";
+      hw.appendChild(bar);
+      const hl=document.createElement("div"); hl.className="hlbl"; hl.textContent=b.lbl;
+      col.appendChild(hp); col.appendChild(hw); col.appendChild(hl);
+      elH.appendChild(col);
+    });
+  }
+
   /* ---------- Main loop ---------- */
+  let lastFrame=performance.now(), loggedErr=false;
   function loop(now){
-    update(now);
-    render();
-    renderOverlay(now);
-    if(game.phase===PHASE.RUNNING) updateUI();   // live button/payout
+    try{
+      const dt=Math.min(Math.max((now-lastFrame)/1000,0),0.05);
+      lastFrame=now;
+      update(now);
+      render(now,dt);
+      renderOverlay(now);
+      renderBalance(now);
+      applyShake(now);
+      if(game.phase===PHASE.RUNNING) updateUI();   // live button/payout
+    }catch(err){
+      if(!loggedErr){ loggedErr=true; try{ console.error("Frame error (loop continues):",err); }catch(e){} }
+    }
     requestAnimationFrame(loop);
   }
 
@@ -588,7 +1093,10 @@
   elAction.addEventListener("click",onAction);
   document.addEventListener("keydown",(e)=>{ if(e.code==="Space"){ e.preventDefault(); onAction(); } });
   $("reset").addEventListener("click",()=>{
-    game.balance=CONFIG.startingBalance; saveBalance(); updateUI(); toast("Demo points reset","warn");
+    balAnim.active=false;
+    game.balance=CONFIG.startingBalance; saveBalance();
+    resetStats();
+    updateUI(); toast("Demo points & stats reset","warn");
   });
   document.querySelectorAll(".quick button").forEach(btn=>{
     btn.addEventListener("click",()=>{
@@ -600,6 +1108,22 @@
       elBet.value=Math.max(1,Math.min(v,game.balance));
     });
   });
+  elSound.addEventListener("click",()=>{
+    sound.enabled=!sound.enabled;
+    saveSoundPref(); renderSoundBtn();
+    if(!sound.enabled) stopRiser(); else unlockAudio();
+  });
+  elAutoBet.addEventListener("change",()=>{
+    game.autoBet=elAutoBet.checked;
+    if(game.autoBet){
+      toast(game.lastStake>0 ? "Auto-rebet on · "+fmt(game.lastStake)+" pts/round"
+                             : "Auto-rebet on — lock points once to set the stake","warn");
+      tryAutoRebet();
+    } else {
+      toast("Auto-rebet off","warn");
+    }
+  });
+  $("sim-run").addEventListener("click",runSimulation);
 
   // header math readout
   (function showMath(){
@@ -610,7 +1134,8 @@
   })();
 
   /* ---------- Boot ---------- */
-  loadBalance(); resize();
+  loadBalance(); loadStats(); initStars(); resize();
+  renderSoundBtn(); renderStats();
   game.phase=PHASE.WAITING; game.phaseEnd=performance.now()+CONFIG.waitMs;
   updateUI(); renderTicker();
   requestAnimationFrame(loop);
