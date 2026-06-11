@@ -6,7 +6,7 @@
 <title>Ascent — Crash Arcade Simulation (Demo Points)</title>
 <style>
   /* ============================================================
-     DESIGN TOKENS  —  sleek dark "iGaming dashboard" palette
+     DESIGN TOKENS — sleek dark iGaming dashboard palette
      ============================================================ */
   :root{
     --bg:#070a12;
@@ -24,6 +24,7 @@
     --purple-deep:#6c3cff;
     --gold:#ffcf4d;
     --red:#ff4d6a;
+    --orange:#ff9f43;
     --blue-grey:#46577d;
     --shadow:0 18px 50px rgba(0,0,0,.55);
     --radius:18px;
@@ -43,11 +44,10 @@
     min-height:100vh;
     -webkit-font-smoothing:antialiased;
   }
-
-  .wrap{ max-width:1140px; margin:0 auto; padding:22px 18px 40px; }
+  .wrap{ max-width:1280px; margin:0 auto; padding:18px 16px 40px; }
 
   /* ---------- Header ---------- */
-  .topbar{ display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:16px; flex-wrap:wrap; }
+  .topbar{ display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:14px; flex-wrap:wrap; }
   .brand{ display:flex; align-items:center; gap:12px; }
   .logo{
     width:42px; height:42px; border-radius:12px; display:grid; place-items:center;
@@ -63,12 +63,27 @@
   }
   .badge b{ color:var(--text); font-family:var(--mono); }
   .badge.rtp{ color:var(--green); border-color:rgba(33,229,139,.3); }
-  button.badge.sound{
-    cursor:pointer; font-family:inherit; font-size:15px; line-height:1; padding:6px 11px;
-    transition:border-color .15s ease, transform .08s ease;
+  button.badge{
+    cursor:pointer; font-family:inherit; line-height:1;
+    transition:border-color .15s ease, transform .08s ease, opacity .15s ease;
   }
-  button.badge.sound:hover{ border-color:var(--purple); }
-  button.badge.sound:active{ transform:scale(.94); }
+  button.badge:hover{ border-color:var(--purple); }
+  button.badge:active{ transform:scale(.94); }
+  button.badge.icon{ font-size:15px; padding:6px 11px; }
+  button.badge.icon.off{ opacity:.4; }
+  button.badge.fairbtn{ color:var(--gold); border-color:rgba(255,207,77,.35); font-weight:700; }
+  .balance-pill{
+    display:flex; align-items:baseline; gap:6px; padding:8px 16px; border-radius:12px;
+    background:linear-gradient(180deg,var(--panel),var(--panel-2)); border:1px solid var(--border);
+  }
+  .balance-pill .v{ font-family:var(--mono); font-size:20px; font-weight:800; }
+  .balance-pill .v.bump{ animation:bump .7s ease; }
+  @keyframes bump{
+    0%{ transform:scale(1); }
+    30%{ transform:scale(1.12); color:var(--green); text-shadow:0 0 18px rgba(33,229,139,.55); }
+    100%{ transform:scale(1); }
+  }
+  .balance-pill .pts{ font-size:11px; color:var(--muted); font-weight:700; }
 
   /* ---------- Past rounds ticker ---------- */
   .ticker{
@@ -80,20 +95,60 @@
   .ticker .lbl{ font-size:11px; text-transform:uppercase; letter-spacing:1.4px; color:var(--muted-2); white-space:nowrap; padding-right:4px; }
   .pill{
     font-family:var(--mono); font-size:13px; font-weight:700; padding:6px 12px; border-radius:10px;
-    white-space:nowrap; border:1px solid transparent; animation:pop .35s ease;
+    white-space:nowrap; border:1px solid transparent; animation:pop .35s ease; cursor:pointer;
   }
   @keyframes pop{ from{ transform:scale(.7); opacity:0; } to{ transform:scale(1); opacity:1; } }
   .pill.low{  color:#aebbd6; background:rgba(70,87,125,.22); border-color:rgba(70,87,125,.5); }
   .pill.mid{  color:#c7adff; background:rgba(108,60,255,.18); border-color:rgba(155,107,255,.5); }
   .pill.high{ color:var(--gold); background:rgba(255,207,77,.12); border-color:rgba(255,207,77,.5); }
 
-  /* ---------- Main grid ---------- */
-  .main{ display:grid; grid-template-columns:1fr 330px; gap:16px; align-items:start; }
-  @media (max-width:860px){ .main{ grid-template-columns:1fr; } }
+  /* ---------- Layout ---------- */
+  .layout{ display:grid; grid-template-columns:300px 1fr; gap:14px; align-items:start; }
+  @media (max-width:1020px){ .layout{ grid-template-columns:1fr; } .sidebar{ order:2; } .centercol{ order:1; } }
 
-  /* ---------- Stage / canvas ---------- */
+  /* ---------- Sidebar: live bets ---------- */
+  .sidebar{
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow);
+    display:flex; flex-direction:column; overflow:hidden;
+  }
+  .tabs{ display:flex; gap:4px; padding:10px 10px 0; }
+  .tabbtn{
+    flex:1; padding:9px 4px; font-size:12px; font-weight:800; letter-spacing:.3px; color:var(--muted);
+    background:transparent; border:0; border-radius:10px 10px 0 0; cursor:pointer; font-family:inherit;
+    border-bottom:2px solid transparent;
+  }
+  .tabbtn.on{ color:var(--text); border-bottom-color:var(--purple); background:rgba(108,60,255,.08); }
+  .feedhead{
+    display:flex; justify-content:space-between; padding:10px 14px 8px; font-size:11px;
+    color:var(--muted-2); text-transform:uppercase; letter-spacing:1px; font-weight:700;
+    border-bottom:1px solid var(--border-soft);
+  }
+  .feed{ height:548px; overflow-y:auto; scrollbar-width:thin; padding:6px 8px 10px; }
+  @media (max-width:1020px){ .feed{ height:320px; } }
+  .frow{
+    display:grid; grid-template-columns:1.25fr .75fr .6fr .8fr; gap:6px; align-items:center;
+    padding:7px 8px; border-radius:9px; font-size:12px; margin-bottom:2px;
+  }
+  .frow .fn{ color:var(--muted); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .frow .fs,.frow .fm,.frow .fw{ font-family:var(--mono); font-weight:700; text-align:right; white-space:nowrap; }
+  .frow .fm{ color:var(--muted-2); }
+  .frow .fw{ color:var(--muted-2); }
+  .frow.won{ background:rgba(33,229,139,.09); }
+  .frow.won .fm{ color:var(--green); }
+  .frow.won .fw{ color:var(--green); }
+  .frow.lost{ opacity:.4; }
+  .frow.lost .fm{ color:var(--red); }
+  .frow.you{ border:1px solid rgba(155,107,255,.45); background:rgba(108,60,255,.10); }
+  .frow.you .fn{ color:var(--purple); font-weight:800; }
+  .frow.head{ background:none; color:var(--muted-2); font-size:10px; text-transform:uppercase; letter-spacing:.6px; padding:4px 8px; }
+  .frow.head span{ font-family:var(--sans); font-weight:700; }
+  .feed .empty{ color:var(--muted-2); font-size:12px; text-align:center; padding:26px 10px; line-height:1.6; }
+
+  /* ---------- Stage ---------- */
+  .centercol{ display:flex; flex-direction:column; gap:14px; min-width:0; }
   .stage{
-    position:relative; height:clamp(360px,54vh,560px);
+    position:relative; height:clamp(340px,46vh,520px);
     background:linear-gradient(180deg,#0b1122,#080c17);
     border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
     will-change:transform;
@@ -101,88 +156,102 @@
   #game-canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
   .overlay{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none; text-align:center; }
   #mult{
-    font-family:var(--mono); font-weight:800; font-size:clamp(48px,9vw,104px); line-height:1;
+    font-family:var(--mono); font-weight:800; font-size:clamp(46px,8vw,96px); line-height:1;
     letter-spacing:-1px; color:#fff; text-shadow:0 0 28px rgba(255,255,255,.35);
     transition:color .15s ease;
   }
-  /* multiplier colour tiers — white → green → purple → gold, glow intensifies */
   #mult.t2{ color:var(--green);  text-shadow:0 0 30px rgba(33,229,139,.55); }
   #mult.t3{ color:var(--purple); text-shadow:0 0 36px rgba(155,107,255,.7), 0 0 80px rgba(155,107,255,.35); }
   #mult.t4{ color:var(--gold);   text-shadow:0 0 34px rgba(255,207,77,.8), 0 0 90px rgba(255,207,77,.45); }
   #mult.win{ color:var(--green); text-shadow:0 0 34px rgba(33,229,139,.55); }
   #mult.crash{ color:var(--red); text-shadow:0 0 38px rgba(255,77,106,.6); }
-  #status{ margin-top:10px; font-size:14px; letter-spacing:.4px; color:var(--muted); min-height:20px; font-weight:600; }
+  #status{ margin-top:8px; font-size:14px; letter-spacing:.4px; color:var(--muted); min-height:20px; font-weight:600; }
   #status .em{ color:var(--text); }
+  #fair-chip{
+    margin-top:9px; font-family:var(--mono); font-size:10px; color:var(--muted-2);
+    background:rgba(255,255,255,.04); border:1px solid var(--border-soft);
+    padding:4px 10px; border-radius:999px; max-width:88%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .chip{
+    position:absolute; font-size:11px; font-weight:700; color:var(--muted);
+    background:rgba(10,14,26,.72); border:1px solid var(--border-soft);
+    padding:6px 11px; border-radius:999px; backdrop-filter:blur(4px); z-index:3;
+  }
+  .chip b{ color:var(--text); font-family:var(--mono); }
+  #players-chip{ top:12px; left:12px; }
+  #round-chip{ top:12px; right:12px; }
   .flash{ position:absolute; inset:0; background:var(--red); opacity:0; pointer-events:none; }
   .flash.go{ animation:flash .5s ease; }
   @keyframes flash{ 0%{opacity:.32;} 100%{opacity:0;} }
-  /* countdown progress bar */
   .cd-track{ position:absolute; left:0; right:0; bottom:0; height:4px; background:rgba(255,255,255,.06); }
   .cd-fill{ height:100%; width:0%; background:linear-gradient(90deg,var(--purple),var(--green)); transition:width .1s linear; }
 
-  /* ---------- Control panel ---------- */
-  .panel{ background:linear-gradient(180deg,var(--panel),var(--panel-2)); border:1px solid var(--border); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); }
-  .balance{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:4px; }
-  .balance .k{ font-size:12px; text-transform:uppercase; letter-spacing:1.4px; color:var(--muted-2); }
-  .balance .v{ font-family:var(--mono); font-size:30px; font-weight:800; }
-  .balance .v .pts{ font-size:13px; color:var(--muted); font-weight:600; margin-left:5px; }
-  .balance .v.bump{ animation:bump .7s ease; }
-  @keyframes bump{
-    0%{ transform:scale(1); }
-    30%{ transform:scale(1.1); color:var(--green); text-shadow:0 0 18px rgba(33,229,139,.55); }
-    100%{ transform:scale(1); }
+  /* ---------- Bet slots ---------- */
+  .bslots{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:760px){ .bslots{ grid-template-columns:1fr; } }
+  .bslot{
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    border:1px solid var(--border); border-radius:var(--radius); padding:14px 14px 12px; box-shadow:var(--shadow);
   }
-  .hr{ height:1px; background:var(--border-soft); margin:16px 0; }
-
-  .field{ margin-bottom:14px; }
-  .field label{ display:block; font-size:12px; color:var(--muted); margin-bottom:7px; font-weight:600; }
+  .bslot .bs-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .bslot .bs-title{ font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted); }
+  .bslot .bs-key{ font-size:10px; color:var(--muted-2); font-family:var(--mono); border:1px solid var(--border-soft); border-radius:6px; padding:2px 7px; }
+  .brow{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .field{ margin-bottom:10px; min-width:0; }
+  .field label{ display:block; font-size:11px; color:var(--muted); margin-bottom:5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .input{
-    display:flex; align-items:center; gap:8px; background:var(--bg-soft);
-    border:1px solid var(--border); border-radius:12px; padding:0 12px;
+    display:flex; align-items:center; gap:7px; background:var(--bg-soft);
+    border:1px solid var(--border); border-radius:11px; padding:0 11px;
   }
   .input:focus-within{ border-color:var(--purple); box-shadow:0 0 0 3px rgba(108,60,255,.18); }
   .input input{
     flex:1; background:transparent; border:0; outline:0; color:var(--text);
-    font-family:var(--mono); font-size:18px; font-weight:700; padding:12px 0; width:100%;
+    font-family:var(--mono); font-size:16px; font-weight:700; padding:10px 0; width:100%; min-width:0;
   }
-  .input .suffix{ color:var(--muted); font-family:var(--mono); font-weight:700; font-size:14px; }
+  .input .suffix{ color:var(--muted); font-family:var(--mono); font-weight:700; font-size:13px; }
   .input input:disabled{ opacity:.5; }
-  .input.sm input{ font-size:14px; padding:9px 0; }
-  .quick{ display:flex; gap:6px; margin-top:8px; }
+  .input.sm input{ font-size:13px; padding:8px 0; }
+  .quick{ display:flex; gap:5px; margin-top:7px; }
   .quick button{
-    flex:1; padding:8px 0; font-size:12px; font-weight:700; color:var(--muted);
-    background:var(--bg-soft); border:1px solid var(--border); border-radius:9px; cursor:pointer;
-    transition:.15s;
+    flex:1; padding:7px 0; font-size:11px; font-weight:700; color:var(--muted);
+    background:var(--bg-soft); border:1px solid var(--border); border-radius:8px; cursor:pointer;
+    transition:.15s; font-family:inherit;
   }
   .quick button:hover{ color:var(--text); border-color:var(--purple); }
   .quick button:disabled{ opacity:.4; cursor:not-allowed; }
-
-  .checkrow{ display:flex; align-items:center; gap:9px; margin-bottom:14px; }
-  .checkrow input[type=checkbox]{ width:17px; height:17px; accent-color:var(--purple); cursor:pointer; margin:0; flex:none; }
-  .checkrow label{ margin:0; cursor:pointer; font-size:12px; color:var(--muted); font-weight:600; line-height:1.4; }
-  .checkrow label b{ color:var(--text); }
-
+  .checkrow{ display:flex; align-items:center; gap:8px; margin:2px 0 10px; }
+  .checkrow input[type=checkbox]{ width:16px; height:16px; accent-color:var(--purple); cursor:pointer; margin:0; flex:none; }
+  .checkrow label{ margin:0; cursor:pointer; font-size:12px; color:var(--muted); font-weight:600; }
+  details.adv{ margin:0 0 10px; }
+  details.adv summary{
+    cursor:pointer; font-size:11px; color:var(--muted-2); font-weight:700; list-style:none;
+    user-select:none; padding:2px 0;
+  }
+  details.adv summary::before{ content:"▸ "; }
+  details.adv[open] summary::before{ content:"▾ "; }
+  details.adv .brow{ margin-top:8px; }
   .action{
-    width:100%; padding:16px; border:0; border-radius:14px; cursor:pointer;
-    font-size:16px; font-weight:800; letter-spacing:.3px; color:#06140d;
-    transition:transform .08s ease, filter .15s ease, background .2s ease; margin-top:4px;
+    width:100%; padding:15px 10px; border:0; border-radius:13px; cursor:pointer; font-family:inherit;
+    font-size:15px; font-weight:800; letter-spacing:.3px; color:#06140d;
+    transition:transform .08s ease, filter .15s ease, background .2s ease;
   }
   .action:active{ transform:translateY(1px) scale(.995); }
-  .action.lock{ background:linear-gradient(135deg,var(--purple),var(--purple-deep)); color:#fff; box-shadow:0 10px 26px rgba(108,60,255,.4); }
-  .action.cancel{ background:#1c2438; color:var(--muted); box-shadow:none; border:1px solid var(--border); }
-  .action.secure{ background:linear-gradient(135deg,var(--green),var(--green-deep)); box-shadow:0 10px 26px rgba(33,229,139,.4); }
+  .action.lock{ background:linear-gradient(135deg,var(--green),var(--green-deep)); box-shadow:0 10px 26px rgba(33,229,139,.35); }
+  .action.cancel{ background:#2a1c25; color:#ff9aa9; box-shadow:none; border:1px solid rgba(255,77,106,.4); }
+  .action.secure{ background:linear-gradient(135deg,var(--orange),#e8721c); color:#1c0e02; box-shadow:0 10px 26px rgba(255,159,67,.4); animation:pulse 1.1s ease infinite; }
+  @keyframes pulse{ 0%,100%{ filter:brightness(1); } 50%{ filter:brightness(1.15); } }
   .action.done{ background:#15241b; color:var(--green); border:1px solid rgba(33,229,139,.4); }
   .action.idle{ background:#141a2b; color:var(--muted-2); cursor:not-allowed; }
-  .action:disabled{ cursor:not-allowed; }
+  .action:disabled{ cursor:not-allowed; animation:none; }
+  .slotnote{ min-height:16px; margin-top:8px; font-size:11px; font-weight:700; text-align:center; color:var(--muted-2); }
+  .slotnote.win{ color:var(--green); }
+  .slotnote.lose{ color:var(--red); }
 
-  .toast{ margin-top:12px; min-height:18px; font-size:13px; font-weight:700; text-align:center; opacity:0; transition:opacity .2s; }
-  .toast.show{ opacity:1; }
-  .toast.win{ color:var(--green); }
-  .toast.lose{ color:var(--red); }
-  .toast.warn{ color:var(--gold); }
-
-  /* ---------- Session stats ---------- */
-  .stats-title{ font-size:11px; text-transform:uppercase; letter-spacing:1.4px; color:var(--muted-2); margin-bottom:9px; font-weight:700; }
+  /* ---------- Bottom panels ---------- */
+  .bottomgrid{ display:grid; grid-template-columns:1fr 1.4fr; gap:14px; margin-top:14px; align-items:start; }
+  @media (max-width:1020px){ .bottomgrid{ grid-template-columns:1fr; } }
+  .panel{ background:linear-gradient(180deg,var(--panel),var(--panel-2)); border:1px solid var(--border); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); }
+  .stats-title{ font-size:11px; text-transform:uppercase; letter-spacing:1.4px; color:var(--muted-2); margin-bottom:10px; font-weight:700; }
   .stats-title span{ text-transform:none; letter-spacing:0; font-weight:600; }
   .stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
   .stat{ background:var(--bg-soft); border:1px solid var(--border-soft); border-radius:11px; padding:9px 10px; min-width:0; }
@@ -190,21 +259,18 @@
   .stat .sv{ font-family:var(--mono); font-size:15px; font-weight:800; color:var(--text); }
   .sv.pos{ color:var(--green); }
   .sv.neg{ color:var(--red); }
-
   .meta{ display:flex; justify-content:space-between; font-size:12px; color:var(--muted-2); margin-top:14px; }
-  .meta button{ background:none; border:0; color:var(--muted); font-size:12px; cursor:pointer; text-decoration:underline; }
+  .meta button{ background:none; border:0; color:var(--muted); font-size:12px; cursor:pointer; text-decoration:underline; font-family:inherit; }
   .meta button:hover{ color:var(--text); }
 
-  /* ---------- Research / strategy lab ---------- */
-  .research{ margin-top:16px; }
+  /* ---------- Strategy lab ---------- */
   .r-top{ display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; }
   .r-title{ font-weight:800; font-size:15px; letter-spacing:.3px; }
   .r-sub{ color:var(--muted); font-size:12px; margin-top:5px; max-width:560px; line-height:1.55; }
   .r-sub code{ font-family:var(--mono); color:var(--purple); font-size:11px; }
   .r-controls{ display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap; }
   .r-controls .field{ margin:0; }
-  .r-controls .field label{ margin-bottom:5px; }
-  .r-controls .input{ width:128px; }
+  .r-controls .input{ width:120px; }
   .btn-sim{
     padding:11px 20px; border:0; border-radius:12px; cursor:pointer; font-family:inherit;
     font-weight:800; font-size:13px; letter-spacing:.3px; color:#fff;
@@ -217,7 +283,7 @@
   .r-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:16px; }
   @media (max-width:700px){ .r-stats{ grid-template-columns:repeat(2,1fr); } }
   .histo{
-    display:flex; gap:8px; align-items:stretch; height:132px; margin-top:12px;
+    display:flex; gap:8px; align-items:stretch; height:128px; margin-top:12px;
     padding:12px 12px 8px; background:var(--bg-soft); border:1px solid var(--border-soft); border-radius:12px;
   }
   .hcol{ flex:1; display:flex; flex-direction:column; min-width:0; }
@@ -229,6 +295,65 @@
   .hbar.high{ background:linear-gradient(180deg,var(--gold),#c79a26); }
   .hlbl{ font-size:10px; color:var(--muted-2); text-align:center; margin-top:6px; font-family:var(--mono); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .r-note{ margin-top:10px; font-size:11px; color:var(--muted-2); }
+
+  /* ---------- Toast (global, fixed) ---------- */
+  #toast{
+    position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(8px);
+    background:linear-gradient(180deg,var(--panel),var(--panel-2)); border:1px solid var(--border);
+    color:var(--text); font-size:13px; font-weight:700; padding:11px 20px; border-radius:12px;
+    box-shadow:var(--shadow); opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:60;
+    max-width:90vw; text-align:center;
+  }
+  #toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+  #toast.win{ border-color:rgba(33,229,139,.5); color:var(--green); }
+  #toast.lose{ border-color:rgba(255,77,106,.5); color:var(--red); }
+  #toast.warn{ border-color:rgba(255,207,77,.5); color:var(--gold); }
+
+  /* ---------- Provably-fair modal ---------- */
+  .modal{
+    position:fixed; inset:0; background:rgba(4,6,12,.7); backdrop-filter:blur(5px);
+    display:none; align-items:flex-start; justify-content:center; z-index:50; padding:5vh 14px;
+    overflow-y:auto;
+  }
+  .modal.open{ display:flex; }
+  .mbox{
+    width:min(760px,100%); background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px;
+    animation:pop .25s ease;
+  }
+  .mhead{ display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+  .mhead h2{ margin:0; font-size:18px; letter-spacing:.3px; }
+  .mclose{ background:none; border:1px solid var(--border); color:var(--muted); width:32px; height:32px; border-radius:9px; cursor:pointer; font-size:15px; }
+  .mclose:hover{ color:var(--text); border-color:var(--purple); }
+  .mtext{ color:var(--muted); font-size:13px; line-height:1.65; }
+  .mtext code{ font-family:var(--mono); font-size:11px; color:var(--purple); background:rgba(108,60,255,.1); padding:1px 5px; border-radius:5px; }
+  .seedrow{ display:flex; gap:8px; margin:14px 0 4px; align-items:center; }
+  .seedrow .input{ flex:1; }
+  .seedrow .input input{ font-size:13px; padding:10px 0; }
+  .btn-mini{
+    padding:10px 16px; border:0; border-radius:11px; cursor:pointer; font-family:inherit;
+    font-weight:800; font-size:12px; color:#fff;
+    background:linear-gradient(135deg,var(--purple),var(--purple-deep));
+  }
+  .btn-mini:hover{ filter:brightness(1.1); }
+  .mtable{ margin-top:14px; border:1px solid var(--border-soft); border-radius:12px; overflow:hidden; }
+  .mrow{
+    display:grid; grid-template-columns:54px 74px 1fr 84px; gap:8px; align-items:center;
+    padding:9px 12px; font-size:11px; border-bottom:1px solid var(--border-soft);
+  }
+  .mrow:last-child{ border-bottom:0; }
+  .mrow.mh{ background:var(--bg-soft); color:var(--muted-2); text-transform:uppercase; letter-spacing:.7px; font-weight:700; font-size:10px; }
+  .mrow .mono{ font-family:var(--mono); color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mrow .mono b{ color:var(--text); display:block; overflow:hidden; text-overflow:ellipsis; }
+  .mrow .crashv{ font-family:var(--mono); font-weight:800; }
+  .vbtn{
+    padding:7px 10px; font-size:11px; font-weight:800; border-radius:8px; cursor:pointer; font-family:inherit;
+    background:var(--bg-soft); border:1px solid var(--border); color:var(--muted);
+  }
+  .vbtn:hover{ border-color:var(--green); color:var(--green); }
+  .vbtn.ok{ border-color:rgba(33,229,139,.6); color:var(--green); cursor:default; }
+  .vbtn.bad{ border-color:rgba(255,77,106,.6); color:var(--red); cursor:default; }
+  .mnote{ margin-top:12px; font-size:11px; color:var(--muted-2); line-height:1.6; }
 
   .footnote{ text-align:center; color:var(--muted-2); font-size:12px; margin-top:22px; line-height:1.6; }
 </style>
@@ -246,10 +371,12 @@
       </div>
     </div>
     <div class="badges">
-      <button class="badge sound" id="sound-toggle" type="button" aria-label="Toggle sound">🔊</button>
-      <span class="badge">Instant pop <b id="b-instant">1.0%</b></span>
       <span class="badge rtp">RTP ≈ <b id="b-rtp">98.0%</b></span>
-      <span class="badge">Edge ≈ <b id="b-edge">2.0%</b></span>
+      <span class="badge">Pop <b id="b-instant">1.0%</b></span>
+      <button class="badge fairbtn" id="fair-open" type="button">🛡 Provably Fair</button>
+      <button class="badge icon" id="music-toggle" type="button" aria-label="Toggle music">🎵</button>
+      <button class="badge icon" id="sound-toggle" type="button" aria-label="Toggle sound">🔊</button>
+      <span class="balance-pill"><span class="v" id="bal-wrap"><span id="balance">1,000</span></span><span class="pts">pts</span></span>
     </div>
   </div>
 
@@ -258,117 +385,220 @@
     <span class="lbl">Past&nbsp;rounds</span>
   </div>
 
-  <!-- ===== Main ===== -->
-  <div class="main">
+  <!-- ===== Main layout ===== -->
+  <div class="layout">
 
-    <!-- Stage -->
-    <div class="stage" id="stage">
-      <canvas id="game-canvas"></canvas>
-      <div class="overlay">
-        <div id="mult">1.00x</div>
-        <div id="status">Waiting for next round…</div>
+    <!-- Sidebar: live bets / my bets / top -->
+    <div class="sidebar">
+      <div class="tabs">
+        <button class="tabbtn on" data-tab="all" type="button">All Bets</button>
+        <button class="tabbtn" data-tab="my" type="button">My Bets</button>
+        <button class="tabbtn" data-tab="top" type="button">Top</button>
       </div>
-      <div class="flash" id="flash"></div>
-      <div class="cd-track"><div class="cd-fill" id="cd-fill"></div></div>
+      <div class="feedhead"><span id="feed-title">This round</span><span id="feed-count">—</span></div>
+      <div class="feed" id="feed"></div>
     </div>
 
-    <!-- Controls -->
+    <!-- Center: stage + bet slots -->
+    <div class="centercol">
+      <div class="stage" id="stage">
+        <canvas id="game-canvas"></canvas>
+        <span class="chip" id="players-chip">👥 <b>0</b> bets · <b>0</b> pts</span>
+        <span class="chip" id="round-chip">Round <b>#0</b></span>
+        <div class="overlay">
+          <div id="mult">1.00x</div>
+          <div id="status">Waiting for next round…</div>
+          <div id="fair-chip">fairness hash: —</div>
+        </div>
+        <div class="flash" id="flash"></div>
+        <div class="cd-track"><div class="cd-fill" id="cd-fill"></div></div>
+      </div>
+
+      <div class="bslots">
+        <!-- Bet slot 1 -->
+        <div class="bslot">
+          <div class="bs-head"><span class="bs-title">Bet 1</span><span class="bs-key">Space</span></div>
+          <div class="brow">
+            <div class="field">
+              <label for="stake-0">Lock points</label>
+              <div class="input"><input id="stake-0" type="number" inputmode="numeric" min="1" step="10" value="100" /><span class="suffix">pts</span></div>
+            </div>
+            <div class="field">
+              <label for="autocash-0">Auto-secure at <span style="color:var(--muted-2)">(blank = manual)</span></label>
+              <div class="input"><input id="autocash-0" type="number" inputmode="decimal" min="1.01" step="0.01" value="2.00" /><span class="suffix">x</span></div>
+            </div>
+          </div>
+          <div class="quick">
+            <button type="button" data-slot="0" data-bet="half">½</button>
+            <button type="button" data-slot="0" data-bet="double">2×</button>
+            <button type="button" data-slot="0" data-bet="100">+100</button>
+            <button type="button" data-slot="0" data-bet="max">Max</button>
+          </div>
+          <div class="checkrow" style="margin-top:10px;">
+            <input type="checkbox" id="autobet-0" />
+            <label for="autobet-0">Auto-bet — re-lock each round</label>
+          </div>
+          <details class="adv">
+            <summary>Auto-play limits</summary>
+            <div class="brow">
+              <div class="field">
+                <label for="rounds-0">Rounds (blank = ∞)</label>
+                <div class="input sm"><input id="rounds-0" type="number" inputmode="numeric" min="1" step="1" placeholder="∞" /></div>
+              </div>
+              <div class="field">
+                <label for="stopw-0">Stop on +profit ≥</label>
+                <div class="input sm"><input id="stopw-0" type="number" inputmode="numeric" min="1" step="50" placeholder="off" /><span class="suffix">pts</span></div>
+              </div>
+            </div>
+            <div class="brow">
+              <div class="field">
+                <label for="stopl-0">Stop on −loss ≥</label>
+                <div class="input sm"><input id="stopl-0" type="number" inputmode="numeric" min="1" step="50" placeholder="off" /><span class="suffix">pts</span></div>
+              </div>
+              <div></div>
+            </div>
+          </details>
+          <button class="action lock" id="act-0" type="button">BET</button>
+          <div class="slotnote" id="note-0"></div>
+        </div>
+
+        <!-- Bet slot 2 -->
+        <div class="bslot">
+          <div class="bs-head"><span class="bs-title">Bet 2</span><span class="bs-key">B</span></div>
+          <div class="brow">
+            <div class="field">
+              <label for="stake-1">Lock points</label>
+              <div class="input"><input id="stake-1" type="number" inputmode="numeric" min="1" step="10" value="50" /><span class="suffix">pts</span></div>
+            </div>
+            <div class="field">
+              <label for="autocash-1">Auto-secure at <span style="color:var(--muted-2)">(blank = manual)</span></label>
+              <div class="input"><input id="autocash-1" type="number" inputmode="decimal" min="1.01" step="0.01" /><span class="suffix">x</span></div>
+            </div>
+          </div>
+          <div class="quick">
+            <button type="button" data-slot="1" data-bet="half">½</button>
+            <button type="button" data-slot="1" data-bet="double">2×</button>
+            <button type="button" data-slot="1" data-bet="100">+100</button>
+            <button type="button" data-slot="1" data-bet="max">Max</button>
+          </div>
+          <div class="checkrow" style="margin-top:10px;">
+            <input type="checkbox" id="autobet-1" />
+            <label for="autobet-1">Auto-bet — re-lock each round</label>
+          </div>
+          <details class="adv">
+            <summary>Auto-play limits</summary>
+            <div class="brow">
+              <div class="field">
+                <label for="rounds-1">Rounds (blank = ∞)</label>
+                <div class="input sm"><input id="rounds-1" type="number" inputmode="numeric" min="1" step="1" placeholder="∞" /></div>
+              </div>
+              <div class="field">
+                <label for="stopw-1">Stop on +profit ≥</label>
+                <div class="input sm"><input id="stopw-1" type="number" inputmode="numeric" min="1" step="50" placeholder="off" /><span class="suffix">pts</span></div>
+              </div>
+            </div>
+            <div class="brow">
+              <div class="field">
+                <label for="stopl-1">Stop on −loss ≥</label>
+                <div class="input sm"><input id="stopl-1" type="number" inputmode="numeric" min="1" step="50" placeholder="off" /><span class="suffix">pts</span></div>
+              </div>
+              <div></div>
+            </div>
+          </details>
+          <button class="action lock" id="act-1" type="button">BET</button>
+          <div class="slotnote" id="note-1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Bottom: stats + strategy lab ===== -->
+  <div class="bottomgrid">
     <div class="panel">
-      <div class="balance">
-        <span class="k">Balance</span>
-        <span class="v" id="bal-wrap"><span id="balance">1,000</span><span class="pts">pts</span></span>
-      </div>
-      <div class="hr"></div>
-
-      <div class="field">
-        <label for="bet">Lock points</label>
-        <div class="input">
-          <input id="bet" type="number" inputmode="numeric" min="1" step="10" value="100" />
-          <span class="suffix">pts</span>
-        </div>
-        <div class="quick">
-          <button data-bet="half">½</button>
-          <button data-bet="double">2×</button>
-          <button data-bet="100">+100</button>
-          <button data-bet="max">Max</button>
-        </div>
-      </div>
-
-      <div class="field">
-        <label for="auto">Auto-secure at multiplier <span style="color:var(--muted-2)">(blank = manual)</span></label>
-        <div class="input">
-          <input id="auto" type="number" inputmode="decimal" min="1.01" step="0.01" value="2.00" />
-          <span class="suffix">x</span>
-        </div>
-      </div>
-
-      <div class="checkrow">
-        <input type="checkbox" id="autobet" />
-        <label for="autobet">Auto-rebet — <b>re-lock the same stake</b> at the start of each round</label>
-      </div>
-
-      <button class="action lock" id="action">Lock Points</button>
-      <div class="toast" id="toast"></div>
-
-      <div class="hr"></div>
       <div class="stats-title">Session stats <span>· stored locally</span></div>
       <div class="stats">
-        <div class="stat"><span class="sk" title="Rounds where you locked points">Rounds</span><span class="sv" id="st-rounds">0</span></div>
+        <div class="stat"><span class="sk" title="Individual bets settled">Bets</span><span class="sv" id="st-rounds">0</span></div>
         <div class="stat"><span class="sk">Wins</span><span class="sv" id="st-wins">0</span></div>
         <div class="stat"><span class="sk">Win rate</span><span class="sv" id="st-rate">—</span></div>
         <div class="stat"><span class="sk">Best secured</span><span class="sv" id="st-best">—</span></div>
         <div class="stat"><span class="sk">Net P/L</span><span class="sv" id="st-net">0</span></div>
         <div class="stat"><span class="sk">Streak</span><span class="sv" id="st-streak">—</span></div>
       </div>
-
       <div class="meta">
-        <span id="round-info">Round #0</span>
-        <button id="reset">Reset demo</button>
+        <span>Balance, stats &amp; bets persist locally</span>
+        <button id="reset" type="button">Reset demo</button>
       </div>
     </div>
-  </div>
 
-  <!-- ===== Research / strategy lab ===== -->
-  <div class="panel research">
-    <div class="r-top">
-      <div>
-        <div class="r-title">🧪 Strategy Lab — headless simulator</div>
-        <div class="r-sub">
-          Runs the <b>exact same</b> <code>generateCrashPoint()</code> engine N times with a flat-stake,
-          fixed cash-out strategy and reports the realized numbers. Sandbox readout only —
-          your demo balance is never touched.
+    <div class="panel">
+      <div class="r-top">
+        <div>
+          <div class="r-title">🧪 Strategy Lab — headless simulator</div>
+          <div class="r-sub">
+            Runs the <b>exact same</b> crash engine N times with a flat-stake, fixed cash-out strategy
+            and reports the realized numbers. Sandbox readout only — your demo balance is never touched.
+          </div>
+        </div>
+        <div class="r-controls">
+          <div class="field">
+            <label for="sim-n">Rounds (N)</label>
+            <div class="input sm"><input id="sim-n" type="number" inputmode="numeric" min="100" max="1000000" step="1000" value="10000" /></div>
+          </div>
+          <div class="field">
+            <label for="sim-target">Cash-out at</label>
+            <div class="input sm"><input id="sim-target" type="number" inputmode="decimal" min="1.01" step="0.01" value="2.00" /><span class="suffix">x</span></div>
+          </div>
+          <button class="btn-sim" id="sim-run" type="button">Simulate ▸</button>
         </div>
       </div>
-      <div class="r-controls">
-        <div class="field">
-          <label for="sim-n">Rounds (N)</label>
-          <div class="input sm"><input id="sim-n" type="number" inputmode="numeric" min="100" max="1000000" step="1000" value="10000" /></div>
+      <div id="sim-out" hidden>
+        <div class="r-stats">
+          <div class="stat"><span class="sk">Realized RTP</span><span class="sv" id="sim-rtp">—</span></div>
+          <div class="stat"><span class="sk">Reached target</span><span class="sv" id="sim-hit">—</span></div>
+          <div class="stat"><span class="sk">Average crash</span><span class="sv" id="sim-avg">—</span></div>
+          <div class="stat"><span class="sk">Max crash seen</span><span class="sv" id="sim-max">—</span></div>
         </div>
-        <div class="field">
-          <label for="sim-target">Cash-out at</label>
-          <div class="input sm"><input id="sim-target" type="number" inputmode="decimal" min="1.01" step="0.01" value="2.00" /><span class="suffix">x</span></div>
-        </div>
-        <button class="btn-sim" id="sim-run" type="button">Simulate ▸</button>
+        <div class="histo" id="histo"></div>
+        <div class="r-note" id="sim-note"></div>
       </div>
-    </div>
-    <div id="sim-out" hidden>
-      <div class="r-stats">
-        <div class="stat"><span class="sk">Realized RTP</span><span class="sv" id="sim-rtp">—</span></div>
-        <div class="stat"><span class="sk">Reached target</span><span class="sv" id="sim-hit">—</span></div>
-        <div class="stat"><span class="sk">Average crash</span><span class="sv" id="sim-avg">—</span></div>
-        <div class="stat"><span class="sk">Max crash seen</span><span class="sv" id="sim-max">—</span></div>
-      </div>
-      <div class="histo" id="histo"></div>
-      <div class="r-note" id="sim-note"></div>
     </div>
   </div>
 
   <p class="footnote">
     Arcade physics demo for research / game-feel study. Uses <b>virtual demo points</b> with no monetary value —
-    no deposits, withdrawals, payments or real-money mechanics of any kind.<br>
-    The crash multiplier is generated locally with a provably-fair-style formula; tweak <code>CONFIG</code> in the source to study the math.
+    no deposits, withdrawals, payments or real-money mechanics of any kind. Other "players" are simulated bots.<br>
+    Crash multipliers use a commit-reveal provably-fair scheme (SHA-256) you can audit via 🛡 — or in the console via <code>window.__ascent</code>.
   </p>
 </div>
+
+<!-- ===== Provably-fair modal ===== -->
+<div class="modal" id="fair-modal" role="dialog" aria-modal="true" aria-label="Provably fair">
+  <div class="mbox">
+    <div class="mhead">
+      <h2>🛡 Provably Fair</h2>
+      <button class="mclose" id="fair-close" type="button" aria-label="Close">✕</button>
+    </div>
+    <div class="mtext">
+      Before each round, a random <code>server seed</code> is generated and its <code>SHA-256</code> hash is shown
+      on screen — a commitment made <b>before</b> any points are locked. The crash point is then derived as
+      <code>SHA-256(serverSeed : clientSeed : nonce)</code>, mapped through the public RTP formula. After the round,
+      the server seed is revealed so you can recompute everything and confirm the commitment matches —
+      the outcome provably couldn't have been changed after you bet.
+    </div>
+    <div class="seedrow">
+      <div class="input"><input id="seed-input" type="text" maxlength="64" spellcheck="false" /><span class="suffix">client seed</span></div>
+      <button class="btn-mini" id="seed-save" type="button">Save</button>
+    </div>
+    <div class="mnote">Your client seed is mixed into every outcome. Change it any time — it applies from the next round.</div>
+    <div class="mtable" id="fair-rows"></div>
+    <div class="mnote">
+      Demo-grade entropy (<code>crypto.getRandomValues</code>) — a production system would use an audited server-side CSPRNG.
+      Verify recomputes both the commitment hash and the crash point from the revealed seed, entirely in this page.
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
 
 <script>
 "use strict";
@@ -379,7 +609,7 @@
 
    MATH ENGINE
    -----------
-   Each round picks a hidden "crash point" the moment it starts:
+   Each round derives a hidden "crash point" from the provably-fair hash chain:
 
      1) With probability `instantCrashChance` the round instantly pops at 1.00x
         (the classic house-edge "instant crash").
@@ -391,9 +621,15 @@
 
             RTP  ≈ (payoutNumerator / 100) · (1 - instantCrashChance)
 
-        Defaults below give RTP ≈ 0.99 · 0.99 ≈ 98.0%  (house edge ≈ 2.0%).
+        Defaults give RTP ≈ 0.99 · 0.99 ≈ 98.0%  (house edge ≈ 2.0%).
         • For ~99% RTP: payoutNumerator = 100 and instantCrashChance = 0.01
         • For ~97% RTP: keep numerator 99 and set instantCrashChance = 0.02
+
+   PROVABLY FAIR
+   -------------
+   commit  = SHA-256(serverSeed)                      → shown BEFORE betting closes
+   outcome = SHA-256(serverSeed:clientSeed:nonce)     → first 2×48 bits = uniforms
+   reveal  = serverSeed published after the crash     → anyone can recompute both
    ============================================================================ */
   const CONFIG = {
     startingBalance:   1000,
@@ -403,7 +639,10 @@
     growthRate:        0.15,   // exponential growth constant (per second)
     waitMs:            5000,   // countdown between rounds
     crashHoldMs:       3000,   // how long the crash result is shown
-    historyMax:        18      // crashes kept for the ticker
+    historyMax:        18,     // crashes kept for the ticker
+    fairMax:           24,     // fairness rows kept
+    myBetsMax:         40,     // personal bet history rows kept
+    topMax:            12      // leaderboard rows kept
   };
 
   /* ---------- State machine ---------- */
@@ -411,61 +650,157 @@
   const game = {
     phase: PHASE.WAITING,
     balance: CONFIG.startingBalance,
-    bet: 0, hasBet:false, hasCashedOut:false, cashedOutAt:0, autoSecure:0,
-    autoBet:false, lastStake:0,
     multiplier: 1.0, crashPoint: 1.0, elapsed:0,
     roundStart:0, phaseEnd:0, roundNo:0,
     history: [], particles: [], particlesSpawned:false
   };
 
-  /* ---------- DOM ---------- */
-  const $ = (id)=>document.getElementById(id);
-  const canvas=$("game-canvas"), ctx=canvas.getContext("2d");
-  const elMult=$("mult"), elStatus=$("status"), elBalance=$("balance"),
-        elAction=$("action"), elToast=$("toast"), elTicker=$("ticker"),
-        elBet=$("bet"), elAuto=$("auto"), elCd=$("cd-fill"),
-        elFlash=$("flash"), elRound=$("round-info"),
-        elStage=$("stage"), elSound=$("sound-toggle"), elAutoBet=$("autobet"),
-        elBalWrap=$("bal-wrap"), elSimN=$("sim-n"), elSimTarget=$("sim-target");
-
-  /* ---------- Engine ---------- */
-  function generateCrashPoint(){
-    if (Math.random() < CONFIG.instantCrashChance) return 1.00;          // instant pop
-    const E = Math.random() * 100;                                       // [0,100)
-    let crash = CONFIG.payoutNumerator / (100 - E);
-    crash = Math.floor(crash * 100) / 100;                               // truncate 2dp
-    return Math.min(Math.max(crash, 1.01), CONFIG.maxCrashCap);          // non-instant >= 1.01
+  /* ============================================================
+     SHA-256 — pure JS, synchronous, verified against reference
+     vectors. Constants are the standard FIPS-180-4 values
+     (fractional parts of cube/square roots of the first primes).
+     ============================================================ */
+  const SHA_K=[1116352408,1899447441,3049323471,3921009573,961987163,1508970993,2453635748,2870763221,3624381080,310598401,607225278,1426881987,1925078388,2162078206,2614888103,3248222580,3835390401,4022224774,264347078,604807628,770255983,1249150122,1555081692,1996064986,2554220882,2821834349,2952996808,3210313671,3336571891,3584528711,113926993,338241895,666307205,773529912,1294757372,1396182291,1695183700,1986661051,2177026350,2456956037,2730485921,2820302411,3259730800,3345764771,3516065817,3600352804,4094571909,275423344,430227734,506948616,659060556,883997877,958139571,1322822218,1537002063,1747873779,1955562222,2024104815,2227730452,2361852424,2428436474,2756734187,3204031479,3329325298];
+  const SHA_H=[1779033703,3144134277,1013904242,2773480762,1359893119,2600822924,528734635,1541459225];
+  function sha256hex(msg){
+    const rr=(x,n)=>(x>>>n)|(x<<(32-n));
+    const bytes=[];
+    for(let i=0;i<msg.length;i++){
+      let c=msg.codePointAt(i);
+      if(c>0xFFFF) i++;
+      if(c<0x80) bytes.push(c);
+      else if(c<0x800) bytes.push(0xC0|c>>6,0x80|c&63);
+      else if(c<0x10000) bytes.push(0xE0|c>>12,0x80|c>>6&63,0x80|c&63);
+      else bytes.push(0xF0|c>>18,0x80|c>>12&63,0x80|c>>6&63,0x80|c&63);
+    }
+    const bitLen=bytes.length*8;
+    bytes.push(0x80);
+    while(bytes.length%64!==56) bytes.push(0);
+    for(let i=7;i>=0;i--) bytes.push((bitLen/Math.pow(2,8*i))&0xFF);
+    const h=SHA_H.slice(), w=new Array(64);
+    for(let off=0;off<bytes.length;off+=64){
+      for(let i=0;i<16;i++) w[i]=(bytes[off+4*i]<<24)|(bytes[off+4*i+1]<<16)|(bytes[off+4*i+2]<<8)|bytes[off+4*i+3];
+      for(let i=16;i<64;i++){
+        const s0=rr(w[i-15],7)^rr(w[i-15],18)^(w[i-15]>>>3), s1=rr(w[i-2],17)^rr(w[i-2],19)^(w[i-2]>>>10);
+        w[i]=(w[i-16]+s0+w[i-7]+s1)|0;
+      }
+      let [a,b,c,d,e,f,g,hh]=h;
+      for(let i=0;i<64;i++){
+        const S1=rr(e,6)^rr(e,11)^rr(e,25), ch=(e&f)^(~e&g), t1=(hh+S1+ch+SHA_K[i]+w[i])|0;
+        const S0=rr(a,2)^rr(a,13)^rr(a,22), maj=(a&b)^(a&c)^(b&c), t2=(S0+maj)|0;
+        hh=g;g=f;f=e;e=(d+t1)|0;d=c;c=b;b=a;a=(t1+t2)|0;
+      }
+      h[0]=(h[0]+a)|0;h[1]=(h[1]+b)|0;h[2]=(h[2]+c)|0;h[3]=(h[3]+d)|0;
+      h[4]=(h[4]+e)|0;h[5]=(h[5]+f)|0;h[6]=(h[6]+g)|0;h[7]=(h[7]+hh)|0;
+    }
+    return h.map(x=>(x>>>0).toString(16).padStart(8,"0")).join("");
   }
+
+  /* ---------- Engine (distribution shared by live rounds AND the lab) ---------- */
+  function crashFromUniforms(u1,u2){
+    if(u1<CONFIG.instantCrashChance) return 1.00;                       // instant pop
+    const E=u2*100;                                                     // [0,100)
+    let crash=CONFIG.payoutNumerator/(100-E);
+    crash=Math.floor(crash*100)/100;                                    // truncate 2dp
+    return Math.min(Math.max(crash,1.01),CONFIG.maxCrashCap);           // non-instant >= 1.01
+  }
+  function generateCrashPoint(){ return crashFromUniforms(Math.random(),Math.random()); } // lab sampler
   // multiplier(t) = e^(rate·t)  → exponential, not linear
-  const multAt   = (t)=> Math.exp(CONFIG.growthRate * t);
-  const timeFor  = (m)=> Math.log(m) / CONFIG.growthRate;
+  const multAt  =(t)=>Math.exp(CONFIG.growthRate*t);
+  const timeFor =(m)=>Math.log(m)/CONFIG.growthRate;
 
-  /* ---------- Helpers ---------- */
-  const fmt = (n)=> Math.floor(n).toLocaleString("en-US");
-  function saveBalance(){ try{ localStorage.setItem("ascent_balance", String(game.balance)); }catch(e){} }
-  function loadBalance(){
-    try{ const v=parseInt(localStorage.getItem("ascent_balance"),10);
-         if(Number.isFinite(v) && v>=0) game.balance=v; }catch(e){}
-  }
-  let toastTimer=null;
-  function toast(msg,kind){
-    elToast.textContent=msg; elToast.className="toast show "+(kind||"");
-    clearTimeout(toastTimer); toastTimer=setTimeout(()=>elToast.classList.remove("show"),2600);
+  /* ---------- Storage helpers ---------- */
+  const store={
+    get(k,d){ try{ const v=localStorage.getItem(k); return v===null?d:v; }catch(e){ return d; } },
+    set(k,v){ try{ localStorage.setItem(k,String(v)); }catch(e){} },
+    getJSON(k,d){ try{ const v=JSON.parse(localStorage.getItem(k)||"null"); return v===null?d:v; }catch(e){ return d; } },
+    setJSON(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+  };
+  function randHex(n){
+    try{
+      if(typeof crypto!=="undefined" && crypto.getRandomValues){
+        const b=new Uint8Array(Math.ceil(n/2));
+        crypto.getRandomValues(b);
+        return Array.from(b,x=>x.toString(16).padStart(2,"0")).join("").slice(0,n);
+      }
+    }catch(e){}
+    let s=""; for(let i=0;i<n;i++) s+="0123456789abcdef"[Math.floor(Math.random()*16)];
+    return s;
   }
 
   /* ============================================================
-     SOUND — 100% synthesized via Web Audio API (no audio files).
-     The AudioContext is created lazily and resumed on the first
-     user gesture; every call is guarded so audio can never break
-     the game loop.
+     PROVABLY FAIR — commit/reveal chain
      ============================================================ */
-  const sound = { enabled:true, ctx:null, master:null, riser:null };
-  (function loadSoundPref(){
-    try{ const v=localStorage.getItem("ascent_sound"); if(v!==null) sound.enabled=(v==="1"); }catch(e){}
-  })();
-  function saveSoundPref(){ try{ localStorage.setItem("ascent_sound", sound.enabled?"1":"0"); }catch(e){} }
+  const fair={
+    clientSeed: store.get("ascent_seed","") || randHex(16),
+    nonce: parseInt(store.get("ascent_nonce","0"),10)||0,
+    serverSeed:"", commit:"",
+    rows: store.getJSON("ascent_fair",[]),
+    pending:null,
+    prepare(){
+      this.serverSeed=randHex(32);
+      this.commit=sha256hex(this.serverSeed);
+    },
+    resolve(){
+      // Deterministic outcome from the committed seed — but the server seed is
+      // NOT published yet: revealing it mid-flight would expose the crash point.
+      const h=sha256hex(this.serverSeed+":"+this.clientSeed+":"+this.nonce);
+      const u1=parseInt(h.slice(0,12),16)/0x1000000000000;   // 48-bit uniforms
+      const u2=parseInt(h.slice(12,24),16)/0x1000000000000;
+      const crash=crashFromUniforms(u1,u2);
+      this.pending={n:this.nonce, server:this.serverSeed, commit:this.commit, client:this.clientSeed, crash};
+      this.nonce++; store.set("ascent_nonce",this.nonce);
+      return crash;
+    },
+    reveal(){
+      if(!this.pending) return;
+      this.rows.unshift(this.pending);
+      if(this.rows.length>CONFIG.fairMax) this.rows.length=CONFIG.fairMax;
+      store.setJSON("ascent_fair",this.rows);
+      this.pending=null;
+    },
+    verify(row){
+      const commitOk=sha256hex(row.server)===row.commit;
+      const h=sha256hex(row.server+":"+row.client+":"+row.n);
+      const u1=parseInt(h.slice(0,12),16)/0x1000000000000;
+      const u2=parseInt(h.slice(12,24),16)/0x1000000000000;
+      const crashOk=Math.abs(crashFromUniforms(u1,u2)-row.crash)<1e-9;
+      return commitOk&&crashOk;
+    }
+  };
+  store.set("ascent_seed",fair.clientSeed);
+
+  /* ---------- DOM ---------- */
+  const $=(id)=>document.getElementById(id);
+  const canvas=$("game-canvas"), ctx=canvas.getContext("2d");
+  const elMult=$("mult"), elStatus=$("status"), elBalance=$("balance"), elBalWrap=$("bal-wrap"),
+        elToast=$("toast"), elTicker=$("ticker"), elCd=$("cd-fill"), elFlash=$("flash"),
+        elStage=$("stage"), elSound=$("sound-toggle"), elMusic=$("music-toggle"),
+        elFairChip=$("fair-chip"), elPlayersChip=$("players-chip"), elRoundChip=$("round-chip"),
+        elFeed=$("feed"), elFeedTitle=$("feed-title"), elFeedCount=$("feed-count"),
+        elModal=$("fair-modal"), elFairRows=$("fair-rows"), elSeed=$("seed-input"),
+        elSimN=$("sim-n"), elSimTarget=$("sim-target");
+
+  const fmt=(n)=>Math.floor(n).toLocaleString("en-US");
+  let toastTimer=null;
+  function toast(msg,kind){
+    elToast.textContent=msg; elToast.className="show "+(kind||"");
+    clearTimeout(toastTimer); toastTimer=setTimeout(()=>elToast.classList.remove("show"),2600);
+  }
+  function saveBalance(){ store.set("ascent_balance",game.balance); }
+  function loadBalance(){
+    const v=parseInt(store.get("ascent_balance",""),10);
+    if(Number.isFinite(v)&&v>=0) game.balance=v;
+  }
+
+  /* ============================================================
+     SOUND — 100% synthesized Web Audio (no files). Lazy context,
+     unlocked on first gesture, every call guarded.
+     ============================================================ */
+  const sound={ enabled:store.get("ascent_sound","1")==="1",
+                music:store.get("ascent_music","0")==="1",
+                ctx:null, master:null, riser:null, pad:null };
   function unlockAudio(){
-    if(!sound.enabled) return;
     try{
       if(!sound.ctx){
         const AC=window.AudioContext||window.webkitAudioContext;
@@ -476,23 +811,20 @@
         sound.master.connect(sound.ctx.destination);
       }
       if(sound.ctx.state==="suspended") sound.ctx.resume().catch(()=>{});
+      if(sound.music&&!sound.pad) startPad();
     }catch(e){ sound.ctx=null; sound.master=null; }
   }
-  const audible=()=> !!(sound.enabled && sound.ctx && sound.master && sound.ctx.state==="running");
-
-  // Continuous "engine" tone whose pitch climbs with the multiplier.
+  const audible=()=>!!(sound.enabled&&sound.ctx&&sound.master&&sound.ctx.state==="running");
   function updateRiser(m){
     if(!audible()) return;
     try{
       const c=sound.ctx;
       if(!sound.riser){
         const o=c.createOscillator(), f=c.createBiquadFilter(), g=c.createGain();
-        o.type="sawtooth";
-        f.type="lowpass"; f.frequency.value=1100; f.Q.value=0.7;
+        o.type="sawtooth"; f.type="lowpass"; f.frequency.value=1100; f.Q.value=0.7;
         g.gain.setValueAtTime(0.0001,c.currentTime);
         g.gain.setTargetAtTime(0.05,c.currentTime,0.1);
-        o.connect(f); f.connect(g); g.connect(sound.master);
-        o.start();
+        o.connect(f); f.connect(g); g.connect(sound.master); o.start();
         sound.riser={o,g};
       }
       const freq=Math.min(110*Math.pow(Math.max(m,1),0.65),1700);
@@ -509,7 +841,6 @@
       r.o.stop(t+0.4);
     }catch(e){}
   }
-  // Pleasant little major arpeggio for securing points.
   function playChime(){
     if(!audible()) return;
     try{
@@ -526,14 +857,12 @@
       });
     }catch(e){}
   }
-  // Filtered noise burst + low thump on crash.
   function playExplosion(){
     if(!audible()) return;
     try{
       const c=sound.ctx, t=c.currentTime;
       const len=Math.floor(c.sampleRate*0.5);
-      const buf=c.createBuffer(1,len,c.sampleRate);
-      const d=buf.getChannelData(0);
+      const buf=c.createBuffer(1,len,c.sampleRate), d=buf.getChannelData(0);
       for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,1.8);
       const src=c.createBufferSource(); src.buffer=buf;
       const f=c.createBiquadFilter(); f.type="lowpass";
@@ -542,8 +871,7 @@
       const g=c.createGain();
       g.gain.setValueAtTime(0.5,t);
       g.gain.exponentialRampToValueAtTime(0.0001,t+0.5);
-      src.connect(f); f.connect(g); g.connect(sound.master);
-      src.start(t);
+      src.connect(f); f.connect(g); g.connect(sound.master); src.start(t);
       const o=c.createOscillator(), g2=c.createGain();
       o.type="sine";
       o.frequency.setValueAtTime(120,t);
@@ -554,212 +882,359 @@
       o.start(t); o.stop(t+0.5);
     }catch(e){}
   }
-  // Soft countdown tick (higher pitch on the final second).
   function playTick(final){
     if(!audible()) return;
     try{
       const c=sound.ctx, t=c.currentTime;
       const o=c.createOscillator(), g=c.createGain();
-      o.type="sine"; o.frequency.value= final?1318.5:880;
+      o.type="sine"; o.frequency.value=final?1318.5:880;
       g.gain.setValueAtTime(0.06,t);
       g.gain.exponentialRampToValueAtTime(0.0001,t+0.09);
       o.connect(g); g.connect(sound.master);
       o.start(t); o.stop(t+0.11);
     }catch(e){}
   }
-  function renderSoundBtn(){
-    elSound.textContent=sound.enabled?"🔊":"🔇";
-    elSound.setAttribute("aria-pressed",sound.enabled?"true":"false");
-    elSound.title=sound.enabled?"Sound on — click to mute":"Sound off — click to unmute";
+  // Ambient music pad — two detuned saws through a slowly-breathing lowpass.
+  function startPad(){
+    if(!sound.ctx||!sound.master||sound.pad) return;
+    try{
+      const c=sound.ctx, t=c.currentTime;
+      const o1=c.createOscillator(), o2=c.createOscillator(),
+            f=c.createBiquadFilter(), g=c.createGain(),
+            lfo=c.createOscillator(), lg=c.createGain();
+      o1.type="sawtooth"; o1.frequency.value=55;
+      o2.type="sawtooth"; o2.frequency.value=55*1.007;
+      f.type="lowpass"; f.frequency.value=240; f.Q.value=1.4;
+      lfo.type="sine"; lfo.frequency.value=0.06;
+      lg.gain.value=110;
+      lfo.connect(lg); lg.connect(f.frequency);
+      g.gain.setValueAtTime(0.0001,t);
+      g.gain.setTargetAtTime(0.045,t,2.5);
+      o1.connect(f); o2.connect(f); f.connect(g); g.connect(sound.master);
+      o1.start(); o2.start(); lfo.start();
+      sound.pad={o1,o2,lfo,g};
+    }catch(e){}
   }
-  // Audio unlock on first gesture (browsers require this).
+  function stopPad(){
+    const p=sound.pad; sound.pad=null;
+    if(!p||!sound.ctx) return;
+    try{
+      const t=sound.ctx.currentTime;
+      p.g.gain.setTargetAtTime(0.0001,t,0.4);
+      p.o1.stop(t+2); p.o2.stop(t+2); p.lfo.stop(t+2);
+    }catch(e){}
+  }
+  function renderAudioBtns(){
+    elSound.textContent=sound.enabled?"🔊":"🔇";
+    elSound.classList.toggle("off",!sound.enabled);
+    elSound.title=sound.enabled?"Sound on":"Sound off";
+    elMusic.classList.toggle("off",!sound.music);
+    elMusic.title=sound.music?"Music on":"Music off";
+  }
   document.addEventListener("pointerdown",unlockAudio);
   document.addEventListener("keydown",unlockAudio);
-  // Don't leave the riser droning when the tab is hidden (rAF pauses).
   document.addEventListener("visibilitychange",()=>{ if(document.hidden) stopRiser(); });
 
   /* ============================================================
-     SESSION STATS — persisted locally alongside the balance.
+     SESSION STATS + MY BETS + TOP — persisted locally
      ============================================================ */
-  const stats = { rounds:0, wins:0, best:0, net:0, streak:0 };
-  function loadStats(){
-    try{
-      const s=JSON.parse(localStorage.getItem("ascent_stats")||"null");
-      if(s && typeof s==="object"){
-        for(const k of ["rounds","wins","best","net","streak"]){
-          if(Number.isFinite(s[k])) stats[k]=s[k];
-        }
-      }
-    }catch(e){}
-  }
-  function saveStats(){ try{ localStorage.setItem("ascent_stats", JSON.stringify(stats)); }catch(e){} }
-  function resetStats(){ stats.rounds=0; stats.wins=0; stats.best=0; stats.net=0; stats.streak=0; saveStats(); renderStats(); }
-  function recordWin(mult,profit){
+  const stats={ rounds:0, wins:0, best:0, net:0, streak:0 };
+  (function loadStats(){
+    const s=store.getJSON("ascent_stats",null);
+    if(s&&typeof s==="object")
+      for(const k of ["rounds","wins","best","net","streak"]) if(Number.isFinite(s[k])) stats[k]=s[k];
+  })();
+  const saveStats=()=>store.setJSON("ascent_stats",stats);
+  const myBets=store.getJSON("ascent_mybets",[]);          // {ts, stake, mult|null, win}
+  const topWins=[];                                        // session leaderboard {name, stake, mult, win}
+  function recordWin(slot,mult,profit){
     stats.rounds++; stats.wins++; stats.net+=profit;
     if(mult>stats.best) stats.best=mult;
-    stats.streak = stats.streak>=0 ? stats.streak+1 : 1;
+    stats.streak=stats.streak>=0?stats.streak+1:1;
     saveStats(); renderStats();
+    myBets.unshift({ts:Date.now(), stake:slot.bet, mult, win:slot.bet+profit});
+    if(myBets.length>CONFIG.myBetsMax) myBets.length=CONFIG.myBetsMax;
+    store.setJSON("ascent_mybets",myBets);
+    considerTop("You ("+slot.label+")",slot.bet,mult,slot.bet+profit);
   }
-  function recordLoss(stake){
-    stats.rounds++; stats.net-=stake;
-    stats.streak = stats.streak<=0 ? stats.streak-1 : -1;
+  function recordLoss(slot){
+    stats.rounds++; stats.net-=slot.bet;
+    stats.streak=stats.streak<=0?stats.streak-1:-1;
     saveStats(); renderStats();
+    myBets.unshift({ts:Date.now(), stake:slot.bet, mult:null, win:0});
+    if(myBets.length>CONFIG.myBetsMax) myBets.length=CONFIG.myBetsMax;
+    store.setJSON("ascent_mybets",myBets);
+  }
+  function considerTop(name,stake,mult,win){
+    topWins.push({name,stake,mult,win});
+    topWins.sort((a,b)=>b.mult-a.mult);
+    if(topWins.length>CONFIG.topMax) topWins.length=CONFIG.topMax;
+    if(activeTab==="top") feedDirty=true;
   }
   function renderStats(){
     try{
       $("st-rounds").textContent=String(stats.rounds);
       $("st-wins").textContent=String(stats.wins);
-      $("st-rate").textContent=stats.rounds ? (stats.wins/stats.rounds*100).toFixed(1)+"%" : "—";
-      $("st-best").textContent=stats.best>0 ? stats.best.toFixed(2)+"x" : "—";
+      $("st-rate").textContent=stats.rounds?(stats.wins/stats.rounds*100).toFixed(1)+"%":"—";
+      $("st-best").textContent=stats.best>0?stats.best.toFixed(2)+"x":"—";
       const n=$("st-net"), net=Math.trunc(stats.net);
       n.textContent=(net>0?"+":"")+net.toLocaleString("en-US");
       n.className="sv "+(net>0?"pos":net<0?"neg":"");
       const s=$("st-streak");
-      s.textContent=stats.streak>0 ? stats.streak+"W" : stats.streak<0 ? (-stats.streak)+"L" : "—";
+      s.textContent=stats.streak>0?stats.streak+"W":stats.streak<0?(-stats.streak)+"L":"—";
       s.className="sv "+(stats.streak>0?"pos":stats.streak<0?"neg":"");
     }catch(e){}
   }
 
-  /* ---------- Balance count-up animation ---------- */
-  const balAnim={ active:false, from:0, to:0, start:0, dur:700 };
+  /* ---------- Balance count-up ---------- */
+  const balAnim={active:false,from:0,to:0,start:0,dur:700};
   function animateBalance(from,to){
     balAnim.active=true; balAnim.from=from; balAnim.to=to; balAnim.start=performance.now();
-    try{
-      elBalWrap.classList.remove("bump");
-      void elBalWrap.offsetWidth;
-      elBalWrap.classList.add("bump");
-    }catch(e){}
+    try{ elBalWrap.classList.remove("bump"); void elBalWrap.offsetWidth; elBalWrap.classList.add("bump"); }catch(e){}
   }
   elBalWrap.addEventListener("animationend",()=>elBalWrap.classList.remove("bump"));
   function renderBalance(now){
     if(!balAnim.active) return;
     const k=Math.min((now-balAnim.start)/balAnim.dur,1);
-    const e=1-Math.pow(1-k,3);                       // ease-out cubic
+    const e=1-Math.pow(1-k,3);
     elBalance.textContent=fmt(balAnim.from+(balAnim.to-balAnim.from)*e);
     if(k>=1){ balAnim.active=false; elBalance.textContent=fmt(game.balance); }
   }
 
   /* ---------- Screen shake ---------- */
-  const shake={ until:0, dur:420, mag:9 };
-  function triggerShake(now){ shake.until=now+shake.dur; }
+  const shake={until:0,dur:420,mag:9};
+  const triggerShake=(now)=>{ shake.until=now+shake.dur; };
   function applyShake(now){
     try{
       if(now<shake.until){
         const k=(shake.until-now)/shake.dur, m=shake.mag*k*k;
         elStage.style.transform="translate("+((Math.random()*2-1)*m).toFixed(1)+"px,"+((Math.random()*2-1)*m).toFixed(1)+"px)";
-      } else if(elStage.style.transform){
-        elStage.style.transform="";
-      }
+      } else if(elStage.style.transform){ elStage.style.transform=""; }
     }catch(e){}
   }
 
-  /* ---------- Betting actions ---------- */
-  function clampBet(v){ if(!Number.isFinite(v)) return 0; return Math.max(0, Math.min(Math.floor(v), game.balance)); }
-  function parseAuto(){
-    const v=parseFloat(elAuto.value);
-    return (Number.isFinite(v) && v>=1.01) ? Math.floor(v*100)/100 : 0;   // 0 = manual
+  /* ============================================================
+     BOTS — simulated co-players for the live bet feed.
+     Cosmetic only: they never touch your balance or the RNG.
+     ============================================================ */
+  const BOT_NAMES=["Skyler","NovaRider","Maverick","Luna","Blitz","Orbit","Zephyr","Crusader","PixelPete","Aurora","Rocketman","Stellar","Vortex","Drift","Echo","Falcon","Gizmo","Halo","Ion","Jinx","Komet","Lyra","Meteor","Nimbus","Onyx","Pulsar","Quasar","Raptor","Sputnik","Titan","Umbra","Vega","Warp","Xenon","Yonder","Zen","Apollo","Boost","Comet","Dyno","Ember","Flux","Gravity","Hyper","Infinity","Jet","Kepler","Lift","Mach1","Neon","Orion","Photon","Quark","Rush","Sonic","Thrust","Uplink","Velocity","Wing","Xray","Yaw","Zoom","Astra","Booster","Cosmo","Delta","Eclipse","Fuel","Glide","Horizon","Impulse","Jupiter"];
+  const maskName=(n)=>n.length<=3?n[0]+"***":n.slice(0,2)+"***"+n.slice(-1);
+  let bots=[], botTotals={count:0,staked:0,cashed:0,won:0};
+  function weightedStake(){
+    let s=Math.round((10+Math.pow(Math.random(),2.4)*990)/5)*5;     // mostly small stakes
+    if(Math.random()<0.06) s*=5;                                    // occasional whale
+    return s;
+  }
+  function sampleTarget(){
+    const r=Math.random();
+    let t;
+    if(r<0.55)      t=1.05+Math.random()*1.45;     // most bail early
+    else if(r<0.80) t=2.5+Math.random()*2.5;
+    else if(r<0.93) t=5+Math.random()*10;
+    else            t=15+Math.random()*85;          // a few moonshots
+    return Math.floor(t*100)/100;
+  }
+  function spawnBots(){
+    bots.length=0;
+    const n=25+Math.floor(Math.random()*60);
+    for(let i=0;i<n;i++){
+      bots.push({
+        name:maskName(BOT_NAMES[Math.floor(Math.random()*BOT_NAMES.length)])+Math.floor(Math.random()*99),
+        stake:weightedStake(), target:sampleTarget(),
+        cashed:false, lost:false, win:0
+      });
+    }
+    bots.sort((a,b)=>b.stake-a.stake);
+    botTotals={count:n, staked:bots.reduce((s,b)=>s+b.stake,0), cashed:0, won:0};
+    feedDirty=true;
+  }
+  function botsProcess(effMult){
+    let changed=false;
+    for(const b of bots){
+      if(!b.cashed&&!b.lost&&b.target<=effMult){
+        b.cashed=true; b.win=Math.floor(b.stake*b.target);
+        botTotals.cashed++; botTotals.won+=b.win;
+        if(b.target>=5) considerTop(b.name,b.stake,b.target,b.win);
+        changed=true;
+      }
+    }
+    if(changed) feedDirty=true;
+  }
+  function botsCrash(){
+    for(const b of bots) if(!b.cashed) b.lost=true;
+    feedDirty=true;
   }
 
-  function placeBet(amount,isAuto){
-    if(game.phase!==PHASE.WAITING || game.hasBet) return;
-    const amt=clampBet(amount);
-    if(amt<=0){ if(!isAuto) toast("Enter points to lock","warn"); return; }
-    if(amt>game.balance){ if(!isAuto) toast("Not enough points","warn"); return; }
-    balAnim.active=false;
-    game.bet=amt; game.hasBet=true; game.balance-=amt; game.autoSecure=parseAuto();
-    game.lastStake=amt;
-    saveBalance(); updateUI();
-    toast((isAuto?"Auto-locked ":"Locked ")+fmt(amt)+" pts"+(game.autoSecure?(" · auto @ "+game.autoSecure.toFixed(2)+"x"):""),"warn");
+  /* ============================================================
+     BET SLOTS — two independent Aviator-style panels.
+     States: idle → placed/queued → flying → cashed|lost → idle
+     ============================================================ */
+  function makeSlot(i){
+    return {
+      id:i, label:"Bet "+(i+1),
+      state:"idle", bet:0, cashedAt:0, autoCash:0,
+      autoOn:false, autoRoundsLeft:Infinity, autoNet:0, stopW:0, stopL:0,
+      el:{
+        stake:$("stake-"+i), autocash:$("autocash-"+i), act:$("act-"+i), note:$("note-"+i),
+        autobet:$("autobet-"+i), rounds:$("rounds-"+i), stopw:$("stopw-"+i), stopl:$("stopl-"+i)
+      }
+    };
   }
-  function cancelBet(){
-    if(game.phase!==PHASE.WAITING || !game.hasBet) return;
-    balAnim.active=false;
-    game.balance+=game.bet; game.bet=0; game.hasBet=false; saveBalance(); updateUI();
-    toast("Bet cancelled","warn");
+  const slots=[makeSlot(0),makeSlot(1)];
+
+  function note(slot,msg,kind){
+    slot.el.note.textContent=msg||"";
+    slot.el.note.className="slotnote "+(kind||"");
   }
-  function cashOut(multiplier, isAuto){
-    if(!game.hasBet || game.hasCashedOut || game.phase!==PHASE.RUNNING) return;
-    game.hasCashedOut=true; game.cashedOutAt=multiplier;
-    const payout=Math.floor(game.bet*multiplier);
-    const profit=payout-game.bet;
+  function parseStake(slot){
+    const v=parseInt(slot.el.stake.value,10);
+    if(!Number.isFinite(v)) return 0;
+    return Math.max(0,Math.floor(v));
+  }
+  function parseAutoCash(slot){
+    const v=parseFloat(slot.el.autocash.value);
+    return (Number.isFinite(v)&&v>=1.01)?Math.floor(v*100)/100:0;
+  }
+  function placeBet(slot,silent){
+    if(slot.state!=="idle") return;
+    const amt=parseStake(slot);
+    if(amt<=0){ if(!silent) note(slot,"Enter points to lock","lose"); return; }
+    if(amt>game.balance){ if(!silent) note(slot,"Not enough points","lose"); return; }
+    balAnim.active=false;
+    game.balance-=amt; saveBalance();
+    slot.bet=amt; slot.autoCash=parseAutoCash(slot);
+    slot.state=(game.phase===PHASE.WAITING)?"placed":"queued";
+    note(slot, slot.state==="queued"?"Queued for next round":"Locked — riding next launch",
+         "");
+    feedDirty=true; updateUI();
+  }
+  function cancelBet(slot){
+    if(slot.state!=="placed"&&slot.state!=="queued") return;
+    balAnim.active=false;
+    game.balance+=slot.bet; saveBalance();
+    slot.bet=0; slot.state="idle";
+    note(slot,"Cancelled","");
+    feedDirty=true; updateUI();
+  }
+  function cashOut(slot,mult,isAuto){
+    if(slot.state!=="flying"||game.phase!==PHASE.RUNNING) return;
+    slot.state="cashed"; slot.cashedAt=mult;
+    const payout=Math.floor(slot.bet*mult), profit=payout-slot.bet;
     const before=game.balance;
     game.balance+=payout; saveBalance();
-    recordWin(multiplier,profit);
+    slot.autoNet+=profit;
+    recordWin(slot,mult,profit);
     stopRiser(); playChime();
     animateBalance(before,game.balance);
     elMult.classList.add("win");
-    toast((isAuto?"Auto-secured":"Secured")+" @ "+multiplier.toFixed(2)+"x · +"+fmt(profit)+" pts","win");
-    updateUI();
+    note(slot,(isAuto?"Auto-secured":"Secured")+" @ "+mult.toFixed(2)+"x · +"+fmt(profit)+" pts","win");
+    toast(slot.label+" "+(isAuto?"auto-secured":"secured")+" @ "+mult.toFixed(2)+"x · +"+fmt(profit)+" pts","win");
+    feedDirty=true; updateUI();
   }
-  function onAction(){
-    if(game.phase===PHASE.WAITING){ game.hasBet ? cancelBet() : placeBet(parseInt(elBet.value,10),false); }
-    else if(game.phase===PHASE.RUNNING && game.hasBet && !game.hasCashedOut){ cashOut(game.multiplier,false); }
+  function slotPrimary(slot){
+    if(slot.state==="flying"){ cashOut(slot,Math.min(game.multiplier,game.crashPoint),false); return; }
+    if(slot.state==="placed"||slot.state==="queued"){ cancelBet(slot); return; }
+    if(slot.state==="idle") placeBet(slot,false);
   }
-  // Auto-rebet: re-lock the previous stake at the start of the betting window.
-  function tryAutoRebet(){
-    if(game.phase!==PHASE.WAITING || game.hasBet || !game.autoBet) return;
-    const stake=game.lastStake;
-    if(!(stake>0)) return;
-    if(stake>game.balance){
-      game.autoBet=false; elAutoBet.checked=false;
-      toast("Auto-rebet disabled — balance below stake","lose");
-      return;
+  function settleLoss(slot){
+    slot.autoNet-=slot.bet;
+    recordLoss(slot);
+    note(slot,"Crashed — −"+fmt(slot.bet)+" pts","lose");
+  }
+  function checkAutoStop(slot){
+    if(!slot.autoOn) return;
+    if(Number.isFinite(slot.autoRoundsLeft)){
+      slot.autoRoundsLeft--;
+      if(slot.autoRoundsLeft<=0){ disableAuto(slot,"rounds done"); return; }
     }
-    placeBet(stake,true);
+    if(slot.stopW>0&&slot.autoNet>=slot.stopW){ disableAuto(slot,"profit target hit (+"+fmt(slot.autoNet)+")"); return; }
+    if(slot.stopL>0&&-slot.autoNet>=slot.stopL){ disableAuto(slot,"loss limit hit (−"+fmt(-slot.autoNet)+")"); return; }
+  }
+  function disableAuto(slot,why){
+    slot.autoOn=false; slot.el.autobet.checked=false;
+    toast(slot.label+" auto-bet stopped — "+why,"warn");
+  }
+  function tryAutoBet(slot){
+    if(!slot.autoOn||slot.state!=="idle") return;
+    const amt=parseStake(slot);
+    if(amt<=0||amt>game.balance){ disableAuto(slot,"balance below stake"); return; }
+    placeBet(slot,true);
+    if(slot.state!=="idle") note(slot,"Auto-bet locked "+fmt(amt)+" pts","");
+  }
+  function readAutoConfig(slot){
+    const r=parseInt(slot.el.rounds.value,10);
+    slot.autoRoundsLeft=(Number.isFinite(r)&&r>0)?r:Infinity;
+    const w=parseInt(slot.el.stopw.value,10);
+    slot.stopW=(Number.isFinite(w)&&w>0)?w:0;
+    const l=parseInt(slot.el.stopl.value,10);
+    slot.stopL=(Number.isFinite(l)&&l>0)?l:0;
+    slot.autoNet=0;
   }
 
   /* ---------- Phase transitions ---------- */
+  function enterWaiting(now){
+    game.phase=PHASE.WAITING; game.phaseEnd=now+CONFIG.waitMs;
+    game.multiplier=1.0; game.elapsed=0; cdLastSec=-1;
+    stopRiser();
+    elMult.classList.remove("crash","win","t2","t3","t4");
+    for(const s of slots){
+      if(s.state==="cashed"||s.state==="lost"){ s.state="idle"; s.bet=0; }
+      if(s.state==="queued"){ s.state="placed"; note(s,"Locked — riding next launch",""); }
+      tryAutoBet(s);
+    }
+    fair.prepare();                 // commit BEFORE the betting window
+    spawnBots();
+    updateUI();
+  }
   function startRound(now){
     game.phase=PHASE.RUNNING; game.roundNo++;
-    game.crashPoint=generateCrashPoint();
+    game.crashPoint=fair.resolve();   // deterministic from committed seeds
     game.roundStart=now; game.elapsed=0; game.multiplier=1.0;
-    game.hasCashedOut=false; game.particles.length=0; game.particlesSpawned=false;
-    exhaust.length=0;
+    game.particles.length=0; game.particlesSpawned=false; exhaust.length=0;
+    for(const s of slots) if(s.state==="placed") s.state="flying";
     elMult.classList.remove("crash","win","t2","t3","t4");
-    updateUI();
+    renderFairModal();
+    feedDirty=true; updateUI();
   }
   function crashRound(now){
     game.phase=PHASE.CRASHED; game.phaseEnd=now+CONFIG.crashHoldMs;
     game.multiplier=game.crashPoint; game.elapsed=timeFor(game.crashPoint);
     stopRiser(); playExplosion(); triggerShake(now);
-    // record + render ticker
+    fair.reveal();                  // server seed is published only AFTER the crash
     game.history.unshift(game.crashPoint);
     if(game.history.length>CONFIG.historyMax) game.history.pop();
-    renderTicker();
-    // settle
-    if(game.hasBet && !game.hasCashedOut){
-      recordLoss(game.bet);
-      toast("Crashed @ "+game.crashPoint.toFixed(2)+"x · -"+fmt(game.bet)+" pts","lose");
+    renderTicker(); botsCrash();
+    let lostAny=false;
+    for(const s of slots){
+      if(s.state==="flying"){ s.state="lost"; settleLoss(s); lostAny=true; }
+      if(s.autoOn&&(s.state==="lost"||s.state==="cashed")) checkAutoStop(s);
     }
+    if(lostAny) toast("Crashed @ "+game.crashPoint.toFixed(2)+"x","lose");
     elMult.classList.remove("win","t2","t3","t4"); elMult.classList.add("crash");
     elFlash.classList.remove("go"); void elFlash.offsetWidth; elFlash.classList.add("go");
-    updateUI();
-  }
-  function enterWaiting(now){
-    game.phase=PHASE.WAITING; game.phaseEnd=now+CONFIG.waitMs;
-    game.bet=0; game.hasBet=false; game.hasCashedOut=false; game.cashedOutAt=0;
-    game.multiplier=1.0; game.elapsed=0; cdLastSec=-1;
-    stopRiser();
-    elMult.classList.remove("crash","win","t2","t3","t4");
-    tryAutoRebet();
-    updateUI();
+    renderFairModal();
+    feedDirty=true; updateUI();
   }
 
-  /* ---------- Update ---------- */
+  /* ---------- Per-frame update ---------- */
   function update(now){
     if(game.phase===PHASE.WAITING){
       if(now>=game.phaseEnd) startRound(now);
     } else if(game.phase===PHASE.RUNNING){
       game.elapsed=(now-game.roundStart)/1000;
       game.multiplier=multAt(game.elapsed);
-      if(!game.hasCashedOut) updateRiser(game.multiplier);   // tone stops at cash-out / crash
-      // auto-secure fires only if it would occur before the crash
-      if(game.hasBet && !game.hasCashedOut && game.autoSecure>=1.01 &&
-         game.autoSecure<=game.crashPoint && game.multiplier>=game.autoSecure){
-        cashOut(game.autoSecure,true);
+      const anyFlying=slots.some(s=>s.state==="flying");
+      if(anyFlying) updateRiser(game.multiplier);
+      else if(sound.riser) stopRiser();
+      // process cash-outs against the capped multiplier BEFORE the crash check,
+      // so targets that land exactly on the crash frame still pay correctly
+      const effMult=Math.min(game.multiplier,game.crashPoint);
+      botsProcess(effMult);
+      for(const s of slots){
+        if(s.state==="flying"&&s.autoCash>=1.01&&s.autoCash<=effMult) cashOut(s,s.autoCash,true);
       }
-      if(game.multiplier>=game.crashPoint){ crashRound(now); }
-    } else { // CRASHED
+      if(game.multiplier>=game.crashPoint) crashRound(now);
+    } else {
       if(now>=game.phaseEnd) enterWaiting(now);
     }
   }
@@ -774,53 +1249,39 @@
   }
   window.addEventListener("resize",resize);
 
-  /* --- starfield (parallax, slow drift; accelerates with the multiplier) --- */
+  /* starfield */
   const stars=[];
   function initStars(){
     stars.length=0;
     for(let i=0;i<110;i++){
-      stars.push({
-        x:Math.random(), y:Math.random(),
-        z:0.25+Math.random()*0.75,            // depth → speed + brightness
-        r:0.4+Math.random()*1.3,
-        tw:Math.random()*Math.PI*2,           // twinkle phase
-        ts:0.5+Math.random()*1.5              // twinkle speed
-      });
+      stars.push({x:Math.random(),y:Math.random(),z:0.25+Math.random()*0.75,
+                  r:0.4+Math.random()*1.3,tw:Math.random()*Math.PI*2,ts:0.5+Math.random()*1.5});
     }
   }
   function drawStars(w,h,now,dt){
-    const speed = game.phase===PHASE.RUNNING
-      ? 0.012+Math.min(game.multiplier,25)*0.004
-      : 0.006;                                 // normalized canvas-widths per second
+    const speed=game.phase===PHASE.RUNNING?0.012+Math.min(game.multiplier,25)*0.004:0.006;
     ctx.save();
     for(const s of stars){
       s.x-=speed*s.z*dt;
       if(s.x<0){ s.x+=1; s.y=Math.random(); }
       const a=(0.18+0.5*s.z)*(0.7+0.3*Math.sin(now/1000*s.ts+s.tw));
       ctx.globalAlpha=Math.max(0,Math.min(a*0.55,0.6));
-      ctx.fillStyle= s.z>0.8 ? "#cfd8ff" : "#8a94ad";
+      ctx.fillStyle=s.z>0.8?"#cfd8ff":"#8a94ad";
       const px=s.x*w, py=s.y*h, pr=s.r*(0.6+s.z*0.8);
-      const streak=speed*w*0.06*s.z;           // gentle motion streak at high speed
-      if(streak>2.5){
-        ctx.fillRect(px,py-pr*0.5,streak,pr);
-      } else {
-        ctx.beginPath(); ctx.arc(px,py,pr,0,Math.PI*2); ctx.fill();
-      }
+      const streak=speed*w*0.06*s.z;
+      if(streak>2.5) ctx.fillRect(px,py-pr*0.5,streak,pr);
+      else { ctx.beginPath(); ctx.arc(px,py,pr,0,Math.PI*2); ctx.fill(); }
     }
     ctx.restore();
   }
 
-  /* --- rocket exhaust trail --- */
+  /* exhaust */
   const exhaust=[];
   function spawnExhaust(x,y,ang){
     for(let i=0;i<2;i++){
       const sp=50+Math.random()*70, j=(Math.random()-0.5)*0.9;
-      exhaust.push({
-        x,y,
-        vx:-Math.cos(ang+j)*sp, vy:-Math.sin(ang+j)*sp,
-        life:0.5+Math.random()*0.3, max:0.8,
-        r:1+Math.random()*1.8
-      });
+      exhaust.push({x,y,vx:-Math.cos(ang+j)*sp,vy:-Math.sin(ang+j)*sp,
+                    life:0.5+Math.random()*0.3,max:0.8,r:1+Math.random()*1.8});
     }
     if(exhaust.length>260) exhaust.splice(0,exhaust.length-260);
   }
@@ -833,13 +1294,18 @@
       p.x+=p.vx*dt; p.y+=p.vy*dt; p.vx*=0.985; p.vy*=0.985;
       const k=Math.min(p.life/p.max,1);
       ctx.globalAlpha=k*0.85;
-      ctx.fillStyle= k>0.66 ? "#ffd9a0" : (k>0.33 ? "#b08cff" : "#5a4a9f");
+      ctx.fillStyle=k>0.66?"#ffd9a0":(k>0.33?"#b08cff":"#5a4a9f");
       ctx.beginPath(); ctx.arc(p.x,p.y,p.r*(0.5+k),0,Math.PI*2); ctx.fill();
     }
     ctx.restore();
   }
 
   const PAD={l:14,r:22,t:22,b:18};
+  function niceStep(range,maxTicks){
+    const cands=[0.25,0.5,1,2,5,10,20,50,100,200,500];
+    for(const c of cands) if(range/c<=maxTicks) return c;
+    return 1000;
+  }
   function drawGrid(w,h,mMax){
     ctx.save();
     ctx.strokeStyle="rgba(255,255,255,.045)"; ctx.lineWidth=1;
@@ -857,17 +1323,32 @@
     }
     ctx.restore();
   }
+  function drawAxisDots(w,h,tMax,mMax,X,Y){
+    // Aviator-style sliding axis dots: time along the bottom, multiplier up the left.
+    ctx.save();
+    ctx.fillStyle="rgba(255,255,255,.28)";
+    const tStep=Math.max(1,Math.ceil(tMax/14));
+    for(let t=tStep;t<=tMax;t+=tStep){
+      ctx.beginPath(); ctx.arc(X(t),h-PAD.b+8,1.6,0,Math.PI*2); ctx.fill();
+    }
+    const mStep=niceStep(mMax-1,8);
+    for(let m=1+mStep;m<=mMax;m+=mStep){
+      ctx.beginPath(); ctx.arc(PAD.l-6+2,Y(m),1.6,0,Math.PI*2); ctx.fill();
+    }
+    ctx.restore();
+  }
   function drawCurve(w,h,dt){
     const crashed=game.phase===PHASE.CRASHED;
     const elapsed=Math.max(game.elapsed,0.0001);
     const headM=game.multiplier;
-    const tMax=Math.max(elapsed*1.12,2.2);          // view headroom
+    const tMax=Math.max(elapsed*1.12,2.2);
     const mMax=Math.max(headM*1.18,1.7);
     const plotW=w-PAD.l-PAD.r, plotH=h-PAD.t-PAD.b;
     const X=(t)=>PAD.l+(t/tMax)*plotW;
     const Y=(m)=>PAD.t+plotH-((m-1)/(mMax-1))*plotH;
 
     drawGrid(w,h,mMax);
+    drawAxisDots(w,h,tMax,mMax,X,Y);
 
     const N=130, pts=[];
     for(let i=0;i<=N;i++){ const t=(i/N)*elapsed; pts.push([X(t),Y(multAt(t))]); }
@@ -875,15 +1356,13 @@
     const line=crashed?"#ff4d6a":"#9b6bff";
     const glow=crashed?"rgba(255,77,106,.85)":"rgba(155,107,255,.85)";
 
-    // filled area under curve
     const grad=ctx.createLinearGradient(0,PAD.t,0,h-PAD.b);
-    grad.addColorStop(0, crashed?"rgba(255,77,106,.28)":"rgba(155,107,255,.28)");
+    grad.addColorStop(0,crashed?"rgba(255,77,106,.28)":"rgba(155,107,255,.28)");
     grad.addColorStop(1,"rgba(155,107,255,0)");
     ctx.beginPath(); ctx.moveTo(pts[0][0],h-PAD.b);
     for(const p of pts) ctx.lineTo(p[0],p[1]);
     ctx.lineTo(hx,h-PAD.b); ctx.closePath(); ctx.fillStyle=grad; ctx.fill();
 
-    // glowing stroke
     ctx.save(); ctx.shadowColor=glow; ctx.shadowBlur=18;
     ctx.strokeStyle=line; ctx.lineWidth=3.5; ctx.lineJoin="round"; ctx.lineCap="round";
     ctx.beginPath(); ctx.moveTo(pts[0][0],pts[0][1]);
@@ -893,20 +1372,20 @@
     if(!crashed){
       const dx=pts[N][0]-pts[N-1][0], dy=pts[N][1]-pts[N-1][1];
       const ang=Math.atan2(dy,dx);
-      // exhaust trail streams out behind the rocket
-      spawnExhaust(hx-Math.cos(ang)*16, hy-Math.sin(ang)*16, ang);
+      const bob=Math.sin(elapsed*2.2)*3.5;     // gentle cruise wobble
+      const rx=hx, ry=hy+bob;
+      spawnExhaust(rx-Math.cos(ang)*16,ry-Math.sin(ang)*16,ang);
       drawExhaust(dt);
-      // glowing rocket head
       ctx.save();
-      const g2=ctx.createRadialGradient(hx,hy,0,hx,hy,26);
+      const g2=ctx.createRadialGradient(rx,ry,0,rx,ry,26);
       g2.addColorStop(0,"rgba(255,255,255,.95)"); g2.addColorStop(.4,"rgba(155,107,255,.6)"); g2.addColorStop(1,"rgba(155,107,255,0)");
-      ctx.fillStyle=g2; ctx.beginPath(); ctx.arc(hx,hy,26,0,Math.PI*2); ctx.fill();
-      ctx.translate(hx,hy); ctx.rotate(ang+Math.PI/4);
+      ctx.fillStyle=g2; ctx.beginPath(); ctx.arc(rx,ry,26,0,Math.PI*2); ctx.fill();
+      ctx.translate(rx,ry); ctx.rotate(ang+Math.PI/4);
       ctx.font="28px serif"; ctx.textAlign="center"; ctx.textBaseline="middle";
       ctx.fillText("🚀",0,0);
       ctx.restore();
     } else {
-      drawExhaust(dt);          // let any leftover exhaust fade out
+      drawExhaust(dt);
       drawParticles(hx,hy);
     }
   }
@@ -923,7 +1402,7 @@
       p.x+=p.vx; p.y+=p.vy; p.vy+=0.12; p.vx*=0.98; p.life-=0.018;
       if(p.life<=0) continue;
       ctx.globalAlpha=Math.max(p.life,0);
-      ctx.fillStyle= p.life>0.5? "#ffce4d":"#ff4d6a";
+      ctx.fillStyle=p.life>0.5?"#ffce4d":"#ff4d6a";
       ctx.beginPath(); ctx.arc(p.x,p.y,3*p.life+0.5,0,Math.PI*2); ctx.fill();
     }
     ctx.restore();
@@ -932,45 +1411,61 @@
     const w=canvas.clientWidth, h=canvas.clientHeight;
     ctx.clearRect(0,0,w,h);
     drawStars(w,h,now,dt);
-    if(game.phase===PHASE.RUNNING || game.phase===PHASE.CRASHED) drawCurve(w,h,dt);
-    else { drawGrid(w,h,2.0); }
+    if(game.phase===PHASE.RUNNING||game.phase===PHASE.CRASHED) drawCurve(w,h,dt);
+    else drawGrid(w,h,2.0);
   }
 
   /* ---------- UI sync ---------- */
-  function updateUI(){
-    if(!balAnim.active) elBalance.textContent=fmt(game.balance);
-    elRound.textContent="Round #"+game.roundNo;
-    const waiting=game.phase===PHASE.WAITING;
-    elBet.disabled = !waiting || game.hasBet;
-    elAuto.disabled= !waiting || game.hasBet;
-    document.querySelectorAll(".quick button").forEach(b=>b.disabled=!waiting||game.hasBet);
-
-    if(game.phase===PHASE.WAITING){
-      elAction.disabled=false;
-      if(game.hasBet){ elAction.className="action cancel"; elAction.textContent="Cancel · "+fmt(game.bet)+" pts locked"; }
-      else { elAction.className="action lock"; elAction.textContent="Lock Points"; }
-    } else if(game.phase===PHASE.RUNNING){
-      if(game.hasBet && !game.hasCashedOut){
-        elAction.disabled=false; elAction.className="action secure";
-        elAction.textContent="Secure "+fmt(game.bet*game.multiplier)+" @ "+game.multiplier.toFixed(2)+"x";
-      } else if(game.hasCashedOut){
-        elAction.disabled=true; elAction.className="action done";
-        elAction.textContent="Secured ✓ @ "+game.cashedOutAt.toFixed(2)+"x";
-      } else {
-        elAction.disabled=true; elAction.className="action idle";
-        elAction.textContent="No points locked";
-      }
-    } else { // CRASHED
-      elAction.disabled=true; elAction.className="action idle"; elAction.textContent="Round over";
+  function updateSlotUI(slot){
+    const btn=slot.el.act;
+    const editable=slot.state==="idle";
+    slot.el.stake.disabled=!editable;
+    slot.el.autocash.disabled=!editable;
+    document.querySelectorAll('.quick button[data-slot="'+slot.id+'"]').forEach(b=>b.disabled=!editable);
+    switch(slot.state){
+      case "idle":
+        btn.disabled=false; btn.className="action lock";
+        btn.textContent=(game.phase===PHASE.WAITING?"BET ":"BET (next round) ")+"· "+fmt(parseStake(slot)||0)+" pts";
+        break;
+      case "placed":
+        btn.disabled=false; btn.className="action cancel";
+        btn.textContent="CANCEL · "+fmt(slot.bet)+" pts locked";
+        break;
+      case "queued":
+        btn.disabled=false; btn.className="action cancel";
+        btn.textContent="CANCEL · queued "+fmt(slot.bet)+" pts";
+        break;
+      case "flying":
+        btn.disabled=false; btn.className="action secure";
+        btn.textContent="CASH OUT "+fmt(slot.bet*Math.min(game.multiplier,game.crashPoint))+" pts";
+        break;
+      case "cashed":
+        btn.disabled=true; btn.className="action done";
+        btn.textContent="SECURED ✓ @ "+slot.cashedAt.toFixed(2)+"x";
+        break;
+      case "lost":
+        btn.disabled=true; btn.className="action idle";
+        btn.textContent="CRASHED · −"+fmt(slot.bet)+" pts";
+        break;
     }
   }
-  function pillClass(m){ return m<2 ? "low" : (m<10 ? "mid" : "high"); }
+  function updateUI(){
+    if(!balAnim.active) elBalance.textContent=fmt(game.balance);
+    elRoundChip.innerHTML="Round <b>#"+game.roundNo+"</b>";
+    const myActive=slots.filter(s=>s.state==="placed"||s.state==="queued"||s.state==="flying");
+    const myStaked=myActive.reduce((s,x)=>s+x.bet,0);
+    elPlayersChip.innerHTML="👥 <b>"+(botTotals.count+myActive.length)+"</b> bets · <b>"+fmt(botTotals.staked+myStaked)+"</b> pts";
+    for(const s of slots) updateSlotUI(s);
+  }
+
+  function pillClass(m){ return m<2?"low":(m<10?"mid":"high"); }
   function renderTicker(){
     [...elTicker.querySelectorAll(".pill")].forEach(p=>p.remove());
-    const show=game.history.slice(0,6);   // last 6 (newest first)
-    for(const m of show){
+    for(const m of game.history.slice(0,10)){
       const s=document.createElement("span");
       s.className="pill "+pillClass(m); s.textContent=m.toFixed(2)+"x";
+      s.title="Click for fairness details";
+      s.addEventListener("click",openFair);
       elTicker.appendChild(s);
     }
   }
@@ -986,41 +1481,154 @@
       const sec=Math.ceil(remain/1000);
       if(sec!==cdLastSec){
         cdLastSec=sec;
-        if(sec>0 && sec<=Math.ceil(CONFIG.waitMs/1000)) playTick(sec<=1);
+        if(sec>0&&sec<=Math.ceil(CONFIG.waitMs/1000)) playTick(sec<=1);
       }
       setMultTier(0);
       elMult.textContent=sec+"";
       elStatus.innerHTML="Waiting for next round… <span class='em'>place your points</span>";
+      elFairChip.textContent="fairness hash: "+fair.commit.slice(0,28)+"…";
       elCd.style.width=(100*(1-remain/CONFIG.waitMs)).toFixed(1)+"%";
     } else if(game.phase===PHASE.RUNNING){
       const m=game.multiplier;
-      setMultTier(m>=10?4 : m>=4?3 : m>=2?2 : 0);
+      setMultTier(m>=10?4:m>=4?3:m>=2?2:0);
       elMult.textContent=m.toFixed(2)+"x";
-      elStatus.innerHTML = game.hasCashedOut
-        ? "Secured @ <span class='em'>"+game.cashedOutAt.toFixed(2)+"x</span>"
-        : (game.hasBet ? "In play — <span class='em'>"+fmt(game.bet*game.multiplier)+" pts</span>" : "Round live");
+      const flying=slots.filter(s=>s.state==="flying");
+      elStatus.innerHTML=flying.length
+        ? "In play — <span class='em'>"+fmt(flying.reduce((s,x)=>s+x.bet,0)*m)+" pts riding</span>"
+        : "Round live";
+      elFairChip.textContent="fairness hash: "+(fair.pending?fair.pending.commit.slice(0,28)+"…":"—");
       elCd.style.width="0%";
-    } else { // CRASHED
+    } else {
       setMultTier(0);
       elMult.textContent=game.crashPoint.toFixed(2)+"x";
       elStatus.innerHTML="💥 <span class='em'>CRASHED</span>";
+      elFairChip.textContent="server seed revealed — verify in 🛡 Provably Fair";
       elCd.style.width="0%";
     }
   }
 
-  /* ============================================================
-     STRATEGY LAB — headless Monte-Carlo over the SAME engine.
-     Flat 1-pt stake, fixed cash-out target. Sandbox only:
-     never reads or writes the player's balance or stats.
-     ============================================================ */
+  /* ---------- Live feed (tabs) ---------- */
+  let activeTab="all", feedDirty=true, lastFeedRender=0;
+  function feedRow(cols,cls){
+    const r=document.createElement("div");
+    r.className="frow "+(cls||"");
+    const [n,s,m,wn]=cols;
+    const a=document.createElement("span"); a.className="fn"; a.textContent=n;
+    const b=document.createElement("span"); b.className="fs"; b.textContent=s;
+    const c=document.createElement("span"); c.className="fm"; c.textContent=m;
+    const d=document.createElement("span"); d.className="fw"; d.textContent=wn;
+    r.append(a,b,c,d);
+    return r;
+  }
+  function renderFeed(){
+    const frag=document.createDocumentFragment();
+    frag.appendChild(feedRow(["Player","Stake","Mult","Win"],"head"));
+    if(activeTab==="all"){
+      elFeedTitle.textContent="This round";
+      const myActive=slots.filter(s=>s.state!=="idle");
+      elFeedCount.textContent=(botTotals.count+myActive.length)+" bets";
+      for(const s of myActive){
+        const cls= s.state==="cashed"?"you won": s.state==="lost"?"you lost":"you";
+        frag.appendChild(feedRow([
+          "You · "+s.label, fmt(s.bet),
+          s.state==="cashed"?s.cashedAt.toFixed(2)+"x":(s.state==="lost"?game.crashPoint.toFixed(2)+"x":(s.autoCash?("@"+s.autoCash.toFixed(2)):"—")),
+          s.state==="cashed"?"+"+fmt(Math.floor(s.bet*s.cashedAt)-s.bet):(s.state==="lost"?"−"+fmt(s.bet):"")
+        ],cls));
+      }
+      for(const b of bots){
+        const cls=b.cashed?"won":(b.lost?"lost":"");
+        frag.appendChild(feedRow([
+          b.name, fmt(b.stake),
+          b.cashed?b.target.toFixed(2)+"x":(b.lost?"—":""),
+          b.cashed?"+"+fmt(b.win-b.stake):(b.lost?"−"+fmt(b.stake):"")
+        ],cls));
+      }
+    } else if(activeTab==="my"){
+      elFeedTitle.textContent="Your history";
+      elFeedCount.textContent=myBets.length+" bets";
+      if(!myBets.length){
+        const e=document.createElement("div"); e.className="empty";
+        e.textContent="No bets yet — lock some points to start your history.";
+        frag.appendChild(e);
+      }
+      for(const m of myBets){
+        const t=new Date(m.ts);
+        const hh=String(t.getHours()).padStart(2,"0"), mm=String(t.getMinutes()).padStart(2,"0");
+        frag.appendChild(feedRow([
+          hh+":"+mm, fmt(m.stake),
+          m.mult?m.mult.toFixed(2)+"x":"—",
+          m.mult?"+"+fmt(m.win-m.stake):"−"+fmt(m.stake)
+        ],m.mult?"won":"lost"));
+      }
+    } else {
+      elFeedTitle.textContent="Top multipliers · session";
+      elFeedCount.textContent=topWins.length+" entries";
+      if(!topWins.length){
+        const e=document.createElement("div"); e.className="empty";
+        e.textContent="No big multipliers yet this session. Someone will moon soon…";
+        frag.appendChild(e);
+      }
+      for(const t of topWins){
+        frag.appendChild(feedRow([t.name,fmt(t.stake),t.mult.toFixed(2)+"x","+"+fmt(t.win-t.stake)],
+                                 t.name.startsWith("You")?"you won":"won"));
+      }
+    }
+    elFeed.replaceChildren(frag);
+  }
+
+  /* ---------- Provably-fair modal ---------- */
+  function openFair(){ elModal.classList.add("open"); renderFairModal(); }
+  function closeFair(){ elModal.classList.remove("open"); }
+  function renderFairModal(){
+    if(!elModal.classList.contains("open")) return;
+    const frag=document.createDocumentFragment();
+    const head=document.createElement("div"); head.className="mrow mh";
+    ["Round","Crash","Seeds (commitment → revealed server seed)","Check"].forEach(t=>{
+      const s=document.createElement("span"); s.textContent=t; head.appendChild(s);
+    });
+    frag.appendChild(head);
+    // current (unrevealed) round — in-flight commitment if running, else the next round's
+    const curN=fair.pending?fair.pending.n:fair.nonce;
+    const curCommit=fair.pending?fair.pending.commit:fair.commit;
+    const cur=document.createElement("div"); cur.className="mrow";
+    const c1=document.createElement("span"); c1.className="mono"; c1.textContent="#"+curN;
+    const c2=document.createElement("span"); c2.className="crashv"; c2.textContent="…";
+    const c3=document.createElement("span"); c3.className="mono";
+    c3.innerHTML="<b>"+curCommit+"</b>seed revealed after the crash";
+    const c4=document.createElement("span"); c4.textContent="⏳";
+    cur.append(c1,c2,c3,c4);
+    frag.appendChild(cur);
+    for(const row of fair.rows.slice(0,CONFIG.fairMax)){
+      const r=document.createElement("div"); r.className="mrow";
+      const a=document.createElement("span"); a.className="mono"; a.textContent="#"+row.n;
+      const b=document.createElement("span"); b.className="crashv";
+      b.textContent=row.crash.toFixed(2)+"x";
+      b.style.color=row.crash<2?"#aebbd6":(row.crash<10?"var(--purple)":"var(--gold)");
+      const c=document.createElement("span"); c.className="mono";
+      c.innerHTML="<b>"+row.commit+"</b>"+row.server+" · client "+row.client+" · nonce "+row.n;
+      const d=document.createElement("span");
+      const v=document.createElement("button"); v.type="button"; v.className="vbtn"; v.textContent="Verify";
+      v.addEventListener("click",()=>{
+        const ok=fair.verify(row);
+        v.textContent=ok?"✓ Valid":"✗ FAIL";
+        v.className="vbtn "+(ok?"ok":"bad");
+      });
+      d.appendChild(v);
+      r.append(a,b,c,d);
+      frag.appendChild(r);
+    }
+    elFairRows.replaceChildren(frag);
+  }
+
+  /* ---------- Strategy lab ---------- */
   const SIM_BUCKETS=[
-    {lbl:"1–1.5x", hi:1.5,      cls:"low"},
-    {lbl:"1.5–2x", hi:2,        cls:"low"},
-    {lbl:"2–3x",   hi:3,        cls:"mid"},
-    {lbl:"3–5x",   hi:5,        cls:"mid"},
-    {lbl:"5–10x",  hi:10,       cls:"mid"},
-    {lbl:"10–50x", hi:50,       cls:"high"},
-    {lbl:"50x+",   hi:Infinity, cls:"high"}
+    {lbl:"1–1.5x",hi:1.5,cls:"low"},
+    {lbl:"1.5–2x",hi:2,cls:"low"},
+    {lbl:"2–3x",hi:3,cls:"mid"},
+    {lbl:"3–5x",hi:5,cls:"mid"},
+    {lbl:"5–10x",hi:10,cls:"mid"},
+    {lbl:"10–50x",hi:50,cls:"high"},
+    {lbl:"50x+",hi:Infinity,cls:"high"}
   ];
   function runSimulation(){
     try{
@@ -1032,8 +1640,7 @@
       if(!Number.isFinite(target)||target<1.01) target=2;
       target=Math.floor(target*100)/100;
       elSimTarget.value=target.toFixed(2);
-
-      let ret=0, hits=0, sum=0, max=0;
+      let ret=0,hits=0,sum=0,max=0;
       const counts=new Array(SIM_BUCKETS.length).fill(0);
       for(let i=0;i<N;i++){
         const c=generateCrashPoint();
@@ -1060,10 +1667,10 @@
       const col=document.createElement("div"); col.className="hcol";
       col.title=b.lbl+" — "+c.toLocaleString("en-US")+" rounds ("+pct.toFixed(2)+"%)";
       const hp=document.createElement("div"); hp.className="hpct";
-      hp.textContent= pct>=0.1 ? pct.toFixed(1)+"%" : (c>0 ? "<0.1%" : "");
+      hp.textContent=pct>=0.1?pct.toFixed(1)+"%":(c>0?"<0.1%":"");
       const hw=document.createElement("div"); hw.className="hwrap";
       const bar=document.createElement("div"); bar.className="hbar "+b.cls;
-      bar.style.height=(c>0 ? Math.max(c/maxC*100,2) : 0).toFixed(1)+"%";
+      bar.style.height=(c>0?Math.max(c/maxC*100,2):0).toFixed(1)+"%";
       hw.appendChild(bar);
       const hl=document.createElement("div"); hl.className="hlbl"; hl.textContent=b.lbl;
       col.appendChild(hp); col.appendChild(hw); col.appendChild(hl);
@@ -1082,7 +1689,8 @@
       renderOverlay(now);
       renderBalance(now);
       applyShake(now);
-      if(game.phase===PHASE.RUNNING) updateUI();   // live button/payout
+      if(game.phase===PHASE.RUNNING) updateUI();
+      if(feedDirty&&now-lastFeedRender>150){ feedDirty=false; lastFeedRender=now; renderFeed(); }
     }catch(err){
       if(!loggedErr){ loggedErr=true; try{ console.error("Frame error (loop continues):",err); }catch(e){} }
     }
@@ -1090,55 +1698,97 @@
   }
 
   /* ---------- Wire up ---------- */
-  elAction.addEventListener("click",onAction);
-  document.addEventListener("keydown",(e)=>{ if(e.code==="Space"){ e.preventDefault(); onAction(); } });
-  $("reset").addEventListener("click",()=>{
-    balAnim.active=false;
-    game.balance=CONFIG.startingBalance; saveBalance();
-    resetStats();
-    updateUI(); toast("Demo points & stats reset","warn");
+  slots.forEach(slot=>{
+    slot.el.act.addEventListener("click",()=>slotPrimary(slot));
+    slot.el.autobet.addEventListener("change",()=>{
+      slot.autoOn=slot.el.autobet.checked;
+      if(slot.autoOn){
+        readAutoConfig(slot);
+        toast(slot.label+" auto-bet on"+(Number.isFinite(slot.autoRoundsLeft)?" · "+slot.autoRoundsLeft+" rounds":""),"warn");
+        if(game.phase===PHASE.WAITING) tryAutoBet(slot);
+      } else {
+        toast(slot.label+" auto-bet off","warn");
+      }
+    });
+    slot.el.stake.addEventListener("input",()=>{ if(slot.state==="idle") updateSlotUI(slot); });
   });
   document.querySelectorAll(".quick button").forEach(btn=>{
     btn.addEventListener("click",()=>{
-      let v=parseInt(elBet.value,10)||0; const k=btn.dataset.bet;
+      const slot=slots[parseInt(btn.dataset.slot,10)||0];
+      let v=parseInt(slot.el.stake.value,10)||0;
+      const k=btn.dataset.bet;
       if(k==="half") v=Math.floor(v/2);
       else if(k==="double") v=v*2;
       else if(k==="100") v=v+100;
       else if(k==="max") v=game.balance;
-      elBet.value=Math.max(1,Math.min(v,game.balance));
+      slot.el.stake.value=Math.max(1,Math.min(v,Math.max(game.balance,1)));
+      updateSlotUI(slot);
+    });
+  });
+  document.addEventListener("keydown",(e)=>{
+    if(e.code==="Escape"){ closeFair(); return; }
+    const tag=(e.target&&e.target.tagName)||"";
+    if(tag==="INPUT"||tag==="TEXTAREA") return;
+    if(e.code==="Space"){ e.preventDefault(); slotPrimary(slots[0]); }
+    else if(e.code==="KeyB"){ e.preventDefault(); slotPrimary(slots[1]); }
+  });
+  document.querySelectorAll(".tabbtn").forEach(b=>{
+    b.addEventListener("click",()=>{
+      document.querySelectorAll(".tabbtn").forEach(x=>x.classList.toggle("on",x===b));
+      activeTab=b.dataset.tab; feedDirty=true; renderFeed();
     });
   });
   elSound.addEventListener("click",()=>{
     sound.enabled=!sound.enabled;
-    saveSoundPref(); renderSoundBtn();
+    store.set("ascent_sound",sound.enabled?"1":"0");
+    renderAudioBtns();
     if(!sound.enabled) stopRiser(); else unlockAudio();
   });
-  elAutoBet.addEventListener("change",()=>{
-    game.autoBet=elAutoBet.checked;
-    if(game.autoBet){
-      toast(game.lastStake>0 ? "Auto-rebet on · "+fmt(game.lastStake)+" pts/round"
-                             : "Auto-rebet on — lock points once to set the stake","warn");
-      tryAutoRebet();
-    } else {
-      toast("Auto-rebet off","warn");
-    }
+  elMusic.addEventListener("click",()=>{
+    sound.music=!sound.music;
+    store.set("ascent_music",sound.music?"1":"0");
+    renderAudioBtns();
+    if(sound.music){ unlockAudio(); startPad(); } else stopPad();
+  });
+  $("fair-open").addEventListener("click",openFair);
+  $("fair-close").addEventListener("click",closeFair);
+  elModal.addEventListener("click",(e)=>{ if(e.target===elModal) closeFair(); });
+  $("seed-save").addEventListener("click",()=>{
+    const v=(elSeed.value||"").trim().slice(0,64);
+    if(!v){ toast("Client seed can't be empty","warn"); return; }
+    fair.clientSeed=v; store.set("ascent_seed",v);
+    toast("Client seed saved — applies from the next round","win");
   });
   $("sim-run").addEventListener("click",runSimulation);
+  $("reset").addEventListener("click",()=>{
+    balAnim.active=false;
+    game.balance=CONFIG.startingBalance; saveBalance();
+    stats.rounds=0; stats.wins=0; stats.best=0; stats.net=0; stats.streak=0; saveStats(); renderStats();
+    myBets.length=0; store.setJSON("ascent_mybets",myBets);
+    topWins.length=0;
+    feedDirty=true;
+    updateUI();
+    toast("Demo points, stats & history reset","warn");
+  });
 
   // header math readout
   (function showMath(){
     const rtp=(CONFIG.payoutNumerator/100)*(1-CONFIG.instantCrashChance);
     $("b-instant").textContent=(CONFIG.instantCrashChance*100).toFixed(1)+"%";
     $("b-rtp").textContent=(rtp*100).toFixed(1)+"%";
-    $("b-edge").textContent=((1-rtp)*100).toFixed(1)+"%";
   })();
 
   /* ---------- Boot ---------- */
-  loadBalance(); loadStats(); initStars(); resize();
-  renderSoundBtn(); renderStats();
+  loadBalance(); initStars(); resize();
+  renderAudioBtns(); renderStats();
+  elSeed.value=fair.clientSeed;
+  fair.prepare(); spawnBots();
   game.phase=PHASE.WAITING; game.phaseEnd=performance.now()+CONFIG.waitMs;
-  updateUI(); renderTicker();
+  updateUI(); renderTicker(); renderFeed();
   requestAnimationFrame(loop);
+
+  // Research hook: poke the live state from the console.
+  try{ window.__ascent={CONFIG,game,slots,stats,fair,sha256hex,crashFromUniforms,generateCrashPoint,getBots:()=>bots}; }catch(e){}
 </script>
 </body>
 </html>
