@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vault Run — Heist Crash Simulation (Demo Points)</title>
+<style>
+  /* ============================================================
+     DESIGN TOKENS — midnight heist palette (money green + gold,
+     police red/blue reserved for the bust)
+     ============================================================ */
+  :root{
+    --bg:#08090f;
+    --bg-soft:#0d0f18;
+    --panel:#14171f;
+    --panel-2:#0f1219;
+    --border:#262c3a;
+    --border-soft:#1c212d;
+    --text:#edf1f7;
+    --muted:#929aac;
+    --muted-2:#5b6375;
+    --green:#2ee376;
+    --green-deep:#15a352;
+    --gold:#f5c84b;
+    --gold-deep:#c79a26;
+    --red:#ff4757;
+    --blue:#3aa0ff;
+    --orange:#ff9f43;
+    --shadow:0 18px 50px rgba(0,0,0,.55);
+    --radius:18px;
+    --mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:var(--sans);
+    color:var(--text);
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(245,200,75,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(46,227,118,.10), transparent 55%),
+      var(--bg);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:1280px; margin:0 auto; padding:18px 16px 40px; }
+
+  /* ---------- Header ---------- */
+  .topbar{ display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:14px; flex-wrap:wrap; }
+  .brand{ display:flex; align-items:center; gap:12px; }
+  .logo{
+    width:42px; height:42px; border-radius:12px; display:grid; place-items:center;
+    background:linear-gradient(135deg,var(--gold),var(--green-deep));
+    box-shadow:0 8px 24px rgba(245,200,75,.35); font-size:22px;
+  }
+  .brand h1{ font-size:19px; margin:0; letter-spacing:1.5px; }
+  .brand p{ margin:2px 0 0; font-size:12px; color:var(--muted); }
+  .badges{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .badge{
+    font-size:12px; font-weight:600; padding:7px 12px; border-radius:999px;
+    border:1px solid var(--border); background:var(--panel-2); color:var(--muted);
+  }
+  .badge b{ color:var(--text); font-family:var(--mono); }
+  .badge.rtp{ color:var(--green); border-color:rgba(46,227,118,.3); }
+  button.badge{
+    cursor:pointer; font-family:inherit; line-height:1;
+    transition:border-color .15s ease, transform .08s ease, opacity .15s ease;
+  }
+  button.badge:hover{ border-color:var(--gold); }
+  button.badge:active{ transform:scale(.94); }
+  button.badge.icon{ font-size:15px; padding:6px 11px; }
+  button.badge.icon.off{ opacity:.4; }
+  button.badge.fairbtn{ color:var(--gold); border-color:rgba(245,200,75,.35); font-weight:700; }
+  .balance-pill{
+    display:flex; align-items:baseline; gap:6px; padding:8px 16px; border-radius:12px;
+    background:linear-gradient(180deg,var(--panel),var(--panel-2)); border:1px solid var(--border);
+  }
+  .balance-pill .v{ font-family:var(--mono); font-size:20px; font-weight:800; }
+  .balance-pill .v.bump{ animation:bump .7s ease; }
+  @keyframes bump{
+    0%{ transform:scale(1); }
+    30%{ transform:scale(1.12); color:var(--green); text-shadow:0 0 18px rgba(46,227,118,.55); }
+    100%{ transform:scale(1); }
+  }
+  .balance-pill .pts{ font-size:11px; color:var(--muted); font-weight:700; }
+
+  /* ---------- Previous jobs ticker ---------- */
+  .ticker{
+    display:flex; gap:8px; align-items:center; padding:10px 12px; margin-bottom:14px;
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    border:1px solid var(--border); border-radius:14px; overflow-x:auto; scrollbar-width:none;
+  }
+  .ticker::-webkit-scrollbar{ display:none; }
+  .ticker .lbl{ font-size:11px; text-transform:uppercase; letter-spacing:1.4px; color:var(--muted-2); white-space:nowrap; padding-right:4px; }
+  .pill{
+    font-family:var(--mono); font-size:13px; font-weight:700; padding:6px 12px; border-radius:10px;
+    white-space:nowrap; border:1px solid transparent; animation:pop .35s ease; cursor:pointer;
+  }
+  @keyframes pop{ from{ transform:scale(.7); opacity:0; } to{ transform:scale(1); opacity:1; } }
+  .pill.low{  color:#aebbd6; background:rgba(70,87,125,.22); border-color:rgba(70,87,125,.5); }
+  .pill.mid{  color:#8fe7b1; background:rgba(46,227,118,.12); border-color:rgba(46,227,118,.4); }
+  .pill.high{ color:var(--gold); background:rgba(245,200,75,.12); border-color:rgba(245,200,75,.5); }
+
+  /* ---------- Layout ---------- */
+  .layout{ display:grid; grid-template-columns:300px 1fr; gap:14px; align-items:start; }
+  @media (max-width:1020px){ .layout{ grid-template-columns:1fr; } .sidebar{ order:2; } .centercol{ order:1; } }
+
+  /* ---------- Sidebar: crew feed ---------- */
+  .sidebar{
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow);
+    display:flex; flex-direction:column; overflow:hidden;
+  }
+  .tabs{ display:flex; gap:4px; padding:10px 10px 0; }
+  .tabbtn{
+    flex:1; padding:9px 4px; font-size:12px; font-weight:800; letter-spacing:.3px; color:var(--muted);
+    background:transparent; border:0; border-radius:10px 10px 0 0; cursor:pointer; font-family:inherit;
+    border-bottom:2px solid transparent;
+  }
+  .tabbtn.on{ color:var(--text); border-bottom-color:var(--gold); background:rgba(245,200,75,.07); }
+  .feedhead{
+    display:flex; justify-content:space-between; padding:10px 14px 8px; font-size:11px;
+    color:var(--muted-2); text-transform:uppercase; letter-spacing:1px; font-weight:700;
+    border-bottom:1px solid var(--border-soft);
+  }
+  .feed{ height:548px; overflow-y:auto; scrollbar-width:thin; padding:6px 8px 10px; }
+  @media (max-width:1020px){ .feed{ height:320px; } }
+  .frow{
+    display:grid; grid-template-columns:1.25fr .75fr .6fr .8fr; gap:6px; align-items:center;
+    padding:7px 8px; border-radius:9px; font-size:12px; margin-bottom:2px;
+  }
+  .frow .fn{ color:var(--muted); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .frow .fs,.frow .fm,.frow .fw{ font-family:var(--mono); font-weight:700; text-align:right; white-space:nowrap; }
+  .frow .fm{ color:var(--muted-2); }
+  .frow .fw{ color:var(--muted-2); }
+  .frow.won{ background:rgba(46,227,118,.09); }
+  .frow.won .fm{ color:var(--green); }
+  .frow.won .fw{ color:var(--green); }
+  .frow.lost{ opacity:.4; }
+  .frow.lost .fm{ color:var(--red); }
+  .frow.you{ border:1px solid rgba(245,200,75,.45); background:rgba(245,200,75,.08); }
+  .frow.you .fn{ color:var(--gold); font-weight:800; }
+  .frow.head{ background:none; color:var(--muted-2); font-size:10px; text-transform:uppercase; letter-spacing:.6px; padding:4px 8px; }
+  .frow.head span{ font-family:var(--sans); font-weight:700; }
+  .feed .empty{ color:var(--muted-2); font-size:12px; text-align:center; padding:26px 10px; line-height:1.6; }
+
+  /* ---------- Stage ---------- */
+  .centercol{ display:flex; flex-direction:column; gap:14px; min-width:0; }
+  .stage{
+    position:relative; height:clamp(340px,46vh,520px);
+    background:linear-gradient(180deg,#0c0f17,#07080d);
+    border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+    will-change:transform;
+  }
+  #game-canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .overlay{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none; text-align:center; }
+  #mult{
+    font-family:var(--mono); font-weight:800; font-size:clamp(46px,8vw,96px); line-height:1;
+    letter-spacing:-1px; color:#fff; text-shadow:0 0 28px rgba(255,255,255,.35);
+    transition:color .15s ease;
+  }
+  #mult.t2{ color:var(--green); text-shadow:0 0 30px rgba(46,227,118,.55); }
+  #mult.t3{ color:var(--gold);  text-shadow:0 0 36px rgba(245,200,75,.7), 0 0 80px rgba(245,200,75,.3); }
+  #mult.t4{ color:#7fdcff;      text-shadow:0 0 34px rgba(127,220,255,.8), 0 0 90px rgba(127,220,255,.4); }
+  #mult.win{ color:var(--green); text-shadow:0 0 34px rgba(46,227,118,.55); }
+  #mult.crash{ color:var(--red); text-shadow:0 0 38px rgba(255,71,87,.6); }
+  #status{ margin-top:8px; font-size:14px; letter-spacing:.4px; color:var(--muted); min-height:20px; font-weight:600; }
+  #status .em{ color:var(--text); }
+  #fair-chip{
+    margin-top:9px; font-family:var(--mono); font-size:10px; color:var(--muted-2);
+    background:rgba(255,255,255,.04); border:1px solid var(--border-soft);
+    padding:4px 10px; border-radius:999px; max-width:88%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .chip{
+    position:absolute; font-size:11px; font-weight:700; color:var(--muted);
+    background:rgba(8,10,16,.72); border:1px solid var(--border-soft);
+    padding:6px 11px; border-radius:999px; backdrop-filter:blur(4px); z-index:3;
+  }
+  .chip b{ color:var(--text); font-family:var(--mono); }
+  #players-chip{ top:12px; left:12px; }
+  #round-chip{ top:12px; right:12px; }
+  /* police strobe on bust: alternating red/blue */
+  .flash{ position:absolute; inset:0; opacity:0; pointer-events:none; }
+  .flash.go{ animation:strobe .9s ease; }
+  @keyframes strobe{
+    0%{ background:var(--red); opacity:.34; }
+    20%{ background:var(--blue); opacity:.30; }
+    40%{ background:var(--red); opacity:.26; }
+    60%{ background:var(--blue); opacity:.20; }
+    80%{ background:var(--red); opacity:.12; }
+    100%{ background:var(--blue); opacity:0; }
+  }
+  .cd-track{ position:absolute; left:0; right:0; bottom:0; height:4px; background:rgba(255,255,255,.06); }
+  .cd-fill{ height:100%; width:0%; background:linear-gradient(90deg,var(--gold),var(--green)); transition:width .1s linear; }
+
+  /* ---------- Bet slots ---------- */
+  .bslots{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:760px){ .bslots{ grid-template-columns:1fr; } }
+  .bslot{
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    border:1px solid var(--border); border-radius:var(--radius); padding:14px 14px 12px; box-shadow:var(--shadow);
+  }
+  .bslot .bs-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .bslot .bs-title{ font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted); }
+  .bslot .bs-key{ font-size:10px; color:var(--muted-2); font-family:var(--mono); border:1px solid var(--border-soft); border-radius:6px; padding:2px 7px; }
+  .brow{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .field{ margin-bottom:10px; min-width:0; }
+  .field label{ display:block; font-size:11px; color:var(--muted); margin-bottom:5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .input{
+    display:flex; align-items:center; gap:7px; background:var(--bg-soft);
+    border:1px solid var(--border); border-radius:11px; padding:0 11px;
+  }
+  .input:focus-within{ border-color:var(--gold); box-shadow:0 0 0 3px rgba(245,200,75,.15); }
+  .input input{
+    flex:1; background:transparent; border:0; outline:0; color:var(--text);
+    font-family:var(--mono); font-size:16px; font-weight:700; padding:10px 0; width:100%; min-width:0;
+  }
+  .input .suffix{ color:var(--muted); font-family:var(--mono); font-weight:700; font-size:13px; }
+  .input input:disabled{ opacity:.5; }
+  .input.sm input{ font-size:13px; padding:8px 0; }
+  .quick{ display:flex; gap:5px; margin-top:7px; }
+  .quick button{
+    flex:1; padding:7px 0; font-size:11px; font-weight:700; color:var(--muted);
+    background:var(--bg-soft); border:1px solid var(--border); border-radius:8px; cursor:pointer;
+    transition:.15s; font-family:inherit;
+  }
+  .quick button:hover{ color:var(--text); border-color:var(--gold); }
+  .quick button:disabled{ opacity:.4; cursor:not-allowed; }
+  .checkrow{ display:flex; align-items:center; gap:8px; margin:2px 0 10px; }
+  .checkrow input[type=checkbox]{ width:16px; height:16px; accent-color:var(--gold); cursor:pointer; margin:0; flex:none; }
+  .checkrow label{ margin:0; cursor:pointer; font-size:12px; color:var(--muted); font-weight:600; }
+  details.adv{ margin:0 0 10px; }
+  details.adv summary{
+    cursor:pointer; font-size:11px; color:var(--muted-2); font-weight:700; list-style:none;
+    user-select:none; padding:2px 0;
+  }
+  details.adv summary::before{ content:"▸ "; }
+  details.adv[open] summary::before{ content:"▾ "; }
+  details.adv .brow{ margin-top:8px; }
+  .action{
+    width:100%; padding:15px 10px; border:0; border-radius:13px; cursor:pointer; font-family:inherit;
+    font-size:15px; font-weight:800; letter-spacing:.3px; color:#06140d;
+    transition:transform .08s ease, filter .15s ease, background .2s ease;
+  }
+  .action:active{ transform:translateY(1px) scale(.995); }
+  .action.lock{ background:linear-gradient(135deg,var(--green),var(--green-deep)); box-shadow:0 10px 26px rgba(46,227,118,.3); }
+  .action.cancel{ background:#2a1c20; color:#ff9aa9; box-shadow:none; border:1px solid rgba(255,71,87,.4); }
+  .action.secure{ background:linear-gradient(135deg,var(--gold),#e8a81c); color:#1c1202; box-shadow:0 10px 26px rgba(245,200,75,.4); animation:pulse 1.1s ease infinite; }
+  @keyframes pulse{ 0%,100%{ filter:brightness(1); } 50%{ filter:brightness(1.15); } }
+  .action.done{ background:#15241b; color:var(--green); border:1px solid rgba(46,227,118,.4); }
+  .action.idle{ background:#161a24; color:var(--muted-2); cursor:not-allowed; }
+  .action:disabled{ cursor:not-allowed; animation:none; }
+  .slotnote{ min-height:16px; margin-top:8px; font-size:11px; font-weight:700; text-align:center; color:var(--muted-2); }
+  .slotnote.win{ color:var(--green); }
+  .slotnote.lose{ color:var(--red); }
+
+  /* ---------- Bottom panels ---------- */
+  .bottomgrid{ display:grid; grid-template-columns:1fr 1.4fr; gap:14px; margin-top:14px; align-items:start; }
+  @media (max-width:1020px){ .bottomgrid{ grid-template-columns:1fr; } }
+  .panel{ background:linear-gradient(180deg,var(--panel),var(--panel-2)); border:1px solid var(--border); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); }
+  .stats-title{ font-size:11px; text-transform:uppercase; letter-spacing:1.4px; color:var(--muted-2); margin-bottom:10px; font-weight:700; }
+  .stats-title span{ text-transform:none; letter-spacing:0; font-weight:600; }
+  .stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .stat{ background:var(--bg-soft); border:1px solid var(--border-soft); border-radius:11px; padding:9px 10px; min-width:0; }
+  .stat .sk{ display:block; font-size:10px; text-transform:uppercase; letter-spacing:.8px; color:var(--muted-2); margin-bottom:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .stat .sv{ font-family:var(--mono); font-size:15px; font-weight:800; color:var(--text); }
+  .sv.pos{ color:var(--green); }
+  .sv.neg{ color:var(--red); }
+  .meta{ display:flex; justify-content:space-between; font-size:12px; color:var(--muted-2); margin-top:14px; }
+  .meta button{ background:none; border:0; color:var(--muted); font-size:12px; cursor:pointer; text-decoration:underline; font-family:inherit; }
+  .meta button:hover{ color:var(--text); }
+
+  /* ---------- Strategy lab ---------- */
+  .r-top{ display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; }
+  .r-title{ font-weight:800; font-size:15px; letter-spacing:.3px; }
+  .r-sub{ color:var(--muted); font-size:12px; margin-top:5px; max-width:560px; line-height:1.55; }
+  .r-sub code{ font-family:var(--mono); color:var(--gold); font-size:11px; }
+  .r-controls{ display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap; }
+  .r-controls .field{ margin:0; }
+  .r-controls .input{ width:120px; }
+  .btn-sim{
+    padding:11px 20px; border:0; border-radius:12px; cursor:pointer; font-family:inherit;
+    font-weight:800; font-size:13px; letter-spacing:.3px; color:#1c1202;
+    background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+    box-shadow:0 8px 20px rgba(245,200,75,.3);
+    transition:transform .08s ease, filter .15s ease;
+  }
+  .btn-sim:hover{ filter:brightness(1.1); }
+  .btn-sim:active{ transform:translateY(1px); }
+  .r-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:16px; }
+  @media (max-width:700px){ .r-stats{ grid-template-columns:repeat(2,1fr); } }
+  .histo{
+    display:flex; gap:8px; align-items:stretch; height:128px; margin-top:12px;
+    padding:12px 12px 8px; background:var(--bg-soft); border:1px solid var(--border-soft); border-radius:12px;
+  }
+  .hcol{ flex:1; display:flex; flex-direction:column; min-width:0; }
+  .hpct{ height:14px; font-size:10px; color:var(--muted); text-align:center; font-family:var(--mono); margin-bottom:3px; white-space:nowrap; overflow:hidden; }
+  .hwrap{ flex:1; display:flex; align-items:flex-end; }
+  .hbar{ width:100%; border-radius:5px 5px 2px 2px; }
+  .hbar.low{ background:linear-gradient(180deg,#5b6f9c,#39476b); }
+  .hbar.mid{ background:linear-gradient(180deg,var(--green),var(--green-deep)); }
+  .hbar.high{ background:linear-gradient(180deg,var(--gold),var(--gold-deep)); }
+  .hlbl{ font-size:10px; color:var(--muted-2); text-align:center; margin-top:6px; font-family:var(--mono); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .r-note{ margin-top:10px; font-size:11px; color:var(--muted-2); }
+
+  /* ---------- Toast ---------- */
+  #toast{
+    position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(8px);
+    background:linear-gradient(180deg,var(--panel),var(--panel-2)); border:1px solid var(--border);
+    color:var(--text); font-size:13px; font-weight:700; padding:11px 20px; border-radius:12px;
+    box-shadow:var(--shadow); opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:60;
+    max-width:90vw; text-align:center;
+  }
+  #toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+  #toast.win{ border-color:rgba(46,227,118,.5); color:var(--green); }
+  #toast.lose{ border-color:rgba(255,71,87,.5); color:var(--red); }
+  #toast.warn{ border-color:rgba(245,200,75,.5); color:var(--gold); }
+
+  /* ---------- Provably-fair modal ---------- */
+  .modal{
+    position:fixed; inset:0; background:rgba(4,6,12,.7); backdrop-filter:blur(5px);
+    display:none; align-items:flex-start; justify-content:center; z-index:50; padding:5vh 14px;
+    overflow-y:auto;
+  }
+  .modal.open{ display:flex; }
+  .mbox{
+    width:min(760px,100%); background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px;
+    animation:pop .25s ease;
+  }
+  .mhead{ display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+  .mhead h2{ margin:0; font-size:18px; letter-spacing:.3px; }
+  .mclose{ background:none; border:1px solid var(--border); color:var(--muted); width:32px; height:32px; border-radius:9px; cursor:pointer; font-size:15px; }
+  .mclose:hover{ color:var(--text); border-color:var(--gold); }
+  .mtext{ color:var(--muted); font-size:13px; line-height:1.65; }
+  .mtext code{ font-family:var(--mono); font-size:11px; color:var(--gold); background:rgba(245,200,75,.08); padding:1px 5px; border-radius:5px; }
+  .seedrow{ display:flex; gap:8px; margin:14px 0 4px; align-items:center; }
+  .seedrow .input{ flex:1; }
+  .seedrow .input input{ font-size:13px; padding:10px 0; }
+  .btn-mini{
+    padding:10px 16px; border:0; border-radius:11px; cursor:pointer; font-family:inherit;
+    font-weight:800; font-size:12px; color:#1c1202;
+    background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+  }
+  .btn-mini:hover{ filter:brightness(1.1); }
+  .mtable{ margin-top:14px; border:1px solid var(--border-soft); border-radius:12px; overflow:hidden; }
+  .mrow{
+    display:grid; grid-template-columns:54px 74px 1fr 84px; gap:8px; align-items:center;
+    padding:9px 12px; font-size:11px; border-bottom:1px solid var(--border-soft);
+  }
+  .mrow:last-child{ border-bottom:0; }
+  .mrow.mh{ background:var(--bg-soft); color:var(--muted-2); text-transform:uppercase; letter-spacing:.7px; font-weight:700; font-size:10px; }
+  .mrow .mono{ font-family:var(--mono); color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mrow .mono b{ color:var(--text); display:block; overflow:hidden; text-overflow:ellipsis; }
+  .mrow .crashv{ font-family:var(--mono); font-weight:800; }
+  .vbtn{
+    padding:7px 10px; font-size:11px; font-weight:800; border-radius:8px; cursor:pointer; font-family:inherit;
+    background:var(--bg-soft); border:1px solid var(--border); color:var(--muted);
+  }
+  .vbtn:hover{ border-color:var(--green); color:var(--green); }
+  .vbtn.ok{ border-color:rgba(46,227,118,.6); color:var(--green); cursor:default; }
+  .vbtn.bad{ border-color:rgba(255,71,87,.6); color:var(--red); cursor:default; }
+  .mnote{ margin-top:12px; font-size:11px; color:var(--muted-2); line-height:1.6; }
+
+  .footnote{ text-align:center; color:var(--muted-2); font-size:12px; margin-top:22px; line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===== Header ===== -->
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">💰</div>
+      <div>
+        <h1>VAULT RUN</h1>
+        <p>Heist-style crash simulation · virtual points only</p>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge rtp">RTP ≈ <b id="b-rtp">98.0%</b></span>
+      <span class="badge">Instant bust <b id="b-instant">1.0%</b></span>
+      <button class="badge fairbtn" id="fair-open" type="button">🛡 Provably Fair</button>
+      <button class="badge icon" id="music-toggle" type="button" aria-label="Toggle music">🎵</button>
+      <button class="badge icon" id="sound-toggle" type="button" aria-label="Toggle sound">🔊</button>
+      <span class="balance-pill"><span class="v" id="bal-wrap"><span id="balance">1,000</span></span><span class="pts">pts</span></span>
+    </div>
+  </div>
+
+  <!-- ===== Previous jobs ticker ===== -->
+  <div class="ticker" id="ticker">
+    <span class="lbl">Previous&nbsp;jobs</span>
+  </div>
+
+  <!-- ===== Main layout ===== -->
+  <div class="layout">
+
+    <!-- Sidebar: crew / my jobs / most wanted -->
+    <div class="sidebar">
+      <div class="tabs">
+        <button class="tabbtn on" data-tab="all" type="button">Crew</button>
+        <button class="tabbtn" data-tab="my" type="button">My Jobs</button>
+        <button class="tabbtn" data-tab="top" type="button">Most Wanted</button>
+      </div>
+      <div class="feedhead"><span id="feed-title">This job</span><span id="feed-count">—</span></div>
+      <div class="feed" id="feed"></div>
+    </div>
+
+    <!-- Center: stage + bet slots -->
+    <div class="centercol">
+      <div class="stage" id="stage">
+        <canvas id="game-canvas"></canvas>
+        <span class="chip" id="players-chip">🦹 <b>0</b> in crew · <b>0</b> pts</span>
+        <span class="chip" id="round-chip">Job <b>#0</b></span>
+        <div class="overlay">
+          <div id="mult">1.00x</div>
+          <div id="status">Planning the next job…</div>
+          <div id="fair-chip">fairness hash: —</div>
+        </div>
+        <div class="flash" id="flash"></div>
+        <div class="cd-track"><div class="cd-fill" id="cd-fill"></div></div>
+      </div>
+
+      <div class="bslots">
+        <!-- Bet slot 1 -->
+        <div class="bslot">
+          <div class="bs-head"><span class="bs-title">Cut 1</span><span class="bs-key">Space</span></div>
+          <div class="brow">
+            <div class="field">
+              <label for="stake-0">Stake your cut</label>
+              <div class="input"><input id="stake-0" type="number" inputmode="numeric" min="1" step="10" value="100" /><span class="suffix">pts</span></div>
+            </div>
+            <div class="field">
+              <label for="autocash-0">Auto-getaway at <span style="color:var(--muted-2)">(blank = manual)</span></label>
+              <div class="input"><input id="autocash-0" type="number" inputmode="decimal" min="1.01" step="0.01" value="2.00" /><span class="suffix">x</span></div>
+            </div>
+          </div>
+          <div class="quick">
+            <button type="button" data-slot="0" data-bet="half">½</button>
+            <button type="button" data-slot="0" data-bet="double">2×</button>
+            <button type="button" data-slot="0" data-bet="100">+100</button>
+            <button type="button" data-slot="0" data-bet="max">Max</button>
+          </div>
+          <div class="checkrow" style="margin-top:10px;">
+            <input type="checkbox" id="autobet-0" />
+            <label for="autobet-0">Auto-join — same cut every job</label>
+          </div>
+          <details class="adv">
+            <summary>Auto-play limits</summary>
+            <div class="brow">
+              <div class="field">
+                <label for="rounds-0">Jobs (blank = ∞)</label>
+                <div class="input sm"><input id="rounds-0" type="number" inputmode="numeric" min="1" step="1" placeholder="∞" /></div>
+              </div>
+              <div class="field">
+                <label for="stopw-0">Stop on +profit ≥</label>
+                <div class="input sm"><input id="stopw-0" type="number" inputmode="numeric" min="1" step="50" placeholder="off" /><span class="suffix">pts</span></div>
+              </div>
+            </div>
+            <div class="brow">
+              <div class="field">
+                <label for="stopl-0">Stop on −loss ≥</label>
+                <div class="input sm"><input id="stopl-0" type="number" inputmode="numeric" min="1" step="50" placeholder="off" /><span class="suffix">pts</span></div>
+              </div>
+              <div></div>
+            </div>
+          </details>
+          <button class="action lock" id="act-0" type="button">JOIN HEIST</button>
+          <div class="slotnote" id="note-0"></div>
+        </div>
+
+        <!-- Bet slot 2 -->
+        <div class="bslot">
+          <div class="bs-head"><span class="bs-title">Cut 2</span><span class="bs-key">B</span></div>
+          <div class="brow">
+            <div class="field">
+              <label for="stake-1">Stake your cut</label>
+              <div class="input"><input id="stake-1" type="number" inputmode="numeric" min="1" step="10" value="50" /><span class="suffix">pts</span></div>
+            </div>
+            <div class="field">
+              <label for="autocash-1">Auto-getaway at <span style="color:var(--muted-2)">(blank = manual)</span></label>
+              <div class="input"><input id="autocash-1" type="number" inputmode="decimal" min="1.01" step="0.01" /><span class="suffix">x</span></div>
+            </div>
+          </div>
+          <div class="quick">
+            <button type="button" data-slot="1" data-bet="half">½</button>
+            <button type="button" data-slot="1" data-bet="double">2×</button>
+            <button type="button" data-slot="1" data-bet="100">+100</button>
+            <button type="button" data-slot="1" data-bet="max">Max</button>
+          </div>
+          <div class="checkrow" style="margin-top:10px;">
+            <input type="checkbox" id="autobet-1" />
+            <label for="autobet-1">Auto-join — same cut every job</label>
+          </div>
+          <details class="adv">
+            <summary>Auto-play limits</summary>
+            <div class="brow">
+              <div class="field">
+                <label for="rounds-1">Jobs (blank = ∞)</label>
+                <div class="input sm"><input id="rounds-1" type="number" inputmode="numeric" min="1" step="1" placeholder="∞" /></div>
+              </div>
+              <div class="field">
+                <label for="stopw-1">Stop on +profit ≥</label>
+                <div class="input sm"><input id="stopw-1" type="number" inputmode="numeric" min="1" step="50" placeholder="off" /><span class="suffix">pts</span></div>
+              </div>
+            </div>
+            <div class="brow">
+              <div class="field">
+                <label for="stopl-1">Stop on −loss ≥</label>
+                <div class="input sm"><input id="stopl-1" type="number" inputmode="numeric" min="1" step="50" placeholder="off" /><span class="suffix">pts</span></div>
+              </div>
+              <div></div>
+            </div>
+          </details>
+          <button class="action lock" id="act-1" type="button">JOIN HEIST</button>
+          <div class="slotnote" id="note-1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Bottom: stats + strategy lab ===== -->
+  <div class="bottomgrid">
+    <div class="panel">
+      <div class="stats-title">Rap sheet <span>· stored locally</span></div>
+      <div class="stats">
+        <div class="stat"><span class="sk" title="Individual cuts settled">Jobs</span><span class="sv" id="st-rounds">0</span></div>
+        <div class="stat"><span class="sk">Escapes</span><span class="sv" id="st-wins">0</span></div>
+        <div class="stat"><span class="sk">Escape rate</span><span class="sv" id="st-rate">—</span></div>
+        <div class="stat"><span class="sk">Best getaway</span><span class="sv" id="st-best">—</span></div>
+        <div class="stat"><span class="sk">Net haul</span><span class="sv" id="st-net">0</span></div>
+        <div class="stat"><span class="sk">Streak</span><span class="sv" id="st-streak">—</span></div>
+      </div>
+      <div class="meta">
+        <span>Balance, stats &amp; jobs persist locally</span>
+        <button id="reset" type="button">Reset demo</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="r-top">
+        <div>
+          <div class="r-title">🧪 Heist Planner — headless simulator</div>
+          <div class="r-sub">
+            Runs the <b>exact same</b> bust engine N jobs with a flat-stake, fixed getaway strategy
+            and reports the realized numbers. Sandbox readout only — your demo balance is never touched.
+          </div>
+        </div>
+        <div class="r-controls">
+          <div class="field">
+            <label for="sim-n">Jobs (N)</label>
+            <div class="input sm"><input id="sim-n" type="number" inputmode="numeric" min="100" max="1000000" step="1000" value="10000" /></div>
+          </div>
+          <div class="field">
+            <label for="sim-target">Getaway at</label>
+            <div class="input sm"><input id="sim-target" type="number" inputmode="decimal" min="1.01" step="0.01" value="2.00" /><span class="suffix">x</span></div>
+          </div>
+          <button class="btn-sim" id="sim-run" type="button">Simulate ▸</button>
+        </div>
+      </div>
+      <div id="sim-out" hidden>
+        <div class="r-stats">
+          <div class="stat"><span class="sk">Realized RTP</span><span class="sv" id="sim-rtp">—</span></div>
+          <div class="stat"><span class="sk">Reached target</span><span class="sv" id="sim-hit">—</span></div>
+          <div class="stat"><span class="sk">Average bust</span><span class="sv" id="sim-avg">—</span></div>
+          <div class="stat"><span class="sk">Max bust seen</span><span class="sv" id="sim-max">—</span></div>
+        </div>
+        <div class="histo" id="histo"></div>
+        <div class="r-note" id="sim-note"></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="footnote">
+    Arcade physics demo for research / game-feel study. Uses <b>virtual demo points</b> with no monetary value —
+    no deposits, withdrawals, payments or real-money mechanics of any kind. Crew members are simulated bots.<br>
+    Bust multipliers use a commit-reveal provably-fair scheme (SHA-256) you can audit via 🛡 — or in the console via <code>window.__vault</code>.
+  </p>
+</div>
+
+<!-- ===== Provably-fair modal ===== -->
+<div class="modal" id="fair-modal" role="dialog" aria-modal="true" aria-label="Provably fair">
+  <div class="mbox">
+    <div class="mhead">
+      <h2>🛡 Provably Fair</h2>
+      <button class="mclose" id="fair-close" type="button" aria-label="Close">✕</button>
+    </div>
+    <div class="mtext">
+      Before each job, a random <code>server seed</code> is generated and its <code>SHA-256</code> hash is shown
+      on screen — a commitment made <b>before</b> any points are staked. The bust point is then derived as
+      <code>SHA-256(serverSeed : clientSeed : nonce)</code>, mapped through the public RTP formula. After the job,
+      the server seed is revealed so you can recompute everything and confirm the commitment matches —
+      the outcome provably couldn't have been changed after you joined.
+    </div>
+    <div class="seedrow">
+      <div class="input"><input id="seed-input" type="text" maxlength="64" spellcheck="false" /><span class="suffix">client seed</span></div>
+      <button class="btn-mini" id="seed-save" type="button">Save</button>
+    </div>
+    <div class="mnote">Your client seed is mixed into every outcome. Change it any time — it applies from the next job.</div>
+    <div class="mtable" id="fair-rows"></div>
+    <div class="mnote">
+      Demo-grade entropy (<code>crypto.getRandomValues</code>) — a production system would use an audited server-side CSPRNG.
+      Verify recomputes both the commitment hash and the bust point from the revealed seed, entirely in this page.
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+"use strict";
+/* ============================================================================
+   VAULT RUN — Heist-style crash simulation
+   ----------------------------------------------------------------------------
+   100% client-side. Demo points only. No networking, no money.
+
+   Theme mapping (Aviator-style → heist):
+     plane climbing → robber looting the vault, loot multiplier rising
+     plane flies away / crash → 🚨 BUSTED (cops catch the crew inside)
+     cash out → GETAWAY (escape with stake × current multiplier)
+
+   MATH ENGINE (identical distribution to the rocket build)
+   --------------------------------------------------------
+     1) With probability `instantCrashChance` the job is busted instantly
+        at 1.00x (silent alarm — the classic house-edge "instant pop").
+     2) Otherwise:  bustPoint = payoutNumerator / (100 - E),  E ~ Uniform[0,100)
+            RTP ≈ (payoutNumerator / 100) · (1 - instantCrashChance) ≈ 98.0%
+
+   PROVABLY FAIR
+   -------------
+   commit  = SHA-256(serverSeed)                      → shown BEFORE betting closes
+   outcome = SHA-256(serverSeed:clientSeed:nonce)     → first 2×48 bits = uniforms
+   reveal  = serverSeed published after the bust      → anyone can recompute both
+   ============================================================================ */
+  const CONFIG = {
+    startingBalance:   1000,
+    instantCrashChance:0.01,   // 1% instant bust at 1.00x
+    payoutNumerator:   99,     // numerator in 99/(100-E)
+    maxCrashCap:       1000,   // safety cap on extreme multipliers
+    growthRate:        0.15,   // exponential loot growth (per second)
+    waitMs:            5000,   // planning countdown between jobs
+    crashHoldMs:       3000,   // how long the bust is shown
+    historyMax:        18,
+    fairMax:           24,
+    myBetsMax:         40,
+    topMax:            12
+  };
+
+  const PHASE = { WAITING:"WAITING", RUNNING:"RUNNING", CRASHED:"CRASHED" };
+  const game = {
+    phase: PHASE.WAITING,
+    balance: CONFIG.startingBalance,
+    multiplier: 1.0, crashPoint: 1.0, elapsed:0,
+    roundStart:0, phaseEnd:0, roundNo:0,
+    history: [], particles: [], particlesSpawned:false
+  };
+
+  /* ============================================================
+     SHA-256 — pure JS, synchronous, FIPS-180-4 constants.
+     ============================================================ */
+  const SHA_K=[1116352408,1899447441,3049323471,3921009573,961987163,1508970993,2453635748,2870763221,3624381080,310598401,607225278,1426881987,1925078388,2162078206,2614888103,3248222580,3835390401,4022224774,264347078,604807628,770255983,1249150122,1555081692,1996064986,2554220882,2821834349,2952996808,3210313671,3336571891,3584528711,113926993,338241895,666307205,773529912,1294757372,1396182291,1695183700,1986661051,2177026350,2456956037,2730485921,2820302411,3259730800,3345764771,3516065817,3600352804,4094571909,275423344,430227734,506948616,659060556,883997877,958139571,1322822218,1537002063,1747873779,1955562222,2024104815,2227730452,2361852424,2428436474,2756734187,3204031479,3329325298];
+  const SHA_H=[1779033703,3144134277,1013904242,2773480762,1359893119,2600822924,528734635,1541459225];
+  function sha256hex(msg){
+    const rr=(x,n)=>(x>>>n)|(x<<(32-n));
+    const bytes=[];
+    for(let i=0;i<msg.length;i++){
+      let c=msg.codePointAt(i);
+      if(c>0xFFFF) i++;
+      if(c<0x80) bytes.push(c);
+      else if(c<0x800) bytes.push(0xC0|c>>6,0x80|c&63);
+      else if(c<0x10000) bytes.push(0xE0|c>>12,0x80|c>>6&63,0x80|c&63);
+      else bytes.push(0xF0|c>>18,0x80|c>>12&63,0x80|c>>6&63,0x80|c&63);
+    }
+    const bitLen=bytes.length*8;
+    bytes.push(0x80);
+    while(bytes.length%64!==56) bytes.push(0);
+    for(let i=7;i>=0;i--) bytes.push((bitLen/Math.pow(2,8*i))&0xFF);
+    const h=SHA_H.slice(), w=new Array(64);
+    for(let off=0;off<bytes.length;off+=64){
+      for(let i=0;i<16;i++) w[i]=(bytes[off+4*i]<<24)|(bytes[off+4*i+1]<<16)|(bytes[off+4*i+2]<<8)|bytes[off+4*i+3];
+      for(let i=16;i<64;i++){
+        const s0=rr(w[i-15],7)^rr(w[i-15],18)^(w[i-15]>>>3), s1=rr(w[i-2],17)^rr(w[i-2],19)^(w[i-2]>>>10);
+        w[i]=(w[i-16]+s0+w[i-7]+s1)|0;
+      }
+      let [a,b,c,d,e,f,g,hh]=h;
+      for(let i=0;i<64;i++){
+        const S1=rr(e,6)^rr(e,11)^rr(e,25), ch=(e&f)^(~e&g), t1=(hh+S1+ch+SHA_K[i]+w[i])|0;
+        const S0=rr(a,2)^rr(a,13)^rr(a,22), maj=(a&b)^(a&c)^(b&c), t2=(S0+maj)|0;
+        hh=g;g=f;f=e;e=(d+t1)|0;d=c;c=b;b=a;a=(t1+t2)|0;
+      }
+      h[0]=(h[0]+a)|0;h[1]=(h[1]+b)|0;h[2]=(h[2]+c)|0;h[3]=(h[3]+d)|0;
+      h[4]=(h[4]+e)|0;h[5]=(h[5]+f)|0;h[6]=(h[6]+g)|0;h[7]=(h[7]+hh)|0;
+    }
+    return h.map(x=>(x>>>0).toString(16).padStart(8,"0")).join("");
+  }
+
+  /* ---------- Engine (same distribution for live jobs AND the planner) ---------- */
+  function crashFromUniforms(u1,u2){
+    if(u1<CONFIG.instantCrashChance) return 1.00;
+    const E=u2*100;
+    let crash=CONFIG.payoutNumerator/(100-E);
+    crash=Math.floor(crash*100)/100;
+    return Math.min(Math.max(crash,1.01),CONFIG.maxCrashCap);
+  }
+  function generateCrashPoint(){ return crashFromUniforms(Math.random(),Math.random()); }
+  const multAt  =(t)=>Math.exp(CONFIG.growthRate*t);
+  const timeFor =(m)=>Math.log(m)/CONFIG.growthRate;
+
+  /* ---------- Storage ---------- */
+  const store={
+    get(k,d){ try{ const v=localStorage.getItem(k); return v===null?d:v; }catch(e){ return d; } },
+    set(k,v){ try{ localStorage.setItem(k,String(v)); }catch(e){} },
+    getJSON(k,d){ try{ const v=JSON.parse(localStorage.getItem(k)||"null"); return v===null?d:v; }catch(e){ return d; } },
+    setJSON(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+  };
+  function randHex(n){
+    try{
+      if(typeof crypto!=="undefined" && crypto.getRandomValues){
+        const b=new Uint8Array(Math.ceil(n/2));
+        crypto.getRandomValues(b);
+        return Array.from(b,x=>x.toString(16).padStart(2,"0")).join("").slice(0,n);
+      }
+    }catch(e){}
+    let s=""; for(let i=0;i<n;i++) s+="0123456789abcdef"[Math.floor(Math.random()*16)];
+    return s;
+  }
+
+  /* ============================================================
+     PROVABLY FAIR — commit/reveal chain
+     ============================================================ */
+  const fair={
+    clientSeed: store.get("vault_seed","") || randHex(16),
+    nonce: parseInt(store.get("vault_nonce","0"),10)||0,
+    serverSeed:"", commit:"",
+    rows: store.getJSON("vault_fair",[]),
+    pending:null,
+    prepare(){
+      this.serverSeed=randHex(32);
+      this.commit=sha256hex(this.serverSeed);
+    },
+    resolve(){
+      // Deterministic outcome from the committed seed — NOT published until
+      // after the bust (revealing mid-job would expose the bust point).
+      const h=sha256hex(this.serverSeed+":"+this.clientSeed+":"+this.nonce);
+      const u1=parseInt(h.slice(0,12),16)/0x1000000000000;
+      const u2=parseInt(h.slice(12,24),16)/0x1000000000000;
+      const crash=crashFromUniforms(u1,u2);
+      this.pending={n:this.nonce, server:this.serverSeed, commit:this.commit, client:this.clientSeed, crash};
+      this.nonce++; store.set("vault_nonce",this.nonce);
+      return crash;
+    },
+    reveal(){
+      if(!this.pending) return;
+      this.rows.unshift(this.pending);
+      if(this.rows.length>CONFIG.fairMax) this.rows.length=CONFIG.fairMax;
+      store.setJSON("vault_fair",this.rows);
+      this.pending=null;
+    },
+    verify(row){
+      const commitOk=sha256hex(row.server)===row.commit;
+      const h=sha256hex(row.server+":"+row.client+":"+row.n);
+      const u1=parseInt(h.slice(0,12),16)/0x1000000000000;
+      const u2=parseInt(h.slice(12,24),16)/0x1000000000000;
+      const crashOk=Math.abs(crashFromUniforms(u1,u2)-row.crash)<1e-9;
+      return commitOk&&crashOk;
+    }
+  };
+  store.set("vault_seed",fair.clientSeed);
+
+  /* ---------- DOM ---------- */
+  const $=(id)=>document.getElementById(id);
+  const canvas=$("game-canvas"), ctx=canvas.getContext("2d");
+  const elMult=$("mult"), elStatus=$("status"), elBalance=$("balance"), elBalWrap=$("bal-wrap"),
+        elToast=$("toast"), elTicker=$("ticker"), elCd=$("cd-fill"), elFlash=$("flash"),
+        elStage=$("stage"), elSound=$("sound-toggle"), elMusic=$("music-toggle"),
+        elFairChip=$("fair-chip"), elPlayersChip=$("players-chip"), elRoundChip=$("round-chip"),
+        elFeed=$("feed"), elFeedTitle=$("feed-title"), elFeedCount=$("feed-count"),
+        elModal=$("fair-modal"), elFairRows=$("fair-rows"), elSeed=$("seed-input"),
+        elSimN=$("sim-n"), elSimTarget=$("sim-target");
+
+  const fmt=(n)=>Math.floor(n).toLocaleString("en-US");
+  let toastTimer=null;
+  function toast(msg,kind){
+    elToast.textContent=msg; elToast.className="show "+(kind||"");
+    clearTimeout(toastTimer); toastTimer=setTimeout(()=>elToast.classList.remove("show"),2600);
+  }
+  function saveBalance(){ store.set("vault_balance",game.balance); }
+  function loadBalance(){
+    const v=parseInt(store.get("vault_balance",""),10);
+    if(Number.isFinite(v)&&v>=0) game.balance=v;
+  }
+
+  /* ============================================================
+     SOUND — synthesized Web Audio. Heist kit: tension riser,
+     cash-register getaway, police-siren bust, countdown ticks.
+     ============================================================ */
+  const sound={ enabled:store.get("vault_sound","1")==="1",
+                music:store.get("vault_music","0")==="1",
+                ctx:null, master:null, riser:null, pad:null };
+  function unlockAudio(){
+    try{
+      if(!sound.ctx){
+        const AC=window.AudioContext||window.webkitAudioContext;
+        if(!AC) return;
+        sound.ctx=new AC();
+        sound.master=sound.ctx.createGain();
+        sound.master.gain.value=0.5;
+        sound.master.connect(sound.ctx.destination);
+      }
+      if(sound.ctx.state==="suspended") sound.ctx.resume().catch(()=>{});
+      if(sound.music&&!sound.pad) startPad();
+    }catch(e){ sound.ctx=null; sound.master=null; }
+  }
+  const audible=()=>!!(sound.enabled&&sound.ctx&&sound.master&&sound.ctx.state==="running");
+  function updateRiser(m){
+    if(!audible()) return;
+    try{
+      const c=sound.ctx;
+      if(!sound.riser){
+        const o=c.createOscillator(), f=c.createBiquadFilter(), g=c.createGain();
+        o.type="sawtooth"; f.type="lowpass"; f.frequency.value=900; f.Q.value=0.8;
+        g.gain.setValueAtTime(0.0001,c.currentTime);
+        g.gain.setTargetAtTime(0.045,c.currentTime,0.1);
+        o.connect(f); f.connect(g); g.connect(sound.master); o.start();
+        sound.riser={o,g};
+      }
+      const freq=Math.min(80*Math.pow(Math.max(m,1),0.65),1400);
+      sound.riser.o.frequency.setTargetAtTime(freq,sound.ctx.currentTime,0.06);
+    }catch(e){}
+  }
+  function stopRiser(){
+    const r=sound.riser; sound.riser=null;
+    if(!r||!sound.ctx) return;
+    try{
+      const t=sound.ctx.currentTime;
+      r.g.gain.cancelScheduledValues(t);
+      r.g.gain.setTargetAtTime(0.0001,t,0.05);
+      r.o.stop(t+0.4);
+    }catch(e){}
+  }
+  // Cash-register "cha-ching": bright ding then a coin-drop arpeggio.
+  function playChime(){
+    if(!audible()) return;
+    try{
+      const c=sound.ctx, t=c.currentTime;
+      const ding=c.createOscillator(), dg=c.createGain();
+      ding.type="triangle"; ding.frequency.value=1568;
+      ding.connect(dg); dg.connect(sound.master);
+      dg.gain.setValueAtTime(0.12,t);
+      dg.gain.exponentialRampToValueAtTime(0.0001,t+0.3);
+      ding.start(t); ding.stop(t+0.32);
+      [1046.5,1318.5,1568,2093].forEach((f,i)=>{
+        const o=c.createOscillator(), g=c.createGain();
+        o.type="sine"; o.frequency.value=f;
+        o.connect(g); g.connect(sound.master);
+        const s=t+0.08+i*0.055;
+        g.gain.setValueAtTime(0.0001,s);
+        g.gain.exponentialRampToValueAtTime(0.09,s+0.015);
+        g.gain.exponentialRampToValueAtTime(0.0001,s+0.22);
+        o.start(s); o.stop(s+0.25);
+      });
+    }catch(e){}
+  }
+  // Bust: noise slam + two-tone police siren wail.
+  function playExplosion(){
+    if(!audible()) return;
+    try{
+      const c=sound.ctx, t=c.currentTime;
+      const len=Math.floor(c.sampleRate*0.35);
+      const buf=c.createBuffer(1,len,c.sampleRate), d=buf.getChannelData(0);
+      for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2);
+      const src=c.createBufferSource(); src.buffer=buf;
+      const f=c.createBiquadFilter(); f.type="lowpass";
+      f.frequency.setValueAtTime(1800,t);
+      f.frequency.exponentialRampToValueAtTime(140,t+0.32);
+      const g=c.createGain();
+      g.gain.setValueAtTime(0.45,t);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+0.35);
+      src.connect(f); f.connect(g); g.connect(sound.master); src.start(t);
+      // siren: oscillator alternating between two tones
+      const o=c.createOscillator(), sg=c.createGain();
+      o.type="square";
+      for(let i=0;i<6;i++) o.frequency.setValueAtTime(i%2?660:880,t+0.1+i*0.22);
+      sg.gain.setValueAtTime(0.0001,t);
+      sg.gain.setTargetAtTime(0.05,t+0.08,0.05);
+      sg.gain.setTargetAtTime(0.0001,t+1.15,0.12);
+      o.connect(sg); sg.connect(sound.master);
+      o.start(t+0.08); o.stop(t+1.6);
+    }catch(e){}
+  }
+  function playTick(final){
+    if(!audible()) return;
+    try{
+      const c=sound.ctx, t=c.currentTime;
+      const o=c.createOscillator(), g=c.createGain();
+      o.type="sine"; o.frequency.value=final?1318.5:880;
+      g.gain.setValueAtTime(0.06,t);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+0.09);
+      o.connect(g); g.connect(sound.master);
+      o.start(t); o.stop(t+0.11);
+    }catch(e){}
+  }
+  function startPad(){
+    if(!sound.ctx||!sound.master||sound.pad) return;
+    try{
+      const c=sound.ctx, t=c.currentTime;
+      const o1=c.createOscillator(), o2=c.createOscillator(),
+            f=c.createBiquadFilter(), g=c.createGain(),
+            lfo=c.createOscillator(), lg=c.createGain();
+      o1.type="sawtooth"; o1.frequency.value=49;          // low G — heist tension
+      o2.type="sawtooth"; o2.frequency.value=49*1.007;
+      f.type="lowpass"; f.frequency.value=220; f.Q.value=1.6;
+      lfo.type="sine"; lfo.frequency.value=0.05;
+      lg.gain.value=100;
+      lfo.connect(lg); lg.connect(f.frequency);
+      g.gain.setValueAtTime(0.0001,t);
+      g.gain.setTargetAtTime(0.045,t,2.5);
+      o1.connect(f); o2.connect(f); f.connect(g); g.connect(sound.master);
+      o1.start(); o2.start(); lfo.start();
+      sound.pad={o1,o2,lfo,g};
+    }catch(e){}
+  }
+  function stopPad(){
+    const p=sound.pad; sound.pad=null;
+    if(!p||!sound.ctx) return;
+    try{
+      const t=sound.ctx.currentTime;
+      p.g.gain.setTargetAtTime(0.0001,t,0.4);
+      p.o1.stop(t+2); p.o2.stop(t+2); p.lfo.stop(t+2);
+    }catch(e){}
+  }
+  function renderAudioBtns(){
+    elSound.textContent=sound.enabled?"🔊":"🔇";
+    elSound.classList.toggle("off",!sound.enabled);
+    elSound.title=sound.enabled?"Sound on":"Sound off";
+    elMusic.classList.toggle("off",!sound.music);
+    elMusic.title=sound.music?"Music on":"Music off";
+  }
+  document.addEventListener("pointerdown",unlockAudio);
+  document.addEventListener("keydown",unlockAudio);
+  document.addEventListener("visibilitychange",()=>{ if(document.hidden) stopRiser(); });
+
+  /* ============================================================
+     RAP SHEET (stats) + MY JOBS + MOST WANTED
+     ============================================================ */
+  const stats={ rounds:0, wins:0, best:0, net:0, streak:0 };
+  (function loadStats(){
+    const s=store.getJSON("vault_stats",null);
+    if(s&&typeof s==="object")
+      for(const k of ["rounds","wins","best","net","streak"]) if(Number.isFinite(s[k])) stats[k]=s[k];
+  })();
+  const saveStats=()=>store.setJSON("vault_stats",stats);
+  const myBets=store.getJSON("vault_myjobs",[]);
+  const topWins=[];
+  function recordWin(slot,mult,profit){
+    stats.rounds++; stats.wins++; stats.net+=profit;
+    if(mult>stats.best) stats.best=mult;
+    stats.streak=stats.streak>=0?stats.streak+1:1;
+    saveStats(); renderStats();
+    myBets.unshift({ts:Date.now(), stake:slot.bet, mult, win:slot.bet+profit});
+    if(myBets.length>CONFIG.myBetsMax) myBets.length=CONFIG.myBetsMax;
+    store.setJSON("vault_myjobs",myBets);
+    considerTop("You ("+slot.label+")",slot.bet,mult,slot.bet+profit);
+  }
+  function recordLoss(slot){
+    stats.rounds++; stats.net-=slot.bet;
+    stats.streak=stats.streak<=0?stats.streak-1:-1;
+    saveStats(); renderStats();
+    myBets.unshift({ts:Date.now(), stake:slot.bet, mult:null, win:0});
+    if(myBets.length>CONFIG.myBetsMax) myBets.length=CONFIG.myBetsMax;
+    store.setJSON("vault_myjobs",myBets);
+  }
+  function considerTop(name,stake,mult,win){
+    topWins.push({name,stake,mult,win});
+    topWins.sort((a,b)=>b.mult-a.mult);
+    if(topWins.length>CONFIG.topMax) topWins.length=CONFIG.topMax;
+    if(activeTab==="top") feedDirty=true;
+  }
+  function renderStats(){
+    try{
+      $("st-rounds").textContent=String(stats.rounds);
+      $("st-wins").textContent=String(stats.wins);
+      $("st-rate").textContent=stats.rounds?(stats.wins/stats.rounds*100).toFixed(1)+"%":"—";
+      $("st-best").textContent=stats.best>0?stats.best.toFixed(2)+"x":"—";
+      const n=$("st-net"), net=Math.trunc(stats.net);
+      n.textContent=(net>0?"+":"")+net.toLocaleString("en-US");
+      n.className="sv "+(net>0?"pos":net<0?"neg":"");
+      const s=$("st-streak");
+      s.textContent=stats.streak>0?stats.streak+"W":stats.streak<0?(-stats.streak)+"L":"—";
+      s.className="sv "+(stats.streak>0?"pos":stats.streak<0?"neg":"");
+    }catch(e){}
+  }
+
+  /* ---------- Balance count-up ---------- */
+  const balAnim={active:false,from:0,to:0,start:0,dur:700};
+  function animateBalance(from,to){
+    balAnim.active=true; balAnim.from=from; balAnim.to=to; balAnim.start=performance.now();
+    try{ elBalWrap.classList.remove("bump"); void elBalWrap.offsetWidth; elBalWrap.classList.add("bump"); }catch(e){}
+  }
+  elBalWrap.addEventListener("animationend",()=>elBalWrap.classList.remove("bump"));
+  function renderBalance(now){
+    if(!balAnim.active) return;
+    const k=Math.min((now-balAnim.start)/balAnim.dur,1);
+    const e=1-Math.pow(1-k,3);
+    elBalance.textContent=fmt(balAnim.from+(balAnim.to-balAnim.from)*e);
+    if(k>=1){ balAnim.active=false; elBalance.textContent=fmt(game.balance); }
+  }
+
+  /* ---------- Screen shake ---------- */
+  const shake={until:0,dur:420,mag:9};
+  const triggerShake=(now)=>{ shake.until=now+shake.dur; };
+  function applyShake(now){
+    try{
+      if(now<shake.until){
+        const k=(shake.until-now)/shake.dur, m=shake.mag*k*k;
+        elStage.style.transform="translate("+((Math.random()*2-1)*m).toFixed(1)+"px,"+((Math.random()*2-1)*m).toFixed(1)+"px)";
+      } else if(elStage.style.transform){ elStage.style.transform=""; }
+    }catch(e){}
+  }
+
+  /* ============================================================
+     CREW BOTS — simulated co-players. Cosmetic only.
+     ============================================================ */
+  const BOT_NAMES=["Slick","Vinnie","Mona","Knuckles","Ghost","Wrench","Ace","Smokey","Bonnie","Clyde","Lockpick","Shades","Tiny","Mumbles","Fingers","Duchess","Gator","Hustle","Pockets","Birdie","Switch","Whisper","Dice","Foxy","Gloves","Halftime","Inky","Joker","Kingpin","Lefty","Magpie","Nines","Orchid","Pretzel","Quickstep","Rascal","Sable","Tempo","Undertow","Velvet","Wires","Xeno","Yoyo","Zigzag","Banjo","Chalk","Drifter","Echo","Flint","Grifter","Hawk","Iceman","Jukebox","Klepto","Lurker","Mirage","Nimble","Oddjob","Phantom","Quarry","Rook","Stitch","Trick","Vandal","Wisp","Cipher","Dapper","Ember","Fenix","Gadget","Holdup","Jimmy"];
+  const maskName=(n)=>n.length<=3?n[0]+"***":n.slice(0,2)+"***"+n.slice(-1);
+  let bots=[], botTotals={count:0,staked:0,cashed:0,won:0};
+  function weightedStake(){
+    let s=Math.round((10+Math.pow(Math.random(),2.4)*990)/5)*5;
+    if(Math.random()<0.06) s*=5;
+    return s;
+  }
+  function sampleTarget(){
+    const r=Math.random();
+    let t;
+    if(r<0.55)      t=1.05+Math.random()*1.45;
+    else if(r<0.80) t=2.5+Math.random()*2.5;
+    else if(r<0.93) t=5+Math.random()*10;
+    else            t=15+Math.random()*85;
+    return Math.floor(t*100)/100;
+  }
+  function spawnBots(){
+    bots.length=0;
+    const n=25+Math.floor(Math.random()*60);
+    for(let i=0;i<n;i++){
+      bots.push({
+        name:maskName(BOT_NAMES[Math.floor(Math.random()*BOT_NAMES.length)])+Math.floor(Math.random()*99),
+        stake:weightedStake(), target:sampleTarget(),
+        cashed:false, lost:false, win:0
+      });
+    }
+    bots.sort((a,b)=>b.stake-a.stake);
+    botTotals={count:n, staked:bots.reduce((s,b)=>s+b.stake,0), cashed:0, won:0};
+    feedDirty=true;
+  }
+  function botsProcess(effMult){
+    let changed=false;
+    for(const b of bots){
+      if(!b.cashed&&!b.lost&&b.target<=effMult){
+        b.cashed=true; b.win=Math.floor(b.stake*b.target);
+        botTotals.cashed++; botTotals.won+=b.win;
+        if(b.target>=5) considerTop(b.name,b.stake,b.target,b.win);
+        changed=true;
+      }
+    }
+    if(changed) feedDirty=true;
+  }
+  function botsCrash(){
+    for(const b of bots) if(!b.cashed) b.lost=true;
+    feedDirty=true;
+  }
+
+  /* ============================================================
+     BET SLOTS — two independent cuts.
+     idle → placed/queued → flying → cashed|lost → idle
+     ============================================================ */
+  function makeSlot(i){
+    return {
+      id:i, label:"Cut "+(i+1),
+      state:"idle", bet:0, cashedAt:0, autoCash:0,
+      autoOn:false, autoRoundsLeft:Infinity, autoNet:0, stopW:0, stopL:0,
+      el:{
+        stake:$("stake-"+i), autocash:$("autocash-"+i), act:$("act-"+i), note:$("note-"+i),
+        autobet:$("autobet-"+i), rounds:$("rounds-"+i), stopw:$("stopw-"+i), stopl:$("stopl-"+i)
+      }
+    };
+  }
+  const slots=[makeSlot(0),makeSlot(1)];
+
+  function note(slot,msg,kind){
+    slot.el.note.textContent=msg||"";
+    slot.el.note.className="slotnote "+(kind||"");
+  }
+  function parseStake(slot){
+    const v=parseInt(slot.el.stake.value,10);
+    if(!Number.isFinite(v)) return 0;
+    return Math.max(0,Math.floor(v));
+  }
+  function parseAutoCash(slot){
+    const v=parseFloat(slot.el.autocash.value);
+    return (Number.isFinite(v)&&v>=1.01)?Math.floor(v*100)/100:0;
+  }
+  function placeBet(slot,silent){
+    if(slot.state!=="idle") return;
+    const amt=parseStake(slot);
+    if(amt<=0){ if(!silent) note(slot,"Enter points to stake","lose"); return; }
+    if(amt>game.balance){ if(!silent) note(slot,"Not enough points","lose"); return; }
+    balAnim.active=false;
+    game.balance-=amt; saveBalance();
+    slot.bet=amt; slot.autoCash=parseAutoCash(slot);
+    slot.state=(game.phase===PHASE.WAITING)?"placed":"queued";
+    note(slot, slot.state==="queued"?"Queued for the next job":"In the crew — job starts soon","");
+    feedDirty=true; updateUI();
+  }
+  function cancelBet(slot){
+    if(slot.state!=="placed"&&slot.state!=="queued") return;
+    balAnim.active=false;
+    game.balance+=slot.bet; saveBalance();
+    slot.bet=0; slot.state="idle";
+    note(slot,"Backed out","");
+    feedDirty=true; updateUI();
+  }
+  function cashOut(slot,mult,isAuto){
+    if(slot.state!=="flying"||game.phase!==PHASE.RUNNING) return;
+    slot.state="cashed"; slot.cashedAt=mult;
+    const payout=Math.floor(slot.bet*mult), profit=payout-slot.bet;
+    const before=game.balance;
+    game.balance+=payout; saveBalance();
+    slot.autoNet+=profit;
+    recordWin(slot,mult,profit);
+    stopRiser(); playChime();
+    animateBalance(before,game.balance);
+    spawnGetawayCar();
+    elMult.classList.add("win");
+    note(slot,(isAuto?"Auto-getaway":"Escaped")+" @ "+mult.toFixed(2)+"x · +"+fmt(profit)+" pts","win");
+    toast(slot.label+" "+(isAuto?"auto-getaway":"escaped")+" @ "+mult.toFixed(2)+"x · +"+fmt(profit)+" pts","win");
+    feedDirty=true; updateUI();
+  }
+  function slotPrimary(slot){
+    if(slot.state==="flying"){ cashOut(slot,Math.min(game.multiplier,game.crashPoint),false); return; }
+    if(slot.state==="placed"||slot.state==="queued"){ cancelBet(slot); return; }
+    if(slot.state==="idle") placeBet(slot,false);
+  }
+  function settleLoss(slot){
+    slot.autoNet-=slot.bet;
+    recordLoss(slot);
+    note(slot,"Busted — −"+fmt(slot.bet)+" pts","lose");
+  }
+  function checkAutoStop(slot){
+    if(!slot.autoOn) return;
+    if(Number.isFinite(slot.autoRoundsLeft)){
+      slot.autoRoundsLeft--;
+      if(slot.autoRoundsLeft<=0){ disableAuto(slot,"jobs done"); return; }
+    }
+    if(slot.stopW>0&&slot.autoNet>=slot.stopW){ disableAuto(slot,"profit target hit (+"+fmt(slot.autoNet)+")"); return; }
+    if(slot.stopL>0&&-slot.autoNet>=slot.stopL){ disableAuto(slot,"loss limit hit (−"+fmt(-slot.autoNet)+")"); return; }
+  }
+  function disableAuto(slot,why){
+    slot.autoOn=false; slot.el.autobet.checked=false;
+    toast(slot.label+" auto-join stopped — "+why,"warn");
+  }
+  function tryAutoBet(slot){
+    if(!slot.autoOn||slot.state!=="idle") return;
+    const amt=parseStake(slot);
+    if(amt<=0||amt>game.balance){ disableAuto(slot,"balance below stake"); return; }
+    placeBet(slot,true);
+    if(slot.state!=="idle") note(slot,"Auto-joined with "+fmt(amt)+" pts","");
+  }
+  function readAutoConfig(slot){
+    const r=parseInt(slot.el.rounds.value,10);
+    slot.autoRoundsLeft=(Number.isFinite(r)&&r>0)?r:Infinity;
+    const w=parseInt(slot.el.stopw.value,10);
+    slot.stopW=(Number.isFinite(w)&&w>0)?w:0;
+    const l=parseInt(slot.el.stopl.value,10);
+    slot.stopL=(Number.isFinite(l)&&l>0)?l:0;
+    slot.autoNet=0;
+  }
+
+  /* ---------- Phase transitions ---------- */
+  function enterWaiting(now){
+    game.phase=PHASE.WAITING; game.phaseEnd=now+CONFIG.waitMs;
+    game.multiplier=1.0; game.elapsed=0; cdLastSec=-1;
+    stopRiser();
+    elMult.classList.remove("crash","win","t2","t3","t4");
+    for(const s of slots){
+      if(s.state==="cashed"||s.state==="lost"){ s.state="idle"; s.bet=0; }
+      if(s.state==="queued"){ s.state="placed"; note(s,"In the crew — job starts soon",""); }
+      tryAutoBet(s);
+    }
+    fair.prepare();
+    spawnBots();
+    updateUI();
+  }
+  function startRound(now){
+    game.phase=PHASE.RUNNING; game.roundNo++;
+    game.crashPoint=fair.resolve();
+    game.roundStart=now; game.elapsed=0; game.multiplier=1.0;
+    game.particles.length=0; game.particlesSpawned=false;
+    bills.length=0; pickups.length=0; getaways.length=0; scrollX=0; copLunge=0;
+    for(const s of slots) if(s.state==="placed") s.state="flying";
+    elMult.classList.remove("crash","win","t2","t3","t4");
+    renderFairModal();
+    feedDirty=true; updateUI();
+  }
+  function crashRound(now){
+    game.phase=PHASE.CRASHED; game.phaseEnd=now+CONFIG.crashHoldMs;
+    game.multiplier=game.crashPoint; game.elapsed=timeFor(game.crashPoint);
+    stopRiser(); playExplosion(); triggerShake(now);
+    fair.reveal();
+    game.history.unshift(game.crashPoint);
+    if(game.history.length>CONFIG.historyMax) game.history.pop();
+    renderTicker(); botsCrash();
+    let lostAny=false;
+    for(const s of slots){
+      if(s.state==="flying"){ s.state="lost"; settleLoss(s); lostAny=true; }
+      if(s.autoOn&&(s.state==="lost"||s.state==="cashed")) checkAutoStop(s);
+    }
+    if(lostAny) toast("🚨 Busted @ "+game.crashPoint.toFixed(2)+"x","lose");
+    elMult.classList.remove("win","t2","t3","t4"); elMult.classList.add("crash");
+    elFlash.classList.remove("go"); void elFlash.offsetWidth; elFlash.classList.add("go");
+    renderFairModal();
+    feedDirty=true; updateUI();
+  }
+
+  /* ---------- Per-frame update ---------- */
+  function update(now){
+    if(game.phase===PHASE.WAITING){
+      if(now>=game.phaseEnd) startRound(now);
+    } else if(game.phase===PHASE.RUNNING){
+      game.elapsed=(now-game.roundStart)/1000;
+      game.multiplier=multAt(game.elapsed);
+      const anyFlying=slots.some(s=>s.state==="flying");
+      if(anyFlying) updateRiser(game.multiplier);
+      else if(sound.riser) stopRiser();
+      const effMult=Math.min(game.multiplier,game.crashPoint);
+      botsProcess(effMult);
+      for(const s of slots){
+        if(s.state==="flying"&&s.autoCash>=1.01&&s.autoCash<=effMult) cashOut(s,s.autoCash,true);
+      }
+      if(game.multiplier>=game.crashPoint) crashRound(now);
+    } else {
+      if(now>=game.phaseEnd) enterWaiting(now);
+    }
+  }
+
+  /* ============================================================
+     RENDERING — side-scrolling getaway chase.
+     Robber sprints right with the loot; cop car prowls behind
+     (pure theatre — its distance never signals the bust point).
+     ============================================================ */
+  let DPR=1;
+  function resize(){
+    DPR=window.devicePixelRatio||1;
+    const r=canvas.getBoundingClientRect();
+    canvas.width=Math.round(r.width*DPR); canvas.height=Math.round(r.height*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  window.addEventListener("resize",resize);
+
+  let scrollX=0, copLunge=0;
+  const bills=[], pickups=[], getaways=[];
+  let lastPickup=0;
+
+  function groundY(h){ return h-46; }
+  function robberX(w){ return w*0.60; }
+  function scrollSpeed(){
+    return game.phase===PHASE.RUNNING ? 120+Math.log(Math.max(game.multiplier,1))*90 : 30;
+  }
+
+  /* money-bill trail fluttering off the loot bag */
+  function spawnBills(x,y){
+    for(let i=0;i<2;i++){
+      bills.push({x:x+(Math.random()-0.5)*8, y:y+(Math.random()-0.5)*10,
+                  vx:-60-Math.random()*70, vy:-30+Math.random()*22,
+                  rot:Math.random()*Math.PI, vr:(Math.random()-0.5)*6,
+                  life:0.55+Math.random()*0.35, max:0.9});
+    }
+    if(bills.length>240) bills.splice(0,bills.length-240);
+  }
+  function drawBills(dt){
+    ctx.save();
+    for(let i=bills.length-1;i>=0;i--){
+      const p=bills[i];
+      p.life-=dt;
+      if(p.life<=0){ bills.splice(i,1); continue; }
+      p.x+=p.vx*dt; p.y+=p.vy*dt; p.vy+=55*dt; p.rot+=p.vr*dt;
+      const k=Math.min(p.life/p.max,1);
+      ctx.globalAlpha=k*0.9;
+      ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+      ctx.fillStyle="#2ee376";
+      ctx.fillRect(-4,-2.5,8,5);
+      ctx.fillStyle="rgba(255,255,255,.5)";
+      ctx.fillRect(-1.1,-2.5,2.2,5);
+      ctx.setTransform(DPR,0,0,DPR,0,0);
+    }
+    ctx.restore();
+    ctx.globalAlpha=1;
+  }
+
+  /* cash bundles sliding in from the right for the robber to scoop (cosmetic) */
+  function updatePickups(w,h,now,dt){
+    const gy=groundY(h);
+    if(game.phase===PHASE.RUNNING && now-lastPickup>Math.max(650-game.multiplier*28,240)){
+      lastPickup=now;
+      pickups.push({x:w+20, y:gy-10-Math.random()*26, got:false, gotT:0});
+    }
+    const sp=scrollSpeed();
+    for(let i=pickups.length-1;i>=0;i--){
+      const p=pickups[i];
+      if(!p.got){
+        p.x-=sp*dt;
+        if(p.x<=robberX(w)+10){ p.got=true; p.gotT=now; }
+        if(p.x<-30) pickups.splice(i,1);
+      } else if(now-p.gotT>380){ pickups.splice(i,1); }
+    }
+  }
+  function drawPickups(now){
+    ctx.save();
+    ctx.textAlign="center"; ctx.textBaseline="middle";
+    for(const p of pickups){
+      if(!p.got){
+        ctx.globalAlpha=1; ctx.font="15px serif";
+        ctx.fillText("💵",p.x,p.y);
+      } else {
+        const k=(now-p.gotT)/380;
+        ctx.globalAlpha=1-k;
+        ctx.fillStyle="#f5c84b"; ctx.font="bold 11px ui-monospace,monospace";
+        ctx.fillText("+",p.x,p.y-14-k*16);
+        ctx.beginPath(); ctx.arc(p.x,p.y-k*10,2.5*(1-k)+0.5,0,Math.PI*2);
+        ctx.fillStyle="#f5c84b"; ctx.fill();
+      }
+    }
+    ctx.restore();
+    ctx.globalAlpha=1;
+  }
+
+  /* little getaway car zips across when YOU escape */
+  function spawnGetawayCar(){ getaways.push({t:performance.now()}); }
+  function drawGetaways(w,h,now){
+    ctx.save();
+    ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.font="22px serif";
+    for(let i=getaways.length-1;i>=0;i--){
+      const k=(now-getaways[i].t)/800;
+      if(k>=1){ getaways.splice(i,1); continue; }
+      const x=robberX(w)+ (w*0.55)*k, y=groundY(h)-14;
+      ctx.globalAlpha=1-k*0.4;
+      ctx.fillText("🚗",x,y);
+      ctx.globalAlpha=(1-k)*0.5; ctx.font="14px serif";
+      ctx.fillText("💨",x-20,y+2);
+      ctx.font="22px serif";
+    }
+    ctx.restore();
+    ctx.globalAlpha=1;
+  }
+
+  /* parallax bank corridor: columns, windows, floor tiles */
+  function drawBackdrop(w,h,dt){
+    const gy=groundY(h);
+    scrollX+=scrollSpeed()*dt;
+    // far wall
+    ctx.fillStyle="rgba(255,255,255,.025)";
+    ctx.fillRect(0,0,w,gy);
+    // windows (far layer, slow)
+    const off1=(scrollX*0.35)%220;
+    ctx.fillStyle="rgba(122,150,200,.05)";
+    for(let x=-off1; x<w; x+=220) ctx.fillRect(x+30,38,52,84);
+    // columns (near layer)
+    const off2=(scrollX*0.8)%260;
+    for(let x=-off2; x<w; x+=260){
+      const g=ctx.createLinearGradient(x,0,x+26,0);
+      g.addColorStop(0,"rgba(255,255,255,.015)");
+      g.addColorStop(.5,"rgba(255,255,255,.07)");
+      g.addColorStop(1,"rgba(255,255,255,.015)");
+      ctx.fillStyle=g;
+      ctx.fillRect(x,16,26,gy-16);
+      ctx.fillRect(x-5,10,36,8);
+      ctx.fillRect(x-5,gy-8,36,8);
+    }
+    // floor
+    ctx.fillStyle="rgba(255,255,255,.05)";
+    ctx.fillRect(0,gy,w,2);
+    const off3=(scrollX*1.0)%64;
+    ctx.fillStyle="rgba(255,255,255,.08)";
+    for(let x=-off3; x<w; x+=64) ctx.fillRect(x,gy+12,30,2);
+  }
+
+  /* police heat bar — honest cosmetics: derived ONLY from the current
+     multiplier (log scale), it carries no information about the bust point */
+  function drawHeat(w,now){
+    if(game.phase===PHASE.WAITING) return;
+    const k=Math.max(0,Math.min(Math.log(game.multiplier)/Math.log(50),1));
+    const bw=w-160, x=80, y=14, bh=6;
+    ctx.save();
+    ctx.fillStyle="rgba(255,255,255,.07)";
+    ctx.fillRect(x,y,bw,bh);
+    const g=ctx.createLinearGradient(x,0,x+bw,0);
+    g.addColorStop(0,"#2ee376"); g.addColorStop(.55,"#f5c84b"); g.addColorStop(1,"#ff4757");
+    ctx.fillStyle=g;
+    const pulse=game.phase===PHASE.CRASHED?1:0.75+0.25*Math.sin(now/1000*(2+k*8));
+    ctx.globalAlpha=pulse;
+    ctx.fillRect(x,y,bw*(game.phase===PHASE.CRASHED?1:k),bh);
+    ctx.globalAlpha=.5;
+    ctx.fillStyle="rgba(255,255,255,.5)";
+    ctx.font="9px ui-monospace,monospace"; ctx.textAlign="left"; ctx.textBaseline="middle";
+    ctx.fillText("HEAT",x-34,y+bh/2);
+    ctx.restore();
+    ctx.globalAlpha=1;
+  }
+
+  function drawRobber(w,h,now,dt){
+    const gy=groundY(h), rx=robberX(w);
+    const run=Math.abs(Math.sin(now/1000*9))*5;
+    const ry=gy-20-run;
+    // loot glow grows with the multiplier
+    const glowR=18+Math.min(game.multiplier,30)*1.1;
+    const g2=ctx.createRadialGradient(rx,ry,0,rx,ry,glowR);
+    g2.addColorStop(0,"rgba(245,200,75,.5)"); g2.addColorStop(1,"rgba(245,200,75,0)");
+    ctx.fillStyle=g2; ctx.beginPath(); ctx.arc(rx,ry,glowR,0,Math.PI*2); ctx.fill();
+    ctx.textAlign="center"; ctx.textBaseline="middle";
+    ctx.font="26px serif";
+    ctx.fillText("🦹",rx,ry);
+    ctx.font="17px serif";
+    ctx.fillText("💰",rx-17,ry+9+run*0.4);
+    spawnBills(rx-20,ry+8);
+  }
+  function drawCop(w,h,now){
+    const gy=groundY(h);
+    let cx;
+    if(game.phase===PHASE.CRASHED){
+      copLunge=Math.min(copLunge+0.09,1);
+      cx=30+(robberX(w)-66-30)*copLunge;
+    } else {
+      cx=34+Math.sin(now/1000*0.7)*16+Math.sin(now/1000*2.3)*6;   // prowling — pure theatre
+    }
+    const cy=gy-16;
+    // light bar glow (alternating)
+    const phase=Math.floor(now/130)%2;
+    const lg=ctx.createRadialGradient(cx,cy-14,0,cx,cy-14,34);
+    lg.addColorStop(0,phase?"rgba(255,71,87,.55)":"rgba(58,160,255,.55)");
+    lg.addColorStop(1,"rgba(0,0,0,0)");
+    ctx.fillStyle=lg; ctx.beginPath(); ctx.arc(cx,cy-14,34,0,Math.PI*2); ctx.fill();
+    ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.font="26px serif";
+    ctx.fillText("🚓",cx,cy);
+  }
+  function drawBustScene(w,h,now){
+    const gy=groundY(h), rx=robberX(w), ry=gy-20;
+    // spotlight on the caught robber
+    const sp=ctx.createRadialGradient(rx,ry,4,rx,ry,60);
+    sp.addColorStop(0,"rgba(255,255,255,.30)"); sp.addColorStop(1,"rgba(255,255,255,0)");
+    ctx.fillStyle=sp; ctx.beginPath(); ctx.arc(rx,ry,60,0,Math.PI*2); ctx.fill();
+    ctx.textAlign="center"; ctx.textBaseline="middle";
+    ctx.font="26px serif"; ctx.fillText("🦹",rx,ry);
+    ctx.font="15px serif"; ctx.fillText("🚨",rx,ry-30+Math.sin(now/1000*10)*2);
+    drawParticles(rx,ry);
+  }
+  function drawParticles(hx,hy){
+    if(!game.particlesSpawned){
+      game.particlesSpawned=true;
+      for(let i=0;i<30;i++){
+        const a=Math.random()*Math.PI*2, sp=1.5+Math.random()*4.5;
+        game.particles.push({x:hx,y:hy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-1.5,life:1,
+                             gold:Math.random()<0.4});
+      }
+    }
+    ctx.save();
+    for(const p of game.particles){
+      p.x+=p.vx; p.y+=p.vy; p.vy+=0.12; p.vx*=0.98; p.life-=0.016;
+      if(p.life<=0) continue;
+      ctx.globalAlpha=Math.max(p.life,0);
+      if(p.gold){
+        ctx.fillStyle="#f5c84b";
+        ctx.beginPath(); ctx.arc(p.x,p.y,2.6*p.life+0.5,0,Math.PI*2); ctx.fill();
+      } else {
+        ctx.fillStyle="#2ee376";
+        ctx.fillRect(p.x-3*p.life,p.y-2*p.life,6*p.life,4*p.life);
+      }
+    }
+    ctx.restore();
+    ctx.globalAlpha=1;
+  }
+  /* blueprint planning screen between jobs */
+  function drawBlueprint(w,h,now){
+    ctx.save();
+    ctx.strokeStyle="rgba(58,160,255,.10)"; ctx.lineWidth=1;
+    for(let x=0;x<w;x+=34){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
+    for(let y=0;y<h;y+=34){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
+    // vault sketch
+    const vx=w*0.78, vy=h*0.42, vr=Math.min(w,h)*0.13;
+    ctx.strokeStyle="rgba(58,160,255,.30)"; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(vx,vy,vr,0,Math.PI*2); ctx.stroke();
+    ctx.beginPath(); ctx.arc(vx,vy,vr*0.62,0,Math.PI*2); ctx.stroke();
+    const a=now/1000*0.5;
+    for(let i=0;i<3;i++){
+      const ang=a+i*Math.PI*2/3;
+      ctx.beginPath();
+      ctx.moveTo(vx+Math.cos(ang)*vr*0.62,vy+Math.sin(ang)*vr*0.62);
+      ctx.lineTo(vx+Math.cos(ang)*vr,vy+Math.sin(ang)*vr);
+      ctx.stroke();
+    }
+    // dashed escape route
+    ctx.setLineDash([6,7]);
+    ctx.strokeStyle="rgba(245,200,75,.35)";
+    ctx.beginPath();
+    ctx.moveTo(vx-vr,vy);
+    ctx.bezierCurveTo(w*0.5,vy+30,w*0.34,h*0.7,w*0.08,h*0.72);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.font="13px serif"; ctx.textAlign="center";
+    ctx.fillText("🚐",w*0.08,h*0.72-12);
+    ctx.restore();
+  }
+  function render(now,dt){
+    const w=canvas.clientWidth, h=canvas.clientHeight;
+    ctx.clearRect(0,0,w,h);
+    if(game.phase===PHASE.WAITING){
+      drawBlueprint(w,h,now);
+      return;
+    }
+    drawBackdrop(w,h,dt);
+    updatePickups(w,h,now,dt);
+    drawPickups(now);
+    drawBills(dt);
+    if(game.phase===PHASE.RUNNING){
+      drawRobber(w,h,now,dt);
+      drawCop(w,h,now);
+    } else {
+      drawCop(w,h,now);
+      drawBustScene(w,h,now);
+    }
+    drawGetaways(w,h,now);
+    drawHeat(w,now);
+  }
+
+  /* ---------- UI sync ---------- */
+  function updateSlotUI(slot){
+    const btn=slot.el.act;
+    const editable=slot.state==="idle";
+    slot.el.stake.disabled=!editable;
+    slot.el.autocash.disabled=!editable;
+    document.querySelectorAll('.quick button[data-slot="'+slot.id+'"]').forEach(b=>b.disabled=!editable);
+    switch(slot.state){
+      case "idle":
+        btn.disabled=false; btn.className="action lock";
+        btn.textContent=(game.phase===PHASE.WAITING?"JOIN HEIST ":"JOIN NEXT JOB ")+"· "+fmt(parseStake(slot)||0)+" pts";
+        break;
+      case "placed":
+        btn.disabled=false; btn.className="action cancel";
+        btn.textContent="BACK OUT · "+fmt(slot.bet)+" pts staked";
+        break;
+      case "queued":
+        btn.disabled=false; btn.className="action cancel";
+        btn.textContent="BACK OUT · queued "+fmt(slot.bet)+" pts";
+        break;
+      case "flying":
+        btn.disabled=false; btn.className="action secure";
+        btn.textContent="GETAWAY 💨 "+fmt(slot.bet*Math.min(game.multiplier,game.crashPoint))+" pts";
+        break;
+      case "cashed":
+        btn.disabled=true; btn.className="action done";
+        btn.textContent="ESCAPED ✓ @ "+slot.cashedAt.toFixed(2)+"x";
+        break;
+      case "lost":
+        btn.disabled=true; btn.className="action idle";
+        btn.textContent="BUSTED · −"+fmt(slot.bet)+" pts";
+        break;
+    }
+  }
+  function updateUI(){
+    if(!balAnim.active) elBalance.textContent=fmt(game.balance);
+    elRoundChip.innerHTML="Job <b>#"+game.roundNo+"</b>";
+    const myActive=slots.filter(s=>s.state==="placed"||s.state==="queued"||s.state==="flying");
+    const myStaked=myActive.reduce((s,x)=>s+x.bet,0);
+    elPlayersChip.innerHTML="🦹 <b>"+(botTotals.count+myActive.length)+"</b> in crew · <b>"+fmt(botTotals.staked+myStaked)+"</b> pts";
+    for(const s of slots) updateSlotUI(s);
+  }
+
+  function pillClass(m){ return m<2?"low":(m<10?"mid":"high"); }
+  function renderTicker(){
+    [...elTicker.querySelectorAll(".pill")].forEach(p=>p.remove());
+    for(const m of game.history.slice(0,10)){
+      const s=document.createElement("span");
+      s.className="pill "+pillClass(m); s.textContent=m.toFixed(2)+"x";
+      s.title="Click for fairness details";
+      s.addEventListener("click",openFair);
+      elTicker.appendChild(s);
+    }
+  }
+  function setMultTier(t){
+    elMult.classList.toggle("t2",t===2);
+    elMult.classList.toggle("t3",t===3);
+    elMult.classList.toggle("t4",t===4);
+  }
+  let cdLastSec=-1;
+  function renderOverlay(now){
+    if(game.phase===PHASE.WAITING){
+      const remain=Math.max(0,game.phaseEnd-now);
+      const sec=Math.ceil(remain/1000);
+      if(sec!==cdLastSec){
+        cdLastSec=sec;
+        if(sec>0&&sec<=Math.ceil(CONFIG.waitMs/1000)) playTick(sec<=1);
+      }
+      setMultTier(0);
+      elMult.textContent=sec+"";
+      elStatus.innerHTML="Planning the next job… <span class='em'>stake your cut</span>";
+      elFairChip.textContent="fairness hash: "+fair.commit.slice(0,28)+"…";
+      elCd.style.width=(100*(1-remain/CONFIG.waitMs)).toFixed(1)+"%";
+    } else if(game.phase===PHASE.RUNNING){
+      const m=game.multiplier;
+      setMultTier(m>=10?4:m>=4?3:m>=2?2:0);
+      elMult.textContent=m.toFixed(2)+"x";
+      const flying=slots.filter(s=>s.state==="flying");
+      elStatus.innerHTML=flying.length
+        ? "Looting the vault — <span class='em'>"+fmt(flying.reduce((s,x)=>s+x.bet,0)*m)+" pts in the bag</span>"
+        : "Job in progress";
+      elFairChip.textContent="fairness hash: "+(fair.pending?fair.pending.commit.slice(0,28)+"…":"—");
+      elCd.style.width="0%";
+    } else {
+      setMultTier(0);
+      elMult.textContent=game.crashPoint.toFixed(2)+"x";
+      elStatus.innerHTML="🚨 <span class='em'>BUSTED</span> — cops got everyone inside";
+      elFairChip.textContent="server seed revealed — verify in 🛡 Provably Fair";
+      elCd.style.width="0%";
+    }
+  }
+
+  /* ---------- Live feed (tabs) ---------- */
+  let activeTab="all", feedDirty=true, lastFeedRender=0;
+  function feedRow(cols,cls){
+    const r=document.createElement("div");
+    r.className="frow "+(cls||"");
+    const [n,s,m,wn]=cols;
+    const a=document.createElement("span"); a.className="fn"; a.textContent=n;
+    const b=document.createElement("span"); b.className="fs"; b.textContent=s;
+    const c=document.createElement("span"); c.className="fm"; c.textContent=m;
+    const d=document.createElement("span"); d.className="fw"; d.textContent=wn;
+    r.append(a,b,c,d);
+    return r;
+  }
+  function renderFeed(){
+    const frag=document.createDocumentFragment();
+    frag.appendChild(feedRow(["Crew member","Cut","Escape","Haul"],"head"));
+    if(activeTab==="all"){
+      elFeedTitle.textContent="This job";
+      const myActive=slots.filter(s=>s.state!=="idle");
+      elFeedCount.textContent=(botTotals.count+myActive.length)+" in crew";
+      for(const s of myActive){
+        const cls= s.state==="cashed"?"you won": s.state==="lost"?"you lost":"you";
+        frag.appendChild(feedRow([
+          "You · "+s.label, fmt(s.bet),
+          s.state==="cashed"?s.cashedAt.toFixed(2)+"x":(s.state==="lost"?game.crashPoint.toFixed(2)+"x":(s.autoCash?("@"+s.autoCash.toFixed(2)):"—")),
+          s.state==="cashed"?"+"+fmt(Math.floor(s.bet*s.cashedAt)-s.bet):(s.state==="lost"?"−"+fmt(s.bet):"")
+        ],cls));
+      }
+      for(const b of bots){
+        const cls=b.cashed?"won":(b.lost?"lost":"");
+        frag.appendChild(feedRow([
+          b.name, fmt(b.stake),
+          b.cashed?b.target.toFixed(2)+"x":(b.lost?"—":""),
+          b.cashed?"+"+fmt(b.win-b.stake):(b.lost?"−"+fmt(b.stake):"")
+        ],cls));
+      }
+    } else if(activeTab==="my"){
+      elFeedTitle.textContent="Your jobs";
+      elFeedCount.textContent=myBets.length+" jobs";
+      if(!myBets.length){
+        const e=document.createElement("div"); e.className="empty";
+        e.textContent="No jobs yet — stake a cut to start your rap sheet.";
+        frag.appendChild(e);
+      }
+      for(const m of myBets){
+        const t=new Date(m.ts);
+        const hh=String(t.getHours()).padStart(2,"0"), mm=String(t.getMinutes()).padStart(2,"0");
+        frag.appendChild(feedRow([
+          hh+":"+mm, fmt(m.stake),
+          m.mult?m.mult.toFixed(2)+"x":"—",
+          m.mult?"+"+fmt(m.win-m.stake):"−"+fmt(m.stake)
+        ],m.mult?"won":"lost"));
+      }
+    } else {
+      elFeedTitle.textContent="Most wanted · session";
+      elFeedCount.textContent=topWins.length+" legends";
+      if(!topWins.length){
+        const e=document.createElement("div"); e.className="empty";
+        e.textContent="No legendary escapes yet this session. Someone will go big…";
+        frag.appendChild(e);
+      }
+      for(const t of topWins){
+        frag.appendChild(feedRow([t.name,fmt(t.stake),t.mult.toFixed(2)+"x","+"+fmt(t.win-t.stake)],
+                                 t.name.startsWith("You")?"you won":"won"));
+      }
+    }
+    elFeed.replaceChildren(frag);
+  }
+
+  /* ---------- Provably-fair modal ---------- */
+  function openFair(){ elModal.classList.add("open"); renderFairModal(); }
+  function closeFair(){ elModal.classList.remove("open"); }
+  function renderFairModal(){
+    if(!elModal.classList.contains("open")) return;
+    const frag=document.createDocumentFragment();
+    const head=document.createElement("div"); head.className="mrow mh";
+    ["Job","Bust","Seeds (commitment → revealed server seed)","Check"].forEach(t=>{
+      const s=document.createElement("span"); s.textContent=t; head.appendChild(s);
+    });
+    frag.appendChild(head);
+    const curN=fair.pending?fair.pending.n:fair.nonce;
+    const curCommit=fair.pending?fair.pending.commit:fair.commit;
+    const cur=document.createElement("div"); cur.className="mrow";
+    const c1=document.createElement("span"); c1.className="mono"; c1.textContent="#"+curN;
+    const c2=document.createElement("span"); c2.className="crashv"; c2.textContent="…";
+    const c3=document.createElement("span"); c3.className="mono";
+    c3.innerHTML="<b>"+curCommit+"</b>seed revealed after the bust";
+    const c4=document.createElement("span"); c4.textContent="⏳";
+    cur.append(c1,c2,c3,c4);
+    frag.appendChild(cur);
+    for(const row of fair.rows.slice(0,CONFIG.fairMax)){
+      const r=document.createElement("div"); r.className="mrow";
+      const a=document.createElement("span"); a.className="mono"; a.textContent="#"+row.n;
+      const b=document.createElement("span"); b.className="crashv";
+      b.textContent=row.crash.toFixed(2)+"x";
+      b.style.color=row.crash<2?"#aebbd6":(row.crash<10?"var(--green)":"var(--gold)");
+      const c=document.createElement("span"); c.className="mono";
+      c.innerHTML="<b>"+row.commit+"</b>"+row.server+" · client "+row.client+" · nonce "+row.n;
+      const d=document.createElement("span");
+      const v=document.createElement("button"); v.type="button"; v.className="vbtn"; v.textContent="Verify";
+      v.addEventListener("click",()=>{
+        const ok=fair.verify(row);
+        v.textContent=ok?"✓ Valid":"✗ FAIL";
+        v.className="vbtn "+(ok?"ok":"bad");
+      });
+      d.appendChild(v);
+      r.append(a,b,c,d);
+      frag.appendChild(r);
+    }
+    elFairRows.replaceChildren(frag);
+  }
+
+  /* ---------- Heist planner (strategy lab) ---------- */
+  const SIM_BUCKETS=[
+    {lbl:"1–1.5x",hi:1.5,cls:"low"},
+    {lbl:"1.5–2x",hi:2,cls:"low"},
+    {lbl:"2–3x",hi:3,cls:"mid"},
+    {lbl:"3–5x",hi:5,cls:"mid"},
+    {lbl:"5–10x",hi:10,cls:"mid"},
+    {lbl:"10–50x",hi:50,cls:"high"},
+    {lbl:"50x+",hi:Infinity,cls:"high"}
+  ];
+  function runSimulation(){
+    try{
+      let N=parseInt(elSimN.value,10);
+      if(!Number.isFinite(N)) N=10000;
+      N=Math.max(100,Math.min(N,1000000));
+      elSimN.value=N;
+      let target=parseFloat(elSimTarget.value);
+      if(!Number.isFinite(target)||target<1.01) target=2;
+      target=Math.floor(target*100)/100;
+      elSimTarget.value=target.toFixed(2);
+      let ret=0,hits=0,sum=0,max=0;
+      const counts=new Array(SIM_BUCKETS.length).fill(0);
+      for(let i=0;i<N;i++){
+        const c=generateCrashPoint();
+        sum+=c; if(c>max) max=c;
+        if(c>=target){ ret+=target; hits++; }
+        for(let b=0;b<SIM_BUCKETS.length;b++){ if(c<SIM_BUCKETS[b].hi){ counts[b]++; break; } }
+      }
+      $("sim-rtp").textContent=(ret/N*100).toFixed(2)+"%";
+      $("sim-hit").textContent=(hits/N*100).toFixed(2)+"%";
+      $("sim-avg").textContent=(sum/N).toFixed(2)+"x";
+      $("sim-max").textContent=max.toFixed(2)+"x";
+      renderHisto(counts,N);
+      $("sim-note").textContent="Flat 1-pt cut, fixed getaway @ "+target.toFixed(2)+"x over "
+        +N.toLocaleString("en-US")+" simulated jobs · sandbox only — demo balance untouched.";
+      $("sim-out").hidden=false;
+    }catch(e){ toast("Simulation error","warn"); }
+  }
+  function renderHisto(counts,N){
+    const elH=$("histo");
+    elH.innerHTML="";
+    const maxC=Math.max.apply(null,counts.concat(1));
+    SIM_BUCKETS.forEach((b,i)=>{
+      const c=counts[i], pct=c/N*100;
+      const col=document.createElement("div"); col.className="hcol";
+      col.title=b.lbl+" — "+c.toLocaleString("en-US")+" jobs ("+pct.toFixed(2)+"%)";
+      const hp=document.createElement("div"); hp.className="hpct";
+      hp.textContent=pct>=0.1?pct.toFixed(1)+"%":(c>0?"<0.1%":"");
+      const hw=document.createElement("div"); hw.className="hwrap";
+      const bar=document.createElement("div"); bar.className="hbar "+b.cls;
+      bar.style.height=(c>0?Math.max(c/maxC*100,2):0).toFixed(1)+"%";
+      hw.appendChild(bar);
+      const hl=document.createElement("div"); hl.className="hlbl"; hl.textContent=b.lbl;
+      col.appendChild(hp); col.appendChild(hw); col.appendChild(hl);
+      elH.appendChild(col);
+    });
+  }
+
+  /* ---------- Main loop ---------- */
+  let lastFrame=performance.now(), loggedErr=false;
+  function loop(now){
+    try{
+      const dt=Math.min(Math.max((now-lastFrame)/1000,0),0.05);
+      lastFrame=now;
+      update(now);
+      render(now,dt);
+      renderOverlay(now);
+      renderBalance(now);
+      applyShake(now);
+      if(game.phase===PHASE.RUNNING) updateUI();
+      if(feedDirty&&now-lastFeedRender>150){ feedDirty=false; lastFeedRender=now; renderFeed(); }
+    }catch(err){
+      if(!loggedErr){ loggedErr=true; try{ console.error("Frame error (loop continues):",err); }catch(e){} }
+    }
+    requestAnimationFrame(loop);
+  }
+
+  /* ---------- Wire up ---------- */
+  slots.forEach(slot=>{
+    slot.el.act.addEventListener("click",()=>slotPrimary(slot));
+    slot.el.autobet.addEventListener("change",()=>{
+      slot.autoOn=slot.el.autobet.checked;
+      if(slot.autoOn){
+        readAutoConfig(slot);
+        toast(slot.label+" auto-join on"+(Number.isFinite(slot.autoRoundsLeft)?" · "+slot.autoRoundsLeft+" jobs":""),"warn");
+        if(game.phase===PHASE.WAITING) tryAutoBet(slot);
+      } else {
+        toast(slot.label+" auto-join off","warn");
+      }
+    });
+    slot.el.stake.addEventListener("input",()=>{ if(slot.state==="idle") updateSlotUI(slot); });
+  });
+  document.querySelectorAll(".quick button").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const slot=slots[parseInt(btn.dataset.slot,10)||0];
+      let v=parseInt(slot.el.stake.value,10)||0;
+      const k=btn.dataset.bet;
+      if(k==="half") v=Math.floor(v/2);
+      else if(k==="double") v=v*2;
+      else if(k==="100") v=v+100;
+      else if(k==="max") v=game.balance;
+      slot.el.stake.value=Math.max(1,Math.min(v,Math.max(game.balance,1)));
+      updateSlotUI(slot);
+    });
+  });
+  document.addEventListener("keydown",(e)=>{
+    if(e.code==="Escape"){ closeFair(); return; }
+    const tag=(e.target&&e.target.tagName)||"";
+    if(tag==="INPUT"||tag==="TEXTAREA") return;
+    if(e.code==="Space"){ e.preventDefault(); slotPrimary(slots[0]); }
+    else if(e.code==="KeyB"){ e.preventDefault(); slotPrimary(slots[1]); }
+  });
+  document.querySelectorAll(".tabbtn").forEach(b=>{
+    b.addEventListener("click",()=>{
+      document.querySelectorAll(".tabbtn").forEach(x=>x.classList.toggle("on",x===b));
+      activeTab=b.dataset.tab; feedDirty=true; renderFeed();
+    });
+  });
+  elSound.addEventListener("click",()=>{
+    sound.enabled=!sound.enabled;
+    store.set("vault_sound",sound.enabled?"1":"0");
+    renderAudioBtns();
+    if(!sound.enabled) stopRiser(); else unlockAudio();
+  });
+  elMusic.addEventListener("click",()=>{
+    sound.music=!sound.music;
+    store.set("vault_music",sound.music?"1":"0");
+    renderAudioBtns();
+    if(sound.music){ unlockAudio(); startPad(); } else stopPad();
+  });
+  $("fair-open").addEventListener("click",openFair);
+  $("fair-close").addEventListener("click",closeFair);
+  elModal.addEventListener("click",(e)=>{ if(e.target===elModal) closeFair(); });
+  $("seed-save").addEventListener("click",()=>{
+    const v=(elSeed.value||"").trim().slice(0,64);
+    if(!v){ toast("Client seed can't be empty","warn"); return; }
+    fair.clientSeed=v; store.set("vault_seed",v);
+    toast("Client seed saved — applies from the next job","win");
+  });
+  $("sim-run").addEventListener("click",runSimulation);
+  $("reset").addEventListener("click",()=>{
+    balAnim.active=false;
+    game.balance=CONFIG.startingBalance; saveBalance();
+    stats.rounds=0; stats.wins=0; stats.best=0; stats.net=0; stats.streak=0; saveStats(); renderStats();
+    myBets.length=0; store.setJSON("vault_myjobs",myBets);
+    topWins.length=0;
+    feedDirty=true;
+    updateUI();
+    toast("Demo points, rap sheet & history reset","warn");
+  });
+
+  (function showMath(){
+    const rtp=(CONFIG.payoutNumerator/100)*(1-CONFIG.instantCrashChance);
+    $("b-instant").textContent=(CONFIG.instantCrashChance*100).toFixed(1)+"%";
+    $("b-rtp").textContent=(rtp*100).toFixed(1)+"%";
+  })();
+
+  /* ---------- Boot ---------- */
+  loadBalance(); resize();
+  renderAudioBtns(); renderStats();
+  elSeed.value=fair.clientSeed;
+  fair.prepare(); spawnBots();
+  game.phase=PHASE.WAITING; game.phaseEnd=performance.now()+CONFIG.waitMs;
+  updateUI(); renderTicker(); renderFeed();
+  requestAnimationFrame(loop);
+
+  // Research hook: poke the live state from the console.
+  try{ window.__vault={CONFIG,game,slots,stats,fair,sha256hex,crashFromUniforms,generateCrashPoint,getBots:()=>bots}; }catch(e){}
+</script>
+</body>
+</html>
