@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="{{ settings.color_schemes.scheme-1.settings.background | default: '#ffffff' }}">
+  <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="{{ canonical_url }}">
   <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
   {%- if settings.favicon != blank -%}
@@ -23,7 +23,7 @@
     document.documentElement.className = document.documentElement.className.replace('no-js','js');
     window.APEX = {
       moneyFormat: {{ shop.money_format | json }},
-      routes: {{ routes | json }},
+      routes: { root: {{ routes.root_url | json }}, cart: {{ routes.cart_url | json }}, cartAdd: {{ routes.cart_add_url | json }}, cartChange: {{ routes.cart_change_url | json }}, search: {{ routes.search_url | json }}, predictiveSearch: {{ routes.predictive_search_url | json }} },
       strings: { addToCart: {{ 'products.product.add_to_cart' | t | json }}, soldOut: {{ 'products.product.sold_out' | t | json }}, unavailable: {{ 'products.product.unavailable' | t | json }} },
       cartType: {{ settings.cart_type | json }},
       backToTop: {{ settings.back_to_top_style | json }}

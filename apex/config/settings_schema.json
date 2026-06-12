@@ -137,91 +137,8 @@
           "secondary_button_border": "secondary_button_label",
           "links": "accent",
           "icons": "text",
-          "borders": "border",
           "shadow": "shadow"
-        },
-        "default": [
-          {
-            "id": "scheme-1",
-            "settings": {
-              "background": "#ffffff",
-              "bg_alt": "#f5f7fb",
-              "card": "#ffffff",
-              "border": "#e5e9f0",
-              "text": "#111827",
-              "accent": "#2f5bff",
-              "on_accent": "#ffffff",
-              "button": "#2f5bff",
-              "button_label": "#ffffff",
-              "secondary_button_label": "#111827",
-              "shadow": "#0b1220"
-            }
-          },
-          {
-            "id": "scheme-2",
-            "settings": {
-              "background": "#f5f7fb",
-              "bg_alt": "#eaeef6",
-              "card": "#ffffff",
-              "border": "#dfe4ee",
-              "text": "#111827",
-              "accent": "#2f5bff",
-              "on_accent": "#ffffff",
-              "button": "#111827",
-              "button_label": "#ffffff",
-              "secondary_button_label": "#111827",
-              "shadow": "#0b1220"
-            }
-          },
-          {
-            "id": "scheme-3",
-            "settings": {
-              "background": "#0e1116",
-              "bg_alt": "#161b22",
-              "card": "#161b22",
-              "border": "#2a313c",
-              "text": "#f3f5f9",
-              "accent": "#5b8cff",
-              "on_accent": "#06122e",
-              "button": "#5b8cff",
-              "button_label": "#06122e",
-              "secondary_button_label": "#f3f5f9",
-              "shadow": "#000000"
-            }
-          },
-          {
-            "id": "scheme-4",
-            "settings": {
-              "background": "#111827",
-              "bg_alt": "#0c1320",
-              "card": "#1b2436",
-              "border": "#2c3850",
-              "text": "#eef2f8",
-              "accent": "#fbbf24",
-              "on_accent": "#1a1500",
-              "button": "#fbbf24",
-              "button_label": "#1a1500",
-              "secondary_button_label": "#eef2f8",
-              "shadow": "#000000"
-            }
-          },
-          {
-            "id": "scheme-5",
-            "settings": {
-              "background": "#2f5bff",
-              "bg_alt": "#2546c8",
-              "card": "#3a64ff",
-              "border": "#6f8cff",
-              "text": "#ffffff",
-              "accent": "#ffffff",
-              "on_accent": "#2f5bff",
-              "button": "#ffffff",
-              "button_label": "#2f5bff",
-              "secondary_button_label": "#ffffff",
-              "shadow": "#10204d"
-            }
-          }
-        ]
+        }
       }
     ]
   },
@@ -249,7 +166,6 @@
         "min": -50,
         "max": 50,
         "step": 5,
-        "unit": "/1000em",
         "label": "Heading letter spacing",
         "default": -20
       },
@@ -655,7 +571,6 @@
         "min": 0,
         "max": 30,
         "step": 1,
-        "unit": "/100em",
         "default": 14
       },
       {
@@ -681,7 +596,6 @@
         "min": -10,
         "max": 20,
         "step": 1,
-        "unit": "/100em",
         "default": 0
       },
       {
@@ -711,7 +625,6 @@
         "min": 400,
         "max": 800,
         "step": 100,
-        "unit": "",
         "default": 700
       },
       {
@@ -756,7 +669,6 @@
         "min": 400,
         "max": 800,
         "step": 100,
-        "unit": "",
         "default": 700
       },
       {
@@ -782,7 +694,6 @@
         "min": 0,
         "max": 20,
         "step": 1,
-        "unit": "/100em",
         "default": 1
       },
       {
@@ -1036,7 +947,6 @@
         "min": 0,
         "max": 90,
         "step": 5,
-        "unit": "",
         "default": 0
       }
     ]
@@ -1195,7 +1105,6 @@
         "min": 2,
         "max": 5,
         "step": 1,
-        "unit": "",
         "default": 4
       },
       {
@@ -1205,7 +1114,6 @@
         "min": 1,
         "max": 2,
         "step": 1,
-        "unit": "",
         "default": 2
       },
       {
@@ -1421,7 +1329,7 @@
         "label": "Caption size",
         "min": 70,
         "max": 100,
-        "step": 2,
+        "step": 1,
         "unit": "%",
         "default": 85
       },
@@ -1606,7 +1514,6 @@
         "min": 1,
         "max": 3,
         "step": 1,
-        "unit": "",
         "default": 2
       },
       {
@@ -1615,7 +1522,7 @@
         "label": "Price size",
         "min": 85,
         "max": 125,
-        "step": 2,
+        "step": 1,
         "unit": "%",
         "default": 100
       },
@@ -1892,7 +1799,6 @@
         "min": 2,
         "max": 6,
         "step": 1,
-        "unit": "",
         "default": 4
       },
       {
@@ -2057,7 +1963,6 @@
         "min": 4,
         "max": 10,
         "step": 1,
-        "unit": "",
         "default": 6
       },
       {

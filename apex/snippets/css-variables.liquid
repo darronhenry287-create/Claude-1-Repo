@@ -8,6 +8,12 @@
   assign bf = settings.body_font
 -%}
 {% style %}
+  {%- comment -%}
+    Fonts are guarded: if settings ever fail to load (nil), we emit NOTHING for
+    font vars so base.css's system-font fallbacks hold — never a broken
+    `font-family: , ;` declaration.
+  {%- endcomment -%}
+  {%- if hf and bf -%}
   {{ hf | font_face: font_display: 'swap' }}
   {{ bf | font_face: font_display: 'swap' }}
   {%- assign hf_bold = hf | font_modify: 'weight', 'bolder' -%}
@@ -16,10 +22,13 @@
   {%- if bf_bold -%}{{ bf_bold | font_face: font_display: 'swap' }}{%- endif -%}
   {%- assign af = settings.accent_font -%}
   {%- if af and af != bf and af != hf -%}{{ af | font_face: font_display: 'swap' }}{%- endif -%}
+  {%- endif -%}
 
   :root {
+    {%- if hf and bf %}
     --font-heading: {{ hf.family }}, {{ hf.fallback_families }};
     --font-body: {{ bf.family }}, {{ bf.fallback_families }};
+    {%- endif %}
     --font-heading-weight: {{ settings.heading_weight | default: 800 }};
     --font-body-weight: {{ bf.weight | default: 400 }};
     --type-base: {{ settings.body_font_size | default: 100 | divided_by: 100.0 }}rem;
@@ -53,7 +62,9 @@
     --h1: calc(clamp(2.3rem, 1.4rem + 3.6vw, 3.8rem) * {{ settings.heading_h1_scale | default: 100 | divided_by: 100.0 }});
     --h2: calc(clamp(1.8rem, 1.2rem + 2.4vw, 2.7rem) * {{ settings.heading_h2_scale | default: 100 | divided_by: 100.0 }});
     --h3: calc(clamp(1.35rem, 1.1rem + 1.1vw, 1.7rem) * {{ settings.heading_h3_scale | default: 100 | divided_by: 100.0 }});
+    {%- if settings.accent_font or hf %}
     --font-accent: {{ settings.accent_font.family | default: hf.family }}, {{ settings.accent_font.fallback_families | default: 'sans-serif' }};
+    {%- endif %}
     --accent-letter-spacing: {{ settings.accent_letter_spacing | default: 14 | divided_by: 100.0 }}em;
     --accent-transform: {{ settings.accent_transform | default: 'uppercase' }};
     --body-letter-spacing: {{ settings.body_letter_spacing | default: 0 | divided_by: 100.0 }}em;
