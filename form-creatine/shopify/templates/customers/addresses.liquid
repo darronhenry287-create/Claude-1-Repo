@@ -1,0 +1,35 @@
+<section class="section">
+  <div class="wrap" style="max-width:680px">
+    <div class="center" style="margin-bottom:2rem"><span class="eyebrow">My account</span><h1 style="margin-top:.6rem">Your addresses</h1></div>
+
+    <details style="margin-bottom:2rem">
+      <summary class="btn btn-clay" style="cursor:pointer;display:inline-flex">Add a new address</summary>
+      {%- form 'customer_address', customer.new_address -%}
+        <div class="form" style="max-width:none;margin-top:1.5rem">
+          <div class="field"><label>First name</label><input type="text" name="address[first_name]"></div>
+          <div class="field"><label>Last name</label><input type="text" name="address[last_name]"></div>
+          <div class="field"><label>Address</label><input type="text" name="address[address1]"></div>
+          <div class="field"><label>City</label><input type="text" name="address[city]"></div>
+          <div class="field"><label>Country</label><input type="text" name="address[country]"></div>
+          <div class="field"><label>ZIP / Postal code</label><input type="text" name="address[zip]"></div>
+          <button type="submit" class="btn btn-primary">Save address</button>
+        </div>
+      {%- endform -%}
+    </details>
+
+    {%- for address in customer.addresses -%}
+      <div style="border:1.5px solid var(--line);border-radius:var(--radius);padding:1.4rem;margin-bottom:1rem">
+        <p class="muted" style="line-height:1.8">{{ address | format_address }}</p>
+        <div style="margin-top:1rem;display:flex;gap:1rem">
+          <a href="#" class="form__note">Edit</a>
+          {%- form 'customer_address', address, style: 'display:inline' -%}
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="drawer__remove" onclick="return confirm('Delete this address?')">Delete</button>
+          {%- endform -%}
+        </div>
+      </div>
+    {%- endfor -%}
+
+    <p style="margin-top:2rem"><a href="{{ routes.account_url }}" class="form__note">← Back to account</a></p>
+  </div>
+</section>

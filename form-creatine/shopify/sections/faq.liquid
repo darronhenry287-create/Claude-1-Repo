@@ -1,0 +1,45 @@
+<section class="section" {% if section.settings.bg %}style="background:var(--cream)"{% endif %}>
+  <div class="wrap faq">
+    <div class="center" style="margin-bottom:2.5rem">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 style="margin-top:.8rem">{{ section.settings.heading }}</h2>
+    </div>
+    <div class="acc">
+      {%- for block in section.blocks -%}
+        <div class="acc__item" {{ block.shopify_attributes }}>
+          <button class="acc__head">{{ block.settings.question }} {% render 'icon', name: 'plus' %}</button>
+          <div class="acc__body"><div class="acc__body-inner">{{ block.settings.answer }}</div></div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    { "type": "checkbox", "id": "bg", "label": "Cream background", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Good to know" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Questions, answered." }
+  ],
+  "blocks": [
+    { "type": "qa", "name": "Q&A", "settings": [
+      { "type": "text", "id": "question", "label": "Question", "default": "How many gummies should I take?" },
+      { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Four gummies a day gives you the full 5g of creatine monohydrate. Take them any time — with or without food.</p>" }
+    ] }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        { "type": "qa", "settings": { "question": "How many gummies should I take?", "answer": "<p>Four gummies a day gives you the full 5g of creatine monohydrate. Take them any time of day, with or without food — what matters most is taking them consistently.</p>" } },
+        { "type": "qa", "settings": { "question": "Do I need to \"load\" creatine?", "answer": "<p>No loading phase required. Take your four gummies daily and your muscles reach full saturation over about three to four weeks. If you'd like to load, you can double up for the first week.</p>" } },
+        { "type": "qa", "settings": { "question": "Is creatine safe?", "answer": "<p>Creatine monohydrate is one of the most studied supplements in the world, with hundreds of trials supporting daily use in healthy adults. As with any supplement, check with your doctor if you're pregnant, nursing, or have a medical condition.</p>" } },
+        { "type": "qa", "settings": { "question": "When will I notice results?", "answer": "<p>Most people feel stronger lifts and faster recovery within two to four weeks of daily use, once their muscles are fully saturated.</p>" } },
+        { "type": "qa", "settings": { "question": "Are they vegan?", "answer": "<p>Yes. Our gummies are made with pectin — no gelatin — and the creatine itself is synthetic, so it's vegan-friendly. Gluten-free, with no artificial dyes.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

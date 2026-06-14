@@ -1,0 +1,25 @@
+<section class="image-banner">
+  {%- if section.settings.image != blank -%}
+    <img src="{{ section.settings.image | image_url: width: 2000 }}" alt="{{ section.settings.image.alt | escape }}" class="image-banner__bg" loading="lazy">
+  {%- else -%}
+    <img src="{{ section.settings.fallback | default: 'lifestyle.svg' | asset_url }}" alt="" class="image-banner__bg" loading="lazy">
+  {%- endif -%}
+  <div class="image-banner__overlay"></div>
+  <div class="image-banner__content">
+    <p class="display" style="font-size:clamp(1.8rem,4vw,3rem);max-width:18ch;margin-inline:auto">{{ section.settings.quote }}</p>
+    {%- if section.settings.attribution != blank -%}<p style="margin-top:1rem;letter-spacing:.1em">{{ section.settings.attribution }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image banner",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "fallback", "label": "Fallback image filename (bundled asset)", "default": "lifestyle.svg" },
+    { "type": "text", "id": "quote", "label": "Quote", "default": "The first creatine I've ever managed to take every single day." },
+    { "type": "text", "id": "attribution", "label": "Attribution", "default": "— WOMEN'S HEALTH" }
+  ],
+  "presets": [ { "name": "Image banner" } ]
+}
+{% endschema %}

@@ -1,0 +1,45 @@
+<section class="section">
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem">
+      <div><span class="eyebrow">My account</span><h1 style="margin-top:.6rem">Hi, {{ customer.first_name | default: 'friend' }}</h1></div>
+      <a href="{{ routes.account_logout_url }}" class="btn btn-ghost">Sign out</a>
+    </div>
+
+    <div class="account-grid">
+      <div>
+        <h3 style="margin-bottom:1rem">Default address</h3>
+        {%- if customer.default_address -%}
+          <p class="muted" style="font-size:.92rem;line-height:1.8">{{ customer.default_address | format_address }}</p>
+        {%- else -%}
+          <p class="muted">No address on file.</p>
+        {%- endif -%}
+        <a href="{{ routes.account_addresses_url }}" class="form__note" style="display:inline-block;margin-top:1rem">Manage addresses →</a>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom:1rem">Order history</h3>
+        {%- paginate customer.orders by 10 -%}
+          {%- if customer.orders.size > 0 -%}
+            <table class="account-table">
+              <thead><tr><th>Order</th><th>Date</th><th>Total</th><th>Status</th></tr></thead>
+              <tbody>
+                {%- for order in customer.orders -%}
+                  <tr>
+                    <td><a href="{{ order.customer_url }}" style="text-decoration:underline">{{ order.name }}</a></td>
+                    <td>{{ order.created_at | date: '%b %-d, %Y' }}</td>
+                    <td>{{ order.total_price | money }}</td>
+                    <td>{{ order.financial_status_label }}</td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+            {%- if paginate.pages > 1 -%}<div style="margin-top:1.5rem">{{ paginate | default_pagination }}</div>{%- endif -%}
+          {%- else -%}
+            <p class="muted">You haven't placed any orders yet.</p>
+            <a href="{{ routes.all_products_collection_url }}" class="btn btn-clay" style="margin-top:1rem">Start shopping</a>
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+    </div>
+  </div>
+</section>

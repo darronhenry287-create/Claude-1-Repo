@@ -1,0 +1,27 @@
+<section class="section">
+  <div class="wrap form">
+    <div class="center" style="margin-bottom:2rem"><span class="eyebrow">FORM</span><h1 style="margin-top:.8rem">Sign in</h1></div>
+
+    <div id="login-wrap">
+      {%- form 'customer_login' -%}
+        {%- if form.errors -%}<div class="errors">{{ form.errors | default_errors }}</div>{%- endif -%}
+        <div class="field"><label>Email</label><input type="email" name="customer[email]" autocomplete="email" required></div>
+        <div class="field"><label>Password</label><input type="password" name="customer[password]" autocomplete="current-password" required></div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Sign in</button>
+        <p class="form__note center" style="margin-top:1rem"><a href="#recover" onclick="document.getElementById('recover-wrap').style.display='block';document.getElementById('login-wrap').style.display='none';return false;">Forgot your password?</a></p>
+      {%- endform -%}
+      <p class="form__note center" style="margin-top:1.5rem">New here? <a href="{{ routes.account_register_url }}">Create an account</a></p>
+    </div>
+
+    <div id="recover-wrap" style="display:none">
+      {%- form 'recover_customer_password' -%}
+        <h3 style="margin-bottom:1rem">Reset your password</h3>
+        {%- if form.posted_successfully? -%}<div class="note-success">We've sent you an email with a link to reset your password.</div>{%- endif -%}
+        {%- if form.errors -%}<div class="errors">{{ form.errors | default_errors }}</div>{%- endif -%}
+        <div class="field"><label>Email</label><input type="email" name="email" required></div>
+        <button type="submit" class="btn btn-primary btn-block">Send reset link</button>
+        <p class="form__note center" style="margin-top:1rem"><a href="#login" onclick="document.getElementById('recover-wrap').style.display='none';document.getElementById('login-wrap').style.display='block';return false;">← Back to sign in</a></p>
+      {%- endform -%}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,30 @@
+<section class="section">
+  <div class="wrap form">
+    <div class="center" style="margin-bottom:2rem">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h1 style="margin-top:.8rem">{{ page.title | default: 'Get in touch' }}</h1>
+      {%- if section.settings.subtext != blank -%}<p class="muted" style="margin-top:.6rem">{{ section.settings.subtext }}</p>{%- endif -%}
+    </div>
+
+    {%- form 'contact' -%}
+      {%- if form.posted_successfully? -%}<div class="note-success">Thanks for reaching out — we'll reply within one business day.</div>{%- endif -%}
+      {%- if form.errors -%}<div class="errors">{{ form.errors | default_errors }}</div>{%- endif -%}
+      <div class="field"><label>Name</label><input type="text" name="contact[name]" required></div>
+      <div class="field"><label>Email</label><input type="email" name="contact[email]" required></div>
+      <div class="field"><label>Message</label><textarea name="contact[body]" required></textarea></div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Send message</button>
+    {%- endform -%}
+
+    {%- if page.content != blank -%}<div class="rte" style="margin-top:2.5rem">{{ page.content }}</div>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Contact" },
+    { "type": "text", "id": "subtext", "label": "Subtext", "default": "Questions about your order, ingredients, or how to take creatine? We're here." }
+  ]
+}
+{% endschema %}

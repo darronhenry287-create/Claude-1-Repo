@@ -1,0 +1,126 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "t1": { "type": "trust", "settings": { "icon": "shield", "text": "Third-party tested" } },
+        "t2": { "type": "trust", "settings": { "icon": "truck", "text": "Free shipping over $35" } },
+        "t3": { "type": "trust", "settings": { "icon": "trial", "text": "Cancel anytime" } }
+      },
+      "block_order": ["t1", "t2", "t3"],
+      "settings": {
+        "heading": "5g creatine. One simple ritual.",
+        "subheading": "Skip the chalky powder and the shaker you always forget to clean. FORM packs the full clinically studied dose of creatine monohydrate into a daily gummy that actually tastes good — so you'll actually keep taking it.",
+        "cta_text": "Shop FORM",
+        "cta_link": "/collections/all",
+        "cta2_text": "How it works",
+        "cta2_link": "#how"
+      }
+    },
+    "marquee": {
+      "type": "marquee",
+      "blocks": {
+        "m1": { "type": "item", "settings": { "text": "WOMEN'S HEALTH" } },
+        "m2": { "type": "item", "settings": { "text": "MEN'S HEALTH" } },
+        "m3": { "type": "item", "settings": { "text": "GQ" } },
+        "m4": { "type": "item", "settings": { "text": "WELL+GOOD" } },
+        "m5": { "type": "item", "settings": { "text": "SELF" } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4", "m5"]
+    },
+    "features": {
+      "type": "feature-grid",
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "icon": "check", "title": "Full 5g dose", "text": "The clinically studied daily amount of creatine monohydrate in every serving — no half-scoops." } },
+        "f2": { "type": "feature", "settings": { "icon": "check", "title": "No chalk, no shaker", "text": "Just chew. No clumps stuck to a blender bottle, no gritty aftertaste to power through." } },
+        "f3": { "type": "feature", "settings": { "icon": "check", "title": "Lab-tested purity", "text": "Every batch is third-party tested for purity and potency. Vegan, gluten-free, no artificial dyes." } },
+        "f4": { "type": "feature", "settings": { "icon": "check", "title": "Actually tastes good", "text": "Wild Berry, Peach or Citrus — with just 2g of sugar, so the daily habit sticks." } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"]
+    },
+    "editorial": {
+      "type": "image-with-text",
+      "blocks": {
+        "p1": { "type": "point", "settings": { "text": "Full 5g of creatine monohydrate — no half-doses" } },
+        "p2": { "type": "point", "settings": { "text": "No mixing, no chalk, no shaker to wash" } },
+        "p3": { "type": "point", "settings": { "text": "Just 2g of sugar, lab-tested every batch" } }
+      },
+      "block_order": ["p1", "p2", "p3"],
+      "settings": {
+        "fallback": "lifestyle.svg",
+        "eyebrow": "The problem with powder",
+        "heading": "Creatine works. Powder doesn't fit your life.",
+        "text": "<p>Chalky scoops. Clumps at the bottom of the shaker. A tub shoved to the back of the cupboard until you forget it's there. Most people quit creatine not because it stops working — but because the routine is a chore.</p><p>FORM is the same clinical 5g dose, in a gummy you'll actually want to take.</p>",
+        "cta_text": "Meet FORM →",
+        "cta_link": "/collections/all"
+      }
+    },
+    "steps": {
+      "type": "steps",
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "Take four a day", "text": "Four gummies, any time — with coffee, after a workout, whenever. No shaker, no mess." } },
+        "s2": { "type": "step", "settings": { "title": "Stay consistent", "text": "Creatine works by saturating your muscles, so the magic is simply in the daily habit." } },
+        "s3": { "type": "step", "settings": { "title": "Feel the difference", "text": "Within two to four weeks, expect stronger lifts, faster recovery and steadier energy." } }
+      },
+      "block_order": ["s1", "s2", "s3"]
+    },
+    "stats": {
+      "type": "stats",
+      "blocks": {
+        "st1": { "type": "stat", "settings": { "number": "500+", "label": "peer-reviewed studies" } },
+        "st2": { "type": "stat", "settings": { "number": "5g", "label": "the daily dose that works" } },
+        "st3": { "type": "stat", "settings": { "number": "30s", "label": "to take it — no shaker required" } }
+      },
+      "block_order": ["st1", "st2", "st3"]
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": { "eyebrow": "Pick your flavor", "heading": "Three flavors. One simple habit.", "limit": 3 }
+    },
+    "comparison": {
+      "type": "comparison",
+      "blocks": {
+        "r1": { "type": "row", "settings": { "feature": "Tastes like a treat", "us": "✓", "a": "Chalky", "b": "Flavorless" } },
+        "r2": { "type": "row", "settings": { "feature": "No shaker, no clumps", "us": "✓", "a": "Needs mixing", "b": "Pills only" } },
+        "r3": { "type": "row", "settings": { "feature": "Full 5g in one serving", "us": "✓", "a": "Only if measured", "b": "5–7 capsules" } },
+        "r4": { "type": "row", "settings": { "feature": "Easy to take every day", "us": "✓", "a": "Often skipped", "b": "Often skipped" } },
+        "r5": { "type": "row", "settings": { "feature": "Travel-friendly", "us": "✓", "a": "Messy", "b": "OK" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4", "r5"]
+    },
+    "banner": {
+      "type": "image-banner",
+      "settings": { "fallback": "lifestyle.svg", "quote": "The first creatine I've ever managed to take every single day.", "attribution": "— WOMEN'S HEALTH" }
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "rv1": { "type": "review", "settings": { "quote": "I've started and quit creatine powder three times. These I actually look forward to — the jar lives on my desk and I never miss a day.", "name": "Maya R.", "meta": "Verified · Taking daily for 4 months" } },
+        "rv2": { "type": "review", "settings": { "quote": "No bloat, no chalky shake to choke down. My lifts are up and recovery is noticeably faster.", "name": "Daniel K.", "meta": "Verified · Wild Berry" } },
+        "rv3": { "type": "review", "settings": { "quote": "Wild Berry is genuinely delicious. My wife and I both take them now — it's part of our morning.", "name": "Tom & Priya", "meta": "Verified · Subscribers" } }
+      },
+      "block_order": ["rv1", "rv2", "rv3"]
+    },
+    "guarantee": {
+      "type": "cta",
+      "settings": {
+        "eyebrow": "Our promise",
+        "heading": "Love it, or it's on us.",
+        "text": "Give FORM 30 days. If you're not recovering faster, lifting stronger, and actually enjoying your daily creatine, we'll refund you — and you keep the jar.",
+        "button_text": "Start the ritual",
+        "button_link": "/collections/all"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "qa", "settings": { "question": "How many gummies should I take?", "answer": "<p>Four gummies a day gives you the full 5g of creatine monohydrate. Take them any time, with or without food — what matters most is taking them consistently.</p>" } },
+        "q2": { "type": "qa", "settings": { "question": "Do I need to \"load\" creatine?", "answer": "<p>No loading phase required. Take your four gummies daily and your muscles reach full saturation over about three to four weeks.</p>" } },
+        "q3": { "type": "qa", "settings": { "question": "Is creatine safe?", "answer": "<p>Creatine monohydrate is one of the most studied supplements in the world, with hundreds of trials supporting daily use in healthy adults. Check with your doctor if you're pregnant, nursing, or have a medical condition.</p>" } },
+        "q4": { "type": "qa", "settings": { "question": "Are they vegan?", "answer": "<p>Yes — made with pectin, not gelatin, and the creatine is synthetic. Gluten-free, with no artificial dyes.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"]
+    }
+  },
+  "order": ["hero", "marquee", "features", "editorial", "steps", "stats", "featured", "comparison", "banner", "reviews", "guarantee", "faq"]
+}

@@ -1,0 +1,85 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "how": { "type": "accordion", "settings": { "title": "How to take", "content": "<p>Take 4 gummies daily for your full 5g dose of creatine monohydrate. Any time of day, with or without food. Consistency is what counts — let your muscles saturate over 3–4 weeks for the full effect.</p>" } },
+        "ingredients": { "type": "accordion", "settings": { "title": "Ingredients & nutrition", "content": "<p>Creatine monohydrate (5g per 4 gummies), organic tapioca syrup, cane sugar, water, pectin, citric acid, natural flavor, fruit &amp; vegetable juice (for color). 2g sugar per serving. Vegan · gluten-free · no artificial dyes. 120 gummies — a 30-day supply.</p>" } },
+        "shipping": { "type": "accordion", "settings": { "title": "Shipping & returns", "content": "<p>Free shipping over $35, ships within 24 hours. Subscribe &amp; save 20% — skip, pause or cancel anytime. Not feeling it? 30-day money-back guarantee, and you keep the jar.</p>" } }
+      },
+      "block_order": ["how", "ingredients", "shipping"]
+    },
+    "steps": {
+      "type": "steps",
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "Take four a day", "text": "Four gummies, any time — with coffee, after a workout, whenever. No shaker, no mess." } },
+        "s2": { "type": "step", "settings": { "title": "Stay consistent", "text": "Creatine works by saturating your muscles, so the magic is simply in the daily habit." } },
+        "s3": { "type": "step", "settings": { "title": "Feel the difference", "text": "Within two to four weeks, expect stronger lifts, faster recovery and steadier energy." } }
+      },
+      "block_order": ["s1", "s2", "s3"]
+    },
+    "inside": {
+      "type": "image-with-text",
+      "blocks": {
+        "p1": { "type": "point", "settings": { "text": "5g creatine monohydrate — the clinically studied daily dose" } },
+        "p2": { "type": "point", "settings": { "text": "Pectin-based and vegan — no gelatin" } },
+        "p3": { "type": "point", "settings": { "text": "Just 2g sugar, sweetened simply — no artificial dyes" } },
+        "p4": { "type": "point", "settings": { "text": "Third-party tested every batch for purity and potency" } }
+      },
+      "block_order": ["p1", "p2", "p3", "p4"],
+      "settings": { "fallback": "inside.svg", "reverse": true, "warm": false, "bg": true, "eyebrow": "What's inside", "heading": "Four gummies. Everything they need, nothing they don't.", "text": "<p>One clean formula, dosed to the research and made to taste like something you'd reach for anyway.</p>", "cta_text": "" }
+    },
+    "banner": {
+      "type": "image-banner",
+      "settings": { "fallback": "gummies.svg", "quote": "The first creatine I've ever managed to take every single day.", "attribution": "— WOMEN'S HEALTH" }
+    },
+    "features": {
+      "type": "feature-grid",
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "icon": "check", "title": "Full 5g dose", "text": "The clinically studied daily amount of creatine monohydrate in every serving." } },
+        "f2": { "type": "feature", "settings": { "icon": "check", "title": "No chalk, no shaker", "text": "Just chew — no clumps, no gritty aftertaste, nothing to wash up." } },
+        "f3": { "type": "feature", "settings": { "icon": "check", "title": "Lab-tested purity", "text": "Third-party tested every batch. Vegan, gluten-free, no artificial dyes." } },
+        "f4": { "type": "feature", "settings": { "icon": "check", "title": "Actually tastes good", "text": "Wild Berry, Peach or Citrus — with just 2g of sugar." } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"]
+    },
+    "comparison": {
+      "type": "comparison",
+      "blocks": {
+        "r1": { "type": "row", "settings": { "feature": "Tastes like a treat", "us": "✓", "a": "Chalky", "b": "Flavorless" } },
+        "r2": { "type": "row", "settings": { "feature": "No shaker, no clumps", "us": "✓", "a": "Needs mixing", "b": "Pills only" } },
+        "r3": { "type": "row", "settings": { "feature": "Full 5g in one serving", "us": "✓", "a": "Only if measured", "b": "5–7 capsules" } },
+        "r4": { "type": "row", "settings": { "feature": "Easy to take every day", "us": "✓", "a": "Often skipped", "b": "Often skipped" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4"]
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "rv1": { "type": "review", "settings": { "quote": "I've started and quit creatine powder three times. These I actually look forward to.", "name": "Maya R.", "meta": "Verified · Taking daily for 4 months" } },
+        "rv2": { "type": "review", "settings": { "quote": "No bloat, no chalky shake to choke down. My lifts are up and recovery is noticeably faster.", "name": "Daniel K.", "meta": "Verified · Wild Berry" } },
+        "rv3": { "type": "review", "settings": { "quote": "Wild Berry is genuinely delicious. My wife and I both take them now.", "name": "Tom & Priya", "meta": "Verified · Subscribers" } }
+      },
+      "block_order": ["rv1", "rv2", "rv3"],
+      "settings": { "heading": "People don't just take it. They stick with it." }
+    },
+    "crosssell": {
+      "type": "featured-collection",
+      "settings": { "eyebrow": "More to love", "heading": "Try another flavor", "limit": 3 }
+    },
+    "guarantee": {
+      "type": "cta",
+      "settings": { "eyebrow": "Our promise", "heading": "Love it, or it's on us.", "text": "Give FORM 30 days. If you're not recovering faster, lifting stronger and enjoying your daily creatine, we'll refund you — and you keep the jar.", "button_text": "", "button_link": "" }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "qa", "settings": { "question": "How many gummies should I take?", "answer": "<p>Four gummies a day gives you the full 5g of creatine monohydrate. Take them any time, with or without food.</p>" } },
+        "q2": { "type": "qa", "settings": { "question": "Do I need to load creatine?", "answer": "<p>No loading required. Take four daily and your muscles saturate over about three to four weeks.</p>" } },
+        "q3": { "type": "qa", "settings": { "question": "Will it make me hold water?", "answer": "<p>Creatine draws a small amount of water into the muscle, which is part of how it works. There's no bloating for most people at the daily 5g dose.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3"]
+    }
+  },
+  "order": ["main", "steps", "inside", "banner", "features", "comparison", "reviews", "crosssell", "guarantee", "faq"]
+}

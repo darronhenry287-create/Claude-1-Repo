@@ -1,0 +1,56 @@
+<section class="section night" id="science">
+  <svg class="stars-bg" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
+    <g fill="#7c8a6b" opacity="0.5">
+      <circle cx="120" cy="90" r="3"/><circle cx="320" cy="160" r="2"/><circle cx="540" cy="60" r="4"/>
+      <circle cx="760" cy="130" r="2.5"/><circle cx="980" cy="80" r="3"/><circle cx="1180" cy="150" r="2"/>
+      <circle cx="1320" cy="70" r="3"/><circle cx="220" cy="300" r="2"/><circle cx="640" cy="340" r="2.5"/>
+      <circle cx="1040" cy="320" r="2"/><circle cx="1280" cy="380" r="3"/><circle cx="80" cy="420" r="2.5"/>
+    </g>
+  </svg>
+  <div class="wrap" style="position:relative">
+    <div class="center" style="max-width:680px;margin-inline:auto">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 style="margin:1rem 0">{{ section.settings.heading }}</h2>
+      <p class="lede">{{ section.settings.text }}</p>
+    </div>
+    <div class="stat-row">
+      {%- for block in section.blocks -%}
+        <div class="stat reveal" {{ block.shopify_attributes }}>
+          <div class="num">{{ block.settings.number }}</div>
+          <div class="lbl">{{ block.settings.label }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.footnote != blank -%}
+      <p class="center" style="margin-top:2.5rem;font-size:.78rem;opacity:.6">{{ section.settings.footnote }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Stats / Science",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why creatine" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "One of the most researched supplements on earth." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Creatine isn't a trend. Decades of research back it for strength, power and faster recovery — with a growing body of work pointing to benefits for focus and energy too. The hard part has always been taking it every day." },
+    { "type": "text", "id": "footnote", "label": "Footnote", "default": "Creatine monohydrate is among the most studied ingredients in sports nutrition. Individual results vary." }
+  ],
+  "blocks": [
+    { "type": "stat", "name": "Stat", "settings": [
+      { "type": "text", "id": "number", "label": "Number", "default": "500+" },
+      { "type": "text", "id": "label", "label": "Label", "default": "peer-reviewed studies" }
+    ] }
+  ],
+  "presets": [
+    {
+      "name": "Stats / Science",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "500+", "label": "peer-reviewed studies" } },
+        { "type": "stat", "settings": { "number": "5g", "label": "the daily dose that works" } },
+        { "type": "stat", "settings": { "number": "30s", "label": "to take it — no shaker required" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

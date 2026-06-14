@@ -1,0 +1,15 @@
+<div class="announce">{{ section.settings.text }}</div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Free shipping over $35 · Subscribe &amp; save 20% · Lab-tested every batch</p>"
+    }
+  ]
+}
+{% endschema %}

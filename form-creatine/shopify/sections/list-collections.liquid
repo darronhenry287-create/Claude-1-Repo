@@ -1,0 +1,30 @@
+<section style="background:var(--cream);padding-block:clamp(2.5rem,5vw,4rem)">
+  <div class="wrap center">
+    <span class="eyebrow">Browse</span>
+    <h1 style="margin-top:.8rem">Shop FORM</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="grid products" style="grid-template-columns:repeat(3,1fr)">
+      {%- for collection in collections -%}
+        <a href="{{ collection.url }}" class="card reveal">
+          <div class="card__media">
+            {%- if collection.featured_image -%}
+              <img src="{{ collection.featured_image | image_url: width: 600 }}" alt="{{ collection.title | escape }}" loading="lazy">
+            {%- else -%}
+              {% render 'jar-art' %}
+            {%- endif -%}
+          </div>
+          <h3 class="card__title">{{ collection.title }}</h3>
+          <div class="card__reviews">{{ collection.products_count }} products</div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Collections list", "settings": [] }
+{% endschema %}

@@ -1,0 +1,19 @@
+{
+  "current": {
+    "color_bg": "#f3ede3",
+    "color_text": "#20211d",
+    "color_accent": "#c9744d",
+    "heading_scale": 100,
+    "logo_text": "FORM",
+    "free_ship_threshold": 35
+  },
+  "presets": {
+    "FORM": {
+      "color_bg": "#f3ede3",
+      "color_text": "#20211d",
+      "color_accent": "#c9744d",
+      "logo_text": "FORM",
+      "free_ship_threshold": 35
+    }
+  }
+}
