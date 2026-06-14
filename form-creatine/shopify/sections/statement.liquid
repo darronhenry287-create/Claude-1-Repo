@@ -1,0 +1,20 @@
+<section class="section {{ section.settings.bg }}">
+  <div class="wrap statement">
+    <div class="statement__big">{{ section.settings.big }}</div>
+    {%- if section.settings.text != blank -%}<p class="lede">{{ section.settings.text }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Statement",
+  "settings": [
+    { "type": "select", "id": "bg", "label": "Background", "options": [
+      { "value": "bg-cream", "label": "Cream" }, { "value": "bg-sky", "label": "Sky" }, { "value": "bg-mint", "label": "Mint" }, { "value": "", "label": "White" }
+    ], "default": "bg-cream" },
+    { "type": "richtext", "id": "big", "label": "Big statement", "default": "<p>Five grams. Every single day. That's the secret.</p>" },
+    { "type": "textarea", "id": "text", "label": "Supporting text", "default": "Creatine is one of the most researched supplements on earth — proven for strength, power and recovery. It only fails when the routine is a chore. So we removed the chore." }
+  ],
+  "presets": [ { "name": "Statement" } ]
+}
+{% endschema %}

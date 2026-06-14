@@ -1,0 +1,29 @@
+<section class="press">
+  <div class="wrap press__inner">
+    <span class="press__label">{{ section.settings.label }}</span>
+    {%- for block in section.blocks -%}
+      <span class="press__logo" {{ block.shopify_attributes }}>{{ block.settings.name }}</span>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Press strip",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "As featured in" }
+  ],
+  "blocks": [
+    { "type": "logo", "name": "Press name", "settings": [ { "type": "text", "id": "name", "label": "Name", "default": "Women's Health" } ] }
+  ],
+  "presets": [
+    { "name": "Press strip", "blocks": [
+      { "type": "logo", "settings": { "name": "Women's Health" } },
+      { "type": "logo", "settings": { "name": "Men's Health" } },
+      { "type": "logo", "settings": { "name": "GQ" } },
+      { "type": "logo", "settings": { "name": "Well+Good" } },
+      { "type": "logo", "settings": { "name": "SELF" } }
+    ] }
+  ]
+}
+{% endschema %}

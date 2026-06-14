@@ -2,8 +2,6 @@
   <defs>
     <clipPath id="jarB"><rect x="112" y="126" width="176" height="214" rx="30"/></clipPath>
   </defs>
-  <rect width="400" height="400" fill="#ffffff"/>
-  <circle cx="200" cy="190" r="150" fill="#f4f7fb"/>
   <ellipse cx="200" cy="356" rx="120" ry="20" fill="#14233f" opacity="0.08"/>
   <!-- jar body -->
   <rect x="112" y="126" width="176" height="214" rx="30" fill="#ffffff" stroke="#e6eaf2" stroke-width="2"/>

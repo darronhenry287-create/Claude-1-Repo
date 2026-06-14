@@ -1,0 +1,64 @@
+<section class="section {{ section.settings.bg }}">
+  <div class="wrap">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-head center">
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow eyebrow--plain">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+    <div class="bento">
+      {%- for block in section.blocks -%}
+        {%- assign size = '' -%}
+        {%- if block.settings.size == 'big' -%}{%- assign size = 'cell--big' -%}{%- elsif block.settings.size == 'wide' -%}{%- assign size = 'cell--wide' -%}{%- elsif block.settings.size == 'tall' -%}{%- assign size = 'cell--tall' -%}{%- endif -%}
+        <div class="cell cell--{{ block.settings.color }} {{ size }} reveal" {{ block.shopify_attributes }}>
+          {%- if block.settings.use_image -%}
+            <div class="cell__media"><img src="{{ 'jar-berry.svg' | asset_url }}" alt="{{ block.settings.title | escape }}"></div>
+            <div class="cell__inner"><h3>{{ block.settings.title }}</h3><p>{{ block.settings.text }}</p></div>
+          {%- elsif block.settings.big_num != blank -%}
+            <div class="cell__big-num">{{ block.settings.big_num }}</div>
+            <h3>{{ block.settings.title }}</h3><p>{{ block.settings.text }}</p>
+          {%- else -%}
+            <div class="cell__ic">{% render 'icon', name: block.settings.icon %}</div>
+            <h3>{{ block.settings.title }}</h3><p>{{ block.settings.text }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bento benefits",
+  "settings": [
+    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "", "label": "White" }, { "value": "bg-cream", "label": "Cream" } ], "default": "" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why FORM" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Everything creatine should be." }
+  ],
+  "blocks": [
+    {
+      "type": "cell",
+      "name": "Cell",
+      "settings": [
+        { "type": "select", "id": "color", "label": "Colour", "options": [ { "value": "paper", "label": "White" }, { "value": "cream", "label": "Cream" }, { "value": "sky", "label": "Sky" }, { "value": "mint", "label": "Mint" }, { "value": "ink", "label": "Navy" }, { "value": "coral", "label": "Coral" } ], "default": "paper" },
+        { "type": "select", "id": "size", "label": "Size", "options": [ { "value": "default", "label": "1×1" }, { "value": "wide", "label": "Wide (2×1)" }, { "value": "tall", "label": "Tall (1×2)" }, { "value": "big", "label": "Big (2×2)" } ], "default": "default" },
+        { "type": "checkbox", "id": "use_image", "label": "Show product image", "default": false },
+        { "type": "text", "id": "big_num", "label": "Big number (optional)" },
+        { "type": "select", "id": "icon", "label": "Icon", "options": [ { "value": "check", "label": "Check" }, { "value": "shield", "label": "Shield" }, { "value": "truck", "label": "Truck" }, { "value": "trial", "label": "Guarantee" } ], "default": "check" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Benefit" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Short supporting line." }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Bento benefits", "blocks": [
+      { "type": "cell", "settings": { "color": "cream", "size": "big", "use_image": true, "title": "The daily 5g, made effortless", "text": "One clean formula, dosed to the research and built to taste good — so the habit actually sticks." } },
+      { "type": "cell", "settings": { "color": "paper", "size": "default", "icon": "check", "title": "No chalk, no shaker", "text": "Just chew. Nothing to mix or wash." } },
+      { "type": "cell", "settings": { "color": "sky", "size": "default", "icon": "shield", "title": "Lab-tested", "text": "Third-party verified, every batch." } },
+      { "type": "cell", "settings": { "color": "coral", "size": "default", "big_num": "2g", "title": "sugar only", "text": "Sweetened simply — no artificial dyes." } },
+      { "type": "cell", "settings": { "color": "mint", "size": "default", "icon": "check", "title": "Vegan, no gelatin", "text": "Pectin-based & gluten-free." } },
+      { "type": "cell", "settings": { "color": "ink", "size": "wide", "icon": "truck", "title": "Free shipping & subscribe to save 20%", "text": "Ships in 24h. Skip, pause or cancel anytime — no strings." } }
+    ] }
+  ]
+}
+{% endschema %}

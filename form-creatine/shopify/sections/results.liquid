@@ -1,0 +1,35 @@
+<section class="section {{ section.settings.bg }}">
+  <div class="wrap results">
+    <div>
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 style="margin:.9rem 0 0">{{ section.settings.heading }}</h2>
+      <p class="lede" style="margin-top:1rem">{{ section.settings.text }}</p>
+      {%- if section.settings.cta_text != blank -%}<a href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" class="btn btn-ink btn-lg" style="margin-top:1.6rem">{{ section.settings.cta_text }}</a>{%- endif -%}
+    </div>
+    <div class="chart reveal">
+      <div class="chart__bars">
+        <div class="chart__bar"><div class="chart__fill is-ghost" style="height:22%">—</div><div class="chart__x">Day 1</div></div>
+        <div class="chart__bar"><div class="chart__fill" style="height:45%">+</div><div class="chart__x">Week 1</div></div>
+        <div class="chart__bar"><div class="chart__fill" style="height:74%">++</div><div class="chart__x">Week 2</div></div>
+        <div class="chart__bar"><div class="chart__fill" style="height:100%">★</div><div class="chart__x">Week 4</div></div>
+      </div>
+      <p class="chart__cap">{{ section.settings.caption }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Results chart",
+  "settings": [
+    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "", "label": "White" }, { "value": "bg-cream", "label": "Cream" } ], "default": "" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The payoff" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Consistency compounds." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Creatine saturates your muscles over a few weeks of daily use — and that's when the strength and recovery benefits really show up. The hardest part was always remembering to take it. Not anymore." },
+    { "type": "text", "id": "cta_text", "label": "Button", "default": "Start your streak" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "text", "id": "caption", "label": "Chart caption", "default": "Illustrative muscle creatine saturation with daily use. Individual results vary." }
+  ],
+  "presets": [ { "name": "Results chart" } ]
+}
+{% endschema %}

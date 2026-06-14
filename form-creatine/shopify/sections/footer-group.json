@@ -2,20 +2,16 @@
   "type": "footer",
   "name": "Footer group",
   "sections": {
-    "newsletter": {
-      "type": "newsletter",
-      "settings": {}
-    },
     "footer": {
       "type": "footer",
       "settings": {},
       "blocks": {
         "shop": { "type": "menu", "settings": { "heading": "Shop" } },
-        "support": { "type": "menu", "settings": { "heading": "Support" } },
+        "learn": { "type": "menu", "settings": { "heading": "Learn" } },
         "company": { "type": "menu", "settings": { "heading": "Company" } }
       },
-      "block_order": ["shop", "support", "company"]
+      "block_order": ["shop", "learn", "company"]
     }
   },
-  "order": ["newsletter", "footer"]
+  "order": ["footer"]
 }

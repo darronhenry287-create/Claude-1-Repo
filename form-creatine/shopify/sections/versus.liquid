@@ -1,0 +1,59 @@
+<section class="section {{ section.settings.bg }}">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow eyebrow--plain">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    <div class="versus">
+      <div class="vs-card vs-old reveal">
+        <h3>{{ section.settings.old_title }}</h3>
+        <ul>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'old' -%}
+              <li {{ block.shopify_attributes }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#aa3a2a" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg> {{ block.settings.text }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+      <div class="vs-card vs-form reveal d1">
+        <h3>{{ section.settings.form_title }} <span class="pill pill--coral">5g</span></h3>
+        <ul>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'form' -%}
+              <li {{ block.shopify_attributes }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7fffc4" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg> {{ block.settings.text }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Versus",
+  "settings": [
+    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "bg-cream", "label": "Cream" }, { "value": "", "label": "White" }, { "value": "bg-sky", "label": "Sky" } ], "default": "bg-cream" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The easy switch" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The old way vs. FORM." },
+    { "type": "text", "id": "old_title", "label": "Left title", "default": "Creatine powder" },
+    { "type": "text", "id": "form_title", "label": "Right title", "default": "FORM gummies" }
+  ],
+  "blocks": [
+    { "type": "old", "name": "Old-way point", "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Chalky, gritty, hard to drink" } ] },
+    { "type": "form", "name": "FORM point", "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Tastes like a treat you look forward to" } ] }
+  ],
+  "presets": [
+    { "name": "Versus", "blocks": [
+      { "type": "old", "settings": { "text": "Chalky, gritty, hard to drink" } },
+      { "type": "old", "settings": { "text": "A shaker to clean every day" } },
+      { "type": "old", "settings": { "text": "Clumps at the bottom of the tub" } },
+      { "type": "old", "settings": { "text": "Forgotten by week two" } },
+      { "type": "form", "settings": { "text": "Tastes like a treat you look forward to" } },
+      { "type": "form", "settings": { "text": "Zero prep — just chew four" } },
+      { "type": "form", "settings": { "text": "The full 5g clinical dose, every time" } },
+      { "type": "form", "settings": { "text": "A habit that actually lasts" } }
+    ] }
+  ]
+}
+{% endschema %}

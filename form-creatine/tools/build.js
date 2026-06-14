@@ -1,6 +1,6 @@
 /* ============================================================
-   FORM static-site builder
-   Wraps body partials in src/ with the shared header/footer chrome
+   FORM static-site builder (single product)
+   Wraps body partials in src/ with shared header/footer chrome
    and writes the final *.html pages to the repo root.
    Run:  node tools/build.js
    ============================================================ */
@@ -11,28 +11,28 @@ const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, 'src');
 
 const NAV = [
-  ['product.html', 'Shop Creatine'],
-  ['collection.html', 'All Flavors'],
-  ['about.html', 'Our Story'],
+  ['product.html', 'Shop'],
+  ['how-to.html', 'How it works'],
   ['reviews.html', 'Reviews'],
+  ['faq.html', 'FAQ'],
 ];
-const MOBILE_NAV = [...NAV, ['how-to.html', 'How It Works'], ['faq.html', 'FAQ'], ['contact.html', 'Contact']];
+const MOBILE_NAV = [...NAV, ['about.html', 'Our Story'], ['contact.html', 'Contact']];
 
 const FOOTER_COLS = [
-  ['Shop', [['product.html', 'Daily Creatine'], ['collection.html', 'All Flavors'], ['bundles.html', 'Bundles & Subscribe'], ['reviews.html', 'Reviews']]],
+  ['Shop', [['product.html', 'Daily Creatine'], ['product.html', 'Subscribe & Save'], ['reviews.html', 'Reviews']]],
   ['Learn', [['how-to.html', 'How to Take Creatine'], ['faq.html', 'FAQ'], ['quality.html', 'Our Quality'], ['guarantee.html', '30-Day Guarantee']]],
-  ['Company', [['about.html', 'Our Story'], ['contact.html', 'Contact'], ['shipping.html', 'Shipping & Returns'], ['contact.html', 'Wholesale']]],
+  ['Company', [['about.html', 'Our Story'], ['contact.html', 'Contact'], ['shipping.html', 'Shipping & Returns']]],
 ];
-const LEGAL = [['privacy.html', 'Privacy Policy'], ['terms.html', 'Terms of Service'], ['refund.html', 'Refund Policy'], ['shipping.html', 'Shipping Policy']];
+const LEGAL = [['privacy.html', 'Privacy'], ['terms.html', 'Terms'], ['refund.html', 'Refunds'], ['shipping.html', 'Shipping']];
 
 const icon = {
-  menu: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',
-  search: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>',
-  cart: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>',
-  close: '<svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M18 6 6 18M6 6l12 12"/></svg>',
-  ig: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
-  tt: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12a4 4 0 1 0 4 4V4c1 2 3 3 5 3"/></svg>',
-  pin: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2a10 10 0 0 0-4 19l1-5M9 11a3 3 0 1 1 6 0c0 3-2 5-4 5"/></svg>',
+  menu: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',
+  search: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>',
+  cart: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>',
+  close: '<svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M18 6 6 18M6 6l12 12"/></svg>',
+  ig: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
+  tt: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 12a4 4 0 1 0 4 4V4c1 2 3 3 5 3"/></svg>',
+  yt: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3Z" fill="currentColor"/></svg>',
 };
 
 const navLinks = (arr) => arr.map(([h, t]) => `<a href="${h}">${t}</a>`).join('\n        ');
@@ -44,33 +44,36 @@ function chrome() {
   <header class="header">
     <div class="header__inner">
       <button class="icon-btn burger" data-action="open-menu" aria-label="Menu">${icon.menu}</button>
-      <a href="index.html" class="logo">FORM</a>
+      <a href="index.html" class="logo">FORM<span>.</span></a>
       <nav class="nav">
         ${navLinks(NAV)}
       </nav>
       <div class="header__actions">
         <button class="icon-btn desktop-only" aria-label="Search">${icon.search}</button>
         <button class="icon-btn" data-action="open-cart" aria-label="Cart">${icon.cart}<span class="cart-count"></span></button>
+        <a href="product.html" class="btn btn-coral header__cta">Get FORM</a>
       </div>
     </div>
   </header>`,
-    foot: `  <footer class="footer">
-    <div class="wrap">
-      <div class="footer__top">
-        <div class="footer__brand">
-          <span class="logo">FORM</span>
-          <p>Creatine made effortless. 5g a day in a gummy you'll actually look forward to. Formulated in the USA, third-party tested.</p>
-        </div>
-        ${FOOTER_COLS.map(([h, links]) => `<div class="footer__col"><h4>${h}</h4>${navLinks(links)}</div>`).join('\n        ')}
+    foot: `  <footer class="foot">
+    <div class="foot__cta">
+      <a href="product.html" class="wordmark">FORM<span>.</span></a>
+    </div>
+    <div class="foot__top">
+      <div class="foot__brand">
+        <span class="logo" style="color:#fff">FORM<span style="color:var(--coral)">.</span></span>
+        <p>Creatine made effortless. 5g a day in a gummy you'll actually look forward to. Formulated in the USA, third-party tested.</p>
+        <form class="signup"><input type="email" placeholder="Email for 15% off" required aria-label="Email"><button class="btn btn-coral" type="submit">Join</button></form>
       </div>
-      <div class="footer__bottom">
-        <p>© 2026 FORM Nutrition. All rights reserved. These statements have not been evaluated by the FDA.</p>
-        <div class="footer__legal">${LEGAL.map(([h, t]) => `<a href="${h}">${t}</a>`).join('')}</div>
-        <div class="footer__socials">
-          <a href="#" aria-label="Instagram">${icon.ig}</a>
-          <a href="#" aria-label="TikTok">${icon.tt}</a>
-          <a href="#" aria-label="Pinterest">${icon.pin}</a>
-        </div>
+      ${FOOTER_COLS.map(([h, links]) => `<div class="foot__col"><h4>${h}</h4>${navLinks(links)}</div>`).join('\n      ')}
+    </div>
+    <div class="foot__bottom">
+      <p>© 2026 FORM Nutrition. These statements have not been evaluated by the FDA.</p>
+      <div class="foot__legal">${LEGAL.map(([h, t]) => `<a href="${h}">${t}</a>`).join('')}</div>
+      <div class="foot__socials">
+        <a href="#" aria-label="Instagram">${icon.ig}</a>
+        <a href="#" aria-label="TikTok">${icon.tt}</a>
+        <a href="#" aria-label="YouTube">${icon.yt}</a>
       </div>
     </div>
   </footer>
@@ -83,15 +86,16 @@ function chrome() {
       <div class="free-ship" id="free-ship"></div>
       <div class="drawer__subtotal"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
       <p class="drawer__note">Shipping & taxes calculated at checkout</p>
-      <button class="btn btn-primary btn-block btn-lg" data-action="checkout">Checkout</button>
+      <button class="btn btn-coral btn-block btn-lg" data-action="checkout">Checkout</button>
     </div>
   </aside>
 
   <div class="mobile-menu" id="mobile-menu">
-    <div class="mobile-menu__head"><span class="logo">FORM</span><button class="icon-btn" data-action="close-menu" aria-label="Close">${icon.close}</button></div>
+    <div class="mobile-menu__head"><span class="logo">FORM<span>.</span></span><button class="icon-btn" data-action="close-menu" aria-label="Close">${icon.close}</button></div>
     <nav>
       ${navLinks(MOBILE_NAV)}
     </nav>
+    <a href="product.html" class="btn btn-coral btn-lg btn-block" style="margin-top:1.5rem">Get FORM — $39</a>
   </div>`,
   };
 }
@@ -125,14 +129,12 @@ ${c.foot}
 }
 
 const PAGES = [
-  ['index.html', 'home.html', 'FORM — 5g Creatine Gummies. One Simple Ritual.', 'FORM Daily Creatine Gummies. The full 5g clinical dose of creatine monohydrate in a daily gummy — no chalk, no shaker. Subscribe & save, free shipping over $35.'],
-  ['product.html', 'product.html', 'FORM Daily Creatine Gummies', '5g creatine monohydrate per serving, in three flavors. No mixing, no clumps. Third-party tested. Subscribe & save 20%.'],
-  ['collection.html', 'collection.html', 'Shop All Flavors — FORM', 'Shop FORM creatine gummies in Wild Berry, Peach and Citrus — plus bundles and subscribe & save.'],
+  ['index.html', 'home.html', 'FORM — 5g Creatine Gummies, Made Effortless', 'FORM Daily Creatine Gummies: the full 5g clinical dose of creatine monohydrate in a daily gummy. No chalk, no shaker. Subscribe & save, free shipping over $35.'],
+  ['product.html', 'product.html', 'FORM Daily Creatine Gummies', '5g creatine monohydrate per serving in three flavors. No mixing, no clumps, third-party tested. Subscribe & save 20%.'],
   ['about.html', 'about.html', 'Our Story — FORM', 'Why we built FORM — the simplest way to actually take your creatine every day.'],
   ['contact.html', 'contact.html', 'Contact — FORM', 'Questions about FORM creatine gummies? Get in touch with our team.'],
   ['cart.html', 'cart.html', 'Your Cart — FORM', 'Your FORM cart.'],
   ['reviews.html', 'reviews.html', 'Reviews — FORM', '9,000+ five-star reviews of FORM creatine gummies.'],
-  ['bundles.html', 'bundles.html', 'Bundles & Subscribe — FORM', 'Save more with FORM bundles and subscribe & save 20%.'],
   ['faq.html', 'faq.html', 'FAQ — FORM', 'Frequently asked questions about FORM creatine gummies, dosing, shipping and returns.'],
   ['how-to.html', 'how-to.html', 'How to Take Creatine — FORM', 'How to take creatine the easy way: four FORM gummies a day for your full 5g dose.'],
   ['guarantee.html', 'guarantee.html', '30-Day Guarantee — FORM', 'Love it or it is on us. The FORM 30-day money-back guarantee, explained.'],

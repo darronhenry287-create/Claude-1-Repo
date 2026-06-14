@@ -1,7 +1,10 @@
 {
   "sections": {
     "main": { "type": "main-collection" },
-    "newsletter": { "type": "newsletter" }
+    "promise": {
+      "type": "promise",
+      "settings": { "bg": "bg-cream", "eyebrow": "Our promise", "heading": "Love it, or it's on us.", "text": "Every order is backed by our 30-day money-back guarantee. Not for you? Keep the jar — we'll refund you anyway.", "cta_text": "", "cta_link": "" }
+    }
   },
-  "order": ["main", "newsletter"]
+  "order": ["main", "promise"]
 }

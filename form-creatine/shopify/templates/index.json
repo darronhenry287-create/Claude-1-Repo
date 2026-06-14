@@ -2,125 +2,125 @@
   "sections": {
     "hero": {
       "type": "hero",
-      "blocks": {
-        "t1": { "type": "trust", "settings": { "icon": "shield", "text": "Third-party tested" } },
-        "t2": { "type": "trust", "settings": { "icon": "truck", "text": "Free shipping over $35" } },
-        "t3": { "type": "trust", "settings": { "icon": "trial", "text": "Cancel anytime" } }
-      },
-      "block_order": ["t1", "t2", "t3"],
       "settings": {
-        "heading": "5g creatine. One simple ritual.",
-        "subheading": "Skip the chalky powder and the shaker you always forget to clean. FORM packs the full clinically studied dose of creatine monohydrate into a daily gummy that actually tastes good — so you'll actually keep taking it.",
-        "cta_text": "Shop FORM",
+        "eyebrow": "5g creatine · one daily gummy",
+        "heading": "<p>Creatine you'll actually keep taking.</p>",
+        "subheading": "The full clinically studied dose of creatine monohydrate — no chalky powder, no shaker, no clumps. Just four gummies a day that taste like something you'd reach for anyway.",
+        "cta_text": "Get FORM — $39",
         "cta_link": "/collections/all",
         "cta2_text": "How it works",
-        "cta2_link": "#how"
+        "cta2_link": "#how",
+        "rating_score": "4.9",
+        "rating_text": "9,000+ happy reviews",
+        "chip1_value": "5g",
+        "chip1_label": "creatine per serving",
+        "chip2_label": "vegan · 2g sugar",
+        "chip3_label": "9,000+ 5-star"
       }
     },
-    "marquee": {
-      "type": "marquee",
+    "press": {
+      "type": "press",
       "blocks": {
-        "m1": { "type": "item", "settings": { "text": "WOMEN'S HEALTH" } },
-        "m2": { "type": "item", "settings": { "text": "MEN'S HEALTH" } },
-        "m3": { "type": "item", "settings": { "text": "GQ" } },
-        "m4": { "type": "item", "settings": { "text": "WELL+GOOD" } },
-        "m5": { "type": "item", "settings": { "text": "SELF" } }
+        "p1": { "type": "logo", "settings": { "name": "Women's Health" } },
+        "p2": { "type": "logo", "settings": { "name": "Men's Health" } },
+        "p3": { "type": "logo", "settings": { "name": "GQ" } },
+        "p4": { "type": "logo", "settings": { "name": "Well+Good" } },
+        "p5": { "type": "logo", "settings": { "name": "SELF" } }
       },
-      "block_order": ["m1", "m2", "m3", "m4", "m5"]
+      "block_order": ["p1", "p2", "p3", "p4", "p5"]
     },
-    "features": {
-      "type": "feature-grid",
+    "bento": {
+      "type": "bento",
+      "settings": { "eyebrow": "Why FORM", "heading": "Everything creatine should be. Nothing it shouldn't." },
       "blocks": {
-        "f1": { "type": "feature", "settings": { "icon": "check", "title": "Full 5g dose", "text": "The clinically studied daily amount of creatine monohydrate in every serving — no half-scoops." } },
-        "f2": { "type": "feature", "settings": { "icon": "check", "title": "No chalk, no shaker", "text": "Just chew. No clumps stuck to a blender bottle, no gritty aftertaste to power through." } },
-        "f3": { "type": "feature", "settings": { "icon": "check", "title": "Lab-tested purity", "text": "Every batch is third-party tested for purity and potency. Vegan, gluten-free, no artificial dyes." } },
-        "f4": { "type": "feature", "settings": { "icon": "check", "title": "Actually tastes good", "text": "Wild Berry, Peach or Citrus — with just 2g of sugar, so the daily habit sticks." } }
+        "b1": { "type": "cell", "settings": { "color": "cream", "size": "big", "use_image": true, "title": "The daily 5g, made effortless", "text": "One clean formula, dosed to the research and built to taste good — so the habit actually sticks." } },
+        "b2": { "type": "cell", "settings": { "color": "paper", "size": "default", "icon": "check", "title": "No chalk, no shaker", "text": "Just chew. Nothing to mix or wash." } },
+        "b3": { "type": "cell", "settings": { "color": "sky", "size": "default", "icon": "shield", "title": "Lab-tested", "text": "Third-party verified, every batch." } },
+        "b4": { "type": "cell", "settings": { "color": "coral", "size": "default", "big_num": "2g", "title": "sugar only", "text": "Sweetened simply — no artificial dyes." } },
+        "b5": { "type": "cell", "settings": { "color": "mint", "size": "default", "icon": "check", "title": "Vegan, no gelatin", "text": "Pectin-based & gluten-free." } },
+        "b6": { "type": "cell", "settings": { "color": "ink", "size": "wide", "icon": "truck", "title": "Free shipping & subscribe to save 20%", "text": "Ships in 24h. Skip, pause or cancel anytime — no strings." } }
       },
-      "block_order": ["f1", "f2", "f3", "f4"]
+      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6"]
     },
-    "editorial": {
-      "type": "image-with-text",
-      "blocks": {
-        "p1": { "type": "point", "settings": { "text": "Full 5g of creatine monohydrate — no half-doses" } },
-        "p2": { "type": "point", "settings": { "text": "No mixing, no chalk, no shaker to wash" } },
-        "p3": { "type": "point", "settings": { "text": "Just 2g of sugar, lab-tested every batch" } }
-      },
-      "block_order": ["p1", "p2", "p3"],
-      "settings": {
-        "fallback": "lifestyle.svg",
-        "eyebrow": "The problem with powder",
-        "heading": "Creatine works. Powder doesn't fit your life.",
-        "text": "<p>Chalky scoops. Clumps at the bottom of the shaker. A tub shoved to the back of the cupboard until you forget it's there. Most people quit creatine not because it stops working — but because the routine is a chore.</p><p>FORM is the same clinical 5g dose, in a gummy you'll actually want to take.</p>",
-        "cta_text": "Meet FORM →",
-        "cta_link": "/collections/all"
-      }
+    "statement": {
+      "type": "statement",
+      "settings": { "bg": "bg-cream", "big": "<p>Five grams. Every single day. That's the secret.</p>", "text": "Creatine is one of the most researched supplements on earth — proven for strength, power and recovery. It only fails when the routine is a chore. So we removed the chore." }
     },
-    "steps": {
-      "type": "steps",
+    "ritual": {
+      "type": "ritual",
+      "settings": { "eyebrow": "The ritual", "heading": "Stronger in three easy steps." },
       "blocks": {
-        "s1": { "type": "step", "settings": { "title": "Take four a day", "text": "Four gummies, any time — with coffee, after a workout, whenever. No shaker, no mess." } },
-        "s2": { "type": "step", "settings": { "title": "Stay consistent", "text": "Creatine works by saturating your muscles, so the magic is simply in the daily habit." } },
-        "s3": { "type": "step", "settings": { "title": "Feel the difference", "text": "Within two to four weeks, expect stronger lifts, faster recovery and steadier energy." } }
+        "s1": { "type": "step", "settings": { "title": "Take four a day", "text": "Any time — with coffee, post-workout, whenever. No mixing, no mess." } },
+        "s2": { "type": "step", "settings": { "title": "Stay consistent", "text": "Creatine works by saturating your muscles. The magic is the daily habit." } },
+        "s3": { "type": "step", "settings": { "title": "Feel the difference", "text": "In two to four weeks: stronger lifts, faster recovery, steadier energy." } }
       },
       "block_order": ["s1", "s2", "s3"]
     },
-    "stats": {
-      "type": "stats",
+    "ingredients": {
+      "type": "ingredients",
+      "settings": { "bg": "bg-sky", "eyebrow": "What's inside", "heading": "Four gummies. Everything they need.", "text": "The exact clinical dose, dosed to the gram — and a short, clean ingredient list you can actually pronounce." },
       "blocks": {
-        "st1": { "type": "stat", "settings": { "number": "500+", "label": "peer-reviewed studies" } },
-        "st2": { "type": "stat", "settings": { "number": "5g", "label": "the daily dose that works" } },
-        "st3": { "type": "stat", "settings": { "number": "30s", "label": "to take it — no shaker required" } }
+        "n1": { "type": "no", "settings": { "text": "No artificial dyes or flavors" } },
+        "n2": { "type": "no", "settings": { "text": "No gelatin — ever" } },
+        "n3": { "type": "no", "settings": { "text": "No fillers, no proprietary blends" } },
+        "t1": { "type": "tag", "settings": { "text": "Vegan", "style": "" } },
+        "t2": { "type": "tag", "settings": { "text": "Gluten-free", "style": "tag--sky" } },
+        "t3": { "type": "tag", "settings": { "text": "Third-party tested", "style": "tag--butter" } },
+        "t4": { "type": "tag", "settings": { "text": "Made in USA", "style": "" } }
       },
-      "block_order": ["st1", "st2", "st3"]
+      "block_order": ["n1", "n2", "n3", "t1", "t2", "t3", "t4"]
     },
-    "featured": {
-      "type": "featured-collection",
-      "settings": { "eyebrow": "Pick your flavor", "heading": "Three flavors. One simple habit.", "limit": 3 }
+    "results": {
+      "type": "results",
+      "settings": { "eyebrow": "The payoff", "heading": "Consistency compounds.", "text": "Creatine saturates your muscles over a few weeks of daily use — and that's when the strength and recovery benefits really show up. The hardest part was always remembering to take it. Not anymore.", "cta_text": "Start your streak", "cta_link": "#buy" }
     },
-    "comparison": {
-      "type": "comparison",
+    "versus": {
+      "type": "versus",
+      "settings": { "eyebrow": "The easy switch", "heading": "The old way vs. FORM.", "old_title": "Creatine powder", "form_title": "FORM gummies" },
       "blocks": {
-        "r1": { "type": "row", "settings": { "feature": "Tastes like a treat", "us": "✓", "a": "Chalky", "b": "Flavorless" } },
-        "r2": { "type": "row", "settings": { "feature": "No shaker, no clumps", "us": "✓", "a": "Needs mixing", "b": "Pills only" } },
-        "r3": { "type": "row", "settings": { "feature": "Full 5g in one serving", "us": "✓", "a": "Only if measured", "b": "5–7 capsules" } },
-        "r4": { "type": "row", "settings": { "feature": "Easy to take every day", "us": "✓", "a": "Often skipped", "b": "Often skipped" } },
-        "r5": { "type": "row", "settings": { "feature": "Travel-friendly", "us": "✓", "a": "Messy", "b": "OK" } }
+        "o1": { "type": "old", "settings": { "text": "Chalky, gritty, hard to drink" } },
+        "o2": { "type": "old", "settings": { "text": "A shaker to clean every day" } },
+        "o3": { "type": "old", "settings": { "text": "Clumps at the bottom of the tub" } },
+        "o4": { "type": "old", "settings": { "text": "Forgotten by week two" } },
+        "f1": { "type": "form", "settings": { "text": "Tastes like a treat you look forward to" } },
+        "f2": { "type": "form", "settings": { "text": "Zero prep — just chew four" } },
+        "f3": { "type": "form", "settings": { "text": "The full 5g clinical dose, every time" } },
+        "f4": { "type": "form", "settings": { "text": "A habit that actually lasts" } }
       },
-      "block_order": ["r1", "r2", "r3", "r4", "r5"]
-    },
-    "banner": {
-      "type": "image-banner",
-      "settings": { "fallback": "lifestyle.svg", "quote": "The first creatine I've ever managed to take every single day.", "attribution": "— WOMEN'S HEALTH" }
+      "block_order": ["o1", "o2", "o3", "o4", "f1", "f2", "f3", "f4"]
     },
     "reviews": {
-      "type": "reviews",
+      "type": "review-wall",
+      "settings": { "eyebrow": "9,000+ five-star reviews", "heading": "People don't just take it. They stick with it." },
       "blocks": {
-        "rv1": { "type": "review", "settings": { "quote": "I've started and quit creatine powder three times. These I actually look forward to — the jar lives on my desk and I never miss a day.", "name": "Maya R.", "meta": "Verified · Taking daily for 4 months" } },
-        "rv2": { "type": "review", "settings": { "quote": "No bloat, no chalky shake to choke down. My lifts are up and recovery is noticeably faster.", "name": "Daniel K.", "meta": "Verified · Wild Berry" } },
-        "rv3": { "type": "review", "settings": { "quote": "Wild Berry is genuinely delicious. My wife and I both take them now — it's part of our morning.", "name": "Tom & Priya", "meta": "Verified · Subscribers" } }
+        "r1": { "type": "review", "settings": { "lead": true, "quote": "I've quit creatine powder three times. These I actually look forward to — I haven't missed a day in four months.", "name": "Maya R.", "meta": "Verified · 4 months in" } },
+        "r2": { "type": "review", "settings": { "quote": "No bloat, no chalky shake. My lifts are up and recovery is noticeably faster.", "name": "Daniel K.", "meta": "Verified · Wild Berry" } },
+        "r3": { "type": "review", "settings": { "quote": "Wild Berry is genuinely delicious. My wife and I both take them now — part of our morning.", "name": "Tom & Priya", "meta": "Verified · Subscribers" } },
+        "r4": { "type": "review", "settings": { "quote": "I travel constantly and powder was a non-starter. The jar goes in my bag and I never skip.", "name": "Jess H.", "meta": "Verified · Peach" } }
       },
-      "block_order": ["rv1", "rv2", "rv3"]
+      "block_order": ["r1", "r2", "r3", "r4"]
     },
-    "guarantee": {
-      "type": "cta",
-      "settings": {
-        "eyebrow": "Our promise",
-        "heading": "Love it, or it's on us.",
-        "text": "Give FORM 30 days. If you're not recovering faster, lifting stronger, and actually enjoying your daily creatine, we'll refund you — and you keep the jar.",
-        "button_text": "Start the ritual",
-        "button_link": "/collections/all"
-      }
+    "buy": {
+      "type": "buy-block",
+      "settings": { "eyebrow": "Daily Creatine Gummies", "heading": "Start the ritual.", "rating_text": "4.9 · 9,000+ reviews", "compare_price": "$39.00" },
+      "blocks": {
+        "p1": { "type": "plan", "settings": { "title": "One-time purchase", "sub": "One jar · 30-day supply", "price": "39", "qty": "1", "unit": "per jar" } },
+        "p2": { "type": "plan", "settings": { "featured": true, "flag": "Save 20%", "title": "Subscribe & Save", "sub": "Monthly · skip or cancel anytime", "price": "31", "qty": "1", "compare": "39", "unit": "per month" } },
+        "p3": { "type": "plan", "settings": { "flag": "Best value", "title": "3-Month Supply", "sub": "Three jars · free shipping", "price": "33", "qty": "3", "compare": "39", "unit": "per jar" } }
+      },
+      "block_order": ["p1", "p2", "p3"]
     },
     "faq": {
       "type": "faq",
+      "settings": { "bg": "bg-cream", "eyebrow": "Good to know", "heading": "Questions, answered." },
       "blocks": {
-        "q1": { "type": "qa", "settings": { "question": "How many gummies should I take?", "answer": "<p>Four gummies a day gives you the full 5g of creatine monohydrate. Take them any time, with or without food — what matters most is taking them consistently.</p>" } },
-        "q2": { "type": "qa", "settings": { "question": "Do I need to \"load\" creatine?", "answer": "<p>No loading phase required. Take your four gummies daily and your muscles reach full saturation over about three to four weeks.</p>" } },
-        "q3": { "type": "qa", "settings": { "question": "Is creatine safe?", "answer": "<p>Creatine monohydrate is one of the most studied supplements in the world, with hundreds of trials supporting daily use in healthy adults. Check with your doctor if you're pregnant, nursing, or have a medical condition.</p>" } },
-        "q4": { "type": "qa", "settings": { "question": "Are they vegan?", "answer": "<p>Yes — made with pectin, not gelatin, and the creatine is synthetic. Gluten-free, with no artificial dyes.</p>" } }
+        "q1": { "type": "qa", "settings": { "question": "How many gummies should I take?", "answer": "<p>Four gummies a day gives you the full 5g of creatine monohydrate. Take them any time, with or without food — consistency is what counts.</p>" } },
+        "q2": { "type": "qa", "settings": { "question": "Do I need to \"load\" creatine?", "answer": "<p>No loading phase required. Take four daily and your muscles reach full saturation over about three to four weeks. If you'd like to load, double up for the first week.</p>" } },
+        "q3": { "type": "qa", "settings": { "question": "Is it safe? Will I hold water?", "answer": "<p>Creatine monohydrate is one of the most studied supplements in the world. At the daily 5g dose, most people notice no bloating. Check with your doctor if pregnant, nursing, or managing a condition.</p>" } },
+        "q4": { "type": "qa", "settings": { "question": "Can I cancel my subscription?", "answer": "<p>Anytime, in one click from your account. Skip a month, swap flavors, or cancel — no fees, no awkward phone calls.</p>" } }
       },
       "block_order": ["q1", "q2", "q3", "q4"]
     }
   },
-  "order": ["hero", "marquee", "features", "editorial", "steps", "stats", "featured", "comparison", "banner", "reviews", "guarantee", "faq"]
+  "order": ["hero", "press", "bento", "statement", "ritual", "ingredients", "results", "versus", "reviews", "buy", "faq"]
 }
