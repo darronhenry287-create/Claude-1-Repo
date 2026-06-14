@@ -5,7 +5,7 @@
       {%- if product.featured_image -%}
         <img src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.title | escape }}">
       {%- else -%}
-        <img src="{{ 'jar-berry.svg' | asset_url }}" alt="FORM Daily Creatine Gummies">
+        <img src="{{ 'jar-berry.svg' | asset_url }}" alt="CREO Daily Creatine Gummies">
       {%- endif -%}
     </div>
     <div class="buy__panel reveal d1" data-product="{{ product.handle | default: 'daily-creatine' }}">
@@ -49,7 +49,7 @@
         </div>
 
         <div class="price"><span class="now" id="pdp-price-now">{{ product.price | money | default: '$31.00' }}</span><span class="was" id="pdp-price-was">{{ section.settings.compare_price }}</span></div>
-        <button type="submit" class="btn btn-coral btn-lg btn-block" data-add data-id="{{ product.handle | default: 'daily-creatine' }}" data-name="{{ product.title | escape | default: 'FORM Daily Creatine' }}" data-price="{{ product.price | money_without_currency | default: '39' }}">{{ 'products.product.add_to_cart' | t | default: 'Add to cart' }}</button>
+        <button type="submit" class="btn btn-coral btn-lg btn-block" data-add data-id="{{ product.handle | default: 'daily-creatine' }}" data-name="{{ product.title | escape | default: 'CREO Daily Creatine' }}" data-price="{{ product.price | money_without_currency | default: '39' }}">{{ 'products.product.add_to_cart' | t | default: 'Add to cart' }}</button>
       {%- endform -%}
 
       <div class="buy__assure">

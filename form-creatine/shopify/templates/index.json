@@ -6,7 +6,7 @@
         "eyebrow": "5g creatine · one daily gummy",
         "heading": "<p>Creatine you'll actually keep taking.</p>",
         "subheading": "The full clinically studied dose of creatine monohydrate — no chalky powder, no shaker, no clumps. Just four gummies a day that taste like something you'd reach for anyway.",
-        "cta_text": "Get FORM — $39",
+        "cta_text": "Get CREO — $39",
         "cta_link": "/collections/all",
         "cta2_text": "How it works",
         "cta2_link": "#how",
@@ -31,7 +31,7 @@
     },
     "bento": {
       "type": "bento",
-      "settings": { "eyebrow": "Why FORM", "heading": "Everything creatine should be. Nothing it shouldn't." },
+      "settings": { "eyebrow": "Why CREO", "heading": "Everything creatine should be. Nothing it shouldn't." },
       "blocks": {
         "b1": { "type": "cell", "settings": { "color": "cream", "size": "big", "use_image": true, "title": "The daily 5g, made effortless", "text": "One clean formula, dosed to the research and built to taste good — so the habit actually sticks." } },
         "b2": { "type": "cell", "settings": { "color": "paper", "size": "default", "icon": "check", "title": "No chalk, no shaker", "text": "Just chew. Nothing to mix or wash." } },
@@ -76,7 +76,7 @@
     },
     "versus": {
       "type": "versus",
-      "settings": { "eyebrow": "The easy switch", "heading": "The old way vs. FORM.", "old_title": "Creatine powder", "form_title": "FORM gummies" },
+      "settings": { "eyebrow": "The easy switch", "heading": "The old way vs. CREO.", "old_title": "Creatine powder", "form_title": "CREO gummies" },
       "blocks": {
         "o1": { "type": "old", "settings": { "text": "Chalky, gritty, hard to drink" } },
         "o2": { "type": "old", "settings": { "text": "A shaker to clean every day" } },

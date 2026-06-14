@@ -1,5 +1,5 @@
 /* ============================================================
-   FORM static-site builder (single product)
+   CREO static-site builder (single product)
    Wraps body partials in src/ with shared header/footer chrome
    and writes the final *.html pages to the repo root.
    Run:  node tools/build.js
@@ -44,31 +44,31 @@ function chrome() {
   <header class="header">
     <div class="header__inner">
       <button class="icon-btn burger" data-action="open-menu" aria-label="Menu">${icon.menu}</button>
-      <a href="index.html" class="logo">FORM<span>.</span></a>
+      <a href="index.html" class="logo">CREO<span>.</span></a>
       <nav class="nav">
         ${navLinks(NAV)}
       </nav>
       <div class="header__actions">
         <button class="icon-btn desktop-only" aria-label="Search">${icon.search}</button>
         <button class="icon-btn" data-action="open-cart" aria-label="Cart">${icon.cart}<span class="cart-count"></span></button>
-        <a href="product.html" class="btn btn-coral header__cta">Get FORM</a>
+        <a href="product.html" class="btn btn-coral header__cta">Get CREO</a>
       </div>
     </div>
   </header>`,
     foot: `  <footer class="foot">
     <div class="foot__cta">
-      <a href="product.html" class="wordmark">FORM<span>.</span></a>
+      <a href="product.html" class="wordmark">CREO<span>.</span></a>
     </div>
     <div class="foot__top">
       <div class="foot__brand">
-        <span class="logo" style="color:#fff">FORM<span style="color:var(--coral)">.</span></span>
+        <span class="logo" style="color:#fff">CREO<span style="color:var(--coral)">.</span></span>
         <p>Creatine made effortless. 5g a day in a gummy you'll actually look forward to. Formulated in the USA, third-party tested.</p>
         <form class="signup"><input type="email" placeholder="Email for 15% off" required aria-label="Email"><button class="btn btn-coral" type="submit">Join</button></form>
       </div>
       ${FOOTER_COLS.map(([h, links]) => `<div class="foot__col"><h4>${h}</h4>${navLinks(links)}</div>`).join('\n      ')}
     </div>
     <div class="foot__bottom">
-      <p>© 2026 FORM Nutrition. These statements have not been evaluated by the FDA.</p>
+      <p>© 2026 CREO Nutrition. These statements have not been evaluated by the FDA.</p>
       <div class="foot__legal">${LEGAL.map(([h, t]) => `<a href="${h}">${t}</a>`).join('')}</div>
       <div class="foot__socials">
         <a href="#" aria-label="Instagram">${icon.ig}</a>
@@ -91,11 +91,11 @@ function chrome() {
   </aside>
 
   <div class="mobile-menu" id="mobile-menu">
-    <div class="mobile-menu__head"><span class="logo">FORM<span>.</span></span><button class="icon-btn" data-action="close-menu" aria-label="Close">${icon.close}</button></div>
+    <div class="mobile-menu__head"><span class="logo">CREO<span>.</span></span><button class="icon-btn" data-action="close-menu" aria-label="Close">${icon.close}</button></div>
     <nav>
       ${navLinks(MOBILE_NAV)}
     </nav>
-    <a href="product.html" class="btn btn-coral btn-lg btn-block" style="margin-top:1.5rem">Get FORM — $39</a>
+    <a href="product.html" class="btn btn-coral btn-lg btn-block" style="margin-top:1.5rem">Get CREO — $39</a>
   </div>`,
   };
 }
@@ -121,7 +121,7 @@ ${body}
 
 ${c.foot}
 
-  <script>window.FORM_MOCK = true;</script>
+  <script>window.CREO_MOCK = true;</script>
   <script src="assets/theme.js"></script>
 </body>
 </html>
@@ -129,20 +129,20 @@ ${c.foot}
 }
 
 const PAGES = [
-  ['index.html', 'home.html', 'FORM — 5g Creatine Gummies, Made Effortless', 'FORM Daily Creatine Gummies: the full 5g clinical dose of creatine monohydrate in a daily gummy. No chalk, no shaker. Subscribe & save, free shipping over $35.'],
-  ['product.html', 'product.html', 'FORM Daily Creatine Gummies', '5g creatine monohydrate per serving in three flavors. No mixing, no clumps, third-party tested. Subscribe & save 20%.'],
-  ['about.html', 'about.html', 'Our Story — FORM', 'Why we built FORM — the simplest way to actually take your creatine every day.'],
-  ['contact.html', 'contact.html', 'Contact — FORM', 'Questions about FORM creatine gummies? Get in touch with our team.'],
-  ['cart.html', 'cart.html', 'Your Cart — FORM', 'Your FORM cart.'],
-  ['reviews.html', 'reviews.html', 'Reviews — FORM', '9,000+ five-star reviews of FORM creatine gummies.'],
-  ['faq.html', 'faq.html', 'FAQ — FORM', 'Frequently asked questions about FORM creatine gummies, dosing, shipping and returns.'],
-  ['how-to.html', 'how-to.html', 'How to Take Creatine — FORM', 'How to take creatine the easy way: four FORM gummies a day for your full 5g dose.'],
-  ['guarantee.html', 'guarantee.html', '30-Day Guarantee — FORM', 'Love it or it is on us. The FORM 30-day money-back guarantee, explained.'],
-  ['quality.html', 'quality.html', 'Our Quality — FORM', 'How FORM is made: clinically dosed, third-party tested, vegan and clean.'],
-  ['shipping.html', 'shipping.html', 'Shipping & Returns — FORM', 'Shipping and returns policy for FORM.'],
-  ['refund.html', 'refund.html', 'Refund Policy — FORM', 'FORM refund policy.'],
-  ['privacy.html', 'privacy.html', 'Privacy Policy — FORM', 'How FORM collects and uses your data.'],
-  ['terms.html', 'terms.html', 'Terms of Service — FORM', 'FORM terms of service.'],
+  ['index.html', 'home.html', 'CREO — 5g Creatine Gummies, Made Effortless', 'CREO Daily Creatine Gummies: the full 5g clinical dose of creatine monohydrate in a daily gummy. No chalk, no shaker. Subscribe & save, free shipping over $35.'],
+  ['product.html', 'product.html', 'CREO Daily Creatine Gummies', '5g creatine monohydrate per serving in three flavors. No mixing, no clumps, third-party tested. Subscribe & save 20%.'],
+  ['about.html', 'about.html', 'Our Story — CREO', 'Why we built CREO — the simplest way to actually take your creatine every day.'],
+  ['contact.html', 'contact.html', 'Contact — CREO', 'Questions about CREO creatine gummies? Get in touch with our team.'],
+  ['cart.html', 'cart.html', 'Your Cart — CREO', 'Your CREO cart.'],
+  ['reviews.html', 'reviews.html', 'Reviews — CREO', '9,000+ five-star reviews of CREO creatine gummies.'],
+  ['faq.html', 'faq.html', 'FAQ — CREO', 'Frequently asked questions about CREO creatine gummies, dosing, shipping and returns.'],
+  ['how-to.html', 'how-to.html', 'How to Take Creatine — CREO', 'How to take creatine the easy way: four CREO gummies a day for your full 5g dose.'],
+  ['guarantee.html', 'guarantee.html', '30-Day Guarantee — CREO', 'Love it or it is on us. The CREO 30-day money-back guarantee, explained.'],
+  ['quality.html', 'quality.html', 'Our Quality — CREO', 'How CREO is made: clinically dosed, third-party tested, vegan and clean.'],
+  ['shipping.html', 'shipping.html', 'Shipping & Returns — CREO', 'Shipping and returns policy for CREO.'],
+  ['refund.html', 'refund.html', 'Refund Policy — CREO', 'CREO refund policy.'],
+  ['privacy.html', 'privacy.html', 'Privacy Policy — CREO', 'How CREO collects and uses your data.'],
+  ['terms.html', 'terms.html', 'Terms of Service — CREO', 'CREO terms of service.'],
 ];
 
 let n = 0;

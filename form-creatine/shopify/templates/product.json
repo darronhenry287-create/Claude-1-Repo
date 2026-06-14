@@ -49,7 +49,7 @@
     },
     "promise": {
       "type": "promise",
-      "settings": { "bg": "bg-ink", "eyebrow": "Our promise", "heading": "Love it, or it's on us.", "text": "Give FORM 30 days. If you're not recovering faster, lifting stronger and enjoying your daily creatine, we'll refund you — and you keep the jar.", "cta_text": "How the guarantee works", "cta_link": "/pages/guarantee" }
+      "settings": { "bg": "bg-ink", "eyebrow": "Our promise", "heading": "Love it, or it's on us.", "text": "Give CREO 30 days. If you're not recovering faster, lifting stronger and enjoying your daily creatine, we'll refund you — and you keep the jar.", "cta_text": "How the guarantee works", "cta_link": "/pages/guarantee" }
     },
     "faq": {
       "type": "faq",

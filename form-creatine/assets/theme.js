@@ -1,14 +1,14 @@
 /* ============================================================
-   FORM — theme interactions
+   CREO — theme interactions
    Works in two modes:
    · MOCK (static preview): localStorage cart + drawer rendering
    · SHOPIFY (live theme): native form posts; drawer shows server cart
-   Toggle by setting window.FORM_MOCK = true before this script.
+   Toggle by setting window.CREO_MOCK = true before this script.
    ============================================================ */
 (function () {
   'use strict';
 
-  const MOCK = window.FORM_MOCK === true;
+  const MOCK = window.CREO_MOCK === true;
   const $  = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const money = (n) => '$' + n.toFixed(2);
@@ -39,7 +39,7 @@
      MOCK CART (static preview only)
      ============================================================ */
   if (MOCK) {
-    const FREE_SHIP = 35, STORE_KEY = 'form-cart';
+    const FREE_SHIP = 35, STORE_KEY = 'creo-cart';
     let cart = [];
     try { cart = JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch (e) { cart = []; }
     const saveCart  = () => localStorage.setItem(STORE_KEY, JSON.stringify(cart));
@@ -132,7 +132,7 @@
       e.preventDefault();
       const scope = btn.closest('[data-product]') || document;
       const id = btn.dataset.id || 'item';
-      const name = btn.dataset.name || 'FORM Daily Creatine';
+      const name = btn.dataset.name || 'CREO Daily Creatine';
       let price = parseFloat(btn.dataset.price || '39'), qty = 1, variant = btn.dataset.variant || '';
       const activeTier = $('.tier.active', scope), qtyInput = $('.qty input', scope);
       const activeOpts = $$('.opt.active[data-variant]', scope).map((o) => o.dataset.variant);
@@ -256,7 +256,7 @@
   if (MOCK) {
     $$('.signup').forEach((form) => form.addEventListener('submit', (e) => {
       e.preventDefault();
-      form.innerHTML = '<p style="font-family:var(--serif);font-size:1.2rem">Welcome to FORM ✦ Check your inbox for 15% off.</p>';
+      form.innerHTML = '<p style="font-family:var(--serif);font-size:1.2rem">Welcome to CREO ✦ Check your inbox for 15% off.</p>';
     }));
     const contact = $('#contact-form');
     if (contact) contact.addEventListener('submit', (e) => {

@@ -4,15 +4,15 @@
     "color_text": "#20211d",
     "color_accent": "#c9744d",
     "heading_scale": 100,
-    "logo_text": "FORM",
+    "logo_text": "CREO",
     "free_ship_threshold": 35
   },
   "presets": {
-    "FORM": {
+    "CREO": {
       "color_bg": "#f3ede3",
       "color_text": "#20211d",
       "color_accent": "#c9744d",
-      "logo_text": "FORM",
+      "logo_text": "CREO",
       "free_ship_threshold": 35
     }
   }

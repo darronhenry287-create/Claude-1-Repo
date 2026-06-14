@@ -1,6 +1,6 @@
 <section class="section">
   <div class="wrap form">
-    <div class="center" style="margin-bottom:2rem"><span class="eyebrow">FORM</span><h1 style="margin-top:.8rem">Activate account</h1><p class="muted" style="margin-top:.6rem">Create your password to finish setting up your account.</p></div>
+    <div class="center" style="margin-bottom:2rem"><span class="eyebrow">CREO</span><h1 style="margin-top:.8rem">Activate account</h1><p class="muted" style="margin-top:.6rem">Create your password to finish setting up your account.</p></div>
     {%- form 'activate_customer_password' -%}
       {%- if form.errors -%}<div class="errors">{{ form.errors | default_errors }}</div>{%- endif -%}
       <div class="field"><label>Password</label><input type="password" name="customer[password]" autocomplete="new-password" required></div>

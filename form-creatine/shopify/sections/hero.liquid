@@ -18,7 +18,7 @@
       {%- if section.settings.image != blank -%}
         <img class="hx__product" src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.image.alt | escape | default: shop.name }}" fetchpriority="high">
       {%- else -%}
-        <img class="hx__product" src="{{ 'jar-berry.svg' | asset_url }}" alt="FORM Daily Creatine Gummies" fetchpriority="high">
+        <img class="hx__product" src="{{ 'jar-berry.svg' | asset_url }}" alt="CREO Daily Creatine Gummies" fetchpriority="high">
       {%- endif -%}
       <div class="chip chip--1"><span class="chip__ic">{{ section.settings.chip1_value }}</span><span>{{ section.settings.chip1_label }}</span></div>
       <div class="chip chip--2"><span class="chip__ic is-mint">✓</span><span>{{ section.settings.chip2_label }}</span></div>
@@ -35,7 +35,7 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "5g creatine · one daily gummy" },
     { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Creatine you'll actually keep taking.</p>" },
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "The full clinically studied dose of creatine monohydrate — no chalky powder, no shaker, no clumps. Just four gummies a day that taste like something you'd reach for anyway." },
-    { "type": "text", "id": "cta_text", "label": "Primary button", "default": "Get FORM — $39" },
+    { "type": "text", "id": "cta_text", "label": "Primary button", "default": "Get CREO — $39" },
     { "type": "url", "id": "cta_link", "label": "Primary link" },
     { "type": "text", "id": "cta2_text", "label": "Secondary button", "default": "How it works" },
     { "type": "url", "id": "cta2_link", "label": "Secondary link" },

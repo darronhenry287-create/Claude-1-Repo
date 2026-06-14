@@ -1,9 +1,9 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "FORM",
+    "theme_name": "CREO",
     "theme_version": "1.0.0",
-    "theme_author": "FORM Nutrition",
+    "theme_author": "CREO Nutrition",
     "theme_documentation_url": "https://shopify.dev",
     "theme_support_url": "https://shopify.dev"
   },
@@ -56,7 +56,7 @@
         "type": "text",
         "id": "logo_text",
         "label": "Logo text",
-        "default": "FORM"
+        "default": "CREO"
       },
       {
         "type": "image_picker",
