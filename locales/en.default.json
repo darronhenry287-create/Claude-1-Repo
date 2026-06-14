@@ -22,7 +22,7 @@
   },
   "cart": {
     "title": "Your Cart",
-    "empty": "Your cart is quiet for now.",
+    "empty": "Your cart is empty.",
     "subtotal": "Subtotal",
     "checkout": "Checkout",
     "remove": "Remove",
@@ -31,6 +31,6 @@
     "free_ship_unlocked": "You've unlocked free shipping!"
   },
   "newsletter": {
-    "success": "Welcome to SOMNA. Check your inbox for 10% off."
+    "success": "Welcome to CREO. Check your inbox for 15% off."
   }
 }

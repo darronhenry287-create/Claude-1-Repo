@@ -1,63 +1,50 @@
 <section class="section" style="padding-top:1.5rem">
   <div class="wrap">
-    <p class="muted" style="font-size:.82rem;margin-bottom:1.5rem">
-      <a href="{{ routes.root_url }}">Home</a> / <a href="{{ collection.url | default: routes.all_products_collection_url }}">Shop</a> / {{ product.title }}
-    </p>
+    <p class="muted" style="font-size:.82rem;margin-bottom:1.4rem"><a href="{{ routes.root_url }}">Home</a> / {{ product.title }}</p>
 
     <div class="pdp" data-product="{{ product.handle }}">
       <!-- Gallery -->
       <div class="gallery">
         <div class="gallery__main" id="gallery-main">
           {%- if product.featured_image -%}
-            <img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.featured_image.alt | escape }}" width="1200" height="1200">
+            <img src="{{ product.featured_image | image_url: width: 1000 }}" alt="{{ product.featured_image.alt | escape }}">
           {%- else -%}
-            <img src="{{ 'somna-pdp-1.jpg' | asset_url }}" alt="{{ product.title | escape }}">
+            <img src="{{ 'jar-berry.svg' | asset_url }}" alt="{{ product.title | escape }}">
           {%- endif -%}
         </div>
-        {%- if product.images.size > 1 -%}
-          <div class="gallery__thumbs">
+        <div class="gallery__thumbs">
+          {%- if product.images.size > 1 -%}
             {%- for image in product.images limit: 4 -%}
-              <button class="gallery__thumb {% if forloop.first %}active{% endif %}" data-full="{{ image | image_url: width: 1200 }}">
-                <img src="{{ image | image_url: width: 240 }}" alt="{{ image.alt | escape }}" width="120" height="120">
-              </button>
+              <button class="gallery__thumb {% if forloop.first %}active{% endif %}" data-full="{{ image | image_url: width: 1000 }}"><img src="{{ image | image_url: width: 220 }}" alt="{{ image.alt | escape }}"></button>
             {%- endfor -%}
-          </div>
-        {%- elsif product.featured_image == blank -%}
-          <div class="gallery__thumbs">
-            {%- assign demo = 'somna-pdp-1.jpg,somna-pdp-2.jpg,somna-pdp-3.jpg,somna-pdp-4.jpg' | split: ',' -%}
+          {%- else -%}
+            {%- assign demo = 'jar-berry.svg,gummies.svg,inside.svg,lifestyle.svg' | split: ',' -%}
             {%- for d in demo -%}
-              <button class="gallery__thumb {% if forloop.first %}active{% endif %}" data-full="{{ d | asset_url }}"><img src="{{ d | asset_url }}" alt="" width="120" height="120"></button>
+              <button class="gallery__thumb {% if forloop.first %}active{% endif %}" data-full="{{ d | asset_url }}"><img src="{{ d | asset_url }}" alt=""></button>
             {%- endfor -%}
-          </div>
-        {%- endif -%}
+          {%- endif -%}
+        </div>
       </div>
 
       <!-- Buy box -->
-      <div class="pdp__info" id="buy-anchor">
-        {%- if product.metafields.custom.badge -%}<span class="pill pill-clay">{{ product.metafields.custom.badge }}</span>{%- endif -%}
+      <div class="buybox" id="buy-anchor">
+        {%- if product.metafields.custom.badge != blank -%}<span class="pill pill--coral">{{ product.metafields.custom.badge }}</span>{%- else -%}<span class="pill pill--coral">★ #1 Bestseller</span>{%- endif -%}
         <h1>{{ product.title }}</h1>
-        <div class="pdp__rating"><span class="star">★★★★★</span> <span>4.9 · <a href="#reviews" style="text-decoration:underline">12,400 reviews</a></span></div>
-
-        <div class="pdp__price">
+        <div class="rating"><span class="star">★★★★★</span> <span class="muted">4.9 · <a href="#reviews" style="text-decoration:underline">9,000 reviews</a></span></div>
+        <div class="price">
           <span class="now" id="pdp-price-now">{{ product.price | money }}</span>
-          {%- if product.compare_at_price > product.price -%}
-            <span class="was" id="pdp-price-was">{{ product.compare_at_price | money }}</span>
-            <span class="pill pill-clay save">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
-          {%- endif -%}
+          {%- if product.compare_at_price > product.price -%}<span class="was" id="pdp-price-was">{{ product.compare_at_price | money }}</span><span class="pill pill--coral">Save {{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%</span>{%- endif -%}
         </div>
-
-        <div class="pdp__desc">{{ product.description }}</div>
+        <div class="buybox__desc">{{ product.description | default: '<p>The full 5g clinical dose of creatine monohydrate in a daily gummy you will actually look forward to. No chalk, no shaker, no clumps — just chew four a day. 120 gummies · 30-day supply.</p>' }}</div>
 
         {%- form 'product', product, id: 'product-form' -%}
           {%- unless product.has_only_default_variant -%}
             {%- for option in product.options_with_values -%}
-              <div class="opt-group">
-                <span class="opt-label">{{ option.name }}</span>
-                <div class="opt-row" data-option-index="{{ forloop.index0 }}">
-                  {%- for value in option.values -%}
-                    <button type="button" class="opt {% if option.selected_value == value %}active{% endif %}" data-variant="{{ value | escape }}">{{ value }}</button>
-                  {%- endfor -%}
-                </div>
+              <span class="opt-label">{{ option.name }}</span>
+              <div class="opt-row" data-option-index="{{ forloop.index0 }}" style="margin-bottom:1.4rem">
+                {%- for value in option.values -%}
+                  <button type="button" class="opt {% if option.selected_value == value %}active{% endif %}" data-variant="{{ value | escape }}">{{ value }}</button>
+                {%- endfor -%}
               </div>
             {%- endfor -%}
           {%- endunless -%}
@@ -68,26 +55,41 @@
             {%- endfor -%}
           </select>
 
-          <div class="pdp__buy">
+          {%- assign has_plans = false -%}
+          {%- for block in section.blocks -%}{%- if block.type == 'plan' -%}{%- assign has_plans = true -%}{%- endif -%}{%- endfor -%}
+          {%- if has_plans -%}
+            <span class="opt-label">Choose your plan</span>
+            <div class="plans">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'plan' -%}
+                  <div class="plan tier {% if block.settings.featured %}active{% endif %}" data-label="{{ block.settings.title | escape }}" data-qty="{{ block.settings.qty }}" data-price="{{ block.settings.price }}" {% if block.settings.compare != blank %}data-compare="{{ block.settings.compare }}"{% endif %} {{ block.shopify_attributes }}>
+                    {%- if block.settings.flag != blank -%}<span class="plan__flag">{{ block.settings.flag }}</span>{%- endif -%}
+                    <div class="plan__radio"></div>
+                    <div class="plan__body"><div class="plan__title">{{ block.settings.title }}</div><div class="plan__sub">{{ block.settings.sub }}</div></div>
+                    <div class="plan__price"><div class="p">${{ block.settings.price }}</div><div class="u">{{ block.settings.unit }}</div></div>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          <div class="buybox__buy" style="display:flex;gap:.8rem;align-items:center">
             <div class="qty">
               <button type="button" data-step="-">−</button>
               <input type="number" name="quantity" value="1" min="1" aria-label="{{ 'products.product.quantity' | t }}">
               <button type="button" data-step="+">+</button>
             </div>
-            <button type="submit" class="btn btn-clay btn-lg btn-block" data-add
-              data-id="{{ product.handle }}" data-name="{{ product.title | escape }}"
-              data-price="{{ product.price | money_without_currency }}"
-              {% unless product.available %}disabled{% endunless %}>
+            <button type="submit" class="btn btn-coral btn-lg btn-block" data-add data-id="{{ product.handle }}" data-name="{{ product.title | escape }}" data-price="{{ product.price | money_without_currency }}" {% unless product.available %}disabled{% endunless %}>
               {%- if product.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
             </button>
           </div>
           {{ form | payment_button }}
         {%- endform -%}
 
-        <div class="pdp__trust">
-          <div>{% render 'icon', name: 'trial' %}100-night trial</div>
-          <div>{% render 'icon', name: 'truck' %}Free 2-day shipping</div>
-          <div>{% render 'icon', name: 'shield' %}5-year warranty</div>
+        <div class="assure-row">
+          <div>{% render 'icon', name: 'trial' %}30-day guarantee</div>
+          <div>{% render 'icon', name: 'truck' %}Free shipping over $35</div>
+          <div>{% render 'icon', name: 'shield' %}Third-party tested</div>
         </div>
 
         <div class="acc">
@@ -95,7 +97,7 @@
             {%- if block.type == 'accordion' -%}
               <div class="acc__item {% if forloop.first %}open{% endif %}" {{ block.shopify_attributes }}>
                 <button class="acc__head">{{ block.settings.title }} {% render 'icon', name: 'plus' %}</button>
-                <div class="acc__body" {% if forloop.first %}style="max-height:400px"{% endif %}><div class="acc__body-inner">{{ block.settings.content }}</div></div>
+                <div class="acc__body" {% if forloop.first %}style="max-height:300px"{% endif %}><div class="acc__body-inner">{{ block.settings.content }}</div></div>
               </div>
             {%- endif -%}
           {%- endfor -%}
@@ -105,14 +107,13 @@
   </div>
 </section>
 
-<!-- Sticky add bar -->
 <div class="sticky-bar" id="sticky-bar" data-product="{{ product.handle }}">
   <div class="sticky-bar__inner">
     <div class="sticky-bar__info">
-      <div class="sticky-bar__thumb">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 96 }}" alt="" width="48" height="48">{%- else -%}<img src="{{ 'somna-pdp-1.jpg' | asset_url }}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px">{%- endif -%}</div>
-      <div><div class="sticky-bar__name">{{ product.title }}</div><div class="sticky-bar__price" id="sticky-price">{{ product.price | money }}</div></div>
+      <div class="sticky-bar__thumb">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 90 }}" alt="">{%- else -%}<img src="{{ 'jar-berry.svg' | asset_url }}" alt="">{%- endif -%}</div>
+      <div><div class="sticky-bar__nm">{{ product.title }}</div><div class="sticky-bar__pr" id="sticky-price">{{ product.price | money }}</div></div>
     </div>
-    <button class="btn btn-clay" data-add data-id="{{ product.handle }}" data-name="{{ product.title | escape }}" data-price="{{ product.price | money_without_currency }}" onclick="document.getElementById('product-form').requestSubmit()">{{ 'products.product.add_to_cart' | t }}</button>
+    <button class="btn btn-coral" data-add data-id="{{ product.handle }}" data-name="{{ product.title | escape }}" data-price="{{ product.price | money_without_currency }}" onclick="document.getElementById('product-form').requestSubmit()">{{ 'products.product.add_to_cart' | t }}</button>
   </div>
 </div>
 
@@ -120,24 +121,30 @@
 {
   "name": "Product",
   "blocks": [
-    {
-      "type": "accordion",
-      "name": "Accordion row",
-      "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Details & materials" },
-        { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Adaptive memory foam core · CloudCool™ gel · removable Tencel™ cover. CertiPUR-US® certified.</p>" }
-      ]
-    }
+    { "type": "plan", "name": "Purchase plan", "settings": [
+      { "type": "checkbox", "id": "featured", "label": "Selected by default", "default": false },
+      { "type": "text", "id": "flag", "label": "Flag (optional)" },
+      { "type": "text", "id": "title", "label": "Title", "default": "One-time purchase" },
+      { "type": "text", "id": "sub", "label": "Subtext", "default": "One jar · 30-day supply" },
+      { "type": "text", "id": "price", "label": "Price (number)", "default": "39" },
+      { "type": "text", "id": "qty", "label": "Quantity", "default": "1" },
+      { "type": "text", "id": "compare", "label": "Compare price (optional)" },
+      { "type": "text", "id": "unit", "label": "Unit label", "default": "per jar" }
+    ] },
+    { "type": "accordion", "name": "Accordion row", "settings": [
+      { "type": "text", "id": "title", "label": "Title", "default": "How to take" },
+      { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Take 4 gummies daily for your full 5g dose.</p>" }
+    ] }
   ],
   "presets": [
-    {
-      "name": "Product",
-      "blocks": [
-        { "type": "accordion", "settings": { "title": "Details & materials" } },
-        { "type": "accordion", "settings": { "title": "Shipping & returns", "content": "<p>Free 2-day shipping over $75. 100-night trial with free returns.</p>" } },
-        { "type": "accordion", "settings": { "title": "Care instructions", "content": "<p>Machine wash the Tencel cover cold. Spot clean the foam core only.</p>" } }
-      ]
-    }
+    { "name": "Product", "blocks": [
+      { "type": "plan", "settings": { "title": "One-time purchase", "sub": "One jar · 30-day supply", "price": "39", "qty": "1", "unit": "per jar" } },
+      { "type": "plan", "settings": { "featured": true, "flag": "Most popular · Save 20%", "title": "Subscribe & Save", "sub": "Monthly · skip or cancel anytime", "price": "31", "qty": "1", "compare": "39", "unit": "per month" } },
+      { "type": "plan", "settings": { "flag": "Best value", "title": "3-Month Supply", "sub": "Three jars · free shipping", "price": "33", "qty": "3", "compare": "39", "unit": "per jar" } },
+      { "type": "accordion", "settings": { "title": "How to take", "content": "<p>Take 4 gummies daily for your full 5g dose of creatine monohydrate. Any time of day, with or without food. Consistency is what counts — let your muscles saturate over 3–4 weeks.</p>" } },
+      { "type": "accordion", "settings": { "title": "Ingredients & nutrition", "content": "<p>Creatine monohydrate (5g per 4 gummies), organic tapioca syrup, cane sugar, pectin, citric acid, natural flavor, fruit &amp; vegetable juice (color). 2g sugar per serving. Vegan · gluten-free · no artificial dyes.</p>" } },
+      { "type": "accordion", "settings": { "title": "Shipping & returns", "content": "<p>Free shipping over $35, ships within 24 hours. Subscribe &amp; save 20% — skip, pause or cancel anytime. 30-day money-back guarantee, and you keep the jar.</p>" } }
+    ] }
   ]
 }
 {% endschema %}

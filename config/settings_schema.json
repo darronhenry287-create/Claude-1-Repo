@@ -1,9 +1,9 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "SOMNA",
+    "theme_name": "CREO",
     "theme_version": "1.0.0",
-    "theme_author": "SOMNA Sleep Co.",
+    "theme_author": "CREO Nutrition",
     "theme_documentation_url": "https://shopify.dev",
     "theme_support_url": "https://shopify.dev"
   },
@@ -13,20 +13,20 @@
       {
         "type": "color",
         "id": "color_bg",
-        "label": "Background",
-        "default": "#f6f2ec"
+        "label": "Background (oat)",
+        "default": "#f3ede3"
       },
       {
         "type": "color",
         "id": "color_text",
         "label": "Text / Ink",
-        "default": "#1c1a17"
+        "default": "#20211d"
       },
       {
         "type": "color",
         "id": "color_accent",
-        "label": "Accent (clay)",
-        "default": "#c08a6a"
+        "label": "Accent (terracotta)",
+        "default": "#c9744d"
       }
     ]
   },
@@ -56,7 +56,7 @@
         "type": "text",
         "id": "logo_text",
         "label": "Logo text",
-        "default": "SOMNA"
+        "default": "CREO"
       },
       {
         "type": "image_picker",
@@ -78,10 +78,10 @@
         "id": "free_ship_threshold",
         "label": "Free shipping threshold",
         "min": 0,
-        "max": 200,
+        "max": 100,
         "step": 5,
         "unit": "$",
-        "default": 75
+        "default": 35
       }
     ]
   }

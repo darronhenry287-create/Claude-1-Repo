@@ -1,7 +1,7 @@
 <section class="section">
   <div class="wrap">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem">
-      <div><span class="eyebrow">My account</span><h1 style="margin-top:.6rem">Hi, {{ customer.first_name | default: 'sleeper' }}</h1></div>
+      <div><span class="eyebrow">My account</span><h1 style="margin-top:.6rem">Hi, {{ customer.first_name | default: 'friend' }}</h1></div>
       <a href="{{ routes.account_logout_url }}" class="btn btn-ghost">Sign out</a>
     </div>
 

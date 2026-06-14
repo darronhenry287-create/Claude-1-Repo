@@ -15,7 +15,7 @@
       <h1 style="margin:.6rem 0 1.5rem">{{ gift_card.balance | money }}</h1>
 
       <div style="background:linear-gradient(160deg,var(--twilight-2),var(--twilight-1));border-radius:var(--radius-lg);padding:2.5rem 1.5rem;color:var(--moon);margin-bottom:1.5rem">
-        <p style="font-family:var(--serif);font-size:1.4rem">A better night, on us.</p>
+        <p style="font-family:var(--serif);font-size:1.4rem">Strength, on us.</p>
         <div style="background:#fff;display:inline-block;padding:1rem;border-radius:12px;margin-top:1.5rem">
           {{ gift_card.qr_identifier }}
           <img src="{{ gift_card | qr_url }}" alt="QR code" width="120" height="120">
@@ -28,7 +28,7 @@
       {%- if gift_card.pass_url -%}
         <a href="{{ gift_card.pass_url }}" class="btn btn-ghost">Add to Apple Wallet</a>
       {%- endif -%}
-      <p style="margin-top:1.5rem"><a href="{{ shop.url }}" class="btn btn-clay btn-lg">Shop SOMNA</a></p>
+      <p style="margin-top:1.5rem"><a href="{{ shop.url }}" class="btn btn-clay btn-lg">Shop CREO</a></p>
     </div>
   </section>
   <script src="{{ 'theme.js' | asset_url }}" defer></script>

@@ -1,6 +1,0 @@
-<article class="section"><div class="wrap" style="max-width:760px">
-  <div class="center" style="margin-bottom:2.5rem"><span class="kicker">{{ article.published_at | date: '%B %-d, %Y' }}</span><h1 style="margin-top:.7rem">{{ article.title }}</h1>{%- if article.author != blank -%}<p class="muted" style="margin-top:.6rem">By {{ article.author }}</p>{%- endif -%}</div>
-  {%- if article.image -%}<img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.title | escape }}" style="border-radius:var(--r-lg);border:2px solid var(--ink);margin-bottom:2.5rem">{%- endif -%}
-  <div class="rte lede">{{ article.content }}</div>
-  <p style="margin-top:3rem"><a href="{{ blog.url }}" class="muted" style="font-weight:700">← Back to the Journal</a></p>
-</div></article>

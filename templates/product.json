@@ -3,83 +3,275 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "details": { "type": "accordion", "settings": { "title": "Details & materials", "content": "<p>Adaptive open-cell memory foam core · CloudCool™ phase-change gel layer · removable Tencel™ lyocell cover. CertiPUR-US® certified. Dual-height: 4.5\" / 5.5\". Hypoallergenic and dust-mite resistant.</p>" } },
-        "shipping": { "type": "accordion", "settings": { "title": "Shipping & returns", "content": "<p>Free 2-day shipping on orders over $75. Ships within 24 hours. Sleep on it for 100 nights — if you don't love it, we'll arrange a free return and full refund.</p>" } },
-        "care": { "type": "accordion", "settings": { "title": "Care instructions", "content": "<p>Unzip and machine wash the Tencel cover cold, tumble dry low. Spot clean the foam core only — do not submerge.</p>" } }
+        "p1": {
+          "type": "plan",
+          "settings": {
+            "title": "One-time purchase",
+            "sub": "One jar · 30-day supply",
+            "price": "39",
+            "qty": "1",
+            "unit": "per jar"
+          }
+        },
+        "p2": {
+          "type": "plan",
+          "settings": {
+            "featured": true,
+            "flag": "Most popular · Save 20%",
+            "title": "Subscribe & Save",
+            "sub": "Monthly · skip or cancel anytime",
+            "price": "31",
+            "qty": "1",
+            "compare": "39",
+            "unit": "per month"
+          }
+        },
+        "p3": {
+          "type": "plan",
+          "settings": {
+            "flag": "Best value",
+            "title": "3-Month Supply",
+            "sub": "Three jars · free shipping",
+            "price": "33",
+            "qty": "3",
+            "compare": "39",
+            "unit": "per jar"
+          }
+        },
+        "a1": {
+          "type": "accordion",
+          "settings": {
+            "title": "How to take",
+            "content": "<p>Take 4 gummies daily for your full 5g dose of creatine monohydrate. Any time of day, with or without food. Consistency is what counts — let your muscles saturate over 3–4 weeks.</p>"
+          }
+        },
+        "a2": {
+          "type": "accordion",
+          "settings": {
+            "title": "Ingredients & nutrition",
+            "content": "<p>Creatine monohydrate (5g per 4 gummies), organic tapioca syrup, cane sugar, pectin, citric acid, natural flavor, fruit &amp; vegetable juice (color). 2g sugar per serving. Vegan · gluten-free · no artificial dyes.</p>"
+          }
+        },
+        "a3": {
+          "type": "accordion",
+          "settings": {
+            "title": "Shipping & returns",
+            "content": "<p>Free shipping over $35, ships within 24 hours. Subscribe &amp; save 20% — skip, pause or cancel anytime. 30-day money-back guarantee, and you keep the jar.</p>"
+          }
+        }
       },
-      "block_order": ["details", "shipping", "care"]
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "a1",
+        "a2",
+        "a3"
+      ]
     },
-    "steps": {
-      "type": "steps",
+    "ritual": {
+      "type": "ritual",
+      "settings": {
+        "eyebrow": "The ritual",
+        "heading": "How to take it."
+      },
       "blocks": {
-        "s1": { "type": "step", "settings": { "title": "Unbox & let it breathe", "text": "Your pillow arrives compressed. Unroll it and it returns to full loft within an hour." } },
-        "s2": { "type": "step", "settings": { "title": "Find your height", "text": "Flip between the 4.5\" and 5.5\" sides to match how you sleep. Most settle in by night three." } },
-        "s3": { "type": "step", "settings": { "title": "Wake up aligned", "text": "The adaptive core holds your neck neutral all night, so you wake without the crick." } }
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Take four a day",
+            "text": "Any time — with coffee, post-workout, whenever. No mixing."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "Stay consistent",
+            "text": "Creatine works by saturating your muscles, so the habit is everything."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "Feel the difference",
+            "text": "In two to four weeks: stronger lifts, faster recovery."
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3"]
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ]
     },
-    "anatomy": {
-      "type": "image-with-text",
+    "ingredients": {
+      "type": "ingredients",
+      "settings": {
+        "bg": "bg-sky",
+        "eyebrow": "What's inside",
+        "heading": "Four gummies. Everything they need, nothing they don't."
+      },
       "blocks": {
-        "p1": { "type": "point", "settings": { "text": "Tencel™ cover — breathable, soft, machine-washable" } },
-        "p2": { "type": "point", "settings": { "text": "CloudCool™ gel — phase-change layer that pulls heat away" } },
-        "p3": { "type": "point", "settings": { "text": "Adaptive memory core — contours to your neck and head" } },
-        "p4": { "type": "point", "settings": { "text": "Support base — the dual-height foundation that never goes flat" } }
+        "n1": {
+          "type": "no",
+          "settings": {
+            "text": "No artificial dyes or flavors"
+          }
+        },
+        "n2": {
+          "type": "no",
+          "settings": {
+            "text": "No gelatin — ever"
+          }
+        },
+        "n3": {
+          "type": "no",
+          "settings": {
+            "text": "No fillers or proprietary blends"
+          }
+        },
+        "t1": {
+          "type": "tag",
+          "settings": {
+            "text": "Vegan",
+            "style": ""
+          }
+        },
+        "t2": {
+          "type": "tag",
+          "settings": {
+            "text": "Gluten-free",
+            "style": "tag--sky"
+          }
+        },
+        "t3": {
+          "type": "tag",
+          "settings": {
+            "text": "Third-party tested",
+            "style": "tag--butter"
+          }
+        },
+        "t4": {
+          "type": "tag",
+          "settings": {
+            "text": "Made in USA",
+            "style": ""
+          }
+        }
       },
-      "block_order": ["p1", "p2", "p3", "p4"],
-      "settings": { "fallback": "somna-anatomy.jpg", "eyebrow": "Inside the Cloud", "heading": "Four layers, one perfect night.", "text": "<p>Every layer earns its place — engineered together for support, coolness, and comfort that lasts.</p>", "cta_text": "", "bg": true, "warm": true }
-    },
-    "banner": {
-      "type": "image-banner",
-      "settings": { "quote": "The best $89 I've ever spent on sleep.", "attribution": "— WIRECUTTER" }
-    },
-    "features": {
-      "type": "feature-grid",
-      "blocks": {
-        "f1": { "type": "feature", "settings": { "title": "Aligns your spine", "text": "Contoured cervical ridge keeps your neck neutral all night." } },
-        "f2": { "type": "feature", "settings": { "title": "Stays cool", "text": "CloudCool™ gel holds the surface ~4°C cooler than memory foam." } },
-        "f3": { "type": "feature", "settings": { "title": "Flips to fit", "text": "Dual-height design — one side for side sleepers, one for back." } },
-        "f4": { "type": "feature", "settings": { "title": "Built to last", "text": "Holds its loft for 5+ years, backed by our warranty." } }
-      },
-      "block_order": ["f1", "f2", "f3", "f4"]
-    },
-    "comparison": {
-      "type": "comparison",
-      "blocks": {
-        "r1": { "type": "row", "settings": { "feature": "Cervical alignment", "us": "✓", "a": "Partial", "b": "✕" } },
-        "r2": { "type": "row", "settings": { "feature": "Stays cool all night", "us": "✓", "a": "✕ traps heat", "b": "Partial" } },
-        "r3": { "type": "row", "settings": { "feature": "Holds shape 5+ years", "us": "✓", "a": "~1 year", "b": "~6 months" } },
-        "r4": { "type": "row", "settings": { "feature": "Washable cover", "us": "✓", "a": "✕", "b": "✕" } }
-      },
-      "block_order": ["r1", "r2", "r3", "r4"]
+      "block_order": [
+        "n1",
+        "n2",
+        "n3",
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ]
     },
     "reviews": {
-      "type": "reviews",
-      "blocks": {
-        "rv1": { "type": "review", "settings": { "quote": "First morning in years without a neck crick. It genuinely stays cool.", "name": "Jordan M.", "meta": "Verified · Side sleeper" } },
-        "rv2": { "type": "review", "settings": { "quote": "The dual height is genius. We both got the pillow we wanted.", "name": "Alex R.", "meta": "Verified · Back sleeper" } },
-        "rv3": { "type": "review", "settings": { "quote": "Four months in and my chiropractor asked what changed.", "name": "Priya T.", "meta": "Verified · Combination sleeper" } }
+      "type": "review-wall",
+      "settings": {
+        "eyebrow": "9,000+ five-star reviews",
+        "heading": "Loved by people who hate routines."
       },
-      "block_order": ["rv1", "rv2", "rv3"],
-      "settings": { "heading": "Loved by sleepers everywhere." }
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "lead": true,
+            "quote": "I've quit creatine powder three times. These I actually look forward to — haven't missed a day in four months.",
+            "name": "Maya R.",
+            "meta": "Verified · 4 months in"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "quote": "No bloat, no chalky shake. My lifts are up and recovery is faster.",
+            "name": "Daniel K.",
+            "meta": "Verified · Wild Berry"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "quote": "Wild Berry is genuinely delicious. My wife and I both take them now.",
+            "name": "Tom & Priya",
+            "meta": "Verified · Subscribers"
+          }
+        },
+        "r4": {
+          "type": "review",
+          "settings": {
+            "quote": "Travel a lot and powder was a non-starter. The jar goes in my bag and I never skip.",
+            "name": "Jess H.",
+            "meta": "Verified · Peach"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4"
+      ]
     },
-    "crosssell": {
-      "type": "featured-collection",
-      "settings": { "eyebrow": "Complete the ritual", "heading": "Pairs perfectly with", "limit": 3 }
-    },
-    "guarantee": {
-      "type": "cta",
-      "settings": { "eyebrow": "Our promise", "heading": "Sleep on it for 100 nights.", "text": "If The Cloud Pillow isn't the best you've ever owned, we'll arrange a free return and a full refund. No risk, no catch." }
+    "promise": {
+      "type": "rich-text",
+      "settings": {
+        "bg": "bg-ink",
+        "center": true,
+        "kicker": "Our promise",
+        "heading": "Love it, or it's on us.",
+        "content": "<p>Give CREO 30 days. If you're not recovering faster, lifting stronger and enjoying your daily creatine, we'll refund you — and you keep the jar.</p>",
+        "cta_text": "How the guarantee works",
+        "cta_link": "/pages/guarantee"
+      }
     },
     "faq": {
       "type": "faq",
-      "blocks": {
-        "q1": { "type": "qa", "settings": { "question": "How does the 100-night trial work?", "answer": "<p>Sleep on it for 100 nights. If it's not the best pillow you've owned, we'll arrange a free return and full refund.</p>" } },
-        "q2": { "type": "qa", "settings": { "question": "Which firmness should I pick?", "answer": "<p>Medium suits most sleepers. Soft for stomach sleepers, Firm for broad-shouldered side sleepers.</p>" } },
-        "q3": { "type": "qa", "settings": { "question": "Can I cancel my subscription?", "answer": "<p>Anytime, in one click from your account.</p>" } }
+      "settings": {
+        "bg": "bg-cream",
+        "eyebrow": "Good to know",
+        "heading": "Questions, answered."
       },
-      "block_order": ["q1", "q2", "q3"]
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "question": "How many gummies should I take?",
+            "answer": "<p>Four gummies a day gives you the full 5g of creatine monohydrate. Take them any time, with or without food.</p>"
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "question": "Do I need to load creatine?",
+            "answer": "<p>No loading required. Take four daily and your muscles saturate over about three to four weeks.</p>"
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "question": "Are they vegan?",
+            "answer": "<p>Yes — made with pectin, not gelatin, and the creatine is synthetic. Gluten-free with no artificial dyes.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ]
     }
   },
-  "order": ["main", "steps", "anatomy", "banner", "features", "comparison", "reviews", "crosssell", "guarantee", "faq"]
+  "order": [
+    "main",
+    "ritual",
+    "ingredients",
+    "reviews",
+    "promise",
+    "faq"
+  ]
 }

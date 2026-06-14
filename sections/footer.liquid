@@ -1,34 +1,42 @@
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer__top">
-      <div class="footer__brand">
-        <span class="logo">{{ settings.logo_text | default: shop.name }}</span>
-        <p>{{ section.settings.tagline }}</p>
-      </div>
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'menu' -%}
-          <div class="footer__col" {{ block.shopify_attributes }}>
-            <h4>{{ block.settings.heading }}</h4>
-            {%- for link in block.settings.menu.links -%}
-              <a href="{{ link.url }}">{{ link.title }}</a>
-            {%- endfor -%}
-          </div>
-        {%- endif -%}
-      {%- endfor -%}
+<footer class="foot">
+  {%- if section.settings.show_wordmark -%}
+    <div class="foot__cta">
+      <a href="{{ section.settings.wordmark_link | default: routes.all_products_collection_url }}" class="wordmark">{{ settings.logo_text | default: shop.name }}<span>.</span></a>
     </div>
-    <div class="footer__bottom">
-      <p>© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
-      <div class="footer__legal">
-        {%- if shop.privacy_policy.url -%}<a href="{{ shop.privacy_policy.url }}">{{ shop.privacy_policy.title }}</a>{%- endif -%}
-        {%- if shop.terms_of_service.url -%}<a href="{{ shop.terms_of_service.url }}">{{ shop.terms_of_service.title }}</a>{%- endif -%}
-        {%- if shop.refund_policy.url -%}<a href="{{ shop.refund_policy.url }}">{{ shop.refund_policy.title }}</a>{%- endif -%}
-        {%- if shop.shipping_policy.url -%}<a href="{{ shop.shipping_policy.url }}">{{ shop.shipping_policy.title }}</a>{%- endif -%}
-      </div>
-      <div class="footer__socials">
-        {%- if section.settings.instagram != blank -%}<a href="{{ section.settings.instagram }}" aria-label="Instagram">{% render 'icon', name: 'instagram' %}</a>{%- endif -%}
-        {%- if section.settings.tiktok != blank -%}<a href="{{ section.settings.tiktok }}" aria-label="TikTok">{% render 'icon', name: 'tiktok' %}</a>{%- endif -%}
-        {%- if section.settings.pinterest != blank -%}<a href="{{ section.settings.pinterest }}" aria-label="Pinterest">{% render 'icon', name: 'pinterest' %}</a>{%- endif -%}
-      </div>
+  {%- endif -%}
+  <div class="foot__top">
+    <div class="foot__brand">
+      <span class="logo" style="color:#fff">{{ settings.logo_text | default: shop.name }}<span style="color:var(--coral)">.</span></span>
+      <p>{{ section.settings.tagline }}</p>
+      {%- form 'customer', class: 'signup' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <input type="email" name="contact[email]" placeholder="{{ section.settings.signup_placeholder }}" required aria-label="Email">
+        <button class="btn btn-coral" type="submit">{{ section.settings.signup_button }}</button>
+      {%- endform -%}
+    </div>
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'menu' -%}
+        <div class="foot__col" {{ block.shopify_attributes }}>
+          <h4>{{ block.settings.heading }}</h4>
+          {%- for link in block.settings.menu.links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+  <div class="foot__bottom">
+    <p>© {{ 'now' | date: '%Y' }} {{ shop.name }}. These statements have not been evaluated by the FDA.</p>
+    <div class="foot__legal">
+      {%- if shop.privacy_policy.url -%}<a href="{{ shop.privacy_policy.url }}">Privacy</a>{%- endif -%}
+      {%- if shop.terms_of_service.url -%}<a href="{{ shop.terms_of_service.url }}">Terms</a>{%- endif -%}
+      {%- if shop.refund_policy.url -%}<a href="{{ shop.refund_policy.url }}">Refunds</a>{%- endif -%}
+      {%- if shop.shipping_policy.url -%}<a href="{{ shop.shipping_policy.url }}">Shipping</a>{%- endif -%}
+    </div>
+    <div class="foot__socials">
+      {%- if section.settings.instagram != blank -%}<a href="{{ section.settings.instagram }}" aria-label="Instagram">{% render 'icon', name: 'instagram' %}</a>{%- endif -%}
+      {%- if section.settings.tiktok != blank -%}<a href="{{ section.settings.tiktok }}" aria-label="TikTok">{% render 'icon', name: 'tiktok' %}</a>{%- endif -%}
+      {%- if section.settings.youtube != blank -%}<a href="{{ section.settings.youtube }}" aria-label="YouTube">{% render 'icon', name: 'pinterest' %}</a>{%- endif -%}
     </div>
   </div>
 </footer>
@@ -37,11 +45,15 @@
 {
   "name": "Footer",
   "settings": [
-    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Sleep, engineered. Premium rest essentials designed in California, loved in 40+ countries." },
+    { "type": "checkbox", "id": "show_wordmark", "label": "Show giant wordmark", "default": true },
+    { "type": "url", "id": "wordmark_link", "label": "Wordmark link" },
+    { "type": "textarea", "id": "tagline", "label": "Tagline", "default": "Creatine made effortless. 5g a day in a gummy you'll actually look forward to. Formulated in the USA, third-party tested." },
+    { "type": "text", "id": "signup_placeholder", "label": "Signup placeholder", "default": "Email for 15% off" },
+    { "type": "text", "id": "signup_button", "label": "Signup button", "default": "Join" },
     { "type": "header", "content": "Social" },
     { "type": "url", "id": "instagram", "label": "Instagram URL" },
     { "type": "url", "id": "tiktok", "label": "TikTok URL" },
-    { "type": "url", "id": "pinterest", "label": "Pinterest URL" }
+    { "type": "url", "id": "youtube", "label": "YouTube URL" }
   ],
   "blocks": [
     {
@@ -54,8 +66,6 @@
     }
   ],
   "max_blocks": 4,
-  "presets": [
-    { "name": "Footer", "blocks": [ { "type": "menu" }, { "type": "menu" }, { "type": "menu" } ] }
-  ]
+  "presets": [ { "name": "Footer", "blocks": [ { "type": "menu" }, { "type": "menu" }, { "type": "menu" } ] } ]
 }
 {% endschema %}

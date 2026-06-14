@@ -4,9 +4,9 @@
 
     <a href="{{ routes.root_url }}" class="logo">
       {%- if settings.logo != blank -%}
-        <img src="{{ settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" height="32">
+        <img src="{{ settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" height="30">
       {%- else -%}
-        {{ settings.logo_text | default: shop.name }}
+        {{ settings.logo_text | default: shop.name }}<span>.</span>
       {%- endif -%}
     </a>
 
@@ -22,13 +22,16 @@
         {% render 'icon', name: 'cart' %}
         <span class="cart-count {% if cart.item_count > 0 %}show{% endif %}">{{ cart.item_count }}</span>
       </button>
+      {%- if section.settings.cta_text != blank -%}
+        <a href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" class="btn btn-coral header__cta">{{ section.settings.cta_text }}</a>
+      {%- endif -%}
     </div>
   </div>
 </header>
 
 <div class="mobile-menu" id="mobile-menu">
   <div class="mobile-menu__head">
-    <span class="logo">{{ settings.logo_text | default: shop.name }}</span>
+    <span class="logo">{{ settings.logo_text | default: shop.name }}<span>.</span></span>
     <button class="icon-btn" data-action="close-menu" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
   </div>
   <nav>
@@ -36,18 +39,18 @@
       <a href="{{ link.url }}">{{ link.title }}</a>
     {%- endfor -%}
   </nav>
+  {%- if section.settings.cta_text != blank -%}
+    <a href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" class="btn btn-coral btn-lg btn-block" style="margin-top:1.5rem">{{ section.settings.cta_text }}</a>
+  {%- endif -%}
 </div>
 
 {% schema %}
 {
   "name": "Header",
   "settings": [
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "Menu",
-      "default": "main-menu"
-    }
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "text", "id": "cta_text", "label": "Header button text", "default": "Get CREO" },
+    { "type": "url", "id": "cta_link", "label": "Header button link" }
   ]
 }
 {% endschema %}

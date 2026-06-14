@@ -1,14 +1,14 @@
 /* ============================================================
-   SOMNA — theme interactions
+   CREO — theme interactions
    Works in two modes:
    · MOCK (static preview): localStorage cart + drawer rendering
    · SHOPIFY (live theme): native form posts; drawer shows server cart
-   Toggle by setting window.SOMNA_MOCK = true before this script.
+   Toggle by setting window.CREO_MOCK = true before this script.
    ============================================================ */
 (function () {
   'use strict';
 
-  const MOCK = window.SOMNA_MOCK === true;
+  const MOCK = window.CREO_MOCK === true;
   const $  = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const money = (n) => '$' + n.toFixed(2);
@@ -39,7 +39,7 @@
      MOCK CART (static preview only)
      ============================================================ */
   if (MOCK) {
-    const FREE_SHIP = 75, STORE_KEY = 'somna-cart';
+    const FREE_SHIP = 35, STORE_KEY = 'creo-cart';
     let cart = [];
     try { cart = JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch (e) { cart = []; }
     const saveCart  = () => localStorage.setItem(STORE_KEY, JSON.stringify(cart));
@@ -56,7 +56,7 @@
       const body = $('#cart-body'), foot = $('#cart-foot');
       if (!body) return;
       if (!cart.length) {
-        body.innerHTML = '<div class="drawer__empty"><p>Your cart is quiet for now.</p><p style="margin-top:.5rem">Time to rest easy.</p></div>';
+        body.innerHTML = '<div class="drawer__empty"><p>Your cart is empty.</p><p style="margin-top:.5rem">Time to start the ritual.</p></div>';
         if (foot) foot.style.display = 'none'; return;
       }
       if (foot) foot.style.display = 'block';
@@ -132,8 +132,8 @@
       e.preventDefault();
       const scope = btn.closest('[data-product]') || document;
       const id = btn.dataset.id || 'item';
-      const name = btn.dataset.name || 'The Cloud Pillow';
-      let price = parseFloat(btn.dataset.price || '89'), qty = 1, variant = btn.dataset.variant || '';
+      const name = btn.dataset.name || 'CREO Daily Creatine';
+      let price = parseFloat(btn.dataset.price || '39'), qty = 1, variant = btn.dataset.variant || '';
       const activeTier = $('.tier.active', scope), qtyInput = $('.qty input', scope);
       const activeOpts = $$('.opt.active[data-variant]', scope).map((o) => o.dataset.variant);
       if (qtyInput) qty = Math.max(1, parseInt(qtyInput.value) || 1);
@@ -256,7 +256,7 @@
   if (MOCK) {
     $$('.signup').forEach((form) => form.addEventListener('submit', (e) => {
       e.preventDefault();
-      form.innerHTML = '<p style="font-family:var(--serif);font-size:1.2rem">Welcome to SOMNA ✦ Check your inbox for 10% off.</p>';
+      form.innerHTML = '<p style="font-family:var(--serif);font-size:1.2rem">Welcome to CREO ✦ Check your inbox for 15% off.</p>';
     }));
     const contact = $('#contact-form');
     if (contact) contact.addEventListener('submit', (e) => {

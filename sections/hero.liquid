@@ -1,28 +1,29 @@
-<section class="hero-split">
-  <div class="hero-split__copy">
-    <div class="hero-split__inner">
-      {%- if section.settings.show_rating -%}
-        <div class="hero__rating"><span class="star">★★★★★</span><span class="muted" style="font-size:.85rem">{{ section.settings.rating_text }}</span></div>
-      {%- endif -%}
-      <h1 class="display">{{ section.settings.heading }}</h1>
-      <p class="hero__lede lede">{{ section.settings.subheading }}</p>
-      <div class="hero__cta">
-        {%- if section.settings.cta_text != blank -%}<a href="{{ section.settings.cta_link }}" class="btn btn-primary btn-lg">{{ section.settings.cta_text }}</a>{%- endif -%}
-        {%- if section.settings.cta2_text != blank -%}<a href="{{ section.settings.cta2_link }}" class="btn btn-ghost btn-lg">{{ section.settings.cta2_text }}</a>{%- endif -%}
+<section class="hx">
+  <div class="hx__inner">
+    <div class="hx__copy">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h1 class="display hx__title">{{ section.settings.heading }}</h1>
+      <p class="hx__lede lede">{{ section.settings.subheading }}</p>
+      <div class="hx__cta">
+        {%- if section.settings.cta_text != blank -%}<a href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" class="btn btn-coral btn-lg">{{ section.settings.cta_text }}</a>{%- endif -%}
+        {%- if section.settings.cta2_text != blank -%}<a href="{{ section.settings.cta2_link }}" class="btn btn-line btn-lg">{{ section.settings.cta2_text }}</a>{%- endif -%}
       </div>
-      <ul class="hero__trust">
-        {%- for block in section.blocks -%}
-          <li {{ block.shopify_attributes }}>{% render 'icon', name: block.settings.icon %} {{ block.settings.text }}</li>
-        {%- endfor -%}
-      </ul>
+      <div class="hx__rating">
+        <div class="hx__avatars"><span>MR</span><span>DK</span><span>SL</span><span>+</span></div>
+        <div><span class="star">★★★★★</span> <strong>{{ section.settings.rating_score }}</strong> <span class="muted">· {{ section.settings.rating_text }}</span></div>
+      </div>
     </div>
-  </div>
-  <div class="hero-split__media">
-    {%- if section.settings.image != blank -%}
-      <img src="{{ section.settings.image | image_url: width: 1600 }}" alt="{{ section.settings.image.alt | escape }}" fetchpriority="high">
-    {%- else -%}
-      <img src="{{ 'somna-hero.jpg' | asset_url }}" alt="Rest, beautifully" fetchpriority="high">
-    {%- endif -%}
+    <div class="hx__media">
+      <div class="hx__blob"></div>
+      {%- if section.settings.image != blank -%}
+        <img class="hx__product" src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.image.alt | escape | default: shop.name }}" fetchpriority="high">
+      {%- else -%}
+        <img class="hx__product" src="{{ 'jar-berry.svg' | asset_url }}" alt="CREO Daily Creatine Gummies" fetchpriority="high">
+      {%- endif -%}
+      <div class="chip chip--1"><span class="chip__ic">{{ section.settings.chip1_value }}</span><span>{{ section.settings.chip1_label }}</span></div>
+      <div class="chip chip--2"><span class="chip__ic is-mint">✓</span><span>{{ section.settings.chip2_label }}</span></div>
+      <div class="chip chip--3"><span class="chip__ic is-sky">★</span><span>{{ section.settings.chip3_label }}</span></div>
+    </div>
   </div>
 </section>
 
@@ -30,37 +31,22 @@
 {
   "name": "Hero",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Hero image (defaults to bundled photo)" },
-    { "type": "checkbox", "id": "show_rating", "label": "Show rating", "default": true },
-    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4.9 · 12,400+ five-star sleepers" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Sleep, engineered." },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "The Cloud Pillow adapts to your spine in real time — cradling your neck, cooling your head, and ending the 3am pillow-flip for good." },
-    { "type": "text", "id": "cta_text", "label": "Primary button", "default": "Shop The Cloud Pillow" },
+    { "type": "image_picker", "id": "image", "label": "Product image (defaults to bundled illustration)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "5g creatine · one daily gummy" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Creatine you'll actually keep taking.</p>" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "The full clinically studied dose of creatine monohydrate — no chalky powder, no shaker, no clumps. Just four gummies a day that taste like something you'd reach for anyway." },
+    { "type": "text", "id": "cta_text", "label": "Primary button", "default": "Get CREO — $39" },
     { "type": "url", "id": "cta_link", "label": "Primary link" },
     { "type": "text", "id": "cta2_text", "label": "Secondary button", "default": "How it works" },
-    { "type": "url", "id": "cta2_link", "label": "Secondary link" }
+    { "type": "url", "id": "cta2_link", "label": "Secondary link" },
+    { "type": "text", "id": "rating_score", "label": "Rating score", "default": "4.9" },
+    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "9,000+ happy reviews" },
+    { "type": "header", "content": "Floating chips" },
+    { "type": "text", "id": "chip1_value", "label": "Chip 1 value", "default": "5g" },
+    { "type": "text", "id": "chip1_label", "label": "Chip 1 label", "default": "creatine per serving" },
+    { "type": "text", "id": "chip2_label", "label": "Chip 2 label", "default": "vegan · 2g sugar" },
+    { "type": "text", "id": "chip3_label", "label": "Chip 3 label", "default": "9,000+ 5-star" }
   ],
-  "blocks": [
-    {
-      "type": "trust",
-      "name": "Trust badge",
-      "settings": [
-        { "type": "select", "id": "icon", "label": "Icon", "options": [
-          { "value": "trial", "label": "Trial" }, { "value": "truck", "label": "Truck" }, { "value": "shield", "label": "Shield" }
-        ], "default": "trial" },
-        { "type": "text", "id": "text", "label": "Text", "default": "100-night trial" }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Hero",
-      "blocks": [
-        { "type": "trust", "settings": { "icon": "trial", "text": "100-night trial" } },
-        { "type": "trust", "settings": { "icon": "truck", "text": "Free 2-day shipping" } },
-        { "type": "trust", "settings": { "icon": "shield", "text": "5-year warranty" } }
-      ]
-    }
-  ]
+  "presets": [ { "name": "Hero" } ]
 }
 {% endschema %}

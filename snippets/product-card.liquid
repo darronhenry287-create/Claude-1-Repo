@@ -21,7 +21,7 @@
     {%- if product.featured_image -%}
       <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | escape }}" loading="lazy" width="600" height="600">
     {%- else -%}
-      <img src="{{ 'somna-pdp-1.jpg' | asset_url }}" alt="{{ product.title | escape }}" loading="lazy">
+      <img src="{{ 'jar-berry.svg' | asset_url }}" alt="{{ product.title | escape }}" loading="lazy">
     {%- endif -%}
   </div>
   <a href="{{ product.url }}"><h3 class="card__title">{{ product.title }}</h3></a>
