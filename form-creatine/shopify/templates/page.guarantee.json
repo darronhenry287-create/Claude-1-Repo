@@ -1,19 +1,88 @@
 {
   "sections": {
-    "head": { "type": "rich-text", "settings": { "center": true, "hero": true, "bg": "bg-cream", "width": 760, "lede": true, "kicker": "Our promise", "heading": "Love it, or it's on us.", "content": "<p>We think the best creatine is the one you'll actually keep taking. So we'll let the gummies prove it — risk-free, for a full 30 days.</p>" } },
-    "promise": { "type": "rich-text", "settings": { "width": 760, "heading": "The 30-day money-back guarantee", "content": "<p>Give CREO a real shot for 30 days. Take your four gummies a day and see how you feel. If you're not recovering faster, lifting stronger, and genuinely enjoying the daily habit, just email us at <a href=\"mailto:hello@trycreo.com\">hello@trycreo.com</a> and we'll refund every cent.</p><p><strong>And you keep the jar.</strong> No shipping it back, no hoops, no fine print. We'd rather you finish the jar and decide for yourself than feel stuck with something that isn't working for you.</p>" } },
+    "head": {
+      "type": "rich-text",
+      "settings": {
+        "center": true,
+        "hero": true,
+        "bg": "bg-cream",
+        "width": 760,
+        "lede": true,
+        "kicker": "Our promise",
+        "heading": "Love it, or it's on us.",
+        "content": "<p>We think the best creatine is the one you'll actually keep taking. So we'll let the gummies prove it — risk-free, for a full 30 days.</p>"
+      }
+    },
+    "promise": {
+      "type": "rich-text",
+      "settings": {
+        "width": 760,
+        "heading": "The 30-day money-back guarantee",
+        "content": "<p>Give CREO a real shot for 30 days. Take your four gummies a day and see how you feel. If you're not recovering faster, lifting stronger, and genuinely enjoying the daily habit, just email us at <a href=\"mailto:hello@trycreo.com\">hello@trycreo.com</a> and we'll refund every cent.</p><p><strong>And you keep the jar.</strong> No shipping it back, no hoops, no fine print. We'd rather you finish the jar and decide for yourself than feel stuck with something that isn't working for you.</p>"
+      }
+    },
     "steps": {
       "type": "ritual",
-      "settings": { "bg": "bg-sky", "eyebrow": "How to claim it", "heading": "Three easy steps." },
-      "blocks": {
-        "s1": { "type": "step", "settings": { "title": "Email us", "text": "Write to hello@trycreo.com any time within 30 days of your order." } },
-        "s2": { "type": "step", "settings": { "title": "Tell us what's up", "text": "A quick line on how it went is all we need — and it helps us keep getting better." } },
-        "s3": { "type": "step", "settings": { "title": "Get refunded", "text": "We'll process your full refund right away. Keep the jar, with our compliments." } }
+      "settings": {
+        "bg": "bg-sky",
+        "eyebrow": "How to claim it",
+        "heading": "Three easy steps."
       },
-      "block_order": ["s1", "s2", "s3"]
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Email us",
+            "text": "Write to hello@trycreo.com any time within 30 days of your order."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "Tell us what's up",
+            "text": "A quick line on how it went is all we need — and it helps us keep getting better."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "Get refunded",
+            "text": "We'll process your full refund right away. Keep the jar, with our compliments."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ]
     },
-    "subs": { "type": "rich-text", "settings": { "width": 760, "heading": "On subscriptions", "content": "<p>Subscribe &amp; Save gives you 20% off every jar, and you're always in control. Skip a month, pause, or cancel anytime — no fees, no awkward phone calls. Manage it in your account or just email us and we'll take care of it.</p><ul><li>Skip a delivery whenever life gets busy.</li><li>Pause for as long as you like.</li><li>Cancel in one click — no strings.</li></ul>" } },
-    "cta": { "type": "promise", "settings": { "bg": "bg-ink", "eyebrow": "Nothing to lose", "heading": "Try CREO for 30 days.", "text": "Recover faster, lift stronger, and build a habit that sticks — or it's on us.", "cta_text": "Start the ritual", "cta_link": "/collections/all" } }
+    "subs": {
+      "type": "rich-text",
+      "settings": {
+        "width": 760,
+        "heading": "On subscriptions",
+        "content": "<p>Subscribe &amp; Save gives you 20% off every jar, and you're always in control. Skip a month, pause, or cancel anytime — no fees, no awkward phone calls. Manage it in your account or just email us and we'll take care of it.</p><ul><li>Skip a delivery whenever life gets busy.</li><li>Pause for as long as you like.</li><li>Cancel in one click — no strings.</li></ul>"
+      }
+    },
+    "cta": {
+      "type": "rich-text",
+      "settings": {
+        "bg": "bg-ink",
+        "center": true,
+        "kicker": "Nothing to lose",
+        "heading": "Try CREO for 30 days.",
+        "content": "<p>Recover faster, lift stronger, and build a habit that sticks — or it's on us.</p>",
+        "cta_text": "Start the ritual",
+        "cta_link": "/collections/all"
+      }
+    }
   },
-  "order": ["head", "promise", "steps", "subs", "cta"]
+  "order": [
+    "head",
+    "promise",
+    "steps",
+    "subs",
+    "cta"
+  ]
 }

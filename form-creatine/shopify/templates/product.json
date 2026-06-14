@@ -3,64 +3,275 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "p1": { "type": "plan", "settings": { "title": "One-time purchase", "sub": "One jar · 30-day supply", "price": "39", "qty": "1", "unit": "per jar" } },
-        "p2": { "type": "plan", "settings": { "featured": true, "flag": "Most popular · Save 20%", "title": "Subscribe & Save", "sub": "Monthly · skip or cancel anytime", "price": "31", "qty": "1", "compare": "39", "unit": "per month" } },
-        "p3": { "type": "plan", "settings": { "flag": "Best value", "title": "3-Month Supply", "sub": "Three jars · free shipping", "price": "33", "qty": "3", "compare": "39", "unit": "per jar" } },
-        "a1": { "type": "accordion", "settings": { "title": "How to take", "content": "<p>Take 4 gummies daily for your full 5g dose of creatine monohydrate. Any time of day, with or without food. Consistency is what counts — let your muscles saturate over 3–4 weeks.</p>" } },
-        "a2": { "type": "accordion", "settings": { "title": "Ingredients & nutrition", "content": "<p>Creatine monohydrate (5g per 4 gummies), organic tapioca syrup, cane sugar, pectin, citric acid, natural flavor, fruit &amp; vegetable juice (color). 2g sugar per serving. Vegan · gluten-free · no artificial dyes.</p>" } },
-        "a3": { "type": "accordion", "settings": { "title": "Shipping & returns", "content": "<p>Free shipping over $35, ships within 24 hours. Subscribe &amp; save 20% — skip, pause or cancel anytime. 30-day money-back guarantee, and you keep the jar.</p>" } }
+        "p1": {
+          "type": "plan",
+          "settings": {
+            "title": "One-time purchase",
+            "sub": "One jar · 30-day supply",
+            "price": "39",
+            "qty": "1",
+            "unit": "per jar"
+          }
+        },
+        "p2": {
+          "type": "plan",
+          "settings": {
+            "featured": true,
+            "flag": "Most popular · Save 20%",
+            "title": "Subscribe & Save",
+            "sub": "Monthly · skip or cancel anytime",
+            "price": "31",
+            "qty": "1",
+            "compare": "39",
+            "unit": "per month"
+          }
+        },
+        "p3": {
+          "type": "plan",
+          "settings": {
+            "flag": "Best value",
+            "title": "3-Month Supply",
+            "sub": "Three jars · free shipping",
+            "price": "33",
+            "qty": "3",
+            "compare": "39",
+            "unit": "per jar"
+          }
+        },
+        "a1": {
+          "type": "accordion",
+          "settings": {
+            "title": "How to take",
+            "content": "<p>Take 4 gummies daily for your full 5g dose of creatine monohydrate. Any time of day, with or without food. Consistency is what counts — let your muscles saturate over 3–4 weeks.</p>"
+          }
+        },
+        "a2": {
+          "type": "accordion",
+          "settings": {
+            "title": "Ingredients & nutrition",
+            "content": "<p>Creatine monohydrate (5g per 4 gummies), organic tapioca syrup, cane sugar, pectin, citric acid, natural flavor, fruit &amp; vegetable juice (color). 2g sugar per serving. Vegan · gluten-free · no artificial dyes.</p>"
+          }
+        },
+        "a3": {
+          "type": "accordion",
+          "settings": {
+            "title": "Shipping & returns",
+            "content": "<p>Free shipping over $35, ships within 24 hours. Subscribe &amp; save 20% — skip, pause or cancel anytime. 30-day money-back guarantee, and you keep the jar.</p>"
+          }
+        }
       },
-      "block_order": ["p1", "p2", "p3", "a1", "a2", "a3"]
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "a1",
+        "a2",
+        "a3"
+      ]
     },
     "ritual": {
       "type": "ritual",
-      "settings": { "eyebrow": "The ritual", "heading": "How to take it." },
-      "blocks": {
-        "s1": { "type": "step", "settings": { "title": "Take four a day", "text": "Any time — with coffee, post-workout, whenever. No mixing." } },
-        "s2": { "type": "step", "settings": { "title": "Stay consistent", "text": "Creatine works by saturating your muscles, so the habit is everything." } },
-        "s3": { "type": "step", "settings": { "title": "Feel the difference", "text": "In two to four weeks: stronger lifts, faster recovery." } }
+      "settings": {
+        "eyebrow": "The ritual",
+        "heading": "How to take it."
       },
-      "block_order": ["s1", "s2", "s3"]
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Take four a day",
+            "text": "Any time — with coffee, post-workout, whenever. No mixing."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "Stay consistent",
+            "text": "Creatine works by saturating your muscles, so the habit is everything."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "Feel the difference",
+            "text": "In two to four weeks: stronger lifts, faster recovery."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ]
     },
     "ingredients": {
       "type": "ingredients",
-      "settings": { "bg": "bg-sky", "eyebrow": "What's inside", "heading": "Four gummies. Everything they need, nothing they don't." },
-      "blocks": {
-        "n1": { "type": "no", "settings": { "text": "No artificial dyes or flavors" } },
-        "n2": { "type": "no", "settings": { "text": "No gelatin — ever" } },
-        "n3": { "type": "no", "settings": { "text": "No fillers or proprietary blends" } },
-        "t1": { "type": "tag", "settings": { "text": "Vegan", "style": "" } },
-        "t2": { "type": "tag", "settings": { "text": "Gluten-free", "style": "tag--sky" } },
-        "t3": { "type": "tag", "settings": { "text": "Third-party tested", "style": "tag--butter" } },
-        "t4": { "type": "tag", "settings": { "text": "Made in USA", "style": "" } }
+      "settings": {
+        "bg": "bg-sky",
+        "eyebrow": "What's inside",
+        "heading": "Four gummies. Everything they need, nothing they don't."
       },
-      "block_order": ["n1", "n2", "n3", "t1", "t2", "t3", "t4"]
+      "blocks": {
+        "n1": {
+          "type": "no",
+          "settings": {
+            "text": "No artificial dyes or flavors"
+          }
+        },
+        "n2": {
+          "type": "no",
+          "settings": {
+            "text": "No gelatin — ever"
+          }
+        },
+        "n3": {
+          "type": "no",
+          "settings": {
+            "text": "No fillers or proprietary blends"
+          }
+        },
+        "t1": {
+          "type": "tag",
+          "settings": {
+            "text": "Vegan",
+            "style": ""
+          }
+        },
+        "t2": {
+          "type": "tag",
+          "settings": {
+            "text": "Gluten-free",
+            "style": "tag--sky"
+          }
+        },
+        "t3": {
+          "type": "tag",
+          "settings": {
+            "text": "Third-party tested",
+            "style": "tag--butter"
+          }
+        },
+        "t4": {
+          "type": "tag",
+          "settings": {
+            "text": "Made in USA",
+            "style": ""
+          }
+        }
+      },
+      "block_order": [
+        "n1",
+        "n2",
+        "n3",
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ]
     },
     "reviews": {
       "type": "review-wall",
-      "settings": { "eyebrow": "9,000+ five-star reviews", "heading": "Loved by people who hate routines." },
-      "blocks": {
-        "r1": { "type": "review", "settings": { "lead": true, "quote": "I've quit creatine powder three times. These I actually look forward to — haven't missed a day in four months.", "name": "Maya R.", "meta": "Verified · 4 months in" } },
-        "r2": { "type": "review", "settings": { "quote": "No bloat, no chalky shake. My lifts are up and recovery is faster.", "name": "Daniel K.", "meta": "Verified · Wild Berry" } },
-        "r3": { "type": "review", "settings": { "quote": "Wild Berry is genuinely delicious. My wife and I both take them now.", "name": "Tom & Priya", "meta": "Verified · Subscribers" } },
-        "r4": { "type": "review", "settings": { "quote": "Travel a lot and powder was a non-starter. The jar goes in my bag and I never skip.", "name": "Jess H.", "meta": "Verified · Peach" } }
+      "settings": {
+        "eyebrow": "9,000+ five-star reviews",
+        "heading": "Loved by people who hate routines."
       },
-      "block_order": ["r1", "r2", "r3", "r4"]
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "lead": true,
+            "quote": "I've quit creatine powder three times. These I actually look forward to — haven't missed a day in four months.",
+            "name": "Maya R.",
+            "meta": "Verified · 4 months in"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "quote": "No bloat, no chalky shake. My lifts are up and recovery is faster.",
+            "name": "Daniel K.",
+            "meta": "Verified · Wild Berry"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "quote": "Wild Berry is genuinely delicious. My wife and I both take them now.",
+            "name": "Tom & Priya",
+            "meta": "Verified · Subscribers"
+          }
+        },
+        "r4": {
+          "type": "review",
+          "settings": {
+            "quote": "Travel a lot and powder was a non-starter. The jar goes in my bag and I never skip.",
+            "name": "Jess H.",
+            "meta": "Verified · Peach"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4"
+      ]
     },
     "promise": {
-      "type": "promise",
-      "settings": { "bg": "bg-ink", "eyebrow": "Our promise", "heading": "Love it, or it's on us.", "text": "Give CREO 30 days. If you're not recovering faster, lifting stronger and enjoying your daily creatine, we'll refund you — and you keep the jar.", "cta_text": "How the guarantee works", "cta_link": "/pages/guarantee" }
+      "type": "rich-text",
+      "settings": {
+        "bg": "bg-ink",
+        "center": true,
+        "kicker": "Our promise",
+        "heading": "Love it, or it's on us.",
+        "content": "<p>Give CREO 30 days. If you're not recovering faster, lifting stronger and enjoying your daily creatine, we'll refund you — and you keep the jar.</p>",
+        "cta_text": "How the guarantee works",
+        "cta_link": "/pages/guarantee"
+      }
     },
     "faq": {
       "type": "faq",
-      "settings": { "bg": "bg-cream", "eyebrow": "Good to know", "heading": "Questions, answered." },
-      "blocks": {
-        "q1": { "type": "qa", "settings": { "question": "How many gummies should I take?", "answer": "<p>Four gummies a day gives you the full 5g of creatine monohydrate. Take them any time, with or without food.</p>" } },
-        "q2": { "type": "qa", "settings": { "question": "Do I need to load creatine?", "answer": "<p>No loading required. Take four daily and your muscles saturate over about three to four weeks.</p>" } },
-        "q3": { "type": "qa", "settings": { "question": "Are they vegan?", "answer": "<p>Yes — made with pectin, not gelatin, and the creatine is synthetic. Gluten-free with no artificial dyes.</p>" } }
+      "settings": {
+        "bg": "bg-cream",
+        "eyebrow": "Good to know",
+        "heading": "Questions, answered."
       },
-      "block_order": ["q1", "q2", "q3"]
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "question": "How many gummies should I take?",
+            "answer": "<p>Four gummies a day gives you the full 5g of creatine monohydrate. Take them any time, with or without food.</p>"
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "question": "Do I need to load creatine?",
+            "answer": "<p>No loading required. Take four daily and your muscles saturate over about three to four weeks.</p>"
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "question": "Are they vegan?",
+            "answer": "<p>Yes — made with pectin, not gelatin, and the creatine is synthetic. Gluten-free with no artificial dyes.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ]
     }
   },
-  "order": ["main", "ritual", "ingredients", "reviews", "promise", "faq"]
+  "order": [
+    "main",
+    "ritual",
+    "ingredients",
+    "reviews",
+    "promise",
+    "faq"
+  ]
 }

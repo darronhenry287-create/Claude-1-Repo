@@ -1,10 +1,23 @@
 {
   "sections": {
-    "main": { "type": "main-collection" },
+    "main": {
+      "type": "main-collection"
+    },
     "promise": {
-      "type": "promise",
-      "settings": { "bg": "bg-cream", "eyebrow": "Our promise", "heading": "Love it, or it's on us.", "text": "Every order is backed by our 30-day money-back guarantee. Not for you? Keep the jar — we'll refund you anyway.", "cta_text": "", "cta_link": "" }
+      "type": "rich-text",
+      "settings": {
+        "bg": "bg-cream",
+        "center": true,
+        "kicker": "Our promise",
+        "heading": "Love it, or it's on us.",
+        "content": "<p>Every order is backed by our 30-day money-back guarantee. Not for you? Keep the jar — we'll refund you anyway.</p>",
+        "cta_text": "",
+        "cta_link": ""
+      }
     }
   },
-  "order": ["main", "promise"]
+  "order": [
+    "main",
+    "promise"
+  ]
 }
