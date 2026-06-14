@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "head": { "type": "rich-text", "settings": { "center": true, "hero": true, "bg": "bg-cream", "width": 760, "lede": true, "kicker": "Reviews", "heading": "9,000+ five-star reviews.", "content": "<p>The real test of any creatine is whether you keep taking it. Here's what people say after they switched to CREO.</p>" } },
+    "stats": {
+      "type": "bento",
+      "settings": { "eyebrow": "", "heading": "" },
+      "blocks": {
+        "a": { "type": "cell", "settings": { "color": "coral", "big_num": "4.9", "title": "average rating", "text": "Out of five, across 9,000+ verified buyers." } },
+        "b": { "type": "cell", "settings": { "color": "sky", "big_num": "9,000+", "title": "happy reviews", "text": "And counting — every one from a real, verified order." } },
+        "c": { "type": "cell", "settings": { "color": "mint", "big_num": "92%", "title": "reorder rate", "text": "The clearest sign the habit actually sticks." } }
+      },
+      "block_order": ["a", "b", "c"]
+    },
+    "wall": {
+      "type": "review-wall",
+      "settings": { "eyebrow": "In their words", "heading": "What people are saying." },
+      "blocks": {
+        "r1": { "type": "review", "settings": { "lead": true, "quote": "I've started and quit creatine powder three separate times. These I actually look forward to — the jar lives on my desk and I genuinely haven't missed a day in four months. My lifts are up and I feel sharper. Wish I'd found them years ago.", "name": "Maya R.", "meta": "Verified · 4 months in" } },
+        "r2": { "type": "review", "settings": { "quote": "No bloat, no chalky shake to choke down. My compound lifts are clearly up and recovery between sessions is noticeably faster.", "name": "Daniel K.", "meta": "Verified · Wild Berry" } },
+        "r3": { "type": "review", "settings": { "quote": "Wild Berry is genuinely delicious. My wife and I both take them now — it's just part of our morning coffee routine.", "name": "Tom & Priya", "meta": "Verified · Subscribers" } },
+        "r4": { "type": "review", "settings": { "quote": "I'm a marathon runner and started creatine purely for recovery. Easiest habit I've ever kept — and Citrus is fantastic.", "name": "Sofia L.", "meta": "Verified · Citrus" } },
+        "r5": { "type": "review", "settings": { "quote": "I travel constantly for work and powder was a complete non-starter. The jar just goes in my bag and I never skip. Total game changer.", "name": "Jess H.", "meta": "Verified · Peach" } },
+        "r6": { "type": "review", "settings": { "quote": "Took about three weeks before I really felt it, but strength on my big lifts is clearly up now. Convenient and tasty in the meantime.", "name": "Andre O.", "meta": "Verified · 6 weeks in" } },
+        "r7": { "type": "review", "settings": { "quote": "I'm not the gym type — the cognitive angle is what sold me. A few weeks in I feel a bit sharper, and it's genuinely pleasant to take.", "name": "Ravi M.", "meta": "Verified · Wild Berry" } },
+        "r8": { "type": "review", "settings": { "quote": "Switched my whole family over. No clumpy shakers in the sink and everyone actually remembers to take it. The subscription is effortless.", "name": "Catherine B.", "meta": "Verified · Subscriber" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8"]
+    },
+    "cta": { "type": "promise", "settings": { "bg": "bg-ink", "eyebrow": "Build, daily.", "heading": "See what the habit feels like.", "text": "Try CREO risk-free for 30 days. If it's not for you, keep the jar — we'll refund you anyway.", "cta_text": "Try CREO risk-free", "cta_link": "/collections/all" } }
+  },
+  "order": ["head", "stats", "wall", "cta"]
+}

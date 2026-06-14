@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "head": { "type": "rich-text", "settings": { "center": true, "hero": true, "bg": "bg-cream", "width": 760, "lede": true, "kicker": "How it's made", "heading": "Clinically dosed. Rigorously tested.", "content": "<p>A gummy should be held to the same standard as anything else you put in your body. Every batch of CREO is dosed to the gram and tested before it ever reaches you.</p>" } },
+    "pillars": {
+      "type": "bento",
+      "settings": { "eyebrow": "What sets us apart", "heading": "Quality you can actually verify." },
+      "blocks": {
+        "p1": { "type": "cell", "settings": { "color": "cream", "size": "big", "use_image": true, "title": "The full 5g clinical dose", "text": "The exact daily amount of creatine monohydrate used in the research — in every four-gummy serving. No fairy dust, no half-scoops." } },
+        "p2": { "type": "cell", "settings": { "color": "sky", "icon": "shield", "title": "Tested every batch", "text": "An independent lab verifies purity and potency on every run — not just once." } },
+        "p3": { "type": "cell", "settings": { "color": "mint", "icon": "check", "title": "Vegan & clean", "text": "Pectin-based, never gelatin. Gluten-free, 2g sugar, no artificial dyes." } },
+        "p4": { "type": "cell", "settings": { "color": "ink", "size": "wide", "icon": "shield", "title": "Made in the USA, cGMP facility", "text": "Formulated and produced under strict manufacturing standards, in a cGMP-compliant facility." } }
+      },
+      "block_order": ["p1", "p2", "p3", "p4"]
+    },
+    "facts": {
+      "type": "ingredients",
+      "settings": { "bg": "bg-sky", "eyebrow": "Purity, potency, nothing to hide", "heading": "Tested, then tested again.", "text": "Every batch is sent to an independent, third-party lab before it ships. We confirm the full 5g clinical dose is present, that it's pure creatine monohydrate, and that it's clear of contaminants like heavy metals and microbial impurities. If a batch doesn't pass, it doesn't go out." },
+      "blocks": {
+        "n1": { "type": "no", "settings": { "text": "No artificial dyes or flavors" } },
+        "n2": { "type": "no", "settings": { "text": "No gelatin — ever" } },
+        "n3": { "type": "no", "settings": { "text": "No fillers or proprietary blends" } },
+        "t1": { "type": "tag", "settings": { "text": "Vegan", "style": "" } },
+        "t2": { "type": "tag", "settings": { "text": "Gluten-free", "style": "tag--sky" } },
+        "t3": { "type": "tag", "settings": { "text": "Third-party tested", "style": "tag--butter" } },
+        "t4": { "type": "tag", "settings": { "text": "Made in USA", "style": "" } }
+      },
+      "block_order": ["n1", "n2", "n3", "t1", "t2", "t3", "t4"]
+    },
+    "cta": { "type": "promise", "settings": { "bg": "bg-ink", "eyebrow": "Quality you can taste", "heading": "Build, daily.", "text": "A full clinical dose, tested every batch, in a gummy you'll actually look forward to.", "cta_text": "Shop CREO", "cta_link": "/collections/all" } },
+    "disc": { "type": "rich-text", "settings": { "center": true, "width": 760, "content": "<p><em>These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease. Consult your doctor if pregnant, nursing, or managing a condition.</em></p>" } }
+  },
+  "order": ["head", "pillars", "facts", "cta", "disc"]
+}

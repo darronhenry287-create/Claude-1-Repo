@@ -30,7 +30,8 @@ form-creatine/
 1. Shopify admin → **Online Store → Themes → Add theme → Upload zip file** → `creo-shopify-theme.zip`. Click **Customize**.
 2. Make it yours:
    - **Create the product** "CREO Daily Creatine Gummies" with a **Flavor** option (Wild Berry / Peach / Citrus) and add your photos. Point the homepage **Buy block** section at it (Customize → Buy block → Product).
-   - **Menus:** set `main-menu` (header) + footer columns under **Navigation**.
+   - **Pages (designed templates included):** Create each page under *Online Store → Pages*, then in the page's **Theme template** dropdown pick its matching template — `page.about`, `page.how-to`, `page.guarantee`, `page.quality`, `page.reviews`, `page.faq`, `page.contact`, plus `page.privacy-policy`, `page.terms-of-service`, `page.refund-policy`, `page.shipping-returns`. Each renders a full designed layout, pre-filled with the copy and editable in the theme editor — you don't have to paste anything. (Policies can also live in *Settings → Policies*; the footer auto-links those.)
+   - **Menus:** set `main-menu` (header) + footer columns under **Navigation**, pointing at the pages you created.
    - **Colors / logo:** Theme settings → Colors / Brand (the CREO coral/navy palette and free-shipping threshold are pre-set).
    - Every homepage block (hero, bento cells, ritual steps, versus points, reviews, plans, FAQ) is editable in the theme editor.
    - **Subscribe & Save:** the plan selector and pricing are built in; to make the recurring charge live, install a Shopify subscriptions app and attach a selling plan. The plan tiers drive the displayed price — for live one-time orders the cart adds the selected variant × quantity.
