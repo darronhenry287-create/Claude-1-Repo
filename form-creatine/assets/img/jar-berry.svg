@@ -2,11 +2,11 @@
   <defs>
     <clipPath id="jarB"><rect x="112" y="126" width="176" height="214" rx="30"/></clipPath>
   </defs>
-  <rect width="400" height="400" fill="#f3ede3"/>
-  <circle cx="200" cy="190" r="150" fill="#ece3d4"/>
-  <ellipse cx="200" cy="356" rx="120" ry="20" fill="#20211d" opacity="0.08"/>
+  <rect width="400" height="400" fill="#ffffff"/>
+  <circle cx="200" cy="190" r="150" fill="#f4f7fb"/>
+  <ellipse cx="200" cy="356" rx="120" ry="20" fill="#14233f" opacity="0.08"/>
   <!-- jar body -->
-  <rect x="112" y="126" width="176" height="214" rx="30" fill="#fffdf8" stroke="#ddd0bb" stroke-width="2"/>
+  <rect x="112" y="126" width="176" height="214" rx="30" fill="#ffffff" stroke="#e6eaf2" stroke-width="2"/>
   <!-- gummies inside -->
   <g clip-path="url(#jarB)">
     <g fill="#9d3b6b">
@@ -25,13 +25,13 @@
   <!-- glass highlight -->
   <rect x="124" y="138" width="22" height="150" rx="11" fill="#ffffff" opacity="0.4"/>
   <!-- lid -->
-  <rect x="102" y="92" width="196" height="46" rx="16" fill="#5f6e50"/>
-  <rect x="102" y="92" width="196" height="16" rx="8" fill="#6f7e5f"/>
+  <rect x="102" y="92" width="196" height="46" rx="16" fill="#14233f"/>
+  <rect x="102" y="92" width="196" height="16" rx="8" fill="#1e3252"/>
   <!-- label -->
-  <rect x="124" y="176" width="152" height="104" rx="12" fill="#fffdf8" stroke="#eadfce" stroke-width="1.5"/>
-  <text x="200" y="212" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="600" fill="#20211d" letter-spacing="3">FORM</text>
+  <rect x="124" y="176" width="152" height="104" rx="12" fill="#ffffff" stroke="#e6eaf2" stroke-width="1.5"/>
+  <text x="200" y="212" text-anchor="middle" font-family="'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="600" fill="#14233f" letter-spacing="3">FORM</text>
   <text x="200" y="232" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#9d3b6b" letter-spacing="2">WILD BERRY</text>
-  <line x1="150" y1="244" x2="250" y2="244" stroke="#eadfce" stroke-width="1.5"/>
-  <text x="200" y="260" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="9" font-weight="600" fill="#4b483f" letter-spacing="1">5g CREATINE · 120 GUMMIES</text>
-  <text x="200" y="273" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="7.5" fill="#8c8579" letter-spacing="1">DAILY CREATINE GUMMIES</text>
+  <line x1="150" y1="244" x2="250" y2="244" stroke="#e6eaf2" stroke-width="1.5"/>
+  <text x="200" y="260" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="9" font-weight="600" fill="#44516b" letter-spacing="1">5g CREATINE · 120 GUMMIES</text>
+  <text x="200" y="273" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="7.5" fill="#7e8aa3" letter-spacing="1">DAILY CREATINE GUMMIES</text>
 </svg>
