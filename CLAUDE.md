@@ -42,6 +42,7 @@ If the user says "you choose" — choose, but state the choice in one line so th
 - Never set `"default": ""` on a schema setting. An empty string can be interpreted as "missing" and silently breaks page templates that expect a value. Either omit `default` or set a real default string.
 - Don't use `"type": "header"` for schema info dividers — it collides with the section type `header`. Use `"type": "paragraph"`.
 - Don't ship blank `templates/page.<handle>.json` — design the page (rich-text head + designed sections + newsletter). A blank `{ "sections": {} }` is worse than no template.
+- **Policy/legal pages are real deliverables, not stubs.** Privacy, Terms, Refund and Shipping should be finished, multi-section policies — intro + "Last updated" + ~6–8 `<h2>` sections of brand-specific copy (real shipping costs/times, the actual refund mechanics, GDPR/CCPA rights, cosmetic/liability terms) + a contact section — in **both** the static `.rte` page and the Shopify `rich-text` template. Drop "starting template / not legal advice" hedges; they read as unfinished. (Match the depth of a known-good build, ~2–3k chars each.)
 
 ### Section groups & tags
 - Header/footer use **plural** `{% sections 'header-group' %}` (section groups, JSON file). The singular `{% section 'header' %}` (single section) throws *"'header' is not a valid section type"* when paired with a `*-group.json`.
