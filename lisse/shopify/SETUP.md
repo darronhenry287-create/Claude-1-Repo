@@ -11,6 +11,8 @@ pages and apps so every link, price and button resolves perfectly.
 Online Store → Themes → **Add theme → Upload zip file** → `lisse-shopify-theme.zip`.
 Click **Customize** to preview, then **Publish** when ready.
 
+> **Logo:** the theme bundles the LISSE wordmark at `assets/logo.png` (transparent PNG; a `logo-tagline.png` lockup is also included). Upload it in Theme editor → **Header → Logo image**, and set the **checkout** logo under Settings → **Checkout → Branding → Logo**.
+
 ## 2. Add your product
 Products → **Add product**
 - Title: **Firming Body Oil** — this gives the URL `/products/firming-body-oil`,
