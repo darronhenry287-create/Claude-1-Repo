@@ -1,0 +1,19 @@
+<section class="section">
+  <div class="wrap">
+    <div class="rstats">
+      {%- for block in section.blocks -%}<div class="rstat reveal" {{ block.shopify_attributes }}><div class="num">{{ block.settings.num }}</div><div class="lbl">{{ block.settings.label }}</div></div>{%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Stat row",
+  "blocks": [ { "type": "stat", "name": "Stat", "settings": [ { "type": "text", "id": "num", "label": "Number", "default": "96%" }, { "type": "text", "id": "label", "label": "Label", "default": "would recommend to a friend" } ] } ],
+  "max_blocks": 4,
+  "presets": [ { "name": "Stat row", "blocks": [
+    { "type": "stat", "settings": { "num": "96%", "label": "would recommend to a friend" } },
+    { "type": "stat", "settings": { "num": "89%", "label": "replaced 2+ products with it" } },
+    { "type": "stat", "settings": { "num": "9/10", "label": "saw softer skin in a week" } }
+  ] } ]
+}
+{% endschema %}

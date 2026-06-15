@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "head": { "type": "rich-text", "settings": { "center": true, "lede": true, "kicker": "Risk-free", "heading": "Love it, or your money back.", "content": "<p>Use the whole jar for 90 days. If your skin isn't softer, calmer and happier, we'll refund every cent — and you keep the jar.</p>" } },
+    "steps": { "type": "journey", "settings": { "bg": true, "kicker": "How it works", "heading": "Simple as that" }, "blocks": {
+      "s1": { "type": "step", "settings": { "art_index": 4, "title": "Use the jar", "text": "Give it a real shot — up to 90 days." } },
+      "s2": { "type": "step", "settings": { "art_index": 1, "title": "Not in love?", "text": "Email us. No forms, no hassle." } },
+      "s3": { "type": "step", "settings": { "art_index": 3, "title": "Full refund", "text": "Every cent back — keep the jar." } }
+    }, "block_order": ["s1","s2","s3"] }
+  },
+  "order": ["head", "steps"]
+}

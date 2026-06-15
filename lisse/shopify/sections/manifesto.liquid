@@ -1,0 +1,26 @@
+<section class="section manifesto center">
+  <div class="wrap">
+    <span class="kicker">{{ section.settings.kicker }}</span>
+    <h2 style="margin:.8rem 0 0">{{ section.settings.heading }}</h2>
+    <ul class="manifesto__list">
+      {%- for block in section.blocks -%}<li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>{%- endfor -%}
+    </ul>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Manifesto",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Our promise" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Four things we'll never do." }
+  ],
+  "blocks": [ { "type": "line", "name": "Line", "settings": [ { "type": "richtext", "id": "text", "label": "Line (wrap key words in bold)", "default": "<p>We'll never <strong>add water</strong> to cut costs.</p>" } ] } ],
+  "max_blocks": 6,
+  "presets": [ { "name": "Manifesto", "blocks": [
+    { "type": "line", "settings": { "text": "<p>We'll never <strong>add water</strong> to cut costs.</p>" } },
+    { "type": "line", "settings": { "text": "<p>We'll never hide behind the word <strong>\"fragrance.\"</strong></p>" } },
+    { "type": "line", "settings": { "text": "<p>We'll never put a <strong>fifth ingredient</strong> in just to sound fancy.</p>" } },
+    { "type": "line", "settings": { "text": "<p>We'll never make a claim our <strong>own skin</strong> can't back up.</p>" } }
+  ] } ]
+}
+{% endschema %}

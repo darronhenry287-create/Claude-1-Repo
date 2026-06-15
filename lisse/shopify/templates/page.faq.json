@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "head": { "type": "rich-text", "settings": { "center": true, "lede": true, "bg": true, "kicker": "Help center", "heading": "Questions, answered.", "content": "<p>Still stuck? <a href=\"/pages/contact\">Talk to a human</a>.</p>" } },
+    "faq1": { "type": "faq", "settings": { "kicker": "The balm", "heading": "About the product" }, "blocks": {
+      "q1": { "type": "qa", "settings": { "q": "Does it smell like beef?", "a": "<p>No. Triple-rendered and purified, the Unscented balm is virtually scentless.</p>" } },
+      "q2": { "type": "qa", "settings": { "q": "Will it clog my pores?", "a": "<p>Tallow is bioidentical to your skin's oils; most people find it balancing. Patch-test and start small.</p>" } },
+      "q3": { "type": "qa", "settings": { "q": "Can I use it on face and body?", "a": "<p>Yes — face, lips, hands, elbows, scars, cuticles. One jar replaces several products.</p>" } }
+    }, "block_order": ["q1","q2","q3"] },
+    "faq2": { "type": "faq", "settings": { "bg": true, "kicker": "Orders", "heading": "Shipping & returns" }, "blocks": {
+      "q1": { "type": "qa", "settings": { "q": "How fast do you ship?", "a": "<p>Within 1–2 business days. Free shipping over $35.</p>" } },
+      "q2": { "type": "qa", "settings": { "q": "What's your guarantee?", "a": "<p>90 days, money back, keep the jar.</p>" } }
+    }, "block_order": ["q1","q2"] }
+  },
+  "order": ["head", "faq1", "faq2"]
+}

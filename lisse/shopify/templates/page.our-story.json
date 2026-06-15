@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "intro": { "type": "rich-text", "settings": { "center": true, "lede": true, "bg": false, "kicker": "Our story", "heading": "It started with grandma's tin.", "content": "<p>No lab. No focus groups. Just a farmhouse kitchen, a slow cooker, and a stubborn belief that skincare got needlessly complicated.</p>" } },
+    "timeline": { "type": "story-timeline", "blocks": {
+      "a": { "type": "milestone", "settings": { "year": "'94", "title": "The tin by the sink", "text": "Grandma kept rendered tallow by the kitchen sink — for chapped hands, wind-burned cheeks, scraped knees." } },
+      "b": { "type": "milestone", "settings": { "year": "2021", "title": "47 messy batches", "text": "Staring at a shelf of $60 creams we couldn't pronounce, we went back to her recipe and whipped it 47 times." } },
+      "c": { "type": "milestone", "settings": { "year": "2022", "title": "The first 100 jars", "text": "We hand-filled a hundred jars at the kitchen table and gave them to friends. They came back for more." } },
+      "d": { "type": "milestone", "settings": { "year": "Today", "title": "8,200 happy faces", "text": "Same four ingredients. Same small batches. Just a lot more sinks with a jar beside them." } }
+    }, "block_order": ["a","b","c","d"] },
+    "manifesto": { "type": "manifesto", "blocks": {
+      "a": { "type": "line", "settings": { "text": "<p>We'll never <strong>add water</strong> to cut costs.</p>" } },
+      "b": { "type": "line", "settings": { "text": "<p>We'll never hide behind the word <strong>\"fragrance.\"</strong></p>" } },
+      "c": { "type": "line", "settings": { "text": "<p>We'll never put a <strong>fifth ingredient</strong> in just to sound fancy.</p>" } },
+      "d": { "type": "line", "settings": { "text": "<p>We'll never make a claim our <strong>own skin</strong> can't back up.</p>" } }
+    }, "block_order": ["a","b","c","d"] },
+    "quote": { "type": "pull-quote", "settings": {} }
+  },
+  "order": ["intro", "timeline", "manifesto", "quote"]
+}

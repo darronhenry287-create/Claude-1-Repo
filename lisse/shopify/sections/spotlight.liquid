@@ -1,0 +1,19 @@
+<section class="section">
+  <div class="wrap">
+    <div class="spotlight reveal">
+      <div class="stars">★★★★★</div>
+      <div class="rte" style="font-family:var(--slab);font-weight:700;font-size:clamp(1.3rem,3vw,1.9rem);line-height:1.3;color:var(--charcoal)">{{ section.settings.quote }}</div>
+      <div class="by">{{ section.settings.by }}</div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Review spotlight",
+  "settings": [
+    { "type": "richtext", "id": "quote", "label": "Quote", "default": "<p>\"I've had eczema for 22 years and tried every steroid cream a dermatologist could prescribe. Three weeks with this jar and my arms are clear for the first time since I was a teenager.\"</p>" },
+    { "type": "text", "id": "by", "label": "Attribution", "default": "— Marina D., verified buyer" }
+  ],
+  "presets": [ { "name": "Review spotlight" } ]
+}
+{% endschema %}
