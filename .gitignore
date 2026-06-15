@@ -1,0 +1,7 @@
+# Local tooling installed at runtime (theme-check, liquidjs, sharp, etc.) — never commit
+node_modules/
+package-lock.json
+
+# OS / editor cruft
+.DS_Store
+*.log
