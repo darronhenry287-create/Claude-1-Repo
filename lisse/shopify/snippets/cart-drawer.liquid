@@ -5,7 +5,7 @@
     {%- if cart.item_count > 0 -%}
       {%- for item in cart.items -%}
         <div class="ditem">
-          <div class="ditem__thumb">{%- if item.image -%}<img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}" style="width:100%;height:100%;object-fit:cover">{%- endif -%}</div>
+          <div class="ditem__thumb">{%- if item.image -%}<img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}" width="160" height="160" style="width:100%;height:100%;object-fit:cover">{%- endif -%}</div>
           <div class="ditem__info">
             <h4>{{ item.product.title }}</h4>
             <div class="v">{{ item.variant.title | remove: 'Default Title' }}</div>

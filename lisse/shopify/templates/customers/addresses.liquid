@@ -13,6 +13,6 @@
       </div>
     {%- endform -%}
   </details>
-  {%- for address in customer.addresses -%}<div style="border:2px solid var(--ink);border-radius:var(--r-lg);padding:1.4rem;margin-bottom:1rem"><p class="muted" style="line-height:1.8">{{ address | format_address }}</p>{%- form 'customer_address', address, style: 'display:inline' -%}<input type="hidden" name="_method" value="delete"><button type="submit" class="drm" style="margin-top:1rem" onclick="return confirm('Delete this address?')">Delete</button>{%- endform -%}</div>{%- endfor -%}
+  {%- for address in customer.addresses -%}<div style="border:1px solid var(--line);border-radius:var(--r-lg);padding:1.4rem;margin-bottom:1rem"><p class="muted" style="line-height:1.8">{{ address | format_address }}</p>{%- form 'customer_address', address, style: 'display:inline' -%}<input type="hidden" name="_method" value="delete"><button type="submit" class="drm" style="margin-top:1rem" onclick="return confirm('Delete this address?')">Delete</button>{%- endform -%}</div>{%- endfor -%}
   <p style="margin-top:2rem"><a href="{{ routes.account_url }}" class="muted" style="font-weight:700">← Back to account</a></p>
 </div></section>

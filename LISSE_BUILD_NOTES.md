@@ -4,6 +4,25 @@
 > confirm Higgsfield CDN egress works (`curl -sI https://d8j0ntlcm91z4.cloudfront.net/...`),
 > then continue from **Build steps** below. Branch: `claude/affectionate-goldberg-l6o4qw`.
 
+## ✅ Build complete (2026-06-15)
+The full LISSE build is finished, validated, committed and pushed. Both deliverable zips
+live at `lisse/lisse-shopify-theme.zip` and `lisse/lisse-preview.zip` (~22 MB each).
+
+- **CDN egress:** the fresh container reaches `d8j0ntlcm91z4.cloudfront.net` (genuine CloudFront
+  responses) — the "Host not in allowlist" issue did not reproduce.
+- **Images (10, all real Higgsfield, downscaled to ≤1600px PNG):** product-hero, product-hero-b,
+  marble-shelf, dropper-hand, carton-box, texture-skin, botanicals, massage-thigh, massage-thigh-b,
+  results-portrait. The "timed-out" results portrait (`9d7bdbc0`) had actually completed — pulled, not re-fired.
+- **Design system:** bone/clay/sage, Fraunces + Inter, hairline borders, soft shadows, pill buttons,
+  no kraft grain. `theme.css`/`theme.js` byte-identical in `assets/` and `shopify/assets/`.
+- **Static preview:** 16 pages built; headless-validated (CSS applied, footer gap 0, menu fixed,
+  drawer off-screen, every image decoded, no console errors).
+- **Shopify theme:** sections/templates/locales/snippets/config/SETUP all rebranded. theme-check clean
+  except the known `qr_url` false-positive (gift_card.liquid). Subscribe & Save is display-only without
+  a subscriptions app — documented in SETUP.md.
+
+Everything below is the original resume plan, kept for reference.
+
 ## Brand
 - **Name:** LISSE — tagline "The daily firming ritual"
 - **Product (single hero):** LISSE Firming Body Oil — an anti-cellulite / firming massage oil

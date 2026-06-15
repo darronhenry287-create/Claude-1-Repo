@@ -13,7 +13,7 @@
     </div>
 
     <a href="{{ routes.root_url }}" class="logo">
-      {%- if settings.logo != blank -%}<img src="{{ settings.logo | image_url: width: 220 }}" alt="{{ shop.name }}" height="30">
+      {%- if settings.logo != blank -%}<img src="{{ settings.logo | image_url: width: 220 }}" alt="{{ shop.name }}" width="{{ settings.logo.width }}" height="{{ settings.logo.height }}" style="height:30px;width:auto">
       {%- else -%}{{ settings.logo_text | default: 'LISSE' }}{%- endif -%}
     </a>
 
