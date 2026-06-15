@@ -1,0 +1,34 @@
+<section class="pagehead"><div class="wrap pagehead__in">
+  <span class="eyebrow">My account</span>
+  <h1 class="h-lg">Your addresses</h1>
+  <p>Add, edit, or remove the addresses we ship your WARCAT to.</p>
+</div></section>
+
+<section class="section"><div class="wrap-narrow">
+  <details style="margin-bottom:2rem">
+    <summary class="btn btn-primary" style="cursor:pointer;display:inline-flex">Add a new address</summary>
+    {%- form 'customer_address', customer.new_address -%}
+      <div style="background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:1.8rem;margin-top:1.5rem">
+        <div class="field"><label>First name</label><input type="text" name="address[first_name]" autocomplete="given-name"></div>
+        <div class="field"><label>Last name</label><input type="text" name="address[last_name]" autocomplete="family-name"></div>
+        <div class="field"><label>Address</label><input type="text" name="address[address1]" autocomplete="address-line1"></div>
+        <div class="field"><label>City</label><input type="text" name="address[city]" autocomplete="address-level2"></div>
+        <div class="field"><label>Country</label><input type="text" name="address[country]" autocomplete="country"></div>
+        <div class="field"><label>ZIP</label><input type="text" name="address[zip]" autocomplete="postal-code"></div>
+        <button type="submit" class="btn btn-primary">Save address</button>
+      </div>
+    {%- endform -%}
+  </details>
+
+  {%- for address in customer.addresses -%}
+    <div style="background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:1.4rem;margin-bottom:1rem">
+      <p class="muted" style="line-height:1.8">{{ address | format_address }}</p>
+      {%- form 'customer_address', address, style: 'display:inline' -%}
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit" class="btn btn-outline" style="margin-top:1rem" onclick="return confirm('Delete this address?')">Delete</button>
+      {%- endform -%}
+    </div>
+  {%- endfor -%}
+
+  <p style="margin-top:2rem"><a href="{{ routes.account_url }}" class="muted" style="font-weight:700">Back to account</a></p>
+</div></section>

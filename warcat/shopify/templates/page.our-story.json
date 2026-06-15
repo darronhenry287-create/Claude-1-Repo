@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "head": { "type": "main-page", "settings": { "eyebrow": "Our story" } },
+    "story": {
+      "type": "split-feature",
+      "settings": { "bg": "white", "media_position": "right", "eyebrow": "Why we built it", "heading": "A chore that never ends deserved a real fix.", "text": "We loved our cats. We did not love the twice-daily scoop, the smell, or the worry about whether everyone was using the box normally. The auto boxes we tried were loud, cramped or cheap — so we built the one we wished existed.", "link_label": "" }
+    },
+    "values": {
+      "type": "safety-grid",
+      "settings": { "bg": "soft", "eyebrow": "What we stand for", "heading": "Quiet by default. Honest by design." },
+      "blocks": {
+        "x1": { "type": "card", "settings": { "icon": "check", "title": "Cats first", "text": "Every decision — the slow rotation, the quiet motor, the wide doorway — starts with what's calm and safe for the cat." } },
+        "x2": { "type": "card", "settings": { "icon": "arrow", "title": "No lock-in", "text": "No proprietary litter, no mandatory subscriptions. You own it outright and run it your way." } },
+        "x3": { "type": "card", "settings": { "icon": "shield", "title": "Built to last", "text": "Replaceable parts, a 2-year warranty and lifetime support — because good hardware shouldn't be disposable." } }
+      },
+      "block_order": ["x1", "x2", "x3"]
+    },
+    "guarantee": { "type": "guarantee" }
+  },
+  "order": ["head", "story", "values", "guarantee"]
+}

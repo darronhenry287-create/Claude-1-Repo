@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "head": { "type": "main-page", "settings": { "eyebrow": "Bundles & save" } },
+    "offer": {
+      "type": "offer",
+      "settings": { "tag": "Most popular · save $120", "heading": "The Complete WARCAT Kit", "text": "Everything to go scoop-free on day one — the box plus the accessories that keep it running beautifully.", "price_now": "$549", "price_was": "$669", "cta1_label": "Shop the kit", "cta2_label": "Shop the box" },
+      "blocks": {
+        "o1": { "type": "item", "settings": { "text": "WARCAT Smart Litter Box (90L)" } },
+        "o2": { "type": "item", "settings": { "text": "Anti-tracking entry mat" } },
+        "o3": { "type": "item", "settings": { "text": "3-month carbon filter set" } },
+        "o4": { "type": "item", "settings": { "text": "30 sealed drawer liners" } }
+      },
+      "block_order": ["o1", "o2", "o3", "o4"]
+    },
+    "guarantee": { "type": "guarantee" }
+  },
+  "order": ["head", "offer", "guarantee"]
+}

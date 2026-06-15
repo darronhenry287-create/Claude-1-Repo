@@ -1,0 +1,34 @@
+<!doctype html><html lang="{{ request.locale.iso_code }}"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>{{ shop.name }} &mdash; Gift Card</title>
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+<style>
+  :root{ --gc-bg:#ffffff; --gc-teal:#0fb5a6; --gc-ink:#0e1a26; --gc-soft:#f3f7f8; --gc-line:#dbe6e9; }
+  body.template-gift-card{ background:var(--gc-bg); color:var(--gc-ink); }
+  .gc-card{ max-width:480px; margin:0 auto; padding:3rem 1.5rem; text-align:center; }
+  .gc-logo{ font-weight:900; letter-spacing:.08em; text-transform:uppercase; font-size:1.6rem; color:var(--gc-ink); }
+  .gc-eyebrow{ display:block; margin-top:1.5rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; font-size:.78rem; color:var(--gc-teal); }
+  .gc-balance{ margin:.6rem 0 1.5rem; font-size:2.6rem; font-weight:900; color:var(--gc-ink); }
+  .gc-panel{ background:var(--gc-ink); border-radius:18px; padding:2.5rem 1.5rem; color:#fff; }
+  .gc-tagline{ font-size:1.25rem; font-weight:700; color:var(--gc-teal); margin:0; }
+  .gc-qr{ background:#fff; display:inline-block; padding:1rem; border-radius:12px; margin-top:1.5rem; }
+  .gc-codelabel{ margin-top:1.5rem; font-weight:700; color:var(--gc-ink); }
+  .gc-code{ display:inline-block; margin:.6rem 0 1.5rem; padding:.7rem 1.2rem; background:var(--gc-soft); border:1px solid var(--gc-line); border-radius:100px; font-size:1rem; font-weight:700; letter-spacing:.1em; }
+  .gc-btn{ display:inline-block; background:var(--gc-teal); color:#fff; font-weight:800; text-decoration:none; padding:.9rem 1.8rem; border-radius:100px; }
+</style>
+</head>
+<body class="template-gift-card"><section class="gc-card">
+  <span class="gc-logo">{{ shop.name }}</span>
+  <span class="gc-eyebrow">Gift card</span>
+  <div class="gc-balance">{{ gift_card.balance | money }}</div>
+  <div class="gc-panel">
+    <p class="gc-tagline">A fresher box, on us.</p>
+    <p style="font-size:.82rem;opacity:.7;margin:.2rem 0 0">Enter the code below at checkout.</p>
+  </div>
+  <p class="gc-codelabel">Gift card code</p>
+  <div class="gc-code">{{ gift_card.code | format_code }}</div>
+  <p><a href="{{ shop.url }}" class="gc-btn">Shop WARCAT</a></p>
+</section>
+<script src="{{ 'theme.js' | asset_url }}" defer></script>
+</body></html>

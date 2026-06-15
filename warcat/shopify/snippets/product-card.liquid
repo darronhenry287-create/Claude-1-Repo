@@ -1,0 +1,29 @@
+{%- liquid
+  assign cardvar = product.selected_or_first_available_variant
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+    assign pct = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round
+  endif
+-%}
+<div class="pcard">
+  <a href="{{ product.url }}" class="pcard__media">
+    {%- if on_sale -%}<span class="pcard__badge tag tag--save">Save {{ pct }}%</span>{%- endif -%}
+    {%- if product.featured_image -%}
+      <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="600" height="600" loading="lazy">
+    {%- endif -%}
+  </a>
+  <div class="pcard__body">
+    <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    <div class="pcard__rate"><span class="stars" style="--p:96%;font-size:.8rem"></span> 4.8</div>
+    <div class="pcard__foot">
+      <span class="pcard__price tnum">{{ product.price | money }}{%- if on_sale -%}<span class="was">{{ product.compare_at_price | money }}</span>{%- endif -%}</span>
+      {%- if cardvar -%}
+        <form method="post" action="{{ routes.cart_add_url }}">
+          <input type="hidden" name="id" value="{{ cardvar.id }}">
+          <button type="submit" name="add" class="btn btn-outline btn-sm" data-bundle-add="{{ cardvar.id }}" data-bundle-qty="1"{% unless cardvar.available %} disabled{% endunless %}>{% if cardvar.available %}Add{% else %}Sold out{% endif %}</button>
+        </form>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<section class="press">
+  <div class="wrap wrap-wide press__in">
+    <span class="press__label">{{ section.settings.label }}</span>
+    <div class="press__logos">
+      {%- for block in section.blocks -%}<span {{ block.shopify_attributes }}>{{ block.settings.name }}</span>{%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Press bar",
+  "blocks": [
+    { "type": "logo", "name": "Name", "settings": [ { "type": "text", "id": "name", "label": "Name", "default": "The Verge" } ] }
+  ],
+  "max_blocks": 8,
+  "settings": [ { "type": "text", "id": "label", "label": "Label", "default": "As featured in" } ],
+  "presets": [
+    { "name": "Press bar", "blocks": [
+      { "type": "logo", "settings": { "name": "The Verge" } },
+      { "type": "logo", "settings": { "name": "WIRED" } },
+      { "type": "logo", "settings": { "name": "Mashable" } },
+      { "type": "logo", "settings": { "name": "Modern Cat" } },
+      { "type": "logo", "settings": { "name": "TechRadar" } }
+    ] }
+  ]
+}
+{% endschema %}

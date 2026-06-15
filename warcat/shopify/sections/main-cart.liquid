@@ -1,0 +1,48 @@
+<section class="section">
+  <div class="wrap wrap-wide">
+    <h1 class="h-lg" style="margin-bottom:2rem">Your cart</h1>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" class="cartpage">
+        <div>
+          {%- for item in cart.items -%}
+            <div class="cline">
+              <div class="cline__thumb">{%- if item.image -%}<img src="{{ item.image | image_url: width: 176 }}" alt="{{ item.product.title | escape }}" width="88" height="88">{%- endif -%}</div>
+              <div class="cline__info">
+                <h4><a href="{{ item.url }}">{{ item.product.title }}</a></h4>
+                {%- unless item.variant.title contains 'Default' -%}<div class="v muted" style="font-size:.82rem">{{ item.variant.title }}</div>{%- endunless -%}
+                <a href="{{ item.url_to_remove }}" class="drm">Remove</a>
+              </div>
+              <div class="qty">
+                <input type="number" name="updates[{{ item.key }}]" value="{{ item.quantity }}" min="0" aria-label="Quantity" style="width:64px;height:46px;text-align:center;border:1.5px solid var(--line-2);border-radius:10px">
+              </div>
+              <div class="cline__price">{{ item.final_line_price | money }}</div>
+            </div>
+          {%- endfor -%}
+          <div style="display:flex;gap:1rem;align-items:center;margin-top:1.4rem">
+            <a href="{{ routes.all_products_collection_url }}" class="tlink">Continue shopping {% render 'icon', name: 'arrow' %}</a>
+            <button type="submit" name="update" class="btn btn-outline btn-sm">Update cart</button>
+          </div>
+        </div>
+        <aside class="csum">
+          <h3>Order summary</h3>
+          <div class="csum__row"><span>Subtotal</span><span>{{ cart.total_price | money }}</span></div>
+          <div class="csum__row"><span>Shipping</span><span style="color:var(--brand-ink);font-weight:600">Free</span></div>
+          <div class="csum__row total"><span>Total</span><span>{{ cart.total_price | money }}</span></div>
+          <button type="submit" name="checkout" class="btn btn-primary btn-block btn-lg" style="margin-top:1.2rem">Checkout</button>
+          <p class="dnote center" style="margin-top:1rem">90-night trial · Free returns · 2-yr warranty</p>
+        </aside>
+      </form>
+    {%- else -%}
+      <div class="cart-empty">
+        <h3 class="h-sm">Your cart is empty</h3>
+        <p class="muted mt-1">Time to retire the scoop for good.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary btn-lg mt-3">Shop the WARCAT</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Cart", "settings": [] }
+{% endschema %}

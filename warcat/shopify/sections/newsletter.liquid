@@ -1,0 +1,33 @@
+<section class="section section--tight">
+  <div class="wrap wrap-wide">
+    <div class="news">
+      <span class="eyebrow eyebrow--light" style="justify-content:center">{{ section.settings.eyebrow }}</span>
+      <h2 class="h-md mt-1">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+      {%- form 'customer', class: 'signup' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="hand" style="font-size:1.3rem;color:#fff">You're in ✓ Check your inbox for your welcome code.</p>
+        {%- else -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input type="email" name="contact[email]" placeholder="you@email.com" aria-label="Email" required>
+          <button class="btn btn-primary" type="submit">{{ section.settings.button }}</button>
+        {%- endif -%}
+      {%- endform -%}
+      {%- if section.settings.note != blank -%}<small>{{ section.settings.note }}</small>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Join the clowder" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Get $40 off your WARCAT." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Sign up for early-access drops, cat-care tips and a welcome code for $40 off your first box." },
+    { "type": "text", "id": "button", "label": "Button label", "default": "Get $40 off" },
+    { "type": "text", "id": "note", "label": "Note", "default": "No spam — just the occasional good email. Unsubscribe anytime." }
+  ],
+  "presets": [ { "name": "Newsletter" } ]
+}
+{% endschema %}

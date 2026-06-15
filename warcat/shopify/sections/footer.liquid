@@ -1,0 +1,67 @@
+<footer class="footer">
+  <div class="wrap wrap-wide">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="logo"><svg class="logo__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#0fb5a6"/><path d="M9 13.5 8 8.5l4 3.2a8.5 8.5 0 0 1 8 0l4-3.2-1 5" stroke="#04332e" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="12.5" cy="17" r="1.4" fill="#04332e"/><circle cx="19.5" cy="17" r="1.4" fill="#04332e"/><path d="M16 19.5v1.4m0 0-1.6.8m1.6-.8 1.6.8" stroke="#04332e" stroke-width="1.6" stroke-linecap="round"/></svg><span>{{ section.settings.logo_text | default: shop.name }}</span></span>
+        <p>{{ section.settings.tagline }}</p>
+        <div class="social">
+          {%- if section.settings.instagram != blank -%}<a href="{{ section.settings.instagram }}" aria-label="Instagram">{% render 'icon', name: 'ig' %}</a>{%- endif -%}
+          {%- if section.settings.tiktok != blank -%}<a href="{{ section.settings.tiktok }}" aria-label="TikTok">{% render 'icon', name: 'tiktok' %}</a>{%- endif -%}
+          {%- if section.settings.youtube != blank -%}<a href="{{ section.settings.youtube }}" aria-label="YouTube">{% render 'icon', name: 'yt' %}</a>{%- endif -%}
+        </div>
+      </div>
+
+      {%- for block in section.blocks -%}
+        <div class="footer__col" {{ block.shopify_attributes }}>
+          <h5>{{ block.settings.heading }}</h5>
+          {%- for link in block.settings.menu.links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="footer__bot">
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+      <div class="footer__legal">
+        {%- for link in section.settings.legal_menu.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+      </div>
+      <div class="footer__pay"><span>VISA</span><span>MC</span><span>AMEX</span><span>Shop Pay</span><span>Klarna</span></div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "logo_text", "label": "Logo text", "default": "WARCAT" },
+    { "type": "textarea", "id": "tagline", "label": "Tagline", "default": "The self-cleaning litter box that runs itself — whisper-quiet, app-controlled, and built for multi-cat homes." },
+    { "type": "url", "id": "instagram", "label": "Instagram URL" },
+    { "type": "url", "id": "tiktok", "label": "TikTok URL" },
+    { "type": "url", "id": "youtube", "label": "YouTube URL" },
+    { "type": "link_list", "id": "legal_menu", "label": "Legal menu" }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Link column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
+        { "type": "link_list", "id": "menu", "label": "Menu" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "menu", "settings": { "heading": "Shop" } },
+        { "type": "menu", "settings": { "heading": "Learn" } },
+        { "type": "menu", "settings": { "heading": "Support" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

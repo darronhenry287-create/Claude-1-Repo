@@ -1,0 +1,29 @@
+<section class="pagehead"><div class="wrap pagehead__in">
+  <span class="eyebrow">WARCAT Journal</span>
+  <h1 class="h-lg">{{ blog.title }}</h1>
+  <p>Cat care, fresh boxes, and life with a self-cleaning WARCAT.</p>
+</div></section>
+
+<section class="section"><div class="wrap">
+  {%- if blog.articles_count > 0 -%}
+    {%- paginate blog.articles by 12 -%}
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.6rem">
+        {%- for article in blog.articles -%}
+          <a href="{{ article.url }}" style="display:block;background:var(--soft);border:1px solid var(--line);border-radius:18px;overflow:hidden;text-decoration:none;color:inherit">
+            {%- if article.image -%}
+              <img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.title | escape }}" width="600" height="400" style="width:100%;height:auto;display:block;object-fit:cover">
+            {%- endif -%}
+            <div style="padding:1.4rem">
+              <h3 class="h-sm" style="margin-bottom:.5rem">{{ article.title }}</h3>
+              <div class="muted" style="font-size:.85rem">{{ article.published_at | date: '%B %-d, %Y' }}</div>
+              {%- if article.excerpt != blank -%}<p class="muted" style="margin-top:.6rem">{{ article.excerpt | strip_html | truncate: 120 }}</p>{%- endif -%}
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}<div class="center" style="margin-top:3rem">{{ paginate | default_pagination }}</div>{%- endif -%}
+    {%- endpaginate -%}
+  {%- else -%}
+    <p class="muted center">No posts yet. Check back soon.</p>
+  {%- endif -%}
+</div></section>

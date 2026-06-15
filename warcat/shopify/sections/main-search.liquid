@@ -1,0 +1,38 @@
+<section class="pagehead">
+  <div class="wrap pagehead__in">
+    <span class="eyebrow">Search</span>
+    <h1 class="h-lg">{{ 'general.search.title' | t }}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" style="display:flex;gap:.6rem;max-width:520px;margin:1.4rem auto 0">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="Search" style="flex:1;padding:.9em 1.2em;border:1.5px solid var(--line-2);border-radius:999px">
+      <button type="submit" class="btn btn-primary">{{ 'general.search.search' | t }}</button>
+    </form>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap wrap-wide">
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+        <p class="muted" style="margin-bottom:1.6rem">{{ 'general.search.results_count' | t: count: search.results_count, terms: search.terms }}</p>
+        {%- paginate search.results by 12 -%}
+          <div class="prodgrid">
+            {%- for item in search.results -%}
+              {%- if item.object_type == 'product' -%}
+                {% render 'product-card', product: item %}
+              {%- else -%}
+                <a class="pcard" href="{{ item.url }}"><div class="pcard__body"><h3>{{ item.title }}</h3><p class="muted" style="font-size:.9rem">{{ item.content | default: item.excerpt | strip_html | truncatewords: 18 }}</p></div></a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          {%- if paginate.pages > 1 -%}<div class="center mt-3">{{ paginate | default_pagination }}</div>{%- endif -%}
+        {%- endpaginate -%}
+      {%- else -%}
+        <p class="muted center">{{ 'general.search.no_results' | t: terms: search.terms }}</p>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}

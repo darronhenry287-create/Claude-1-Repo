@@ -1,0 +1,53 @@
+<section class="section{% if section.settings.bg == 'soft' %} bg-soft{% endif %}">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 class="h-lg">{{ section.settings.heading }}</h2>
+    </div>
+    <div class="compare">
+      <div class="compare__row compare__head">
+        <div class="c-feat">&nbsp;</div>
+        <div class="c-us">{{ section.settings.us_label }}</div>
+        <div class="c-them">{{ section.settings.them_label }}</div>
+      </div>
+      {%- for block in section.blocks -%}
+        <div class="compare__row" {{ block.shopify_attributes }}>
+          <div class="c-feat">{{ block.settings.feature }}</div>
+          <div class="c-us"><strong class="yes">{{ block.settings.us }}</strong></div>
+          <div class="c-them">{{ block.settings.them }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Comparison table",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why WARCAT" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The difference is in the details." },
+    { "type": "text", "id": "us_label", "label": "Our column", "default": "WARCAT" },
+    { "type": "text", "id": "them_label", "label": "Their column", "default": "Other auto boxes" },
+    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "white", "label": "White" }, { "value": "soft", "label": "Soft" } ], "default": "soft" }
+  ],
+  "blocks": [
+    { "type": "row", "name": "Row", "settings": [
+      { "type": "text", "id": "feature", "label": "Feature", "default": "Feature" },
+      { "type": "text", "id": "us", "label": "WARCAT value", "default": "Yes" },
+      { "type": "text", "id": "them", "label": "Their value", "default": "No" }
+    ] }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    { "name": "Comparison table", "blocks": [
+      { "type": "row", "settings": { "feature": "Cleaning noise", "us": "< 40 dB", "them": "55–65 dB" } },
+      { "type": "row", "settings": { "feature": "Globe capacity", "us": "90 L XL", "them": "55–76 L" } },
+      { "type": "row", "settings": { "feature": "Per-cat health tracking", "us": "Yes", "them": "No" } },
+      { "type": "row", "settings": { "feature": "Anti-pinch safety reverse", "us": "Yes", "them": "Weight only" } },
+      { "type": "row", "settings": { "feature": "Home trial", "us": "90 nights", "them": "14–30 days" } },
+      { "type": "row", "settings": { "feature": "Warranty", "us": "2 years", "them": "1 year" } }
+    ] }
+  ]
+}
+{% endschema %}

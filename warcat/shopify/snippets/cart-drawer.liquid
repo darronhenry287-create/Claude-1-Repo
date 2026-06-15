@@ -1,0 +1,41 @@
+<div class="overlay" id="overlay"></div>
+
+<aside class="drawer" id="drawer" aria-label="Cart">
+  <div class="drawer__head">
+    <h3>Your cart</h3>
+    <button class="iconbtn" data-action="close-cart" aria-label="Close">{% render 'icon', name: 'close' %}</button>
+  </div>
+
+  <div class="drawer__body" id="cart-body">
+    {%- if cart.item_count > 0 -%}
+      {%- for item in cart.items -%}
+        <div class="ditem">
+          <div class="ditem__thumb">
+            {%- if item.image -%}<img src="{{ item.image | image_url: width: 144 }}" alt="{{ item.product.title | escape }}" width="72" height="72">{%- endif -%}
+          </div>
+          <div class="ditem__info">
+            <h4>{{ item.product.title }}</h4>
+            {%- unless item.variant.title contains 'Default' -%}<div class="v">{{ item.variant.title }}</div>{%- endunless -%}
+            <div class="ditem__foot">
+              <span class="v">Qty {{ item.quantity }}</span>
+              <strong>{{ item.final_line_price | money }}</strong>
+            </div>
+            <a href="{{ item.url_to_remove }}" class="drm">Remove</a>
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      <div class="dempty"><p>Your cart is empty.</p><p style="margin-top:.4rem">Time to retire the scoop.</p></div>
+    {%- endif -%}
+  </div>
+
+  <div class="drawer__foot" id="cart-foot"{% if cart.item_count == 0 %} style="display:none"{% endif %}>
+    <div class="freebar" id="freebar" data-threshold="{{ settings.free_ship_threshold }}" data-total="{{ cart.total_price | divided_by: 100.0 }}"></div>
+    <div class="dsub"><span>Subtotal</span><span id="cart-sub">{{ cart.total_price | money }}</span></div>
+    <p class="dnote">Shipping &amp; taxes calculated at checkout</p>
+    <form action="{{ routes.cart_url }}" method="post">
+      <button type="submit" name="checkout" class="btn btn-primary btn-block btn-lg">Checkout</button>
+    </form>
+    <a href="{{ routes.cart_url }}" class="btn btn-outline btn-block" style="margin-top:.6rem">View cart</a>
+  </div>
+</aside>

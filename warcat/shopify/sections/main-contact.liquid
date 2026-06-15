@@ -1,0 +1,52 @@
+<section class="pagehead">
+  <div class="wrap pagehead__in">
+    <span class="eyebrow">Support</span>
+    <h1 class="h-lg">{{ section.settings.heading | default: 'Talk to a real cat person.' }}</h1>
+    <p>{{ section.settings.subtitle | default: "Questions before you buy, or help with a box you already own — we're here, and we reply fast." }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap wrap-wide">
+    <div class="contact">
+      <div style="background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:1.8rem">
+        {%- form 'contact', id: 'contact-form' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="note-ok">Thanks — our support team will reply within one business day.</div>
+          {%- else -%}
+            {%- if form.errors -%}<div class="note-ok" style="background:#fdece6;border-color:#f4c4b3;color:#b3431f">Please check the highlighted fields and try again.</div>{%- endif -%}
+            <div class="field"><label for="cf-name">Your name</label><input id="cf-name" type="text" name="contact[name]" required></div>
+            <div class="field"><label for="cf-email">Email</label><input id="cf-email" type="email" name="contact[email]" required></div>
+            <div class="field"><label for="cf-topic">How can we help?</label>
+              <select id="cf-topic" name="contact[topic]">
+                <option>Question before buying</option>
+                <option>Help with my WARCAT</option>
+                <option>Order &amp; shipping</option>
+                <option>Returns &amp; trial</option>
+                <option>Warranty claim</option>
+              </select>
+            </div>
+            <div class="field"><label for="cf-msg">Message</label><textarea id="cf-msg" name="contact[body]" required></textarea></div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Send message</button>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+
+      <aside class="contactside">
+        <div class="ci"><span class="ic">{% render 'icon', name: 'user' %}</span><div><b>Email us</b><p>care@warcat.com — replies within one business day.</p></div></div>
+        <div class="ci"><span class="ic">{% render 'icon', name: 'check' %}</span><div><b>Support hours</b><p>Monday–Saturday, 9am–6pm ET.</p></div></div>
+        <div class="ci"><span class="ic">{% render 'icon', name: 'shield' %}</span><div><b>Quick answers</b><p>Most questions are covered in our FAQ, shipping &amp; warranty pages.</p></div></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Talk to a real cat person." },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Questions before you buy, or help with a box you already own — we're here, and we reply fast." }
+  ]
+}
+{% endschema %}

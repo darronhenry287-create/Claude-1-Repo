@@ -1,0 +1,134 @@
+{%- liquid
+  assign cur = product.selected_or_first_available_variant
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+    assign pct = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round
+  endif
+-%}
+<div class="wrap wrap-wide" style="padding-top:1.4rem"><p class="crumbs"><a href="{{ routes.root_url }}">Home</a> / <a href="{{ routes.all_products_collection_url }}">Shop</a> / {{ product.title }}</p></div>
+
+<section class="section section--tight" style="padding-top:1.4rem">
+  <div class="wrap wrap-wide">
+    <div class="pdp" data-product="{{ product.handle }}">
+      <div class="pgallery">
+        <div class="pgallery__main" id="pg-main">
+          {%- if product.featured_image -%}
+            <img src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="900" height="900" fetchpriority="high">
+          {%- else -%}
+            <img src="{{ 'hero.webp' | asset_url }}" alt="{{ product.title | escape }}" width="900" height="900">
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="pgallery__thumbs">
+            {%- for image in product.images -%}
+              <button class="pthumb{% if forloop.first %} active{% endif %}" type="button"><img src="{{ image | image_url: width: 200 }}" data-full="{{ image | image_url: width: 900 }}" alt="{{ image.alt | escape }}" width="120" height="120" loading="lazy"></button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="pinfo" id="buy-anchor">
+        {%- if section.settings.badge != blank -%}<span class="tag tag--soft">{{ section.settings.badge }}</span>{%- endif -%}
+        <h1>{{ product.title }}</h1>
+        <div class="pinfo__rate"><span class="stars" style="--p:96%"></span> <strong>{{ section.settings.rating | default: '4.8' }}</strong> · <a href="#reviews">{{ section.settings.reviews_count | default: '12,418' }} reviews</a></div>
+        <div class="pinfo__price">
+          <span class="now tnum" id="p-now">{{ product.price | money }}</span>
+          {%- if on_sale -%}<span class="was tnum" id="p-was">{{ product.compare_at_price | money }}</span><span class="tag tag--save">Save {{ pct }}%</span>{%- endif -%}
+        </div>
+        <div class="pinfo__desc">{% if section.settings.subtitle != blank %}{{ section.settings.subtitle }}{% else %}{{ product.description | strip_html | truncatewords: 40 }}{% endif %}</div>
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <span class="opt-label">{{ option.name }}</span>
+            <div class="opt-row">
+              {%- for value in option.values -%}
+                <button type="button" class="opt{% if option.selected_value == value %} active{% endif %}" data-variant="{{ value | escape }}">{{ value }}</button>
+              {%- endfor -%}
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        <form method="post" action="{{ routes.cart_add_url }}" id="product-form" data-product="{{ product.handle }}">
+          <select name="id" id="variant-id" hidden aria-hidden="true">
+            {%- for v in product.variants -%}
+              <option value="{{ v.id }}"{% unless v.available %} disabled{% endunless %}{% if v == cur %} selected{% endif %}>{{ v.title }}</option>
+            {%- endfor -%}
+          </select>
+          <div class="qtyrow">
+            <div class="qty">
+              <button type="button" data-step="-" aria-label="Decrease">−</button>
+              <input type="number" name="quantity" value="1" min="1" aria-label="Quantity">
+              <button type="button" data-step="+" aria-label="Increase">+</button>
+            </div>
+            <button type="submit" name="add" class="btn btn-primary btn-lg btn-block"{% unless product.available %} disabled{% endunless %}>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</button>
+          </div>
+        </form>
+
+        <p class="paynote">{% render 'icon', name: 'shield' %} {{ section.settings.payline | default: '90-night home trial · Free 2-day shipping · 2-year warranty' }}</p>
+
+        <div class="ptrust">
+          <div><span class="ck">{% render 'icon', name: 'check' %}</span>90-night trial</div>
+          <div><span class="ck">{% render 'icon', name: 'check' %}</span>Free 2-day shipping</div>
+          <div><span class="ck">{% render 'icon', name: 'check' %}</span>2-year warranty</div>
+        </div>
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="acc">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'accordion' -%}
+                <div class="acc__item{% if forloop.first %} open{% endif %}" {{ block.shopify_attributes }}>
+                  <button class="acc__head" type="button">{{ block.settings.title }} <span class="pm">+</span></button>
+                  <div class="acc__body"><div class="acc__body-inner">{{ block.settings.content }}</div></div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stickybar" id="stickybar">
+  <div class="stickybar__in">
+    <div class="stickybar__info">
+      <div class="stickybar__thumb">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 92 }}" alt="" width="46" height="46">{%- endif -%}</div>
+      <div><div class="stickybar__name">{{ product.title }}</div><div class="stickybar__price" id="sticky-price">{{ product.price | money }}</div></div>
+    </div>
+    <button type="submit" form="product-form" name="add" class="btn btn-primary"{% unless product.available %} disabled{% endunless %}>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</button>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Badge", "default": "★ #1 rated quiet auto box" },
+    { "type": "text", "id": "rating", "label": "Rating", "default": "4.8" },
+    { "type": "text", "id": "reviews_count", "label": "Reviews count", "default": "12,418" },
+    { "type": "textarea", "id": "subtitle", "label": "Short subtitle (overrides description)", "default": "The whisper-quiet, app-controlled, auto-cleaning litter box with a 90L XL globe and per-cat health tracking. Set it up once and never scoop again." },
+    { "type": "text", "id": "payline", "label": "Trust line", "default": "90-night home trial · Free 2-day shipping · 2-year warranty" }
+  ],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordion row",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "What's in the box" },
+        { "type": "richtext", "id": "content", "label": "Content", "default": "<p>WARCAT smart litter box, power adapter, starter liners, quick-start guide, and the free WARCAT app.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product",
+      "blocks": [
+        { "type": "accordion", "settings": { "title": "What's in the box", "content": "<p>WARCAT smart litter box (base, globe & sealed drawer), power adapter, starter liners, quick-start guide, and free WARCAT app for iOS & Android.</p>" } },
+        { "type": "accordion", "settings": { "title": "Dimensions & specs", "content": "<p>26 × 27 × 29 in. 90L globe. Under 40 dB. For cats 1–11 kg. 2.4GHz Wi-Fi. Works with any clumping litter.</p>" } },
+        { "type": "accordion", "settings": { "title": "Shipping & returns", "content": "<p>Free 2-day shipping. 90-night trial with free returns. 2-year warranty.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

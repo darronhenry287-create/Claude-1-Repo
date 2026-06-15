@@ -1,0 +1,20 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "shop": { "type": "menu", "settings": { "heading": "Shop", "menu": "footer-shop" } },
+        "learn": { "type": "menu", "settings": { "heading": "Learn", "menu": "footer-learn" } },
+        "support": { "type": "menu", "settings": { "heading": "Support", "menu": "footer-support" } }
+      },
+      "block_order": ["shop", "learn", "support"],
+      "settings": {
+        "logo_text": "WARCAT",
+        "legal_menu": "footer-legal"
+      }
+    }
+  },
+  "order": ["footer"]
+}

@@ -1,0 +1,62 @@
+{%- liquid
+  assign hero_img = 'hero.webp' | asset_url
+  if section.settings.image
+    assign hero_img = section.settings.image | image_url: width: 1000
+  endif
+-%}
+<section class="hero">
+  <div class="wrap wrap-wide hero__in">
+    <div class="hero__copy">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h1 class="h-xl">{{ section.settings.heading }}</h1>
+      <p class="lede">{{ section.settings.subtitle }}</p>
+      <div class="hero__rate">
+        <span class="stars" style="--p:96%"></span>
+        <strong>{{ section.settings.rating }}</strong>
+        <span class="div"></span>
+        <span class="muted">{{ section.settings.rating_text }}</span>
+      </div>
+      <div class="hero__cta">
+        <a href="{{ section.settings.cta1_link | default: routes.all_products_collection_url }}" class="btn btn-primary btn-lg">{{ section.settings.cta1_label }}</a>
+        {%- if section.settings.cta2_label != blank -%}<a href="{{ section.settings.cta2_link | default: routes.root_url }}" class="btn btn-ghost btn-lg"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span> {{ section.settings.cta2_label }}</a>{%- endif -%}
+      </div>
+      <div class="hero__pills">
+        <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5 6 9H3v6h3l5 4zM16 9a4 4 0 0 1 0 6"/></svg> {{ section.settings.pill1 }}</span>
+        <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8 12 3l9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5"/></svg> {{ section.settings.pill2 }}</span>
+        <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg> {{ section.settings.pill3 }}</span>
+      </div>
+    </div>
+    <div class="hero__media">
+      <div class="hero__halo"></div>
+      <div class="hero__device"><img src="{{ hero_img }}" alt="{{ section.settings.heading | escape }}" width="900" height="900" fetchpriority="high"></div>
+      <div class="floatcard floatcard--tl"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5 6 9H3v6h3l5 4zM16 9a4 4 0 0 1 0 6"/></svg></span><span><b>{{ section.settings.float1_title }}</b><span>{{ section.settings.float1_sub }}</span></span></div>
+      <div class="floatcard floatcard--br"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span><span><b>{{ section.settings.float2_title }}</b><span>{{ section.settings.float2_sub }}</span></span></div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Smart self-cleaning litter box" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Never scoop again." },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "WARCAT detects, cleans and seals away odor the moment your cat steps out — whisper-quiet, app-controlled, and big enough for every cat in the house." },
+    { "type": "text", "id": "rating", "label": "Rating", "default": "4.8" },
+    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "12,000+ happy cat homes" },
+    { "type": "text", "id": "cta1_label", "label": "Primary button", "default": "Shop WARCAT — $499" },
+    { "type": "url", "id": "cta1_link", "label": "Primary link" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary button", "default": "See how it works" },
+    { "type": "url", "id": "cta2_link", "label": "Secondary link" },
+    { "type": "image_picker", "id": "image", "label": "Product image" },
+    { "type": "text", "id": "pill1", "label": "Pill 1", "default": "Whisper-quiet <40dB" },
+    { "type": "text", "id": "pill2", "label": "Pill 2", "default": "90L XL capacity" },
+    { "type": "text", "id": "pill3", "label": "Pill 3", "default": "App-controlled" },
+    { "type": "text", "id": "float1_title", "label": "Float card 1 title", "default": "<40 dB" },
+    { "type": "text", "id": "float1_sub", "label": "Float card 1 sub", "default": "Library-quiet cycle" },
+    { "type": "text", "id": "float2_title", "label": "Float card 2 title", "default": "Clean & ready" },
+    { "type": "text", "id": "float2_sub", "label": "Float card 2 sub", "default": "Auto-cycled in 3 min" }
+  ],
+  "presets": [ { "name": "Hero" } ]
+}
+{% endschema %}

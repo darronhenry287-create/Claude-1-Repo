@@ -1,0 +1,28 @@
+<section class="pagehead"><div class="wrap pagehead__in">
+  <span class="eyebrow">WARCAT</span>
+  <h1 class="h-lg">Sign in</h1>
+  <p>Welcome back. Sign in to track orders and manage your WARCAT.</p>
+</div></section>
+
+<section class="section"><div class="wrap-narrow">
+  <div id="login-wrap" style="background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:1.8rem">
+    {%- form 'customer_login' -%}
+      {%- if form.errors -%}<div class="note-ok" style="background:#fdecea;border-color:#d64545;color:#a12a2a">{{ form.errors | default_errors }}</div>{%- endif -%}
+      <div class="field"><label>Email</label><input type="email" name="customer[email]" autocomplete="email" required></div>
+      <div class="field"><label>Password</label><input type="password" name="customer[password]" autocomplete="current-password" required></div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Sign in</button>
+      <p class="muted center" style="margin-top:1rem;font-weight:600"><a href="#recover" onclick="document.getElementById('recover-wrap').style.display='block';document.getElementById('login-wrap').style.display='none';return false;">Forgot your password?</a></p>
+    {%- endform -%}
+    <p class="muted center" style="margin-top:1.5rem;font-weight:600">New here? <a href="{{ routes.account_register_url }}" style="text-decoration:underline">Create an account</a></p>
+  </div>
+
+  <div id="recover-wrap" style="display:none;background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:1.8rem">
+    {%- form 'recover_customer_password' -%}
+      <h3 class="h-sm" style="margin-bottom:1rem">Reset your password</h3>
+      {%- if form.posted_successfully? -%}<div class="note-ok">We've emailed you a reset link.</div>{%- endif -%}
+      <div class="field"><label>Email</label><input type="email" name="email" required></div>
+      <button type="submit" class="btn btn-primary btn-block">Send reset link</button>
+      <p class="muted center" style="margin-top:1rem;font-weight:600"><a href="#login" onclick="document.getElementById('recover-wrap').style.display='none';document.getElementById('login-wrap').style.display='block';return false;">Back to sign in</a></p>
+    {%- endform -%}
+  </div>
+</div></section>

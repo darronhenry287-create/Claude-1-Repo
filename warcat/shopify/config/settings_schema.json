@@ -1,0 +1,34 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "WARCAT",
+    "theme_version": "1.0.0",
+    "theme_author": "WARCAT Pet Technologies",
+    "theme_documentation_url": "https://warcat.com",
+    "theme_support_url": "https://warcat.com/pages/contact"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_bg", "label": "Background", "default": "#ffffff" },
+      { "type": "color", "id": "color_ink", "label": "Text / ink", "default": "#0e1a26" },
+      { "type": "color", "id": "color_brand", "label": "Accent (teal)", "default": "#0fb5a6" },
+      { "type": "color", "id": "color_dark", "label": "Dark sections", "default": "#0e1a26" }
+    ]
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      { "type": "text", "id": "logo_text", "label": "Logo text", "default": "WARCAT" },
+      { "type": "image_picker", "id": "logo", "label": "Logo image (optional)" },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      { "type": "paragraph", "content": "The free-shipping progress bar in the cart drawer uses this threshold." },
+      { "type": "range", "id": "free_ship_threshold", "label": "Free shipping threshold", "min": 0, "max": 200, "step": 5, "unit": "$", "default": 49 }
+    ]
+  }
+]

@@ -1,0 +1,33 @@
+<section class="pagehead"><div class="wrap pagehead__in">
+  <span class="eyebrow">Order {{ order.name }}</span>
+  <h1 class="h-lg">Order details</h1>
+  <p>Placed {{ order.created_at | date: '%B %-d, %Y' }}</p>
+</div></section>
+
+<section class="section"><div class="wrap-narrow">
+  <div style="background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:1.8rem">
+    {%- for line_item in order.line_items -%}
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.9rem 0;border-top:1px solid var(--line)">
+        <div style="flex:1">{{ line_item.title }}</div>
+        <div class="muted">&times;{{ line_item.quantity }}</div>
+        <div style="font-weight:700;color:var(--ink)">{{ line_item.final_line_price | money }}</div>
+      </div>
+    {%- endfor -%}
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.2rem;padding-top:1.2rem;border-top:2px solid var(--line);font-weight:800;color:var(--brand-ink)">
+      <span>Total</span><span>{{ order.total_price | money }}</span>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-top:1.5rem">
+    <div style="background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:1.4rem">
+      <h3 class="h-sm" style="margin-bottom:.8rem">Shipping</h3>
+      <p class="muted" style="line-height:1.8">{{ order.shipping_address | format_address }}</p>
+    </div>
+    <div style="background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:1.4rem">
+      <h3 class="h-sm" style="margin-bottom:.8rem">Billing</h3>
+      <p class="muted" style="line-height:1.8">{{ order.billing_address | format_address }}</p>
+    </div>
+  </div>
+
+  <p style="margin-top:2rem"><a href="{{ routes.account_url }}" class="muted" style="font-weight:700">Back to account</a></p>
+</div></section>

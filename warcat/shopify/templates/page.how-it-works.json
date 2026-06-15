@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "head": { "type": "main-page", "settings": { "eyebrow": "How it works" } },
+    "steps": {
+      "type": "steps",
+      "settings": { "eyebrow": "The cycle", "heading": "Four steps. Zero effort." },
+      "blocks": {
+        "s1": { "type": "step", "settings": { "icon": "shield", "title": "Your cat steps in", "text": "Precision weight sensors register the visit — and which cat it is, by weight." } },
+        "s2": { "type": "step", "settings": { "icon": "check", "title": "A safe pause", "text": "A smart timer waits in case they come back; sensors confirm the globe is empty before anything moves." } },
+        "s3": { "type": "step", "settings": { "icon": "arrow", "title": "Quiet sift & seal", "text": "The globe rotates slowly — under 40 dB — sifting clumps into a carbon-sealed drawer below." } },
+        "s4": { "type": "step", "settings": { "icon": "user", "title": "You stay informed", "text": "The app logs the cycle and pings you only when the drawer's full. Empty it weekly." } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"]
+    },
+    "inside": {
+      "type": "split-feature",
+      "settings": { "bg": "soft", "media_position": "right", "eyebrow": "Inside the globe", "heading": "Engineered to be gentle — on cats and ears.", "text": "The sift screen and slow rotation do the work a scoop normally would, without crushing clumps or kicking up dust.", "link_label": "" },
+      "blocks": {
+        "c1": { "type": "point", "settings": { "text": "Gear-damped motor keeps every cycle under 40 dB." } },
+        "c2": { "type": "point", "settings": { "text": "Fine sift screen separates clumps cleanly and levels the bed." } },
+        "c3": { "type": "point", "settings": { "text": "Carbon-sealed drawer traps odor the instant waste drops in." } }
+      },
+      "block_order": ["c1", "c2", "c3"]
+    },
+    "safety": {
+      "type": "safety-grid",
+      "settings": { "eyebrow": "Built-in safety", "heading": "It only ever moves when it's safe." },
+      "blocks": {
+        "k1": { "type": "card", "settings": { "icon": "shield", "title": "Triple-sensor check", "text": "Weight, infrared and anti-pinch sensors must all agree the chamber is clear before the drum turns." } },
+        "k2": { "type": "card", "settings": { "icon": "arrow", "title": "Instant reverse", "text": "If a cat hops in mid-cycle, WARCAT stops and reverses within a fraction of a second." } },
+        "k3": { "type": "card", "settings": { "icon": "check", "title": "Quiet hours", "text": "Schedule overnight pauses in the app so the cycle never runs while you sleep." } }
+      },
+      "block_order": ["k1", "k2", "k3"]
+    },
+    "guarantee": { "type": "guarantee" }
+  },
+  "order": ["head", "steps", "inside", "safety", "guarantee"]
+}

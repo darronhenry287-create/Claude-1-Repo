@@ -1,0 +1,58 @@
+{%- liquid
+  assign logo_mark = '<svg class="logo__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#0fb5a6"/><path d="M9 13.5 8 8.5l4 3.2a8.5 8.5 0 0 1 8 0l4-3.2-1 5" stroke="#04332e" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="12.5" cy="17" r="1.4" fill="#04332e"/><circle cx="19.5" cy="17" r="1.4" fill="#04332e"/><path d="M16 19.5v1.4m0 0-1.6.8m1.6-.8 1.6.8" stroke="#04332e" stroke-width="1.6" stroke-linecap="round"/></svg>'
+  assign cta_url = section.settings.cta_link | default: routes.all_products_collection_url
+-%}
+<header class="header">
+  <div class="header__in">
+    <button class="iconbtn burger" data-action="open-menu" aria-label="Open menu">{% render 'icon', name: 'menu' %}</button>
+
+    <a href="{{ routes.root_url }}" class="logo">
+      {%- if section.settings.logo != blank -%}
+        <img src="{{ section.settings.logo | image_url: width: 240 }}" alt="{{ shop.name | escape }}" width="120" height="32" style="height:32px;width:auto">
+      {%- else -%}
+        {{ logo_mark }}<span>{{ section.settings.logo_text | default: shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <div class="header__spacer"></div>
+
+    <div class="header__right">
+      <a class="iconbtn desk" href="{{ routes.search_url }}" aria-label="Search">{% render 'icon', name: 'search' %}</a>
+      <a class="iconbtn desk" href="{{ routes.account_url }}" aria-label="Account">{% render 'icon', name: 'user' %}</a>
+      <a class="iconbtn" href="{{ routes.cart_url }}" data-action="open-cart" aria-label="Cart">{% render 'icon', name: 'bag' %}<span class="cartnum{% if cart.item_count > 0 %} show{% endif %}">{{ cart.item_count }}</span></a>
+      <a href="{{ cta_url }}" class="btn btn-primary btn-sm cta-mini">{{ section.settings.cta_label | default: 'Shop now' }}</a>
+    </div>
+  </div>
+</header>
+
+<div class="mobile" id="menu">
+  <div class="mobile__head">
+    <span class="logo">{{ logo_mark }}<span>{{ section.settings.logo_text | default: shop.name }}</span></span>
+    <button class="iconbtn" data-action="close-menu" aria-label="Close">{% render 'icon', name: 'close' %}</button>
+  </div>
+  <nav aria-label="Mobile">
+    {%- for link in section.settings.menu.links -%}
+      <a href="{{ link.url }}">{{ link.title }}</a>
+    {%- endfor -%}
+  </nav>
+  <div class="mobile__foot"><a href="{{ cta_url }}" class="btn btn-primary btn-block btn-lg">Shop the WARCAT</a></div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo image (optional)" },
+    { "type": "text", "id": "logo_text", "label": "Logo text", "default": "WARCAT" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Shop now" },
+    { "type": "url", "id": "cta_link", "label": "Button link" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,211 @@
+{
+  "general": {
+    "pagination": {
+      "page": "Page {{ page }}",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "search": {
+      "search": "Search",
+      "placeholder": "Search for products…",
+      "no_results": "No results for “{{ terms }}”. Try another search.",
+      "results_count": "{{ count }} results for “{{ terms }}”",
+      "title": "Search"
+    },
+    "newsletter": {
+      "label": "Email",
+      "placeholder": "you@email.com",
+      "submit": "Subscribe",
+      "success": "You’re in — check your inbox."
+    },
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you were after has wandered off.",
+      "back": "Back to home"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "close": "Close",
+    "cart": "Cart",
+    "menu": "Menu",
+    "search": "Search",
+    "previous": "Previous",
+    "next": "Next",
+    "star_reviews": "{{ rating }} out of 5 stars"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "quantity": "Quantity",
+      "on_sale": "Sale",
+      "from_price": "From {{ price }}",
+      "regular_price": "Regular price",
+      "sale_price": "Sale price",
+      "save": "Save {{ amount }}",
+      "view_full_details": "View full details",
+      "include_taxes": "Tax included.",
+      "shipping_policy": "Shipping calculated at checkout."
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your cart",
+      "empty": "Your cart is empty.",
+      "empty_subtext": "Time to retire the scoop.",
+      "continue_shopping": "Continue shopping",
+      "subtotal": "Subtotal",
+      "total": "Total",
+      "shipping": "Shipping",
+      "shipping_free": "Free",
+      "taxes_note": "Shipping & taxes calculated at checkout",
+      "checkout": "Checkout",
+      "remove": "Remove",
+      "update": "Update",
+      "free_shipping_unlocked": "Free shipping unlocked",
+      "free_shipping_remaining": "You’re {{ amount }} from free shipping"
+    }
+  },
+  "blogs": {
+    "article": {
+      "by": "by {{ author }}",
+      "read_more": "Read more",
+      "comments": "{{ count }} comments",
+      "comment_form_title": "Leave a comment",
+      "name": "Name",
+      "email": "Email",
+      "message": "Comment",
+      "post": "Post comment",
+      "moderated": "Comments are moderated before they appear.",
+      "success": "Your comment was posted — thanks!",
+      "success_moderated": "Thanks! Your comment will appear once approved."
+    },
+    "comments": {
+      "title": "Comments",
+      "name": "Name",
+      "email": "Email",
+      "message": "Comment",
+      "post": "Post comment",
+      "moderated": "Comments are moderated before they appear.",
+      "success": "Your comment was posted — thanks!",
+      "success_moderated": "Thanks! Your comment will appear once approved."
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Here’s your {{ value }} WARCAT gift card",
+      "subtext": "Use this code at checkout.",
+      "balance": "{{ balance }} remaining",
+      "copy_code": "Copy code",
+      "shop_link": "Start shopping",
+      "print": "Print",
+      "expired": "Expired"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "My account",
+      "details": "Account details",
+      "view_addresses": "View addresses",
+      "return": "Return to account",
+      "welcome": "Welcome back"
+    },
+    "orders": {
+      "title": "Order history",
+      "order_number": "Order {{ number }}",
+      "date": "Date",
+      "payment_status": "Payment status",
+      "fulfillment_status": "Fulfillment status",
+      "total": "Total",
+      "none": "You haven’t placed any orders yet."
+    },
+    "order": {
+      "title": "Order {{ name }}",
+      "date_html": "Placed on {{ date }}",
+      "billing_address": "Billing address",
+      "shipping_address": "Shipping address",
+      "payment_status": "Payment status",
+      "fulfillment_status": "Fulfillment status",
+      "product": "Product",
+      "sku": "SKU",
+      "price": "Price",
+      "quantity": "Quantity",
+      "total": "Total",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "tax": "Tax"
+    },
+    "addresses": {
+      "title": "Your addresses",
+      "default": "Default",
+      "add_new": "Add a new address",
+      "edit": "Edit",
+      "delete": "Delete",
+      "delete_confirm": "Delete this address?",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "company": "Company",
+      "address1": "Address",
+      "address2": "Apartment, suite, etc.",
+      "city": "City",
+      "country": "Country/region",
+      "province": "State/province",
+      "zip": "Postal/ZIP code",
+      "phone": "Phone",
+      "set_default": "Set as default address",
+      "add": "Add address",
+      "update": "Update address",
+      "cancel": "Cancel"
+    },
+    "login": {
+      "title": "Log in",
+      "email": "Email",
+      "password": "Password",
+      "forgot_password": "Forgot your password?",
+      "sign_in": "Sign in",
+      "guest_title": "Continue as a guest",
+      "guest_continue": "Continue",
+      "create_account": "Create account",
+      "no_account": "New here?"
+    },
+    "recover_password": {
+      "title": "Reset your password",
+      "subtext": "We’ll email you a reset link.",
+      "email": "Email",
+      "submit": "Send reset link",
+      "cancel": "Back to login",
+      "success": "We’ve sent you an email with a link to update your password."
+    },
+    "reset_password": {
+      "title": "Reset account password",
+      "subtext": "Enter a new password.",
+      "password": "Password",
+      "password_confirm": "Confirm password",
+      "submit": "Reset password"
+    },
+    "register": {
+      "title": "Create account",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Create account",
+      "has_account": "Already have an account?",
+      "sign_in": "Sign in"
+    },
+    "activate_account": {
+      "title": "Activate account",
+      "subtext": "Create your password to activate your account.",
+      "password": "Password",
+      "password_confirm": "Confirm password",
+      "submit": "Activate account",
+      "decline": "Decline invitation"
+    }
+  },
+  "sections": {
+    "header": { "announcement": "Announcement", "cart_count": "{{ count }} items in cart" },
+    "footer": { "newsletter_title": "Get $40 off your WARCAT" }
+  }
+}

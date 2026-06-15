@@ -1,0 +1,44 @@
+<section class="pagehead"><div class="wrap pagehead__in">
+  <span class="eyebrow">My account</span>
+  <h1 class="h-lg">Hi, {{ customer.first_name | default: 'friend' }}</h1>
+  <p>Manage your orders, addresses, and details for the WARCAT smart litter box.</p>
+</div></section>
+
+<section class="section"><div class="wrap-narrow">
+  <div class="btn-row" style="justify-content:flex-end;margin-bottom:1.5rem">
+    <a href="{{ routes.account_logout_url }}" class="btn btn-outline">Sign out</a>
+  </div>
+
+  <div style="background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:1.8rem;margin-bottom:1.5rem">
+    <h3 class="h-sm" style="margin-bottom:1rem">Default address</h3>
+    {%- if customer.default_address -%}
+      <p class="muted" style="line-height:1.8">{{ customer.default_address | format_address }}</p>
+    {%- else -%}
+      <p class="muted">No address on file.</p>
+    {%- endif -%}
+    <a href="{{ routes.account_addresses_url }}" class="btn btn-outline" style="margin-top:1.2rem">Manage addresses</a>
+  </div>
+
+  <div style="background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:1.8rem">
+    <h3 class="h-sm" style="margin-bottom:1rem">Order history</h3>
+    {%- paginate customer.orders by 10 -%}
+      {%- if customer.orders.size > 0 -%}
+        {%- for order in customer.orders -%}
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 0;border-top:1px solid var(--line)">
+            <div>
+              <a href="{{ order.customer_url }}" style="font-weight:700;color:var(--brand-ink);text-decoration:underline">{{ order.name }}</a>
+              <div class="muted" style="font-size:.82rem">{{ order.created_at | date: '%b %-d, %Y' }} &middot; {{ order.financial_status_label }}</div>
+            </div>
+            <div style="font-weight:700;color:var(--ink)">{{ order.total_price | money }}</div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <p class="muted">No orders yet.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary" style="margin-top:1.2rem">Start shopping</a>
+      {%- endif -%}
+      {%- if paginate.pages > 1 -%}
+        <div class="center" style="margin-top:1.5rem">{{ paginate | default_pagination }}</div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</div></section>

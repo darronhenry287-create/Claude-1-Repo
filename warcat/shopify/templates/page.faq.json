@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "head": { "type": "main-page", "settings": { "eyebrow": "Help center" } },
+    "faq": {
+      "type": "faq",
+      "settings": { "eyebrow": "Answers", "heading": "Frequently asked questions." },
+      "blocks": {
+        "q1": { "type": "qa", "settings": { "question": "How quiet is it, really?", "answer": "<p>The cleaning cycle runs under 40 dB — quieter than a typical fridge. Most owners can't hear it from another room, and you can set quiet hours so it never runs overnight.</p>" } },
+        "q2": { "type": "qa", "settings": { "question": "How often does it clean?", "answer": "<p>After each visit, following a short safety delay. You can also trigger a manual clean or set a fixed schedule in the app.</p>" } },
+        "q3": { "type": "qa", "settings": { "question": "How often do I empty the drawer?", "answer": "<p>About once a week for one to two cats; more often for larger multi-cat homes. The app warns you before it's full.</p>" } },
+        "q4": { "type": "qa", "settings": { "question": "Will it work for multiple cats?", "answer": "<p>Yes — the 90L globe and large drawer handle up to four cats, and the app tracks each cat individually by weight.</p>" } },
+        "q5": { "type": "qa", "settings": { "question": "Is it safe for kittens and senior cats?", "answer": "<p>Safe for any cat over 1 kg. Triple sensors stop and reverse the drum instantly if a cat enters mid-cycle, and an optional low ramp helps kittens and seniors.</p>" } },
+        "q6": { "type": "qa", "settings": { "question": "What litter should I use?", "answer": "<p>Any quality clumping litter — clay or tofu/plant-based clumping both work. No proprietary refills required.</p>" } },
+        "q7": { "type": "qa", "settings": { "question": "How long does setup take?", "answer": "<p>About 10 minutes and no tools: place it, add litter, connect to Wi-Fi in the app, and choose your quiet hours.</p>" } },
+        "q8": { "type": "qa", "settings": { "question": "How does the 90-night trial work?", "answer": "<p>Use WARCAT for up to 90 nights. If it's not right for you, contact us for a free return and a full refund — no restocking fees.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"]
+    },
+    "newsletter": { "type": "newsletter" }
+  },
+  "order": ["head", "faq", "newsletter"]
+}

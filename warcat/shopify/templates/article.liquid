@@ -1,0 +1,42 @@
+<section class="pagehead"><div class="wrap pagehead__in">
+  <span class="eyebrow">{{ article.published_at | date: '%B %-d, %Y' }}</span>
+  <h1 class="h-lg">{{ article.title }}</h1>
+  {%- if article.author != blank -%}<p>By {{ article.author }}</p>{%- endif -%}
+</div></section>
+
+<article class="section"><div class="wrap-narrow">
+  {%- if article.image -%}
+    <img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.title | escape }}" width="1200" height="675" style="width:100%;height:auto;border-radius:18px;border:1px solid var(--line);margin-bottom:2.5rem;display:block">
+  {%- endif -%}
+
+  <div class="prose">{{ article.content }}</div>
+
+  {%- if blog.comments_enabled? -%}
+    <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line)">
+      <h2 class="h-md" style="margin-bottom:1.5rem">{{ 'blogs.comments.title' | t }}</h2>
+
+      {%- if article.comments_count > 0 -%}
+        {%- paginate article.comments by 20 -%}
+          {%- for comment in article.comments -%}
+            <div style="background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:1.4rem;margin-bottom:1rem">
+              <div class="prose">{{ comment.content }}</div>
+              <div class="muted" style="margin-top:.8rem;font-weight:700;font-size:.85rem">{{ comment.author }} &middot; {{ comment.created_at | date: '%B %-d, %Y' }}</div>
+            </div>
+          {%- endfor -%}
+          {%- if paginate.pages > 1 -%}<div class="center" style="margin-top:1.5rem">{{ paginate | default_pagination }}</div>{%- endif -%}
+        {%- endpaginate -%}
+      {%- endif -%}
+
+      {%- form 'new_comment', article -%}
+        {%- if form.errors -%}<div class="note-ok" style="background:#fdecea;border-color:#d64545;color:#a12a2a">{{ form.errors | default_errors }}</div>{%- endif -%}
+        {%- if form.posted_successfully? -%}<div class="note-ok">{{ 'blogs.comments.success' | t }}</div>{%- endif -%}
+        <div class="field"><label>{{ 'blogs.comments.name' | t }}</label><input type="text" name="comment[author]" autocomplete="name" required></div>
+        <div class="field"><label>{{ 'blogs.comments.email' | t }}</label><input type="email" name="comment[email]" autocomplete="email" required></div>
+        <div class="field"><label>{{ 'blogs.comments.message' | t }}</label><textarea name="comment[body]" rows="5" required></textarea></div>
+        <button type="submit" class="btn btn-primary">{{ 'blogs.comments.post' | t }}</button>
+      {%- endform -%}
+    </div>
+  {%- endif -%}
+
+  <p style="margin-top:3rem"><a href="{{ blog.url }}" class="muted" style="font-weight:700">Back to the Journal</a></p>
+</div></article>

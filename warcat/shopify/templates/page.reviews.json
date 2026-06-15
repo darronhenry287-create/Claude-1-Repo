@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "head": { "type": "main-page", "settings": { "eyebrow": "Reviews" } },
+    "reviews": {
+      "type": "review-wall",
+      "settings": { "bg": "white", "score": "4.8", "score_text": "Based on 12,418 verified reviews", "cta_label": "" },
+      "blocks": {
+        "v1": { "type": "review", "settings": { "quote": "I genuinely forget the litter box exists now. It's silent — runs while I'm on calls and I never notice.", "name": "Jordan M.", "initials": "JM", "meta": "2 cats" } },
+        "v2": { "type": "review", "settings": { "quote": "The app told me my older cat's weight was dropping before I'd noticed. Vet caught a thyroid issue early.", "name": "Priya R.", "initials": "PR", "meta": "3 cats" } },
+        "v3": { "type": "review", "settings": { "quote": "We have a Maine Coon and most auto boxes are too small. The 90L globe fits him easily.", "name": "Derek K.", "initials": "DK", "meta": "1 cat" } },
+        "v4": { "type": "review", "settings": { "quote": "Took my nervous rescue about a week to trust it. Now she waits by it. The quiet motor is the real deal.", "name": "Amara L.", "initials": "AL", "meta": "2 cats", "stars_pct": 90 } },
+        "v5": { "type": "review", "settings": { "quote": "Setup was 10 minutes. Best money I've spent on my cats, full stop.", "name": "Theo T.", "initials": "TT", "meta": "4 cats" } },
+        "v6": { "type": "review", "settings": { "quote": "Three cats, one box, keeps up easily. Zero smell in a small apartment.", "name": "Nadia S.", "initials": "NS", "meta": "3 cats" } },
+        "v7": { "type": "review", "settings": { "quote": "Pricey, but I did the math on litter and time and it's worth it. Multi-cat tracking is shockingly accurate.", "name": "Marcus B.", "initials": "MB", "meta": "2 cats", "stars_pct": 90 } },
+        "v8": { "type": "review", "settings": { "quote": "Bought the duo for a two-floor house. Both boxes report into one app. Feels like the future.", "name": "Elena C.", "initials": "EC", "meta": "3 cats" } },
+        "v9": { "type": "review", "settings": { "quote": "I travel for work and used to dread the litter situation. Now it's handled. Life-changing.", "name": "Riya F.", "initials": "RF", "meta": "1 cat" } }
+      },
+      "block_order": ["v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9"]
+    },
+    "guarantee": { "type": "guarantee" }
+  },
+  "order": ["head", "reviews", "guarantee"]
+}

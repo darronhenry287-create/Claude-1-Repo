@@ -1,0 +1,39 @@
+<section class="section{% if section.settings.bg == 'soft' %} bg-soft{% endif %}">
+  <div class="wrap wrap-wide">
+    <div class="sec-head">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 class="h-lg">{{ section.settings.heading }}</h2>
+    </div>
+    <div class="safety">
+      {%- for block in section.blocks -%}
+        <div class="safetycard" {{ block.shopify_attributes }}><span class="ic">{% render 'icon', name: block.settings.icon %}</span><h4>{{ block.settings.title }}</h4><p>{{ block.settings.text }}</p></div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Safety / cards",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Safety first" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Designed around your cat." },
+    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "white", "label": "White" }, { "value": "soft", "label": "Soft" } ], "default": "white" }
+  ],
+  "blocks": [
+    { "type": "card", "name": "Card", "settings": [
+      { "type": "text", "id": "icon", "label": "Icon", "default": "shield" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Card title" },
+      { "type": "textarea", "id": "text", "label": "Text", "default": "Card description." }
+    ] }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    { "name": "Safety / cards", "blocks": [
+      { "type": "card", "settings": { "icon": "shield", "title": "Triple-sensor protection", "text": "Weight, infrared and anti-pinch sensors must all agree the chamber is empty before the drum ever moves." } },
+      { "type": "card", "settings": { "icon": "check", "title": "Gentle, slow rotation", "text": "The globe turns at a calm, even pace — no sudden jolts, no loud snaps. Cats habituate within days." } },
+      { "type": "card", "settings": { "icon": "user", "title": "Kitten & senior friendly", "text": "A low step-in, wide doorway and a 1 kg minimum threshold make it safe for growing kittens and older cats alike." } }
+    ] }
+  ]
+}
+{% endschema %}

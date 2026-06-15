@@ -1,0 +1,23 @@
+<section class="pagehead">
+  <div class="wrap pagehead__in">
+    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    <h1 class="h-lg">{{ page.title }}</h1>
+    {%- if section.settings.subtitle != blank -%}<p>{{ section.settings.subtitle }}</p>{%- endif -%}
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap prose">
+    {{ page.content }}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "WARCAT" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle" }
+  ]
+}
+{% endschema %}

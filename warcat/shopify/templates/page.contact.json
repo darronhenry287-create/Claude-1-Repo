@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "main": { "type": "main-contact" },
+    "newsletter": { "type": "newsletter" }
+  },
+  "order": ["main", "newsletter"]
+}
