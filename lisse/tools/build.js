@@ -5,12 +5,12 @@ const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, 'src');
 
 const MOBILE = [
-  ['product.html','The Oil'],['collection.html','Shop'],['how-to.html','The Ritual'],
+  ['product.html','Shop the Oil'],['how-to.html','The Ritual'],
   ['ingredients.html','Actives'],['about.html','Our Story'],['reviews.html','Reviews'],
   ['faq.html','FAQ'],['contact.html','Contact'],
 ];
 const FOOT = [
-  ['Shop', [['product.html','Firming Body Oil'],['collection.html','Shop All'],['bundles.html','Bundles & Save'],['trial.html','90-Day Promise']]],
+  ['Shop', [['product.html','Firming Body Oil'],['product.html','Subscribe & Save'],['trial.html','90-Day Promise']]],
   ['Discover', [['ingredients.html','The Actives'],['how-to.html','The Ritual'],['about.html','Our Story'],['reviews.html','Reviews']]],
   ['Help', [['contact.html','Contact'],['faq.html','FAQ'],['shipping.html','Shipping & Returns']]],
 ];
@@ -25,7 +25,7 @@ const ic = {
   drop:'<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3s7 8 7 13a7 7 0 0 1-14 0c0-5 7-13 7-13Z"/></svg>',
   user:'<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/></svg>',
 };
-const NAV_LEFT = [['collection.html','Shop'],['how-to.html','The Ritual']];
+const NAV_LEFT = [['product.html','Shop'],['how-to.html','The Ritual']];
 const NAV_RIGHT = [['ingredients.html','Actives'],['reviews.html','Reviews']];
 
 function chrome() {
@@ -116,8 +116,6 @@ const PAGES = [
   ['ingredients.html','ingredients.html','The Actives — LISSE','The botanicals inside LISSE: caffeine-rich green coffee & guarana, bitter orange and ivy, in a base of squalane and jojoba.'],
   ['about.html','about.html','Our Story — LISSE','Why we made firming feel like a ritual, not a chore.'],
   ['reviews.html','reviews.html','Reviews — LISSE','Thousands of five-star reviews for the LISSE Firming Body Oil.'],
-  ['collection.html','collection.html','Shop — LISSE','Shop the LISSE firming ritual.'],
-  ['bundles.html','bundles.html','Bundles & Save — LISSE','Build your ritual and save with LISSE bundles & subscriptions.'],
   ['how-to.html','how-to.html','The Ritual — LISSE','How to use LISSE in 60 seconds a day for visibly firmer, smoother skin.'],
   ['faq.html','faq.html','FAQ — LISSE','Questions about the LISSE firming ritual, ingredients, shipping and returns.'],
   ['contact.html','contact.html','Contact — LISSE','Talk to a real human on the LISSE team.'],

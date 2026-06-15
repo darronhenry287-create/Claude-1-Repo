@@ -21,8 +21,9 @@ Products → **Add product**
 - **Media:** upload your real product photos here. Until you do, the theme falls
   back to the bundled images (`product-hero.png`, etc.). The product gallery shows
   all images you upload — no need to limit how many.
-- (Optional) If you sell the trio as its own product, create a **3-Bottle Ritual**
-  product at **$120.00** and point the upsell/bundle button at it (see step 4).
+- The product page's **plan selector** is the single place to buy: One bottle ($48),
+  Subscribe & Save ($38), and the 3-Bottle Ritual ($120). There is no separate bundle
+  product or page — see step 4 to make the subscription and trio charge correctly.
 
 ## 3. Create the content pages
 Online Store → **Pages → Add page**. For each, set the **Title** below, then on the
@@ -36,7 +37,6 @@ from the title) must match these exactly, so use these titles:
 | Ingredients         | `ingredients`        | `ingredients`        |
 | Reviews             | `reviews`            | `reviews`            |
 | How to Use          | `how-to-use`         | `how-to-use`         |
-| Bundles             | `bundles`            | `bundles`            |
 | FAQ                 | `faq`                | `faq`                |
 | 90-Day Promise      | `guarantee`          | `guarantee`          |
 | Contact             | `contact`            | `contact`            |
@@ -46,7 +46,6 @@ from the title) must match these exactly, so use these titles:
 | Terms of Service    | `terms-of-service`   | `terms-of-service`   |
 
 (If a title produces a different handle, just edit the handle field to match.)
-The **Bundles** page uses a collection — connect one in step 4 so products show.
 
 ## 4. Subscriptions, bundles & collections
 - **Subscribe & Save ($38/bottle):** the tier selector on the product page is
@@ -55,14 +54,15 @@ The **Bundles** page uses a collection — connect one in step 4 so products sho
   **Shopify Subscriptions** (free) or **Recharge**, create a subscription plan for the
   Firming Body Oil, then the "Subscribe & Save" option will sell as a true sub.
   Without an app, leave it as marketing UI or hide it.
-- **3-Bottle Ritual ($120 / $40 each):** this is an upsell/bundle. Fulfil it one of
-  two ways: (a) a **bundle app** (Shopify Bundles, or a 3rd-party builder) that
-  groups 3 bottles into one purchasable item, or (b) an automatic **discount** — e.g.
-  create a discount code `RITUAL3` (or an automatic "buy 3, price $120") under
-  Discounts. Point the bundle/upsell button at the matching product or cart link.
-- **Collections:** create an **All** collection (`/collections/all` is used by the
-  "Shop All" links) and, if you want the Bundles page populated, a **Bundles**
-  collection — then connect it in the theme editor (Bundles page → collection section).
+- **3-Bottle Ritual ($120 / $40 each):** this is a **plan option in the product
+  page's selector**, not a separate product or page. To make it charge correctly,
+  fulfil it with a **bundle app** (Shopify Bundles or similar) that groups 3 bottles
+  into one item, or an automatic **discount** (a "buy 3 for $120" rule, or code
+  `RITUAL3`) under Discounts.
+- **Shop link & collections:** the header/footer **"Shop"** links point straight to
+  `/products/firming-body-oil` — this is a one-product store, so no collection is
+  needed for navigation. Create an **All** collection only if you want a
+  `/collections/all` browse page.
 
 ## 5. Free shipping threshold
 The cart drawer's "free shipping over $50" progress bar reads a theme setting.

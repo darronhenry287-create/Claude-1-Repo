@@ -6,7 +6,7 @@
         {%- if section.settings.menu_left != blank and linklists[section.settings.menu_left].links.size > 0 -%}
           {%- for link in linklists[section.settings.menu_left].links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
         {%- else -%}
-          <a href="{{ routes.all_products_collection_url }}">Shop</a>
+          <a href="/products/firming-body-oil">Shop</a>
           <a href="/pages/ingredients">Ingredients</a>
         {%- endif -%}
       </nav>
@@ -36,7 +36,7 @@
 <div class="mobile" id="menu">
   <div class="mobile__head"><span class="logo">{{ settings.logo_text | default: 'LISSE' }}</span><button class="iconbtn" data-action="close-menu" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button></div>
   <nav>
-    <a href="{{ routes.all_products_collection_url }}">Shop</a>
+    <a href="/products/firming-body-oil">Shop</a>
     <a href="/pages/ingredients">Ingredients</a>
     <a href="/pages/our-story">Our Story</a>
     <a href="/pages/reviews">Reviews</a>

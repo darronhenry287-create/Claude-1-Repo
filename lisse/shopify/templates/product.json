@@ -17,8 +17,7 @@
       "b": { "type": "feel", "settings": { "word": "fast", "text": "Squalane & jojoba absorb in seconds — dress straight away, no greasy film." } },
       "c": { "type": "feel", "settings": { "word": "clean", "text": "Fragrance-free and non-comedogenic. Just a soft, barely-there warmth." } }
     }, "block_order": ["a","b","c"] },
-    "upsell": { "type": "upsell", "settings": {} },
     "wall": { "type": "reviews-masonry", "settings": { "bg": true, "kicker": "6,400+ five-star reviews", "heading": "Real skin, real results.", "button_text": "" } }
   },
-  "order": ["main", "shelf", "expect", "skin", "texture", "upsell", "wall"]
+  "order": ["main", "shelf", "expect", "skin", "texture", "wall"]
 }

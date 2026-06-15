@@ -17,7 +17,7 @@
           </div>
         {%- endfor -%}
       {%- else -%}
-        <div class="footer__col"><h4>Shop</h4><a href="/products/firming-body-oil">Firming Body Oil</a><a href="{{ routes.all_products_collection_url }}">Shop All</a><a href="/pages/bundles">Bundles &amp; Save</a><a href="/pages/reviews">Reviews</a></div>
+        <div class="footer__col"><h4>Shop</h4><a href="/products/firming-body-oil">Firming Body Oil</a><a href="/pages/reviews">Reviews</a><a href="/pages/guarantee">90-Day Promise</a></div>
         <div class="footer__col"><h4>Learn</h4><a href="/pages/ingredients">Ingredients</a><a href="/pages/our-story">Our Story</a><a href="/pages/faq">FAQ</a><a href="/pages/how-to-use">How to Use</a></div>
         <div class="footer__col"><h4>Help</h4><a href="/pages/contact">Contact</a><a href="/pages/shipping-returns">Shipping &amp; Returns</a><a href="/pages/guarantee">90-Day Promise</a></div>
       {%- endif -%}
@@ -46,7 +46,7 @@
       "settings": [
         { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
         { "type": "link_list", "id": "menu", "label": "Menu (optional)" },
-        { "type": "html", "id": "links_fallback", "label": "Fallback links (if no menu chosen)", "default": "<a href=\"/products/firming-body-oil\">Firming Body Oil</a><a href=\"/collections/all\">Shop All</a>" }
+        { "type": "html", "id": "links_fallback", "label": "Fallback links (if no menu chosen)", "default": "<a href=\"/products/firming-body-oil\">Firming Body Oil</a>" }
       ]
     }
   ],
