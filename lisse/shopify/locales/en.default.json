@@ -1,6 +1,6 @@
 {
   "general": { "page": "Page {{ page }}" },
-  "accessibility": { "skip": "Skip to content", "close": "Close", "cart": "Cart", "menu": "Menu", "search": "Search" },
-  "products": { "product": { "add_to_cart": "Add to basket", "buy_it_now": "Buy it now", "sold_out": "Sold out", "quantity": "Quantity", "from": "From" } },
-  "cart": { "title": "Your Basket", "empty": "Your basket is empty.", "subtotal": "Subtotal", "checkout": "Checkout", "remove": "Remove", "taxes_note": "Shipping & taxes calculated at checkout" }
+  "accessibility": { "skip": "Skip to content", "close": "Close", "cart": "Bag", "menu": "Menu", "search": "Search" },
+  "products": { "product": { "add_to_cart": "Add to bag", "buy_it_now": "Buy it now", "sold_out": "Sold out", "quantity": "Quantity", "from": "From" } },
+  "cart": { "title": "Your Bag", "empty": "Your bag is empty.", "subtotal": "Subtotal", "checkout": "Checkout", "remove": "Remove", "taxes_note": "Shipping & taxes calculated at checkout" }
 }

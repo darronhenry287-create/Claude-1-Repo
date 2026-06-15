@@ -2,8 +2,8 @@
   <div class="wrap">
     <div class="split {% if section.settings.reverse %}split--rev{% endif %}">
       <div class="split__media reveal">
-        {%- if section.settings.image != blank -%}<img src="{{ section.settings.image | image_url: width: 1000 }}" alt="{{ section.settings.image.alt | escape }}">
-        {%- else -%}<img src="{{ section.settings.fallback | default: 'hh-jar.svg' | asset_url }}" alt="" style="object-fit:contain;padding:2rem">{%- endif -%}
+        {%- if section.settings.image != blank -%}<img src="{{ section.settings.image | image_url: width: 1000 }}" alt="{{ section.settings.image.alt | escape }}" width="2528" height="1696">
+        {%- else -%}<img src="{{ section.settings.fallback | default: 'texture-skin.png' | asset_url }}" alt="" width="2528" height="1696">{%- endif -%}
       </div>
       <div class="split__copy reveal">
         {%- if section.settings.kicker != blank -%}<span class="kicker">{{ section.settings.kicker }}</span>{%- endif -%}
@@ -20,16 +20,16 @@
   "name": "Image with text",
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "fallback", "label": "Fallback bundled asset", "default": "hh-jar.svg" },
+    { "type": "text", "id": "fallback", "label": "Fallback bundled asset", "default": "texture-skin.png" },
     { "type": "checkbox", "id": "reverse", "label": "Reverse", "default": false },
     { "type": "checkbox", "id": "bg", "label": "Cream background", "default": false },
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "No water. No synthetics." },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Your moisturizer is mostly water." },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Flip over a typical cream and the first ingredient is water. Ours is pure, concentrated nourishment that actually stays.</p>" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The feel" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A dry-touch oil that vanishes in seconds." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Most body oils leave you waiting — and sticking to your clothes. LISSE is formulated with weightless squalane and jojoba that sink in fast, leaving skin satin-soft and never greasy.</p>" },
     { "type": "text", "id": "button_text", "label": "Button" },
     { "type": "url", "id": "button_link", "label": "Button link" }
   ],
-  "blocks": [ { "type": "check", "name": "Checklist item", "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Bioidentical to your skin's own sebum" } ] } ],
+  "blocks": [ { "type": "check", "name": "Checklist item", "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Absorbs fast — dress straight away" } ] } ],
   "presets": [ { "name": "Image with text" } ]
 }
 {% endschema %}

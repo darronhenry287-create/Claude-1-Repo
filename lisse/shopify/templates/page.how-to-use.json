@@ -1,14 +1,14 @@
 {
   "sections": {
-    "head": { "type": "rich-text", "settings": { "center": true, "lede": true, "bg": true, "kicker": "How to use", "heading": "Three seconds, head to toe.", "content": "<p>No 7-step routine. Just warm, press, and glow.</p>" } },
-    "journey": { "type": "journey", "settings": { "bg": false, "kicker": "The routine", "heading": "Warm · Press · Glow" }, "blocks": {
-      "s1": { "type": "step", "settings": { "art_index": 0, "title": "Warm a little", "text": "Scoop a pea-sized amount and rub between fingertips until it melts." } },
-      "s2": { "type": "step", "settings": { "art_index": 1, "title": "Press it in", "text": "Smooth over damp skin — face, lips, elbows, anywhere dry." } },
-      "s3": { "type": "step", "settings": { "art_index": 4, "title": "Glow on", "text": "Morning, night, or whenever skin asks. A little goes far." } }
+    "head": { "type": "rich-text", "settings": { "center": true, "lede": true, "bg": true, "kicker": "How to use", "heading": "One quiet minute, head to toe.", "content": "<p>No 7-step routine. Just warm, massage, and let it absorb.</p>" } },
+    "journey": { "type": "journey", "settings": { "bg": false, "kicker": "The ritual", "heading": "Warm · Massage · Absorb" }, "blocks": {
+      "s1": { "type": "step", "settings": { "art_index": 0, "title": "Warm the drops", "text": "Press 4–6 drops between your palms until they warm." } },
+      "s2": { "type": "step", "settings": { "art_index": 1, "title": "Massage upward", "text": "Sweep over clean skin in upward strokes — thighs, tummy, arms." } },
+      "s3": { "type": "step", "settings": { "art_index": 4, "title": "Let it absorb", "text": "It sinks in fast — dress straight away. Use daily for best results." } }
     }, "block_order": ["s1","s2","s3"] },
-    "faq": { "type": "faq", "settings": { "kicker": "Pro tips", "heading": "Get the most from your jar" }, "blocks": {
-      "q1": { "type": "qa", "settings": { "q": "Use on damp skin", "a": "<p>Applying after a shower helps the balm trap that moisture in — you'll need even less.</p>" } },
-      "q2": { "type": "qa", "settings": { "q": "Less is more", "a": "<p>Start tiny. Tallow is concentrated; too much can feel greasy.</p>" } }
+    "faq": { "type": "faq", "settings": { "kicker": "Pro tips", "heading": "Get the most from your bottle" }, "blocks": {
+      "q1": { "type": "qa", "settings": { "q": "Use on slightly damp skin", "a": "<p>Applying just after a shower helps lock that moisture in — and the oil glides further.</p>" } },
+      "q2": { "type": "qa", "settings": { "q": "Consistency beats quantity", "a": "<p>4–6 drops is plenty. It's the daily one-minute habit, not the amount, that changes how skin looks.</p>" } }
     }, "block_order": ["q1","q2"] }
   },
   "order": ["head", "journey", "faq"]

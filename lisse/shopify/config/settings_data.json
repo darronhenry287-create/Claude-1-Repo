@@ -1,20 +1,20 @@
 {
   "current": {
-    "color_paper": "#ece0c8",
-    "color_honey": "#d99323",
-    "color_ink": "#2c2114",
-    "color_charcoal": "#1c1812",
-    "logo_text": "PRAIRIE FAT CO.",
-    "free_ship_threshold": 35
+    "color_paper": "#f4efe8",
+    "color_honey": "#b26f4c",
+    "color_ink": "#25211d",
+    "color_charcoal": "#221e1a",
+    "logo_text": "LISSE",
+    "free_ship_threshold": 50
   },
   "presets": {
-    "Prairie Fat Co.": {
-      "color_paper": "#ece0c8",
-      "color_honey": "#d99323",
-      "color_ink": "#2c2114",
-      "color_charcoal": "#1c1812",
-      "logo_text": "PRAIRIE FAT CO.",
-      "free_ship_threshold": 35
+    "LISSE": {
+      "color_paper": "#f4efe8",
+      "color_honey": "#b26f4c",
+      "color_ink": "#25211d",
+      "color_charcoal": "#221e1a",
+      "logo_text": "LISSE",
+      "free_ship_threshold": 50
     }
   }
 }

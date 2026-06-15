@@ -7,9 +7,9 @@
       "type": "footer",
       "settings": {},
       "blocks": {
-        "shop": { "type": "column", "settings": { "heading": "Shop", "links_fallback": "<a href=\"/products/the-tallow-balm\">The Tallow Balm</a><a href=\"/collections/all\">Shop All</a><a href=\"/pages/bundles\">Bundles & Save</a><a href=\"/pages/reviews\">Reviews</a>" } },
+        "shop": { "type": "column", "settings": { "heading": "Shop", "links_fallback": "<a href=\"/products/firming-body-oil\">Firming Body Oil</a><a href=\"/collections/all\">Shop All</a><a href=\"/pages/bundles\">Bundles & Save</a><a href=\"/pages/reviews\">Reviews</a>" } },
         "learn": { "type": "column", "settings": { "heading": "Learn", "links_fallback": "<a href=\"/pages/ingredients\">Ingredients</a><a href=\"/pages/our-story\">Our Story</a><a href=\"/pages/faq\">FAQ</a><a href=\"/pages/how-to-use\">How to Use</a>" } },
-        "help": { "type": "column", "settings": { "heading": "Help", "links_fallback": "<a href=\"/pages/contact\">Contact</a><a href=\"/pages/shipping-returns\">Shipping & Returns</a><a href=\"/pages/guarantee\">90-Day Guarantee</a>" } }
+        "help": { "type": "column", "settings": { "heading": "Help", "links_fallback": "<a href=\"/pages/contact\">Contact</a><a href=\"/pages/shipping-returns\">Shipping & Returns</a><a href=\"/pages/guarantee\">90-Day Promise</a>" } }
       },
       "block_order": ["shop", "learn", "help"]
     }

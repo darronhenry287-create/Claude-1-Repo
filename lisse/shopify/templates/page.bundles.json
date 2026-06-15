@@ -1,6 +1,6 @@
 {
   "sections": {
-    "head": { "type": "rich-text", "settings": { "center": true, "lede": true, "bg": true, "kicker": "Bundles & save", "heading": "Stock up. Save more.", "content": "<p>One jar lasts months — but your future self will thank you for the backup. Connect a collection below to show your bundle products.</p>" } },
+    "head": { "type": "rich-text", "settings": { "center": true, "lede": true, "bg": true, "kicker": "Bundles & save", "heading": "Stock up. Save more.", "content": "<p>One bottle lasts 4–6 weeks — but the 3-Bottle Ritual drops it to $40 each with free shipping. Connect a collection below to show your bundle products.</p>" } },
     "coll": { "type": "main-collection" },
     "news": { "type": "newsletter" }
   },

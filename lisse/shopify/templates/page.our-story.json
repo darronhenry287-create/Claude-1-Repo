@@ -1,17 +1,17 @@
 {
   "sections": {
-    "intro": { "type": "rich-text", "settings": { "center": true, "lede": true, "bg": false, "kicker": "Our story", "heading": "It started with grandma's tin.", "content": "<p>No lab. No focus groups. Just a farmhouse kitchen, a slow cooker, and a stubborn belief that skincare got needlessly complicated.</p>" } },
+    "intro": { "type": "rich-text", "settings": { "center": true, "lede": true, "bg": false, "kicker": "Our story", "heading": "It started with a shelf of empty promises.", "content": "<p>No silicone. No synthetic fragrance. Just a clean, dry-touch firming oil and a stubborn belief that one good minute a day beats a ten-step routine.</p>" } },
     "timeline": { "type": "story-timeline", "blocks": {
-      "a": { "type": "milestone", "settings": { "year": "'94", "title": "The tin by the sink", "text": "Grandma kept rendered tallow by the kitchen sink — for chapped hands, wind-burned cheeks, scraped knees." } },
-      "b": { "type": "milestone", "settings": { "year": "2021", "title": "47 messy batches", "text": "Staring at a shelf of $60 creams we couldn't pronounce, we went back to her recipe and whipped it 47 times." } },
-      "c": { "type": "milestone", "settings": { "year": "2022", "title": "The first 100 jars", "text": "We hand-filled a hundred jars at the kitchen table and gave them to friends. They came back for more." } },
-      "d": { "type": "milestone", "settings": { "year": "Today", "title": "8,200 happy faces", "text": "Same four ingredients. Same small batches. Just a lot more sinks with a jar beside them." } }
+      "a": { "type": "milestone", "settings": { "year": "The itch", "title": "Tacky, perfumed, fake", "text": "Camille tried every firming cream on the shelf. They were either sticky, heavily perfumed, or made of promises and silicone — nothing she actually wanted to use daily." } },
+      "b": { "type": "milestone", "settings": { "year": "The build", "title": "Caffeine, not claims", "text": "We formulated the opposite: weightless squalane and jojoba carrying caffeine-rich green coffee and guarana, with no synthetic fragrance and a texture that disappears." } },
+      "c": { "type": "milestone", "settings": { "year": "The first bottles", "title": "The one-minute test", "text": "Real women used 4–6 drops, once a day, for eight weeks. Skin looked smoother and firmer — and they kept reaching for the bottle." } },
+      "d": { "type": "milestone", "settings": { "year": "Today", "title": "6,400+ firmer mornings", "text": "One bottle. One minute. The same clean, dry-touch oil — now part of thousands of daily rituals." } }
     }, "block_order": ["a","b","c","d"] },
     "manifesto": { "type": "manifesto", "blocks": {
-      "a": { "type": "line", "settings": { "text": "<p>We'll never <strong>add water</strong> to cut costs.</p>" } },
+      "a": { "type": "line", "settings": { "text": "<p>We'll never use <strong>silicones</strong> to fake a smooth finish.</p>" } },
       "b": { "type": "line", "settings": { "text": "<p>We'll never hide behind the word <strong>\"fragrance.\"</strong></p>" } },
-      "c": { "type": "line", "settings": { "text": "<p>We'll never put a <strong>fifth ingredient</strong> in just to sound fancy.</p>" } },
-      "d": { "type": "line", "settings": { "text": "<p>We'll never make a claim our <strong>own skin</strong> can't back up.</p>" } }
+      "c": { "type": "line", "settings": { "text": "<p>We'll never make a <strong>medical claim</strong> our formula can't back up.</p>" } },
+      "d": { "type": "line", "settings": { "text": "<p>We'll never test on <strong>animals</strong>, ever.</p>" } }
     }, "block_order": ["a","b","c","d"] },
     "quote": { "type": "pull-quote", "settings": {} }
   },

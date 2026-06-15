@@ -8,7 +8,7 @@
       </div>
       <div class="shelf__arrow">→</div>
       <div class="shelf__new">
-        {%- if section.settings.image != blank -%}<img src="{{ section.settings.image | image_url: width: 400 }}" alt="">{%- else -%}<img src="{{ 'hh-jar.svg' | asset_url }}" alt="">{%- endif -%}
+        {%- if section.settings.image != blank -%}<img src="{{ section.settings.image | image_url: width: 400 }}" alt="" width="1856" height="2304">{%- else -%}<img src="{{ 'product-hero.png' | asset_url }}" alt="LISSE Firming Body Oil" width="1856" height="2304">{%- endif -%}
         <b>{{ section.settings.new_label }}</b><p class="muted" style="font-size:.9rem">{{ section.settings.new_sub }}</p>
       </div>
     </div>
@@ -20,11 +20,11 @@
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Product image" },
     { "type": "checkbox", "id": "bg", "label": "Cream background", "default": true },
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "One jar replaces a shelf" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Your bathroom shelf, simplified." },
-    { "type": "text", "id": "replaces", "label": "Replaced products (comma separated)", "default": "Day moisturizer, Night cream, Lip balm, Hand cream, Cuticle oil, Body butter, Scar gel" },
-    { "type": "text", "id": "new_label", "label": "New label", "default": "One honest jar." },
-    { "type": "text", "id": "new_sub", "label": "New sub", "default": "$24 · lasts months" }
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "One bottle, every step" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Replaces the whole firming shelf." },
+    { "type": "text", "id": "replaces", "label": "Replaced products (comma separated)", "default": "Firming cream, Body lotion, Tightening serum, Stretch-mark oil, Cellulite gel, Bust cream" },
+    { "type": "text", "id": "new_label", "label": "New label", "default": "One clean oil." },
+    { "type": "text", "id": "new_sub", "label": "New sub", "default": "$48 · lasts 4–6 weeks" }
   ],
   "presets": [ { "name": "Shelf simplified" } ]
 }

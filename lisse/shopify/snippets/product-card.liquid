@@ -9,7 +9,7 @@
     {%- if product.featured_image -%}
       <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | escape }}" loading="lazy" width="600" height="600">
     {%- else -%}
-      <img src="{{ 'hh-jar.svg' | asset_url }}" alt="{{ product.title | escape }}" loading="lazy">
+      <img src="{{ 'product-hero.png' | asset_url }}" alt="{{ product.title | escape }}" loading="lazy" width="600" height="600">
     {%- endif -%}
   </div>
   <div class="card__body">

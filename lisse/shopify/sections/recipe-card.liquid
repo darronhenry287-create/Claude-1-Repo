@@ -4,11 +4,11 @@
       <h3>{{ section.settings.title }}</h3>
       <p class="recipe__sub">{{ section.settings.sub }}</p>
       <div class="recipe__cols">
-        <div><h4>Ingredients</h4><ul>
+        <div><h4>Actives</h4><ul>
           {%- assign ing = section.settings.ingredients | newline_to_br | strip_newlines | split: '<br />' -%}
           {%- for i in ing -%}{%- if i != blank -%}<li>{{ i | strip }}</li>{%- endif -%}{%- endfor -%}
         </ul></div>
-        <div><h4>Method</h4><ol>
+        <div><h4>Base &amp; carriers</h4><ol>
           {%- assign met = section.settings.method | newline_to_br | strip_newlines | split: '<br />' -%}
           {%- for m in met -%}{%- if m != blank -%}<li>{{ m | strip }}</li>{%- endif -%}{%- endfor -%}
         </ol></div>
@@ -20,10 +20,10 @@
 {
   "name": "Recipe card",
   "settings": [
-    { "type": "text", "id": "title", "label": "Title", "default": "The Recipe" },
-    { "type": "text", "id": "sub", "label": "Subtitle", "default": "Small batch · makes one 60g jar" },
-    { "type": "textarea", "id": "ingredients", "label": "Ingredients (one per line)", "default": "30g grass-fed beef tallow\n15g raw wildflower honey\n9g golden beeswax\n6g cold-pressed olive oil" },
-    { "type": "textarea", "id": "method", "label": "Method (one per line)", "default": "Gently melt the tallow & beeswax.\nStir in honey & olive oil.\nWhip until cloud-soft & cooled.\nHand-fill, cap, and ship to you." }
+    { "type": "text", "id": "title", "label": "Title", "default": "Inside every bottle" },
+    { "type": "text", "id": "sub", "label": "Subtitle", "default": "Fragrance-free · 96% naturally derived" },
+    { "type": "textarea", "id": "ingredients", "label": "Actives (one per line)", "default": "Green Coffee\nGuarana\nBitter Orange\nIvy Leaf" },
+    { "type": "textarea", "id": "method", "label": "Base & carriers (one per line)", "default": "Squalane\nJojoba\nCaprylic/Capric Triglyceride\nVitamin E" }
   ],
   "presets": [ { "name": "Recipe card" } ]
 }

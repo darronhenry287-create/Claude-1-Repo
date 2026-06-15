@@ -1,11 +1,11 @@
 /* ============================================================
-   PRAIRIE FAT CO. — interactions
-   Runs in MOCK mode (static preview: window.HH_MOCK = true) or
+   LISSE — interactions
+   Runs in MOCK mode (static preview: window.LISSE_MOCK = true) or
    LIVE mode (Shopify: native cart, server-rendered values).
    ============================================================ */
 (function () {
   'use strict';
-  const MOCK = window.HH_MOCK === true;
+  const MOCK = window.LISSE_MOCK === true;
   const $  = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const money = (n) => '$' + n.toFixed(2);
@@ -36,7 +36,7 @@
      MOCK CART (static preview only)
      ============================================================ */
   if (MOCK) {
-    const FREE = 35, KEY = 'hh-cart';
+    const FREE = 50, KEY = 'lisse-cart';
     let cart = [];
     try { cart = JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { cart = []; }
     const save = () => localStorage.setItem(KEY, JSON.stringify(cart));
@@ -52,7 +52,7 @@
       if (foot) foot.style.display = 'block';
       body.innerHTML = cart.map((i, x) => `
         <div class="ditem">
-          <div class="ditem__thumb"><img src="${i.img || 'assets/img/jar.svg'}" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+          <div class="ditem__thumb"><img src="${i.img || 'assets/img/product-hero.png'}" alt="" style="width:100%;height:100%;object-fit:cover"></div>
           <div class="ditem__info"><h4>${i.name}</h4><div class="v">${i.variant || ''}</div>
             <div class="ditem__foot">
               <div class="dqty"><button data-q="-1" data-i="${x}">−</button><span>${i.qty}</span><button data-q="1" data-i="${x}">+</button></div>
@@ -83,7 +83,7 @@
       if (empty) empty.hidden = true; if (sum) sum.style.display = '';
       items.innerHTML = cart.map((i, x) => `
         <div class="cline">
-          <div class="cline__thumb"><img src="${i.img || 'assets/img/jar.svg'}" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+          <div class="cline__thumb"><img src="${i.img || 'assets/img/product-hero.png'}" alt="" style="width:100%;height:100%;object-fit:cover"></div>
           <div class="cline__info"><h4 style="font-family:var(--slab)">${i.name}</h4><div class="v muted" style="font-size:.82rem">${i.variant || ''}</div><button class="drm" data-prm="${x}">Remove</button></div>
           <div class="dqty"><button data-pq="-1" data-i="${x}">−</button><span>${i.qty}</span><button data-pq="1" data-i="${x}">+</button></div>
           <div class="cline__price">${money(i.price * i.qty)}</div>
@@ -98,9 +98,9 @@
     $$('[data-add]').forEach(btn => btn.addEventListener('click', (e) => {
       e.preventDefault();
       const scope = btn.closest('[data-product]') || document;
-      const id = btn.dataset.id || 'item', name = btn.dataset.name || 'The Tallow Balm';
-      let price = parseFloat(btn.dataset.price || '24'), qty = 1, variant = btn.dataset.variant || '';
-      const img = btn.dataset.img || 'assets/img/jar.svg';
+      const id = btn.dataset.id || 'item', name = btn.dataset.name || 'LISSE Firming Body Oil';
+      let price = parseFloat(btn.dataset.price || '48'), qty = 1, variant = btn.dataset.variant || '';
+      const img = btn.dataset.img || 'assets/img/product-hero.png';
       const opts = $$('.opt.active[data-variant]', scope).map(o => o.dataset.variant);
       const tier = $('.tier.active', scope), qin = $('.qty input', scope);
       if (qin) qty = Math.max(1, parseInt(qin.value) || 1);
@@ -126,7 +126,7 @@
     }
 
     /* If a previous click added to cart and reloaded, open the drawer now */
-    if (sessionStorage.getItem('pf-open-cart') === '1') { sessionStorage.removeItem('pf-open-cart'); openCart(); }
+    if (sessionStorage.getItem('lisse-open-cart') === '1') { sessionStorage.removeItem('lisse-open-cart'); openCart(); }
 
     /* Bundle / quick add-to-cart buttons: add to the cart (no checkout redirect) */
     $$('[data-bundle-add]').forEach(btn => btn.addEventListener('click', (e) => {
@@ -143,7 +143,7 @@
       }).then(r => { if (!r.ok) throw new Error('add failed'); return r.json(); })
         .then(() => {
           if (discount) { window.location.href = '/discount/' + encodeURIComponent(discount) + '?redirect=' + encodeURIComponent('/cart'); }
-          else { sessionStorage.setItem('pf-open-cart', '1'); window.location.reload(); }
+          else { sessionStorage.setItem('lisse-open-cart', '1'); window.location.reload(); }
         })
         .catch(() => { window.location.href = btn.getAttribute('href') || '/cart'; });
     }));

@@ -4,9 +4,9 @@
     <h1 class="poster__head">{{ section.settings.line1 }}<br><span class="out">{{ section.settings.line2 }}</span></h1>
     <div class="poster__jar">
       {%- if section.settings.image != blank -%}
-        <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.image.alt | escape }}">
+        <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.image.alt | escape }}" width="1856" height="2304">
       {%- else -%}
-        <img src="{{ 'hh-jar.svg' | asset_url }}" alt="{{ shop.name }}">
+        <img src="{{ 'product-hero.png' | asset_url }}" alt="{{ shop.name }}" width="1856" height="2304">
       {%- endif -%}
       <div class="seal"><span><span class="big">{{ section.settings.seal_big }}</span><small>{{ section.settings.seal_small }}</small></span></div>
       {%- if section.settings.ribbon != blank -%}<span class="ribbon">{{ section.settings.ribbon }}</span>{%- endif -%}
@@ -22,18 +22,18 @@
 {
   "name": "Poster hero",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Product image (defaults to bundled jar)" },
-    { "type": "text", "id": "eyebrow", "label": "Handwritten eyebrow", "default": "skin food, simplified" },
-    { "type": "text", "id": "line1", "label": "Headline line 1", "default": "Four ingredients." },
-    { "type": "text", "id": "line2", "label": "Headline line 2 (outlined)", "default": "Nothing else." },
-    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Whipped grass-fed beef tallow and raw honey — bioidentical skin food that deeply nourishes, calms and softens. No water, no fillers, no synthetics." },
-    { "type": "text", "id": "button_text", "label": "Button text", "default": "Shop the Balm" },
+    { "type": "image_picker", "id": "image", "label": "Product image (defaults to bundled bottle)" },
+    { "type": "text", "id": "eyebrow", "label": "Handwritten eyebrow", "default": "the daily firming ritual" },
+    { "type": "text", "id": "line1", "label": "Headline line 1", "default": "Firmer skin," },
+    { "type": "text", "id": "line2", "label": "Headline line 2 (outlined)", "default": "by the morning." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "A lightweight, fast-absorbing body oil with caffeine-rich green coffee and guarana that visibly firms, smooths and nourishes — in one quiet minute a day." },
+    { "type": "text", "id": "button_text", "label": "Button text", "default": "Shop the Oil" },
     { "type": "url", "id": "button_link", "label": "Button link" },
     { "type": "text", "id": "seal_big", "label": "Seal big text", "default": "90" },
-    { "type": "text", "id": "seal_small", "label": "Seal small text", "default": "DAY GUARANTEE" },
-    { "type": "text", "id": "ribbon", "label": "Ribbon", "default": "Made in small batches" },
+    { "type": "text", "id": "seal_small", "label": "Seal small text", "default": "DAY PROMISE" },
+    { "type": "text", "id": "ribbon", "label": "Ribbon", "default": "Cruelty-free & vegan" },
     { "type": "checkbox", "id": "show_rating", "label": "Show rating", "default": true },
-    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4.9 · 8,200+ happy faces" }
+    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4.9 · 6,400+ firmer mornings" }
   ],
   "presets": [ { "name": "Poster hero" } ]
 }

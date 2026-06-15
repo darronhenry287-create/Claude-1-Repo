@@ -6,7 +6,7 @@
         <div class="chip reveal" {{ block.shopify_attributes }}><span class="stars">★★★★★</span><p>"{{ block.settings.quote }}"</p><span class="who">{{ block.settings.who }}</span></div>
       {%- endfor -%}
     </div>
-    {%- if section.settings.button_text != blank -%}<div class="center" style="margin-top:3rem"><a href="{{ section.settings.button_link | default: '/products/the-tallow-balm' }}" class="btn btn-honey btn-lg">{{ section.settings.button_text }}</a></div>{%- endif -%}
+    {%- if section.settings.button_text != blank -%}<div class="center" style="margin-top:3rem"><a href="{{ section.settings.button_link | default: '/products/firming-body-oil' }}" class="btn btn-honey btn-lg">{{ section.settings.button_text }}</a></div>{%- endif -%}
   </div>
 </section>
 {% schema %}
@@ -14,20 +14,20 @@
   "name": "Reviews masonry",
   "settings": [
     { "type": "checkbox", "id": "bg", "label": "Cream background", "default": true },
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Straight from the jar owners" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "8,200 and counting." },
-    { "type": "text", "id": "button_text", "label": "Button", "default": "Shop the Balm · $24" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Straight from the bottle owners" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "6,400 and counting." },
+    { "type": "text", "id": "button_text", "label": "Button", "default": "Shop the Oil · $48" },
     { "type": "url", "id": "button_link", "label": "Button link" }
   ],
-  "blocks": [ { "type": "review", "name": "Review", "settings": [ { "type": "textarea", "id": "quote", "label": "Quote", "default": "My eczema patches calmed down in four days." }, { "type": "text", "id": "who", "label": "Who", "default": "Rachel K. · Dry skin" } ] } ],
+  "blocks": [ { "type": "review", "name": "Review", "settings": [ { "type": "textarea", "id": "quote", "label": "Quote", "default": "Eight weeks in and my thighs look smoother and firmer." }, { "type": "text", "id": "who", "label": "Who", "default": "Marina L. · Thighs" } ] } ],
   "max_blocks": 16,
   "presets": [ { "name": "Reviews masonry", "blocks": [
-    { "type": "review", "settings": { "quote": "My eczema patches calmed down in four days. This $24 jar beat prescription creams.", "who": "Rachel K. · Dry skin" } },
-    { "type": "review", "settings": { "quote": "Now it's the only thing I use. One jar lasts months and a little goes so far.", "who": "Daniel M. · Normal" } },
-    { "type": "review", "settings": { "quote": "Replaced my lip balm, hand cream and night moisturizer with one little jar.", "who": "Sofia T. · Combination" } },
-    { "type": "review", "settings": { "quote": "Winter wrecks my hands every year. Two weeks of this and the cracks are gone.", "who": "Jonas B. · Very dry" } },
-    { "type": "review", "settings": { "quote": "The unscented really is scentless. Melts right in.", "who": "Amara L. · Sensitive" } },
-    { "type": "review", "settings": { "quote": "My teenage son uses it without complaining. His skin cleared up too.", "who": "Priya H. · Acne-prone" } }
+    { "type": "review", "settings": { "quote": "Eight weeks in and my thighs genuinely look smoother and firmer. And it smells like nothing — I love that.", "who": "Marina L. · Thighs" } },
+    { "type": "review", "settings": { "quote": "It actually absorbs. I get dressed straight away — no greasy sheets, no waiting around.", "who": "Priya S. · Post-workout" } },
+    { "type": "review", "settings": { "quote": "Used it through my whole pregnancy. Skin stayed soft and my stretch marks are far less visible.", "who": "Hannah W. · Post-partum" } },
+    { "type": "review", "settings": { "quote": "The one-minute ritual is the only self-care I keep up with. My skin has never looked better.", "who": "Dani R. · Daily" } },
+    { "type": "review", "settings": { "quote": "Fragrance-free and it sinks right in. A little goes a long way — one bottle lasts weeks.", "who": "Amara L. · Sensitive" } },
+    { "type": "review", "settings": { "quote": "My tummy looks noticeably firmer and more even. So glad I stuck with it daily.", "who": "Sofia T. · Tummy" } }
   ] } ]
 }
 {% endschema %}

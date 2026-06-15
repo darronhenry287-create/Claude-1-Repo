@@ -1,15 +1,75 @@
   <section style="background:var(--cream);padding-block:clamp(2.5rem,5vw,4rem)" class="center">
-    <div class="wrap"><span class="kicker">Bundles &amp; save</span><h1 style="margin-top:.7rem">Stock up. Save more.</h1><p class="lede" style="max-width:480px;margin:1rem auto 0">One jar lasts months — but your future self will thank you for the backup.</p></div>
+    <div class="wrap"><span class="kicker">Bundles &amp; save</span><h1 style="margin-top:.7rem">Firmer skin is a habit. Stock up for it.</h1><p class="lede" style="max-width:540px;margin:1rem auto 0">One bottle lasts roughly 4–6 weeks. Results come from doing the minute every day — so the people who see the most are the ones who never run out. Subscribe or stock up and save up to 31%.</p></div>
   </section>
 
+  <!-- THE THREE OPTIONS -->
   <section class="section">
     <div class="wrap">
       <div class="grid products" style="grid-template-columns:repeat(3,1fr)">
-        <article class="card reveal"><div class="card__media"><span class="tag tag-honey card__badge">Save 17%</span><img src="assets/img/jar.svg" alt=""></div><div class="card__body"><h3 class="card__title">Subscribe &amp; Save</h3><div class="card__rev">1 jar · every 1–3 months</div><div class="card__row"><span class="card__price"><span class="was">$24</span>$20</span><button class="btn btn-ink" data-add data-id="sub" data-name="The Tallow Balm (Subscription)" data-price="20" data-img="assets/img/jar.svg">Add</button></div></div></article>
-        <article class="card reveal"><div class="card__media"><span class="tag tag-honey card__badge">Save 25%</span><img src="assets/img/jar.svg" alt=""></div><div class="card__body"><h3 class="card__title">3-Jar Stock-Up</h3><div class="card__rev">Three jars · free shipping</div><div class="card__row"><span class="card__price"><span class="was">$72</span>$54</span><button class="btn btn-ink" data-add data-id="trio" data-name="3-Jar Stock-Up" data-price="54" data-img="assets/img/jar.svg">Add</button></div></div></article>
-        <article class="card reveal"><div class="card__media"><span class="tag tag-honey card__badge">Save $14</span><img src="assets/img/jar.svg" alt=""></div><div class="card__body"><h3 class="card__title">The Starter Set</h3><div class="card__rev">Balm + Lip Balm + Soap</div><div class="card__row"><span class="card__price"><span class="was">$59</span>$45</span><button class="btn btn-ink" data-add data-id="starter" data-name="The Starter Set" data-price="45" data-img="assets/img/jar.svg">Add</button></div></div></article>
+        <article class="card reveal" data-product="firming-body-oil">
+          <div class="card__media"><img src="assets/img/product-hero.png" alt="LISSE Firming Body Oil, one bottle" width="1856" height="2304"></div>
+          <div class="card__body">
+            <h3 class="card__title">One bottle</h3>
+            <div class="card__rev">100 ml · try it once</div>
+            <div class="card__row"><span class="card__price"><span class="was">$58</span>$48</span><button class="btn btn-ink" data-add data-id="firming-body-oil" data-name="LISSE Firming Body Oil" data-price="48" data-img="assets/img/product-hero.png">Add to bag</button></div>
+          </div>
+        </article>
+
+        <article class="card reveal" data-product="firming-body-oil-sub">
+          <div class="card__media"><span class="tag tag-honey card__badge">Most popular · Save 21%</span><img src="assets/img/marble-shelf.png" alt="LISSE Firming Body Oil on a marble bathroom shelf" width="1856" height="2304"></div>
+          <div class="card__body">
+            <h3 class="card__title">Subscribe &amp; Save</h3>
+            <div class="card__rev">1 bottle · every 1–2 months · cancel anytime</div>
+            <div class="card__row"><span class="card__price"><span class="was">$48</span>$38<span class="muted" style="font-size:.8rem;font-weight:400">/bottle</span></span><button class="btn btn-ink" data-add data-id="firming-body-oil-sub" data-name="LISSE Firming Body Oil — Subscribe &amp; Save" data-price="38" data-img="assets/img/marble-shelf.png">Subscribe</button></div>
+          </div>
+        </article>
+
+        <article class="card reveal" data-product="ritual-trio">
+          <div class="card__media"><span class="tag card__badge">Best value · Save 31%</span><img src="assets/img/carton-box.png" alt="The 3-Bottle Ritual beside its cream carton" width="2048" height="2048"></div>
+          <div class="card__body">
+            <h3 class="card__title">3-Bottle Ritual</h3>
+            <div class="card__rev">Three bottles · $40 each · free shipping</div>
+            <div class="card__row"><span class="card__price"><span class="was">$144</span>$120</span><button class="btn btn-ink" data-add data-id="ritual-trio" data-name="3-Bottle Ritual" data-price="120" data-img="assets/img/carton-box.png">Add 3 to bag</button></div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <section class="section dark cta-band"><div class="wrap"><span class="kicker">Risk-free</span><h2 style="margin-top:.7rem">Every bundle is backed by our 90-day guarantee.</h2><a href="product.html" class="btn btn-honey btn-lg" style="margin-top:1.5rem">Shop the Balm</a></div></section>
+  <!-- SAVINGS COMPARISON -->
+  <section class="section" style="background:var(--cream)">
+    <div class="wrap" style="max-width:760px">
+      <div class="center" style="margin-bottom:2.6rem"><span class="kicker">The maths</span><h2 style="margin-top:.7rem">What you pay per bottle.</h2></div>
+      <table class="compare">
+        <thead>
+          <tr><th>Option</th><th>Per bottle</th><th>You save</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>One bottle</td><td>$48</td><td class="no">—</td></tr>
+          <tr class="col-us"><td>Subscribe &amp; Save</td><td>$38</td><td class="yes">Save 21%</td></tr>
+          <tr><td>3-Bottle Ritual</td><td>$40</td><td class="yes">Save 31% vs single</td></tr>
+        </tbody>
+      </table>
+      <p class="muted center" style="font-size:.85rem;margin-top:1.4rem">All options ship free over $50. Subscriptions are flexible — skip, swap your cadence, or cancel anytime in a click.</p>
+    </div>
+  </section>
+
+  <!-- BUNDLE UPSELL band -->
+  <section class="section">
+    <div class="wrap">
+      <div class="upsell reveal">
+        <div><span class="kicker" style="color:#e8c4a8">One for every room</span><h3 style="margin-top:.5rem">Make it a 3-bottle ritual.</h3><p>One for the bathroom, one for your bag, one to gift. The best price per bottle, and free shipping included.</p></div>
+        <button class="btn btn-honey btn-lg" data-add data-id="ritual-trio" data-name="3-Bottle Ritual" data-price="120" data-img="assets/img/carton-box.png">Get 3 bottles · $120</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 90-DAY PROMISE -->
+  <section class="section dark center">
+    <div class="wrap" style="max-width:620px">
+      <div class="seal" style="margin:0 auto 1.5rem"><span><span class="big">90</span><small>DAY PROMISE</small></span></div>
+      <h2>Every bundle is risk-free.</h2>
+      <p class="lede" style="margin-top:1rem">Buy one or buy three — use it daily for 90 days. If your skin doesn't look and feel firmer, smoother and more nourished, we'll refund every cent, and you keep the bottle.</p>
+      <a href="product.html" class="btn btn-honey btn-lg" style="margin-top:1.6rem">Shop the Oil · $48</a>
+    </div>
+  </section>

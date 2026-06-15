@@ -3,20 +3,20 @@
     <p class="muted" style="font-size:.82rem;font-weight:600;margin-bottom:1.4rem"><a href="{{ routes.root_url }}">Home</a> / <a href="{{ collection.url | default: routes.all_products_collection_url }}">Shop</a> / {{ product.title }}</p>
     <div class="pdp" data-product="{{ product.handle }}">
       <div class="pgallery">
-        <div class="pgallery__main{% if product.featured_image %} has-photo{% endif %}" id="pg-main">
-          {%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.featured_image.alt | escape }}">
-          {%- else -%}<img src="{{ 'hh-jar.svg' | asset_url }}" alt="{{ product.title | escape }}">{%- endif -%}
+        <div class="pgallery__main has-photo" id="pg-main">
+          {%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.featured_image.alt | escape }}" width="1856" height="2304">
+          {%- else -%}<img src="{{ 'product-hero.png' | asset_url }}" alt="{{ product.title | escape }}" width="1856" height="2304">{%- endif -%}
         </div>
         {%- if product.images.size > 1 -%}
           <div class="pgallery__thumbs has-photo">
             {%- for image in product.images -%}
-              <button class="pthumb has-photo {% if image == product.featured_image %}active{% endif %}"><img src="{{ image | image_url: width: 300 }}" data-full="{{ image | image_url: width: 1200 }}" alt="{{ image.alt | escape }}"></button>
+              <button class="pthumb has-photo {% if image == product.featured_image %}active{% endif %}"><img src="{{ image | image_url: width: 300 }}" data-full="{{ image | image_url: width: 1200 }}" alt="{{ image.alt | escape }}" width="1856" height="2304"></button>
             {%- endfor -%}
           </div>
         {%- elsif product.featured_image == blank -%}
-          <div class="pgallery__thumbs">
-            {%- assign demo = 'hh-jar.svg,hh-honeycomb.svg,hh-cow.svg,hh-olive.svg' | split: ',' -%}
-            {%- for d in demo -%}<button class="pthumb {% if forloop.first %}active{% endif %}"><img src="{{ d | asset_url }}" data-full="{{ d | asset_url }}" alt=""></button>{%- endfor -%}
+          <div class="pgallery__thumbs has-photo">
+            {%- assign demo = 'product-hero.png,marble-shelf.png,dropper-hand.png,texture-skin.png,massage-thigh.png,product-hero-b.png' | split: ',' -%}
+            {%- for d in demo -%}<button class="pthumb has-photo {% if forloop.first %}active{% endif %}"><img src="{{ d | asset_url }}" data-full="{{ d | asset_url }}" alt="" width="1856" height="2304"></button>{%- endfor -%}
           </div>
         {%- endif -%}
       </div>
@@ -24,12 +24,12 @@
       <div class="pinfo" id="buy-anchor">
         {%- if product.metafields.custom.badge -%}<span class="tag tag-honey">{{ product.metafields.custom.badge }}</span>{%- else -%}<span class="tag tag-honey">★ Bestseller</span>{%- endif -%}
         <h1>{{ product.title }}</h1>
-        <div class="pinfo__rate"><span class="stars">★★★★★</span> 4.9 · <a href="#reviews" style="text-decoration:underline">8,200 reviews</a></div>
+        <div class="pinfo__rate"><span class="stars">★★★★★</span> 4.9 · <a href="#reviews" style="text-decoration:underline">6,400 reviews</a></div>
         <div class="pinfo__price">
           <span class="now" id="p-now">{{ product.price | money }}</span>
           {%- if product.compare_at_price > product.price -%}<span class="was" id="p-was">{{ product.compare_at_price | money }}</span><span class="tag tag-outline">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>{%- endif -%}
         </div>
-        <div class="pinfo__desc rte">{{ product.description | default: 'Whipped grass-fed beef tallow and raw honey — bioidentical skin food. Four ingredients. Nothing else.' }}</div>
+        <div class="pinfo__desc rte">{{ product.description | default: 'A lightweight, dry-touch body oil with caffeine-rich green coffee and guarana. Visibly firms, smooths and nourishes — and absorbs in seconds, so you can dress straight away. 100 ml.' }}</div>
 
         {%- form 'product', product, id: 'product-form' -%}
           {%- unless product.has_only_default_variant -%}
@@ -50,9 +50,9 @@
         {%- endform -%}
 
         <div class="ptrust">
-          <div><span class="ck">{% render 'icon', name: 'check' %}</span>90-day guarantee</div>
-          <div><span class="ck">{% render 'icon', name: 'check' %}</span>Free shipping $35+</div>
-          <div><span class="ck">{% render 'icon', name: 'check' %}</span>Small-batch made</div>
+          <div><span class="ck">{% render 'icon', name: 'check' %}</span>90-day promise</div>
+          <div><span class="ck">{% render 'icon', name: 'check' %}</span>Free shipping $50+</div>
+          <div><span class="ck">{% render 'icon', name: 'check' %}</span>Vegan &amp; cruelty-free</div>
         </div>
 
         <div class="acc">
@@ -72,7 +72,7 @@
 
 <div class="stickybar" id="stickybar" data-product="{{ product.handle }}">
   <div class="stickybar__in">
-    <div class="stickybar__info"><div class="stickybar__thumb">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 96 }}" alt="" style="width:100%;height:100%;object-fit:cover">{%- else -%}<img src="{{ 'hh-jar.svg' | asset_url }}" alt="" style="width:100%;height:100%;object-fit:cover">{%- endif -%}</div><div><div class="stickybar__name">{{ product.title }}</div><div class="stickybar__price" id="sticky-price">{{ product.price | money }}</div></div></div>
+    <div class="stickybar__info"><div class="stickybar__thumb">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 96 }}" alt="" width="1856" height="2304" style="width:100%;height:100%;object-fit:cover">{%- else -%}<img src="{{ 'product-hero.png' | asset_url }}" alt="" width="1856" height="2304" style="width:100%;height:100%;object-fit:cover">{%- endif -%}</div><div><div class="stickybar__name">{{ product.title }}</div><div class="stickybar__price" id="sticky-price">{{ product.price | money }}</div></div></div>
     <button class="btn btn-honey" onclick="document.getElementById('product-form').requestSubmit()">{{ 'products.product.add_to_cart' | t }}</button>
   </div>
 </div>
@@ -82,15 +82,15 @@
   "name": "Product",
   "blocks": [
     { "type": "accordion", "name": "Accordion row", "settings": [
-      { "type": "text", "id": "title", "label": "Title", "default": "The full ingredient list" },
-      { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Grass-fed beef tallow, raw wildflower honey, golden beeswax, cold-pressed olive oil. That's the entire list.</p>" }
+      { "type": "text", "id": "title", "label": "Title", "default": "Full ingredient list" },
+      { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Squalane, Caprylic/Capric Triglyceride, Simmondsia Chinensis (Jojoba) Seed Oil, Coffea Arabica (Green Coffee) Seed Oil, Paullinia Cupana (Guarana) Seed Extract, Citrus Aurantium Amara (Bitter Orange) Peel Oil, Hedera Helix (Ivy) Leaf Extract, Tocopherol (Vitamin E). Fragrance-free. 96% naturally derived.</p>" }
     ] }
   ],
   "presets": [
     { "name": "Product", "blocks": [
-      { "type": "accordion", "settings": { "title": "The full ingredient list" } },
-      { "type": "accordion", "settings": { "title": "How to use", "content": "<p>Warm a pea-sized amount and press into damp skin — face, lips, hands, elbows. Morning and night.</p>" } },
-      { "type": "accordion", "settings": { "title": "Shipping & returns", "content": "<p>Free shipping over $35, ships in 1–2 days. 90-day money-back guarantee — keep the jar.</p>" } }
+      { "type": "accordion", "settings": { "title": "Full ingredient list" } },
+      { "type": "accordion", "settings": { "title": "How to use", "content": "<p>Warm 4–6 drops between your palms and massage into clean skin using upward strokes — thighs, tummy, arms, anywhere you want a firmer look. Best on slightly damp skin, morning or night. Sinks in fast.</p>" } },
+      { "type": "accordion", "settings": { "title": "Shipping & returns", "content": "<p>Free shipping over $50, ships in 1–2 business days. 90-day money-back promise — if you don't love it, we'll refund you and you keep the bottle.</p>" } }
     ] }
   ]
 }

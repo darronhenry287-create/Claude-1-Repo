@@ -1,25 +1,25 @@
 {
   "sections": {
-    "hero": { "type": "poster-hero", "settings": {} },
+    "hero": { "type": "poster-hero", "settings": { "eyebrow": "the daily firming ritual", "line1": "Firmer skin,", "line2": "by the morning." } },
     "seals": {
       "type": "seal-row",
       "blocks": {
-        "a": { "type": "seal", "settings": { "text": "100% Natural" } },
-        "b": { "type": "seal", "settings": { "text": "Gluten-Free" } },
-        "c": { "type": "seal", "settings": { "text": "Additive-Free" } },
-        "d": { "type": "seal", "settings": { "text": "BPA-Free" } },
-        "e": { "type": "seal", "settings": { "text": "Paraben-Free" } },
-        "f": { "type": "seal", "settings": { "text": "Cruelty-Free" } }
+        "a": { "type": "seal", "settings": { "text": "Vegan" } },
+        "b": { "type": "seal", "settings": { "text": "Cruelty-free" } },
+        "c": { "type": "seal", "settings": { "text": "Silicone-free" } },
+        "d": { "type": "seal", "settings": { "text": "Dermatologist-tested" } },
+        "e": { "type": "seal", "settings": { "text": "Non-comedogenic" } },
+        "f": { "type": "seal", "settings": { "text": "90-day promise" } }
       },
       "block_order": ["a", "b", "c", "d", "e", "f"]
     },
     "diagram": {
       "type": "ingredient-diagram",
       "blocks": {
-        "n1": { "type": "node", "settings": { "slot": 1, "art_index": 0, "name": "Beef Tallow", "pct": "50%", "text": "Grass-fed & bioidentical — nourishes deeply." } },
-        "n2": { "type": "node", "settings": { "slot": 2, "art_index": 1, "name": "Raw Honey", "pct": "25%", "text": "A humectant that locks moisture in." } },
-        "n3": { "type": "node", "settings": { "slot": 3, "art_index": 2, "name": "Beeswax", "pct": "15%", "text": "A breathable, protective seal." } },
-        "n4": { "type": "node", "settings": { "slot": 4, "art_index": 3, "name": "Olive Oil", "pct": "10%", "text": "Cold-pressed, vitamin-rich glow." } }
+        "n1": { "type": "node", "settings": { "slot": 1, "art_index": 0, "name": "Green Coffee", "pct": "caffeine", "text": "Energises and visibly firms the look of skin." } },
+        "n2": { "type": "node", "settings": { "slot": 2, "art_index": 1, "name": "Guarana", "pct": "+ tone", "text": "A natural caffeine boost to support microcirculation." } },
+        "n3": { "type": "node", "settings": { "slot": 3, "art_index": 2, "name": "Bitter Orange", "pct": "smooth", "text": "Helps refine and even the look of skin texture." } },
+        "n4": { "type": "node", "settings": { "slot": 4, "art_index": 3, "name": "Ivy Leaf", "pct": "de-puff", "text": "A classic botanical for a smoother, tighter look." } }
       },
       "block_order": ["n1", "n2", "n3", "n4"]
     },
@@ -28,34 +28,34 @@
     "journey": {
       "type": "journey",
       "blocks": {
-        "s1": { "type": "step", "settings": { "art_index": 0, "title": "Pastured", "text": "Grass-fed cattle on regenerative farms." } },
-        "s2": { "type": "step", "settings": { "art_index": 1, "title": "Gathered", "text": "Raw honey from small independent apiaries." } },
-        "s3": { "type": "step", "settings": { "art_index": 2, "title": "Whipped", "text": "Slow-rendered & whipped in small batches." } },
-        "s4": { "type": "step", "settings": { "art_index": 4, "title": "Jarred", "text": "Hand-filled and sent straight to your door." } }
+        "s1": { "type": "step", "settings": { "art_index": 0, "title": "Warm", "text": "Press 4–6 drops between your palms." } },
+        "s2": { "type": "step", "settings": { "art_index": 1, "title": "Massage", "text": "Sweep upward over thighs, tummy & arms." } },
+        "s3": { "type": "step", "settings": { "art_index": 2, "title": "Absorb", "text": "It sinks in fast — dress straight away." } },
+        "s4": { "type": "step", "settings": { "art_index": 4, "title": "Glow", "text": "Repeat daily for a firmer-looking finish." } }
       },
       "block_order": ["s1", "s2", "s3", "s4"]
     },
     "uses": {
       "type": "uses-grid",
       "blocks": {
-        "u1": { "type": "use", "settings": { "text": "Dry face" } },
-        "u2": { "type": "use", "settings": { "text": "Chapped lips" } },
-        "u3": { "type": "use", "settings": { "text": "Cracked hands" } },
-        "u4": { "type": "use", "settings": { "text": "Rough elbows" } },
-        "u5": { "type": "use", "settings": { "text": "Faded scars" } },
-        "u6": { "type": "use", "settings": { "text": "Eczema patches" } },
-        "u7": { "type": "use", "settings": { "text": "Baby-soft skin" } },
-        "u8": { "type": "use", "settings": { "text": "After shaving" } }
+        "u1": { "type": "use", "settings": { "text": "Thighs" } },
+        "u2": { "type": "use", "settings": { "text": "Tummy" } },
+        "u3": { "type": "use", "settings": { "text": "Upper arms" } },
+        "u4": { "type": "use", "settings": { "text": "Décolleté" } },
+        "u5": { "type": "use", "settings": { "text": "Post-shower" } },
+        "u6": { "type": "use", "settings": { "text": "After workout" } },
+        "u7": { "type": "use", "settings": { "text": "Bump-safe" } },
+        "u8": { "type": "use", "settings": { "text": "Everywhere" } }
       },
       "block_order": ["u1", "u2", "u3", "u4", "u5", "u6", "u7", "u8"]
     },
     "wall": {
       "type": "reviews-wall",
       "blocks": {
-        "r1": { "type": "review", "settings": { "quote": "My eczema calmed down in four days. Beat every prescription cream I've tried.", "name": "Rachel K." } },
-        "r2": { "type": "review", "settings": { "quote": "Skeptical about beef fat on my face — now it's the only thing I use.", "name": "Daniel M." } },
-        "r3": { "type": "review", "settings": { "quote": "Replaced my lip balm, hand cream and night moisturizer with one jar.", "name": "Sofia T." } },
-        "r4": { "type": "review", "settings": { "quote": "Winter wrecks my hands. Two weeks of this and the cracks are gone.", "name": "Jonas B." } }
+        "r1": { "type": "review", "settings": { "quote": "Eight weeks in and my thighs genuinely look smoother and firmer. And it smells like nothing.", "name": "Marina L." } },
+        "r2": { "type": "review", "settings": { "quote": "It actually absorbs — I get dressed straight away, no greasy sheets.", "name": "Priya S." } },
+        "r3": { "type": "review", "settings": { "quote": "Used it through my whole pregnancy. Skin stayed soft, stretch marks far less visible.", "name": "Hannah W." } },
+        "r4": { "type": "review", "settings": { "quote": "The one-minute ritual is the only self-care I keep up with.", "name": "Dani R." } }
       },
       "block_order": ["r1", "r2", "r3", "r4"]
     },
