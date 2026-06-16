@@ -8,7 +8,7 @@
       </div>
       <div class="specgrid">
         {%- for block in section.blocks -%}
-          <div class="specstat" {{ block.shopify_attributes }}><div class="n tnum">{{ block.settings.number }}{%- if block.settings.unit != blank -%}<span class="u">{{ block.settings.unit }}</span>{%- endif -%}</div><div class="l">{{ block.settings.label }}</div></div>
+          <div class="specstat" {{ block.shopify_attributes }}><div class="n tnum">{{ block.settings.number | escape }}{%- if block.settings.unit != blank -%}<span class="u">{{ block.settings.unit | escape }}</span>{%- endif -%}</div><div class="l">{{ block.settings.label }}</div></div>
         {%- endfor -%}
       </div>
     </div>
