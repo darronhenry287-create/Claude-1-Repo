@@ -1,5 +1,5 @@
 {%- liquid
-  assign img = 'app.webp' | asset_url
+  assign img = 'app-phone.webp' | asset_url
   if section.settings.image
     assign img = section.settings.image | image_url: width: 900
   endif
@@ -7,7 +7,7 @@
 <section class="section">
   <div class="wrap wrap-wide">
     <div class="app">
-      <div class="app__phone"><div class="app__glow"></div><img src="{{ img }}" alt="WARCAT app dashboard" width="900" height="1120"></div>
+      <div class="app__phone"><div class="app__glow"></div><img src="{{ img }}" alt="WARCAT app dashboard" width="886" height="1100"></div>
       <div class="app__copy">
         <span class="eyebrow">{{ section.settings.eyebrow }}</span>
         <h2 class="h-lg">{{ section.settings.heading }}</h2>

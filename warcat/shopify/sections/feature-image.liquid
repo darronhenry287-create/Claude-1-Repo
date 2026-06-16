@@ -1,0 +1,48 @@
+{%- liquid
+  assign w = 1500
+  if section.settings.image != blank
+    assign src = section.settings.image | image_url: width: 1500
+    assign h = 1500 | divided_by: section.settings.image.aspect_ratio | round
+  else
+    assign src = section.settings.asset | default: 'usp-hero.webp' | asset_url
+    case section.settings.ratio
+      when '4:3'
+        assign h = 1125
+      when '4:5'
+        assign h = 1875
+      when '1:1'
+        assign h = 1500
+      else
+        assign h = 1000
+    endcase
+  endif
+-%}
+<section class="section featband{% if section.settings.bg == 'soft' %} bg-soft{% elsif section.settings.bg == 'dark' %} bg-dark{% endif %}{% if section.settings.tight %} section--tight{% endif %}">
+  <div class="wrap wrap-wide">
+    {%- if section.settings.heading != blank -%}
+      <div class="sec-head">
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow{% if section.settings.bg == 'dark' %} eyebrow--light{% endif %}">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="h-lg">{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+    <div class="featimg{% if section.settings.full %} featimg--full{% endif %}"><img src="{{ src }}" alt="{{ section.settings.alt | escape }}" width="{{ w }}" height="{{ h }}" loading="lazy"></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Feature image",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image (overrides built-in)" },
+    { "type": "text", "id": "asset", "label": "Built-in asset filename", "default": "usp-hero.webp", "info": "usp-hero.webp · callout.webp · app-feature.webp" },
+    { "type": "select", "id": "ratio", "label": "Aspect ratio (for built-in asset)", "options": [ { "value": "3:2", "label": "3:2" }, { "value": "4:3", "label": "4:3" }, { "value": "4:5", "label": "4:5" }, { "value": "1:1", "label": "1:1" } ], "default": "3:2" },
+    { "type": "text", "id": "alt", "label": "Alt text", "default": "WARCAT feature" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow (optional)" },
+    { "type": "text", "id": "heading", "label": "Heading (optional)" },
+    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "white", "label": "White" }, { "value": "soft", "label": "Soft grey" }, { "value": "dark", "label": "Dark" } ], "default": "white" },
+    { "type": "checkbox", "id": "tight", "label": "Tighter spacing", "default": false },
+    { "type": "checkbox", "id": "full", "label": "Full width image", "default": false }
+  ],
+  "presets": [ { "name": "Feature image" } ]
+}
+{% endschema %}

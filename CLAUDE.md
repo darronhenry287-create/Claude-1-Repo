@@ -53,6 +53,15 @@ If the user says "you choose" — choose, but state the choice in one line so th
 - When a gallery frame is designed for illustrations (heavy kraft border, offset shadow, image at 76%), give real photos a separate variant (`.has-photo` modifier: `width:100%`, `height:100%`, `object-fit:cover`, soft drop shadow, no kraft border). Don't make photos sit inside an illustration frame.
 - Don't put decorative overlays (seal stamps, badges) on top of real product photos — they look great on illustrations, bad on photography. Leave them in a separate trust-row beneath the buy box.
 - Thumbnail click should swap the main image's `src` in place — never `innerHTML = <img ...>` (it wipes overlay siblings like the seal badge).
+- **The global image reset MUST be `img,svg,video{max-width:100%;height:auto}`.** Omitting `height:auto` while constraining only the width of an `<img>` that carries `width`/`height` HTML attributes makes the browser keep the literal attribute height → a stretched/squished image (the "horrible stretched app phone" bug). Images that fill a fixed frame must set `height:100%;object-fit:cover` explicitly (that overrides the reset).
+
+### Feature images & callouts — brand standard (do this on every build)
+The merchant wants the **gummies-style** treatment: premium, baked-in marketing imagery, not just bare product shots. On every brand, generate and place:
+- **USP feature images** — product on one side; on the other a small brand-colored pill badge, a bold headline, 3–4 benefit rows each with a brand-color check icon, and a star rating + review count (e.g. WARCAT `usp-hero.webp`, `app-feature.webp`).
+- **Annotated callout diagrams** — the product centered with thin brand-color leader lines + dots pointing to 4 labelled parts/specs, Apple-keynote style (e.g. WARCAT `callout.webp`).
+- Generate with `nano_banana_pro` (best text rendering) at 2k; **put the exact text and brand hex in the prompt**, and **always open and visually verify the rendered text** before using — regenerate if a word is garbled.
+- Frame them simply (`.featimg`: rounded card, hairline border, soft shadow, `max-width ~1060px`, `img{width:100%;height:auto}`) inside a normal alternating-background section. Keep baked text short/high-contrast — it doesn't reflow on mobile.
+- In Shopify, expose via a reusable **`feature-image`** section (image_picker override + built-in asset fallback + ratio select) so it's swappable.
 
 ### Positioning & layout
 - Don't put `position: fixed` pseudo-elements (`body::before { position: fixed; inset: 0 }`) for paper/grain overlays. A transformed ancestor in the Shopify editor (and on real storefronts using certain apps) defeats `position: fixed` — fixed elements then fall back into normal flow and add phantom document height (the "huge empty space below the footer" symptom). Bake textures into `body { background-image: url(...) }` instead — backgrounds can never affect layout.

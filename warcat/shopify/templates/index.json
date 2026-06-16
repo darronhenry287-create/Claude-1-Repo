@@ -45,15 +45,13 @@
       },
       "block_order": ["f1", "f2", "f3", "f4", "f5", "f6"]
     },
+    "callout": {
+      "type": "feature-image",
+      "settings": { "asset": "callout.webp", "ratio": "4:3", "alt": "WARCAT anatomy — low-noise motor under 40 dB, 90L XL sifting globe, carbon-sealed odor drawer, weight & health sensors", "eyebrow": "Built to the last detail", "heading": "Every part, doing a quiet job.", "bg": "white" }
+    },
     "app": {
-      "type": "app-showcase",
-      "blocks": {
-        "a1": { "type": "item", "settings": { "icon": "arrow", "title": "Clean on demand", "text": "Tap once to run a cycle, or set a daily auto-clean schedule." } },
-        "a2": { "type": "item", "settings": { "icon": "check", "title": "Per-cat tracking", "text": "Weight and visit charts for each cat, with smart anomaly alerts." } },
-        "a3": { "type": "item", "settings": { "icon": "shield", "title": "Drawer-full alerts", "text": "A gentle nudge when it's time to empty — never an overflow." } },
-        "a4": { "type": "item", "settings": { "icon": "user", "title": "Quiet hours", "text": "Pause cleaning overnight so the cycle never disturbs your sleep." } }
-      },
-      "block_order": ["a1", "a2", "a3", "a4"]
+      "type": "feature-image",
+      "settings": { "asset": "app-feature.webp", "ratio": "3:2", "alt": "The WARCAT app — clean on demand or on a schedule, per-cat weight & health tracking, drawer-full & litter-low alerts, quiet hours while you sleep", "bg": "soft" }
     },
     "spec": {
       "type": "spec-band",
@@ -124,5 +122,5 @@
     },
     "newsletter": { "type": "newsletter" }
   },
-  "order": ["hero", "press", "value", "split", "steps", "features", "app", "spec", "compare", "safety", "reviews", "offer", "guarantee", "faq", "newsletter"]
+  "order": ["hero", "press", "value", "split", "steps", "features", "callout", "app", "spec", "compare", "safety", "reviews", "offer", "guarantee", "faq", "newsletter"]
 }
