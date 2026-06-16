@@ -1,0 +1,8 @@
+{%- comment -%} Shell filled by base.js when a [data-quick-view] trigger is clicked. {%- endcomment -%}
+<div class="modal apex-qv-modal" id="quick-view-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Quick view">
+  <div class="modal__bg" data-close="quick-view-modal"></div>
+  <div class="modal__box apex-qv-modal__box">
+    <button class="icon-btn apex-qv-modal__close" data-close="quick-view-modal" aria-label="{{ 'accessibility.close' | t | default: 'Close' }}">{% render 'icon', icon: 'close' %}</button>
+    <div data-quick-view-body class="apex-qv-modal__body"><p class="muted" style="padding:3rem;text-align:center">Loading…</p></div>
+  </div>
+</div>

@@ -1,0 +1,209 @@
+{%- liquid
+  assign s = section.settings
+  comment
+    Shopify Search & Discovery recommendations. The Product Recommendations API
+    populates `recommendations` when the URL carries the right params; the theme
+    requests it via the recommendations route below so it works without JS too.
+  endcomment
+-%}
+<section class="apex-related color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px;--cols:{{ s.columns_desktop }};--cols-m:{{ s.columns_mobile }}"
+  id="related-{{ section.id }}"
+  data-related
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ s.products_to_show }}&intent={{ s.intent }}">
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    <div class="page-width">
+      <header class="section-head{% if s.heading_alignment == 'center' %} section-head--center{% endif %} reveal">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+      </header>
+
+      {%- if s.layout == 'slider' -%}
+        <div class="apex-related__slider reveal" data-slider>
+          <ul class="slider apex-related__track" role="list" data-slider-track>
+            {%- for rec in recommendations.products limit: s.products_to_show -%}
+              <li class="apex-related__item">{% render 'product-card', product: rec %}</li>
+            {%- endfor -%}
+          </ul>
+          {%- if recommendations.products_count > s.columns_desktop -%}
+            <div class="slider-nav apex-related__nav">
+              <button data-slider-prev aria-label="{{ 'general.slider.previous' | t | default: 'Previous' }}">{% render 'icon', icon: 'arrow-left' %}</button>
+              <button data-slider-next aria-label="{{ 'general.slider.next' | t | default: 'Next' }}">{% render 'icon', icon: 'arrow-right' %}</button>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        <div class="apex-related__grid grid reveal">
+          {%- for rec in recommendations.products limit: s.products_to_show -%}
+            {% render 'product-card', product: rec %}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</section>
+{% stylesheet %}
+.apex-related__slider { position: relative; }
+.apex-related__track { gap: var(--gutter); }
+.apex-related__item { width: calc((100% - (var(--cols, 4) - 1) * var(--gutter)) / var(--cols, 4)); min-width: 220px; }
+.apex-related__nav { position: absolute; top: 0; right: 0; transform: translateY(-150%); }
+.apex-related__grid { grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); }
+@media (max-width: 990px) {
+  .apex-related__grid { grid-template-columns: repeat(var(--cols-m, 2), minmax(0, 1fr)); }
+  .apex-related__item { width: calc((100% - var(--gutter)) / var(--cols-m, 2)); }
+  .apex-related__nav { display: none; }
+}
+{% endstylesheet %}
+{% javascript %}
+(() => {
+  // Lazy-load recommendations through the Product Recommendations API so the
+  // section also renders when reached without the route params (e.g. AJAX nav).
+  document.querySelectorAll('[data-related]').forEach((section) => {
+    if (section.querySelector('.product-card')) return; // already server-rendered
+    const url = section.dataset.url;
+    if (!url) return;
+    fetch(url)
+      .then((r) => r.text())
+      .then((text) => {
+        const html = new DOMParser().parseFromString(text, 'text/html');
+        const fresh = html.querySelector('[data-related] .page-width');
+        if (fresh) {
+          section.innerHTML = '';
+          section.appendChild(fresh);
+          document.dispatchEvent(new CustomEvent('shopify:section:load', { detail: { sectionId: section.id } }));
+        }
+      })
+      .catch(() => {});
+  });
+})();
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Related products",
+  "tag": "section",
+  "class": "shopify-section--related-products",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Uses Shopify's product recommendations (Search & Discovery). Choose the relationship below."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "You may also like"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "intent",
+      "label": "Recommendation type",
+      "default": "related",
+      "options": [
+        {
+          "value": "related",
+          "label": "Related"
+        },
+        {
+          "value": "complementary",
+          "label": "Complementary"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Maximum products",
+      "default": 8
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "slider",
+      "options": [
+        {
+          "value": "slider",
+          "label": "Carousel"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 2,
+      "step": 1,
+      "label": "Columns on mobile",
+      "default": 2
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "Related products"
+    }
+  ]
+}
+{% endschema %}

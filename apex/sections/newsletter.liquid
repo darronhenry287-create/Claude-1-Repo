@@ -1,0 +1,155 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-newsletter color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px">
+  <div class="page-width">
+    <div class="apex-newsletter__inner reveal">
+      <div class="apex-newsletter__text stack">
+        {%- if s.subheading != blank -%}<p class="eyebrow eyebrow--pill">{{ s.subheading }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+        {%- if s.description != blank -%}<p class="subtitle">{{ s.description }}</p>{%- endif -%}
+      </div>
+
+      <div class="apex-newsletter__form-wrap">
+        {%- form 'customer', id: 'NewsletterSection-{{ section.id }}' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          {%- if form.posted_successfully? -%}
+            <p class="apex-newsletter__success" role="status">
+              {% render 'icon', icon: 'check' %}
+              {{ s.success_message | default: 'Thanks for subscribing!' }}
+            </p>
+          {%- else -%}
+            {%- if form.errors -%}
+              <p class="apex-newsletter__error" role="alert">{{ form.errors | default_errors }}</p>
+            {%- endif -%}
+            <div class="apex-newsletter__fields">
+              <div class="input-group">
+                <label for="NewsletterEmail-{{ section.id }}" class="visually-hidden">{{ 'newsletter.label' | t | default: 'Email address' }}</label>
+                <input
+                  class="input"
+                  type="email"
+                  id="NewsletterEmail-{{ section.id }}"
+                  name="contact[email]"
+                  value="{{ form.email }}"
+                  required
+                  autocomplete="email"
+                  placeholder="{{ s.placeholder | default: 'Enter your email' }}"
+                  aria-required="true">
+                <button class="btn btn--accent" type="submit" aria-label="{{ s.button_label | default: 'Subscribe' }}">
+                  {%- if s.button_label != blank -%}
+                    {{ s.button_label }}
+                  {%- else -%}
+                    {% render 'icon', icon: 'arrow-right' %}
+                  {%- endif -%}
+                </button>
+              </div>
+              {%- if s.disclaimer != blank -%}
+                <p class="apex-newsletter__disclaimer muted">{{ s.disclaimer }}</p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-newsletter__inner { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem,1.4rem + 3vw,4rem); align-items: center; }
+@media (max-width: 800px) { .apex-newsletter__inner { grid-template-columns: 1fr; text-align: center; } }
+.apex-newsletter__text { gap: .8rem; }
+.apex-newsletter__fields { display: grid; gap: .8rem; }
+.apex-newsletter .input-group { max-width: 440px; }
+@media (max-width: 800px) { .apex-newsletter .input-group { margin-inline: auto; } }
+.apex-newsletter__success { display: flex; align-items: center; gap: .6rem; font-weight: 600; color: var(--success); }
+.apex-newsletter__success svg { width: 1.2rem; height: 1.2rem; flex: none; }
+.apex-newsletter__error { color: var(--sale); font-size: var(--text-sm); margin-bottom: .5rem; }
+.apex-newsletter__disclaimer { font-size: var(--text-xs); margin-top: .4rem; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Stay in the loop"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get 10% off your first order"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Join thousands of subscribers. New drops, exclusive discounts, and zero spam."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input placeholder",
+      "default": "Enter your email address"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks for subscribing! Check your inbox."
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer text",
+      "default": "By subscribing you agree to our Privacy Policy. Unsubscribe at any time."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-3"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter",
+      "settings": {
+        "subheading": "Stay in the loop",
+        "heading": "Get 10% off your first order",
+        "description": "Join thousands of subscribers. New drops, exclusive discounts, and zero spam.",
+        "button_label": "Subscribe"
+      }
+    }
+  ]
+}
+{% endschema %}

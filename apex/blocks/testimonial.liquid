@@ -1,0 +1,111 @@
+{%- liquid
+  assign star_value = block.settings.stars
+-%}
+<blockquote class="apex-tb-testimonial" {{ block.shopify_attributes }}>
+  {%- if star_value > 0 -%}
+    <div class="rating" role="img" aria-label="{{ star_value }} out of 5 stars">
+      <span class="rating__stars" aria-hidden="true">
+        {%- for i in (1..5) -%}
+          {%- if i <= star_value -%}★{%- else -%}☆{%- endif -%}
+        {%- endfor -%}
+      </span>
+    </div>
+  {%- endif -%}
+  {%- if block.settings.quote != blank -%}
+    <p class="apex-tb-testimonial__quote">{{ block.settings.quote | escape }}</p>
+  {%- endif -%}
+  <footer class="apex-tb-testimonial__footer">
+    {%- if block.settings.avatar != blank -%}
+      {%- assign avatar_alt = block.settings.author -%}
+      <div class="apex-tb-testimonial__avatar media media--round">
+        {{ block.settings.avatar | image_url: width: 160 | image_tag: loading: 'lazy', width: 80, height: 80, alt: avatar_alt }}
+      </div>
+    {%- endif -%}
+    <div>
+      {%- if block.settings.author != blank -%}
+        <cite class="apex-tb-testimonial__author">{{ block.settings.author | escape }}</cite>
+      {%- endif -%}
+      {%- if block.settings.role != blank -%}
+        <p class="apex-tb-testimonial__role muted">{{ block.settings.role | escape }}</p>
+      {%- endif -%}
+    </div>
+  </footer>
+</blockquote>
+{% stylesheet %}
+.apex-tb-testimonial {
+  display: grid;
+  gap: 1rem;
+  padding: 1.6rem;
+  background: var(--card);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-card);
+}
+.apex-tb-testimonial__quote {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  font-style: italic;
+}
+.apex-tb-testimonial__footer {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  margin-top: .4rem;
+}
+.apex-tb-testimonial__avatar {
+  width: 2.8rem;
+  height: 2.8rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.apex-tb-testimonial__author {
+  font-style: normal;
+  font-weight: 700;
+  font-size: .95rem;
+}
+.apex-tb-testimonial__role { font-size: var(--text-sm); }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Testimonial",
+  "settings": [
+    {
+      "type": "range",
+      "id": "stars",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "label": "Star rating",
+      "default": 5
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "This product completely changed my daily routine. I can't imagine going back to what I used before."
+    },
+    {
+      "type": "image_picker",
+      "id": "avatar",
+      "label": "Avatar image"
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "Author name",
+      "default": "Jane Smith"
+    },
+    {
+      "type": "text",
+      "id": "role",
+      "label": "Role / location",
+      "default": "Verified buyer"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonial"
+    }
+  ]
+}
+{% endschema %}

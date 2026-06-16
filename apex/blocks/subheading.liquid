@@ -1,0 +1,59 @@
+{%- liquid
+  assign muted_class = ''
+  if block.settings.muted
+    assign muted_class = ' muted'
+  endif
+-%}
+<p class="{{ block.settings.size }}{{ muted_class }} balance" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</p>
+{% schema %}
+{
+  "name": "Subheading",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Subheading text",
+      "default": "A compelling sub-headline that supports the main message."
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "label": "Size",
+      "default": "h3",
+      "options": [
+        {
+          "value": "h2",
+          "label": "Extra large"
+        },
+        {
+          "value": "h3",
+          "label": "Large"
+        },
+        {
+          "value": "h4",
+          "label": "Medium"
+        },
+        {
+          "value": "h5",
+          "label": "Small"
+        },
+        {
+          "value": "subtitle",
+          "label": "Subtitle"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "muted",
+      "label": "Muted colour",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Subheading"
+    }
+  ]
+}
+{% endschema %}

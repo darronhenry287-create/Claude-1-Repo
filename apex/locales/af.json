@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "Sluit",
+    "refresh_page": "Die keuse van 'n opsie veroorsaak 'n volledige bladsy-herlaai.",
+    "skip_to_text": "Spring na inhoud"
+  },
+  "general": {
+    "continue_shopping": "Gaan voort met inkopies",
+    "video": {
+      "play": "Speel video",
+      "no_video": "Geen video-URL gestel nie."
+    },
+    "accessibility": {
+      "close": "Sluit"
+    },
+    "page": "Bladsy {{ page }}",
+    "tags": "Etikette",
+    "search_placeholder": "Soek produkte…",
+    "pagination": {
+      "label": "Bladsynommer",
+      "load_more": "Laai meer",
+      "next": "Volgende",
+      "previous": "Vorige"
+    },
+    "search": {
+      "search": "Soek",
+      "placeholder": "Soek produkte…",
+      "prompt": "Waarna soek jy?",
+      "for": "Soek",
+      "suggestions": "Voorstelle",
+      "products": "Produkte",
+      "pages": "Bladsye",
+      "articles": "Artikels",
+      "result": "resultaat",
+      "results": "resultate",
+      "view_all": "Sien alle {{ count }} resultate",
+      "browse_all": "Blaai deur alle produkte",
+      "no_results": "Geen resultate vir “{{ terms }}” nie",
+      "no_results_for": "Geen resultate gevind vir",
+      "no_results_detail": "Probeer 'n ander soektog of blaai deur ons katalogus."
+    },
+    "slider": {
+      "next": "Volgende skyfie",
+      "previous": "Vorige skyfie"
+    }
+  },
+  "newsletter": {
+    "label": "E-pos",
+    "placeholder": "E-posadres",
+    "success": "Dankie vir jou inskrywing!"
+  },
+  "payment": {
+    "methods": "Aanvaarde betaalmetodes"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Voeg by mandjie",
+      "buy": "Koop",
+      "choose_options": "Kies opsies",
+      "from": "Vanaf",
+      "in_stock": "In voorraad",
+      "low_stock": "Slegs {{ quantity }} oor",
+      "sold_out": "Uitverkoop",
+      "unavailable": "Nie beskikbaar nie",
+      "quantity": "Hoeveelheid",
+      "increase": "Verhoog hoeveelheid",
+      "decrease": "Verminder hoeveelheid",
+      "save": "Bespaar {{ savings }}",
+      "view_full_details": "Sien volledige besonderhede",
+      "media": {
+        "load_image": "Laai prent {{ index }}"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Kieslys"
+    },
+    "cart": {
+      "title": "Jou mandjie",
+      "empty": "Jou mandjie is leeg",
+      "empty_detail": "Kom ons vind iets vir jou.",
+      "item": "item",
+      "items": "items",
+      "quantity": "Hoeveelheid",
+      "increase": "Verhoog hoeveelheid",
+      "decrease": "Verminder hoeveelheid",
+      "remove": "Verwyder",
+      "note": "Voeg bestellingnota by",
+      "note_placeholder": "Spesiale instruksies vir jou bestelling",
+      "subtotal": "Subtotaal",
+      "summary": "Opsomming",
+      "taxes": "Belasting en aflewering word by betaling bereken.",
+      "checkout": "Betaal",
+      "each": "elk",
+      "original": "Oorspronklik",
+      "free_ship_progress": "Jy is {{ amount }} weg van gratis aflewering",
+      "free_ship_progress_html": "Jy is <strong>{{ amount }}</strong> weg van gratis aflewering",
+      "free_ship_unlocked": "Jy het gratis aflewering ontsluit!"
+    },
+    "collection": {
+      "count": "{{ count }} produkte",
+      "products": "produkte",
+      "empty": "Geen produkte gevind nie",
+      "empty_detail": "Probeer om sommige filters te verwyder.",
+      "filter": "Filter",
+      "apply": "Pas toe",
+      "clear_filters": "Maak alles skoon",
+      "sort_label": "Sorteer volgens",
+      "price_from": "Vanaf",
+      "price_to": "Tot"
+    },
+    "collection_list": {
+      "empty": "Geen versamelings om te wys nie",
+      "products": "produkte"
+    },
+    "featured_collection": {
+      "empty": "Geen produkte om te wys nie"
+    }
+  },
+  "customer": {
+    "log_out": "Teken uit",
+    "account": {
+      "title": "Rekening",
+      "details": "Rekeningbesonderhede",
+      "return": "Keer terug na rekening",
+      "view_addresses": "Sien adresse"
+    },
+    "login": {
+      "title": "Teken aan",
+      "email": "E-pos",
+      "password": "Wagwoord",
+      "sign_in": "Teken aan",
+      "forgot_password": "Het jy jou wagwoord vergeet?",
+      "no_account": "Het jy nie 'n rekening nie?",
+      "create_account": "Skep rekening",
+      "cancel": "Kanselleer"
+    },
+    "register": {
+      "title": "Skep rekening",
+      "first_name": "Voornaam",
+      "last_name": "Van",
+      "email": "E-pos",
+      "password": "Wagwoord",
+      "password_placeholder": "Ten minste 5 karakters",
+      "submit": "Skep rekening",
+      "login": "Het jy reeds 'n rekening? Teken aan"
+    },
+    "recover_password": {
+      "title": "Herstel jou wagwoord",
+      "subtext": "Ons sal jou 'n e-pos stuur om dit te herstel.",
+      "submit": "Stuur herstellings-e-pos",
+      "success": "Ons het jou 'n e-pos gestuur met 'n skakel om jou wagwoord te herstel."
+    },
+    "reset_password": {
+      "title": "Herstel rekeningwagwoord",
+      "subtext": "Voer 'n nuwe wagwoord in.",
+      "password": "Wagwoord",
+      "password_confirm": "Bevestig wagwoord",
+      "password_placeholder": "Nuwe wagwoord",
+      "submit": "Herstel wagwoord"
+    },
+    "activate_account": {
+      "title": "Aktiveer rekening",
+      "subtext": "Skep jou wagwoord om jou rekening te aktiveer.",
+      "password": "Wagwoord",
+      "password_placeholder": "Wagwoord",
+      "password_confirm": "Bevestig wagwoord",
+      "password_confirm_placeholder": "Bevestig wagwoord",
+      "submit": "Aktiveer rekening",
+      "cancel": "Weier uitnodiging"
+    },
+    "orders": {
+      "title": "Bestelling geskiedenis",
+      "none": "Jy het nog geen bestellings geplaas nie.",
+      "order_number": "Bestelling",
+      "date": "Datum",
+      "payment_status": "Betaling",
+      "fulfillment_status": "Aflewering",
+      "total": "Totaal"
+    },
+    "order": {
+      "title": "Bestelling {{ name }}",
+      "date_html": "Geplaas op {{ date }}",
+      "fulfilled_at_html": "Afgelewer {{ date }}",
+      "summary": "Bestellingopsomming",
+      "items": "Items",
+      "quantity": "Hoeveelh.",
+      "subtotal": "Subtotaal",
+      "total": "Totaal",
+      "shipping_address": "Aflewer adres",
+      "billing_address": "Faktureringsadres"
+    },
+    "addresses": {
+      "title": "Adresse",
+      "first_name": "Voornaam",
+      "last_name": "Van",
+      "company": "Maatskappy",
+      "address1": "Adres",
+      "address2": "Woonstel, suite, ens.",
+      "city": "Stad",
+      "zip": "Poskode",
+      "country": "Land / Streek",
+      "province": "Provinsie / Staat",
+      "phone": "Telefoon",
+      "default": "Verstek",
+      "default_address": "Verstekadres",
+      "add_new": "Voeg nuwe adres by",
+      "add": "Voeg adres by",
+      "update": "Dateer adres op",
+      "edit": "Wysig",
+      "delete": "Skrap",
+      "delete_confirm": "Is jy seker jy wil hierdie adres skrap?",
+      "set_default": "Stel as verstek",
+      "cancel": "Kanselleer",
+      "none": "Jy het geen gestoorde adresse nie."
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "deur {{ author }}"
+    },
+    "comments": {
+      "title": "Kommentaar",
+      "name": "Naam",
+      "email": "E-pos",
+      "message": "Kommentaar",
+      "post": "Plaas kommentaar",
+      "success": "Jou kommentaar is suksesvol geplaas!",
+      "comments_with_count": "{{ count }} kommentaar"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Naam",
+      "email": "E-pos",
+      "phone": "Telefoon",
+      "phone_placeholder": "Opsioneel",
+      "message": "Boodskap",
+      "message_placeholder": "Hoe kan ons help?"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Hier is jou {{ value }} geskenkaart!",
+      "remaining_html": "{{ balance }} oor",
+      "expiry_date": "Verval {{ expiry }}",
+      "copy_code": "Kopieer kode",
+      "shop_link": "Begin inkopies doen",
+      "print_link": "Druk"
+    }
+  }
+}

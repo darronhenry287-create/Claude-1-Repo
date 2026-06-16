@@ -1,0 +1,246 @@
+{%- liquid
+  assign s = section.settings
+  assign col = s.collection
+  assign cols = s.columns_desktop
+  assign cols_m = s.columns_mobile
+  assign limit = s.products_to_show
+  assign products = col.products
+  assign count = col.all_products_count | default: 0
+-%}
+<section class="apex-featured-collection color-{{ s.color_scheme }} apex-featured-collection--{{ s.layout }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px;--cols:{{ cols }};--cols-m:{{ cols_m }}"
+  id="featured-collection-{{ section.id }}"
+  {% if s.layout == 'slider' %}data-slider{% endif %}>
+  <div class="page-width">
+    <div class="apex-featured-collection__head section-head{% if s.heading_alignment == 'center' %} section-head--center{% endif %} reveal">
+      <div class="apex-featured-collection__head-text">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}
+          <h2 class="balance">{{ s.heading }}{%- if s.show_count and count > 0 -%} <span class="apex-featured-collection__count muted">({{ count }})</span>{%- endif -%}</h2>
+        {%- endif -%}
+        {%- if s.subheading != blank -%}<p class="subtitle">{{ s.subheading }}</p>{%- endif -%}
+      </div>
+
+      <div class="apex-featured-collection__controls cluster">
+        {%- if s.show_view_all and col != blank and col.url != blank -%}
+          <a class="btn btn--secondary apex-featured-collection__view-all" href="{{ col.url }}">{{ s.view_all_label | default: 'View all' }} {% render 'icon', icon: 'arrow-right' %}</a>
+        {%- endif -%}
+        {%- if s.layout == 'slider' -%}
+          <div class="slider-nav" aria-hidden="true">
+            <button type="button" data-slider-prev aria-label="{{ 'general.slider.previous' | t | default: 'Previous' }}">{% render 'icon', icon: 'arrow-left' %}</button>
+            <button type="button" data-slider-next aria-label="{{ 'general.slider.next' | t | default: 'Next' }}">{% render 'icon', icon: 'arrow-right' %}</button>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if col != blank and products.size > 0 -%}
+      {%- if s.layout == 'slider' -%}
+        <div class="apex-featured-collection__slider slider reveal">
+          {%- for product in products limit: limit -%}
+            <div class="apex-featured-collection__slide">{% render 'product-card', product: product %}</div>
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <div class="apex-featured-collection__grid grid reveal">
+          {%- for product in products limit: limit -%}
+            {% render 'product-card', product: product %}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if s.show_view_all_mobile and col.url != blank -%}
+        <div class="apex-featured-collection__foot center">
+          <a class="btn btn--secondary btn--block" href="{{ col.url }}">{{ s.view_all_label | default: 'View all' }}</a>
+        </div>
+      {%- endif -%}
+    {%- elsif col == blank -%}
+      {%- comment -%} Editor placeholder when no collection is picked yet. {%- endcomment -%}
+      <div class="apex-featured-collection__grid grid reveal">
+        {%- for i in (1..limit) -%}
+          {% render 'product-card' %}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="apex-featured-collection__empty center muted reveal">{{ 'sections.featured_collection.empty' | t | default: 'This collection has no products yet.' }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+.apex-featured-collection__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; max-width: none; }
+.apex-featured-collection__head.section-head--center { flex-direction: column; align-items: center; text-align: center; }
+.apex-featured-collection__controls { flex: none; }
+.apex-featured-collection__grid { grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); }
+.apex-featured-collection__slide { width: calc((100% - (var(--cols, 4) - 1) * var(--gutter)) / var(--cols, 4)); min-width: 240px; }
+.apex-featured-collection__foot { margin-top: 1.6rem; display: none; }
+.apex-featured-collection__count { font-weight: 500; font-size: .7em; }
+@media (max-width: 990px) {
+  .apex-featured-collection__grid { grid-template-columns: repeat(var(--cols-m, 2), minmax(0, 1fr)); }
+  .apex-featured-collection__slide { width: calc((100% - var(--gutter)) / 2); }
+  .apex-featured-collection__head { flex-direction: column; align-items: flex-start; }
+  .apex-featured-collection__head.section-head--center { align-items: center; }
+}
+@media (max-width: 600px) {
+  .apex-featured-collection__slide { width: 78%; }
+  .apex-featured-collection__view-all { display: none; }
+  .apex-featured-collection--grid .apex-featured-collection__foot { display: block; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "tag": "section",
+  "class": "shopify-section--featured-collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Best sellers"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_count",
+      "label": "Show product count",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "grid",
+      "options": [
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "slider",
+          "label": "Carousel"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 16,
+      "step": 1,
+      "label": "Products to show",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 2,
+      "step": 1,
+      "label": "Columns on mobile",
+      "default": 2
+    },
+    {
+      "type": "header",
+      "content": "View all"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show \"view all\" button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all_mobile",
+      "label": "Show \"view all\" below grid on mobile",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "\"View all\" label",
+      "default": "View all"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection"
+    }
+  ]
+}
+{% endschema %}

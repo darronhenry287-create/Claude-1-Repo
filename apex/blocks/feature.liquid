@@ -1,0 +1,141 @@
+{%- liquid
+  assign has_image = false
+  if block.settings.image != blank
+    assign has_image = true
+  endif
+  assign has_icon = false
+  if block.settings.icon != blank and has_image == false
+    assign has_icon = true
+  endif
+  assign ratio_class = 'media--' | append: block.settings.ratio
+-%}
+<div class="apex-tb-feature card" {{ block.shopify_attributes }}>
+  {%- if has_image -%}
+    <div class="apex-tb-feature__media media {{ ratio_class }}">
+      {%- assign alt = block.settings.image.alt -%}
+      {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400,600,800', sizes: '(max-width:749px) 100vw, 400px', alt: alt }}
+    </div>
+  {%- elsif has_icon -%}
+    <div class="apex-tb-feature__icon">
+      {%- render 'icon', icon: block.settings.icon -%}
+    </div>
+  {%- endif -%}
+  <div class="apex-tb-feature__body stack">
+    {%- if block.settings.title != blank -%}
+      <p class="h4" style="font-family:var(--font-heading);font-weight:var(--font-heading-weight)">{{ block.settings.title | escape }}</p>
+    {%- endif -%}
+    {%- if block.settings.text != blank -%}
+      <p class="muted">{{ block.settings.text | escape }}</p>
+    {%- endif -%}
+  </div>
+</div>
+{% stylesheet %}
+.apex-tb-feature { overflow: hidden; }
+.apex-tb-feature__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  margin: 1.4rem 1.4rem 0;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  border-radius: var(--radius);
+}
+.apex-tb-feature__icon svg { width: 55%; height: 55%; }
+.apex-tb-feature__body { padding: 1.4rem; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Feature card",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Takes priority over icon when set."
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Image ratio",
+      "default": "landscape",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "wide",
+          "label": "Wide (16:9)"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Icon (if no image)",
+      "default": "star",
+      "options": [
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "return",
+          "label": "Return"
+        },
+        {
+          "value": "bag",
+          "label": "Bag"
+        },
+        {
+          "value": "user",
+          "label": "User"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Feature title"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Supporting text",
+      "default": "Briefly explain the value this feature delivers to the customer."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature card"
+    }
+  ]
+}
+{% endschema %}

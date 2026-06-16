@@ -1,0 +1,24 @@
+<div class="apex-tb-product" {{ block.shopify_attributes }}>
+  {%- if block.settings.product != blank -%}
+    {%- render 'product-card', product: block.settings.product -%}
+  {%- else -%}
+    {%- render 'product-card', product: nil -%}
+  {%- endif -%}
+</div>
+{% schema %}
+{
+  "name": "Product card",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product card"
+    }
+  ]
+}
+{% endschema %}

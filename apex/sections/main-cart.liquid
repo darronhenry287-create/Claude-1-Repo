@@ -1,0 +1,293 @@
+{%- liquid
+  assign s = section.settings
+  assign threshold = settings.cart_free_shipping_threshold | times: 100
+  assign remaining = threshold | minus: cart.total_price
+
+  comment
+    Optional upsell source: a merchant-chosen collection, otherwise Shopify
+    product recommendations when they have resolved for this request. The grid
+    is rendered only when products actually exist, so both paths degrade safely.
+  endcomment
+  assign upsell_products = null
+  if s.upsell_collection != blank
+    assign upsell_products = s.upsell_collection.products
+  elsif recommendations.performed and recommendations.products_count > 0
+    assign upsell_products = recommendations.products
+  endif
+  assign upsell_size = upsell_products.size | default: 0
+-%}
+<section class="apex-cart color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="cart-{{ section.id }}">
+  <div class="page-width">
+    <header class="section-head reveal">
+      <h1 class="h2">{{ 'sections.cart.title' | t | default: 'Your cart' }}</h1>
+      {%- if cart.item_count > 0 -%}
+        <p class="muted" style="margin-top:.4rem">{{ cart.item_count }} {% if cart.item_count == 1 %}{{ 'sections.cart.item' | t | default: 'item' }}{% else %}{{ 'sections.cart.items' | t | default: 'items' }}{% endif %}</p>
+      {%- endif -%}
+    </header>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" id="cart-form" class="apex-cart__layout reveal">
+        <div class="apex-cart__items">
+          {%- if settings.cart_free_shipping_bar -%}
+            <div class="apex-cart__ship ship-bar bordered">
+              {%- if remaining > 0 -%}
+                <p style="font-size:var(--text-sm)">{{ 'sections.cart.free_ship_progress_html' | t: amount: remaining | money | default: 'Spend more to unlock free shipping.' }}</p>
+              {%- else -%}
+                <p style="font-size:var(--text-sm);font-weight:600;display:flex;align-items:center;gap:.4rem">{% render 'icon', icon: 'truck' %} {{ 'sections.cart.free_ship_unlocked' | t | default: 'Free shipping unlocked!' }}</p>
+              {%- endif -%}
+              <div class="ship-bar__track"><div class="ship-bar__fill" style="width:{% if threshold > 0 %}{{ cart.total_price | times: 100.0 | divided_by: threshold | at_most: 100 }}{% else %}100{% endif %}%"></div></div>
+            </div>
+          {%- endif -%}
+
+          <ul class="apex-cart__lines" role="list">
+            {%- for item in cart.items -%}
+              <li class="line-item apex-cart__line" data-line-key="{{ item.key }}">
+                <a href="{{ item.url }}" class="line-item__media media media--square" aria-label="{{ item.product.title | escape }}">
+                  {%- if item.image -%}
+                    {{ item.image | image_url: width: 200 | image_tag: loading: 'lazy', widths: '120,160,200', sizes: '80px', alt: item.title }}
+                  {%- else -%}
+                    {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </a>
+
+                <div class="line-item__info stack" style="gap:.35rem">
+                  <a href="{{ item.url }}" class="apex-cart__title">{{ item.product.title }}</a>
+                  {%- unless item.product.has_only_default_variant -%}
+                    <div class="muted" style="font-size:var(--text-sm)">{{ item.variant.title }}</div>
+                  {%- endunless -%}
+                  {%- if item.selling_plan_allocation -%}
+                    <div class="muted" style="font-size:var(--text-xs)">{{ item.selling_plan_allocation.selling_plan.name }}</div>
+                  {%- endif -%}
+                  {%- if item.properties.size > 0 -%}
+                    <dl class="apex-cart__props muted" style="font-size:var(--text-xs)">
+                      {%- for prop in item.properties -%}
+                        {%- assign first = prop.first -%}
+                        {%- if first.first != '_' and prop.last != blank -%}
+                          <div><dt>{{ first }}:</dt> <dd>{{ prop.last }}</dd></div>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </dl>
+                  {%- endif -%}
+                  {%- if item.line_level_discount_allocations.size > 0 -%}
+                    {%- for allocation in item.line_level_discount_allocations -%}
+                      <span class="badge badge--sale apex-cart__line-discount">{% render 'icon', icon: 'check' %} {{ allocation.discount_application.title }} (-{{ allocation.amount | money }})</span>
+                    {%- endfor -%}
+                  {%- endif -%}
+
+                  <div class="apex-cart__line-controls cluster" style="gap:.8rem;margin-top:.4rem">
+                    <div class="qty">
+                      <button type="button" data-cart-change="{{ item.quantity | minus: 1 }}" data-line="{{ forloop.index }}" aria-label="{{ 'sections.cart.decrease' | t | default: 'Decrease quantity' }}">{% render 'icon', icon: 'minus' %}</button>
+                      <input type="text" name="updates[]" value="{{ item.quantity }}" inputmode="numeric" readonly aria-label="{{ 'sections.cart.quantity' | t | default: 'Quantity' }}">
+                      <button type="button" data-cart-change="{{ item.quantity | plus: 1 }}" data-line="{{ forloop.index }}" aria-label="{{ 'sections.cart.increase' | t | default: 'Increase quantity' }}">{% render 'icon', icon: 'plus' %}</button>
+                    </div>
+                    <button type="button" class="link apex-cart__remove" data-cart-change="0" data-line="{{ forloop.index }}">{{ 'sections.cart.remove' | t | default: 'Remove' }}</button>
+                  </div>
+                </div>
+
+                <div class="line-item__price apex-cart__line-price">
+                  {%- if item.original_line_price != item.final_line_price -%}
+                    <s class="muted" style="font-size:var(--text-sm)">{{ item.original_line_price | money }}</s>
+                    <div style="font-weight:700">{{ item.final_line_price | money }}</div>
+                  {%- else -%}
+                    <div style="font-weight:700">{{ item.final_line_price | money }}</div>
+                  {%- endif -%}
+                  {%- if item.quantity > 1 -%}
+                    <div class="muted" style="font-size:var(--text-xs)">{{ item.final_price | money }} {{ 'sections.cart.each' | t | default: 'each' }}</div>
+                  {%- endif -%}
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          <div class="apex-cart__continue">
+            <a href="{{ routes.all_products_collection_url }}" class="link">{% render 'icon', icon: 'arrow-left' %} {{ 'general.continue_shopping' | t | default: 'Continue shopping' }}</a>
+          </div>
+        </div>
+
+        <aside class="apex-cart__summary card" aria-label="{{ 'sections.cart.summary' | t | default: 'Order summary' }}">
+          <h2 class="h4">{{ 'sections.cart.summary' | t | default: 'Order summary' }}</h2>
+
+          {%- if settings.cart_note -%}
+            <details class="apex-cart__note">
+              <summary class="link" style="font-size:var(--text-sm)">{{ 'sections.cart.note' | t | default: 'Add order note' }}</summary>
+              <textarea class="input" name="note" rows="3" placeholder="{{ 'sections.cart.note_placeholder' | t | default: 'Special instructions for your order' }}">{{ cart.note }}</textarea>
+            </details>
+          {%- endif -%}
+
+          {%- if cart.cart_level_discount_applications.size > 0 -%}
+            <ul class="apex-cart__discounts stack" role="list" style="gap:.4rem">
+              {%- for discount in cart.cart_level_discount_applications -%}
+                <li class="apex-cart__discount cluster" style="justify-content:space-between">
+                  <span class="badge badge--sale">{% render 'icon', icon: 'check' %} {{ discount.title }}</span>
+                  <span class="muted">-{{ discount.total_allocated_amount | money }}</span>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+
+          <div class="apex-cart__totals">
+            {%- if cart.original_total_price != cart.total_price -%}
+              <div class="apex-cart__row muted">
+                <span>{{ 'sections.cart.original' | t | default: 'Original' }}</span>
+                <s>{{ cart.original_total_price | money }}</s>
+              </div>
+            {%- endif -%}
+            <div class="apex-cart__row apex-cart__subtotal">
+              <span>{{ 'sections.cart.subtotal' | t | default: 'Subtotal' }}</span>
+              <strong>{{ cart.total_price | money }}</strong>
+            </div>
+          </div>
+
+          <p class="muted apex-cart__tax">{{ 'sections.cart.taxes' | t | default: 'Taxes and shipping calculated at checkout.' }}</p>
+
+          <button type="submit" name="checkout" class="btn btn--accent btn--block btn--lg">{{ 'sections.cart.checkout' | t | default: 'Checkout' }}</button>
+
+          {%- if additional_checkout_buttons -%}
+            <div class="apex-cart__dynamic">{{ content_for_additional_checkout_buttons }}</div>
+          {%- endif -%}
+        </aside>
+      </form>
+
+      {%- if s.show_upsell and settings.cart_upsell and upsell_size > 0 -%}
+        <div class="apex-cart__upsell reveal">
+          <div class="section-head section-head--center">
+            <h2 class="h3">{{ s.upsell_heading | default: 'You may also like' }}</h2>
+          </div>
+          <div class="apex-cart__upsell-grid grid grid--4">
+            {%- for product in upsell_products limit: s.upsell_count -%}
+              {% render 'product-card', product: product %}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+    {%- else -%}
+      <div class="apex-cart__empty center stack reveal" style="justify-items:center">
+        <div class="apex-cart__empty-icon">{% render 'icon', icon: 'bag' %}</div>
+        <p class="h3">{{ 'sections.cart.empty' | t | default: 'Your cart is empty' }}</p>
+        <p class="muted">{{ 'sections.cart.empty_detail' | t | default: 'Add your favourite products to get started.' }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--accent btn--lg">{{ 'general.continue_shopping' | t | default: 'Continue shopping' }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+.apex-cart__layout { display: grid; grid-template-columns: 1fr minmax(0, 22rem); gap: clamp(1.5rem, 3vw, 3rem); align-items: start; }
+.apex-cart__ship { padding: 1rem 1.2rem; margin-bottom: 1.4rem; }
+.apex-cart__ship .ship-bar__track { margin-top: .7rem; }
+.apex-cart__lines { display: grid; }
+.apex-cart__line { grid-template-columns: 80px 1fr auto; gap: 1.1rem; align-items: start; }
+.apex-cart__line .line-item__media { width: 80px; height: 80px; }
+.apex-cart__title { font-weight: 600; }
+.apex-cart__title:hover { color: var(--accent); }
+.apex-cart__props dt, .apex-cart__props dd { display: inline; }
+.apex-cart__line-discount { font-size: var(--text-xs); }
+.apex-cart__remove { font-size: var(--text-sm); color: var(--text-muted); font-weight: 500; }
+.apex-cart__remove:hover { color: var(--sale); }
+.apex-cart__line-price { text-align: right; }
+.apex-cart__continue { margin-top: 1.4rem; }
+.apex-cart__summary { padding: clamp(1.2rem, 1rem + 1vw, 1.8rem); gap: 1rem; position: sticky; top: 1rem; }
+.apex-cart__note textarea { margin-top: .6rem; }
+.apex-cart__totals { border-top: var(--border-width) solid var(--border); padding-top: 1rem; display: grid; gap: .5rem; }
+.apex-cart__row { display: flex; align-items: baseline; justify-content: space-between; }
+.apex-cart__subtotal { font-size: 1.15rem; }
+.apex-cart__subtotal strong { font-weight: 800; }
+.apex-cart__tax { font-size: var(--text-xs); }
+.apex-cart__dynamic { display: grid; gap: .5rem; }
+.apex-cart__upsell { margin-top: clamp(2.5rem, 5vw, 4rem); }
+.apex-cart__empty { padding-block: clamp(3rem, 8vw, 6rem); gap: .6rem; }
+.apex-cart__empty-icon { width: 4rem; height: 4rem; display: grid; place-items: center; border-radius: var(--radius-pill); background: var(--bg-alt); color: var(--text-muted); margin-bottom: .4rem; }
+.apex-cart__empty-icon svg { width: 1.8rem; height: 1.8rem; }
+@media (max-width: 860px) {
+  .apex-cart__layout { grid-template-columns: 1fr; }
+  .apex-cart__summary { position: static; }
+}
+@media (max-width: 600px) {
+  .apex-cart__line { grid-template-columns: 64px 1fr; }
+  .apex-cart__line .line-item__media { width: 64px; height: 64px; }
+  .apex-cart__line-price { grid-column: 2; text-align: left; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Cart page",
+  "tag": "section",
+  "class": "shopify-section--main-cart",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Upsell"
+    },
+    {
+      "type": "paragraph",
+      "content": "Shown below the cart. Requires \"Show cart upsell\" enabled in Theme settings → Cart."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_upsell",
+      "label": "Show upsell row",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "upsell_heading",
+      "label": "Upsell heading",
+      "default": "You may also like"
+    },
+    {
+      "type": "collection",
+      "id": "upsell_collection",
+      "label": "Upsell collection",
+      "info": "Leave empty to use automatic product recommendations."
+    },
+    {
+      "type": "range",
+      "id": "upsell_count",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "label": "Products to show",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cart page"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,136 @@
+{%- comment -%}
+  Injects global design tokens from theme settings + emits one CSS class per
+  colour scheme (.color-scheme-N) mapped onto Apex's variable names.
+  Rendered once in <head> by layout/theme.liquid.
+{%- endcomment -%}
+{%- liquid
+  assign hf = settings.heading_font
+  assign bf = settings.body_font
+-%}
+{% style %}
+  {%- comment -%}
+    Fonts are guarded: if settings ever fail to load (nil), we emit NOTHING for
+    font vars so base.css's system-font fallbacks hold — never a broken
+    `font-family: , ;` declaration.
+  {%- endcomment -%}
+  {%- if hf and bf -%}
+  {{ hf | font_face: font_display: 'swap' }}
+  {{ bf | font_face: font_display: 'swap' }}
+  {%- assign hf_bold = hf | font_modify: 'weight', 'bolder' -%}
+  {%- if hf_bold -%}{{ hf_bold | font_face: font_display: 'swap' }}{%- endif -%}
+  {%- assign bf_bold = bf | font_modify: 'weight', 'bold' -%}
+  {%- if bf_bold -%}{{ bf_bold | font_face: font_display: 'swap' }}{%- endif -%}
+  {%- assign af = settings.accent_font -%}
+  {%- if af and af != bf and af != hf -%}{{ af | font_face: font_display: 'swap' }}{%- endif -%}
+  {%- endif -%}
+
+  :root {
+    {%- if hf and bf %}
+    --font-heading: {{ hf.family }}, {{ hf.fallback_families }};
+    --font-body: {{ bf.family }}, {{ bf.fallback_families }};
+    {%- endif %}
+    --font-heading-weight: {{ settings.heading_weight | default: 800 }};
+    --font-body-weight: {{ bf.weight | default: 400 }};
+    --type-base: {{ settings.body_font_size | default: 100 | divided_by: 100.0 }}rem;
+    --type-scale: {{ settings.type_scale | default: 122 | divided_by: 100.0 }};
+    --heading-letter-spacing: {{ settings.heading_letter_spacing | default: -20 | divided_by: 1000.0 }}em;
+    --heading-line-height: {{ settings.heading_line_height | default: 108 | divided_by: 100.0 }};
+    --body-line-height: {{ settings.body_line_height | default: 165 | divided_by: 100.0 }};
+
+    --page-width: {{ settings.page_width | default: 1280 }}px;
+    --gutter: {{ settings.gutter_mobile | default: 16 }}px;
+    --section-gap: {{ settings.section_spacing | default: 72 }}px;
+    --section-gap-tight: {{ settings.section_spacing | default: 72 | times: 0.6 | round }}px;
+
+    --radius-btn: {{ settings.button_radius | default: 10 }}px;
+    --radius-card: {{ settings.card_radius | default: 16 }}px;
+    --radius-input: {{ settings.input_radius | default: 10 }}px;
+    --radius: {{ settings.card_radius | default: 16 }}px;
+    --radius-pill: {% if settings.button_radius >= 40 %}999px{% else %}{{ settings.button_radius | default: 10 | plus: 12 }}px{% endif %};
+    --border-width: {{ settings.border_width | default: 1 }}px;
+    --shadow-card: 0 1px 2px rgba(17,24,39,{{ settings.shadow_opacity | default: 8 | divided_by: 100.0 }}), 0 18px 40px -24px rgba(17,24,39,{{ settings.shadow_opacity | default: 8 | times: 3 | divided_by: 100.0 }});
+
+    --dur: {{ settings.anim_duration | default: 500 }}ms;
+    --reveal-distance: {{ settings.anim_distance | default: 24 }}px;
+    {% if settings.button_uppercase or settings.button_transform == 'uppercase' %}--btn-transform: uppercase;{% else %}--btn-transform: none;{% endif %}
+    --btn-weight: {{ settings.button_weight | default: 700 }};
+    --btn-letter-spacing: {{ settings.button_letter_spacing | default: 1 | divided_by: 100.0 }}em;
+    --btn-border: {{ settings.button_border_width | default: 1 }}px;
+    --btn-px: {{ settings.button_padding_x | default: 26 }}px;
+    --btn-py: {{ settings.button_padding_y | default: 15 }}px;
+    --heading-transform: {{ settings.heading_transform | default: 'none' }};
+    --h1: calc(clamp(2.3rem, 1.4rem + 3.6vw, 3.8rem) * {{ settings.heading_h1_scale | default: 100 | divided_by: 100.0 }});
+    --h2: calc(clamp(1.8rem, 1.2rem + 2.4vw, 2.7rem) * {{ settings.heading_h2_scale | default: 100 | divided_by: 100.0 }});
+    --h3: calc(clamp(1.35rem, 1.1rem + 1.1vw, 1.7rem) * {{ settings.heading_h3_scale | default: 100 | divided_by: 100.0 }});
+    {%- if settings.accent_font or hf %}
+    --font-accent: {{ settings.accent_font.family | default: hf.family }}, {{ settings.accent_font.fallback_families | default: 'sans-serif' }};
+    {%- endif %}
+    --accent-letter-spacing: {{ settings.accent_letter_spacing | default: 14 | divided_by: 100.0 }}em;
+    --accent-transform: {{ settings.accent_transform | default: 'uppercase' }};
+    --body-letter-spacing: {{ settings.body_letter_spacing | default: 0 | divided_by: 100.0 }}em;
+    --price-weight: {{ settings.price_weight | default: 700 }};
+    --nav-size: {{ settings.nav_font_size | default: 100 | divided_by: 100.0 }};
+    --card-align: {{ settings.card_text_align | default: 'left' }};
+    --card-gap: {{ settings.card_gap | default: 24 }}px;
+    --card-title-size: {{ settings.card_text_size | default: 100 | divided_by: 100.0 }};
+    --badge-radius: {% if settings.badge_shape == 'square' %}4px{% elsif settings.badge_shape == 'soft' %}8px{% else %}999px{% endif %};
+    --badge-transform: {% if settings.badge_uppercase %}uppercase{% else %}none{% endif %};
+    --badge-scale: {{ settings.badge_size | default: 100 | divided_by: 100.0 }};
+    --image-corner: {{ settings.image_corner | default: 12 }}px;
+    --input-border: {{ settings.input_border_width | default: 1 }}px;
+    --header-h: {{ settings.header_height | default: 68 }}px;
+    --form-label-transform: {% if settings.form_label_uppercase %}uppercase{% else %}none{% endif %};
+    --h4: calc(1.2rem * {{ settings.heading_h4_scale | default: 100 | divided_by: 100.0 }});
+    --h5: calc(1rem * {{ settings.heading_h5_scale | default: 100 | divided_by: 100.0 }});
+    --subheading-size: {{ settings.subheading_size | default: 110 | divided_by: 100.0 }};
+    --rte-gap: {{ settings.paragraph_spacing | default: 16 }}px;
+    --rte-measure: {{ settings.rte_measure | default: 68 }}ch;
+    --link-offset: {{ settings.link_underline_offset | default: 3 }}px;
+    --btn-min: {{ settings.button_min_width | default: 0 }}px;
+    --btn-gap: {{ settings.button_icon_gap | default: 8 }}px;
+    --btn-hover-scale: {{ settings.button_hover_scale | default: 100 | divided_by: 100.0 }};
+    --accent-2: {{ settings.accent_2 | default: '#0ea5a3' }};
+    --gradient-angle: {{ settings.gradient_angle | default: 135 }}deg;
+    --overlay-color: {{ settings.overlay_color | default: '#0b1220' }};
+    --overlay-default: {{ settings.overlay_default | default: 30 | divided_by: 100.0 }};
+    --link-hover: {{ settings.link_hover_color | default: '#1f3fd0' }};
+    --success: {{ settings.success_color | default: '#16a34a' }};
+    --sale: {{ settings.sale_color | default: '#e0364f' }};
+    --logo-h: {{ settings.logo_max_height | default: 40 }}px;
+    --header-pad: {{ settings.header_padding | default: 16 }}px;
+    --dropdown-radius: {{ settings.dropdown_radius | default: 12 }}px;
+    --footer-pad: {{ settings.footer_padding | default: 56 }}px;
+    --cart-w: {{ settings.cart_drawer_width | default: 440 }}px;
+    --hover-zoom: {{ settings.hover_scale_amount | default: 105 | divided_by: 100.0 }};
+    --card-lift: {{ settings.card_lift_amount | default: 4 }}px;
+    --card-price-size: {{ settings.card_price_size | default: 100 | divided_by: 100.0 }};
+    --card-title-lines: {{ settings.card_title_lines | default: 2 }};
+    --glass-blur: {{ settings.glass_blur | default: 12 }}px;
+    --divider-thickness: {{ settings.divider_thickness | default: 1 }}px;
+    --marquee-speed: {{ settings.marquee_speed | default: 30 }}s;
+    --stagger-delay: {{ settings.stagger_delay | default: 80 }}ms;
+  }
+  @media (min-width: 750px){ :root { --gutter: {{ settings.gutter_desktop | default: 40 }}px; } }
+  {% unless settings.animations_enabled %}.reveal{opacity:1;transform:none;}{% endunless %}
+
+  {%- for scheme in settings.color_schemes -%}
+    {%- assign s = scheme.settings -%}
+    .color-{{ scheme.id }} {
+      --bg: {{ s.background }};
+      {% if s.background_gradient != blank %}--bg-gradient: {{ s.background_gradient }};{% endif %}
+      --bg-alt: {{ s.bg_alt | default: s.background }};
+      --card: {{ s.card | default: s.background }};
+      --text: {{ s.text }};
+      --text-muted: {{ s.text | color_mix: s.background, 62 }};
+      --border: {{ s.border | default: s.text }};
+      --accent: {{ s.accent }};
+      --accent-text: {{ s.on_accent | default: '#ffffff' }};
+      --btn: {{ s.button | default: s.accent }};
+      --btn-text: {{ s.button_label | default: s.on_accent }};
+      --btn-secondary-text: {{ s.secondary_button_label | default: s.text }};
+      --shadow-rgb: {{ s.shadow | default: '#0b1220' | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    }
+    .color-{{ scheme.id }} { background-color: var(--bg); color: var(--text); }
+    {% if s.background_gradient != blank %}.color-{{ scheme.id }}.gradient { background: var(--bg-gradient); }{% endif %}
+  {%- endfor -%}
+{% endstyle %}

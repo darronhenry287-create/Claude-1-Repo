@@ -1,0 +1,316 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-offer-banner color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="offer-banner-{{ section.id }}"
+  >
+  <div class="page-width">
+    <div class="apex-offer-banner__inner reveal">
+
+      <div class="apex-offer-banner__content stack">
+        {%- if s.heading != blank -%}
+          <h2 class="apex-offer-banner__heading balance">{{ s.heading }}</h2>
+        {%- endif -%}
+
+        {%- if s.text != blank -%}
+          <div class="apex-offer-banner__text rte">{{ s.text }}</div>
+        {%- endif -%}
+
+        {%- if s.price_text != blank -%}
+          <p class="apex-offer-banner__price">{{ s.price_text }}</p>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="apex-offer-banner__chips cluster">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'urgency_chip' and block.settings.text != blank -%}
+                <span class="apex-offer-banner__chip badge badge--sale" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if s.end_datetime != blank -%}
+          <div class="apex-offer-banner__countdown-wrap">
+            <apex-countdown
+              class="apex-offer-banner__countdown"
+              data-end="{{ s.end_datetime }}"
+              {% if s.hide_when_ended %}data-hide-on-end{% endif %}
+              aria-live="polite"
+              aria-label="Offer countdown timer">
+              <div class="apex-offer-banner__unit">
+                <span class="apex-offer-banner__digits" data-unit="days">00</span>
+                <span class="apex-offer-banner__unit-label">Days</span>
+              </div>
+              <div class="apex-offer-banner__sep" aria-hidden="true">:</div>
+              <div class="apex-offer-banner__unit">
+                <span class="apex-offer-banner__digits" data-unit="hours">00</span>
+                <span class="apex-offer-banner__unit-label">Hours</span>
+              </div>
+              <div class="apex-offer-banner__sep" aria-hidden="true">:</div>
+              <div class="apex-offer-banner__unit">
+                <span class="apex-offer-banner__digits" data-unit="mins">00</span>
+                <span class="apex-offer-banner__unit-label">Mins</span>
+              </div>
+              <div class="apex-offer-banner__sep" aria-hidden="true">:</div>
+              <div class="apex-offer-banner__unit">
+                <span class="apex-offer-banner__digits" data-unit="secs">00</span>
+                <span class="apex-offer-banner__unit-label">Secs</span>
+              </div>
+            </apex-countdown>
+          </div>
+        {%- endif -%}
+
+        {%- if s.button_label != blank -%}
+          <div class="apex-offer-banner__cta">
+            <a class="btn btn--accent btn--lg btn--pill" href="{{ s.button_url | default: '#' }}">{{ s.button_label }}</a>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if s.product != blank -%}
+        {%- assign ob_product = s.product -%}
+        <div class="apex-offer-banner__product">
+          <div class="media media--square media--round apex-offer-banner__product-img">
+            {%- if ob_product.featured_media != blank -%}
+              {%- assign ob_alt = ob_product.featured_media.alt -%}
+              {{ ob_product.featured_media | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300,400,600', sizes: '(min-width:990px) 360px, 80vw', alt: ob_alt }}
+            {%- else -%}
+              {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div class="apex-offer-banner__product-meta stack" style="gap:.3rem">
+            <p class="apex-offer-banner__product-title">{{ ob_product.title }}</p>
+            {% render 'price', product: ob_product %}
+          </div>
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-offer-banner__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center;
+}
+.apex-offer-banner__content { gap: 1.2rem; }
+.apex-offer-banner__heading {
+  font-size: clamp(1.6rem, 1.1rem + 2.5vw, 2.4rem);
+  line-height: 1.1;
+}
+.apex-offer-banner__text { font-size: 1.05rem; }
+.apex-offer-banner__price {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 1.2rem + 2vw, 2.6rem);
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  margin: 0;
+}
+.apex-offer-banner__chips { gap: .5rem; flex-wrap: wrap; }
+.apex-offer-banner__chip { font-size: var(--text-sm); }
+.apex-offer-banner__countdown-wrap { display: flex; }
+.apex-offer-banner__countdown {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+}
+.apex-offer-banner__unit { display: flex; flex-direction: column; align-items: center; gap: .2rem; }
+.apex-offer-banner__digits {
+  display: block;
+  min-width: 3.4rem;
+  padding: .4rem .3rem;
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  line-height: 1;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.apex-offer-banner__unit-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.apex-offer-banner__sep {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--accent);
+  align-self: flex-start;
+  padding-top: .3rem;
+}
+.apex-offer-banner__countdown[data-ended] .apex-offer-banner__digits { color: var(--text-muted); }
+.apex-offer-banner__cta { display: flex; }
+.apex-offer-banner__product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .8rem;
+  text-align: center;
+}
+.apex-offer-banner__product-img {
+  width: clamp(180px, 20vw, 280px);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-pop);
+}
+.apex-offer-banner__product-img img,
+.apex-offer-banner__product-img .placeholder-svg { width: 100%; height: 100%; object-fit: cover; }
+.apex-offer-banner__product-title { font-weight: 600; font-size: .95rem; margin: 0; }
+@media (max-width: 768px) {
+  .apex-offer-banner__inner { grid-template-columns: 1fr; text-align: center; }
+  .apex-offer-banner__product { display: none; }
+  .apex-offer-banner__cta { justify-content: center; }
+  .apex-offer-banner__chips { justify-content: center; }
+  .apex-offer-banner__countdown-wrap { justify-content: center; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Offer banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Limited-time offer — save 30% today only"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Supporting text",
+      "default": "<p>This exclusive discount is available for a limited time. Don't miss out — stock is running low and this price won't last.</p>"
+    },
+    {
+      "type": "text",
+      "id": "price_text",
+      "label": "Price / discount display text",
+      "default": "From $39 — was $55",
+      "info": "e.g. 'Only $39' or 'Save 30%'. Displayed in accent colour."
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product (optional — for image)"
+    },
+    {
+      "type": "header",
+      "content": "Countdown"
+    },
+    {
+      "type": "text",
+      "id": "end_datetime",
+      "label": "Offer end date & time (ISO 8601: YYYY-MM-DDTHH:MM)",
+      "default": "2026-12-31T23:59",
+      "info": "Leave blank to hide the countdown."
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_when_ended",
+      "label": "Hide section when offer expires",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Claim your discount now"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-4"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "urgency_chip",
+      "name": "Urgency chip",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Chip text",
+          "default": "Limited stock"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Offer banner",
+      "settings": {
+        "heading": "Limited-time offer — save 30% today only",
+        "text": "<p>This exclusive discount is available for a limited time only. Don't miss out — stock is running low and this price won't last.</p>",
+        "price_text": "From $39 — was $55",
+        "end_datetime": "2026-12-31T23:59",
+        "button_label": "Claim your discount now"
+      },
+      "blocks": [
+        {
+          "type": "urgency_chip",
+          "settings": {
+            "text": "Limited stock"
+          }
+        },
+        {
+          "type": "urgency_chip",
+          "settings": {
+            "text": "Free shipping included"
+          }
+        },
+        {
+          "type": "urgency_chip",
+          "settings": {
+            "text": "60-day guarantee"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

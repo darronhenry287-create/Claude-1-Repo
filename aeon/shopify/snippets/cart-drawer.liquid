@@ -1,0 +1,143 @@
+<div class="overlay" id="overlay"></div>
+
+<aside class="drawer" id="drawer" aria-label="{{ 'accessibility.cart' | t }}">
+  <div class="drawer__head">
+    <h3>{{ 'sections.cart.title' | t }}</h3>
+    <button class="iconbtn" data-action="close-cart" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', icon: 'close' %}</button>
+  </div>
+  <div class="drawer__body" id="cart-body">
+    {%- if cart.item_count > 0 -%}
+      {%- for item in cart.items -%}
+        <div class="ditem">
+          <div class="ditem__thumb">
+            {%- if item.image -%}
+              <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}" width="64" height="64" loading="lazy" style="width:100%;height:100%;object-fit:cover">
+            {%- endif -%}
+          </div>
+          <div class="ditem__info">
+            <h4>{{ item.product.title }}</h4>
+            <div class="v">{{ item.variant.title | remove: 'Default Title' }}</div>
+            <div class="ditem__foot">
+              <div class="dqty">
+                <button
+                  aria-label="Decrease quantity"
+                  data-line="{{ forloop.index }}"
+                  data-qty="{{ item.quantity | minus: 1 }}"
+                  data-action="cart-change">−</button>
+                <span>{{ item.quantity }}</span>
+                <button
+                  aria-label="Increase quantity"
+                  data-line="{{ forloop.index }}"
+                  data-qty="{{ item.quantity | plus: 1 }}"
+                  data-action="cart-change">+</button>
+              </div>
+              <strong>{{ item.final_line_price | money }}</strong>
+            </div>
+            <a class="drm"
+               href="/cart/change?line={{ forloop.index }}&quantity=0"
+               data-line="{{ forloop.index }}"
+               data-action="remove-item">{{ 'sections.cart.remove' | t }}</a>
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      <div class="dempty">
+        <p>{{ 'sections.cart.empty' | t }}</p>
+        <p style="margin-top:.5rem;font-size:.85rem">Your protocol starts here.</p>
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if cart.item_count > 0 -%}
+    <div class="drawer__foot" id="cart-foot">
+      {%- if settings.enable_free_shipping_bar -%}
+        <div class="freebar" id="freebar"
+             data-threshold="{{ settings.free_shipping_threshold | times: 100 }}"
+             data-total="{{ cart.total_price }}"></div>
+      {%- endif -%}
+      <div class="dsub">
+        <span>{{ 'sections.cart.subtotal' | t }}</span>
+        <span id="cart-sub">{{ cart.total_price | money }}</span>
+      </div>
+      <p class="dnote">{{ 'sections.cart.taxes_note' | t }}</p>
+      <form action="/cart" method="post">
+        <button name="checkout" class="btn btn-mint btn-block btn-lg">
+          {{ 'sections.cart.checkout' | t }}
+        </button>
+      </form>
+      <a href="{{ routes.cart_url }}" class="btn btn-ghost btn-block" style="margin-top:.6rem">View full cart</a>
+    </div>
+  {%- endif -%}
+</aside>
+
+<div class="mobile" id="menu">
+  <div class="mobile__head">
+    <a href="{{ routes.root_url }}" class="logo">
+      <svg class="logo__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true"><polygon points="12,2.5 20,7 20,17 12,21.5 4,17 4,7" stroke="#2f5bff" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="2.5" r="1.7" fill="#2f5bff"/><circle cx="20" cy="17" r="1.7" fill="#2f5bff"/><circle cx="4" cy="17" r="1.7" fill="#2f5bff"/></svg>
+      AEON
+    </a>
+    <button class="iconbtn" data-action="close-menu" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', icon: 'close' %}</button>
+  </div>
+  <nav>
+    <a href="/collections/all">Shop</a>
+    <a href="/products/aeon-nmn-1000">AEON NMN 1000</a>
+    <a href="/pages/science">The Science</a>
+    <a href="/pages/subscribe-save">Subscribe &amp; Save</a>
+    <a href="/pages/reviews">Reviews</a>
+    <a href="/pages/about">About</a>
+    <a href="/pages/faq">FAQ</a>
+    <a href="/pages/contact">Contact</a>
+  </nav>
+  <div class="mobile__foot">
+    <a href="/products/aeon-nmn-1000" class="btn btn-mint btn-block btn-lg">Shop AEON NMN</a>
+  </div>
+</div>
+
+<div class="modal" id="coa-modal" aria-label="Certificate of Analysis">
+  <div class="modal__bg" data-action="close-coa"></div>
+  <div class="modal__card">
+    <div class="modal__head">
+      <div><div class="kicker">Certificate of Analysis</div></div>
+      <button class="iconbtn" data-action="close-coa" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', icon: 'close' %}</button>
+    </div>
+    <div class="coa__body" style="padding:.5rem 0 1rem">
+      <div class="assay" style="grid-template-columns:1fr auto">
+        <div class="name mono" style="color:var(--muted)">Batch</div>
+        <div class="res">AE-NMN-2026-0418</div>
+      </div>
+      <div class="assay">
+        <div class="name">NMN identity (HPLC)</div>
+        <div class="res">Conforms</div>
+        <div class="tick">{% render 'icon', icon: 'check' %}</div>
+      </div>
+      <div class="assay">
+        <div class="name">NMN purity (assay)</div>
+        <div class="res">99.6%</div>
+        <div class="tick">{% render 'icon', icon: 'check' %}</div>
+      </div>
+      <div class="assay">
+        <div class="name">Heavy metals (Pb, As, Cd, Hg)</div>
+        <div class="res">&lt; limits</div>
+        <div class="tick">{% render 'icon', icon: 'check' %}</div>
+      </div>
+      <div class="assay">
+        <div class="name">Microbial (TPC, yeast/mold)</div>
+        <div class="res">Pass</div>
+        <div class="tick">{% render 'icon', icon: 'check' %}</div>
+      </div>
+      <div class="assay">
+        <div class="name">Residual solvents</div>
+        <div class="res">Not detected</div>
+        <div class="tick">{% render 'icon', icon: 'check' %}</div>
+      </div>
+      <div class="assay">
+        <div class="name">Allergens / gluten</div>
+        <div class="res">None</div>
+        <div class="tick">{% render 'icon', icon: 'check' %}</div>
+      </div>
+    </div>
+    <div style="padding:0 1.4rem 1.4rem">
+      <p class="faint" style="font-size:.78rem">Representative sample COA. Every batch is tested by an ISO 17025-accredited lab; scan the QR on your bottle for that lot's full report.</p>
+    </div>
+  </div>
+</div>

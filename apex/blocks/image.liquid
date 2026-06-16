@@ -1,0 +1,72 @@
+{%- liquid
+  assign img = block.settings.image
+  assign ratio_class = 'media--' | append: block.settings.ratio
+-%}
+<div class="apex-tb-image media {{ ratio_class }}" style="max-width:{{ block.settings.max_width }}px;border-radius:{{ block.settings.radius }}px;margin-inline:auto" {{ block.shopify_attributes }}>
+  {%- if img != blank -%}
+    {{ img | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400,600,800,1000,1200', sizes: '(min-width:990px) 60vw, 100vw', alt: img.alt }}
+  {%- else -%}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+  {%- endif -%}
+</div>
+{% schema %}
+{
+  "name": "Image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Ratio",
+      "default": "landscape",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape"
+        },
+        {
+          "value": "wide",
+          "label": "Wide (16:9)"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 160,
+      "max": 1200,
+      "step": 40,
+      "unit": "px",
+      "label": "Max width",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image"
+    }
+  ]
+}
+{% endschema %}

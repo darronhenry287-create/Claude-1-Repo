@@ -1,0 +1,94 @@
+{%- liquid
+  assign col = block.settings.collection
+  assign ratio_class = 'media--' | append: block.settings.ratio
+-%}
+<a
+  class="apex-tb-collection-card card card--hover"
+  href="{{ col.url | default: '#' }}"
+  aria-label="{{ col.title | default: 'Browse collection' | escape }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="apex-tb-collection-card__media media {{ ratio_class }}">
+    {%- if col.image != blank -%}
+      {%- assign col_alt = col.title -%}
+      {{ col.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400,600,800', sizes: '(max-width:749px) 100vw, 400px', alt: col_alt }}
+    {%- elsif col.products.first.featured_image != blank -%}
+      {%- assign first_alt = col.products.first.featured_image.alt -%}
+      {{ col.products.first.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400,600,800', sizes: '(max-width:749px) 100vw, 400px', alt: first_alt }}
+    {%- else -%}
+      {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+  <div class="apex-tb-collection-card__body">
+    <p class="apex-tb-collection-card__title h5" style="font-family:var(--font-heading);font-weight:var(--font-heading-weight)">
+      {{ col.title | default: 'Collection name' | escape }}
+    </p>
+    {%- if block.settings.show_count and col.products_count != blank -%}
+      <p class="apex-tb-collection-card__count muted">{{ col.products_count }} products</p>
+    {%- endif -%}
+  </div>
+</a>
+{% stylesheet %}
+.apex-tb-collection-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
+.apex-tb-collection-card__media { border-radius: var(--radius-card) var(--radius-card) 0 0; }
+.apex-tb-collection-card__body {
+  padding: .85rem 1rem 1rem;
+  background: var(--card);
+  border: var(--border-width) solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius-card) var(--radius-card);
+}
+.apex-tb-collection-card__count { font-size: var(--text-sm); margin-top: .2rem; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Collection card",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Image ratio",
+      "default": "square",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "wide",
+          "label": "Wide (16:9)"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_count",
+      "label": "Show product count",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection card"
+    }
+  ]
+}
+{% endschema %}

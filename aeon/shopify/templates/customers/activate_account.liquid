@@ -1,0 +1,28 @@
+<section class="section" style="min-height:70vh;display:grid;place-items:center">
+  <div class="wrap" style="max-width:480px;width:100%">
+    <div class="center" style="margin-bottom:2rem">
+      <div class="kicker" style="justify-content:center;margin-bottom:.8rem">// AEON</div>
+      <h1>Activate account</h1>
+      <p class="lede" style="margin-top:.7rem;font-size:1rem">Set a password to activate your AEON account.</p>
+    </div>
+    {%- form 'activate_customer_password' -%}
+      {%- if form.errors -%}
+        <div class="note-ok" style="background:rgba(255,122,107,0.08);border-color:rgba(255,122,107,0.4);color:var(--ember);margin-bottom:1.2rem">
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+      <div class="panel" style="padding:1.8rem">
+        <div class="field">
+          <label for="activate-password">Password</label>
+          <input id="activate-password" type="password" name="customer[password]" autocomplete="new-password" required>
+        </div>
+        <div class="field">
+          <label for="activate-confirm">Confirm password</label>
+          <input id="activate-confirm" type="password" name="customer[password_confirmation]" autocomplete="new-password" required>
+        </div>
+        <button type="submit" class="btn btn-mint btn-block btn-lg">Activate account</button>
+        <button type="submit" name="decline" class="btn btn-ghost btn-block" style="margin-top:.8rem">Decline invitation</button>
+      </div>
+    {%- endform -%}
+  </div>
+</section>

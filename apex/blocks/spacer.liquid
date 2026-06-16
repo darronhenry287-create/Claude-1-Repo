@@ -1,0 +1,38 @@
+<div class="apex-tb-spacer" style="--spacer-h:{{ block.settings.height_desktop }}px;height:{{ block.settings.height_mobile }}px" {{ block.shopify_attributes }}></div>
+{% stylesheet %}
+@media (min-width: 750px) {
+  .apex-tb-spacer { height: var(--spacer-h) !important; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Spacer",
+  "settings": [
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 4,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Height (mobile)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "min": 4,
+      "max": 400,
+      "step": 4,
+      "unit": "px",
+      "label": "Height (desktop)",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spacer"
+    }
+  ]
+}
+{% endschema %}

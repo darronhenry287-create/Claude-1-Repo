@@ -1,0 +1,316 @@
+{%- liquid
+  assign s = section.settings
+  assign cols = s.columns_desktop
+  assign cols_m = s.columns_mobile
+  assign terms = search.terms
+
+  comment
+    Split results by type so we can offer a tabbed view. We still rely on
+    Shopify's combined `search.results` (with the type filter set in the form)
+    for pagination; the tabs simply scope what each panel shows.
+  endcomment
+  assign product_results = search.results | where: 'object_type', 'product'
+  assign page_results = search.results | where: 'object_type', 'page'
+  assign article_results = search.results | where: 'object_type', 'article'
+-%}
+<section class="apex-search color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px;--cols:{{ cols }};--cols-m:{{ cols_m }}"
+  id="search-{{ section.id }}">
+  <div class="page-width">
+    <header class="section-head section-head--center reveal">
+      {%- if s.heading != blank -%}<h1 class="h2">{{ s.heading }}</h1>{%- endif -%}
+
+      <form action="{{ routes.search_url }}" method="get" role="search" class="apex-search__form input-group">
+        <input type="hidden" name="type" value="{{ s.search_types | default: 'product' }}">
+        {%- if s.search_types contains 'product' -%}<input type="hidden" name="options[unavailable_products]" value="last">{%- endif -%}
+        <label class="visually-hidden" for="search-input-{{ section.id }}">{{ 'general.search.search' | t | default: 'Search' }}</label>
+        <input class="input" type="search" id="search-input-{{ section.id }}" name="q" value="{{ terms | escape }}" placeholder="{{ 'general.search.placeholder' | t | default: 'Search products, articles…' }}" autocomplete="off">
+        <button type="submit" class="btn btn--accent" aria-label="{{ 'general.search.search' | t | default: 'Search' }}">{% render 'icon', icon: 'search' %}</button>
+      </form>
+
+      {%- if search.performed -%}
+        <p class="muted apex-search__summary">
+          {%- if search.results_count > 0 -%}
+            {{ search.results_count }} {% if search.results_count == 1 %}{{ 'general.search.result' | t | default: 'result' }}{% else %}{{ 'general.search.results' | t | default: 'results' }}{% endif %} {{ 'general.search.for' | t | default: 'for' }} &ldquo;{{ terms }}&rdquo;
+          {%- else -%}
+            {{ 'general.search.no_results_for' | t | default: 'No results for' }} &ldquo;{{ terms }}&rdquo;
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+    </header>
+
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+        {%- paginate search.results by s.per_page -%}
+          {%- comment -%} Tabs when more than one result type is present; otherwise a single combined grid. {%- endcomment -%}
+          {%- assign type_count = 0 -%}
+          {%- if product_results.size > 0 -%}{%- assign type_count = type_count | plus: 1 -%}{%- endif -%}
+          {%- if page_results.size > 0 -%}{%- assign type_count = type_count | plus: 1 -%}{%- endif -%}
+          {%- if article_results.size > 0 -%}{%- assign type_count = type_count | plus: 1 -%}{%- endif -%}
+
+          {%- if s.layout == 'tabs' and type_count > 1 -%}
+            <div class="apex-search__results reveal" data-tabs>
+              <div class="tabs__nav" role="tablist" aria-label="{{ 'general.search.results' | t | default: 'Results' }}">
+                {%- if product_results.size > 0 -%}<button class="tabs__tab" role="tab" type="button">{{ 'general.search.products' | t | default: 'Products' }} ({{ product_results.size }})</button>{%- endif -%}
+                {%- if page_results.size > 0 -%}<button class="tabs__tab" role="tab" type="button">{{ 'general.search.pages' | t | default: 'Pages' }} ({{ page_results.size }})</button>{%- endif -%}
+                {%- if article_results.size > 0 -%}<button class="tabs__tab" role="tab" type="button">{{ 'general.search.articles' | t | default: 'Articles' }} ({{ article_results.size }})</button>{%- endif -%}
+              </div>
+
+              {%- if product_results.size > 0 -%}
+                <div class="tabs__panel" role="tabpanel" tabindex="0">
+                  <div class="apex-search__grid grid">
+                    {%- for product in product_results -%}{% render 'product-card', product: product %}{%- endfor -%}
+                  </div>
+                </div>
+              {%- endif -%}
+              {%- if page_results.size > 0 -%}
+                <div class="tabs__panel" role="tabpanel" tabindex="0">
+                  <ul class="apex-search__list stack" role="list">
+                    {%- for page in page_results -%}
+                      <li class="apex-search__result apex-search__result--text" style="grid-template-columns:1fr">
+                        <div>
+                          <h3 class="apex-search__result-title"><a href="{{ page.url }}">{{ page.title }}</a></h3>
+                          {%- if page.content != blank -%}<p class="muted apex-search__result-excerpt">{{ page.content | strip_html | truncate: 160 }}</p>{%- endif -%}
+                        </div>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- endif -%}
+              {%- if article_results.size > 0 -%}
+                <div class="tabs__panel" role="tabpanel" tabindex="0">
+                  <ul class="apex-search__list stack" role="list">
+                    {%- for article in article_results -%}
+                      <li class="apex-search__result">
+                        <a href="{{ article.url }}" class="media" aria-hidden="true" tabindex="-1">
+                          {%- if article.image -%}{{ article.image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120,180,240', sizes: '96px', alt: article.image.alt }}{%- else -%}{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}{%- endif -%}
+                        </a>
+                        <div>
+                          <h3 class="apex-search__result-title"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                          {%- if article.excerpt_or_content != blank -%}<p class="muted apex-search__result-excerpt">{{ article.excerpt_or_content | strip_html | truncate: 160 }}</p>{%- endif -%}
+                        </div>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- else -%}
+            {%- comment -%} Combined view: products in a grid, pages/articles in lists. {%- endcomment -%}
+            <div class="apex-search__results reveal stack" style="gap:2.5rem">
+              {%- if product_results.size > 0 -%}
+                <div class="apex-search__group">
+                  {%- if type_count > 1 -%}<h2 class="h4 apex-search__group-title">{{ 'general.search.products' | t | default: 'Products' }}</h2>{%- endif -%}
+                  <div class="apex-search__grid grid">
+                    {%- for product in product_results -%}{% render 'product-card', product: product %}{%- endfor -%}
+                  </div>
+                </div>
+              {%- endif -%}
+              {%- if page_results.size > 0 -%}
+                <div class="apex-search__group">
+                  <h2 class="h4 apex-search__group-title">{{ 'general.search.pages' | t | default: 'Pages' }}</h2>
+                  <ul class="apex-search__list stack" role="list">
+                    {%- for page in page_results -%}
+                      <li class="apex-search__result apex-search__result--text" style="grid-template-columns:1fr">
+                        <div>
+                          <h3 class="apex-search__result-title"><a href="{{ page.url }}">{{ page.title }}</a></h3>
+                          {%- if page.content != blank -%}<p class="muted apex-search__result-excerpt">{{ page.content | strip_html | truncate: 160 }}</p>{%- endif -%}
+                        </div>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- endif -%}
+              {%- if article_results.size > 0 -%}
+                <div class="apex-search__group">
+                  <h2 class="h4 apex-search__group-title">{{ 'general.search.articles' | t | default: 'Articles' }}</h2>
+                  <ul class="apex-search__list stack" role="list">
+                    {%- for article in article_results -%}
+                      <li class="apex-search__result">
+                        <a href="{{ article.url }}" class="media" aria-hidden="true" tabindex="-1">
+                          {%- if article.image -%}{{ article.image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120,180,240', sizes: '96px', alt: article.image.alt }}{%- else -%}{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}{%- endif -%}
+                        </a>
+                        <div>
+                          <h3 class="apex-search__result-title"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                          {%- if article.excerpt_or_content != blank -%}<p class="muted apex-search__result-excerpt">{{ article.excerpt_or_content | strip_html | truncate: 160 }}</p>{%- endif -%}
+                        </div>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- if paginate.pages > 1 -%}
+            <nav class="apex-search__pagination cluster" role="navigation" aria-label="{{ 'general.pagination.label' | t | default: 'Pagination' }}">
+              {%- if paginate.previous -%}<a class="btn btn--ghost btn--sm" href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t | default: 'Previous' }}">{% render 'icon', icon: 'arrow-left' %}</a>{%- endif -%}
+              {%- for part in paginate.parts -%}
+                {%- if part.is_link -%}
+                  <a class="btn btn--ghost btn--sm" href="{{ part.url }}">{{ part.title }}</a>
+                {%- elsif part.title == paginate.current_page -%}
+                  <span class="btn btn--sm" aria-current="page">{{ part.title }}</span>
+                {%- else -%}
+                  <span class="muted apex-search__gap">{{ part.title }}</span>
+                {%- endif -%}
+              {%- endfor -%}
+              {%- if paginate.next -%}<a class="btn btn--ghost btn--sm" href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t | default: 'Next' }}">{% render 'icon', icon: 'arrow-right' %}</a>{%- endif -%}
+            </nav>
+          {%- endif -%}
+        {%- endpaginate -%}
+      {%- else -%}
+        <div class="apex-search__empty center stack reveal" style="justify-items:center">
+          <p class="muted">{{ 'general.search.no_results_detail' | t | default: 'Check your spelling or try a different search term.' }}</p>
+          <a class="btn btn--secondary" href="{{ routes.all_products_collection_url }}">{{ 'general.search.browse_all' | t | default: 'Browse all products' }}</a>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <div class="apex-search__prompt center reveal">
+        <p class="muted">{{ 'general.search.prompt' | t | default: 'Type a keyword above to search the store.' }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+.apex-search__form { max-width: 40rem; margin-inline: auto; margin-top: 1.2rem; }
+.apex-search__form .btn { flex: none; }
+.apex-search__summary { margin-top: 1rem; font-size: var(--text-sm); }
+.apex-search__results { margin-top: clamp(1.6rem, 3vw, 2.4rem); }
+.apex-search__grid { grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); }
+.apex-search__group-title { margin-bottom: 1rem; }
+.tabs__panel .apex-search__grid, .tabs__panel .apex-search__list { margin-top: 1.4rem; }
+.apex-search__result { display: grid; grid-template-columns: 96px 1fr; gap: 1.1rem; align-items: center; padding: 1rem 0; border-bottom: var(--border-width) solid var(--border); }
+.apex-search__result .media { width: 96px; aspect-ratio: 4/3; border-radius: var(--radius-sm); }
+.apex-search__result-title { font-weight: 600; font-size: 1.05rem; }
+.apex-search__result-title a:hover { color: var(--accent); }
+.apex-search__result-excerpt { font-size: var(--text-sm); margin-top: .3rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.apex-search__pagination { justify-content: center; margin-top: clamp(2rem, 4vw, 3rem); flex-wrap: wrap; }
+.apex-search__gap { padding-inline: .4rem; }
+.apex-search__empty, .apex-search__prompt { padding-block: clamp(2rem, 6vw, 4rem); gap: 1rem; }
+@media (max-width: 990px) {
+  .apex-search__grid { grid-template-columns: repeat(var(--cols-m, 2), minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .apex-search__result { grid-template-columns: 72px 1fr; }
+  .apex-search__result .media { width: 72px; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Search results",
+  "tag": "section",
+  "class": "shopify-section--main-search",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Search"
+    },
+    {
+      "type": "select",
+      "id": "search_types",
+      "label": "Searchable content",
+      "default": "product,article,page",
+      "options": [
+        {
+          "value": "product",
+          "label": "Products only"
+        },
+        {
+          "value": "product,article",
+          "label": "Products + articles"
+        },
+        {
+          "value": "product,article,page",
+          "label": "Products, articles + pages"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Results layout",
+      "default": "tabs",
+      "options": [
+        {
+          "value": "tabs",
+          "label": "Tabbed by type"
+        },
+        {
+          "value": "combined",
+          "label": "Combined"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Product grid"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 2,
+      "step": 1,
+      "label": "Columns on mobile",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "per_page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "label": "Results per page",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "Search results"
+    }
+  ]
+}
+{% endschema %}

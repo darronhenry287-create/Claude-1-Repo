@@ -1,0 +1,139 @@
+{%- liquid
+  assign vid_id = 'tb-video-' | append: block.id
+  assign cover = block.settings.cover_image
+  assign vid_type = block.settings.video_type
+  assign vid_url = block.settings.video_url
+  assign vid_mp4 = block.settings.mp4_url
+  assign ratio_class = 'media--' | append: block.settings.ratio
+-%}
+<div class="apex-tb-video" style="max-width:{{ block.settings.max_width }}px;margin-inline:auto" {{ block.shopify_attributes }}>
+  <div class="apex-tb-video__trigger media {{ ratio_class }} card--hover" style="cursor:pointer;position:relative" data-open="{{ vid_id }}">
+    {%- if cover != blank -%}
+      {{ cover | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400,600,800,1200', sizes: '(min-width:990px) 70vw, 100vw', alt: cover.alt }}
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+    <button class="apex-tb-video__play btn--accent" aria-label="{{ 'general.video.play' | t | default: 'Play video' }}" data-open="{{ vid_id }}">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28" aria-hidden="true"><path d="M6 4l14 8-14 8V4z"/></svg>
+    </button>
+  </div>
+
+  <div id="{{ vid_id }}" class="modal" role="dialog" aria-modal="true" aria-label="{{ block.settings.title | default: 'Video' | escape }}">
+    <div class="overlay" data-close="{{ vid_id }}"></div>
+    <div class="modal__box apex-tb-video__modal" style="max-width:860px;background:#000">
+      <button class="apex-tb-video__close btn--ghost" data-close="{{ vid_id }}" aria-label="{{ 'general.accessibility.close' | t | default: 'Close' }}" style="position:absolute;top:.6rem;right:.6rem;z-index:2;color:#fff;border-color:rgba(255,255,255,.3)">
+        {%- render 'icon', icon: 'close' -%}
+      </button>
+      <div class="media media--wide">
+        {%- if vid_type == 'youtube' and vid_url != blank -%}
+          {%- assign yt_id = vid_url | split: 'v=' | last | split: '&' | first -%}
+          <iframe src="https://www.youtube.com/embed/{{ yt_id }}?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen title="{{ block.settings.title | default: 'YouTube video' | escape }}" width="1280" height="720" loading="lazy"></iframe>
+        {%- elsif vid_type == 'vimeo' and vid_url != blank -%}
+          {%- assign vm_id = vid_url | split: 'vimeo.com/' | last | split: '?' | first -%}
+          <iframe src="https://player.vimeo.com/video/{{ vm_id }}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen title="{{ block.settings.title | default: 'Vimeo video' | escape }}" width="1280" height="720" loading="lazy"></iframe>
+        {%- elsif vid_type == 'mp4' and vid_mp4 != blank -%}
+          <video src="{{ vid_mp4 }}" controls autoplay playsinline width="1280" height="720" style="width:100%;height:100%;object-fit:contain"></video>
+        {%- else -%}
+          <div style="display:grid;place-items:center;height:100%;color:#fff;padding:2rem">{{ 'general.video.no_video' | t | default: 'No video URL set.' }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+{% stylesheet %}
+.apex-tb-video__play {
+  position: absolute; inset: 0; margin: auto;
+  width: 4rem; height: 4rem; border-radius: var(--radius-pill);
+  display: grid; place-items: center;
+  background: var(--accent); color: var(--accent-text);
+  box-shadow: 0 4px 24px rgba(0,0,0,.35);
+  transition: transform .2s var(--ease), box-shadow .2s;
+  border: none;
+}
+.apex-tb-video__play:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(0,0,0,.45); }
+.apex-tb-video__modal { position: relative; padding: 0; border-radius: var(--radius-lg); overflow: hidden; }
+.apex-tb-video__close { padding: .5rem; width: 2.4rem; height: 2.4rem; border-radius: var(--radius-sm); }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Video",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Accessible title",
+      "default": "Product video"
+    },
+    {
+      "type": "image_picker",
+      "id": "cover_image",
+      "label": "Cover / poster image"
+    },
+    {
+      "type": "select",
+      "id": "video_type",
+      "label": "Video source",
+      "default": "youtube",
+      "options": [
+        {
+          "value": "youtube",
+          "label": "YouTube"
+        },
+        {
+          "value": "vimeo",
+          "label": "Vimeo"
+        },
+        {
+          "value": "mp4",
+          "label": "MP4 (direct URL)"
+        }
+      ]
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "YouTube / Vimeo URL"
+    },
+    {
+      "type": "text",
+      "id": "mp4_url",
+      "label": "MP4 file URL"
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Cover ratio",
+      "default": "wide",
+      "options": [
+        {
+          "value": "wide",
+          "label": "16:9"
+        },
+        {
+          "value": "landscape",
+          "label": "4:3"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 320,
+      "max": 1280,
+      "step": 40,
+      "unit": "px",
+      "label": "Max width",
+      "default": 800
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video"
+    }
+  ]
+}
+{% endschema %}

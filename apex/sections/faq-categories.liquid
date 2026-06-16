@@ -1,0 +1,346 @@
+{%- liquid
+  assign s = section.settings
+  assign cat_blocks = section.blocks | where: 'type', 'category'
+-%}
+<section class="apex-faq-cats color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="faq-cats-{{ section.id }}">
+  <div class="page-width">
+    <div class="reveal">
+
+      {%- if s.heading != blank or s.eyebrow != blank -%}
+        <div class="section-head{% if s.center_header %} section-head--center{% endif %}">
+          {%- if s.eyebrow != blank -%}<p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>{%- endif -%}
+          {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+          {%- if s.subheading != blank -%}<p class="subtitle balance">{{ s.subheading }}</p>{%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="apex-faq-cats__layout">
+
+        {%- if cat_blocks.size > 1 -%}
+          <nav class="apex-faq-cats__nav" aria-label="FAQ categories">
+            <ul class="apex-faq-cats__nav-list">
+              {%- for block in cat_blocks -%}
+                {%- assign cat_anchor = 'faq-cat-' | append: section.id | append: '-' | append: forloop.index -%}
+                <li>
+                  <a class="apex-faq-cats__nav-link{% if forloop.first %} is-active{% endif %}" href="#{{ cat_anchor }}">
+                    {{ block.settings.category_name | default: 'Category' }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </nav>
+        {%- endif -%}
+
+        <div class="apex-faq-cats__groups">
+          {%- for block in cat_blocks -%}
+            {%- assign cat_anchor = 'faq-cat-' | append: section.id | append: '-' | append: forloop.index -%}
+            <div class="apex-faq-cats__group" id="{{ cat_anchor }}" {{ block.shopify_attributes }}>
+              {%- if block.settings.category_name != blank -%}
+                <h3 class="apex-faq-cats__group-title h4">{{ block.settings.category_name }}</h3>
+              {%- endif -%}
+
+              <div class="accordion"{% if s.single_open %} data-accordion-single{% endif %}>
+                {%- if block.settings.q1 != blank -%}
+                  <details class="accordion__item">
+                    <summary class="accordion__head"><span>{{ block.settings.q1 }}</span><span class="accordion__icon" aria-hidden="true"></span></summary>
+                    <div class="accordion__body rte">{{ block.settings.a1 }}</div>
+                  </details>
+                {%- endif -%}
+                {%- if block.settings.q2 != blank -%}
+                  <details class="accordion__item">
+                    <summary class="accordion__head"><span>{{ block.settings.q2 }}</span><span class="accordion__icon" aria-hidden="true"></span></summary>
+                    <div class="accordion__body rte">{{ block.settings.a2 }}</div>
+                  </details>
+                {%- endif -%}
+                {%- if block.settings.q3 != blank -%}
+                  <details class="accordion__item">
+                    <summary class="accordion__head"><span>{{ block.settings.q3 }}</span><span class="accordion__icon" aria-hidden="true"></span></summary>
+                    <div class="accordion__body rte">{{ block.settings.a3 }}</div>
+                  </details>
+                {%- endif -%}
+                {%- if block.settings.q4 != blank -%}
+                  <details class="accordion__item">
+                    <summary class="accordion__head"><span>{{ block.settings.q4 }}</span><span class="accordion__icon" aria-hidden="true"></span></summary>
+                    <div class="accordion__body rte">{{ block.settings.a4 }}</div>
+                  </details>
+                {%- endif -%}
+                {%- if block.settings.q5 != blank -%}
+                  <details class="accordion__item">
+                    <summary class="accordion__head"><span>{{ block.settings.q5 }}</span><span class="accordion__icon" aria-hidden="true"></span></summary>
+                    <div class="accordion__body rte">{{ block.settings.a5 }}</div>
+                  </details>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-faq-cats__layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: clamp(2rem,4vw,4rem);
+  align-items: start;
+}
+.apex-faq-cats__nav {
+  position: sticky;
+  top: 100px;
+}
+.apex-faq-cats__nav-list {
+  display: grid;
+  gap: .25rem;
+}
+.apex-faq-cats__nav-link {
+  display: block;
+  padding: .55rem .9rem;
+  font-size: .92rem;
+  font-weight: 600;
+  border-radius: var(--radius-btn);
+  color: var(--text-muted);
+  border-left: 3px solid transparent;
+  transition: color .2s, border-color .2s, background .2s;
+}
+.apex-faq-cats__nav-link:hover,
+.apex-faq-cats__nav-link.is-active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.apex-faq-cats__groups {
+  display: grid;
+  gap: clamp(2.4rem,4vw,3.6rem);
+}
+.apex-faq-cats__group-title {
+  padding-bottom: .9rem;
+  margin-bottom: .6rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--text);
+}
+@media (max-width: 768px) {
+  .apex-faq-cats__layout {
+    grid-template-columns: 1fr;
+  }
+  .apex-faq-cats__nav {
+    position: static;
+    overflow-x: auto;
+  }
+  .apex-faq-cats__nav-list {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: nowrap;
+    padding-bottom: .4rem;
+  }
+  .apex-faq-cats__nav-link {
+    white-space: nowrap;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+  }
+  .apex-faq-cats__nav-link:hover,
+  .apex-faq-cats__nav-link.is-active {
+    border-left-color: transparent;
+    border-bottom-color: var(--accent);
+  }
+}
+{% endstylesheet %}
+{% javascript %}
+(function () {
+  var section = document.getElementById('faq-cats-{{ section.id }}');
+  if (!section) return;
+  var links = section.querySelectorAll('.apex-faq-cats__nav-link');
+  if (!links.length) return;
+
+  function setActive(id) {
+    links.forEach(function (l) {
+      l.classList.toggle('is-active', l.getAttribute('href') === '#' + id);
+    });
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) setActive(e.target.id);
+    });
+  }, { rootMargin: '-20% 0px -60% 0px' });
+
+  section.querySelectorAll('.apex-faq-cats__group').forEach(function (g) {
+    observer.observe(g);
+  });
+})();
+{% endjavascript %}
+{% schema %}
+{
+  "name": "FAQ categories",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Support"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently asked questions"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "center_header",
+      "label": "Center header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "single_open",
+      "label": "Only one item open at a time (per category)",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "FAQ category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_name",
+          "label": "Category name",
+          "default": "General"
+        },
+        {
+          "type": "text",
+          "id": "q1",
+          "label": "Question 1",
+          "default": "What makes your product different?"
+        },
+        {
+          "type": "richtext",
+          "id": "a1",
+          "label": "Answer 1",
+          "default": "<p>Our products are developed with precision-sourced ingredients and manufactured to the highest standards, so every batch performs consistently.</p>"
+        },
+        {
+          "type": "text",
+          "id": "q2",
+          "label": "Question 2",
+          "default": "Do you offer a satisfaction guarantee?"
+        },
+        {
+          "type": "richtext",
+          "id": "a2",
+          "label": "Answer 2",
+          "default": "<p>Yes — if you're not satisfied within 30 days of purchase, contact us and we'll arrange a full refund with no questions asked.</p>"
+        },
+        {
+          "type": "text",
+          "id": "q3",
+          "label": "Question 3"
+        },
+        {
+          "type": "richtext",
+          "id": "a3",
+          "label": "Answer 3"
+        },
+        {
+          "type": "text",
+          "id": "q4",
+          "label": "Question 4"
+        },
+        {
+          "type": "richtext",
+          "id": "a4",
+          "label": "Answer 4"
+        },
+        {
+          "type": "text",
+          "id": "q5",
+          "label": "Question 5"
+        },
+        {
+          "type": "richtext",
+          "id": "a5",
+          "label": "Answer 5"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ categories",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "category_name": "General",
+            "q1": "What makes your product different?",
+            "a1": "<p>Every detail — from ingredient sourcing to packaging — is designed to give you a measurably better experience than alternatives at the same price point.</p>",
+            "q2": "Do you offer a satisfaction guarantee?",
+            "a2": "<p>Absolutely. If you're not happy within 30 days of delivery, reach out to our team and we'll arrange a full refund.</p>",
+            "q3": "Where are your products made?",
+            "a3": "<p>All products are manufactured in certified facilities that comply with ISO and GMP standards. We publish full supply-chain transparency reports annually.</p>"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_name": "Shipping",
+            "q1": "How long does standard shipping take?",
+            "a1": "<p>Standard shipping typically takes 3–5 business days. Express options delivering within 1–2 business days are available at checkout.</p>",
+            "q2": "Do you ship internationally?",
+            "a2": "<p>Yes — we deliver to over 50 countries. Shipping rates and estimated delivery windows are shown at checkout based on your location.</p>",
+            "q3": "Can I track my order?",
+            "a3": "<p>Yes. Once your order ships you'll receive a tracking link by email. You can also view live tracking from your account dashboard.</p>"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_name": "Returns",
+            "q1": "What is your return policy?",
+            "a1": "<p>We accept returns within 30 days of delivery for items in original condition. Initiating a return takes under two minutes from your account page.</p>",
+            "q2": "How long do refunds take?",
+            "a2": "<p>Refunds are processed within 2 business days of receiving the returned item and typically appear in your account within 5–7 business days depending on your bank.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

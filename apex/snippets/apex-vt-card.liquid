@@ -1,0 +1,54 @@
+{%- comment -%} Video-testimonial card. Params: block, modal_id, vurl, vtype, yt_id, vim_id, stars, role {%- endcomment -%}
+<div class="apex-video-testimonials__card card" role="{{ role | default: 'listitem' }}" {{ block.shopify_attributes }}>
+  {%- if vurl != blank -%}
+    <button class="apex-video-testimonials__trigger" data-open="{{ modal_id }}" aria-label="Play review by {{ block.settings.author | default: 'customer' | escape }}">
+  {%- else -%}
+    <div class="apex-video-testimonials__trigger apex-video-testimonials__trigger--static">
+  {%- endif -%}
+      <div class="media media--portrait apex-video-testimonials__cover">
+        {%- if block.settings.cover != blank -%}
+          {{ block.settings.cover | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300,400,600', sizes: '(min-width:990px) 280px, 50vw', alt: block.settings.cover.alt }}
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+        {%- if vurl != blank -%}
+          <span class="apex-video-testimonials__play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24" aria-hidden="true"><path d="M8 5.1v13.8L19 12Z"/></svg></span>
+        {%- endif -%}
+      </div>
+  {%- if vurl != blank -%}</button>{%- else -%}</div>{%- endif -%}
+
+  <div class="apex-video-testimonials__body">
+    <div class="apex-video-testimonials__stars" aria-label="{{ stars }} out of 5 stars">
+      {%- for i in (1..5) -%}<span class="apex-video-testimonials__star{% if i > stars %} apex-video-testimonials__star--empty{% endif %}" aria-hidden="true">{% render 'icon', icon: 'star' %}</span>{%- endfor -%}
+    </div>
+    {%- if block.settings.quote != blank -%}<blockquote class="apex-video-testimonials__quote"><p>{{ block.settings.quote }}</p></blockquote>{%- endif -%}
+    <footer class="apex-video-testimonials__footer">
+      <cite class="apex-video-testimonials__author">{{ block.settings.author | default: 'Happy Customer' }}</cite>
+      {%- if block.settings.verified -%}<span class="badge">{% render 'icon', icon: 'check' %} Verified</span>{%- endif -%}
+    </footer>
+  </div>
+
+  {%- if vurl != blank -%}
+    <div class="overlay" id="{{ modal_id }}-overlay" data-close="{{ modal_id }}"></div>
+    <div class="modal" id="{{ modal_id }}" role="dialog" aria-modal="true" aria-label="{{ block.settings.author | default: 'Video review' | escape }}">
+      <div class="modal__box apex-video-testimonials__modal-box">
+        <button class="apex-video-testimonials__close icon-btn" data-close="{{ modal_id }}" aria-label="Close video">{% render 'icon', icon: 'close' %}</button>
+        <div class="apex-video-testimonials__embed media media--portrait">
+          {%- if vtype == 'youtube' -%}
+            <iframe src="https://www.youtube.com/embed/{{ yt_id }}?autoplay=1&rel=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="{{ block.settings.author | default: 'Video review' | escape }}" loading="lazy"></iframe>
+          {%- elsif vtype == 'vimeo' -%}
+            <iframe src="https://player.vimeo.com/video/{{ vim_id }}?autoplay=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="{{ block.settings.author | default: 'Video review' | escape }}" loading="lazy"></iframe>
+          {%- else -%}
+            <video controls autoplay playsinline{%- if block.settings.cover != blank %} poster="{{ block.settings.cover | image_url: width: 800 }}"{% endif %}><source src="{{ vurl }}" type="video/mp4"></video>
+          {%- endif -%}
+        </div>
+        {%- if block.settings.author != blank or block.settings.quote != blank -%}
+          <div class="apex-video-testimonials__modal-meta">
+            {%- if block.settings.quote != blank -%}<p class="apex-video-testimonials__modal-quote">{{ block.settings.quote }}</p>{%- endif -%}
+            <cite class="apex-video-testimonials__author">{{ block.settings.author | default: 'Happy Customer' }}</cite>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>

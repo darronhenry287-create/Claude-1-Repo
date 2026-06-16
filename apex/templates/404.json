@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "settings": {
+        "heading": "Page not found",
+        "message": "Sorry, the page you're looking for doesn't exist or has been moved. Try searching or head back home.",
+        "show_search": true,
+        "search_placeholder": "Search our store…",
+        "button_label": "Back to home",
+        "color_scheme": "scheme-1",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

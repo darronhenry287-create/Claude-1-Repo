@@ -1,0 +1,52 @@
+<section class="section">
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--line)">
+      <div>
+        <div class="kicker" style="margin-bottom:.5rem">// My account</div>
+        <h1>Hi, {{ customer.first_name | default: 'there' }}</h1>
+      </div>
+      <a href="{{ routes.account_logout_url }}" class="btn btn-ghost btn-sm">Sign out</a>
+    </div>
+
+    <div class="spec__grid" style="align-items:start">
+      <div>
+        <h3 style="margin-bottom:1.1rem">Default address</h3>
+        <div class="panel" style="padding:1.4rem">
+          {%- if customer.default_address -%}
+            <p class="muted" style="line-height:1.9;font-size:.95rem">{{ customer.default_address | format_address }}</p>
+          {%- else -%}
+            <p class="muted" style="font-size:.95rem">No address on file.</p>
+          {%- endif -%}
+          <a href="{{ routes.account_addresses_url }}" class="mint" style="display:inline-block;margin-top:1rem;font-size:.88rem;font-weight:600;text-decoration:underline;text-underline-offset:3px">Manage addresses →</a>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom:1.1rem">Order history</h3>
+        {%- paginate customer.orders by 10 -%}
+          {%- if customer.orders.size > 0 -%}
+            <div style="border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden">
+              {%- for order in customer.orders -%}
+                <div class="cline" style="grid-template-columns:1fr auto;padding:1rem 1.4rem;border-bottom:1px solid var(--line)">
+                  <div>
+                    <a href="{{ order.customer_url }}" class="mint" style="font-weight:600;text-decoration:underline;text-underline-offset:3px">{{ order.name }}</a>
+                    <div class="muted" style="font-size:.8rem;margin-top:.2rem">{{ order.created_at | date: '%b %-d, %Y' }} · {{ order.financial_status_label }}</div>
+                  </div>
+                  <div class="cline__price">{{ order.total_price | money }}</div>
+                </div>
+              {%- endfor -%}
+            </div>
+            {%- if paginate.pages > 1 -%}
+              <div style="margin-top:1.5rem">{{ paginate | default_pagination }}</div>
+            {%- endif -%}
+          {%- else -%}
+            <div class="panel" style="padding:1.8rem;text-align:center">
+              <p class="muted" style="margin-bottom:1.2rem">No orders yet. Start your protocol.</p>
+              <a href="{{ routes.all_products_collection_url }}" class="btn btn-mint">Shop AEON</a>
+            </div>
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+    </div>
+  </div>
+</section>

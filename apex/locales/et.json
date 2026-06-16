@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "Sulge",
+    "refresh_page": "Valiku tegemine laadib kogu lehe uuesti.",
+    "skip_to_text": "Jäta sisu juurde"
+  },
+  "general": {
+    "continue_shopping": "Jätka ostlemist",
+    "video": {
+      "play": "Esita video",
+      "no_video": "Video URL puudub."
+    },
+    "accessibility": {
+      "close": "Sulge"
+    },
+    "page": "Lehekülg {{ page }}",
+    "tags": "Sildid",
+    "search_placeholder": "Otsi tooteid…",
+    "pagination": {
+      "label": "Lehekülgede navigatsioon",
+      "load_more": "Laadi rohkem",
+      "next": "Järgmine",
+      "previous": "Eelmine"
+    },
+    "search": {
+      "search": "Otsi",
+      "placeholder": "Otsi tooteid…",
+      "prompt": "Mida otsite?",
+      "for": "Otsi",
+      "suggestions": "Soovitused",
+      "products": "Tooted",
+      "pages": "Leheküljed",
+      "articles": "Artiklid",
+      "result": "tulemus",
+      "results": "tulemust",
+      "view_all": "Vaata kõiki {{ count }} tulemust",
+      "browse_all": "Sirvi kõiki tooteid",
+      "no_results": "Tulemusi pole otsinguks „{{ terms }}”",
+      "no_results_for": "Tulemusi ei leitud otsinguks",
+      "no_results_detail": "Proovige teist otsingut või sirvige meie kataloogi."
+    },
+    "slider": {
+      "next": "Järgmine slaid",
+      "previous": "Eelmine slaid"
+    }
+  },
+  "newsletter": {
+    "label": "E-post",
+    "placeholder": "E-posti aadress",
+    "success": "Täname tellimuse eest!"
+  },
+  "payment": {
+    "methods": "Aktsepteeritud makseviisid"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Lisa ostukorvi",
+      "buy": "Osta",
+      "choose_options": "Vali variandid",
+      "from": "Alates",
+      "in_stock": "Laos olemas",
+      "low_stock": "Alles on ainult {{ quantity }}",
+      "sold_out": "Otsas",
+      "unavailable": "Pole saadaval",
+      "quantity": "Kogus",
+      "increase": "Suurenda kogust",
+      "decrease": "Vähenda kogust",
+      "save": "Säästa {{ savings }}",
+      "view_full_details": "Vaata täielikke üksikasju",
+      "media": {
+        "load_image": "Laadi pilt {{ index }}"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menüü"
+    },
+    "cart": {
+      "title": "Teie ostukorv",
+      "empty": "Teie ostukorv on tühi",
+      "empty_detail": "Leiame teile midagi.",
+      "item": "toode",
+      "items": "toodet",
+      "quantity": "Kogus",
+      "increase": "Suurenda kogust",
+      "decrease": "Vähenda kogust",
+      "remove": "Eemalda",
+      "note": "Lisa tellimusele märkus",
+      "note_placeholder": "Erijuhised teie tellimuse jaoks",
+      "subtotal": "Vahesumma",
+      "summary": "Kokkuvõte",
+      "taxes": "Maksud ja saatmine arvutatakse kassas.",
+      "checkout": "Kassa",
+      "each": "tk",
+      "original": "Esialgne hind",
+      "free_ship_progress": "Tasuta saatmiseni jääb veel {{ amount }}",
+      "free_ship_progress_html": "Tasuta saatmiseni jääb veel <strong>{{ amount }}</strong>",
+      "free_ship_unlocked": "Olete tasuta saatmise avannud!"
+    },
+    "collection": {
+      "count": "{{ count }} toodet",
+      "products": "toodet",
+      "empty": "Tooteid ei leitud",
+      "empty_detail": "Proovige mõned filtrid eemaldada.",
+      "filter": "Filter",
+      "apply": "Rakenda",
+      "clear_filters": "Tühjenda kõik",
+      "sort_label": "Sorteeri",
+      "price_from": "Alates",
+      "price_to": "Kuni"
+    },
+    "collection_list": {
+      "empty": "Kuvamiseks pole kollektsioone",
+      "products": "toodet"
+    },
+    "featured_collection": {
+      "empty": "Kuvamiseks pole tooteid"
+    }
+  },
+  "customer": {
+    "log_out": "Logi välja",
+    "account": {
+      "title": "Konto",
+      "details": "Konto andmed",
+      "return": "Tagasi kontole",
+      "view_addresses": "Vaata aadresse"
+    },
+    "login": {
+      "title": "Logi sisse",
+      "email": "E-post",
+      "password": "Parool",
+      "sign_in": "Logi sisse",
+      "forgot_password": "Unustasite parooli?",
+      "no_account": "Pole kontot?",
+      "create_account": "Loo konto",
+      "cancel": "Tühista"
+    },
+    "register": {
+      "title": "Loo konto",
+      "first_name": "Eesnimi",
+      "last_name": "Perekonnanimi",
+      "email": "E-post",
+      "password": "Parool",
+      "password_placeholder": "Vähemalt 5 tähemärki",
+      "submit": "Loo konto",
+      "login": "On juba konto? Logi sisse"
+    },
+    "recover_password": {
+      "title": "Taasta parool",
+      "subtext": "Saadame teile taastamise e-kirja.",
+      "submit": "Saada taastamise e-kiri",
+      "success": "Saatsime teile e-kirja parooli lähtestamise lingiga."
+    },
+    "reset_password": {
+      "title": "Lähtesta konto parool",
+      "subtext": "Sisestage uus parool.",
+      "password": "Parool",
+      "password_confirm": "Kinnita parool",
+      "password_placeholder": "Uus parool",
+      "submit": "Lähtesta parool"
+    },
+    "activate_account": {
+      "title": "Aktiveeri konto",
+      "subtext": "Looge parool konto aktiveerimiseks.",
+      "password": "Parool",
+      "password_placeholder": "Parool",
+      "password_confirm": "Kinnita parool",
+      "password_confirm_placeholder": "Kinnita parool",
+      "submit": "Aktiveeri konto",
+      "cancel": "Lükka kutse tagasi"
+    },
+    "orders": {
+      "title": "Tellimuste ajalugu",
+      "none": "Te pole veel ühtegi tellimust esitanud.",
+      "order_number": "Tellimus",
+      "date": "Kuupäev",
+      "payment_status": "Makse",
+      "fulfillment_status": "Täitmine",
+      "total": "Kokku"
+    },
+    "order": {
+      "title": "Tellimus {{ name }}",
+      "date_html": "Esitatud {{ date }}",
+      "fulfilled_at_html": "Täidetud {{ date }}",
+      "summary": "Tellimuse kokkuvõte",
+      "items": "Tooted",
+      "quantity": "Kog.",
+      "subtotal": "Vahesumma",
+      "total": "Kokku",
+      "shipping_address": "Tarneaadress",
+      "billing_address": "Arveaadress"
+    },
+    "addresses": {
+      "title": "Aadressid",
+      "first_name": "Eesnimi",
+      "last_name": "Perekonnanimi",
+      "company": "Ettevõte",
+      "address1": "Aadress",
+      "address2": "Korter, korrus jne",
+      "city": "Linn",
+      "zip": "Postiindeks",
+      "country": "Riik / piirkond",
+      "province": "Maakond / provints",
+      "phone": "Telefon",
+      "default": "Vaikimisi",
+      "default_address": "Vaikimisi aadress",
+      "add_new": "Lisa uus aadress",
+      "add": "Lisa aadress",
+      "update": "Uuenda aadressi",
+      "edit": "Muuda",
+      "delete": "Kustuta",
+      "delete_confirm": "Kas olete kindel, et soovite selle aadressi kustutada?",
+      "set_default": "Määra vaikimisi",
+      "cancel": "Tühista",
+      "none": "Teil pole salvestatud aadresse."
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "autor: {{ author }}"
+    },
+    "comments": {
+      "title": "Kommentaarid",
+      "name": "Nimi",
+      "email": "E-post",
+      "message": "Kommentaar",
+      "post": "Postita kommentaar",
+      "success": "Teie kommentaar postitati edukalt!",
+      "comments_with_count": "{{ count }} kommentaari"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Nimi",
+      "email": "E-post",
+      "phone": "Telefon",
+      "phone_placeholder": "Valikuline",
+      "message": "Sõnum",
+      "message_placeholder": "Kuidas saame teid aidata?"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Siin on teie {{ value }} kinkekaart!",
+      "remaining_html": "{{ balance }} järel",
+      "expiry_date": "Aegub {{ expiry }}",
+      "copy_code": "Kopeeri kood",
+      "shop_link": "Alusta ostlemist",
+      "print_link": "Prindi"
+    }
+  }
+}

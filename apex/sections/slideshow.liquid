@@ -1,0 +1,401 @@
+{%- liquid
+  assign s = section.settings
+  assign autoplay_ms = s.autoplay_speed | times: 1000
+-%}
+<section class="apex-slideshow color-{{ s.color_scheme }} apex-slideshow--{{ s.height }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="slideshow-{{ section.id }}"
+  data-autoplay="{{ s.autoplay }}"
+  data-autoplay-speed="{{ autoplay_ms }}">
+
+  <div class="apex-slideshow__stage">
+    <div class="apex-slideshow__track" data-slider aria-label="Slideshow" role="region">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign bs = block.settings
+          assign txt_pos = bs.text_position | default: 'center'
+        -%}
+        <div class="apex-slideshow__slide apex-slideshow__slide--{{ txt_pos }}"
+          role="group"
+          aria-label="Slide {{ forloop.index }} of {{ section.blocks.size }}"
+          style="--overlay:{{ bs.overlay_opacity | divided_by: 100.0 }}"
+          {{ block.shopify_attributes }}>
+
+          <div class="apex-slideshow__media">
+            {%- if bs.image != blank -%}
+              {%- assign sl = 'lazy' -%}{%- assign sp = 'auto' -%}{%- if forloop.first -%}{%- assign sl = 'eager' -%}{%- assign sp = 'high' -%}{%- endif -%}{{ bs.image | image_url: width: 2000 | image_tag: loading: sl, fetchpriority: sp, widths: '600,900,1200,1600,2000', sizes: '100vw', alt: bs.image.alt }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+
+          <div class="page-width apex-slideshow__content-wrap">
+            <div class="apex-slideshow__content reveal stack">
+              {%- if bs.eyebrow != blank -%}
+                <p class="eyebrow eyebrow--pill" style="--accent:#fff;color:#fff;background:rgba(255,255,255,.18)">{{ bs.eyebrow }}</p>
+              {%- endif -%}
+              {%- if bs.heading != blank -%}
+                <h2 class="apex-slideshow__heading balance">{{ bs.heading }}</h2>
+              {%- endif -%}
+              {%- if bs.text != blank -%}
+                <div class="subtitle balance">{{ bs.text }}</div>
+              {%- endif -%}
+              {%- if bs.button_1 != blank or bs.button_2 != blank -%}
+                <div class="cluster apex-slideshow__btns">
+                  {%- if bs.button_1 != blank -%}<a class="btn btn--accent btn--lg" href="{{ bs.button_1_url }}">{{ bs.button_1 }}</a>{%- endif -%}
+                  {%- if bs.button_2 != blank -%}<a class="btn btn--ghost btn--lg" style="color:#fff;border-color:rgba(255,255,255,.5)" href="{{ bs.button_2_url }}">{{ bs.button_2 }}</a>{%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.blocks.size > 1 -%}
+      <div class="apex-slideshow__controls">
+        <button class="apex-slideshow__arrow apex-slideshow__arrow--prev" data-slider-prev aria-label="Previous slide">
+          {% render 'icon', icon: 'arrow-left' %}
+        </button>
+        <button class="apex-slideshow__arrow apex-slideshow__arrow--next" data-slider-next aria-label="Next slide">
+          {% render 'icon', icon: 'arrow-right' %}
+        </button>
+      </div>
+
+      <div class="apex-slideshow__dots" role="tablist" aria-label="Slideshow navigation">
+        {%- for block in section.blocks -%}
+          <button class="apex-slideshow__dot{% if forloop.first %} is-active{% endif %}"
+            role="tab"
+            aria-label="Go to slide {{ forloop.index }}"
+            aria-selected="{{ forloop.first }}"
+            data-dot="{{ forloop.index0 }}"></button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+
+</section>
+{% stylesheet %}
+.apex-slideshow { display: block; }
+.apex-slideshow__stage { position: relative; overflow: hidden; }
+.apex-slideshow--sm .apex-slideshow__stage { min-height: 42vh; }
+.apex-slideshow--md .apex-slideshow__stage { min-height: 60vh; }
+.apex-slideshow--lg .apex-slideshow__stage { min-height: 78vh; }
+.apex-slideshow--full .apex-slideshow__stage { min-height: 100svh; }
+.apex-slideshow__track {
+  display: flex;
+  overflow: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.apex-slideshow__slide {
+  position: relative;
+  flex: 0 0 100%;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  min-height: inherit;
+}
+.apex-slideshow__slide--left .apex-slideshow__content-wrap { justify-items: start; }
+.apex-slideshow__slide--center .apex-slideshow__content-wrap { justify-items: center; text-align: center; }
+.apex-slideshow__slide--right .apex-slideshow__content-wrap { justify-items: end; text-align: right; }
+.apex-slideshow__media {
+  position: absolute;
+  inset: 0;
+}
+.apex-slideshow__media img,
+.apex-slideshow__media video,
+.apex-slideshow__media svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.apex-slideshow__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: var(--overlay, 0.3);
+}
+.apex-slideshow__content-wrap {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: grid;
+  padding-block: clamp(3rem, 6vw, 6rem);
+}
+.apex-slideshow__content {
+  max-width: 40rem;
+  color: #fff;
+  gap: 1.2rem;
+}
+.apex-slideshow__heading {
+  font-size: clamp(2rem, 1rem + 4vw, 3.6rem);
+  line-height: 1.05;
+}
+.apex-slideshow__btns { gap: 1rem; }
+.apex-slideshow__controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 1rem;
+  pointer-events: none;
+  z-index: 10;
+}
+.apex-slideshow__arrow {
+  pointer-events: all;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255,255,255,.18);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.3);
+  display: grid;
+  place-items: center;
+  transition: background .2s;
+}
+.apex-slideshow__arrow:hover { background: rgba(255,255,255,.32); }
+.apex-slideshow__arrow svg { width: 1.2rem; height: 1.2rem; }
+.apex-slideshow__dots {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: .5rem;
+  z-index: 10;
+}
+.apex-slideshow__dot {
+  width: .55rem;
+  height: .55rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255,255,255,.4);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background .2s, width .3s var(--ease);
+}
+.apex-slideshow__dot.is-active {
+  background: #fff;
+  width: 1.6rem;
+}
+{% endstylesheet %}
+{% javascript %}
+(function () {
+  const section = document.getElementById('slideshow-{{ section.id }}');
+  if (!section) return;
+  const track = section.querySelector('[data-slider]');
+  const slides = section.querySelectorAll('.apex-slideshow__slide');
+  const dots = section.querySelectorAll('.apex-slideshow__dot');
+  const prevBtn = section.querySelector('[data-slider-prev]');
+  const nextBtn = section.querySelector('[data-slider-next]');
+  let current = 0;
+  let timer = null;
+  const autoplay = section.dataset.autoplay === 'true';
+  const speed = parseInt(section.dataset.autoplaySpeed) || 5000;
+
+  function goTo(idx) {
+    current = (idx + slides.length) % slides.length;
+    track.scrollTo({ left: track.offsetWidth * current, behavior: 'smooth' });
+    dots.forEach((d, i) => {
+      d.classList.toggle('is-active', i === current);
+      d.setAttribute('aria-selected', i === current);
+    });
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', () => { clearInterval(timer); goTo(current - 1); startAuto(); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { clearInterval(timer); goTo(current + 1); startAuto(); });
+  dots.forEach((dot, i) => dot.addEventListener('click', () => { clearInterval(timer); goTo(i); startAuto(); }));
+
+  function startAuto() {
+    if (!autoplay || slides.length < 2) return;
+    timer = setInterval(() => goTo(current + 1), speed);
+  }
+  startAuto();
+})();
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Slideshow",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Slide height",
+      "default": "md",
+      "options": [
+        {
+          "value": "sm",
+          "label": "Small"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "full",
+          "label": "Full screen"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-advance slides",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Auto-advance speed",
+      "default": 5
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background image"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "%",
+          "label": "Image overlay opacity",
+          "default": 35
+        },
+        {
+          "type": "select",
+          "id": "text_position",
+          "label": "Content position",
+          "default": "center",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow text"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Our latest collection"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Subtext",
+          "default": "Thoughtfully designed for everyday life."
+        },
+        {
+          "type": "text",
+          "id": "button_1",
+          "label": "Button 1 label",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "button_1_url",
+          "label": "Button 1 link"
+        },
+        {
+          "type": "text",
+          "id": "button_2",
+          "label": "Button 2 label"
+        },
+        {
+          "type": "url",
+          "id": "button_2_url",
+          "label": "Button 2 link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slideshow",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "New season. New standards.",
+            "text": "Explore the collection crafted for those who care about quality.",
+            "button_1": "Shop now"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "Designed for real life.",
+            "text": "Every product built to perform beautifully, every single day.",
+            "button_1": "Explore"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

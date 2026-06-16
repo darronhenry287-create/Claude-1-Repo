@@ -1,0 +1,99 @@
+{%- comment -%} templates/customers/login.liquid — Apex customer login with recover password toggle {%- endcomment -%}
+<div class="page-width page-width--narrow apex-customers" style="padding-block:clamp(3rem,2rem + 4vw,5rem)">
+
+  {%- comment -%} Login form {%- endcomment -%}
+  <div class="card bordered apex-customers__card" id="customer-login-form">
+    <h1 class="h3">{{ 'customer.login.title' | t | default: 'Log in' }}</h1>
+
+    {%- form 'customer_login' -%}
+      {%- if form.errors -%}
+        <div class="apex-customers__error" role="alert">
+          {% render 'icon', icon: 'close' %}
+          <div>{{ form.errors | default_errors }}</div>
+        </div>
+      {%- endif -%}
+
+      <div class="stack apex-customers__fields">
+        <div class="field">
+          <label for="CustomerEmail">{{ 'customer.login.email' | t | default: 'Email' }}</label>
+          <input class="input" type="email" id="CustomerEmail" name="customer[email]"
+            autocomplete="email" autocorrect="off" autocapitalize="off"
+            value="{{ form.email }}" required placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label for="CustomerPassword">{{ 'customer.login.password' | t | default: 'Password' }}</label>
+          <input class="input" type="password" id="CustomerPassword" name="customer[password]"
+            autocomplete="current-password" required placeholder="••••••••">
+        </div>
+
+        <div class="cluster" style="justify-content:space-between;flex-wrap:wrap;gap:.5rem">
+          <button class="btn btn--accent" type="submit">
+            {{ 'customer.login.sign_in' | t | default: 'Sign in' }}
+          </button>
+          <button type="button" class="link" onclick="apexToggleRecover(true)">
+            {{ 'customer.login.forgot_password' | t | default: 'Forgot password?' }}
+          </button>
+        </div>
+      </div>
+    {%- endform -%}
+
+    <hr class="divider" style="margin-block:1.4rem">
+    <p class="muted" style="font-size:var(--text-sm)">
+      {{ 'customer.login.no_account' | t | default: "Don't have an account?" }}
+      <a class="link" href="{{ routes.account_register_url }}">{{ 'customer.login.create_account' | t | default: 'Create account' }}</a>
+    </p>
+  </div>
+
+  {%- comment -%} Recover password form (hidden by default) {%- endcomment -%}
+  <div class="card bordered apex-customers__card" id="recover-password-form" hidden>
+    <h1 class="h3">{{ 'customer.recover_password.title' | t | default: 'Reset password' }}</h1>
+    <p class="muted" style="margin-bottom:1.2rem">{{ 'customer.recover_password.subtext' | t | default: 'Enter your email address and we will send you a link to reset your password.' }}</p>
+
+    {%- form 'recover_customer_password' -%}
+      {%- if form.posted_successfully? -%}
+        <div class="apex-customers__success" role="status">
+          {% render 'icon', icon: 'check' %}
+          {{ 'customer.recover_password.success' | t | default: 'Check your email — a reset link is on its way.' }}
+        </div>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <div class="apex-customers__error" role="alert">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+
+      <div class="stack apex-customers__fields">
+        <div class="field">
+          <label for="RecoverEmail">{{ 'customer.login.email' | t | default: 'Email' }}</label>
+          <input class="input" type="email" id="RecoverEmail" name="email"
+            autocomplete="email" value="{{ form.email }}" required placeholder="you@example.com">
+        </div>
+        <div class="cluster" style="gap:.8rem">
+          <button class="btn btn--accent" type="submit">
+            {{ 'customer.recover_password.submit' | t | default: 'Send reset link' }}
+          </button>
+          <button type="button" class="btn btn--ghost" onclick="apexToggleRecover(false)">
+            {{ 'customer.login.cancel' | t | default: 'Cancel' }}
+          </button>
+        </div>
+      </div>
+    {%- endform -%}
+  </div>
+
+</div>
+<style>
+.apex-customers { max-width: 440px; }
+.apex-customers__card { padding: clamp(1.4rem,.8rem + 2vw,2.4rem); }
+.apex-customers__card h1 { margin-bottom: 1.4rem; }
+.apex-customers__fields { gap: 1rem; }
+.apex-customers__error { display: flex; align-items: flex-start; gap: .6rem; padding: .9rem 1rem; background: color-mix(in srgb, var(--sale) 10%, transparent); color: var(--sale); border-radius: var(--radius-sm); margin-bottom: 1rem; font-size: var(--text-sm); }
+.apex-customers__error svg, .apex-customers__success svg { width: 1.1rem; height: 1.1rem; flex: none; margin-top: .1em; }
+.apex-customers__success { display: flex; align-items: flex-start; gap: .6rem; padding: .9rem 1rem; background: color-mix(in srgb, var(--success) 10%, transparent); color: var(--success); border-radius: var(--radius-sm); margin-bottom: 1rem; font-size: var(--text-sm); }
+</style>
+<script>
+function apexToggleRecover(show) {
+  document.getElementById('customer-login-form').hidden = show;
+  document.getElementById('recover-password-form').hidden = !show;
+}
+{%- if form.errors and request.path contains 'recover' -%}
+document.addEventListener('DOMContentLoaded', function() { apexToggleRecover(true); });
+{%- endif -%}
+</script>

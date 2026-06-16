@@ -1,0 +1,21 @@
+{%- comment -%} Usage: {% render 'price', product: product %} or {% render 'price', price: 1999 %} {%- endcomment -%}
+{%- liquid
+  if product
+    assign target = product.selected_or_first_available_variant | default: product
+    assign current = target.price
+    assign compare = target.compare_at_price
+    assign varies = product.price_varies
+  else
+    assign current = price
+    assign compare = compare_at
+  endif
+  assign on_sale = false
+  if compare and compare > current
+    assign on_sale = true
+  endif
+-%}
+<span class="price{% if on_sale %} price--sale{% endif %}">
+  {%- if varies -%}<span class="price__from">{{ 'products.product.from' | t | default: 'From' }}</span> {%- endif -%}
+  <span class="price__current">{{ current | money }}</span>
+  {%- if on_sale -%}<s class="price__compare">{{ compare | money }}</s>{%- endif -%}
+</span>

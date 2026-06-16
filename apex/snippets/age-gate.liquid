@@ -1,0 +1,17 @@
+{%- comment -%} Shown once via base.js (stores acceptance in localStorage; hidden in the theme editor). {%- endcomment -%}
+<div class="apex-age-gate color-scheme-1" id="apex-age-gate" role="dialog" aria-modal="true" aria-label="Age verification">
+  <div class="apex-age-gate__box">
+    {%- if settings.logo != blank -%}
+      {{ settings.logo | image_url: width: 300 | image_tag: widths: '150,300', alt: shop.name, class: 'apex-age-gate__logo' }}
+    {%- else -%}
+      <div class="header__logo" style="font-size:1.6rem">{{ shop.name }}</div>
+    {%- endif -%}
+    <h2 class="h3">{{ settings.age_check_heading | default: 'Are you 18 or older?' }}</h2>
+    <p class="muted">{{ settings.age_check_text | default: 'You must be of legal age to enter this store.' }}</p>
+    <div class="cluster" style="justify-content:center;margin-top:.4rem">
+      <button class="btn btn--accent btn--lg" data-age-yes>{{ settings.age_check_yes | default: 'Yes, I am' }}</button>
+      <button class="btn btn--secondary btn--lg" data-age-no>{{ settings.age_check_no | default: 'No' }}</button>
+    </div>
+    <p class="muted" data-age-deny hidden style="margin-top:1rem;color:var(--sale)">Sorry — you are not old enough to view this store.</p>
+  </div>
+</div>

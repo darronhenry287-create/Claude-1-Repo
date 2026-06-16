@@ -1,0 +1,41 @@
+{
+  "sections": {
+    "pagehead": {
+      "type": "aeon-pagehead",
+      "settings": {
+        "kicker": "Subscribe & Save",
+        "heading": "Longevity is a subscription, not a sprint.",
+        "subtext": "NAD⁺ support only compounds if you stay consistent. So we make consistency cheaper: subscribe and save up to 30%, shipped on your schedule. Skip, pause or cancel anytime."
+      }
+    },
+    "tiers": {
+      "type": "aeon-tiers",
+      "blocks": {
+        "t1": { "type": "tier", "settings": { "supply": "1-month", "name": "Starter", "save_label": "", "price": "$68", "compare": "", "per": "$1.13 / serving · one-time", "features": "1 bottle · 60 servings\nBatch COA included\nNo commitment", "best": false, "badge": "Most popular", "cta_label": "Add — $68" } },
+        "t2": { "type": "tier", "settings": { "supply": "3-month", "name": "Protocol", "save_label": "Save 25%", "price": "$153", "compare": "$204", "per": "$0.85 / serving · subscription", "features": "3 bottles · ships every 90 days\nFree priority shipping\nSkip / cancel anytime", "best": true, "badge": "Most popular", "cta_label": "Subscribe — $153" } },
+        "t3": { "type": "tier", "settings": { "supply": "6-month", "name": "Longevity", "save_label": "Save 30%", "price": "$286", "compare": "$408", "per": "$0.79 / serving · subscription", "features": "6 bottles · best value\nFree priority shipping\nLock today's price", "best": false, "badge": "Most popular", "cta_label": "Subscribe — $286" } }
+      },
+      "block_order": ["t1", "t2", "t3"],
+      "settings": {
+        "kicker": "Choose your supply",
+        "heading": "Commit to the protocol, save more.",
+        "lede": "Subscribe and save up to 25%. Skip, pause or cancel anytime."
+      }
+    },
+    "faq": {
+      "type": "aeon-faq",
+      "blocks": {
+        "q1": { "type": "qa", "settings": { "question": "Can I cancel anytime?", "answer": "Yes — manage everything from your account in two taps. Skip a delivery, change your cadence, or cancel outright with no penalty and no phone call." } },
+        "q2": { "type": "qa", "settings": { "question": "When am I charged?", "answer": "On the day each order ships. We email you a few days before so there are never surprises." } },
+        "q3": { "type": "qa", "settings": { "question": "Is the guarantee included?", "answer": "Always. Every subscription is covered by the same 60-night money-back guarantee as a one-time order." } }
+      },
+      "block_order": ["q1", "q2", "q3"],
+      "settings": {
+        "kicker": "Subscription FAQ",
+        "heading": "The fine print, in plain words.",
+        "footer_label": ""
+      }
+    }
+  },
+  "order": ["pagehead", "tiers", "faq"]
+}

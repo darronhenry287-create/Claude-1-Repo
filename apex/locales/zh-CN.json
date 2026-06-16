@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "关闭",
+    "refresh_page": "选择后将刷新整个页面。",
+    "skip_to_text": "跳转至内容"
+  },
+  "general": {
+    "continue_shopping": "继续购物",
+    "video": {
+      "play": "播放视频",
+      "no_video": "未设置视频链接。"
+    },
+    "accessibility": {
+      "close": "关闭"
+    },
+    "page": "第 {{ page }} 页",
+    "tags": "标签",
+    "search_placeholder": "搜索商品…",
+    "pagination": {
+      "label": "分页",
+      "load_more": "加载更多",
+      "next": "下一页",
+      "previous": "上一页"
+    },
+    "search": {
+      "search": "搜索",
+      "placeholder": "搜索商品…",
+      "prompt": "您在寻找什么？",
+      "for": "搜索",
+      "suggestions": "建议",
+      "products": "商品",
+      "pages": "页面",
+      "articles": "文章",
+      "result": "条结果",
+      "results": "条结果",
+      "view_all": "查看全部 {{ count }} 条结果",
+      "browse_all": "浏览所有商品",
+      "no_results": "未找到“{{ terms }}”的相关结果",
+      "no_results_for": "未找到相关结果",
+      "no_results_detail": "请尝试其他搜索词或浏览我们的商品目录。"
+    },
+    "slider": {
+      "next": "下一张",
+      "previous": "上一张"
+    }
+  },
+  "newsletter": {
+    "label": "电子邮件",
+    "placeholder": "电子邮件地址",
+    "success": "感谢您的订阅！"
+  },
+  "payment": {
+    "methods": "支持的支付方式"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "加入购物车",
+      "buy": "立即购买",
+      "choose_options": "选择规格",
+      "from": "起",
+      "in_stock": "有库存",
+      "low_stock": "仅剩 {{ quantity }} 件",
+      "sold_out": "已售罄",
+      "unavailable": "暂不可购",
+      "quantity": "数量",
+      "increase": "增加数量",
+      "decrease": "减少数量",
+      "save": "节省 {{ savings }}",
+      "view_full_details": "查看详情",
+      "media": {
+        "load_image": "加载图片 {{ index }}"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "菜单"
+    },
+    "cart": {
+      "title": "购物车",
+      "empty": "购物车为空",
+      "empty_detail": "来挑选您喜欢的商品吧。",
+      "item": "件",
+      "items": "件",
+      "quantity": "数量",
+      "increase": "增加数量",
+      "decrease": "减少数量",
+      "remove": "删除",
+      "note": "添加订单备注",
+      "note_placeholder": "订单特殊说明",
+      "subtotal": "小计",
+      "summary": "订单摘要",
+      "taxes": "税费和运费将在结账时计算。",
+      "checkout": "去结账",
+      "each": "每件",
+      "original": "原价",
+      "free_ship_progress": "再购 {{ amount }} 即可享受免费配送",
+      "free_ship_progress_html": "再购 <strong>{{ amount }}</strong> 即可享受免费配送",
+      "free_ship_unlocked": "您已解锁免费配送！"
+    },
+    "collection": {
+      "count": "共 {{ count }} 件商品",
+      "products": "商品",
+      "empty": "未找到商品",
+      "empty_detail": "请尝试移除部分筛选条件。",
+      "filter": "筛选",
+      "apply": "应用",
+      "clear_filters": "清除全部",
+      "sort_label": "排序方式",
+      "price_from": "最低价",
+      "price_to": "最高价"
+    },
+    "collection_list": {
+      "empty": "暂无分类",
+      "products": "商品"
+    },
+    "featured_collection": {
+      "empty": "暂无商品展示"
+    }
+  },
+  "customer": {
+    "log_out": "退出登录",
+    "account": {
+      "title": "账户",
+      "details": "账户详情",
+      "return": "返回账户",
+      "view_addresses": "查看地址"
+    },
+    "login": {
+      "title": "登录",
+      "email": "电子邮件",
+      "password": "密码",
+      "sign_in": "登录",
+      "forgot_password": "忘记密码？",
+      "no_account": "还没有账户？",
+      "create_account": "创建账户",
+      "cancel": "取消"
+    },
+    "register": {
+      "title": "创建账户",
+      "first_name": "名",
+      "last_name": "姓",
+      "email": "电子邮件",
+      "password": "密码",
+      "password_placeholder": "至少 5 个字符",
+      "submit": "创建账户",
+      "login": "已有账户？立即登录"
+    },
+    "recover_password": {
+      "title": "重置密码",
+      "subtext": "我们将向您发送重置邮件。",
+      "submit": "发送重置邮件",
+      "success": "我们已向您发送了包含密码重置链接的电子邮件。"
+    },
+    "reset_password": {
+      "title": "重置账户密码",
+      "subtext": "请输入新密码。",
+      "password": "密码",
+      "password_confirm": "确认密码",
+      "password_placeholder": "新密码",
+      "submit": "重置密码"
+    },
+    "activate_account": {
+      "title": "激活账户",
+      "subtext": "请创建密码以激活您的账户。",
+      "password": "密码",
+      "password_placeholder": "密码",
+      "password_confirm": "确认密码",
+      "password_confirm_placeholder": "确认密码",
+      "submit": "激活账户",
+      "cancel": "拒绝邀请"
+    },
+    "orders": {
+      "title": "订单历史",
+      "none": "您尚未下过任何订单。",
+      "order_number": "订单",
+      "date": "日期",
+      "payment_status": "付款",
+      "fulfillment_status": "履行状态",
+      "total": "总计"
+    },
+    "order": {
+      "title": "订单 {{ name }}",
+      "date_html": "下单时间：{{ date }}",
+      "fulfilled_at_html": "发货时间：{{ date }}",
+      "summary": "订单摘要",
+      "items": "商品",
+      "quantity": "数量",
+      "subtotal": "小计",
+      "total": "总计",
+      "shipping_address": "收货地址",
+      "billing_address": "账单地址"
+    },
+    "addresses": {
+      "title": "地址",
+      "first_name": "名",
+      "last_name": "姓",
+      "company": "公司",
+      "address1": "地址",
+      "address2": "楼层、门牌号等",
+      "city": "城市",
+      "zip": "邮政编码",
+      "country": "国家 / 地区",
+      "province": "省 / 自治区",
+      "phone": "手机号码",
+      "default": "默认",
+      "default_address": "默认地址",
+      "add_new": "添加新地址",
+      "add": "添加地址",
+      "update": "更新地址",
+      "edit": "编辑",
+      "delete": "删除",
+      "delete_confirm": "确定要删除此地址吗？",
+      "set_default": "设为默认",
+      "cancel": "取消",
+      "none": "您尚未保存任何地址。"
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "作者：{{ author }}"
+    },
+    "comments": {
+      "title": "评论",
+      "name": "姓名",
+      "email": "电子邮件",
+      "message": "评论内容",
+      "post": "发布评论",
+      "success": "您的评论已成功发布！",
+      "comments_with_count": "{{ count }} 条评论"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "姓名",
+      "email": "电子邮件",
+      "phone": "手机号码",
+      "phone_placeholder": "选填",
+      "message": "留言",
+      "message_placeholder": "请问有什么可以帮您？"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "这是您的 {{ value }} 礼品卡！",
+      "remaining_html": "剩余 {{ balance }}",
+      "expiry_date": "有效期至 {{ expiry }}",
+      "copy_code": "复制代码",
+      "shop_link": "开始购物",
+      "print_link": "打印"
+    }
+  }
+}

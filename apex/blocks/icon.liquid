@@ -1,0 +1,128 @@
+<div class="apex-tb-icon" style="text-align:{{ block.settings.align }};color:{{ block.settings.color }}" {{ block.shopify_attributes }}>
+  <span class="apex-tb-icon__wrap" style="width:{{ block.settings.size }}px;height:{{ block.settings.size }}px;display:inline-flex;align-items:center;justify-content:center">
+    {%- render 'icon', icon: block.settings.icon -%}
+  </span>
+</div>
+{% stylesheet %}
+.apex-tb-icon__wrap svg { width: 100%; height: 100%; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Icon",
+  "settings": [
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Icon",
+      "default": "star",
+      "options": [
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "return",
+          "label": "Return"
+        },
+        {
+          "value": "cart",
+          "label": "Cart"
+        },
+        {
+          "value": "bag",
+          "label": "Bag"
+        },
+        {
+          "value": "user",
+          "label": "User"
+        },
+        {
+          "value": "search",
+          "label": "Search"
+        },
+        {
+          "value": "plus",
+          "label": "Plus"
+        },
+        {
+          "value": "minus",
+          "label": "Minus"
+        },
+        {
+          "value": "arrow-right",
+          "label": "Arrow right"
+        },
+        {
+          "value": "arrow-left",
+          "label": "Arrow left"
+        },
+        {
+          "value": "chevron-right",
+          "label": "Chevron right"
+        },
+        {
+          "value": "chevron-down",
+          "label": "Chevron down"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "size",
+      "min": 16,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "label": "Size",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Color",
+      "default": "#2f5bff"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,122 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-404 color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px">
+  <div class="page-width">
+    <div class="apex-404__inner reveal center stack">
+      <p class="apex-404__code eyebrow eyebrow--pill">404</p>
+      <h1 class="balance">{{ s.heading }}</h1>
+      {%- if s.message != blank -%}
+        <p class="subtitle balance">{{ s.message }}</p>
+      {%- endif -%}
+
+      {%- if s.show_search -%}
+        <form action="{{ routes.search_url }}" method="get" class="apex-404__search" role="search">
+          <input type="hidden" name="type" value="product">
+          <div class="input-group">
+            <input
+              class="input"
+              type="search"
+              name="q"
+              placeholder="{{ s.search_placeholder | default: 'Search our store…' }}"
+              aria-label="{{ s.search_placeholder | default: 'Search our store…' }}"
+            >
+            <button class="btn btn--accent" type="submit" aria-label="Search">
+              {% render 'icon', icon: 'search' %}
+            </button>
+          </div>
+        </form>
+      {%- endif -%}
+
+      {%- if s.button_label != blank -%}
+        <div>
+          <a class="btn btn--accent btn--lg" href="{{ s.button_url | default: routes.root_url }}">
+            {{ s.button_label }}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-404 { min-height: 60vh; display: flex; align-items: center; }
+.apex-404__inner { max-width: 42rem; margin-inline: auto; gap: 1.4rem; }
+.apex-404__code { font-size: var(--text-xs); }
+.apex-404__search { width: 100%; max-width: 28rem; margin-inline: auto; }
+.apex-404__search .input-group { gap: .5rem; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "404 page",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Page not found"
+    },
+    {
+      "type": "textarea",
+      "id": "message",
+      "label": "Message",
+      "default": "Sorry, the page you're looking for doesn't exist or has been moved."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search placeholder",
+      "default": "Search our store…"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Back to home"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "404 page"
+    }
+  ]
+}
+{% endschema %}

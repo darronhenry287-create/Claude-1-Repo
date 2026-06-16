@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "Închide",
+    "refresh_page": "Selectarea unei opțiuni reîncarcă întreaga pagină.",
+    "skip_to_text": "Sari la conținut"
+  },
+  "general": {
+    "continue_shopping": "Continuați cumpărăturile",
+    "video": {
+      "play": "Redați videoclipul",
+      "no_video": "Nu este setată nicio adresă URL pentru videoclip."
+    },
+    "accessibility": {
+      "close": "Închide"
+    },
+    "page": "Pagina {{ page }}",
+    "tags": "Etichete",
+    "search_placeholder": "Căutați produse…",
+    "pagination": {
+      "label": "Paginare",
+      "load_more": "Încărcați mai multe",
+      "next": "Următor",
+      "previous": "Anterior"
+    },
+    "search": {
+      "search": "Căutare",
+      "placeholder": "Căutați produse…",
+      "prompt": "Ce căutați?",
+      "for": "Căutare",
+      "suggestions": "Sugestii",
+      "products": "Produse",
+      "pages": "Pagini",
+      "articles": "Articole",
+      "result": "rezultat",
+      "results": "rezultate",
+      "view_all": "Vedeți toate cele {{ count }} rezultate",
+      "browse_all": "Răsfoiți toate produsele",
+      "no_results": "Niciun rezultat pentru „{{ terms }}”",
+      "no_results_for": "Nu s-au găsit rezultate pentru",
+      "no_results_detail": "Încercați o altă căutare sau răsfoiți catalogul nostru."
+    },
+    "slider": {
+      "next": "Diapozitivul următor",
+      "previous": "Diapozitivul anterior"
+    }
+  },
+  "newsletter": {
+    "label": "E-mail",
+    "placeholder": "Adresă de e-mail",
+    "success": "Vă mulțumim pentru abonare!"
+  },
+  "payment": {
+    "methods": "Metode de plată acceptate"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Adaugă în coș",
+      "buy": "Cumpără",
+      "choose_options": "Alegeți opțiunile",
+      "from": "De la",
+      "in_stock": "În stoc",
+      "low_stock": "Mai sunt doar {{ quantity }}",
+      "sold_out": "Epuizat",
+      "unavailable": "Indisponibil",
+      "quantity": "Cantitate",
+      "increase": "Mărește cantitatea",
+      "decrease": "Micșorează cantitatea",
+      "save": "Economisiți {{ savings }}",
+      "view_full_details": "Vedeți detaliile complete",
+      "media": {
+        "load_image": "Încărcați imaginea {{ index }}"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Meniu"
+    },
+    "cart": {
+      "title": "Coșul dvs.",
+      "empty": "Coșul dvs. este gol",
+      "empty_detail": "Să găsim ceva pentru dvs.",
+      "item": "produs",
+      "items": "produse",
+      "quantity": "Cantitate",
+      "increase": "Mărește cantitatea",
+      "decrease": "Micșorează cantitatea",
+      "remove": "Elimină",
+      "note": "Adăugați o notă la comandă",
+      "note_placeholder": "Instrucțiuni speciale pentru comanda dvs.",
+      "subtotal": "Subtotal",
+      "summary": "Rezumat",
+      "taxes": "Taxele și livrarea sunt calculate la finalizarea comenzii.",
+      "checkout": "Finalizare comandă",
+      "each": "bucata",
+      "original": "Preț original",
+      "free_ship_progress": "Mai aveți nevoie de {{ amount }} pentru livrare gratuită",
+      "free_ship_progress_html": "Mai aveți nevoie de <strong>{{ amount }}</strong> pentru livrare gratuită",
+      "free_ship_unlocked": "Ați deblocat livrarea gratuită!"
+    },
+    "collection": {
+      "count": "{{ count }} produse",
+      "products": "produse",
+      "empty": "Nu s-au găsit produse",
+      "empty_detail": "Încercați să eliminați câteva filtre.",
+      "filter": "Filtrare",
+      "apply": "Aplică",
+      "clear_filters": "Șterge toate",
+      "sort_label": "Sortare după",
+      "price_from": "De la",
+      "price_to": "Până la"
+    },
+    "collection_list": {
+      "empty": "Nu există colecții de afișat",
+      "products": "produse"
+    },
+    "featured_collection": {
+      "empty": "Nu există produse de afișat"
+    }
+  },
+  "customer": {
+    "log_out": "Deconectare",
+    "account": {
+      "title": "Cont",
+      "details": "Detalii cont",
+      "return": "Înapoi la cont",
+      "view_addresses": "Vizualizați adresele"
+    },
+    "login": {
+      "title": "Autentificare",
+      "email": "E-mail",
+      "password": "Parolă",
+      "sign_in": "Conectare",
+      "forgot_password": "Ați uitat parola?",
+      "no_account": "Nu aveți un cont?",
+      "create_account": "Creați cont",
+      "cancel": "Anulare"
+    },
+    "register": {
+      "title": "Creați cont",
+      "first_name": "Prenume",
+      "last_name": "Nume de familie",
+      "email": "E-mail",
+      "password": "Parolă",
+      "password_placeholder": "Cel puțin 5 caractere",
+      "submit": "Creați cont",
+      "login": "Aveți deja un cont? Conectați-vă"
+    },
+    "recover_password": {
+      "title": "Resetați parola",
+      "subtext": "Vă vom trimite un e-mail pentru resetare.",
+      "submit": "Trimiteți e-mailul de resetare",
+      "success": "V-am trimis un e-mail cu un link pentru resetarea parolei."
+    },
+    "reset_password": {
+      "title": "Resetați parola contului",
+      "subtext": "Introduceți o nouă parolă.",
+      "password": "Parolă",
+      "password_confirm": "Confirmați parola",
+      "password_placeholder": "Parolă nouă",
+      "submit": "Resetați parola"
+    },
+    "activate_account": {
+      "title": "Activați contul",
+      "subtext": "Creați o parolă pentru a vă activa contul.",
+      "password": "Parolă",
+      "password_placeholder": "Parolă",
+      "password_confirm": "Confirmați parola",
+      "password_confirm_placeholder": "Confirmați parola",
+      "submit": "Activați contul",
+      "cancel": "Refuzați invitația"
+    },
+    "orders": {
+      "title": "Istoricul comenzilor",
+      "none": "Nu ați plasat încă nicio comandă.",
+      "order_number": "Comandă",
+      "date": "Dată",
+      "payment_status": "Plată",
+      "fulfillment_status": "Expediere",
+      "total": "Total"
+    },
+    "order": {
+      "title": "Comanda {{ name }}",
+      "date_html": "Plasată pe {{ date }}",
+      "fulfilled_at_html": "Expediată pe {{ date }}",
+      "summary": "Rezumatul comenzii",
+      "items": "Produse",
+      "quantity": "Cant.",
+      "subtotal": "Subtotal",
+      "total": "Total",
+      "shipping_address": "Adresă de livrare",
+      "billing_address": "Adresă de facturare"
+    },
+    "addresses": {
+      "title": "Adrese",
+      "first_name": "Prenume",
+      "last_name": "Nume de familie",
+      "company": "Companie",
+      "address1": "Adresă",
+      "address2": "Apartament, etaj etc.",
+      "city": "Oraș",
+      "zip": "Cod poștal",
+      "country": "Țară / regiune",
+      "province": "Județ / provincie",
+      "phone": "Telefon",
+      "default": "Implicit",
+      "default_address": "Adresă implicită",
+      "add_new": "Adăugați o adresă nouă",
+      "add": "Adăugați adresa",
+      "update": "Actualizați adresa",
+      "edit": "Editare",
+      "delete": "Ștergere",
+      "delete_confirm": "Sigur doriți să ștergeți această adresă?",
+      "set_default": "Setați ca implicită",
+      "cancel": "Anulare",
+      "none": "Nu aveți adrese salvate."
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "de {{ author }}"
+    },
+    "comments": {
+      "title": "Comentarii",
+      "name": "Nume",
+      "email": "E-mail",
+      "message": "Comentariu",
+      "post": "Postați comentariul",
+      "success": "Comentariul dvs. a fost postat cu succes!",
+      "comments_with_count": "{{ count }} comentarii"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Nume",
+      "email": "E-mail",
+      "phone": "Telefon",
+      "phone_placeholder": "Opțional",
+      "message": "Mesaj",
+      "message_placeholder": "Cum vă putem ajuta?"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Iată cardul dvs. cadou de {{ value }}!",
+      "remaining_html": "{{ balance }} rămas",
+      "expiry_date": "Expiră pe {{ expiry }}",
+      "copy_code": "Copiați codul",
+      "shop_link": "Începeți cumpărăturile",
+      "print_link": "Tipărire"
+    }
+  }
+}

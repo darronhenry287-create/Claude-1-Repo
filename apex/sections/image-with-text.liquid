@@ -1,0 +1,282 @@
+{%- liquid
+  assign s = section.settings
+  assign img_ratio = s.image_ratio | default: 'square'
+  assign img_pos   = s.image_position | default: 'left'
+  assign v_align   = s.vertical_align | default: 'center'
+-%}
+<section class="apex-image-with-text color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="image-with-text-{{ section.id }}">
+  <div class="page-width">
+    <div class="apex-iwt__grid apex-iwt__grid--{{ img_pos }} apex-iwt__valign--{{ v_align }}">
+
+      <div class="apex-iwt__media reveal reveal--zoom">
+        <div class="media media--{{ img_ratio }} media--round">
+          {%- if s.image != blank -%}
+            {{ s.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400,600,800,1000,1200', sizes: '(min-width:990px) 50vw, 100vw', alt: s.image.alt }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="apex-iwt__content reveal stack">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'eyebrow' -%}
+              <p class="eyebrow eyebrow--pill" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+            {%- when 'heading' -%}
+              <h2 class="balance" {{ block.shopify_attributes }}>{{ block.settings.text }}</h2>
+            {%- when 'text' -%}
+              <div class="rte subtitle" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+            {%- when 'button' -%}
+              <div class="cluster" {{ block.shopify_attributes }}>
+                {%- if block.settings.button_1 != blank -%}
+                  <a class="btn btn--accent" href="{{ block.settings.button_1_url }}">{{ block.settings.button_1 }}</a>
+                {%- endif -%}
+                {%- if block.settings.button_2 != blank -%}
+                  <a class="btn btn--secondary" href="{{ block.settings.button_2_url }}">{{ block.settings.button_2 }}</a>
+                {%- endif -%}
+              </div>
+            {%- when 'list' -%}
+              <ul class="apex-iwt__checklist stack" {{ block.shopify_attributes }}>
+                {%- assign items = block.settings.items | split: '|' -%}
+                {%- for item in items -%}
+                  {%- assign item_text = item | strip -%}
+                  {%- if item_text != blank -%}
+                    <li class="apex-iwt__check-item">
+                      <span class="apex-iwt__check-icon">{% render 'icon', icon: 'check' %}</span>
+                      <span>{{ item_text }}</span>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-iwt__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 2rem + 4vw, 5rem);
+  align-items: center;
+}
+.apex-iwt__valign--start { align-items: start; }
+.apex-iwt__valign--center { align-items: center; }
+.apex-iwt__valign--end { align-items: end; }
+.apex-iwt__grid--right .apex-iwt__media { order: 2; }
+.apex-iwt__grid--right .apex-iwt__content { order: 1; }
+.apex-iwt__content { gap: 1.4rem; }
+.apex-iwt__checklist { gap: .75rem; }
+.apex-iwt__check-item { display: flex; align-items: flex-start; gap: .7rem; line-height: 1.5; }
+.apex-iwt__check-icon { flex: none; width: 1.25rem; height: 1.25rem; display: grid; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); margin-top: .1rem; }
+.apex-iwt__check-icon svg { width: .75rem; height: .75rem; }
+@media (max-width: 749px) {
+  .apex-iwt__grid { grid-template-columns: 1fr; }
+  .apex-iwt__grid--right .apex-iwt__media { order: 0; }
+  .apex-iwt__grid--right .apex-iwt__content { order: 0; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Image with text",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "default": "square",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape (4:3)"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "vertical_align",
+      "label": "Vertical alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Middle"
+        },
+        {
+          "value": "end",
+          "label": "Bottom"
+        }
+      ]
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "eyebrow",
+      "name": "Eyebrow",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Why choose us"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Heading",
+          "default": "Designed to perform. Built to last."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Every detail has been considered. From material selection to final finish, we hold every product to the highest standard so you can rely on it every day.</p>"
+        }
+      ]
+    },
+    {
+      "type": "list",
+      "name": "Checklist",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "List items (separate with |)",
+          "default": "Premium materials, ethically sourced | Rigorously tested for durability | Free returns within 60 days"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_1",
+          "label": "Button 1 label",
+          "default": "Shop the collection"
+        },
+        {
+          "type": "url",
+          "id": "button_1_url",
+          "label": "Button 1 link"
+        },
+        {
+          "type": "text",
+          "id": "button_2",
+          "label": "Button 2 label"
+        },
+        {
+          "type": "url",
+          "id": "button_2_url",
+          "label": "Button 2 link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text",
+      "blocks": [
+        {
+          "type": "eyebrow"
+        },
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "list"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

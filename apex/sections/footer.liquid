@@ -1,0 +1,141 @@
+<footer class="footer color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="footer__top">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'brand' -%}
+            <div class="footer__col footer__col--brand" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}<div class="header__logo" style="margin-bottom:.8rem">{{ block.settings.heading }}</div>{%- endif -%}
+              {%- if block.settings.text != blank -%}<p class="muted" style="max-width:34ch">{{ block.settings.text }}</p>{%- endif -%}
+              {%- assign socials = 'instagram,tiktok,facebook,youtube,x,pinterest,linkedin,threads,snapchat,whatsapp' | split: ',' -%}
+              <div class="cluster" style="margin-top:1.2rem">
+                {%- for s in socials -%}{%- assign key = 'social_' | append: s -%}{%- assign url = settings[key] -%}{%- if url != blank -%}<a class="icon-btn bordered" href="{{ url }}" aria-label="{{ s }}" style="width:2.4rem;height:2.4rem">{% render 'icon', icon: s %}</a>{%- endif -%}{%- endfor -%}
+              </div>
+            </div>
+          {%- when 'menu' -%}
+            <div class="footer__col" {{ block.shopify_attributes }}>
+              <h4>{{ block.settings.heading }}</h4>
+              {%- for link in block.settings.menu.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+            </div>
+          {%- when 'newsletter' -%}
+            <div class="footer__col" {{ block.shopify_attributes }}>
+              <h4>{{ block.settings.heading }}</h4>
+              {%- if block.settings.text != blank -%}<p class="muted" style="margin-bottom:.8rem">{{ block.settings.text }}</p>{%- endif -%}
+              {%- form 'customer' -%}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <div class="input-group"><input type="email" name="contact[email]" placeholder="{{ 'newsletter.placeholder' | t | default: 'Email address' }}" required>
+                <button class="btn btn--accent" type="submit">{% render 'icon', icon: 'arrow-right' %}</button></div>
+                {%- if form.posted_successfully? -%}<p style="color:var(--success);margin-top:.5rem">{{ 'newsletter.success' | t | default: 'Thanks for subscribing!' }}</p>{%- endif -%}
+              {%- endform -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright }}</span>
+      <span>{% if section.settings.payment_icons %}{{ shop.enabled_payment_types | payment_type_svg_tag }}{% endif %}</span>
+    </div>
+  </div>
+</footer>
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright note",
+      "default": "All rights reserved."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Brand name",
+          "default": "Apex"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "A flagship store, built on the Apex theme."
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "footer"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Stay in the loop"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Get launches and offers first."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        {
+          "type": "brand"
+        },
+        {
+          "type": "menu"
+        },
+        {
+          "type": "menu"
+        },
+        {
+          "type": "newsletter"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

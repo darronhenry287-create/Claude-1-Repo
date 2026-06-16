@@ -1,0 +1,70 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-recently color-{{ s.color_scheme }}" data-rv-section style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px">
+  <div class="page-width">
+    <div class="section-head section-head--center reveal">
+      {%- if s.heading != blank -%}<h2 class="h2">{{ s.heading }}</h2>{%- endif -%}
+    </div>
+    <div class="apex-recently__grid" data-recently-viewed data-limit="{{ s.limit }}" data-exclude="{{ product.handle }}"></div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-recently__grid { display: grid; grid-template-columns: repeat(var(--rv-cols, 4), 1fr); gap: var(--card-gap, 24px); }
+.apex-recently__grid:empty { display: none; }
+@media (max-width: 990px) { .apex-recently__grid { grid-template-columns: repeat(2, 1fr); } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Recently viewed",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Recently viewed"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "label": "Products",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recently viewed"
+    }
+  ]
+}
+{% endschema %}

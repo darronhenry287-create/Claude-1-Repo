@@ -1,0 +1,85 @@
+{%- liquid
+  assign img = block.settings.image
+  assign lnk = block.settings.url
+  assign w = block.settings.width
+  assign lbl = block.settings.label | default: 'Visit link'
+-%}
+<div class="apex-tb-logo" style="text-align:{{ block.settings.align }}" {{ block.shopify_attributes }}>
+  {%- if lnk != blank -%}<a href="{{ lnk }}" class="apex-tb-logo__link" aria-label="{{ lbl | escape }}">{%- endif -%}
+  {%- if img != blank -%}
+    <img
+      src="{{ img | image_url: width: w }}"
+      alt="{{ img.alt | escape }}"
+      width="{{ w }}"
+      height="{{ img.height | times: w | divided_by: img.width }}"
+      loading="lazy"
+      style="max-width:{{ w }}px;width:100%;height:auto;display:inline-block"
+    >
+  {%- else -%}
+    {{ 'logo' | placeholder_svg_tag: 'placeholder-svg apex-tb-logo__placeholder' }}
+  {%- endif -%}
+  {%- if lnk != blank -%}</a>{%- endif -%}
+</div>
+{% stylesheet %}
+.apex-tb-logo__link { display: inline-block; transition: opacity .2s; }
+.apex-tb-logo__link:hover { opacity: .75; }
+.apex-tb-logo__placeholder { width: 120px; height: 40px; display: inline-block; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Logo",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "width",
+      "min": 60,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Max width",
+      "default": 160
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Link URL (optional)"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Link aria-label",
+      "default": "Brand website"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logo"
+    }
+  ]
+}
+{% endschema %}

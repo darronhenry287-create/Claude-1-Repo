@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "閉じる",
+    "refresh_page": "選択するとページ全体が更新されます。",
+    "skip_to_text": "コンテンツへスキップ"
+  },
+  "general": {
+    "continue_shopping": "ショッピングを続ける",
+    "video": {
+      "play": "動画を再生",
+      "no_video": "動画URLが設定されていません。"
+    },
+    "accessibility": {
+      "close": "閉じる"
+    },
+    "page": "{{ page }}ページ",
+    "tags": "タグ",
+    "search_placeholder": "商品を検索…",
+    "pagination": {
+      "label": "ページネーション",
+      "load_more": "さらに読み込む",
+      "next": "次へ",
+      "previous": "前へ"
+    },
+    "search": {
+      "search": "検索",
+      "placeholder": "商品を検索…",
+      "prompt": "何をお探しですか？",
+      "for": "検索する",
+      "suggestions": "候補",
+      "products": "商品",
+      "pages": "ページ",
+      "articles": "記事",
+      "result": "件の結果",
+      "results": "件の結果",
+      "view_all": "{{ count }}件すべての結果を見る",
+      "browse_all": "すべての商品を見る",
+      "no_results": "「{{ terms }}」の検索結果はありません",
+      "no_results_for": "検索結果が見つかりませんでした",
+      "no_results_detail": "別のキーワードで検索するか、カタログをご覧ください。"
+    },
+    "slider": {
+      "next": "次のスライド",
+      "previous": "前のスライド"
+    }
+  },
+  "newsletter": {
+    "label": "メールアドレス",
+    "placeholder": "メールアドレス",
+    "success": "ご登録ありがとうございます！"
+  },
+  "payment": {
+    "methods": "利用可能なお支払い方法"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "カートに追加",
+      "buy": "購入する",
+      "choose_options": "オプションを選択",
+      "from": "から",
+      "in_stock": "在庫あり",
+      "low_stock": "残り{{ quantity }}点",
+      "sold_out": "売り切れ",
+      "unavailable": "取り扱いなし",
+      "quantity": "数量",
+      "increase": "数量を増やす",
+      "decrease": "数量を減らす",
+      "save": "{{ savings }}お得",
+      "view_full_details": "詳細を見る",
+      "media": {
+        "load_image": "画像{{ index }}を読み込む"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "メニュー"
+    },
+    "cart": {
+      "title": "カート",
+      "empty": "カートは空です",
+      "empty_detail": "商品を探してみましょう。",
+      "item": "点",
+      "items": "点",
+      "quantity": "数量",
+      "increase": "数量を増やす",
+      "decrease": "数量を減らす",
+      "remove": "削除",
+      "note": "注文メモを追加",
+      "note_placeholder": "ご注文に関する特別なご指示",
+      "subtotal": "小計",
+      "summary": "注文概要",
+      "taxes": "税金と送料はチェックアウト時に計算されます。",
+      "checkout": "チェックアウト",
+      "each": "各",
+      "original": "元の価格",
+      "free_ship_progress": "送料無料まであと{{ amount }}",
+      "free_ship_progress_html": "送料無料まであと<strong>{{ amount }}</strong>",
+      "free_ship_unlocked": "送料無料が適用されました！"
+    },
+    "collection": {
+      "count": "{{ count }}点の商品",
+      "products": "商品",
+      "empty": "商品が見つかりません",
+      "empty_detail": "フィルターを解除してみてください。",
+      "filter": "フィルター",
+      "apply": "適用",
+      "clear_filters": "すべてクリア",
+      "sort_label": "並べ替え",
+      "price_from": "から",
+      "price_to": "まで"
+    },
+    "collection_list": {
+      "empty": "コレクションがありません",
+      "products": "商品"
+    },
+    "featured_collection": {
+      "empty": "表示する商品がありません"
+    }
+  },
+  "customer": {
+    "log_out": "ログアウト",
+    "account": {
+      "title": "アカウント",
+      "details": "アカウント詳細",
+      "return": "アカウントに戻る",
+      "view_addresses": "住所を見る"
+    },
+    "login": {
+      "title": "ログイン",
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "sign_in": "サインイン",
+      "forgot_password": "パスワードをお忘れですか？",
+      "no_account": "アカウントをお持ちでないですか？",
+      "create_account": "アカウントを作成",
+      "cancel": "キャンセル"
+    },
+    "register": {
+      "title": "アカウントを作成",
+      "first_name": "名",
+      "last_name": "姓",
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "password_placeholder": "5文字以上",
+      "submit": "アカウントを作成",
+      "login": "すでにアカウントをお持ちですか？サインイン"
+    },
+    "recover_password": {
+      "title": "パスワードのリセット",
+      "subtext": "リセット用メールをお送りします。",
+      "submit": "リセットメールを送信",
+      "success": "パスワードをリセットするためのリンクをメールでお送りしました。"
+    },
+    "reset_password": {
+      "title": "アカウントパスワードのリセット",
+      "subtext": "新しいパスワードを入力してください。",
+      "password": "パスワード",
+      "password_confirm": "パスワードの確認",
+      "password_placeholder": "新しいパスワード",
+      "submit": "パスワードをリセット"
+    },
+    "activate_account": {
+      "title": "アカウントの有効化",
+      "subtext": "パスワードを作成してアカウントを有効化してください。",
+      "password": "パスワード",
+      "password_placeholder": "パスワード",
+      "password_confirm": "パスワードの確認",
+      "password_confirm_placeholder": "パスワードの確認",
+      "submit": "アカウントを有効化",
+      "cancel": "招待を辞退"
+    },
+    "orders": {
+      "title": "注文履歴",
+      "none": "まだ注文がありません。",
+      "order_number": "注文番号",
+      "date": "日付",
+      "payment_status": "支払い",
+      "fulfillment_status": "配送",
+      "total": "合計"
+    },
+    "order": {
+      "title": "注文 {{ name }}",
+      "date_html": "{{ date }}に注文",
+      "fulfilled_at_html": "{{ date }}に発送",
+      "summary": "注文概要",
+      "items": "商品",
+      "quantity": "数量",
+      "subtotal": "小計",
+      "total": "合計",
+      "shipping_address": "配送先住所",
+      "billing_address": "請求先住所"
+    },
+    "addresses": {
+      "title": "住所",
+      "first_name": "名",
+      "last_name": "姓",
+      "company": "会社名",
+      "address1": "住所",
+      "address2": "マンション名・部屋番号など",
+      "city": "市区町村",
+      "zip": "郵便番号",
+      "country": "国・地域",
+      "province": "都道府県",
+      "phone": "電話番号",
+      "default": "デフォルト",
+      "default_address": "デフォルトの住所",
+      "add_new": "新しい住所を追加",
+      "add": "住所を追加",
+      "update": "住所を更新",
+      "edit": "編集",
+      "delete": "削除",
+      "delete_confirm": "この住所を削除してもよろしいですか？",
+      "set_default": "デフォルトに設定",
+      "cancel": "キャンセル",
+      "none": "保存された住所がありません。"
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "{{ author }} 著"
+    },
+    "comments": {
+      "title": "コメント",
+      "name": "名前",
+      "email": "メールアドレス",
+      "message": "コメント",
+      "post": "コメントを投稿",
+      "success": "コメントが正常に投稿されました！",
+      "comments_with_count": "{{ count }}件のコメント"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "名前",
+      "email": "メールアドレス",
+      "phone": "電話番号",
+      "phone_placeholder": "任意",
+      "message": "メッセージ",
+      "message_placeholder": "どのようなご用件でしょうか？"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "{{ value }}のギフトカードです！",
+      "remaining_html": "残高 {{ balance }}",
+      "expiry_date": "有効期限：{{ expiry }}",
+      "copy_code": "コードをコピー",
+      "shop_link": "ショッピングを始める",
+      "print_link": "印刷"
+    }
+  }
+}

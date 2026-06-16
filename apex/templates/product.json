@@ -1,0 +1,104 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "size": "medium"
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_save": true
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "option_style": "buttons",
+            "show_quantity": true,
+            "show_dynamic_checkout": true
+          }
+        },
+        "icon_list": {
+          "type": "icon_list",
+          "settings": {
+            "icon_1": "truck",
+            "text_1": "Free shipping over $50",
+            "icon_2": "return",
+            "text_2": "30-day money-back guarantee",
+            "icon_3": "shield",
+            "text_3": "Secure checkout"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "collapsible_shipping": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Shipping & returns",
+            "content": "<p>Free shipping over $50. Easy 30-day returns — no questions asked.</p>",
+            "icon": "truck"
+          }
+        },
+        "collapsible_use": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "How to use",
+            "content": "<p>Add a short usage or care guide here so shoppers know exactly what to expect.</p>",
+            "icon": "check"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "rating",
+        "price",
+        "variant_picker",
+        "icon_list",
+        "description",
+        "collapsible_shipping",
+        "collapsible_use"
+      ]
+    },
+    "related": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "intent": "related"
+      }
+    },
+    "sticky": {
+      "type": "sticky-add-to-cart",
+      "settings": {
+        "show_image": true
+      }
+    },
+    "recently": {
+      "type": "recently-viewed",
+      "settings": {
+        "color_scheme": "scheme-2"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related",
+    "sticky",
+    "recently"
+  ]
+}

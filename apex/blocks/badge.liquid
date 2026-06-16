@@ -1,0 +1,65 @@
+<div class="apex-tb-badge" style="text-align:{{ block.settings.align }}" {{ block.shopify_attributes }}>
+  <span class="badge{% if block.settings.variant == 'sale' %} badge--sale{% elsif block.settings.variant == 'sold-out' %} badge--sold-out{% elsif block.settings.variant == 'soft' %} badge--soft{% endif %}">{{ block.settings.text | escape }}</span>
+</div>
+{% schema %}
+{
+  "name": "Badge",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "New"
+    },
+    {
+      "type": "select",
+      "id": "variant",
+      "label": "Variant",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default (accent)"
+        },
+        {
+          "value": "sale",
+          "label": "Sale (red)"
+        },
+        {
+          "value": "sold-out",
+          "label": "Sold out (muted)"
+        },
+        {
+          "value": "soft",
+          "label": "Soft (neutral)"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Badge"
+    }
+  ]
+}
+{% endschema %}

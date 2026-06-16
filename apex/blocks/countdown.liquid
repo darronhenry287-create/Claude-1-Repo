@@ -1,0 +1,140 @@
+{%- liquid
+  assign end_date = block.settings.end_date
+  assign end_time = block.settings.end_time | default: '23:59'
+  assign end_iso = end_date | append: 'T' | append: end_time
+-%}
+<div class="apex-tb-countdown" style="text-align:{{ block.settings.align }}" {{ block.shopify_attributes }}>
+  {%- if block.settings.heading != blank -%}
+    <p class="apex-tb-countdown__label muted" style="font-size:var(--text-sm);font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.8rem">{{ block.settings.heading | escape }}</p>
+  {%- endif -%}
+  <apex-countdown data-end="{{ end_iso }}" class="apex-tb-countdown__timer" aria-live="polite">
+    <span class="apex-tb-countdown__unit">
+      <span class="apex-tb-countdown__num h2" data-unit="days">00</span>
+      <span class="apex-tb-countdown__lbl muted">{{ block.settings.label_days | default: 'Days' | escape }}</span>
+    </span>
+    <span class="apex-tb-countdown__sep h3" aria-hidden="true">:</span>
+    <span class="apex-tb-countdown__unit">
+      <span class="apex-tb-countdown__num h2" data-unit="hours">00</span>
+      <span class="apex-tb-countdown__lbl muted">{{ block.settings.label_hours | default: 'Hours' | escape }}</span>
+    </span>
+    <span class="apex-tb-countdown__sep h3" aria-hidden="true">:</span>
+    <span class="apex-tb-countdown__unit">
+      <span class="apex-tb-countdown__num h2" data-unit="mins">00</span>
+      <span class="apex-tb-countdown__lbl muted">{{ block.settings.label_mins | default: 'Mins' | escape }}</span>
+    </span>
+    <span class="apex-tb-countdown__sep h3" aria-hidden="true">:</span>
+    <span class="apex-tb-countdown__unit">
+      <span class="apex-tb-countdown__num h2" data-unit="secs">00</span>
+      <span class="apex-tb-countdown__lbl muted">{{ block.settings.label_secs | default: 'Secs' | escape }}</span>
+    </span>
+  </apex-countdown>
+</div>
+{% stylesheet %}
+.apex-tb-countdown__timer {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+.apex-tb-countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 3.5rem;
+}
+.apex-tb-countdown__num {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  color: var(--accent);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.apex-tb-countdown__lbl {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-top: .25rem;
+}
+.apex-tb-countdown__sep {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  color: var(--accent);
+  align-self: flex-start;
+  padding-top: .1em;
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Countdown",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Label above timer (optional)",
+      "default": "Sale ends in"
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "End date (YYYY-MM-DD)",
+      "default": "2026-12-31"
+    },
+    {
+      "type": "text",
+      "id": "end_time",
+      "label": "End time (HH:MM, 24h)",
+      "default": "23:59"
+    },
+    {
+      "type": "text",
+      "id": "label_days",
+      "label": "Days label",
+      "default": "Days"
+    },
+    {
+      "type": "text",
+      "id": "label_hours",
+      "label": "Hours label",
+      "default": "Hours"
+    },
+    {
+      "type": "text",
+      "id": "label_mins",
+      "label": "Minutes label",
+      "default": "Mins"
+    },
+    {
+      "type": "text",
+      "id": "label_secs",
+      "label": "Seconds label",
+      "default": "Secs"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Countdown"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,76 @@
+{
+  "sections": {
+    "pagehead": {
+      "type": "aeon-pagehead",
+      "settings": {
+        "kicker": "Refund Policy",
+        "heading": "Refund policy.",
+        "subtext": ""
+      }
+    },
+    "main": {
+      "type": "rich-text",
+      "blocks": {
+        "t0": {
+          "type": "text",
+          "settings": {
+            "content": "<p>We want you to feel great about your purchase — literally. This policy explains how refunds work alongside our 60-night guarantee.</p>"
+          }
+        },
+        "h1": {
+          "type": "heading",
+          "settings": { "heading": "60-night money-back guarantee" }
+        },
+        "t1": {
+          "type": "text",
+          "settings": {
+            "content": "<p>Try AEON daily for up to 60 nights from delivery. If you're not satisfied, email us for a full refund of your first order of that product. You don't need to return what's left.</p>"
+          }
+        },
+        "h2": {
+          "type": "heading",
+          "settings": { "heading": "Standard returns" }
+        },
+        "t2": {
+          "type": "text",
+          "settings": {
+            "content": "<p>Unopened, unused products may be returned within 30 days of delivery for a refund to your original payment method, less original shipping. Email <strong>care@aeonlabs.example</strong> to begin.</p>"
+          }
+        },
+        "h3": {
+          "type": "heading",
+          "settings": { "heading": "Subscriptions" }
+        },
+        "t3": {
+          "type": "text",
+          "settings": {
+            "content": "<p>You can skip, pause or cancel anytime before an order ships from your account. Charges for orders that have already shipped fall under the guarantee above rather than automatic reversal.</p>"
+          }
+        },
+        "h4": {
+          "type": "heading",
+          "settings": { "heading": "How refunds are issued" }
+        },
+        "t4": {
+          "type": "text",
+          "settings": {
+            "content": "<p>Approved refunds are processed within 3–5 business days. Depending on your bank, it may take a few additional days to appear on your statement.</p>"
+          }
+        },
+        "h5": {
+          "type": "heading",
+          "settings": { "heading": "Questions" }
+        },
+        "t5": {
+          "type": "text",
+          "settings": {
+            "content": "<p>Reach us at <strong>care@aeonlabs.example</strong> — we're happy to help.</p>"
+          }
+        }
+      },
+      "block_order": ["t0", "h1", "t1", "h2", "t2", "h3", "t3", "h4", "t4", "h5", "t5"],
+      "settings": {}
+    }
+  },
+  "order": ["pagehead", "main"]
+}

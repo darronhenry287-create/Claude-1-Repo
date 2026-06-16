@@ -1,0 +1,105 @@
+{%- comment -%} templates/customers/account.liquid — Apex customer account dashboard {%- endcomment -%}
+<div class="page-width apex-account" style="padding-block:clamp(3rem,2rem + 4vw,5rem)">
+
+  <header class="apex-account__header cluster">
+    <div>
+      <p class="eyebrow eyebrow--pill">My account</p>
+      <h1 class="h2">{{ 'customer.account.title' | t | default: 'Welcome back,' }} {{ customer.first_name }}</h1>
+    </div>
+    <a class="btn btn--ghost btn--sm" href="{{ routes.account_logout_url }}">
+      {{ 'customer.log_out' | t | default: 'Log out' }}
+    </a>
+  </header>
+
+  <div class="apex-account__layout">
+
+    <main class="apex-account__orders">
+      <h2 class="h4" style="margin-bottom:1.2rem">{{ 'customer.orders.title' | t | default: 'Order history' }}</h2>
+
+      {%- if customer.orders.size > 0 -%}
+        <div class="apex-account__table-wrap">
+          <table class="apex-account__table">
+            <thead>
+              <tr>
+                <th scope="col">{{ 'customer.orders.order_number' | t | default: 'Order' }}</th>
+                <th scope="col">{{ 'customer.orders.date' | t | default: 'Date' }}</th>
+                <th scope="col">{{ 'customer.orders.payment_status' | t | default: 'Payment' }}</th>
+                <th scope="col">{{ 'customer.orders.fulfillment_status' | t | default: 'Fulfillment' }}</th>
+                <th scope="col">{{ 'customer.orders.total' | t | default: 'Total' }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for order in customer.orders -%}
+                <tr>
+                  <td data-label="{{ 'customer.orders.order_number' | t | default: 'Order' }}">
+                    <a class="link" href="{{ order.customer_url }}">{{ order.name }}</a>
+                  </td>
+                  <td data-label="{{ 'customer.orders.date' | t | default: 'Date' }}">
+                    <time datetime="{{ order.created_at | date: '%Y-%m-%d' }}">{{ order.created_at | date: '%b %d, %Y' }}</time>
+                  </td>
+                  <td data-label="{{ 'customer.orders.payment_status' | t | default: 'Payment' }}">
+                    <span class="badge{% if order.financial_status == 'paid' %} badge--soft{% elsif order.financial_status == 'pending' %} badge--sale{% endif %}">
+                      {{ order.financial_status_label }}
+                    </span>
+                  </td>
+                  <td data-label="{{ 'customer.orders.fulfillment_status' | t | default: 'Fulfillment' }}">
+                    <span class="badge badge--soft">{{ order.fulfillment_status_label }}</span>
+                  </td>
+                  <td data-label="{{ 'customer.orders.total' | t | default: 'Total' }}">
+                    {{ order.total_price | money }}
+                  </td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+      {%- else -%}
+        <p class="muted">{{ 'customer.orders.none' | t | default: "You haven't placed any orders yet." }}</p>
+        <a class="btn btn--accent" href="{{ routes.collections_url }}" style="margin-top:1rem">{{ 'general.continue_shopping' | t | default: 'Start shopping' }}</a>
+      {%- endif -%}
+    </main>
+
+    <aside class="apex-account__aside stack">
+      <div class="card bordered" style="padding:1.4rem">
+        <h2 class="h5" style="margin-bottom:1rem">{{ 'customer.account.details' | t | default: 'Account details' }}</h2>
+        <address style="font-style:normal;font-size:var(--text-sm);color:var(--text-muted);line-height:1.8">
+          {{ customer.name }}<br>
+          {{ customer.email }}
+        </address>
+        <a class="link" href="{{ routes.account_addresses_url }}" style="margin-top:1rem;display:inline-flex;font-size:var(--text-sm)">
+          {{ 'customer.account.view_addresses' | t | default: 'Manage addresses' }}
+          {% render 'icon', icon: 'chevron-right' %}
+        </a>
+      </div>
+
+      {%- if customer.default_address -%}
+        <div class="card bordered" style="padding:1.4rem">
+          <h2 class="h5" style="margin-bottom:1rem">{{ 'customer.addresses.default_address' | t | default: 'Default address' }}</h2>
+          <address style="font-style:normal;font-size:var(--text-sm);color:var(--text-muted);line-height:1.8">
+            {{ customer.default_address | format_address }}
+          </address>
+        </div>
+      {%- endif -%}
+    </aside>
+
+  </div>
+</div>
+<style>
+.apex-account__header { justify-content: space-between; margin-bottom: clamp(2rem,1.4rem + 2vw,3rem); }
+.apex-account__header h1 { margin-top: .4rem; }
+.apex-account__layout { display: grid; grid-template-columns: 1fr 280px; gap: clamp(2rem,1.4rem + 3vw,4rem); align-items: start; }
+@media (max-width: 900px) { .apex-account__layout { grid-template-columns: 1fr; } }
+.apex-account__table-wrap { overflow-x: auto; }
+.apex-account__table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+.apex-account__table th { text-align: left; padding: .7rem 1rem; font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); border-bottom: var(--border-width) solid var(--border); }
+.apex-account__table td { padding: 1rem 1rem; border-bottom: var(--border-width) solid var(--border); vertical-align: middle; }
+.apex-account__table tr:last-child td { border-bottom: none; }
+.apex-account__table tr:hover td { background: var(--bg-alt); }
+@media (max-width: 640px) {
+  .apex-account__table thead { display: none; }
+  .apex-account__table td { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; padding: .6rem 0; border-bottom: none; }
+  .apex-account__table td::before { content: attr(data-label); font-weight: 700; font-size: var(--text-xs); text-transform: uppercase; color: var(--text-muted); }
+  .apex-account__table tr { display: grid; padding: .8rem 0; border-bottom: var(--border-width) solid var(--border); }
+}
+.apex-account__aside { gap: 1rem; }
+</style>

@@ -1,0 +1,117 @@
+{%- liquid
+  assign s = section.settings
+-%}
+{%- comment -%}
+  Sentinel: base.js watches for this element leaving the viewport, then
+  sets .is-visible on [data-sticky-atc] to slide the bar into view.
+{%- endcomment -%}
+<span id="anchor-{{ section.id }}" class="apex-floating-cta__sentinel" aria-hidden="true"></span>
+
+<div class="apex-floating-cta sticky-atc color-{{ s.color_scheme }}"
+  data-sticky-atc="anchor-{{ section.id }}"
+  role="region"
+  aria-label="{{ s.bar_label | default: 'Offer bar' }}">
+  <div class="apex-floating-cta__inner sticky-atc__inner">
+
+    <div class="apex-floating-cta__info">
+      {%- if s.title != blank -%}
+        <p class="apex-floating-cta__title">{{ s.title }}</p>
+      {%- endif -%}
+      {%- if s.price_text != blank -%}
+        <p class="apex-floating-cta__price">{{ s.price_text }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if s.button_label != blank -%}
+      <a class="btn btn--accent apex-floating-cta__btn{% if s.button_size == 'lg' %} btn--lg{% endif %}"
+        href="{{ s.button_url | default: '#' }}">
+        {{ s.button_label }}
+        {% render 'icon', icon: 'arrow-right' %}
+      </a>
+    {%- endif -%}
+
+  </div>
+</div>
+{% stylesheet %}
+.apex-floating-cta__sentinel { display: block; height: 0; overflow: hidden; }
+.apex-floating-cta .sticky-atc__inner { gap: 1rem; flex-wrap: wrap; }
+.apex-floating-cta__info { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1.2rem; }
+.apex-floating-cta__title { font-family: var(--font-heading); font-weight: 700; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.apex-floating-cta__price { font-size: .92rem; font-weight: 700; color: var(--accent); white-space: nowrap; }
+.apex-floating-cta__btn { flex: none; white-space: nowrap; }
+.apex-floating-cta__btn svg { width: .9em; height: .9em; }
+@media (max-width: 480px) {
+  .apex-floating-cta .sticky-atc__inner { flex-direction: column; align-items: stretch; padding-block: .8rem; gap: .7rem; }
+  .apex-floating-cta__btn { width: 100%; justify-content: center; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Floating CTA bar",
+  "tag": "section",
+  "class": "shopify-section--floating-cta",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Slides up from the bottom once the page scrolls past the sentinel point. Add this section near the top of the page and it will appear as customers scroll down."
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Offer title",
+      "default": "Limited-time offer — save 20%"
+    },
+    {
+      "type": "text",
+      "id": "price_text",
+      "label": "Price or offer text",
+      "default": "From $39 · Free shipping"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Claim offer"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "label": "Button size",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "bar_label",
+      "label": "Accessibility label",
+      "default": "Promotional offer bar",
+      "info": "Describes the bar for screen readers."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Floating CTA bar"
+    }
+  ]
+}
+{% endschema %}

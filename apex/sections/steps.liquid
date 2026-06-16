@@ -1,0 +1,297 @@
+{%- liquid
+  assign s = section.settings
+  assign block_count = section.blocks | size
+-%}
+<section class="apex-steps color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="steps-{{ section.id }}">
+  <div class="page-width">
+    <div class="reveal">
+      {%- if s.heading != blank or s.subheading != blank -%}
+        <div class="section-head{% if s.center_header %} section-head--center{% endif %}">
+          {%- if s.subheading != blank -%}<p class="eyebrow eyebrow--pill">{{ s.subheading }}</p>{%- endif -%}
+          {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <ol class="apex-steps__list" style="--step-count:{{ block_count }}">
+        {%- for block in section.blocks -%}
+          {%- assign bs = block.settings -%}
+          {%- assign step_num = bs.custom_number | default: forloop.index -%}
+          <li class="apex-steps__step" {{ block.shopify_attributes }}>
+            {%- if s.show_connector and forloop.last == false -%}
+              <div class="apex-steps__connector" aria-hidden="true"></div>
+            {%- endif -%}
+
+            <div class="apex-steps__visual">
+              {%- if bs.image != blank -%}
+                <div class="apex-steps__img media media--square media--round">
+                  {{ bs.image | image_url: width: 400 | image_tag: loading: 'lazy', alt: bs.heading }}
+                </div>
+              {%- elsif bs.icon != blank and bs.icon != 'none' -%}
+                <div class="apex-steps__icon-wrap" aria-hidden="true">
+                  {% render 'icon', icon: bs.icon %}
+                </div>
+              {%- endif -%}
+              <div class="apex-steps__number" aria-hidden="true">{{ step_num }}</div>
+            </div>
+
+            <div class="apex-steps__body">
+              {%- if bs.heading != blank -%}<h3 class="apex-steps__heading h4">{{ bs.heading }}</h3>{%- endif -%}
+              {%- if bs.text != blank -%}<p class="apex-steps__text muted">{{ bs.text }}</p>{%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-steps__list {
+  display: grid;
+  grid-template-columns: repeat(var(--step-count, 3), 1fr);
+  gap: var(--gutter);
+  list-style: none;
+  padding: 0;
+}
+.apex-steps__step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.1rem;
+}
+.apex-steps__connector {
+  position: absolute;
+  top: 2.8rem;
+  left: calc(50% + 2.8rem);
+  right: calc(-50% + 2.8rem);
+  height: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+.apex-steps__connector::after {
+  content: '';
+  position: absolute;
+  right: -4px; top: -4px;
+  border: 4px solid transparent;
+  border-left: 6px solid var(--accent);
+}
+.apex-steps__visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.apex-steps__img {
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.apex-steps__icon-wrap {
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: var(--radius-card);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+}
+.apex-steps__icon-wrap svg { width: 2rem; height: 2rem; }
+.apex-steps__number {
+  position: absolute;
+  top: -.5rem;
+  right: -.5rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--accent-text);
+  font-size: .7rem;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+}
+.apex-steps__step:has(.apex-steps__img) .apex-steps__number,
+.apex-steps__step:has(.apex-steps__icon-wrap) .apex-steps__number { top: -.4rem; right: -.4rem; }
+/* When no image/icon, number becomes main visual */
+.apex-steps__step:not(:has(.apex-steps__img)):not(:has(.apex-steps__icon-wrap)) .apex-steps__number {
+  position: static;
+  width: 3.5rem;
+  height: 3.5rem;
+  font-size: 1.3rem;
+  border-radius: var(--radius-pill);
+}
+.apex-steps__body { display: grid; gap: .4rem; }
+.apex-steps__heading { margin: 0; }
+.apex-steps__text { font-size: .96rem; max-width: 22ch; margin-inline: auto; }
+
+@media (max-width: 860px) {
+  .apex-steps__list { grid-template-columns: repeat(2, 1fr); }
+  .apex-steps__connector { display: none; }
+}
+@media (max-width: 480px) {
+  .apex-steps__list { grid-template-columns: 1fr; }
+  .apex-steps__step { flex-direction: row; text-align: left; }
+  .apex-steps__text { margin-inline: 0; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Steps",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Simple process"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How it works"
+    },
+    {
+      "type": "checkbox",
+      "id": "center_header",
+      "label": "Center header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_connector",
+      "label": "Show step connectors",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "custom_number",
+          "label": "Custom step number (leave blank for auto)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Step image"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon (if no image)",
+          "default": "check",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Step heading",
+          "default": "Choose your plan"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Step description",
+          "default": "Browse our selection and pick what works best for you. No complicated decisions."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Steps",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "icon": "check",
+            "heading": "Choose your plan",
+            "text": "Browse our selection and pick what works best for you."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "star",
+            "heading": "Place your order",
+            "text": "Checkout securely in under a minute with your preferred payment method."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "truck",
+            "heading": "Fast delivery",
+            "text": "We ship the same day on orders placed before 2 PM."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,239 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-press-quotes color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="press-quotes-{{ section.id }}">
+  <div class="page-width">
+
+    {%- if s.heading != blank or s.subheading != blank -%}
+      <div class="section-head{% if s.center_header %} section-head--center{% endif %} reveal">
+        {%- if s.subheading != blank -%}<p class="eyebrow eyebrow--pill">{{ s.subheading }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Logo strip row {%- endcomment -%}
+    <div class="apex-press-quotes__logos reveal" role="list" aria-label="Press logos">
+      {%- for block in section.blocks -%}
+        <button
+          class="apex-press-quotes__logo-btn{% if forloop.first %} is-active{% endif %}"
+          type="button"
+          data-press-idx="{{ forloop.index0 }}"
+          data-section="{{ section.id }}"
+          aria-label="{{ block.settings.outlet | default: 'Press outlet' | escape }}"
+          {{ block.shopify_attributes }}
+          role="listitem">
+          {%- if block.settings.logo != blank -%}
+            {%- assign logo_alt = block.settings.outlet | default: '' -%}
+            {{ block.settings.logo | image_url: width: 240 | image_tag:
+                loading: 'lazy',
+                widths: '120,180,240',
+                alt: logo_alt,
+                width: block.settings.logo.width,
+                height: block.settings.logo.height }}
+          {%- else -%}
+            <span class="apex-press-quotes__logo-text">{{ block.settings.outlet | default: 'Publication' }}</span>
+          {%- endif -%}
+        </button>
+      {%- endfor -%}
+    </div>
+
+    {%- comment -%} Quote panels {%- endcomment -%}
+    <div class="apex-press-quotes__quotes reveal--delay-1 reveal">
+      {%- for block in section.blocks -%}
+        <div class="apex-press-quotes__quote-panel{% if forloop.first %} is-active{% endif %}"
+          id="press-panel-{{ section.id }}-{{ forloop.index0 }}"
+          aria-hidden="{{ forloop.first | default: 'false' | replace: 'true', 'false' | replace: 'false', 'true' }}">
+          {%- comment -%} first panel visible, rest hidden — JS toggles {%- endcomment -%}
+          {%- if block.settings.quote != blank -%}
+            <blockquote class="apex-press-quotes__blockquote">
+              <p class="apex-press-quotes__pull-quote balance">&#8220;{{ block.settings.quote }}&#8221;</p>
+              {%- if block.settings.outlet != blank -%}
+                <footer>
+                  <cite class="apex-press-quotes__cite">
+                    {%- if block.settings.link != blank -%}
+                      <a href="{{ block.settings.link }}" class="link" target="_blank" rel="noopener">{{ block.settings.outlet }}</a>
+                    {%- else -%}
+                      {{ block.settings.outlet }}
+                    {%- endif -%}
+                  </cite>
+                </footer>
+              {%- endif -%}
+            </blockquote>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+{% stylesheet %}
+.apex-press-quotes__logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  margin-bottom: 2.8rem;
+}
+.apex-press-quotes__logo-btn {
+  background: none;
+  border: none;
+  padding: .6rem 1rem;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: opacity .2s, filter .2s;
+  opacity: .4;
+  filter: grayscale(1);
+  max-height: 3rem;
+  display: flex;
+  align-items: center;
+}
+.apex-press-quotes__logo-btn img { max-height: 2.6rem; width: auto; }
+.apex-press-quotes__logo-btn.is-active { opacity: 1; filter: grayscale(0); }
+.apex-press-quotes__logo-btn:hover { opacity: .8; }
+.apex-press-quotes__logo-text { font-family: var(--font-heading); font-weight: 800; font-size: 1.05rem; color: var(--text); white-space: nowrap; }
+.apex-press-quotes__quotes { position: relative; min-height: 5rem; }
+.apex-press-quotes__quote-panel { display: none; text-align: center; }
+.apex-press-quotes__quote-panel.is-active { display: block; }
+.apex-press-quotes__pull-quote {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 1rem + 1.5vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: var(--heading-letter-spacing);
+  color: var(--text);
+  max-width: 50rem;
+  margin-inline: auto;
+}
+.apex-press-quotes__cite { font-style: normal; font-weight: 700; font-size: var(--text-sm); color: var(--text-muted); margin-top: 1rem; display: block; letter-spacing: .06em; text-transform: uppercase; }
+.apex-press-quotes__cite .link { color: var(--accent); }
+{% endstylesheet %}
+{% javascript %}
+(function(){
+  document.querySelectorAll('.apex-press-quotes__logo-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var sid = btn.dataset.section;
+      var idx = btn.dataset.pressIdx;
+      var section = document.getElementById('press-quotes-' + sid);
+      if (!section) return;
+      section.querySelectorAll('.apex-press-quotes__logo-btn').forEach(function(b){ b.classList.remove('is-active'); });
+      section.querySelectorAll('.apex-press-quotes__quote-panel').forEach(function(p){ p.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      var panel = document.getElementById('press-panel-' + sid + '-' + idx);
+      if (panel) panel.classList.add('is-active');
+    });
+  });
+})();
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Press quotes",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "As seen in"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The press agrees"
+    },
+    {
+      "type": "checkbox",
+      "id": "center_header",
+      "label": "Center header",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "outlet",
+      "name": "Press outlet",
+      "settings": [
+        {
+          "type": "text",
+          "id": "outlet",
+          "label": "Publication name",
+          "default": "The Daily"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo (grayscale works best)"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Pull quote",
+          "default": "A genuinely exciting brand doing things differently — and it shows in every product."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link to article"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press quotes",
+      "blocks": [
+        {
+          "type": "outlet",
+          "settings": {
+            "outlet": "Vogue",
+            "quote": "The product your shelf has been waiting for. Effortlessly effective and beautifully designed."
+          }
+        },
+        {
+          "type": "outlet",
+          "settings": {
+            "outlet": "Forbes",
+            "quote": "A brand that's quietly redefining the category with science-backed formulas and stunning execution."
+          }
+        },
+        {
+          "type": "outlet",
+          "settings": {
+            "outlet": "Allure",
+            "quote": "Editors picked it, readers loved it, and now we can't stop talking about it. Best in show."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

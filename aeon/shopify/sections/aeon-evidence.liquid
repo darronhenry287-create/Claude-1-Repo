@@ -1,0 +1,56 @@
+<section class="section">
+  <div class="wrap wrap--wide">
+    <div class="shead reveal">
+      <div class="kicker">{{ section.settings.kicker }}</div>
+      <h2 style="margin-top:1rem">{{ section.settings.heading }}</h2>
+    </div>
+    <div class="studies reveal" style="margin-top:2rem">
+      {%- for block in section.blocks -%}
+        <div class="study" {{ block.shopify_attributes }}>
+          <div class="study__meta">
+            <span>{{ block.settings.source }}</span>
+            <span>{{ block.settings.meta }}</span>
+          </div>
+          <p>{{ block.settings.text }}</p>
+          <cite>{{ block.settings.cite }}</cite>
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.disclaim != blank -%}
+      <p class="disclaim">{{ section.settings.disclaim }}</p>
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Evidence / Studies",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The research" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What the science says about NMN." },
+    { "type": "textarea", "id": "disclaim", "label": "Disclaimer", "default": "† Cited research describes NMN/NAD⁺ biology generally and is provided for education. It does not constitute a claim that AEON treats, cures or prevents any condition. Individual results vary." }
+  ],
+  "blocks": [
+    {
+      "type": "study",
+      "name": "Study",
+      "settings": [
+        { "type": "text", "id": "source", "label": "Source", "default": "NATURE / CELL METAB." },
+        { "type": "text", "id": "meta", "label": "Meta (n= / year)", "default": "n = preclinical" },
+        { "type": "textarea", "id": "text", "label": "Summary text", "default": "Oral NMN raised tissue NAD⁺ levels and improved markers of mitochondrial and metabolic function in animal models." },
+        { "type": "text", "id": "cite", "label": "Citation", "default": "— Mills et al., Cell Metabolism" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Evidence / Studies",
+      "blocks": [
+        { "type": "study", "settings": { "source": "NATURE / CELL METAB.", "meta": "n = preclinical", "text": "Oral NMN raised tissue NAD⁺ levels and improved markers of mitochondrial and metabolic function in animal models.", "cite": "— Mills et al., Cell Metabolism" } },
+        { "type": "study", "settings": { "source": "HUMAN TRIAL", "meta": "n = 80", "text": "In a randomized human study, NMN supplementation was well-tolerated and increased blood NAD⁺ concentrations over 60 days.", "cite": "— Yoshino et al., Science" } },
+        { "type": "study", "settings": { "source": "REVIEW", "meta": "2023", "text": "Reviews of NAD⁺ biology link declining NAD⁺ to hallmarks of aging and identify NMN as a leading precursor strategy.", "cite": "— Covarrubias et al., Nat. Rev. Mol. Cell Biol." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

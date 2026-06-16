@@ -1,0 +1,111 @@
+<div class="apex-tb-newsletter" {{ block.shopify_attributes }}>
+  {%- if block.settings.heading != blank -%}
+    <p class="{{ block.settings.heading_size }}" style="font-family:var(--font-heading);font-weight:var(--font-heading-weight)">{{ block.settings.heading | escape }}</p>
+  {%- endif -%}
+  {%- if block.settings.subtext != blank -%}
+    <p class="muted">{{ block.settings.subtext | escape }}</p>
+  {%- endif -%}
+  {%- form 'customer' -%}
+    {%- if form.posted_successfully? -%}
+      <p class="apex-tb-newsletter__success">{{ block.settings.success_message | default: 'Thanks for subscribing!' | escape }}</p>
+    {%- else -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="input-group apex-tb-newsletter__form">
+        <label for="apex-nl-{{ block.id }}" class="visually-hidden">{{ block.settings.placeholder | default: 'Your email address' | escape }}</label>
+        <input
+          type="email"
+          id="apex-nl-{{ block.id }}"
+          name="contact[email]"
+          class="input"
+          placeholder="{{ block.settings.placeholder | default: 'Your email address' | escape }}"
+          required
+          autocomplete="email"
+          aria-required="true"
+        >
+        <button type="submit" class="btn btn--accent">{{ block.settings.button_label | default: 'Subscribe' | escape }}</button>
+      </div>
+      {%- if form.errors -%}
+        <p class="apex-tb-newsletter__error">{{ form.errors | default_errors }}</p>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endform -%}
+</div>
+{% stylesheet %}
+.apex-tb-newsletter { display: grid; gap: .85rem; }
+.apex-tb-newsletter__form {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+.apex-tb-newsletter__form .input { flex: 1 1 220px; min-width: 0; }
+.apex-tb-newsletter__success {
+  color: var(--success);
+  font-weight: 600;
+  padding: .7rem 1rem;
+  background: color-mix(in srgb, var(--success) 10%, transparent);
+  border-radius: var(--radius-input);
+}
+.apex-tb-newsletter__error { color: var(--sale); font-size: .9rem; margin-top: .3rem; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Newsletter signup",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Stay in the loop"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "h4",
+      "options": [
+        {
+          "value": "h3",
+          "label": "Large"
+        },
+        {
+          "value": "h4",
+          "label": "Medium"
+        },
+        {
+          "value": "h5",
+          "label": "Small"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Supporting text",
+      "default": "Get exclusive offers, early access, and more — no spam, ever."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input placeholder",
+      "default": "Your email address"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks for subscribing!"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter signup"
+    }
+  ]
+}
+{% endschema %}

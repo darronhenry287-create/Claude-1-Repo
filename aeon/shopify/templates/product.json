@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "details": { "type": "collapsible", "settings": { "heading": "Details & dosage", "content": "<p>Each bottle contains 120 vegetable capsules — a 60-day supply at the full serving. Serving size: 2 capsules (1000&nbsp;mg NMN). Take once daily, ideally in the morning, with or without food.</p>" } },
+        "ingredients": { "type": "collapsible", "settings": { "heading": "Ingredients", "content": "<p>β-Nicotinamide Mononucleotide (NMN) 1000&nbsp;mg, vegetable cellulose capsule. That's it — no fillers, no magnesium stearate, no flow agents, no artificial anything. Non-GMO, gluten-free, vegan.</p>" } },
+        "testing": { "type": "collapsible", "settings": { "heading": "Testing & quality", "content": "<p>Manufactured in a cGMP facility and tested by an ISO 17025-accredited lab for purity, identity, heavy metals and microbials. A certificate of analysis is published for every lot. <button type=\"button\" class=\"mint\" data-action=\"open-coa\" style=\"text-decoration:underline\">View sample COA</button>.</p>" } },
+        "shipping": { "type": "collapsible", "settings": { "heading": "Shipping & returns", "content": "<p>Free carbon-neutral shipping over $50; ships within 24 hours. Subscriptions ship automatically — skip, pause or cancel anytime. Backed by our 60-night money-back guarantee.</p>" } }
+      },
+      "block_order": ["details", "ingredients", "testing", "shipping"]
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,31 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement-ticker": {
+      "type": "announcement-ticker",
+      "settings": {},
+      "blocks": {
+        "t1": { "type": "message", "settings": { "highlight": "≥99%", "text": "purity β-NMN" } },
+        "t2": { "type": "message", "settings": { "highlight": "1000MG", "text": "per serving" } },
+        "t3": { "type": "message", "settings": { "highlight": "", "text": "Third-party tested" } },
+        "t4": { "type": "message", "settings": { "highlight": "FREE", "text": "shipping over $50" } },
+        "t5": { "type": "message", "settings": { "highlight": "60-NIGHT", "text": "money-back guarantee" } },
+        "t6": { "type": "message", "settings": { "highlight": "", "text": "Vegan · Non-GMO · No fillers" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4", "t5", "t6"]
+    },
+    "header": {
+      "type": "header",
+      "settings": {},
+      "blocks": {
+        "nav1": { "type": "link", "settings": { "label": "Shop", "url": "/collections/all", "menu_position": "left" } },
+        "nav2": { "type": "link", "settings": { "label": "The Science", "url": "/pages/science", "menu_position": "left" } },
+        "nav3": { "type": "link", "settings": { "label": "Reviews", "url": "/pages/reviews", "menu_position": "right" } },
+        "nav4": { "type": "link", "settings": { "label": "About", "url": "/pages/about", "menu_position": "right" } }
+      },
+      "block_order": ["nav1", "nav2", "nav3", "nav4"]
+    }
+  },
+  "order": ["announcement-ticker", "header"]
+}

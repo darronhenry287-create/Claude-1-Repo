@@ -1,0 +1,363 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-collage color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="collage-{{ section.id }}">
+  <div class="page-width">
+
+    {%- if s.heading != blank or s.eyebrow != blank -%}
+      <div class="section-head section-head--center reveal">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2>{{ s.heading }}</h2>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="apex-collage__grid reveal">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign tile_size = block.settings.size | default: 'small'
+          assign tile_type = block.type
+        -%}
+        <div class="apex-collage__tile apex-collage__tile--{{ tile_size }} apex-collage__tile--{{ tile_type }}" {{ block.shopify_attributes }}>
+
+          {%- case tile_type -%}
+
+            {%- when 'image' -%}
+              <div class="apex-collage__media media media--round">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400,600,800,1000,1200', sizes: '(min-width:990px) 50vw, 100vw', alt: block.settings.image.alt }}
+                {%- else -%}
+                  {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+
+            {%- when 'product' -%}
+              <div class="apex-collage__media media media--round">
+                {%- if block.settings.product != blank -%}
+                  {%- assign prod = block.settings.product -%}
+                  {%- if prod.featured_media -%}
+                    {{ prod.featured_media | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300,500,800', sizes: '(min-width:990px) 33vw, 80vw', alt: prod.featured_media.alt }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+
+            {%- when 'video' -%}
+              <div class="apex-collage__media media media--round">
+                {%- if block.settings.video_url != blank -%}
+                  <video autoplay muted loop playsinline>
+                    <source src="{{ block.settings.video_url }}" type="video/mp4">
+                  </video>
+                {%- else -%}
+                  {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+
+          {%- endcase -%}
+
+          {%- if block.settings.caption != blank or block.settings.button_label != blank -%}
+            <div class="apex-collage__overlay">
+              {%- if block.settings.caption != blank -%}
+                <p class="apex-collage__caption">{{ block.settings.caption }}</p>
+              {%- endif -%}
+              {%- if block.settings.button_label != blank -%}
+                <a class="btn btn--accent btn--sm" href="{{ block.settings.button_url }}">{{ block.settings.button_label }}</a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- if tile_type == 'product' and block.settings.product != blank -%}
+            <a class="apex-collage__link" href="{{ block.settings.product.url }}" aria-label="{{ block.settings.product.title | escape }}"></a>
+          {%- endif -%}
+
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+{% stylesheet %}
+.apex-collage__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 220px;
+  gap: var(--radius-sm);
+}
+.apex-collage__tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+}
+.apex-collage__tile--large {
+  grid-column: span 7;
+  grid-row: span 2;
+}
+.apex-collage__tile--small {
+  grid-column: span 5;
+  grid-row: span 1;
+}
+.apex-collage__tile--large:nth-child(even) {
+  grid-column: span 5;
+}
+.apex-collage__tile--large:nth-child(even) ~ .apex-collage__tile--small {
+  grid-column: span 7;
+}
+.apex-collage__media {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+.apex-collage__media img,
+.apex-collage__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s var(--ease);
+}
+.apex-collage__tile:hover .apex-collage__media img,
+.apex-collage__tile:hover .apex-collage__media video {
+  transform: scale(1.04);
+}
+.apex-collage__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem 1.2rem;
+  background: linear-gradient(to top, rgba(0,0,0,.62) 0%, transparent 100%);
+  color: #fff;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+.apex-collage__caption {
+  font-weight: 600;
+  font-size: .95rem;
+  line-height: 1.3;
+}
+.apex-collage__link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+@media (max-width: 749px) {
+  .apex-collage__grid {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 180px;
+  }
+  .apex-collage__tile--large,
+  .apex-collage__tile--small {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+  .apex-collage__tile--large {
+    grid-row: span 2;
+    grid-column: span 2;
+  }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Collage",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image tile",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Tile size",
+          "default": "small",
+          "options": [
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button link"
+        }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Product tile",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Tile size",
+          "default": "small",
+          "options": [
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption overlay"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button link"
+        }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Video tile",
+      "settings": [
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "Video URL (MP4)"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Tile size",
+          "default": "large",
+          "options": [
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collage",
+      "blocks": [
+        {
+          "type": "image",
+          "settings": {
+            "size": "large",
+            "caption": "New arrivals"
+          }
+        },
+        {
+          "type": "image",
+          "settings": {
+            "size": "small",
+            "caption": "Best sellers"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "size": "small"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

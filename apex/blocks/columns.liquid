@@ -1,0 +1,81 @@
+{%- liquid
+  assign cols = block.settings.columns
+  assign cols_mobile = block.settings.columns_mobile
+  assign col_gap = block.settings.gap
+-%}
+<div class="apex-tb-columns" style="--cols:{{ cols }};--cols-mobile:{{ cols_mobile }};--col-gap:{{ col_gap }}px" {{ block.shopify_attributes }}>
+  {%- for b in block.blocks -%}
+    <div class="apex-tb-columns__item">
+      {%- render b -%}
+    </div>
+  {%- endfor -%}
+</div>
+{% stylesheet %}
+.apex-tb-columns {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), 1fr);
+  gap: var(--col-gap, 24px);
+  align-items: var(--apex-cols-align, start);
+}
+@media (max-width: 989px) {
+  .apex-tb-columns {
+    grid-template-columns: repeat(var(--cols-mobile, 1), 1fr);
+  }
+}
+@media (max-width: 599px) {
+  .apex-tb-columns { grid-template-columns: 1fr; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Columns",
+  "blocks": [
+    {
+      "type": "@theme"
+    }
+  ],
+  "settings": [
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns (desktop)",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 2,
+      "step": 1,
+      "label": "Columns (tablet)",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "Columns",
+      "blocks": [
+        {
+          "type": "icon-box"
+        },
+        {
+          "type": "icon-box"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

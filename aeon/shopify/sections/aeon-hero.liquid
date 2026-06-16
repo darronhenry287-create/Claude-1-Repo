@@ -1,0 +1,75 @@
+<section class="hero">
+  <div class="hero__grid">
+    <div class="hero__copy">
+      <div class="hero__eyebrow">
+        <span class="chip chip--mint"><span class="dot live"></span>NAD⁺ precursor</span>
+        <span class="rating-row"><span class="stars">★★★★★</span> {{ section.settings.rating_text }}</span>
+      </div>
+      <h1 class="display">{{ section.settings.heading_line1 }}<span class="line2">{{ section.settings.heading_line2 }}</span></h1>
+      <p class="lede hero__lede">{{ section.settings.lede }}</p>
+      <div class="hero__cta">
+        <a href="{{ section.settings.cta_primary_url }}" class="btn btn-mint btn-lg">{{ section.settings.cta_primary_label }}</a>
+        <a href="{{ section.settings.cta_secondary_url }}" class="btn btn-ghost btn-lg">{{ section.settings.cta_secondary_label }}</a>
+      </div>
+      <div class="hero__specs">
+        {%- for block in section.blocks -%}
+          <div class="hero__spec" {{ block.shopify_attributes }}>
+            <div class="v">{{ block.settings.value }}<small>{{ block.settings.unit }}</small></div>
+            <div class="l">{{ block.settings.label }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="hero__visual reveal">
+      <div class="hero__ring">
+        <div class="hero__orbit o1 spin"><i style="position:absolute;top:-5px;left:50%;width:9px;height:9px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint);transform:translateX(-50%)"></i></div>
+        <div class="hero__orbit o2 spin" style="animation-duration:18s;animation-direction:reverse"><i style="position:absolute;bottom:-4px;left:50%;width:6px;height:6px;border-radius:50%;background:var(--volt);box-shadow:0 0 10px var(--volt);transform:translateX(-50%)"></i></div>
+      </div>
+      <img class="hero__bottle" src="{{ 'aeon-bottle.svg' | asset_url }}" alt="{{ section.settings.bottle_alt }}">
+      <div class="gauge" data-countup="100" data-suffix="%">
+        <div class="gauge__top"><span>NAD⁺ index</span><span class="mono" style="color:var(--mint);font-size:.6rem">● LIVE</span></div>
+        <div class="gauge__val">0%</div>
+        <div class="gauge__bar"><div class="gauge__fill"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4.9 · 9,200+ reviews" },
+    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "NAD⁺," },
+    { "type": "text", "id": "heading_line2", "label": "Heading line 2", "default": "restored." },
+    { "type": "richtext", "id": "lede", "label": "Lede", "default": "<p>By 50, your cells run on roughly half the NAD⁺ they had at 20. AEON delivers <strong>1000 mg of pharmaceutical-grade NMN</strong> per serving to rebuild it — the molecule your energy, repair and longevity depend on.</p>" },
+    { "type": "url", "id": "cta_primary_url", "label": "Primary CTA link" },
+    { "type": "text", "id": "cta_primary_label", "label": "Primary CTA label", "default": "Shop AEON NMN" },
+    { "type": "url", "id": "cta_secondary_url", "label": "Secondary CTA link" },
+    { "type": "text", "id": "cta_secondary_label", "label": "Secondary CTA label", "default": "See the science →" },
+    { "type": "text", "id": "bottle_alt", "label": "Bottle image alt text", "default": "AEON NMN 1000mg, 120 veggie capsules" }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Spec",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "1000" },
+        { "type": "text", "id": "unit", "label": "Unit (small)", "default": "mg" },
+        { "type": "text", "id": "label", "label": "Label", "default": "NMN / serving" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Hero",
+      "blocks": [
+        { "type": "spec", "settings": { "value": "1000", "unit": "mg", "label": "NMN / serving" } },
+        { "type": "spec", "settings": { "value": "60", "unit": "", "label": "servings / bottle" } },
+        { "type": "spec", "settings": { "value": "≥99", "unit": "%", "label": "tested purity" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

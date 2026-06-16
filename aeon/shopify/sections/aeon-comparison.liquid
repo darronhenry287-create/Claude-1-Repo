@@ -1,0 +1,78 @@
+<section class="section">
+  <div class="wrap">
+    <div class="shead shead--center reveal" style="margin-bottom:2rem">
+      <div class="kicker k--plain" style="justify-content:center">{{ section.settings.kicker }}</div>
+      <h2 style="margin-top:1rem">{{ section.settings.heading }}</h2>
+    </div>
+    <div class="compare reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>{{ section.settings.col_spec }}</th>
+            <th class="us">{{ section.settings.col_us }}</th>
+            <th>{{ section.settings.col_them }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            <tr {{ block.shopify_attributes }}>
+              <td>{{ block.settings.spec }}</td>
+              <td class="us">
+                {%- if block.settings.us_yes -%}
+                  <span class="yes">{{ block.settings.aeon_value }}</span>
+                {%- else -%}
+                  {{ block.settings.aeon_value }}
+                {%- endif -%}
+              </td>
+              <td class="them">
+                {%- if block.settings.them_no -%}
+                  <span class="no">{{ block.settings.typical_value }}</span>
+                {%- else -%}
+                  {{ block.settings.typical_value }}
+                {%- endif -%}
+              </td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Comparison table",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The difference" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "AEON vs. typical NMN." },
+    { "type": "text", "id": "col_spec", "label": "Column 1 header", "default": "Spec" },
+    { "type": "text", "id": "col_us", "label": "Column 2 header (AEON)", "default": "AEON" },
+    { "type": "text", "id": "col_them", "label": "Column 3 header (typical)", "default": "Typical NMN" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        { "type": "text", "id": "spec", "label": "Spec", "default": "Dose per serving" },
+        { "type": "text", "id": "aeon_value", "label": "AEON value", "default": "1000 mg" },
+        { "type": "checkbox", "id": "us_yes", "label": "Style AEON value as .yes (mint)", "default": false },
+        { "type": "text", "id": "typical_value", "label": "Typical value", "default": "125–500 mg" },
+        { "type": "checkbox", "id": "them_no", "label": "Style typical value as .no (ember)", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison table",
+      "blocks": [
+        { "type": "row", "settings": { "spec": "Dose per serving", "aeon_value": "1000 mg", "us_yes": false, "typical_value": "125–500 mg", "them_no": false } },
+        { "type": "row", "settings": { "spec": "Assayed purity", "aeon_value": "≥99%", "us_yes": false, "typical_value": "unverified", "them_no": false } },
+        { "type": "row", "settings": { "spec": "Third-party tested", "aeon_value": "Every batch", "us_yes": true, "typical_value": "Rarely", "them_no": true } },
+        { "type": "row", "settings": { "spec": "Published COA", "aeon_value": "Yes", "us_yes": true, "typical_value": "No", "them_no": true } },
+        { "type": "row", "settings": { "spec": "Fillers / flow agents", "aeon_value": "None", "us_yes": true, "typical_value": "Common", "them_no": true } },
+        { "type": "row", "settings": { "spec": "Guarantee", "aeon_value": "60 nights", "us_yes": false, "typical_value": "14–30 days", "them_no": false } }
+      ]
+    }
+  ]
+}
+{% endschema %}

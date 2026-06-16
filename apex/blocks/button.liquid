@@ -1,0 +1,94 @@
+<div class="apex-tb-button" style="text-align:{{ block.settings.align }}" {{ block.shopify_attributes }}>
+  <a href="{{ block.settings.url }}" class="btn btn--{{ block.settings.style }}{% if block.settings.size == 'lg' %} btn--lg{% elsif block.settings.size == 'sm' %} btn--sm{% endif %}{% if block.settings.pill %} btn--pill{% endif %}">
+    {{ block.settings.label | escape }}
+  </a>
+</div>
+{% schema %}
+{
+  "name": "Button",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "URL"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "default": "accent",
+      "options": [
+        {
+          "value": "accent",
+          "label": "Accent"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        },
+        {
+          "value": "ghost",
+          "label": "Ghost"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "label": "Size",
+      "default": "md",
+      "options": [
+        {
+          "value": "sm",
+          "label": "Small"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "pill",
+      "label": "Pill shape",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Button"
+    }
+  ]
+}
+{% endschema %}

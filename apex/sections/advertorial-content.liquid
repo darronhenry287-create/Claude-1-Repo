@@ -1,0 +1,708 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-advertorial-content color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="advertorial-content-{{ section.id }}">
+  <div class="page-width--narrow">
+    <div class="apex-advertorial-content__body reveal">
+
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign bs = block.settings
+        -%}
+
+        {%- case block.type -%}
+
+          {%- when 'heading' -%}
+            {%- if bs.text != blank -%}
+              {%- if bs.level == 'h3' -%}
+                <h3 class="apex-advc__heading apex-advc__heading--h3 balance" {{ block.shopify_attributes }}>{{ bs.text }}</h3>
+              {%- else -%}
+                <h2 class="apex-advc__heading apex-advc__heading--h2 balance" {{ block.shopify_attributes }}>{{ bs.text }}</h2>
+              {%- endif -%}
+            {%- endif -%}
+
+          {%- when 'paragraph' -%}
+            {%- if bs.text != blank -%}
+              <div class="apex-advc__paragraph rte" {{ block.shopify_attributes }}>{{ bs.text }}</div>
+            {%- endif -%}
+
+          {%- when 'image' -%}
+            <figure class="apex-advc__image" {{ block.shopify_attributes }}>
+              {%- if bs.image != blank -%}
+                {%- assign img_alt = bs.image.alt -%}
+                {{ bs.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width:990px) 760px, 100vw', alt: img_alt }}
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+              {%- if bs.caption != blank -%}
+                <figcaption class="apex-advc__caption muted">{{ bs.caption }}</figcaption>
+              {%- endif -%}
+            </figure>
+
+          {%- when 'image_text' -%}
+            <div class="apex-advc__image-text{% if bs.image_side == 'right' %} apex-advc__image-text--reverse{% endif %}" {{ block.shopify_attributes }}>
+              <div class="apex-advc__image-text-media media media--square">
+                {%- if bs.image != blank -%}
+                  {%- assign it_alt = bs.image.alt -%}
+                  {{ bs.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300,500,800', sizes: '(min-width:990px) 380px, 100vw', alt: it_alt }}
+                {%- else -%}
+                  {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+              <div class="apex-advc__image-text-body rte stack">
+                {%- if bs.text != blank -%}{{ bs.text }}{%- endif -%}
+              </div>
+            </div>
+
+          {%- when 'quote' -%}
+            <blockquote class="apex-advc__quote" {{ block.shopify_attributes }}>
+              {%- if bs.text != blank -%}
+                <p class="apex-advc__quote-text">{{ bs.text }}</p>
+              {%- endif -%}
+              {%- if bs.attribution != blank -%}
+                <cite class="apex-advc__quote-attr muted">— {{ bs.attribution }}</cite>
+              {%- endif -%}
+            </blockquote>
+
+          {%- when 'callout' -%}
+            <div class="apex-advc__callout card" {{ block.shopify_attributes }}>
+              <div class="apex-advc__callout-inner cluster" style="align-items:flex-start">
+                {%- if bs.icon != blank and bs.icon != 'none' -%}
+                  <span class="apex-advc__callout-icon" aria-hidden="true">{% render 'icon', icon: bs.icon %}</span>
+                {%- endif -%}
+                <div class="stack" style="gap:.4rem">
+                  {%- if bs.title != blank -%}
+                    <strong class="apex-advc__callout-title">{{ bs.title }}</strong>
+                  {%- endif -%}
+                  {%- if bs.text != blank -%}
+                    <div class="rte">{{ bs.text }}</div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+
+          {%- when 'checklist' -%}
+            {%- if bs.items != blank -%}
+              <ul class="apex-advc__checklist stack" {{ block.shopify_attributes }}>
+                {%- assign cl_lines = bs.items | newline_to_br | split: '<br />' -%}
+                {%- for line in cl_lines -%}
+                  {%- assign cl_item = line | strip -%}
+                  {%- if cl_item != blank -%}
+                    <li class="apex-advc__checklist-item cluster">
+                      <span class="apex-advc__check-icon" aria-hidden="true">{% render 'icon', icon: 'check' %}</span>
+                      <span>{{ cl_item }}</span>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+
+          {%- when 'button' -%}
+            {%- if bs.label != blank -%}
+              <div class="apex-advc__button-wrap" {{ block.shopify_attributes }}>
+                <a class="btn{% if bs.style == 'secondary' %} btn--secondary{% elsif bs.style == 'ghost' %} btn--ghost{% else %} btn--accent{% endif %} btn--lg"
+                  href="{{ bs.url | default: '#' }}">{{ bs.label }}</a>
+              </div>
+            {%- endif -%}
+
+          {%- when 'divider' -%}
+            <hr class="apex-advc__divider" {{ block.shopify_attributes }}>
+
+          {%- when 'stat' -%}
+            <div class="apex-advc__stat center" {{ block.shopify_attributes }}>
+              {%- if bs.number != blank -%}
+                <p class="apex-advc__stat-number">{{ bs.number }}</p>
+              {%- endif -%}
+              {%- if bs.label != blank -%}
+                <p class="apex-advc__stat-label muted">{{ bs.label }}</p>
+              {%- endif -%}
+            </div>
+
+          {%- when 'video' -%}
+            <div class="apex-advc__video" {{ block.shopify_attributes }}>
+              <button class="apex-advc__video-trigger" data-open="advc-video-{{ block.id }}" aria-label="Play video">
+                <div class="media media--wide apex-advc__video-cover">
+                  {%- if bs.cover_image != blank -%}
+                    {%- assign vid_alt = bs.cover_image.alt -%}
+                    {{ bs.cover_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width:990px) 760px, 100vw', alt: vid_alt }}
+                  {%- else -%}
+                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <span class="apex-advc__play-btn" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.55)"/><path d="M10 8.5l6 3.5-6 3.5z" fill="#fff"/></svg>
+                </span>
+              </button>
+
+              <div id="advc-video-{{ block.id }}" class="modal" role="dialog" aria-modal="true" aria-label="Video player">
+                <div class="overlay" data-close="advc-video-{{ block.id }}"></div>
+                <div class="apex-advc__video-modal-inner">
+                  <button class="apex-advc__video-close btn btn--ghost btn--sm" data-close="advc-video-{{ block.id }}" aria-label="Close video">{% render 'icon', icon: 'close' %}</button>
+                  {%- if bs.video_url != blank -%}
+                    {%- assign vurl = bs.video_url | downcase -%}
+                    {%- if vurl contains 'youtube' or vurl contains 'youtu.be' -%}
+                      <div class="apex-advc__video-embed media--wide" style="position:relative;padding-top:56.25%">
+                        <iframe src="{{ bs.video_url | replace: 'watch?v=', 'embed/' }}" style="position:absolute;inset:0;width:100%;height:100%;border:0" allowfullscreen loading="lazy" title="Video"></iframe>
+                      </div>
+                    {%- elsif vurl contains 'vimeo' -%}
+                      <div class="apex-advc__video-embed media--wide" style="position:relative;padding-top:56.25%">
+                        <iframe src="{{ bs.video_url | replace: 'vimeo.com/', 'player.vimeo.com/video/' }}" style="position:absolute;inset:0;width:100%;height:100%;border:0" allowfullscreen loading="lazy" title="Video"></iframe>
+                      </div>
+                    {%- else -%}
+                      <video src="{{ bs.video_url }}" controls playsinline style="width:100%;display:block;border-radius:var(--radius)"></video>
+                    {%- endif -%}
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+
+          {%- when 'product_cta' -%}
+            {%- liquid
+              assign cta_product = bs.product
+            -%}
+            {%- if cta_product != blank -%}
+              {%- assign cta_variant = cta_product.selected_or_first_available_variant -%}
+              <div class="apex-advc__product-cta card" {{ block.shopify_attributes }}>
+                <div class="apex-advc__product-cta-media media media--square media--round">
+                  {%- if cta_product.featured_media != blank -%}
+                    {%- assign pcta_alt = cta_product.featured_media.alt -%}
+                    {{ cta_product.featured_media | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300,400,600', sizes: '200px', alt: pcta_alt }}
+                  {%- else -%}
+                    {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="apex-advc__product-cta-info stack">
+                  <h3 class="apex-advc__product-cta-title h4">
+                    <a href="{{ cta_product.url }}" class="link">{{ cta_product.title }}</a>
+                  </h3>
+                  <div class="apex-advc__product-cta-price">
+                    {% render 'price', product: cta_product %}
+                  </div>
+                  {%- if cta_product.description != blank -%}
+                    <p class="muted apex-advc__product-cta-desc">{{ cta_product.description | strip_html | truncatewords: 20 }}</p>
+                  {%- endif -%}
+                  <div class="apex-advc__product-cta-actions cluster">
+                    {%- if cta_variant != blank and cta_variant.available -%}
+                      <button class="btn btn--accent" data-quick-add="{{ cta_variant.id }}">
+                        {{ 'products.product.add_to_cart' | t | default: 'Add to cart' }}
+                      </button>
+                    {%- elsif cta_variant != blank -%}
+                      <a class="btn btn--accent" href="{{ cta_product.url }}">
+                        {{ 'products.product.sold_out' | t | default: 'Sold out' }}
+                      </a>
+                    {%- endif -%}
+                    <a class="btn btn--ghost btn--sm" href="{{ cta_product.url }}">
+                      {{ 'products.product.view_full_details' | t | default: 'View details' }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            {%- endif -%}
+
+        {%- endcase -%}
+      {%- endfor -%}
+
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-advertorial-content__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.apex-advc__heading--h2 { font-size: clamp(1.5rem, 1.1rem + 2vw, 2rem); margin-top: .5rem; }
+.apex-advc__heading--h3 { font-size: clamp(1.15rem, .95rem + 1vw, 1.4rem); margin-top: .25rem; }
+.apex-advc__paragraph { font-size: 1.05rem; line-height: 1.75; }
+.apex-advc__image { margin: 0; }
+.apex-advc__image img,
+.apex-advc__image .placeholder-svg { width: 100%; border-radius: var(--radius-card); display: block; }
+.apex-advc__caption { font-size: var(--text-sm); margin-top: .5rem; text-align: center; }
+.apex-advc__image-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.2rem, 2vw, 2rem);
+  align-items: center;
+}
+.apex-advc__image-text--reverse .apex-advc__image-text-media { order: 2; }
+.apex-advc__image-text-media { border-radius: var(--radius-card); overflow: hidden; }
+.apex-advc__image-text-media img,
+.apex-advc__image-text-media .placeholder-svg { width: 100%; height: 100%; object-fit: cover; }
+.apex-advc__image-text-body { gap: .8rem; font-size: 1rem; line-height: 1.7; }
+.apex-advc__quote {
+  border-left: 4px solid var(--accent);
+  margin: 0;
+  padding: 1.2rem 1.6rem;
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.apex-advc__quote-text {
+  font-size: clamp(1.1rem, .95rem + .8vw, 1.4rem);
+  font-style: italic;
+  line-height: 1.5;
+  margin: 0 0 .5rem;
+  font-family: var(--font-heading);
+}
+.apex-advc__quote-attr { font-size: var(--text-sm); font-style: normal; display: block; }
+.apex-advc__callout {
+  padding: 1.4rem 1.6rem;
+  background: color-mix(in srgb, var(--bg-alt) 60%, transparent);
+  border-left: 3px solid var(--accent);
+}
+.apex-advc__callout-inner { gap: .9rem; }
+.apex-advc__callout-icon { color: var(--accent); flex: none; }
+.apex-advc__callout-icon svg { width: 1.4rem; height: 1.4rem; }
+.apex-advc__callout-title { font-size: 1rem; }
+.apex-advc__checklist { list-style: none; padding: 0; margin: 0; gap: .6rem; }
+.apex-advc__checklist-item { gap: .65rem; align-items: flex-start; font-size: 1rem; line-height: 1.55; }
+.apex-advc__check-icon { color: var(--accent); flex: none; margin-top: .15rem; }
+.apex-advc__check-icon svg { width: 1rem; height: 1rem; }
+.apex-advc__button-wrap { display: flex; }
+.apex-advc__divider { border: 0; border-top: var(--border-width) solid var(--border); margin: .5rem 0; }
+.apex-advc__stat { padding: 1.5rem; }
+.apex-advc__stat-number {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 2rem + 2vw, 4rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent);
+  margin: 0 0 .3rem;
+}
+.apex-advc__stat-label { font-size: 1rem; margin: 0; }
+.apex-advc__video { position: relative; }
+.apex-advc__video-trigger {
+  position: relative;
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.apex-advc__video-cover { border-radius: var(--radius-card); overflow: hidden; }
+.apex-advc__video-cover img,
+.apex-advc__video-cover .placeholder-svg { width: 100%; height: 100%; object-fit: cover; }
+.apex-advc__play-btn {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.apex-advc__video-trigger:hover .apex-advc__play-btn svg circle { fill: rgba(0,0,0,.72); }
+.apex-advc__video-modal-inner {
+  position: relative;
+  background: #000;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  width: min(92vw, 860px);
+  max-height: 90vh;
+}
+.apex-advc__video-close {
+  position: absolute;
+  top: .6rem;
+  right: .6rem;
+  z-index: 2;
+  color: #fff;
+  border-color: rgba(255,255,255,.3);
+}
+.apex-advc__product-cta {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 1.4rem;
+  padding: 1.4rem;
+  align-items: start;
+}
+.apex-advc__product-cta-media { flex: none; }
+.apex-advc__product-cta-media img,
+.apex-advc__product-cta-media .placeholder-svg { width: 100%; height: 100%; object-fit: cover; }
+.apex-advc__product-cta-info { gap: .6rem; }
+.apex-advc__product-cta-title { margin: 0; font-size: 1.1rem; }
+.apex-advc__product-cta-desc { font-size: .9rem; margin: 0; }
+.apex-advc__product-cta-actions { gap: .6rem; flex-wrap: wrap; }
+@media (max-width: 640px) {
+  .apex-advc__image-text { grid-template-columns: 1fr; }
+  .apex-advc__image-text--reverse .apex-advc__image-text-media { order: 0; }
+  .apex-advc__product-cta { grid-template-columns: 6rem 1fr; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Advertorial content",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "select",
+          "id": "level",
+          "label": "Heading level",
+          "default": "h2",
+          "options": [
+            {
+              "value": "h2",
+              "label": "H2 – Section heading"
+            },
+            {
+              "value": "h3",
+              "label": "H3 – Sub-heading"
+            }
+          ]
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "Why thousands of people are switching"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "name": "Paragraph",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Every year, more people discover a smarter way to approach this category. The results speak for themselves — and the science is finally catching up.</p>"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption (optional)"
+        }
+      ]
+    },
+    {
+      "type": "image_text",
+      "name": "Image + text",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "image_side",
+          "label": "Image position",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Pair a compelling image with supporting copy. Use this block to break up long reading passages and add visual interest to the narrative.</p>"
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "name": "Pull quote",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Quote text",
+          "default": "I wasn't a believer until I tried it myself. Now I can't imagine my routine without it."
+        },
+        {
+          "type": "text",
+          "id": "attribution",
+          "label": "Attribution",
+          "default": "Alex T., verified customer"
+        }
+      ]
+    },
+    {
+      "type": "callout",
+      "name": "Callout box",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "star",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "bag",
+              "label": "Bag"
+            },
+            {
+              "value": "user",
+              "label": "User"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Did you know?"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Nine out of ten customers reported noticeable improvements within the first 30 days of consistent use.</p>"
+        }
+      ]
+    },
+    {
+      "type": "checklist",
+      "name": "Checklist",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "Items (one per line)",
+          "default": "Clinically tested and third-party verified\nFree from artificial fillers and additives\nSustainably sourced ingredients\n60-day satisfaction guarantee"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Shop now — limited stock available"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "default": "accent",
+          "options": [
+            {
+              "value": "accent",
+              "label": "Accent (primary)"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "ghost",
+              "label": "Ghost"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divider",
+      "name": "Divider",
+      "settings": [
+
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number / value",
+          "default": "94%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "of customers would recommend to a friend"
+        }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "cover_image",
+          "label": "Cover / thumbnail image"
+        },
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "Video URL (YouTube, Vimeo, or MP4)",
+          "info": "Paste a full YouTube share URL, Vimeo URL, or direct .mp4 link."
+        }
+      ]
+    },
+    {
+      "type": "product_cta",
+      "name": "Product CTA",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Advertorial content",
+      "blocks": [
+        {
+          "type": "heading",
+          "settings": {
+            "level": "h2",
+            "text": "Why thousands of people are making the switch"
+          }
+        },
+        {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>It starts with a simple idea: what if the product you use every day was actually working <em>with</em> your body, not against it? That's the premise behind the approach that's quietly taken over wellness communities worldwide.</p>"
+          }
+        },
+        {
+          "type": "image_text",
+          "settings": {
+            "image_side": "left",
+            "text": "<p><strong>Backed by independent research</strong>, the formulation has been refined over three years of real-world testing. The result is a product that delivers consistent, measurable results — without the compromises you'd expect at this price point.</p>"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "text": "I've tried everything on the market. Nothing came close until I found this. Two months in and I feel like a different person.",
+            "attribution": "Sam K., verified customer, Austin TX"
+          }
+        },
+        {
+          "type": "heading",
+          "settings": {
+            "level": "h3",
+            "text": "What sets this apart from the rest"
+          }
+        },
+        {
+          "type": "checklist",
+          "settings": {
+            "items": "Third-party tested for purity and potency\nNo artificial colours, flavours or fillers\nSustainably manufactured in certified facilities\nFull ingredient transparency — no proprietary blends\n60-day money-back guarantee, no questions asked"
+          }
+        },
+        {
+          "type": "callout",
+          "settings": {
+            "icon": "shield",
+            "title": "Our promise to you",
+            "text": "<p>Every batch is tested before it ships. If you're not completely satisfied within 60 days, we'll refund every penny — no forms, no hassle.</p>"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "94%",
+            "label": "of customers would recommend to a friend"
+          }
+        },
+        {
+          "type": "button",
+          "settings": {
+            "label": "Claim your discount — today only",
+            "style": "accent"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

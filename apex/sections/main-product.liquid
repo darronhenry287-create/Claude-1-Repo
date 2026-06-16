@@ -1,0 +1,948 @@
+{%- liquid
+  assign s = section.settings
+  assign product = product
+  assign current_variant = product.selected_or_first_available_variant
+  comment
+    Stable form id (derived from the product handle, not section.id) so the
+    separate sticky-add-to-cart section can reproduce it from `product` and
+    submit this exact form via requestSubmit().
+  endcomment
+  assign form_id = 'product-form-' | append: product.id
+-%}
+<section class="apex-product color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px;--media-w:{{ s.media_width }}%"
+  id="product-{{ section.id }}"
+  data-product-section>
+  <div class="page-width">
+    {% render 'breadcrumb' %}
+    <div class="apex-product__grid reveal">
+
+      {%- comment -%} ----------------------------- MEDIA GALLERY ----------------------------- {%- endcomment -%}
+      <div class="apex-product__media apex-product__media--{{ s.thumb_position }}">
+        {%- if product.media.size > 0 -%}
+          <div class="apex-product__gallery" data-gallery>
+            <div class="apex-product__stage">
+              {%- for media in product.media -%}
+                {%- liquid
+                  assign img_loading = 'lazy'
+                  assign img_priority = 'auto'
+                  if forloop.first
+                    assign img_loading = 'eager'
+                    assign img_priority = 'high'
+                  endif
+                -%}
+                <div class="apex-product__viewport media media--{{ s.image_ratio }}{% if s.image_ratio == 'adapt' %} media--contain{% endif %}{% unless forloop.first %} hidden{% endunless %}"
+                  data-media-id="{{ media.id }}"
+                  data-media-view>
+                  {%- case media.media_type -%}
+                    {%- when 'image' -%}
+                      {{ media | image_url: width: 1400 | image_tag:
+                        loading: img_loading,
+                        widths: '400,600,800,1000,1200,1400',
+                        sizes: '(min-width: 990px) 50vw, 100vw',
+                        alt: media.alt,
+                        class: 'apex-product__image',
+                        fetchpriority: img_priority }}
+                    {%- when 'video', 'external_video' -%}
+                      {{ media | media_tag: image_size: '1400x', controls: true, preload: 'metadata' }}
+                    {%- when 'model' -%}
+                      {{ media | media_tag: image_size: '1400x' }}
+                    {%- else -%}
+                      {{ media | media_tag }}
+                  {%- endcase -%}
+                </div>
+              {%- endfor -%}
+            </div>
+
+            {%- if product.media.size > 1 -%}
+              <div class="apex-product__thumbs" data-slider>
+                <ul class="slider apex-product__thumb-track" role="list" data-slider-track>
+                  {%- for media in product.media -%}
+                    <li>
+                      <button type="button"
+                        class="apex-product__thumb media media--square{% if forloop.first %} is-active{% endif %}"
+                        data-media-target="{{ media.id }}"
+                        aria-label="{{ 'products.product.media.load_image' | t: index: forloop.index | default: 'Show image' }}">
+                        {{ media.preview_image | image_url: width: 200 | image_tag: loading: 'lazy', widths: '120,200,300', sizes: '90px', alt: media.alt }}
+                        {%- if media.media_type != 'image' -%}<span class="apex-product__thumb-badge" aria-hidden="true">{% render 'icon', icon: 'plus' %}</span>{%- endif -%}
+                      </button>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- else -%}
+          <div class="media media--square">{{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ------------------------- INFO COLUMN (blocks) -------------------------- {%- endcomment -%}
+      <div class="apex-product__info">
+        <div class="apex-product__info-inner stack">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+
+              {%- when 'vendor' -%}
+                {%- if product.vendor != blank -%}
+                  <p class="apex-product__vendor eyebrow" {{ block.shopify_attributes }}>
+                    <a href="{{ product.vendor | url_for_vendor }}">{{ product.vendor }}</a>
+                  </p>
+                {%- endif -%}
+
+              {%- when 'title' -%}
+                <h1 class="apex-product__title{% if block.settings.size == 'large' %} h1{% else %} h2{% endif %}" {{ block.shopify_attributes }}>{{ product.title | default: 'Product title' }}</h1>
+
+              {%- when 'price' -%}
+                {%- comment -%} [data-price] wraps only the price so base.js can replace its innerHTML on variant change without clobbering the badge. {%- endcomment -%}
+                <div class="apex-product__price-row" {{ block.shopify_attributes }}>
+                  <span class="apex-product__price" data-price>{% render 'price', product: product %}</span>
+                  {%- if block.settings.show_save and current_variant.compare_at_price > current_variant.price -%}
+                    {%- assign off = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price -%}
+                    <span class="badge badge--sale apex-product__save">{{ 'products.product.save' | t: percent: off | default: 'Save' }} {{ off }}%</span>
+                  {%- endif -%}
+                </div>
+
+              {%- when 'rating' -%}
+                {%- if product.metafields.reviews.rating != blank -%}
+                  <a class="apex-product__rating" href="#reviews-{{ section.id }}" {{ block.shopify_attributes }}>{% render 'rating', product: product %}</a>
+                {%- endif -%}
+
+              {%- when 'variant_picker' -%}
+                <apex-product-form class="apex-product__form stack" {{ block.shopify_attributes }}>
+                  {%- comment -%}
+                    base.js reads this JSON: each item must expose .id .price
+                    .compare_at_price .available and an .options ARRAY indexed by
+                    data-option-index. Shopify variants store option1/2/3, so we
+                    build that array explicitly. compare_at_price falls back to 0
+                    so the `compare > price` check in base.js behaves.
+                  {%- endcomment -%}
+                  <script type="application/json" data-variants>
+                    [
+                      {%- for v in product.variants -%}
+                        {
+                          "id": {{ v.id | json }},
+                          "price": {{ v.price | json }},
+                          "compare_at_price": {{ v.compare_at_price | default: 0 | json }},
+                          "available": {{ v.available | json }},
+                          "featured_media": {% if v.featured_media %}{ "id": {{ v.featured_media.id | json }} }{% else %}null{% endif %},
+                          "options": [{{ v.option1 | json }}{% if product.options.size > 1 %}, {{ v.option2 | json }}{% endif %}{% if product.options.size > 2 %}, {{ v.option3 | json }}{% endif %}]
+                        }{%- unless forloop.last -%},{%- endunless -%}
+                      {%- endfor -%}
+                    ]
+                  </script>
+
+                  {%- form 'product', product, id: form_id, novalidate: 'novalidate' -%}
+                    {%- comment -%}
+                      Single live name="id" — base.js syncs its value on option change, and the
+                      [data-atc] button (not this input) carries the disabled state, so the id is
+                      never dropped from FormData. On no-JS the form still posts to /cart/add with
+                      the first available variant (standard AJAX-form degradation).
+                    {%- endcomment -%}
+                    <input type="hidden" name="id" value="{{ current_variant.id }}" class="apex-product__id">
+
+                    {%- unless product.has_only_default_variant -%}
+                      <div class="apex-product__options stack">
+                        {%- for option in product.options_with_values -%}
+                          {%- assign opt_index = forloop.index0 -%}
+                          {%- liquid
+                            assign is_color = false
+                            assign dn = option.name | downcase
+                            if dn contains 'color' or dn contains 'colour'
+                              assign is_color = true
+                            endif
+                          -%}
+                          <fieldset class="apex-product__option" data-option>
+                            <legend class="apex-product__option-label">
+                              {{ option.name }}
+                              <span class="muted apex-product__option-value" data-option-selected="{{ opt_index }}">{{ option.selected_value }}</span>
+                            </legend>
+                            {%- if block.settings.option_style == 'dropdown' and is_color == false -%}
+                              <div class="apex-product__select-wrap">
+                                <select class="input" data-option-index="{{ opt_index }}" aria-label="{{ option.name | escape }}">
+                                  {%- for value in option.values -%}
+                                    <option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>{{ value }}</option>
+                                  {%- endfor -%}
+                                </select>
+                                {% render 'icon', icon: 'chevron-down' %}
+                              </div>
+                            {%- else -%}
+                              <div class="apex-product__swatches{% if is_color %} apex-product__swatches--color{% endif %}">
+                                {%- for value in option.values -%}
+                                  {%- assign input_id = section.id | append: '-' | append: opt_index | append: '-' | append: forloop.index0 -%}
+                                  <input type="radio"
+                                    class="apex-product__radio visually-hidden"
+                                    id="{{ input_id }}"
+                                    name="option-{{ section.id }}-{{ opt_index }}"
+                                    value="{{ value | escape }}"
+                                    data-option-index="{{ opt_index }}"
+                                    {% if option.selected_value == value %}checked{% endif %}>
+                                  <label for="{{ input_id }}"
+                                    class="apex-product__chip{% if is_color %} apex-product__chip--color{% endif %}"
+                                    {% if is_color %}style="--swatch:{{ value | downcase | split: ' ' | last }}"{% endif %}
+                                    title="{{ value | escape }}">
+                                    {%- if is_color -%}<span class="visually-hidden">{{ value }}</span>{%- else -%}{{ value }}{%- endif -%}
+                                  </label>
+                                {%- endfor -%}
+                              </div>
+                            {%- endif -%}
+                          </fieldset>
+                        {%- endfor -%}
+                      </div>
+                    {%- endunless -%}
+
+                    {%- if block.settings.show_quantity -%}
+                      <div class="apex-product__qty field">
+                        <label for="qty-{{ section.id }}">{{ 'products.product.quantity' | t | default: 'Quantity' }}</label>
+                        <div class="qty">
+                          <button type="button" data-dir="down" aria-label="{{ 'products.product.decrease' | t | default: 'Decrease quantity' }}">{% render 'icon', icon: 'minus' %}</button>
+                          <input type="number" id="qty-{{ section.id }}" name="quantity" value="1" min="1" inputmode="numeric" aria-label="{{ 'products.product.quantity' | t | default: 'Quantity' }}">
+                          <button type="button" data-dir="up" aria-label="{{ 'products.product.increase' | t | default: 'Increase quantity' }}">{% render 'icon', icon: 'plus' %}</button>
+                        </div>
+                      </div>
+                    {%- endif -%}
+
+                    <div class="apex-product__buy" data-atc-anchor id="atc-anchor-{{ section.id }}">
+                      <button type="submit" name="add"
+                        class="btn btn--accent btn--lg btn--block apex-product__atc"
+                        data-atc
+                        data-label="{{ 'products.product.add_to_cart' | t | default: 'Add to cart' }}"
+                        {% unless current_variant.available %}disabled{% endunless %}>
+                        <span data-atc-label>{% if current_variant.available %}{{ 'products.product.add_to_cart' | t | default: 'Add to cart' }}{% else %}{{ 'products.product.sold_out' | t | default: 'Sold out' }}{% endif %}</span>
+                      </button>
+                      {%- if block.settings.show_dynamic_checkout -%}
+                        {{ form | payment_button }}
+                      {%- endif -%}
+                    </div>
+                  {%- endform -%}
+                </apex-product-form>
+
+              {%- when 'description' -%}
+                {%- if product.description != blank -%}
+                  <div class="apex-product__description rte" {{ block.shopify_attributes }}>{{ product.description }}</div>
+                {%- endif -%}
+
+              {%- when 'collapsible' -%}
+                <div class="accordion apex-product__collapsible" {{ block.shopify_attributes }}>
+                  <details class="accordion__item"{% if block.settings.open_by_default %} open{% endif %}>
+                    <summary class="accordion__head">
+                      <span class="cluster" style="gap:.5rem">
+                        {%- if block.settings.icon != blank and block.settings.icon != 'none' -%}{% render 'icon', icon: block.settings.icon %}{%- endif -%}
+                        {{ block.settings.heading | default: 'Collapsible row' }}
+                      </span>
+                      <span class="accordion__icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="accordion__body rte">
+                      {%- if block.settings.content != blank -%}{{ block.settings.content }}{%- endif -%}
+                      {%- if block.settings.page != blank -%}{{ block.settings.page.content }}{%- endif -%}
+                    </div>
+                  </details>
+                </div>
+
+              {%- when 'icon_list' -%}
+                <ul class="apex-product__trust" role="list" {{ block.shopify_attributes }}>
+                  {%- for i in (1..4) -%}
+                    {%- assign icon_key = 'icon_' | append: i -%}
+                    {%- assign text_key = 'text_' | append: i -%}
+                    {%- assign icon_val = block.settings[icon_key] -%}
+                    {%- assign text_val = block.settings[text_key] -%}
+                    {%- if text_val != blank -%}
+                      <li class="apex-product__trust-item">
+                        <span class="apex-product__trust-icon">{% render 'icon', icon: icon_val %}</span>
+                        <span>{{ text_val }}</span>
+                      </li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+
+              {%- when 'inventory' -%}
+                {%- if current_variant.available and current_variant.inventory_management != blank -%}
+                  {%- assign qty = current_variant.inventory_quantity -%}
+                  {%- if current_variant.inventory_policy != 'continue' and qty <= block.settings.threshold and qty > 0 -%}
+                    <p class="apex-product__inventory apex-product__inventory--low" {{ block.shopify_attributes }}>
+                      <span class="apex-product__inventory-dot" aria-hidden="true"></span>
+                      {{ 'products.product.low_stock' | t: count: qty | default: 'Only a few left' }} — {{ qty }}
+                    </p>
+                  {%- elsif qty > block.settings.threshold or current_variant.inventory_policy == 'continue' -%}
+                    <p class="apex-product__inventory apex-product__inventory--ok" {{ block.shopify_attributes }}>
+                      <span class="apex-product__inventory-dot" aria-hidden="true"></span>
+                      {{ 'products.product.in_stock' | t | default: 'In stock, ready to ship' }}
+                    </p>
+                  {%- endif -%}
+                {%- endif -%}
+
+              {%- when 'share' -%}
+                <div class="apex-product__share cluster" {{ block.shopify_attributes }}>
+                  <span class="muted" style="font-size:var(--text-sm)">{{ block.settings.text | default: 'Share' }}</span>
+                  {%- assign share_url = shop.url | append: product.url | url_encode -%}
+                  <a class="icon-btn" href="https://www.facebook.com/sharer.php?u={{ share_url }}" target="_blank" rel="noopener" aria-label="Share on Facebook">{% render 'icon', icon: 'facebook' %}</a>
+                  <a class="icon-btn" href="https://twitter.com/intent/tweet?url={{ share_url }}&text={{ product.title | url_encode }}" target="_blank" rel="noopener" aria-label="Share on X">{% render 'icon', icon: 'x' %}</a>
+                </div>
+
+              {%- when 'complementary' -%}
+                {%- if recommendations.performed and recommendations.products_count > 0 -%}
+                  <div class="apex-product__complementary stack" {{ block.shopify_attributes }}>
+                    <h2 class="h5">{{ block.settings.heading | default: 'Pairs well with' }}</h2>
+                    <div class="apex-product__complementary-list stack">
+                      {%- for rec in recommendations.products limit: block.settings.limit -%}
+                        <div class="apex-product__complementary-item card">
+                          <a class="line-item__media media media--square" href="{{ rec.url }}">
+                            {%- if rec.featured_media -%}{{ rec.featured_media | image_url: width: 160 | image_tag: loading: 'lazy', alt: rec.featured_media.alt }}{%- endif -%}
+                          </a>
+                          <div class="apex-product__complementary-info">
+                            <a href="{{ rec.url }}" style="font-weight:600">{{ rec.title }}</a>
+                            {% render 'price', product: rec %}
+                          </div>
+                          {%- if rec.variants.size == 1 and rec.available -%}
+                            <button class="btn btn--secondary btn--sm" data-quick-add="{{ rec.selected_or_first_available_variant.id }}" aria-label="Add {{ rec.title | escape }} to cart">{% render 'icon', icon: 'plus' %}</button>
+                          {%- else -%}
+                            <a class="btn btn--secondary btn--sm" href="{{ rec.url }}">{% render 'icon', icon: 'chevron-right' %}</a>
+                          {%- endif -%}
+                        </div>
+                      {%- endfor -%}
+                    </div>
+                  </div>
+                {%- endif -%}
+
+              {%- when 'custom_liquid' -%}
+                <div class="apex-product__custom" {{ block.shopify_attributes }}>{{ block.settings.custom_liquid }}</div>
+
+              {%- when '@app' -%}
+                {%- render block -%}
+
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{%- comment -%}
+  Product JSON-LD for rich results. Uses request.origin so canonical URLs work.
+{%- endcomment -%}
+<script type="application/ld+json">
+{ "@context":"https://schema.org/","@type":"Product","name":{{ product.title | json }},"description":{{ product.description | strip_html | truncate: 300 | json }},"image":[{{ product.featured_image | image_url: width: 1200 | prepend: "https:" | json }}],"sku":{{ product.selected_or_first_available_variant.sku | json }},"brand":{"@type":"Brand","name":{{ product.vendor | json }}},"offers":{"@type":"Offer","price":{{ product.price | divided_by: 100.0 | json }},"priceCurrency":{{ cart.currency.iso_code | json }},"availability":"https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}","url":{{ product.url | prepend: request.origin | json }}}}
+</script>
+
+{% stylesheet %}
+.apex-product__grid { display: grid; grid-template-columns: var(--media-w, 55%) 1fr; gap: clamp(1.5rem, 1rem + 3vw, 4rem); align-items: start; }
+.apex-product__media { position: sticky; top: 1.5rem; }
+.apex-product__viewport { border-radius: var(--radius-card); }
+.apex-product__viewport.hidden { display: none !important; }
+.apex-product__stage img, .apex-product__stage video { width: 100%; height: 100%; }
+.apex-product__thumbs { margin-top: .8rem; }
+.apex-product__thumb-track { gap: .6rem; }
+.apex-product__thumb { width: 78px; height: 78px; flex: 0 0 auto; border-radius: var(--radius-sm); border: 2px solid transparent; cursor: pointer; position: relative; padding: 0; background: var(--bg-alt); }
+.apex-product__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.apex-product__thumb.is-active { border-color: var(--accent); }
+.apex-product__thumb-badge { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.35); color: #fff; }
+.apex-product__thumb-badge svg { width: 1.2rem; height: 1.2rem; }
+/* thumbnails to the side on wide screens */
+.apex-product__media--left .apex-product__gallery { display: grid; grid-template-columns: 80px 1fr; gap: .8rem; align-items: start; }
+.apex-product__media--left .apex-product__thumbs { margin-top: 0; order: -1; }
+.apex-product__media--left .apex-product__thumb-track { flex-direction: column; overflow-x: visible; overflow-y: auto; max-height: 560px; }
+
+.apex-product__info-inner { gap: 1.1rem; }
+.apex-product__vendor a { color: var(--accent); }
+.apex-product__title { line-height: 1.05; }
+.apex-product__price-row { display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; font-size: 1.35rem; }
+.apex-product__rating { display: inline-flex; }
+.apex-product__option { border: 0; padding: 0; margin: 0; }
+.apex-product__option-label { display: flex; gap: .5rem; align-items: baseline; font-size: var(--text-sm); font-weight: 600; margin-bottom: .55rem; padding: 0; }
+.apex-product__option-value { font-weight: 400; }
+.apex-product__swatches { display: flex; flex-wrap: wrap; gap: .5rem; }
+.apex-product__chip { display: inline-flex; align-items: center; justify-content: center; min-width: 2.8rem; padding: .55rem .9rem; border: var(--border-width) solid var(--border); border-radius: var(--radius-btn); font-size: .9rem; font-weight: 600; cursor: pointer; transition: border-color .15s, color .15s, box-shadow .15s; }
+.apex-product__chip:hover { border-color: var(--accent); }
+.apex-product__radio:checked + .apex-product__chip { border-color: var(--accent); color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.apex-product__radio:focus-visible + .apex-product__chip { box-shadow: var(--focus); }
+.apex-product__chip--color { min-width: 0; width: 2.2rem; height: 2.2rem; padding: 0; border-radius: var(--radius-pill); background: var(--swatch, var(--bg-alt)); position: relative; }
+.apex-product__radio:checked + .apex-product__chip--color { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent); }
+.apex-product__select-wrap { position: relative; }
+.apex-product__select-wrap select { appearance: none; padding-right: 2.5rem; }
+.apex-product__select-wrap svg { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); width: 1.1rem; height: 1.1rem; pointer-events: none; color: var(--text-muted); }
+.apex-product__qty .qty { width: fit-content; }
+.apex-product__buy { display: grid; gap: .7rem; margin-top: .3rem; }
+.apex-product__buy .shopify-payment-button { margin: 0; }
+.apex-product__trust { display: grid; gap: .6rem; margin: 0; padding: 1rem 0 0; border-top: var(--border-width) solid var(--border); }
+.apex-product__trust-item { display: flex; align-items: center; gap: .65rem; font-size: var(--text-sm); }
+.apex-product__trust-icon { display: grid; place-items: center; color: var(--accent); flex: none; }
+.apex-product__trust-icon svg { width: 1.2rem; height: 1.2rem; }
+.apex-product__inventory { display: inline-flex; align-items: center; gap: .5rem; font-size: var(--text-sm); font-weight: 600; }
+.apex-product__inventory-dot { width: .55rem; height: .55rem; border-radius: 50%; background: var(--success); }
+.apex-product__inventory--low { color: var(--sale); }
+.apex-product__inventory--low .apex-product__inventory-dot { background: var(--sale); animation: apex-pulse 1.6s var(--ease) infinite; }
+@keyframes apex-pulse { 50% { opacity: .35; } }
+.apex-product__collapsible { border-top: 0; }
+.apex-product__collapsible .accordion__item { border-top: var(--border-width) solid var(--border); }
+.apex-product__collapsible + .apex-product__collapsible { margin-top: calc(-1 * var(--block-gap)); }
+.apex-product__complementary-list { gap: .7rem; }
+.apex-product__complementary-item { flex-direction: row; align-items: center; gap: .8rem; padding: .6rem; }
+.apex-product__complementary-item .line-item__media { width: 56px; height: 56px; flex: none; }
+.apex-product__complementary-info { flex: 1; display: grid; gap: .15rem; font-size: var(--text-sm); }
+.apex-product__share .icon-btn { width: 2.3rem; height: 2.3rem; }
+@media (max-width: 990px) {
+  .apex-product__grid { grid-template-columns: 1fr; gap: 1.6rem; }
+  .apex-product__media { position: static; }
+  .apex-product__media--left .apex-product__gallery { grid-template-columns: 1fr; }
+  .apex-product__media--left .apex-product__thumbs { order: 0; margin-top: .8rem; }
+  .apex-product__media--left .apex-product__thumb-track { flex-direction: row; max-height: none; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+(() => {
+  // Media gallery: thumbnail clicks swap the active stage view. Lives here
+  // because it is unique to the PDP; base.js handles the variant form + slider.
+  document.addEventListener('click', (e) => {
+    const thumb = e.target.closest('[data-media-target]');
+    if (!thumb) return;
+    const gallery = thumb.closest('[data-gallery]');
+    if (!gallery) return;
+    const id = thumb.dataset.mediaTarget;
+    gallery.querySelectorAll('[data-media-view]').forEach((v) => v.classList.toggle('hidden', v.dataset.mediaId !== id));
+    gallery.querySelectorAll('[data-media-target]').forEach((t) => t.classList.toggle('is-active', t === thumb));
+  });
+
+  // When a variant with its own featured media is selected, jump to that image.
+  document.addEventListener('variant:change', (e) => {
+    const variant = e.detail && e.detail.variant;
+    const form = e.target.closest('[data-product-section]');
+    if (!variant || !form || !variant.featured_media) return;
+    const thumb = form.querySelector(`[data-media-target="${variant.featured_media.id}"]`);
+    if (thumb) thumb.click();
+  });
+})();
+{% endjavascript %}
+
+<script type="application/json" id="apex-pdp-product">
+{"handle":{{ product.handle | json }},"title":{{ product.title | json }},"url":{{ product.url | json }},"price":{{ product.price | money | json }},"image":{% if product.featured_media %}{{ product.featured_media | image_url: width: 400 | prepend: 'https:' | json }}{% else %}""{% endif %}}
+</script>
+{% schema %}
+{
+  "name": "Product",
+  "tag": "section",
+  "class": "shopify-section--main-product",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "range",
+      "id": "media_width",
+      "min": 40,
+      "max": 65,
+      "step": 5,
+      "unit": "%",
+      "label": "Media column width",
+      "default": 55
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "default": "square",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
+        },
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape (4:3)"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "thumb_position",
+      "label": "Thumbnail position",
+      "default": "below",
+      "options": [
+        {
+          "value": "below",
+          "label": "Below image"
+        },
+        {
+          "value": "left",
+          "label": "Beside image (left)"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "vendor",
+      "name": "Vendor",
+      "limit": 1,
+      "settings": [
+
+      ]
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Size",
+          "default": "medium",
+          "options": [
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_save",
+          "label": "Show savings badge",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "Rating",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Reads product.metafields.reviews.rating. Links to a #reviews section."
+        }
+      ]
+    },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker & buy buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "option_style",
+          "label": "Option style",
+          "default": "buttons",
+          "options": [
+            {
+              "value": "buttons",
+              "label": "Buttons"
+            },
+            {
+              "value": "dropdown",
+              "label": "Dropdowns"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_quantity",
+          "label": "Show quantity selector",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_dynamic_checkout",
+          "label": "Show dynamic checkout buttons",
+          "default": true
+        },
+        {
+          "type": "paragraph",
+          "content": "Color options always render as swatches."
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1,
+      "settings": [
+
+      ]
+    },
+    {
+      "type": "collapsible",
+      "name": "Collapsible row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shipping & returns"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Free shipping over $50. Easy 30-day returns — no questions asked.</p>"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "Or pull content from a page"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by default",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "none",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "icon_list",
+      "name": "Trust icons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_1",
+          "label": "Icon 1",
+          "default": "truck",
+          "options": [
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text_1",
+          "label": "Text 1",
+          "default": "Free shipping over $50"
+        },
+        {
+          "type": "select",
+          "id": "icon_2",
+          "label": "Icon 2",
+          "default": "return",
+          "options": [
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "label": "Text 2",
+          "default": "30-day money-back guarantee"
+        },
+        {
+          "type": "select",
+          "id": "icon_3",
+          "label": "Icon 3",
+          "default": "shield",
+          "options": [
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text_3",
+          "label": "Text 3",
+          "default": "Secure checkout"
+        },
+        {
+          "type": "select",
+          "id": "icon_4",
+          "label": "Icon 4",
+          "default": "leaf",
+          "options": [
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text_4",
+          "label": "Text 4"
+        }
+      ]
+    },
+    {
+      "type": "inventory",
+      "name": "Inventory status",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "threshold",
+          "min": 1,
+          "max": 50,
+          "step": 1,
+          "label": "Low-stock threshold",
+          "default": 10
+        }
+      ]
+    },
+    {
+      "type": "share",
+      "name": "Share",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Label",
+          "default": "Share"
+        }
+      ]
+    },
+    {
+      "type": "complementary",
+      "name": "Complementary products",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Uses Search & Discovery complementary recommendations. Requires the app + a block setup on the template."
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Pairs well with"
+        },
+        {
+          "type": "range",
+          "id": "limit",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "label": "Products to show",
+          "default": 3
+        }
+      ]
+    },
+    {
+      "type": "custom_liquid",
+      "name": "Custom Liquid",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Custom Liquid"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product",
+      "blocks": [
+        {
+          "type": "vendor"
+        },
+        {
+          "type": "title"
+        },
+        {
+          "type": "rating"
+        },
+        {
+          "type": "price"
+        },
+        {
+          "type": "variant_picker"
+        },
+        {
+          "type": "icon_list"
+        },
+        {
+          "type": "description"
+        },
+        {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Shipping & returns"
+          }
+        },
+        {
+          "type": "collapsible",
+          "settings": {
+            "heading": "How to use",
+            "content": "<p>Add a short usage or care guide here so shoppers know exactly what to expect.</p>",
+            "icon": "check"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

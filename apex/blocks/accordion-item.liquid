@@ -1,0 +1,37 @@
+<details class="accordion__item{% if block.settings.open %} is-open{% endif %}" {{ block.shopify_attributes }}{% if block.settings.open %} open{% endif %}>
+  <summary class="accordion__head">
+    <span>{{ block.settings.question | escape }}</span>
+    <span class="accordion__icon" aria-hidden="true"></span>
+  </summary>
+  <div class="accordion__body rte">{{ block.settings.answer }}</div>
+</details>
+{% schema %}
+{
+  "name": "Accordion item",
+  "settings": [
+    {
+      "type": "text",
+      "id": "question",
+      "label": "Question",
+      "default": "Frequently asked question"
+    },
+    {
+      "type": "richtext",
+      "id": "answer",
+      "label": "Answer",
+      "default": "<p>Provide a clear, concise answer here.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "open",
+      "label": "Open by default",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Accordion item"
+    }
+  ]
+}
+{% endschema %}

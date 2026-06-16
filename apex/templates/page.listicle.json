@@ -1,0 +1,259 @@
+{
+  "sections": {
+    "lst-header": {
+      "type": "advertorial-header",
+      "settings": {
+        "label": "EDITORIAL",
+        "headline": "7 Reasons Experts Say This Is the Best Choice You Can Make This Year",
+        "subheadline": "We tested the top options so you don't have to. Here's exactly what we found — ranked, reviewed, and rated.",
+        "author_name": "Casey L., Product Research Editor",
+        "publish_date": "June 2025",
+        "read_time": "6 min read",
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 40
+      }
+    },
+    "lst-listicle": {
+      "type": "listicle",
+      "settings": {
+        "intro": "<p>We researched, tested, and ranked the top options so you don't have to. Our methodology: independent blind testing, customer survey data, and side-by-side ingredient analysis. Here's the definitive list.</p>",
+        "disclaimer": "* Results may vary. This article contains sponsored content. We may earn a commission from qualifying purchases. All opinions are our own.",
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 72
+      },
+      "blocks": {
+        "li-1": {
+          "type": "item",
+          "settings": {
+            "heading": "Best Overall: The Clear Front-Runner",
+            "body": "<p>This option consistently topped every testing category we ran. Customers who tried it reported noticeable improvements within the first week, with results continuing to compound over time. The formulation is clean, transparent, and third-party verified.</p>",
+            "rating_value": "4.9",
+            "rating_count": "3,200+",
+            "pros": "Fast-acting formula\nThird-party independently tested\nFree shipping on every order\nFull 60-day money-back guarantee",
+            "cons": "Premium price point\nSells out quickly",
+            "cta_label": "Shop #1 pick"
+          }
+        },
+        "li-2": {
+          "type": "item",
+          "settings": {
+            "heading": "Best Value: Quality Without the Premium Price Tag",
+            "body": "<p>If you're looking for exceptional quality without the premium price, this is the one. Delivers consistent, reliable results at a fraction of the cost of the top pick — making it our recommended option for first-timers.</p>",
+            "rating_value": "4.7",
+            "rating_count": "1,800+",
+            "pros": "Most affordable option\nSatisfaction guarantee included\nEasy to use daily\nWidely available",
+            "cons": "Fewer flavour/variant options\nSlightly longer shipping window",
+            "cta_label": "Shop best value"
+          }
+        },
+        "li-3": {
+          "type": "item",
+          "settings": {
+            "heading": "Best for Beginners: The Easiest Entry Point",
+            "body": "<p>New to this category? This pick makes starting simple. A guided experience with everything you need included — beginner-friendly setup, clear instructions, and a 30-day starter period so you can try before you fully commit.</p>",
+            "rating_value": "4.6",
+            "rating_count": "950+",
+            "pros": "Beginner-friendly setup\nDetailed instructions included\n30-day introductory trial\nResponsive customer support",
+            "cons": "Not optimised for advanced users\nSmaller pack sizes only",
+            "cta_label": "Shop beginner pick"
+          }
+        }
+      },
+      "block_order": [
+        "li-1",
+        "li-2",
+        "li-3"
+      ]
+    },
+    "lst-comparison": {
+      "type": "comparison",
+      "settings": {
+        "subheading": "How they stack up",
+        "heading": "Side-by-side comparison",
+        "center_header": true,
+        "our_brand": "Our #1 Pick",
+        "brand_badge": "Best choice",
+        "competitor_1": "Budget Option",
+        "competitor_2": "Big Brand",
+        "color_scheme": "scheme-2",
+        "padding_top": 72,
+        "padding_bottom": 72
+      },
+      "blocks": {
+        "cf-1": {
+          "type": "row",
+          "settings": {
+            "feature": "Third-party tested",
+            "us": true,
+            "comp_1": false,
+            "comp_2": false
+          }
+        },
+        "cf-2": {
+          "type": "row",
+          "settings": {
+            "feature": "60-day money-back guarantee",
+            "us": true,
+            "comp_1": false,
+            "comp_2": true
+          }
+        },
+        "cf-3": {
+          "type": "row",
+          "settings": {
+            "feature": "Free shipping",
+            "us": true,
+            "comp_1": true,
+            "comp_2": false
+          }
+        },
+        "cf-4": {
+          "type": "row",
+          "settings": {
+            "feature": "No artificial additives",
+            "us": true,
+            "comp_1": false,
+            "comp_2": false
+          }
+        },
+        "cf-5": {
+          "type": "row",
+          "settings": {
+            "feature": "Transparent ingredient list",
+            "us": true,
+            "comp_1": false,
+            "comp_2": false
+          }
+        },
+        "cf-6": {
+          "type": "row",
+          "settings": {
+            "feature": "Sustainably manufactured",
+            "us": true,
+            "comp_1": false,
+            "comp_2": true
+          }
+        }
+      },
+      "block_order": [
+        "cf-1",
+        "cf-2",
+        "cf-3",
+        "cf-4",
+        "cf-5",
+        "cf-6"
+      ]
+    },
+    "lst-guarantee": {
+      "type": "guarantee",
+      "settings": {
+        "layout": "split",
+        "heading": "Risk-Free — 60-Day Money-Back Guarantee",
+        "text": "<p>Every product we feature in our top picks comes with a satisfaction guarantee. If you're not completely happy within 60 days, you'll receive a full refund. We only recommend brands we trust.</p>",
+        "signature_line": "— The editorial team",
+        "color_scheme": "scheme-1",
+        "padding_top": 72,
+        "padding_bottom": 72
+      },
+      "blocks": {
+        "gp-1": {
+          "type": "point",
+          "settings": {
+            "icon": "check",
+            "text": "Full refund within 60 days of purchase"
+          }
+        },
+        "gp-2": {
+          "type": "point",
+          "settings": {
+            "icon": "shield",
+            "text": "2-year manufacturer warranty on all top picks"
+          }
+        },
+        "gp-3": {
+          "type": "point",
+          "settings": {
+            "icon": "truck",
+            "text": "Free shipping on orders over $50"
+          }
+        },
+        "gp-4": {
+          "type": "point",
+          "settings": {
+            "icon": "star",
+            "text": "Independently reviewed and rated 4.9 / 5"
+          }
+        }
+      },
+      "block_order": [
+        "gp-1",
+        "gp-2",
+        "gp-3",
+        "gp-4"
+      ]
+    },
+    "lst-offer": {
+      "type": "offer-banner",
+      "settings": {
+        "heading": "Exclusive reader discount — save 25% on our #1 pick",
+        "text": "<p>We've negotiated an exclusive discount for our readers. Use it while it lasts — this offer expires at midnight and won't be extended.</p>",
+        "price_text": "Save 25% — today only",
+        "end_datetime": "2026-12-31T23:59",
+        "hide_when_ended": false,
+        "button_label": "Claim 25% off now",
+        "color_scheme": "scheme-4",
+        "padding_top": 72,
+        "padding_bottom": 72
+      },
+      "blocks": {
+        "oc-1": {
+          "type": "urgency_chip",
+          "settings": {
+            "text": "Reader exclusive"
+          }
+        },
+        "oc-2": {
+          "type": "urgency_chip",
+          "settings": {
+            "text": "Free shipping"
+          }
+        },
+        "oc-3": {
+          "type": "urgency_chip",
+          "settings": {
+            "text": "60-day guarantee"
+          }
+        }
+      },
+      "block_order": [
+        "oc-1",
+        "oc-2",
+        "oc-3"
+      ]
+    },
+    "lst-newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "subheading": "Never miss a top pick",
+        "heading": "Get our next buying guide first",
+        "description": "Join our community of savvy shoppers. New guides, exclusive reader discounts, and zero spam.",
+        "placeholder": "Enter your email address",
+        "button_label": "Subscribe",
+        "disclaimer": "By subscribing you agree to our Privacy Policy. Unsubscribe at any time.",
+        "color_scheme": "scheme-3",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": [
+    "lst-header",
+    "lst-listicle",
+    "lst-comparison",
+    "lst-guarantee",
+    "lst-offer",
+    "lst-newsletter"
+  ]
+}

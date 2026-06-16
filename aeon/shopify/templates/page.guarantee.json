@@ -1,0 +1,52 @@
+{
+  "sections": {
+    "pagehead": {
+      "type": "aeon-pagehead",
+      "settings": {
+        "kicker": "60-Night Guarantee",
+        "heading": "Feel it, or it's free.",
+        "subtext": "NAD⁺ support takes consistency, so we give you a real window to find out — not a token two weeks."
+      }
+    },
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "t1": {
+          "type": "text",
+          "settings": {
+            "content": "<p>Take AEON daily for up to 60 nights from delivery. If you’re not satisfied, email us for a full refund of your first order of that product. You don’t need to return what’s left.</p>"
+          }
+        }
+      },
+      "block_order": ["t1"],
+      "settings": {}
+    },
+    "howto": {
+      "type": "rich-text",
+      "blocks": {
+        "h1": {
+          "type": "heading",
+          "settings": {
+            "heading": "No hoops. No restocking fees."
+          }
+        },
+        "t2": {
+          "type": "text",
+          "settings": {
+            "content": "<ul><li>Take AEON NMN every day for up to 60 nights from delivery.</li><li>If you’re not satisfied, email <strong>care@aeonlabs.example</strong> with your order number.</li><li>We refund the full purchase price to your original payment method.</li><li>No need to ship anything back — keep or share what’s left.</li></ul><p>Applies to your first order of each product, one-time or subscription. We can’t guarantee how you’ll feel — but we can guarantee you won’t be out a cent finding out.</p>"
+          }
+        },
+        "btn1": {
+          "type": "button",
+          "settings": {
+            "button_label": "Start your protocol →",
+            "button_url": "/products"
+          }
+        }
+      },
+      "block_order": ["h1", "t2", "btn1"],
+      "settings": {}
+    }
+  },
+  "order": ["pagehead", "intro", "howto"]
+}

@@ -1,0 +1,300 @@
+{%- liquid
+  assign s = section.settings
+  assign start_pct = s.start_position | default: 50
+-%}
+<section class="apex-before-after color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="before-after-{{ section.id }}">
+  <div class="page-width{% if s.full_width == false %} page-width--narrow{% endif %}">
+    <div class="reveal">
+      {%- if s.heading != blank or s.subheading != blank -%}
+        <div class="section-head section-head--center">
+          {%- if s.subheading != blank -%}<p class="eyebrow eyebrow--pill">{{ s.subheading }}</p>{%- endif -%}
+          {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="apex-before-after__wrap"
+        id="ba-{{ section.id }}"
+        data-ba-slider
+        style="--ba-pos:{{ start_pct }}%"
+        role="group"
+        aria-label="{{ s.heading | default: 'Before and after comparison' | escape }}">
+
+        {%- comment -%} After image (bottom layer, full width) {%- endcomment -%}
+        <div class="apex-before-after__after" aria-label="{{ s.after_label | default: 'After' | escape }}">
+          {%- if s.after_image != blank -%}
+            {{ s.after_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width:990px) 80vw, 100vw', alt: s.after_label }}
+          {%- else -%}
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+          {%- if s.after_label != blank -%}<span class="apex-before-after__label apex-before-after__label--after">{{ s.after_label }}</span>{%- endif -%}
+        </div>
+
+        {%- comment -%} Before image (top layer, clipped) {%- endcomment -%}
+        <div class="apex-before-after__before" aria-label="{{ s.before_label | default: 'Before' | escape }}">
+          {%- if s.before_image != blank -%}
+            {{ s.before_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width:990px) 80vw, 100vw', alt: s.before_label }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+          {%- if s.before_label != blank -%}<span class="apex-before-after__label apex-before-after__label--before">{{ s.before_label }}</span>{%- endif -%}
+        </div>
+
+        {%- comment -%} Drag handle {%- endcomment -%}
+        <div class="apex-before-after__handle" aria-hidden="true">
+          <div class="apex-before-after__line"></div>
+          <div class="apex-before-after__btn">
+            <span>{% render 'icon', icon: 'arrow-left' %}</span>
+            <span>{% render 'icon', icon: 'arrow-right' %}</span>
+          </div>
+        </div>
+
+        {%- comment -%} Accessible range input fallback {%- endcomment -%}
+        <label class="visually-hidden" for="ba-range-{{ section.id }}">Drag to compare before and after</label>
+        <input
+          class="apex-before-after__range"
+          type="range"
+          id="ba-range-{{ section.id }}"
+          min="0" max="100"
+          value="{{ start_pct }}"
+          step="1"
+          aria-label="Before and after comparison slider">
+      </div>
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-before-after__wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  aspect-ratio: 16/9;
+  cursor: ew-resize;
+  user-select: none;
+  touch-action: none;
+  box-shadow: var(--shadow-pop);
+}
+.apex-before-after__after,
+.apex-before-after__before {
+  position: absolute;
+  inset: 0;
+}
+.apex-before-after__after img,
+.apex-before-after__after svg,
+.apex-before-after__before img,
+.apex-before-after__before svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+.apex-before-after__before {
+  clip-path: inset(0 calc(100% - var(--ba-pos, 50%)) 0 0);
+}
+.apex-before-after__label {
+  position: absolute;
+  bottom: 1rem;
+  padding: .35em .8em;
+  border-radius: var(--radius-pill);
+  background: rgba(0,0,0,.55);
+  color: #fff;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.apex-before-after__label--before { left: 1rem; }
+.apex-before-after__label--after { right: 1rem; }
+.apex-before-after__handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--ba-pos, 50%);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 3;
+}
+.apex-before-after__line {
+  width: 2px;
+  flex: 1;
+  background: #fff;
+  box-shadow: 0 0 6px rgba(0,0,0,.35);
+}
+.apex-before-after__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: var(--radius-pill);
+  background: #fff;
+  color: var(--text);
+  box-shadow: var(--shadow-pop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .1rem;
+}
+.apex-before-after__btn svg { width: .85rem; height: .85rem; }
+.apex-before-after__range {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: ew-resize;
+  z-index: 4;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+@media (max-width: 600px) {
+  .apex-before-after__wrap { aspect-ratio: 4/3; }
+}
+{% endstylesheet %}
+{% javascript %}
+(function () {
+  const initBA = (wrap) => {
+    const handle = wrap.querySelector('.apex-before-after__handle');
+    const before = wrap.querySelector('.apex-before-after__before');
+    const range = wrap.querySelector('.apex-before-after__range');
+    let isDragging = false;
+
+    const setPos = (pct) => {
+      pct = Math.min(100, Math.max(0, pct));
+      wrap.style.setProperty('--ba-pos', pct + '%');
+      if (range) range.value = pct;
+    };
+
+    const getPct = (clientX) => {
+      const rect = wrap.getBoundingClientRect();
+      return ((clientX - rect.left) / rect.width) * 100;
+    };
+
+    // Pointer events (mouse + touch unified)
+    wrap.addEventListener('pointerdown', (e) => {
+      if (e.target === range) return; // let range handle it
+      isDragging = true;
+      wrap.setPointerCapture(e.pointerId);
+      setPos(getPct(e.clientX));
+    });
+    wrap.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      setPos(getPct(e.clientX));
+    });
+    wrap.addEventListener('pointerup', () => { isDragging = false; });
+    wrap.addEventListener('pointercancel', () => { isDragging = false; });
+
+    // Range input fallback (keyboard + assistive tech)
+    if (range) {
+      range.addEventListener('input', () => { setPos(parseFloat(range.value)); });
+    }
+  };
+
+  document.querySelectorAll('[data-ba-slider]').forEach(initBA);
+})();
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Before & After",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "See the difference"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The transformation speaks for itself"
+    },
+    {
+      "type": "image_picker",
+      "id": "before_image",
+      "label": "Before image"
+    },
+    {
+      "type": "image_picker",
+      "id": "after_image",
+      "label": "After image"
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Before label",
+      "default": "Before"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "After label",
+      "default": "After"
+    },
+    {
+      "type": "range",
+      "id": "start_position",
+      "min": 10,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "label": "Starting handle position",
+      "default": 50
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width (disable narrow container)",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+
+  ],
+  "presets": [
+    {
+      "name": "Before & After",
+      "settings": {
+        "heading": "The transformation speaks for itself",
+        "before_label": "Before",
+        "after_label": "After",
+        "start_position": 50
+      }
+    }
+  ]
+}
+{% endschema %}

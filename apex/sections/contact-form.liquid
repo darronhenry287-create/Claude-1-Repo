@@ -1,0 +1,259 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-contact color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px">
+  <div class="page-width">
+
+    {%- if s.heading != blank or s.subheading != blank -%}
+      <div class="section-head{% if s.layout == 'centered' %} section-head--center{% endif %} reveal">
+        {%- if s.subheading != blank -%}<p class="eyebrow eyebrow--pill">{{ s.subheading }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+        {%- if s.intro != blank -%}<p class="subtitle">{{ s.intro }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="apex-contact__layout{% if s.layout == 'two-col' %} apex-contact__layout--two-col{% endif %} reveal">
+
+      {%- if s.layout == 'two-col' -%}
+        <aside class="apex-contact__info stack">
+          {%- if s.info_heading != blank -%}<h3 class="h4">{{ s.info_heading }}</h3>{%- endif -%}
+          {%- if s.info_text != blank -%}<div class="rte muted">{{ s.info_text }}</div>{%- endif -%}
+
+          <ul class="stack apex-contact__details" style="gap:.9rem">
+            {%- if s.email != blank -%}
+              <li class="cluster">
+                <span class="apex-contact__icon">{% render 'icon', icon: 'check' %}</span>
+                <a href="mailto:{{ s.email }}" class="link">{{ s.email }}</a>
+              </li>
+            {%- endif -%}
+            {%- if s.phone != blank -%}
+              <li class="cluster">
+                <span class="apex-contact__icon">{% render 'icon', icon: 'check' %}</span>
+                <a href="tel:{{ s.phone }}" class="link">{{ s.phone }}</a>
+              </li>
+            {%- endif -%}
+            {%- if s.address != blank -%}
+              <li class="cluster" style="align-items:flex-start">
+                <span class="apex-contact__icon" style="margin-top:.2em">{% render 'icon', icon: 'truck' %}</span>
+                <address style="font-style:normal;color:var(--text-muted)">{{ s.address | newline_to_br }}</address>
+              </li>
+            {%- endif -%}
+          </ul>
+
+          {%- if s.map_embed != blank -%}
+            <div class="apex-contact__map media media--landscape" style="border-radius:var(--radius-card);overflow:hidden">
+              {{ s.map_embed }}
+            </div>
+          {%- endif -%}
+        </aside>
+      {%- endif -%}
+
+      <div class="apex-contact__form-wrap">
+        {%- form 'contact', id: 'ContactForm' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="apex-contact__success" role="status">
+              {% render 'icon', icon: 'check' %}
+              <p>{{ s.success_message | default: 'Thanks for reaching out! We will be in touch shortly.' }}</p>
+            </div>
+          {%- else -%}
+            {%- if form.errors -%}
+              <div class="apex-contact__error" role="alert">
+                {{ form.errors | default_errors }}
+              </div>
+            {%- endif -%}
+
+            <div class="stack apex-contact__fields">
+              <div class="grid grid--2">
+                <div class="field">
+                  <label for="ContactForm-name">{{ 'contact.form.name' | t | default: 'Name' }}</label>
+                  <input class="input" type="text" id="ContactForm-name" name="contact[name]"
+                    value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                    autocomplete="name" placeholder="{{ 'contact.form.name' | t | default: 'Your name' }}">
+                </div>
+                <div class="field">
+                  <label for="ContactForm-email">{{ 'contact.form.email' | t | default: 'Email' }} <span aria-hidden="true">*</span></label>
+                  <input class="input" type="email" id="ContactForm-email" name="contact[email]"
+                    value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                    required autocomplete="email" placeholder="{{ 'contact.form.email' | t | default: 'you@example.com' }}">
+                </div>
+              </div>
+
+              {%- if s.show_phone -%}
+                <div class="field">
+                  <label for="ContactForm-phone">{{ 'contact.form.phone' | t | default: 'Phone' }}</label>
+                  <input class="input" type="tel" id="ContactForm-phone" name="contact[phone]"
+                    value="{{ form.phone }}" autocomplete="tel"
+                    placeholder="{{ 'contact.form.phone_placeholder' | t | default: '+1 (555) 000-0000' }}">
+                </div>
+              {%- endif -%}
+
+              <div class="field">
+                <label for="ContactForm-body">{{ 'contact.form.message' | t | default: 'Message' }} <span aria-hidden="true">*</span></label>
+                <textarea class="input" id="ContactForm-body" name="contact[body]" required
+                  placeholder="{{ 'contact.form.message_placeholder' | t | default: 'How can we help?' }}">{{ form.body }}</textarea>
+              </div>
+
+              <div>
+                <button class="btn btn--accent btn--lg" type="submit">
+                  {{ s.submit_label | default: 'Send message' }}
+                  {% render 'icon', icon: 'arrow-right' %}
+                </button>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-contact__layout { display: grid; gap: clamp(2rem,1.4rem + 3vw,4rem); }
+.apex-contact__layout--two-col { grid-template-columns: 1fr 1.4fr; }
+@media (max-width: 900px) { .apex-contact__layout--two-col { grid-template-columns: 1fr; } }
+.apex-contact__fields { gap: 1.2rem; }
+.apex-contact__info { gap: 1.2rem; }
+.apex-contact__icon { width: 1.4rem; height: 1.4rem; flex: none; color: var(--accent); }
+.apex-contact__details { list-style: none; }
+.apex-contact__map iframe { width: 100%; border: 0; min-height: 220px; }
+.apex-contact__success { display: flex; align-items: flex-start; gap: .8rem; padding: 1.2rem 1.4rem; background: color-mix(in srgb, var(--success) 10%, transparent); color: var(--success); border-radius: var(--radius-card); margin-bottom: 1.2rem; }
+.apex-contact__success svg { width: 1.3rem; height: 1.3rem; flex: none; margin-top: .15em; }
+.apex-contact__error { padding: 1rem 1.2rem; background: color-mix(in srgb, var(--sale) 10%, transparent); color: var(--sale); border-radius: var(--radius-sm); margin-bottom: 1rem; font-size: var(--text-sm); }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Contact form",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Get in touch"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "We'd love to hear from you"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro text"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "two-col",
+      "options": [
+        {
+          "value": "centered",
+          "label": "Centered (form only)"
+        },
+        {
+          "value": "two-col",
+          "label": "Two-column (info + form)"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Contact details (two-col layout)"
+    },
+    {
+      "type": "text",
+      "id": "info_heading",
+      "label": "Info column heading",
+      "default": "Contact us"
+    },
+    {
+      "type": "richtext",
+      "id": "info_text",
+      "label": "Info text",
+      "default": "<p>Our team is here to help. Reach out with any questions about orders, products, or partnerships.</p>"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email address"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone number"
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "Address (one line per line)"
+    },
+    {
+      "type": "html",
+      "id": "map_embed",
+      "label": "Map embed code (iframe)"
+    },
+    {
+      "type": "header",
+      "content": "Form"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_phone",
+      "label": "Show phone field",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Submit button label",
+      "default": "Send message"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks for reaching out! We will be in touch shortly."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact form",
+      "settings": {
+        "heading": "We'd love to hear from you",
+        "subheading": "Get in touch",
+        "layout": "two-col",
+        "show_phone": true
+      }
+    }
+  ]
+}
+{% endschema %}

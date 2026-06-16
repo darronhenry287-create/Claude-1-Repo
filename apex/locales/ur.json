@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "بند کریں",
+    "refresh_page": "کسی اختیار کو منتخب کرنے سے پورا صفحہ تازہ ہو جاتا ہے۔",
+    "skip_to_text": "مواد پر جائیں"
+  },
+  "general": {
+    "continue_shopping": "خریداری جاری رکھیں",
+    "video": {
+      "play": "ویڈیو چلائیں",
+      "no_video": "کوئی ویڈیو URL مقرر نہیں ہے۔"
+    },
+    "accessibility": {
+      "close": "بند کریں"
+    },
+    "page": "صفحہ {{ page }}",
+    "tags": "ٹیگز",
+    "search_placeholder": "مصنوعات تلاش کریں…",
+    "pagination": {
+      "label": "صفحہ بندی",
+      "load_more": "مزید لوڈ کریں",
+      "next": "اگلا",
+      "previous": "پچھلا"
+    },
+    "search": {
+      "search": "تلاش",
+      "placeholder": "مصنوعات تلاش کریں…",
+      "prompt": "آپ کیا تلاش کر رہے ہیں؟",
+      "for": "تلاش کریں",
+      "suggestions": "تجاویز",
+      "products": "مصنوعات",
+      "pages": "صفحات",
+      "articles": "مضامین",
+      "result": "نتیجہ",
+      "results": "نتائج",
+      "view_all": "تمام {{ count }} نتائج دیکھیں",
+      "browse_all": "تمام مصنوعات دیکھیں",
+      "no_results": "“{{ terms }}” کے لیے کوئی نتیجہ نہیں ملا",
+      "no_results_for": "کوئی نتیجہ نہیں ملا لیے",
+      "no_results_detail": "کوئی اور تلاش آزمائیں یا ہمارا کیٹلاگ دیکھیں۔"
+    },
+    "slider": {
+      "next": "اگلی سلائڈ",
+      "previous": "پیچھلی سلائڈ"
+    }
+  },
+  "newsletter": {
+    "label": "ای میل",
+    "placeholder": "ای میل پتہ",
+    "success": "سبسکرائب ہونے کا شکریہ!"
+  },
+  "payment": {
+    "methods": "منظور ادائگی کے طریقے"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "ٹوکری میں شامل کریں",
+      "buy": "خریدیں",
+      "choose_options": "اختیارات چنیں",
+      "from": "سے",
+      "in_stock": "اسٹاک میں موجود",
+      "low_stock": "صرف {{ quantity }} باقی ہیں",
+      "sold_out": "فروخت ہو گیا",
+      "unavailable": "دستیاب نہیں",
+      "quantity": "تعداد",
+      "increase": "تعداد بڑھائیں",
+      "decrease": "تعداد گھٹائیں",
+      "save": "{{ savings }} بچائیں",
+      "view_full_details": "مکمل تفصیلات دیکھیں",
+      "media": {
+        "load_image": "تصویر {{ index }} لوڈ کریں"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "مینو"
+    },
+    "cart": {
+      "title": "آپ کی ٹوکری",
+      "empty": "آپ کی ٹوکری خالی ہے",
+      "empty_detail": "آئیں آپ کے لیے کچھ تلاش کرتے ہیں۔",
+      "item": "ایٹم",
+      "items": "ایٹمز",
+      "quantity": "تعداد",
+      "increase": "تعداد بڑھائیں",
+      "decrease": "تعداد گھٹائیں",
+      "remove": "ہٹائیں",
+      "note": "آرڈر نوٹ شامل کریں",
+      "note_placeholder": "آپ کے آرڈر کے لیے خصوصی ہدایات",
+      "subtotal": "جزوی مجموعہ",
+      "summary": "خلاصہ",
+      "taxes": "ٹیکس اور شپنگ کی ادائیگی پر حساب ہوگا۔",
+      "checkout": "چیک آؤٹ",
+      "each": "فی ایکائی",
+      "original": "اصل قیمت",
+      "free_ship_progress": "مفت شپنگ کے لیے {{ amount }} اور درکار ہیں",
+      "free_ship_progress_html": "مفت شپنگ کے لیے <strong>{{ amount }}</strong> اور درکار ہیں",
+      "free_ship_unlocked": "آپ نے مفت شپنگ حاصل کر لیا!"
+    },
+    "collection": {
+      "count": "{{ count }} مصنوعات",
+      "products": "مصنوعات",
+      "empty": "کوئی مصنوع نہیں ملا",
+      "empty_detail": "کچھ فلٹرز ہٹانے کی کوشش کریں۔",
+      "filter": "فلٹر",
+      "apply": "لاگو کریں",
+      "clear_filters": "سب صاف کریں",
+      "sort_label": "ترتیب کی بنیاد پر",
+      "price_from": "سے",
+      "price_to": "تک"
+    },
+    "collection_list": {
+      "empty": "دکھانے کے لیے کوئی کلیکشن نہیں",
+      "products": "مصنوعات"
+    },
+    "featured_collection": {
+      "empty": "دکھانے کے لیے کوئی مصنوع نہیں"
+    }
+  },
+  "customer": {
+    "log_out": "لاگ آؤٹ",
+    "account": {
+      "title": "اکاؤنٹ",
+      "details": "اکاؤنٹ کی تفصیلات",
+      "return": "اکاؤنٹ پر واپس جائیں",
+      "view_addresses": "پتے دیکھیں"
+    },
+    "login": {
+      "title": "لاگ ان",
+      "email": "ای میل",
+      "password": "پاس ورڈ",
+      "sign_in": "سائن ان",
+      "forgot_password": "پاس ورڈ بھول گئے؟",
+      "no_account": "اکاؤنٹ نہیں ہے؟",
+      "create_account": "اکاؤنٹ بنائیں",
+      "cancel": "منسوخ کریں"
+    },
+    "register": {
+      "title": "اکاؤنٹ بنائیں",
+      "first_name": "پہلا نام",
+      "last_name": "آخری نام",
+      "email": "ای میل",
+      "password": "پاس ورڈ",
+      "password_placeholder": "کم از کم 5 حروف",
+      "submit": "اکاؤنٹ بنائیں",
+      "login": "پہلے سے اکاؤنٹ ہے؟ سائن ان کریں"
+    },
+    "recover_password": {
+      "title": "پاس ورڈ ریسیٹ کریں",
+      "subtext": "ہم آپ کو ریسیٹ کے لیے ای میل بھیجیں گے۔",
+      "submit": "ریسیٹ ای میل بھیجیں",
+      "success": "ہم نے آپ کو پاس ورڈ ریسیٹ کرنے کے لیے لنک کے ساتھ ای میل بھیج دیا ہے۔"
+    },
+    "reset_password": {
+      "title": "اکاؤنٹ پاس ورڈ ریسیٹ کریں",
+      "subtext": "نیا پاس ورڈ درج کریں۔",
+      "password": "پاس ورڈ",
+      "password_confirm": "پاس ورڈ کی تصدیق کریں",
+      "password_placeholder": "نیا پاس ورڈ",
+      "submit": "پاس ورڈ ریسیٹ کریں"
+    },
+    "activate_account": {
+      "title": "اکاؤنٹ فعال کریں",
+      "subtext": "اپنا اکاؤنٹ فعال کرنے کے لیے پاس ورڈ بنائیں۔",
+      "password": "پاس ورڈ",
+      "password_placeholder": "پاس ورڈ",
+      "password_confirm": "پاس ورڈ کی تصدیق کریں",
+      "password_confirm_placeholder": "پاس ورڈ کی تصدیق کریں",
+      "submit": "اکاؤنٹ فعال کریں",
+      "cancel": "دعوت رد کریں"
+    },
+    "orders": {
+      "title": "آرڈر کی تاریخ",
+      "none": "آپ نے اب تک کوئی آرڈر نہیں دیا۔",
+      "order_number": "آرڈر",
+      "date": "تاریخ",
+      "payment_status": "ادائیگی",
+      "fulfillment_status": "تکمیل",
+      "total": "کل رقم"
+    },
+    "order": {
+      "title": "آرڈر {{ name }}",
+      "date_html": "{{ date }} کو دیا گیا",
+      "fulfilled_at_html": "{{ date }} کو پورا ہوا",
+      "summary": "آرڈر كا خلاصہ",
+      "items": "ایٹمز",
+      "quantity": "تعداد",
+      "subtotal": "جزوی مجموعہ",
+      "total": "کل رقم",
+      "shipping_address": "شپنگ پتہ",
+      "billing_address": "بلنگ پتہ"
+    },
+    "addresses": {
+      "title": "پتے",
+      "first_name": "پہلا نام",
+      "last_name": "آخری نام",
+      "company": "کمپنی",
+      "address1": "پتہ",
+      "address2": "اپارٹمینٹ، سوٹ وغیرہ",
+      "city": "شہر",
+      "zip": "پوسٹل کوڈ",
+      "country": "ملک / خطہ",
+      "province": "صوبہ / ضلع",
+      "phone": "فون",
+      "default": "ڈیفالٹ",
+      "default_address": "ڈیفالٹ پتہ",
+      "add_new": "نیا پتہ شامل کریں",
+      "add": "پتہ شامل کریں",
+      "update": "پتہ اپڈیٹ کریں",
+      "edit": "ترمیم",
+      "delete": "حذف کریں",
+      "delete_confirm": "کیا آپ واقعی یہ پتہ حذف کرنا چاہتے ہیں؟",
+      "set_default": "ڈیفالٹ سیٹ کریں",
+      "cancel": "منسوخ کریں",
+      "none": "کوئی محفوظ پتہ نہیں۔"
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "{{ author }} کی جانب سے"
+    },
+    "comments": {
+      "title": "تبصرے",
+      "name": "نام",
+      "email": "ای میل",
+      "message": "تبصرہ",
+      "post": "تبصرہ پوسٹ کریں",
+      "success": "آپ کا تبصرہ کامیابی سے پوسٹ ہو گیا!",
+      "comments_with_count": "{{ count }} تبصرے"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "نام",
+      "email": "ای میل",
+      "phone": "فون",
+      "phone_placeholder": "اختیاری",
+      "message": "پیغام",
+      "message_placeholder": "ہم کیسے مدد کر سکتے ہیں؟"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "یہ ہے آپ کا {{ value }} کا گفٹ کارڈ!",
+      "remaining_html": "{{ balance }} باقی",
+      "expiry_date": "میعاد ختم {{ expiry }}",
+      "copy_code": "کوڈ کاپی کریں",
+      "shop_link": "خریداری شروع کریں",
+      "print_link": "پرنٹ"
+    }
+  }
+}

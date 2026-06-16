@@ -1,0 +1,204 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-quote color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="quote-{{ section.id }}">
+  <div class="page-width page-width--narrow">
+    <div class="apex-quote__inner reveal stack center">
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+
+          {%- when 'quote' -%}
+            <blockquote class="apex-quote__blockquote" {{ block.shopify_attributes }}>
+              <p class="apex-quote__text balance">{{ block.settings.text }}</p>
+            </blockquote>
+
+          {%- when 'rating' -%}
+            <div class="apex-quote__rating" {{ block.shopify_attributes }}>
+              {% render 'rating', value: block.settings.value, count: block.settings.count %}
+            </div>
+
+          {%- when 'attribution' -%}
+            <footer class="apex-quote__attribution" {{ block.shopify_attributes }}>
+              {%- if block.settings.avatar != blank -%}
+                <div class="apex-quote__avatar media media--round media--square">
+                  {{ block.settings.avatar | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60,80,120', sizes: '48px', alt: block.settings.name }}
+                </div>
+              {%- endif -%}
+              <div class="apex-quote__attr-text">
+                {%- if block.settings.name != blank -%}<strong class="apex-quote__name">{{ block.settings.name }}</strong>{%- endif -%}
+                {%- if block.settings.title != blank -%}<span class="apex-quote__role muted">{{ block.settings.title }}</span>{%- endif -%}
+              </div>
+            </footer>
+
+        {%- endcase -%}
+      {%- endfor -%}
+
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-quote__inner {
+  align-items: center;
+  gap: 1.8rem;
+}
+.apex-quote__blockquote {
+  margin: 0;
+}
+.apex-quote__text {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  font-size: clamp(1.5rem, 1rem + 2.5vw, 2.6rem);
+  line-height: 1.2;
+  letter-spacing: var(--heading-letter-spacing);
+  quotes: "\201C" "\201D";
+}
+.apex-quote__text::before {
+  content: open-quote;
+  color: var(--accent);
+}
+.apex-quote__text::after {
+  content: close-quote;
+  color: var(--accent);
+}
+.apex-quote__attribution {
+  display: inline-flex;
+  align-items: center;
+  gap: .9rem;
+  justify-content: center;
+}
+.apex-quote__avatar {
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+.apex-quote__attr-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .15rem;
+  text-align: left;
+}
+.apex-quote__name {
+  font-size: .96rem;
+}
+.apex-quote__role {
+  font-size: var(--text-sm);
+}
+.apex-quote__rating {
+  justify-content: center;
+  display: flex;
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Quote",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "rating",
+      "name": "Rating",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Rating value (e.g. 4.9)",
+          "default": "4.9"
+        },
+        {
+          "type": "text",
+          "id": "count",
+          "label": "Review count label",
+          "default": "from 12,000+ customers"
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "name": "Quote",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Quote text",
+          "default": "This is the most thoughtfully designed product I've used. The quality is immediately obvious, and it's held up perfectly after months of daily use."
+        }
+      ]
+    },
+    {
+      "type": "attribution",
+      "name": "Attribution",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Alex M."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title / description",
+          "default": "Verified customer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quote",
+      "blocks": [
+        {
+          "type": "rating"
+        },
+        {
+          "type": "quote"
+        },
+        {
+          "type": "attribution"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

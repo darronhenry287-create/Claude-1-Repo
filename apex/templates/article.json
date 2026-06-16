@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "settings": {
+        "show_hero_image": true,
+        "hero_height": 55,
+        "show_tags": true,
+        "show_date": true,
+        "show_author": true,
+        "show_read_time": true,
+        "show_share": true,
+        "show_prev_next": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

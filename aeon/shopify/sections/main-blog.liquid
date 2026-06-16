@@ -1,0 +1,60 @@
+<section class="pagehead">
+  <div class="wrap wrap--wide">
+    <div class="kicker">{{ section.settings.kicker | default: 'The Journal' }}</div>
+    <h1>{{ blog.title }}</h1>
+    {%- if section.settings.subtext != blank -%}
+      <p class="lede" style="max-width:50ch;margin-top:.8rem">{{ section.settings.subtext }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    {%- paginate blog.articles by section.settings.articles_per_page -%}
+      {%- if blog.articles.size > 0 -%}
+        <div class="prodgrid">
+          {%- for article in blog.articles -%}
+            <a href="{{ article.url }}" class="pcard reveal">
+              <div class="pcard__img">
+                {%- if article.image -%}
+                  <img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.title | escape }}" width="600" height="600" loading="lazy">
+                {%- else -%}
+                  <img src="{{ 'aeon-seal.svg' | asset_url }}" alt="" width="120" height="120">
+                {%- endif -%}
+              </div>
+              <div class="pcard__body">
+                <div class="kicker k--muted" style="font-size:.65rem">{{ article.published_at | date: '%B %-d, %Y' }}</div>
+                <h3 class="pcard__body" style="font-size:1.05rem;margin:.4rem 0">{{ article.title }}</h3>
+                {%- if article.excerpt != blank -%}
+                  <p class="sub" style="font-size:.88rem;-webkit-line-clamp:3;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden">{{ article.excerpt | strip_html }}</p>
+                {%- endif -%}
+              </div>
+              <div class="pcard__foot" style="padding:1rem 1.3rem 1.3rem;margin-top:auto">
+                <span class="mint" style="font-size:.82rem;font-weight:600">Read more →</span>
+              </div>
+            </a>
+          {%- endfor -%}
+        </div>
+        {%- if paginate.pages > 1 -%}
+          <div class="center" style="margin-top:3rem">{{ paginate | default_pagination }}</div>
+        {%- endif -%}
+      {%- else -%}
+        <p class="muted">No posts yet. Check back soon.</p>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The Journal" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Research, protocols, and longevity science — explained plainly." },
+    { "type": "range", "id": "articles_per_page", "label": "Articles per page", "min": 3, "max": 24, "step": 3, "default": 9 }
+  ],
+  "presets": [
+    { "name": "Blog posts" }
+  ]
+}
+{% endschema %}

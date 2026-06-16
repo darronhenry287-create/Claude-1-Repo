@@ -1,0 +1,101 @@
+<div class="apex-tb-tabs" data-tabs {{ block.shopify_attributes }}>
+  <div class="apex-tb-tabs__nav" role="tablist">
+    {%- for b in block.blocks -%}
+      {%- liquid
+        assign tab_id = 'tab-' | append: block.id | append: '-' | append: forloop.index
+        assign panel_id = 'panel-' | append: block.id | append: '-' | append: forloop.index
+        assign is_first = false
+        if forloop.first
+          assign is_first = true
+        endif
+      -%}
+      <button
+        role="tab"
+        id="{{ tab_id }}"
+        aria-controls="{{ panel_id }}"
+        aria-selected="{{ is_first }}"
+        class="apex-tb-tabs__tab{% if is_first %} is-active{% endif %}"
+        tabindex="{% if is_first %}0{% else %}-1{% endif %}"
+      >{{ b.settings.tab_label | default: b.settings.heading | default: 'Tab' | escape }}</button>
+    {%- endfor -%}
+  </div>
+  <div class="apex-tb-tabs__panels">
+    {%- for b in block.blocks -%}
+      {%- liquid
+        assign tab_id = 'tab-' | append: block.id | append: '-' | append: forloop.index
+        assign panel_id = 'panel-' | append: block.id | append: '-' | append: forloop.index
+        assign is_first = false
+        if forloop.first
+          assign is_first = true
+        endif
+      -%}
+      <div
+        role="tabpanel"
+        id="{{ panel_id }}"
+        aria-labelledby="{{ tab_id }}"
+        class="apex-tb-tabs__panel{% unless is_first %} is-hidden{% endunless %}"
+      >
+        {%- render b -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+{% stylesheet %}
+.apex-tb-tabs__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem;
+  border-bottom: var(--border-width) solid var(--border);
+  margin-bottom: 1.4rem;
+}
+.apex-tb-tabs__tab {
+  padding: .55rem 1.1rem;
+  font-size: .93rem;
+  font-weight: 600;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: color .2s, border-color .2s;
+  margin-bottom: -1px;
+}
+.apex-tb-tabs__tab:hover,
+.apex-tb-tabs__tab.is-active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.apex-tb-tabs__panel.is-hidden { display: none; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Tabs",
+  "blocks": [
+    {
+      "type": "@theme"
+    }
+  ],
+  "settings": [
+
+  ],
+  "presets": [
+    {
+      "name": "Tabs",
+      "blocks": [
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Content for the first tab.</p>"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Content for the second tab.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

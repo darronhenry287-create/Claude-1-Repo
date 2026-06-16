@@ -1,0 +1,369 @@
+{%- liquid
+  assign s = section.settings
+  assign layout = s.layout | default: 'vertical'
+-%}
+<section class="apex-timeline color-{{ s.color_scheme }} apex-timeline--{{ layout }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="timeline-{{ section.id }}">
+  <div class="page-width{% if layout == 'horizontal' %}--full{% endif %}">
+
+    {%- if s.eyebrow != blank or s.heading != blank -%}
+      <div class="section-head section-head--center reveal">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+        {%- if s.subheading != blank -%}<p class="subtitle balance muted">{{ s.subheading }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if layout == 'horizontal' -%}
+      <div class="apex-tl__h-track" aria-label="Timeline">
+        <div class="apex-tl__h-line" aria-hidden="true"></div>
+        <div class="apex-tl__h-scroll">
+          {%- for block in section.blocks -%}
+            <div class="apex-tl__h-step reveal" {{ block.shopify_attributes }}>
+              <div class="apex-tl__h-node" aria-hidden="true">
+                <div class="apex-tl__h-dot"></div>
+              </div>
+              <div class="apex-tl__h-content">
+                {%- if block.settings.date != blank or block.settings.label != blank -%}
+                  <p class="apex-tl__meta eyebrow">
+                    {%- if block.settings.label != blank -%}{{ block.settings.label }}{%- endif -%}
+                    {%- if block.settings.label != blank and block.settings.date != blank -%} · {%- endif -%}
+                    {%- if block.settings.date != blank -%}<time>{{ block.settings.date }}</time>{%- endif -%}
+                  </p>
+                {%- endif -%}
+                {%- if block.settings.heading != blank -%}
+                  <h3 class="apex-tl__step-heading">{{ block.settings.heading }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <div class="rte muted apex-tl__step-text">{{ block.settings.text }}</div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+    {%- else -%}
+      <div class="apex-tl__v-list" aria-label="Timeline">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign side = 'left'
+            assign mod = forloop.index0 | modulo: 2
+            if mod == 1
+              assign side = 'right'
+            endif
+          -%}
+          <div class="apex-tl__v-step apex-tl__v-step--{{ side }} reveal" {{ block.shopify_attributes }}>
+
+            <div class="apex-tl__v-node" aria-hidden="true">
+              <div class="apex-tl__v-dot"></div>
+              <div class="apex-tl__v-line"></div>
+            </div>
+
+            <div class="apex-tl__v-content">
+              {%- if block.settings.image != blank -%}
+                <div class="apex-tl__step-img media media--landscape media--round">
+                  {%- assign step_img_alt = block.settings.image.alt -%}
+                  {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '400,600,800,900', sizes: '(min-width:990px) 40vw, 100vw', alt: step_img_alt }}
+                </div>
+              {%- endif -%}
+              <div class="apex-tl__v-body stack">
+                {%- if block.settings.date != blank or block.settings.label != blank -%}
+                  <p class="apex-tl__meta eyebrow">
+                    {%- if block.settings.label != blank -%}{{ block.settings.label }}{%- endif -%}
+                    {%- if block.settings.label != blank and block.settings.date != blank -%} · {%- endif -%}
+                    {%- if block.settings.date != blank -%}<time>{{ block.settings.date }}</time>{%- endif -%}
+                  </p>
+                {%- endif -%}
+                {%- if block.settings.heading != blank -%}
+                  <h3 class="apex-tl__step-heading balance">{{ block.settings.heading }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <div class="rte muted apex-tl__step-text">{{ block.settings.text }}</div>
+                {%- endif -%}
+              </div>
+            </div>
+
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+{% stylesheet %}
+/* ===== shared ===== */
+.apex-tl__meta {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.apex-tl__step-heading {
+  font-size: var(--h3);
+  line-height: var(--heading-line-height);
+  letter-spacing: var(--heading-letter-spacing);
+}
+.apex-tl__step-text { font-size: 1rem; }
+
+/* ===== VERTICAL layout ===== */
+.apex-tl__v-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  max-width: 52rem;
+  margin-inline: auto;
+}
+.apex-tl__v-step {
+  display: grid;
+  grid-template-columns: 2.75rem 1fr;
+  gap: 0 1.75rem;
+  position: relative;
+}
+.apex-tl__v-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: .2rem;
+  flex: none;
+}
+.apex-tl__v-dot {
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 3px var(--accent);
+  flex: none;
+  z-index: 1;
+}
+.apex-tl__v-line {
+  flex: 1;
+  width: 2px;
+  background: var(--border);
+  margin-top: .5rem;
+  min-height: 2rem;
+}
+.apex-tl__v-step:last-child .apex-tl__v-line { display: none; }
+.apex-tl__v-content {
+  padding-bottom: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+}
+.apex-tl__v-body { gap: .7rem; }
+.apex-tl__step-img { margin-bottom: 1rem; }
+
+/* desktop alternating sides */
+@media (min-width: 750px) {
+  .apex-tl__v-list { max-width: 100%; }
+  .apex-tl__v-step {
+    grid-template-columns: 1fr 2.75rem 1fr;
+    gap: 0 1.75rem;
+    align-items: start;
+  }
+  .apex-tl__v-node { grid-column: 2; }
+  .apex-tl__v-step--left .apex-tl__v-content  { grid-column: 3; grid-row: 1; }
+  .apex-tl__v-step--right .apex-tl__v-content { grid-column: 1; grid-row: 1; text-align: right; }
+  .apex-tl__v-step--right .apex-tl__step-img { margin-left: auto; }
+  .apex-tl__v-step--right .apex-tl__v-body .rte { margin-left: auto; }
+}
+
+/* ===== HORIZONTAL layout ===== */
+.apex-tl__h-track {
+  position: relative;
+  overflow: hidden;
+}
+.apex-tl__h-line {
+  position: absolute;
+  top: 1.25rem;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+.apex-tl__h-scroll {
+  display: flex;
+  gap: clamp(2rem, 1.5rem + 3vw, 4rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  position: relative;
+}
+.apex-tl__h-scroll::-webkit-scrollbar { display: none; }
+.apex-tl__h-step {
+  flex: 0 0 clamp(180px, 240px, 300px);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 2.5rem;
+  position: relative;
+}
+.apex-tl__h-node {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+}
+.apex-tl__h-dot {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 3px var(--accent);
+  z-index: 1;
+}
+.apex-tl__h-content { display: flex; flex-direction: column; gap: .5rem; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Timeline",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our journey"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "vertical",
+      "options": [
+        {
+          "value": "vertical",
+          "label": "Vertical (alternating sides on desktop)"
+        },
+        {
+          "value": "horizontal",
+          "label": "Horizontal scroll"
+        }
+      ]
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Timeline step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label / step number",
+          "default": "Step 01"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "A milestone worth noting"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "<p>Describe what happened at this point in time, or what this step in the process involves for the customer.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Optional image (vertical layout only)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Timeline",
+      "settings": {
+        "eyebrow": "Our story",
+        "heading": "Built from the ground up",
+        "layout": "vertical"
+      },
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "label": "2019",
+            "heading": "The idea",
+            "text": "<p>It started in a garage with one question: why is this so hard? We decided to fix it.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "label": "2020",
+            "heading": "First product ships",
+            "text": "<p>After 18 months of development and 200+ prototypes, we sent our first order to a real customer. They came back for more.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "label": "2022",
+            "heading": "10,000 customers",
+            "text": "<p>Word spread. We crossed 10,000 orders and hit our first £1M revenue milestone without a single paid ad.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "label": "Today",
+            "heading": "Still just getting started",
+            "text": "<p>We're a team of 30, shipping to 42 countries, and still obsessively improving everything we make.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

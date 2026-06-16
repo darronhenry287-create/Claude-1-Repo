@@ -1,0 +1,127 @@
+{%- comment -%} templates/customers/order.liquid — Apex order detail page {%- endcomment -%}
+<div class="page-width apex-order" style="padding-block:clamp(3rem,2rem + 4vw,5rem)">
+
+  <a class="link" href="{{ routes.account_url }}" style="display:inline-flex;align-items:center;gap:.4em;margin-bottom:1.6rem;font-size:var(--text-sm)">
+    {% render 'icon', icon: 'arrow-left' %}
+    {{ 'customer.account.return' | t | default: 'Back to account' }}
+  </a>
+
+  <header class="apex-order__header">
+    <div>
+      <p class="eyebrow eyebrow--pill">{{ 'customer.order.title' | t | default: 'Order' }} {{ order.name }}</p>
+      <h1 class="h3" style="margin-top:.4rem">
+        {{ 'customer.order.date_html' | t: date: order.created_at | date: '%B %d, %Y' | default: order.created_at | date: '%B %d, %Y' }}
+      </h1>
+    </div>
+    <div class="cluster">
+      <span class="badge{% if order.financial_status == 'paid' %} badge--soft{% elsif order.financial_status == 'pending' %} badge--sale{% endif %}">
+        {{ order.financial_status_label }}
+      </span>
+      <span class="badge badge--soft">{{ order.fulfillment_status_label }}</span>
+    </div>
+  </header>
+
+  <div class="apex-order__layout">
+
+    <section class="apex-order__items">
+      <h2 class="h5" style="margin-bottom:1rem">{{ 'customer.order.items' | t | default: 'Items' }}</h2>
+      <div class="stack" style="gap:0">
+        {%- for line_item in order.line_items -%}
+          <div class="apex-order__line-item">
+            <div class="apex-order__line-media">
+              {%- if line_item.image -%}
+                {{ line_item.image | image_url: width: 120 | image_tag: loading: 'lazy', alt: line_item.title, style: 'border-radius:var(--radius-sm)' }}
+              {%- else -%}
+                <div class="media media--square" style="border-radius:var(--radius-sm);width:70px;height:70px">
+                  {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              {%- endif -%}
+            </div>
+            <div class="stack" style="gap:.25rem;flex:1">
+              <span class="apex-order__line-title">{{ line_item.title }}</span>
+              {%- if line_item.variant_title and line_item.variant_title != 'Default Title' -%}
+                <span class="muted" style="font-size:var(--text-sm)">{{ line_item.variant_title }}</span>
+              {%- endif -%}
+              <span class="muted" style="font-size:var(--text-sm)">{{ 'customer.order.quantity' | t | default: 'Qty' }}: {{ line_item.quantity }}</span>
+              {%- if line_item.fulfillment -%}
+                <span class="muted" style="font-size:var(--text-sm)">{{ 'customer.order.fulfilled_at_html' | t: date: line_item.fulfillment.created_at | date: '%b %d' | default: 'Fulfilled' }}</span>
+              {%- endif -%}
+            </div>
+            <div class="apex-order__line-price">
+              <span class="price">{{ line_item.final_line_price | money }}</span>
+              {%- if line_item.original_line_price != line_item.final_line_price -%}
+                <s class="price__compare">{{ line_item.original_line_price | money }}</s>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </section>
+
+    <aside class="apex-order__aside stack">
+      <div class="card bordered" style="padding:1.4rem">
+        <h2 class="h5" style="margin-bottom:1rem">{{ 'customer.order.summary' | t | default: 'Summary' }}</h2>
+        <div class="stack" style="gap:.7rem;font-size:var(--text-sm)">
+          <div class="cluster" style="justify-content:space-between">
+            <span class="muted">{{ 'customer.order.subtotal' | t | default: 'Subtotal' }}</span>
+            <span>{{ order.subtotal_price | money }}</span>
+          </div>
+          {%- for discount in order.discounts -%}
+            <div class="cluster" style="justify-content:space-between">
+              <span class="muted">{{ discount.code }}</span>
+              <span style="color:var(--sale)">-{{ discount.savings | money }}</span>
+            </div>
+          {%- endfor -%}
+          {%- for shipping_method in order.shipping_methods -%}
+            <div class="cluster" style="justify-content:space-between">
+              <span class="muted">{{ shipping_method.title }}</span>
+              <span>{{ shipping_method.price | money }}</span>
+            </div>
+          {%- endfor -%}
+          {%- for tax_line in order.tax_lines -%}
+            <div class="cluster" style="justify-content:space-between">
+              <span class="muted">{{ tax_line.title }} ({{ tax_line.rate | times: 100 }}%)</span>
+              <span>{{ tax_line.price | money }}</span>
+            </div>
+          {%- endfor -%}
+          <hr class="divider">
+          <div class="cluster" style="justify-content:space-between;font-size:1rem;font-weight:700">
+            <span>{{ 'customer.order.total' | t | default: 'Total' }}</span>
+            <span>{{ order.total_price | money }}</span>
+          </div>
+        </div>
+      </div>
+
+      {%- if order.shipping_address -%}
+        <div class="card bordered" style="padding:1.4rem">
+          <h2 class="h5" style="margin-bottom:.8rem">{{ 'customer.order.shipping_address' | t | default: 'Shipping address' }}</h2>
+          <address style="font-style:normal;font-size:var(--text-sm);color:var(--text-muted);line-height:1.8">
+            {{ order.shipping_address | format_address }}
+          </address>
+        </div>
+      {%- endif -%}
+
+      {%- if order.billing_address -%}
+        <div class="card bordered" style="padding:1.4rem">
+          <h2 class="h5" style="margin-bottom:.8rem">{{ 'customer.order.billing_address' | t | default: 'Billing address' }}</h2>
+          <address style="font-style:normal;font-size:var(--text-sm);color:var(--text-muted);line-height:1.8">
+            {{ order.billing_address | format_address }}
+          </address>
+        </div>
+      {%- endif -%}
+    </aside>
+
+  </div>
+</div>
+<style>
+.apex-order__header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: clamp(2rem,1.4rem + 2vw,3rem); }
+.apex-order__layout { display: grid; grid-template-columns: 1fr 300px; gap: clamp(2rem,1.4rem + 3vw,4rem); align-items: start; }
+@media (max-width: 900px) { .apex-order__layout { grid-template-columns: 1fr; } }
+.apex-order__line-item { display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; padding: 1rem 0; border-bottom: var(--border-width) solid var(--border); align-items: center; }
+.apex-order__line-item:last-child { border-bottom: none; }
+.apex-order__line-media { width: 70px; height: 70px; overflow: hidden; }
+.apex-order__line-media img { width: 100%; height: 100%; object-fit: cover; }
+.apex-order__line-title { font-weight: 600; font-size: .95rem; }
+.apex-order__line-price { text-align: right; display: grid; gap: .2rem; }
+.apex-order__aside { gap: 1rem; }
+</style>

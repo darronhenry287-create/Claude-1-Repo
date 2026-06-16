@@ -1,0 +1,37 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "tagline": "Pharmaceutical-grade NMN to rebuild the NAD⁺ your cells run on. Third-party tested, nothing hidden."
+      },
+      "blocks": {
+        "shop": {
+          "type": "column",
+          "settings": {
+            "heading": "Shop",
+            "links_fallback": "<a href=\"/products/aeon-nmn-1000\">AEON NMN 1000</a><a href=\"/collections/all\">Shop All</a><a href=\"/pages/subscribe-save\">Subscribe & Save</a><a href=\"/pages/guarantee\">60-Night Guarantee</a>"
+          }
+        },
+        "science": {
+          "type": "column",
+          "settings": {
+            "heading": "Science",
+            "links_fallback": "<a href=\"/pages/science\">How NMN Works</a><a href=\"/pages/science\">The Research</a><a href=\"/pages/faq\">FAQ</a><a href=\"/pages/about\">Our Standards</a>"
+          }
+        },
+        "support": {
+          "type": "column",
+          "settings": {
+            "heading": "Support",
+            "links_fallback": "<a href=\"/pages/contact\">Contact</a><a href=\"/pages/shipping-returns\">Shipping & Returns</a><a href=\"/pages/guarantee\">Guarantee</a><a href=\"/cart\">Cart</a>"
+          }
+        }
+      },
+      "block_order": ["shop", "science", "support"]
+    }
+  },
+  "order": ["footer"]
+}

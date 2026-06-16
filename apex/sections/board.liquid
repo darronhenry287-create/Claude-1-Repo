@@ -1,0 +1,596 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-board color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="board-{{ section.id }}">
+  <div class="page-width">
+
+    {%- if s.eyebrow != blank or s.heading != blank -%}
+      <div class="section-head section-head--center reveal">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+        {%- if s.subheading != blank -%}<p class="subtitle balance muted">{{ s.subheading }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="apex-board__grid reveal">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign tile_size = block.settings.size | default: 'md'
+          assign tile_type = block.type
+        -%}
+        <div class="apex-board__tile apex-board__tile--{{ tile_size }} apex-board__tile--{{ tile_type }}" {{ block.shopify_attributes }}>
+
+          {%- case tile_type -%}
+
+            {%- when 'image' -%}
+              {%- if block.settings.image != blank -%}
+                {%- assign img_alt = block.settings.image.alt -%}
+                {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400,600,800,1000,1200', sizes: '(min-width:990px) 33vw, 100vw', alt: img_alt, class: 'apex-board__bg' }}
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg apex-board__bg' }}
+              {%- endif -%}
+              {%- if block.settings.caption != blank -%}
+                <div class="apex-board__caption">
+                  <p class="apex-board__caption-text">{{ block.settings.caption }}</p>
+                </div>
+              {%- endif -%}
+              {%- if block.settings.link_url != blank -%}
+                <a class="apex-board__full-link" href="{{ block.settings.link_url }}" aria-label="{{ block.settings.caption | escape }}"></a>
+              {%- endif -%}
+
+            {%- when 'text' -%}
+              <div class="apex-board__text-inner stack">
+                {%- if block.settings.eyebrow != blank -%}
+                  <p class="eyebrow eyebrow--pill">{{ block.settings.eyebrow }}</p>
+                {%- endif -%}
+                {%- if block.settings.heading != blank -%}
+                  <h3 class="balance">{{ block.settings.heading }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <div class="rte muted">{{ block.settings.text }}</div>
+                {%- endif -%}
+                {%- if block.settings.button_label != blank -%}
+                  <div class="cluster">
+                    <a class="btn btn--accent btn--sm" href="{{ block.settings.button_url }}">{{ block.settings.button_label }}</a>
+                  </div>
+                {%- endif -%}
+              </div>
+
+            {%- when 'product' -%}
+              {%- if block.settings.product != blank -%}
+                {%- assign prod = block.settings.product -%}
+                {%- if prod.featured_media != blank -%}
+                  {%- assign prod_img_alt = prod.featured_media.alt -%}
+                  {{ prod.featured_media | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300,500,800', sizes: '(min-width:990px) 33vw, 80vw', alt: prod_img_alt, class: 'apex-board__bg' }}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg apex-board__bg' }}
+                {%- endif -%}
+                <div class="apex-board__product-info">
+                  <p class="apex-board__product-title">{{ prod.title }}</p>
+                  <div class="apex-board__product-price">{% render 'price', product: prod %}</div>
+                </div>
+                <a class="apex-board__full-link" href="{{ prod.url }}" aria-label="{{ prod.title | escape }}"></a>
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg apex-board__bg' }}
+                <div class="apex-board__product-info">
+                  <p class="apex-board__product-title">Product name</p>
+                </div>
+              {%- endif -%}
+
+            {%- when 'quote' -%}
+              <div class="apex-board__quote-inner stack">
+                {%- if block.settings.quote != blank -%}
+                  <blockquote class="apex-board__quote-text">{{ block.settings.quote }}</blockquote>
+                {%- endif -%}
+                {%- if block.settings.author != blank -%}
+                  <p class="apex-board__quote-author muted">— {{ block.settings.author }}</p>
+                {%- endif -%}
+              </div>
+
+            {%- when 'stat' -%}
+              <div class="apex-board__stat-inner stack">
+                {%- if block.settings.value != blank -%}
+                  <p class="apex-board__stat-value">{{ block.settings.value }}</p>
+                {%- endif -%}
+                {%- if block.settings.label != blank -%}
+                  <p class="apex-board__stat-label muted">{{ block.settings.label }}</p>
+                {%- endif -%}
+                {%- if block.settings.description != blank -%}
+                  <p class="apex-board__stat-desc muted">{{ block.settings.description }}</p>
+                {%- endif -%}
+              </div>
+
+          {%- endcase -%}
+
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+{% stylesheet %}
+.apex-board__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 200px;
+  gap: clamp(.6rem, .4rem + .8vw, 1rem);
+}
+/* size modifiers — span columns + rows */
+.apex-board__tile--sm   { grid-column: span 3;  grid-row: span 1; }
+.apex-board__tile--md   { grid-column: span 4;  grid-row: span 1; }
+.apex-board__tile--lg   { grid-column: span 6;  grid-row: span 2; }
+.apex-board__tile--tall { grid-column: span 3;  grid-row: span 2; }
+.apex-board__tile--wide { grid-column: span 8;  grid-row: span 1; }
+
+.apex-board__tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+}
+.apex-board__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .55s var(--ease);
+}
+.apex-board__tile:hover .apex-board__bg { transform: scale(1.04); }
+.apex-board__caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: .75rem 1rem;
+  background: linear-gradient(to top, rgba(0,0,0,.6) 0%, transparent 100%);
+  color: #fff;
+}
+.apex-board__caption-text { font-weight: 600; font-size: .9rem; }
+.apex-board__full-link { position: absolute; inset: 0; z-index: 4; }
+/* text tile */
+.apex-board__tile--text {
+  display: flex;
+  align-items: center;
+  padding: clamp(1.2rem, 1rem + 2vw, 2.5rem);
+}
+.apex-board__text-inner { gap: .85rem; }
+/* product tile */
+.apex-board__product-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: .75rem 1rem;
+  background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+.apex-board__product-title { font-weight: 600; font-size: .9rem; line-height: 1.3; }
+.apex-board__product-price { font-size: .85rem; }
+/* quote tile */
+.apex-board__tile--quote {
+  display: flex;
+  align-items: center;
+  padding: clamp(1.2rem, 1rem + 2vw, 2.5rem);
+  background: color-mix(in srgb, var(--accent) 8%, var(--card));
+}
+.apex-board__quote-inner { gap: .85rem; }
+.apex-board__quote-text {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  font-size: clamp(1rem, .85rem + .8vw, 1.45rem);
+  line-height: 1.3;
+  letter-spacing: var(--heading-letter-spacing);
+}
+.apex-board__quote-author { font-size: var(--text-sm); }
+/* stat tile */
+.apex-board__tile--stat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(1.2rem, 1rem + 2vw, 2.5rem);
+  background: var(--accent);
+  color: var(--accent-text);
+}
+.apex-board__stat-inner { gap: .5rem; align-items: center; }
+.apex-board__stat-value {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  font-size: clamp(2rem, 1.4rem + 3vw, 4rem);
+  line-height: 1;
+  letter-spacing: var(--heading-letter-spacing);
+}
+.apex-board__stat-label {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent-text) 75%, transparent);
+}
+.apex-board__stat-desc { font-size: var(--text-sm); color: color-mix(in srgb, var(--accent-text) 75%, transparent); }
+@media (max-width: 990px) {
+  .apex-board__grid {
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 180px;
+  }
+  .apex-board__tile--sm   { grid-column: span 3; grid-row: span 1; }
+  .apex-board__tile--md   { grid-column: span 3; grid-row: span 1; }
+  .apex-board__tile--lg   { grid-column: span 6; grid-row: span 2; }
+  .apex-board__tile--tall { grid-column: span 3; grid-row: span 2; }
+  .apex-board__tile--wide { grid-column: span 6; grid-row: span 1; }
+}
+@media (max-width: 600px) {
+  .apex-board__grid {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 160px;
+  }
+  .apex-board__tile--sm,
+  .apex-board__tile--md,
+  .apex-board__tile--lg,
+  .apex-board__tile--tall,
+  .apex-board__tile--wide { grid-column: span 2; grid-row: span 1; }
+  .apex-board__tile--lg,
+  .apex-board__tile--tall { grid-row: span 2; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Board",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image tile",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption overlay"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Tile size",
+          "default": "md",
+          "options": [
+            {
+              "value": "sm",
+              "label": "Small (3 cols)"
+            },
+            {
+              "value": "md",
+              "label": "Medium (4 cols)"
+            },
+            {
+              "value": "lg",
+              "label": "Large (6 cols × 2 rows)"
+            },
+            {
+              "value": "tall",
+              "label": "Tall (3 cols × 2 rows)"
+            },
+            {
+              "value": "wide",
+              "label": "Wide (8 cols)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text tile",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "A key message"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Body text",
+          "default": "<p>Use this tile to highlight a feature, tell a story, or add context to the surrounding visuals.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Tile size",
+          "default": "md",
+          "options": [
+            {
+              "value": "sm",
+              "label": "Small (3 cols)"
+            },
+            {
+              "value": "md",
+              "label": "Medium (4 cols)"
+            },
+            {
+              "value": "lg",
+              "label": "Large (6 cols × 2 rows)"
+            },
+            {
+              "value": "tall",
+              "label": "Tall (3 cols × 2 rows)"
+            },
+            {
+              "value": "wide",
+              "label": "Wide (8 cols)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Product tile",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Tile size",
+          "default": "md",
+          "options": [
+            {
+              "value": "sm",
+              "label": "Small (3 cols)"
+            },
+            {
+              "value": "md",
+              "label": "Medium (4 cols)"
+            },
+            {
+              "value": "lg",
+              "label": "Large (6 cols × 2 rows)"
+            },
+            {
+              "value": "tall",
+              "label": "Tall (3 cols × 2 rows)"
+            },
+            {
+              "value": "wide",
+              "label": "Wide (8 cols)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "name": "Quote tile",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote text",
+          "default": "The best decision I made this year."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author / attribution",
+          "default": "A happy customer"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Tile size",
+          "default": "md",
+          "options": [
+            {
+              "value": "sm",
+              "label": "Small (3 cols)"
+            },
+            {
+              "value": "md",
+              "label": "Medium (4 cols)"
+            },
+            {
+              "value": "lg",
+              "label": "Large (6 cols × 2 rows)"
+            },
+            {
+              "value": "tall",
+              "label": "Tall (3 cols × 2 rows)"
+            },
+            {
+              "value": "wide",
+              "label": "Wide (8 cols)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Stat tile",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Stat value",
+          "default": "50k+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Stat label",
+          "default": "Happy customers"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Supporting text"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Tile size",
+          "default": "sm",
+          "options": [
+            {
+              "value": "sm",
+              "label": "Small (3 cols)"
+            },
+            {
+              "value": "md",
+              "label": "Medium (4 cols)"
+            },
+            {
+              "value": "lg",
+              "label": "Large (6 cols × 2 rows)"
+            },
+            {
+              "value": "tall",
+              "label": "Tall (3 cols × 2 rows)"
+            },
+            {
+              "value": "wide",
+              "label": "Wide (8 cols)"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Board",
+      "settings": {
+        "heading": "Everything in one place"
+      },
+      "blocks": [
+        {
+          "type": "image",
+          "settings": {
+            "size": "lg",
+            "caption": "Our story"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "50k+",
+            "label": "Customers served",
+            "size": "sm"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "4.9★",
+            "label": "Average rating",
+            "size": "sm"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "size": "md",
+            "heading": "Why we do it",
+            "text": "<p>We started with one idea: make something people actually love. Everything else followed from there.</p>",
+            "button_label": "Our story"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "size": "md",
+            "quote": "Genuinely changed how I start every morning.",
+            "author": "Emma R., verified buyer"
+          }
+        },
+        {
+          "type": "image",
+          "settings": {
+            "size": "wide",
+            "caption": "New arrivals"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

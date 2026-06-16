@@ -1,0 +1,48 @@
+{%- comment -%} Compact PDP fragment fetched by base.js: /products/HANDLE?section_id=quick-view {%- endcomment -%}
+{%- liquid
+  assign p = product
+  assign cv = p.selected_or_first_available_variant
+  assign fid = 'qv-form-' | append: p.id
+-%}
+<div data-quick-view-content class="apex-qv">
+  <div class="apex-qv__media media media--square">
+    {%- if p.featured_media -%}
+      {{ p.featured_media | image_url: width: 800 | image_tag: widths: '400,600,800', sizes: '(min-width:750px) 40vw, 90vw', alt: p.featured_media.alt }}
+    {%- else -%}
+      {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+  <div class="apex-qv__info stack">
+    {%- if p.vendor != blank -%}<p class="eyebrow">{{ p.vendor }}</p>{%- endif -%}
+    <h2 class="h3" style="margin:0"><a href="{{ p.url }}">{{ p.title }}</a></h2>
+    {% render 'rating', product: p %}
+    <div class="apex-qv__price" data-price>{% render 'price', product: p %}</div>
+    <apex-product-form class="stack" style="gap:1rem">
+      <script type="application/json" data-variants>[{%- for v in p.variants -%}{"id":{{ v.id | json }},"price":{{ v.price | json }},"compare_at_price":{{ v.compare_at_price | default: 0 | json }},"available":{{ v.available | json }},"options":[{{ v.option1 | json }}{% if p.options.size > 1 %},{{ v.option2 | json }}{% endif %}{% if p.options.size > 2 %},{{ v.option3 | json }}{% endif %}]}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]</script>
+      {%- form 'product', p, id: fid -%}
+        <input type="hidden" name="id" value="{{ cv.id }}">
+        {%- unless p.has_only_default_variant -%}
+          {%- for option in p.options_with_values -%}
+            <div class="field"><label>{{ option.name }}</label>
+              <select class="input" data-option-index="{{ forloop.index0 }}">
+                {%- for value in option.values -%}<option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>{{ value }}</option>{%- endfor -%}
+              </select>
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+        <div class="qty"><button type="button" data-dir="down" aria-label="Decrease">{% render 'icon', icon: 'minus' %}</button><input type="number" name="quantity" value="1" min="1" aria-label="Quantity"><button type="button" data-dir="up" aria-label="Increase">{% render 'icon', icon: 'plus' %}</button></div>
+        <button type="submit" name="add" class="btn btn--accent btn--block btn--lg" data-atc data-label="{{ 'products.product.add_to_cart' | t | default: 'Add to cart' }}"{% unless cv.available %} disabled{% endunless %}><span data-atc-label>{% if cv.available %}{{ 'products.product.add_to_cart' | t | default: 'Add to cart' }}{% else %}{{ 'products.product.sold_out' | t | default: 'Sold out' }}{% endif %}</span></button>
+      {%- endform -%}
+      {%- if p.description != blank -%}<div class="rte apex-qv__desc">{{ p.description | strip_html | truncatewords: 40 }}</div>{%- endif -%}
+      <a class="link" href="{{ p.url }}">{{ 'products.product.view_full_details' | t | default: 'View full details' }} &rarr;</a>
+    </apex-product-form>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Quick view",
+  "settings": [
+
+  ]
+}
+{% endschema %}

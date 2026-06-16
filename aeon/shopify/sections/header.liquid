@@ -1,0 +1,82 @@
+<header class="header">
+  <div class="header__inner">
+    <div class="header__left">
+      <button class="iconbtn burger" data-action="open-menu" aria-label="{{ 'accessibility.menu' | t }}">{% render 'icon', icon: 'menu' %}</button>
+      <nav class="nav">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'link' and block.settings.menu_position == 'left' -%}
+            <a href="{{ block.settings.url }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+          {%- endif -%}
+        {%- else -%}
+          <a href="/collections/all">Shop</a>
+          <a href="/pages/science">The Science</a>
+        {%- endfor -%}
+      </nav>
+    </div>
+
+    <a href="{{ routes.root_url }}" class="logo" aria-label="{{ shop.name }}">
+      <svg class="logo__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true"><polygon points="12,2.5 20,7 20,17 12,21.5 4,17 4,7" stroke="#2f5bff" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="2.5" r="1.7" fill="#2f5bff"/><circle cx="20" cy="17" r="1.7" fill="#2f5bff"/><circle cx="4" cy="17" r="1.7" fill="#2f5bff"/></svg>
+      AEON
+    </a>
+
+    <div class="header__right">
+      <nav class="nav">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'link' and block.settings.menu_position == 'right' -%}
+            <a href="{{ block.settings.url }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+          {%- endif -%}
+        {%- else -%}
+          <a href="/pages/reviews">Reviews</a>
+          <a href="/pages/about">About</a>
+        {%- endfor -%}
+      </nav>
+      <a href="{{ routes.search_url }}" class="iconbtn desk" aria-label="{{ 'accessibility.search' | t }}">{% render 'icon', icon: 'search' %}</a>
+      <a href="{{ routes.account_url }}" class="iconbtn desk" aria-label="Account">{% render 'icon', icon: 'user' %}</a>
+      <button class="iconbtn" data-action="open-cart" aria-label="{{ 'accessibility.cart' | t }}">
+        {% render 'icon', icon: 'bag' %}
+        <span class="cartnum {% if cart.item_count > 0 %}show{% endif %}">{{ cart.item_count }}</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "paragraph", "content": "Split nav around a centered logo. Add 'link' blocks below — set position to 'Left' for the left nav group, 'Right' for the right." }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Nav link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Shop" },
+        { "type": "url", "id": "url", "label": "URL", "default": "/collections/all" },
+        {
+          "type": "select",
+          "id": "menu_position",
+          "label": "Position",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Header",
+      "blocks": [
+        { "type": "link", "settings": { "label": "Shop", "url": "/collections/all", "menu_position": "left" } },
+        { "type": "link", "settings": { "label": "The Science", "url": "/pages/science", "menu_position": "left" } },
+        { "type": "link", "settings": { "label": "Reviews", "url": "/pages/reviews", "menu_position": "right" } },
+        { "type": "link", "settings": { "label": "About", "url": "/pages/about", "menu_position": "right" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

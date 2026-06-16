@@ -1,0 +1,59 @@
+<section class="section">
+  <div class="wrap" style="max-width:860px">
+    <div style="margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--line)">
+      <div class="kicker" style="margin-bottom:.5rem">// {{ order.name }}</div>
+      <h1>Order details</h1>
+      <p class="muted" style="margin-top:.5rem;font-size:.95rem">Placed {{ order.created_at | date: '%B %-d, %Y' }}</p>
+    </div>
+
+    <div class="panel" style="overflow:hidden;margin-bottom:2rem">
+      {%- for line_item in order.line_items -%}
+        <div class="cline" style="grid-template-columns:1fr auto auto;padding:1rem 1.4rem;border-bottom:1px solid var(--line)">
+          <div>
+            <div style="font-weight:600">{{ line_item.title }}</div>
+            {%- if line_item.variant.title != 'Default Title' -%}
+              <div class="muted" style="font-size:.82rem;margin-top:.2rem">{{ line_item.variant.title }}</div>
+            {%- endif -%}
+          </div>
+          <div class="muted" style="font-size:.9rem">×{{ line_item.quantity }}</div>
+          <div class="cline__price">{{ line_item.final_line_price | money }}</div>
+        </div>
+      {%- endfor -%}
+      <div style="padding:1rem 1.4rem;display:flex;justify-content:space-between;align-items:center">
+        <span class="muted" style="font-size:.9rem">Shipping</span>
+        <span class="cline__price">{{ order.shipping_price | money }}</span>
+      </div>
+      <div style="padding:1rem 1.4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);background:rgba(43,240,196,0.03)">
+        <span style="font-weight:600">Total</span>
+        <span class="cline__price" style="font-size:1.1rem">{{ order.total_price | money }}</span>
+      </div>
+    </div>
+
+    <div class="spec__grid">
+      <div>
+        <h3 style="margin-bottom:.9rem">Shipping address</h3>
+        <div class="panel" style="padding:1.4rem">
+          {%- if order.shipping_address -%}
+            <p class="muted" style="line-height:1.9;font-size:.95rem">{{ order.shipping_address | format_address }}</p>
+          {%- else -%}
+            <p class="muted">N/A</p>
+          {%- endif -%}
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:.9rem">Billing address</h3>
+        <div class="panel" style="padding:1.4rem">
+          {%- if order.billing_address -%}
+            <p class="muted" style="line-height:1.9;font-size:.95rem">{{ order.billing_address | format_address }}</p>
+          {%- else -%}
+            <p class="muted">N/A</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top:2.5rem">
+      <a href="{{ routes.account_url }}" class="muted" style="font-weight:600;font-size:.9rem">← Back to account</a>
+    </p>
+  </div>
+</section>

@@ -1,0 +1,207 @@
+{%- liquid
+  assign s = section.settings
+  assign cols = s.columns | default: 4
+-%}
+<section class="apex-stats color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="stats-{{ section.id }}">
+  <div class="page-width">
+
+    {%- if s.heading != blank or s.eyebrow != blank -%}
+      <div class="section-head section-head--center reveal">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2>{{ s.heading }}</h2>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="apex-stats__grid reveal" style="--cols:{{ cols }}">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'stat' -%}
+          <div class="apex-stats__item{% if s.card_style %} card apex-stats__item--card{% endif %}" {{ block.shopify_attributes }}>
+            <div class="apex-stats__figure">
+              <span class="apex-stats__number" data-stat-number>{{ block.settings.number }}</span>
+              {%- if block.settings.suffix != blank -%}
+                <span class="apex-stats__suffix">{{ block.settings.suffix }}</span>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.label != blank -%}
+              <p class="apex-stats__label muted">{{ block.settings.label }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+{% stylesheet %}
+.apex-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 4), 1fr);
+  gap: var(--gutter);
+}
+.apex-stats__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: .5rem;
+  padding-block: clamp(1rem, .5rem + 2vw, 1.8rem);
+}
+.apex-stats__item--card {
+  padding: clamp(1.5rem, 1rem + 2vw, 2.2rem);
+}
+.apex-stats__figure {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .1em;
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  letter-spacing: var(--heading-letter-spacing);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.apex-stats__number {
+  font-size: clamp(2.4rem, 1.5rem + 3.5vw, 4.5rem);
+  color: var(--accent);
+}
+.apex-stats__suffix {
+  font-size: clamp(1.4rem, 1rem + 2vw, 2.4rem);
+  color: var(--accent);
+}
+.apex-stats__label {
+  font-size: clamp(.9rem, .85rem + .2vw, 1rem);
+  line-height: 1.4;
+  max-width: 14ch;
+}
+@media (max-width: 990px) {
+  .apex-stats__grid { grid-template-columns: repeat(min(var(--cols, 4), 2), 1fr); }
+}
+@media (max-width: 480px) {
+  .apex-stats__grid { grid-template-columns: repeat(2, 1fr); }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Stats",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Columns",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "card_style",
+      "label": "Show card background",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "50K"
+        },
+        {
+          "type": "text",
+          "id": "suffix",
+          "label": "Suffix (e.g. +, %, ×)",
+          "default": "+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Happy customers"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Stats",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "50K",
+            "suffix": "+",
+            "label": "Happy customers"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "4.9",
+            "suffix": "★",
+            "label": "Average rating"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "98",
+            "suffix": "%",
+            "label": "Would recommend"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "60",
+            "suffix": "d",
+            "label": "Return policy"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

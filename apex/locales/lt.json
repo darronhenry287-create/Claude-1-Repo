@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "Uždaryti",
+    "refresh_page": "Pasirinkus parinktį puslapis bus visiškai atnaujintas.",
+    "skip_to_text": "Pereiti prie turinio"
+  },
+  "general": {
+    "continue_shopping": "Tęsti apsipirkimą",
+    "video": {
+      "play": "Paleisti vaizdo įrašą",
+      "no_video": "Vaizdo įrašo URL nenurodytas."
+    },
+    "accessibility": {
+      "close": "Uždaryti"
+    },
+    "page": "{{ page }} puslapis",
+    "tags": "Žymos",
+    "search_placeholder": "Ieškoti prekių…",
+    "pagination": {
+      "label": "Puslapių navigacija",
+      "load_more": "Įkelti daugiau",
+      "next": "Kitas",
+      "previous": "Ankstesnis"
+    },
+    "search": {
+      "search": "Ieškoti",
+      "placeholder": "Ieškoti prekių…",
+      "prompt": "Ko ieškote?",
+      "for": "Ieškoti",
+      "suggestions": "Pasiūlymai",
+      "products": "Prekės",
+      "pages": "Puslapiai",
+      "articles": "Straipsniai",
+      "result": "rezultatas",
+      "results": "rezultatai",
+      "view_all": "Peržiūrėti visus {{ count }} rezultatus",
+      "browse_all": "Naršyti visas prekes",
+      "no_results": "Nėra rezultatų „{{ terms }}”",
+      "no_results_for": "Rezultatų nerasta:",
+      "no_results_detail": "Pabandykite kitą paiešką arba naršykite mūsų katalogą."
+    },
+    "slider": {
+      "next": "Kitas skaidrė",
+      "previous": "Ankstesnis skaidrė"
+    }
+  },
+  "newsletter": {
+    "label": "El. paštas",
+    "placeholder": "El. pašto adresas",
+    "success": "Ačiū, kad užsiprenumeravote!"
+  },
+  "payment": {
+    "methods": "Priimami mokėjimo būdai"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Į krepšelį",
+      "buy": "Pirkti",
+      "choose_options": "Pasirinkti variantus",
+      "from": "Nuo",
+      "in_stock": "Yra sandėlyje",
+      "low_stock": "Liko tik {{ quantity }}",
+      "sold_out": "Išparduota",
+      "unavailable": "Nepasiekiama",
+      "quantity": "Kiekis",
+      "increase": "Padidinti kiekį",
+      "decrease": "Sumažinti kiekį",
+      "save": "Sutaupykite {{ savings }}",
+      "view_full_details": "Peržiūrėti visą informaciją",
+      "media": {
+        "load_image": "Įkelti paveikslėlį {{ index }}"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Meniu"
+    },
+    "cart": {
+      "title": "Jūsų krepšelis",
+      "empty": "Jūsų krepšelis tuščias",
+      "empty_detail": "Rasime jums ką nors.",
+      "item": "prekė",
+      "items": "prekės",
+      "quantity": "Kiekis",
+      "increase": "Padidinti kiekį",
+      "decrease": "Sumažinti kiekį",
+      "remove": "Pašalinti",
+      "note": "Pridėti pastabą prie užsakymo",
+      "note_placeholder": "Specialūs nurodymai jūsų užsakymui",
+      "subtotal": "Tarpinė suma",
+      "summary": "Suvestinė",
+      "taxes": "Mokesčiai ir pristatymas skaičiuojami atsiskaitymo metu.",
+      "checkout": "Atsiskaitymas",
+      "each": "vnt.",
+      "original": "Pradinė kaina",
+      "free_ship_progress": "Iki nemokamo pristatymo liko {{ amount }}",
+      "free_ship_progress_html": "Iki nemokamo pristatymo liko <strong>{{ amount }}</strong>",
+      "free_ship_unlocked": "Jūs įgijote nemokamą pristatymą!"
+    },
+    "collection": {
+      "count": "{{ count }} prekės",
+      "products": "prekės",
+      "empty": "Prekių nerasta",
+      "empty_detail": "Pabandykite pašalinti kai kuriuos filtrus.",
+      "filter": "Filtras",
+      "apply": "Taikyti",
+      "clear_filters": "Išvalyti viską",
+      "sort_label": "Rūšiuoti pagal",
+      "price_from": "Nuo",
+      "price_to": "Iki"
+    },
+    "collection_list": {
+      "empty": "Nėra kolekcijų, kurias būtų galima rodyti",
+      "products": "prekės"
+    },
+    "featured_collection": {
+      "empty": "Nėra prekių, kurias būtų galima rodyti"
+    }
+  },
+  "customer": {
+    "log_out": "Atsijungti",
+    "account": {
+      "title": "Paskyra",
+      "details": "Paskyros informacija",
+      "return": "Grįžti į paskyrą",
+      "view_addresses": "Peržiūrėti adresus"
+    },
+    "login": {
+      "title": "Prisijungimas",
+      "email": "El. paštas",
+      "password": "Slaptažodis",
+      "sign_in": "Prisijungti",
+      "forgot_password": "Pamiršote slaptažodį?",
+      "no_account": "Neturite paskyros?",
+      "create_account": "Sukurti paskyrą",
+      "cancel": "Atšaukti"
+    },
+    "register": {
+      "title": "Sukurti paskyrą",
+      "first_name": "Vardas",
+      "last_name": "Pavardė",
+      "email": "El. paštas",
+      "password": "Slaptažodis",
+      "password_placeholder": "Bent 5 simboliai",
+      "submit": "Sukurti paskyrą",
+      "login": "Jau turite paskyrą? Prisijunkite"
+    },
+    "recover_password": {
+      "title": "Atkurti slaptažodį",
+      "subtext": "Atsiųsime jums el. laišką slaptažodžio atstatymo nuorodą.",
+      "submit": "Siųsti atstatymo el. laišką",
+      "success": "Išsiuntėme jums el. laišką su nuoroda slaptažodžiui atstatyti."
+    },
+    "reset_password": {
+      "title": "Atstatyti paskyros slaptažodį",
+      "subtext": "Įveskite naują slaptažodį.",
+      "password": "Slaptažodis",
+      "password_confirm": "Patvirtinti slaptažodį",
+      "password_placeholder": "Naujas slaptažodis",
+      "submit": "Atstatyti slaptažodį"
+    },
+    "activate_account": {
+      "title": "Aktyvuoti paskyrą",
+      "subtext": "Sukurkite slaptažodį savo paskyrai aktyvuoti.",
+      "password": "Slaptažodis",
+      "password_placeholder": "Slaptažodis",
+      "password_confirm": "Patvirtinti slaptažodį",
+      "password_confirm_placeholder": "Patvirtinti slaptažodį",
+      "submit": "Aktyvuoti paskyrą",
+      "cancel": "Atmesti kvietimą"
+    },
+    "orders": {
+      "title": "Užsakymų istorija",
+      "none": "Dar nepateikėte jokių užsakymų.",
+      "order_number": "Užsakymas",
+      "date": "Data",
+      "payment_status": "Mokėjimas",
+      "fulfillment_status": "Vykdymas",
+      "total": "Iš viso"
+    },
+    "order": {
+      "title": "Užsakymas {{ name }}",
+      "date_html": "Pateiktas {{ date }}",
+      "fulfilled_at_html": "Įvykdytas {{ date }}",
+      "summary": "Užsakymo suvestinė",
+      "items": "Prekės",
+      "quantity": "Kiek.",
+      "subtotal": "Tarpinė suma",
+      "total": "Iš viso",
+      "shipping_address": "Pristatymo adresas",
+      "billing_address": "Atsiskaitymo adresas"
+    },
+    "addresses": {
+      "title": "Adresai",
+      "first_name": "Vardas",
+      "last_name": "Pavardė",
+      "company": "Įmonė",
+      "address1": "Adresas",
+      "address2": "Butas, aukštas ir kt.",
+      "city": "Miestas",
+      "zip": "Pašto kodas",
+      "country": "Šalis / regionas",
+      "province": "Apskritis / sritis",
+      "phone": "Telefonas",
+      "default": "Numatytasis",
+      "default_address": "Numatytasis adresas",
+      "add_new": "Pridėti naują adresą",
+      "add": "Pridėti adresą",
+      "update": "Atnaujinti adresą",
+      "edit": "Redaguoti",
+      "delete": "Ištrinti",
+      "delete_confirm": "Ar tikrai norite ištrinti šį adresą?",
+      "set_default": "Nustatyti kaip numatytąjį",
+      "cancel": "Atšaukti",
+      "none": "Neturite išsaugotų adresų."
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "autorius: {{ author }}"
+    },
+    "comments": {
+      "title": "Komentarai",
+      "name": "Vardas",
+      "email": "El. paštas",
+      "message": "Komentaras",
+      "post": "Skelbti komentarą",
+      "success": "Jūsų komentaras sėkmingai paskelbtas!",
+      "comments_with_count": "{{ count }} komentarų"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Vardas",
+      "email": "El. paštas",
+      "phone": "Telefonas",
+      "phone_placeholder": "Neprivaloma",
+      "message": "Žinutė",
+      "message_placeholder": "Kaip galime jums padėti?"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Štai jūsų {{ value }} vertės dovanų kortelė!",
+      "remaining_html": "{{ balance }} likutis",
+      "expiry_date": "Galioja iki {{ expiry }}",
+      "copy_code": "Kopijuoti kodą",
+      "shop_link": "Pradėti apsipirkimą",
+      "print_link": "Spausdinti"
+    }
+  }
+}

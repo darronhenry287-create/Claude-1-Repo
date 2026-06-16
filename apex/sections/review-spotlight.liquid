@@ -1,0 +1,321 @@
+{%- liquid
+  assign s = section.settings
+  assign star_value = s.rating | plus: 0
+-%}
+<section class="apex-review-spotlight color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="review-spotlight-{{ section.id }}">
+  <div class="page-width">
+
+    {%- if s.eyebrow != blank -%}
+      <div class="section-head section-head--center reveal">
+        <p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>
+      </div>
+    {%- endif -%}
+
+    <div class="apex-review-spotlight__layout reveal{% if s.product_image != blank %} apex-review-spotlight__layout--with-image{% endif %}">
+
+      <div class="apex-review-spotlight__main">
+
+        {%- comment -%} Stars {%- endcomment -%}
+        <div class="apex-review-spotlight__stars" aria-label="{{ star_value }} out of 5 stars">
+          {%- for i in (1..5) -%}
+            <span class="apex-review-spotlight__star{% if i > star_value %} apex-review-spotlight__star--empty{% endif %}" aria-hidden="true">
+              {% render 'icon', icon: 'star' %}
+            </span>
+          {%- endfor -%}
+        </div>
+
+        {%- comment -%} Quote {%- endcomment -%}
+        <blockquote class="apex-review-spotlight__quote">
+          {%- if s.quote != blank -%}
+            <p class="apex-review-spotlight__quote-text">{{ s.quote }}</p>
+          {%- endif -%}
+          <footer class="apex-review-spotlight__footer">
+            {%- if s.avatar != blank -%}
+              <div class="apex-review-spotlight__avatar media media--square media--round">
+                {{ s.avatar | image_url: width: 120 | image_tag: loading: 'lazy', alt: s.author }}
+              </div>
+            {%- else -%}
+              <div class="apex-review-spotlight__avatar apex-review-spotlight__avatar--placeholder" aria-hidden="true">
+                {%- assign initials = s.author | truncate: 1, '' -%}
+                {{ initials }}
+              </div>
+            {%- endif -%}
+            <div class="apex-review-spotlight__meta">
+              {%- if s.author != blank -%}
+                <cite class="apex-review-spotlight__author">{{ s.author }}</cite>
+              {%- endif -%}
+              {%- if s.role != blank -%}
+                <span class="apex-review-spotlight__role muted">{{ s.role }}</span>
+              {%- endif -%}
+            </div>
+          </footer>
+        </blockquote>
+
+        {%- comment -%} Stat row {%- endcomment -%}
+        {%- if s.stat_text != blank -%}
+          <p class="apex-review-spotlight__stat">{{ s.stat_text }}</p>
+        {%- endif -%}
+
+        {%- comment -%} CTA {%- endcomment -%}
+        {%- if s.button_label != blank -%}
+          <div class="apex-review-spotlight__cta">
+            <a class="btn btn--accent{% if s.button_style == 'secondary' %} btn--secondary{% endif %}{% if s.button_size == 'lg' %} btn--lg{% endif %}"
+              href="{{ s.button_url | default: '#' }}">
+              {{ s.button_label }}
+            </a>
+          </div>
+        {%- endif -%}
+
+      </div>
+
+      {%- comment -%} Optional product image {%- endcomment -%}
+      {%- if s.product_image != blank -%}
+        <div class="apex-review-spotlight__product-media media media--portrait media--round">
+          {{ s.product_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300,400,600,800', sizes: '(min-width:990px) 35vw, 80vw', alt: s.product_image.alt }}
+        </div>
+      {%- endif -%}
+
+    </div>
+
+  </div>
+</section>
+{% stylesheet %}
+.apex-review-spotlight__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 1rem + 4vw, 4rem);
+  align-items: center;
+  max-width: 860px;
+  margin-inline: auto;
+}
+.apex-review-spotlight__layout--with-image {
+  grid-template-columns: 1fr 1fr;
+  max-width: var(--page-width);
+}
+.apex-review-spotlight__main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+/* stars */
+.apex-review-spotlight__stars {
+  display: flex;
+  gap: .3rem;
+}
+.apex-review-spotlight__star {
+  color: var(--star);
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.apex-review-spotlight__star--empty { color: var(--border); }
+.apex-review-spotlight__star svg { width: 100%; height: 100%; }
+/* quote */
+.apex-review-spotlight__quote { margin: 0; }
+.apex-review-spotlight__quote-text {
+  font-size: clamp(1.2rem, 1rem + 1.2vw, 1.7rem);
+  line-height: 1.6;
+  font-style: italic;
+  color: var(--text);
+}
+.apex-review-spotlight__quote-text::before { content: '\201C'; }
+.apex-review-spotlight__quote-text::after { content: '\201D'; }
+.apex-review-spotlight__footer {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  margin-top: 1.4rem;
+}
+.apex-review-spotlight__avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  flex: none;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+}
+.apex-review-spotlight__avatar--placeholder {
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 1.3rem;
+  font-family: var(--font-heading);
+  border-radius: var(--radius-pill);
+}
+.apex-review-spotlight__meta {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+}
+.apex-review-spotlight__author {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+}
+.apex-review-spotlight__role { font-size: var(--text-sm); }
+/* stat */
+.apex-review-spotlight__stat {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: .8rem 1.2rem;
+  background: var(--bg-alt);
+  border-radius: var(--radius-pill);
+  display: inline-block;
+  align-self: flex-start;
+}
+/* product image */
+.apex-review-spotlight__product-media {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+@media (max-width: 990px) {
+  .apex-review-spotlight__layout--with-image {
+    grid-template-columns: 1fr;
+  }
+  .apex-review-spotlight__product-media { order: -1; max-width: 420px; margin-inline: auto; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Review spotlight",
+  "tag": "section",
+  "class": "shopify-section--review-spotlight",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Real results"
+    },
+    {
+      "type": "range",
+      "id": "rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "label": "Star rating",
+      "default": 5
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "I was genuinely skeptical — I had tried everything. Within three weeks of using this daily I saw a difference I hadn't seen with anything else. My confidence is through the roof and I have recommended it to everyone I know."
+    },
+    {
+      "type": "image_picker",
+      "id": "avatar",
+      "label": "Author avatar image"
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "Author name",
+      "default": "Taylor M."
+    },
+    {
+      "type": "text",
+      "id": "role",
+      "label": "Author role or location",
+      "default": "Verified buyer · Chicago, IL"
+    },
+    {
+      "type": "text",
+      "id": "stat_text",
+      "label": "Social proof stat",
+      "default": "Join 12,000+ happy customers"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product image (optional)"
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "default": "accent",
+      "options": [
+        {
+          "value": "accent",
+          "label": "Accent"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "label": "Button size",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "Review spotlight"
+    }
+  ]
+}
+{% endschema %}

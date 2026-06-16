@@ -1,0 +1,45 @@
+<section class="section decline">
+  <div class="wrap wrap--wide">
+    <div class="decline__grid">
+      <div class="reveal">
+        <div class="kicker">{{ section.settings.kicker }}</div>
+        <h2 style="margin:1rem 0 1rem">{{ section.settings.heading }}</h2>
+        <p class="lede">{{ section.settings.lede }}</p>
+        <div class="decline__stat" style="margin-top:1.6rem">{{ section.settings.stat }}<sup>%</sup></div>
+        <p class="muted" style="margin-top:.4rem">{{ section.settings.stat_caption }}</p>
+      </div>
+      <div class="chart reveal" aria-label="Chart: NAD+ declines with age">
+        <span class="chart__yl">NAD⁺ level</span>
+        <svg viewBox="0 0 540 210" preserveAspectRatio="none" role="img">
+          <defs>
+            <linearGradient id="declineFade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ef4444" stop-opacity="0.28"/>
+              <stop offset="1" stop-color="#ef4444" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path class="curve-area" d="M30,28 C80,42 150,62 190,80 C230,98 250,100 270,108 C330,128 380,146 430,156 C470,164 495,170 510,173 L510,196 L30,196 Z"/>
+          <path class="curve-line" d="M30,28 C80,42 150,62 190,80 C230,98 250,100 270,108 C330,128 380,146 430,156 C470,164 495,170 510,173"/>
+          <line x1="270" y1="108" x2="270" y2="196" stroke="#ef4444" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+          <circle class="curve-dot" cx="270" cy="108" r="5"/>
+          <circle cx="30" cy="28" r="4" fill="#2f5bff"/>
+        </svg>
+        <div class="chart__axis"><span>Age 20</span><span>40</span><span>50</span><span>65</span><span>80</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Decline curve",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The problem" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your cells are running low." },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "NAD⁺ is the coenzyme every cell uses to make energy and repair DNA. It falls steadily with age — and as it drops, so does cellular performance." },
+    { "type": "text", "id": "stat", "label": "Stat (prepend −)", "default": "−50" },
+    { "type": "text", "id": "stat_caption", "label": "Stat caption", "default": "approximate NAD⁺ decline from age 20 to 50." }
+  ],
+  "presets": [
+    { "name": "Decline curve" }
+  ]
+}
+{% endschema %}

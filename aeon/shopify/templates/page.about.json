@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "pagehead": {
+      "type": "aeon-pagehead",
+      "settings": {
+        "kicker": "Our Standards",
+        "heading": "We built the NMN we couldn't find.",
+        "subtext": "AEON started with a frustrating discovery: most NMN on the market is underdosed, untested, or cut with fillers — and almost none of it shows its work. So we set a higher bar and refused to move it."
+      }
+    },
+    "statbar": {
+      "type": "aeon-statbar",
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "number": "2026", "suffix": "", "label": "founded by longevity nerds" } },
+        "s2": { "type": "stat", "settings": { "number": "1", "suffix": "k mg", "label": "full clinical dose, no compromise" } },
+        "s3": { "type": "stat", "settings": { "number": "100", "suffix": "%", "label": "lots tested & published" } },
+        "s4": { "type": "stat", "settings": { "number": "0", "suffix": "", "label": "fillers, ever" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": {}
+    },
+    "standards": {
+      "type": "aeon-standards",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "dose", "tag": "Dose", "title": "Clinically meaningful", "text": "1000 mg per serving — not the 125–250 mg that lets others hit a price point." } },
+        "b2": { "type": "benefit", "settings": { "icon": "check", "tag": "Proof", "title": "Tested & published", "text": "Independent COA for every lot. If we can't show it, we don't claim it." } },
+        "b3": { "type": "benefit", "settings": { "icon": "plus", "tag": "Purity", "title": "Nothing you don't need", "text": "Just NMN and a vegetable capsule. No fillers, flow agents or marketing dust." } },
+        "prose1": { "type": "prose", "settings": { "kicker": "The standard", "heading": "From raw material to your door.", "content": "<p>We source pharmaceutical-grade β-NMN and verify identity and purity before anything is encapsulated. Manufacturing happens in a cGMP-certified facility. Then every finished lot goes back out to an ISO 17025-accredited lab — a separate set of eyes — to confirm what's on the label is what's in the bottle.</p><p>Heavy metals, microbials, residual solvents, assay purity: all checked, all documented. The QR code on your bottle pulls up that exact lot's certificate. No \"proprietary blend\" hand-waving, no trust-me-bro.</p><h3>Why it matters</h3><ul><li>NMN is fragile and easy to adulterate — testing is the only real safeguard.</li><li>Underdosing is the industry's quiet default; the full dose is the whole point.</li><li>Transparency should be the floor, not a premium feature.</li></ul><p>That's the entire company, really: do the boring, expensive things right, and show our work.</p>" } }
+      },
+      "block_order": ["b1", "b2", "b3", "prose1"],
+      "settings": {
+        "benefits_kicker": "What we stand for",
+        "benefits_heading": "Three non-negotiables."
+      }
+    },
+    "guarantee": {
+      "type": "aeon-guarantee",
+      "settings": {
+        "kicker": "60-night guarantee",
+        "heading": "Held to your standard, too.",
+        "text": "Try it for 60 nights. If AEON isn't everything we say, we refund you — and you keep the bottle.",
+        "cta_label": "Shop AEON NMN"
+      }
+    }
+  },
+  "order": ["pagehead", "statbar", "standards", "guarantee"]
+}

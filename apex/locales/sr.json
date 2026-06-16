@@ -1,0 +1,253 @@
+{
+  "accessibility": {
+    "close": "Zatvori",
+    "refresh_page": "Odabir opcije uzrokuje potpuno osvježavanje stranice.",
+    "skip_to_text": "Preskoči na sadržaj"
+  },
+  "general": {
+    "continue_shopping": "Nastavi kupovinu",
+    "video": {
+      "play": "Reprodukuj video",
+      "no_video": "Nije podešen URL videa."
+    },
+    "accessibility": {
+      "close": "Zatvori"
+    },
+    "page": "Stranica {{ page }}",
+    "tags": "Oznake",
+    "search_placeholder": "Pretraži proizvode…",
+    "pagination": {
+      "label": "Straničenje",
+      "load_more": "Učitaj više",
+      "next": "Sljedeće",
+      "previous": "Prethodno"
+    },
+    "search": {
+      "search": "Pretraži",
+      "placeholder": "Pretraži proizvode…",
+      "prompt": "Šta tražiš?",
+      "for": "Pretraži",
+      "suggestions": "Prijedlozi",
+      "products": "Proizvodi",
+      "pages": "Stranice",
+      "articles": "Članci",
+      "result": "rezultat",
+      "results": "rezultati",
+      "view_all": "Pogledaj svih {{ count }} rezultata",
+      "browse_all": "Pregledaj sve proizvode",
+      "no_results": "Nema rezultata za \"{{ terms }}\"",
+      "no_results_for": "Nisu pronađeni rezultati za",
+      "no_results_detail": "Pokušaj drugu pretragu ili pregledaj naš katalog."
+    },
+    "slider": {
+      "next": "Sljedeći slajd",
+      "previous": "Prethodni slajd"
+    }
+  },
+  "newsletter": {
+    "label": "E-mail",
+    "placeholder": "E-mail adresa",
+    "success": "Hvala na pretplati!"
+  },
+  "payment": {
+    "methods": "Prihvaćeni načini plaćanja"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Dodaj u korpu",
+      "buy": "Kupi",
+      "choose_options": "Odaberi opcije",
+      "from": "Od",
+      "in_stock": "Na stanju",
+      "low_stock": "Samo {{ quantity }} preostalo",
+      "sold_out": "Rasprodano",
+      "unavailable": "Nedostupno",
+      "quantity": "Količina",
+      "increase": "Povećaj količinu",
+      "decrease": "Smanji količinu",
+      "save": "Uštedi {{ savings }}",
+      "view_full_details": "Pogledaj sve detalje",
+      "media": {
+        "load_image": "Učitaj sliku {{ index }}"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Meni"
+    },
+    "cart": {
+      "title": "Tvoja korpa",
+      "empty": "Tvoja korpa je prazna",
+      "empty_detail": "Hajdemo pronaći nešto za tebe.",
+      "item": "artikal",
+      "items": "artikli",
+      "quantity": "Količina",
+      "increase": "Povećaj količinu",
+      "decrease": "Smanji količinu",
+      "remove": "Ukloni",
+      "note": "Dodaj bilješku narudžbi",
+      "note_placeholder": "Posebne upute za tvoju narudžbu",
+      "subtotal": "Međuzbir",
+      "summary": "Pregled",
+      "taxes": "Porez i dostava se obračunavaju pri plaćanju.",
+      "checkout": "Plaćanje",
+      "each": "svaki",
+      "original": "Originalna cijena",
+      "free_ship_progress": "Nedostaje ti {{ amount }} do besplatne dostave",
+      "free_ship_progress_html": "Nedostaje ti <strong>{{ amount }}</strong> do besplatne dostave",
+      "free_ship_unlocked": "Otključao si besplatnu dostavu!"
+    },
+    "collection": {
+      "count": "{{ count }} proizvoda",
+      "products": "proizvodi",
+      "empty": "Nisu pronađeni proizvodi",
+      "empty_detail": "Pokušaj ukloniti neke filtere.",
+      "filter": "Filtriraj",
+      "apply": "Primijeni",
+      "clear_filters": "Očisti sve",
+      "sort_label": "Sortiraj prema",
+      "price_from": "Od",
+      "price_to": "Do"
+    },
+    "collection_list": {
+      "empty": "Nema kolekcija za prikaz",
+      "products": "proizvodi"
+    },
+    "featured_collection": {
+      "empty": "Nema proizvoda za prikaz"
+    }
+  },
+  "customer": {
+    "log_out": "Odjavi se",
+    "account": {
+      "title": "Nalog",
+      "details": "Detalji naloga",
+      "return": "Vrati se na nalog",
+      "view_addresses": "Pogledaj adrese"
+    },
+    "login": {
+      "title": "Prijava",
+      "email": "E-mail",
+      "password": "Lozinka",
+      "sign_in": "Prijavi se",
+      "forgot_password": "Zaboravio si lozinku?",
+      "no_account": "Nemaš nalog?",
+      "create_account": "Napravi nalog",
+      "cancel": "Otkaži"
+    },
+    "register": {
+      "title": "Napravi nalog",
+      "first_name": "Ime",
+      "last_name": "Prezime",
+      "email": "E-mail",
+      "password": "Lozinka",
+      "password_placeholder": "Najmanje 5 znakova",
+      "submit": "Napravi nalog",
+      "login": "Već imaš nalog? Prijavi se"
+    },
+    "recover_password": {
+      "title": "Resetuj lozinku",
+      "subtext": "Poslat ćemo ti e-mail za resetovanje.",
+      "submit": "Pošalji e-mail za resetovanje",
+      "success": "Poslali smo ti e-mail s linkom za resetovanje lozinke."
+    },
+    "reset_password": {
+      "title": "Resetuj lozinku naloga",
+      "subtext": "Unesi novu lozinku.",
+      "password": "Lozinka",
+      "password_confirm": "Potvrdi lozinku",
+      "password_placeholder": "Nova lozinka",
+      "submit": "Resetuj lozinku"
+    },
+    "activate_account": {
+      "title": "Aktiviraj nalog",
+      "subtext": "Kreiraj lozinku kako bi aktivirao nalog.",
+      "password": "Lozinka",
+      "password_placeholder": "Lozinka",
+      "password_confirm": "Potvrdi lozinku",
+      "password_confirm_placeholder": "Potvrdi lozinku",
+      "submit": "Aktiviraj nalog",
+      "cancel": "Odbij pozivnicu"
+    },
+    "orders": {
+      "title": "Historija narudžbi",
+      "none": "Još nisi napravio narudžbu.",
+      "order_number": "Narudžba",
+      "date": "Datum",
+      "payment_status": "Plaćanje",
+      "fulfillment_status": "Isporuka",
+      "total": "Ukupno"
+    },
+    "order": {
+      "title": "Narudžba {{ name }}",
+      "date_html": "Naručeno {{ date }}",
+      "fulfilled_at_html": "Isporučeno {{ date }}",
+      "summary": "Pregled narudžbe",
+      "items": "Artikli",
+      "quantity": "Kol.",
+      "subtotal": "Međuzbir",
+      "total": "Ukupno",
+      "shipping_address": "Adresa dostave",
+      "billing_address": "Adresa naplate"
+    },
+    "addresses": {
+      "title": "Adrese",
+      "first_name": "Ime",
+      "last_name": "Prezime",
+      "company": "Kompanija",
+      "address1": "Adresa",
+      "address2": "Stan, apartman itd.",
+      "city": "Grad",
+      "zip": "Poštanski broj",
+      "country": "Zemlja / Region",
+      "province": "Pokrajina / Država",
+      "phone": "Telefon",
+      "default": "Zadana",
+      "default_address": "Zadana adresa",
+      "add_new": "Dodaj novu adresu",
+      "add": "Dodaj adresu",
+      "update": "Ažuriraj adresu",
+      "edit": "Uredi",
+      "delete": "Obriši",
+      "delete_confirm": "Jesi li siguran da želiš obrisati ovu adresu?",
+      "set_default": "Postavi kao zadanu",
+      "cancel": "Otkaži",
+      "none": "Nemaš sačuvanih adresa."
+    }
+  },
+  "blogs": {
+    "article": {
+      "by_author": "autor {{ author }}"
+    },
+    "comments": {
+      "title": "Komentari",
+      "name": "Ime",
+      "email": "E-mail",
+      "message": "Komentar",
+      "post": "Objavi komentar",
+      "success": "Tvoj komentar je uspješno objavljen!",
+      "comments_with_count": "{{ count }} komentara"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Ime",
+      "email": "E-mail",
+      "phone": "Telefon",
+      "phone_placeholder": "Opciono",
+      "message": "Poruka",
+      "message_placeholder": "Kako možemo pomoći?"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Ovo je tvoja poklon kartica od {{ value }}!",
+      "remaining_html": "{{ balance }} preostalo",
+      "expiry_date": "Ističe {{ expiry }}",
+      "copy_code": "Kopiraj kod",
+      "shop_link": "Počni kupovinu",
+      "print_link": "Štampaj"
+    }
+  }
+}

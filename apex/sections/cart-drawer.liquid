@@ -1,0 +1,84 @@
+{%- liquid
+  assign threshold = settings.cart_free_shipping_threshold | times: 100
+  assign remaining = threshold | minus: cart.total_price
+-%}
+<aside id="cart-drawer" class="drawer drawer--right color-scheme-1" aria-hidden="true" aria-label="{{ 'sections.cart.title' | t | default: 'Cart' }}" role="dialog" aria-modal="true">
+  <div class="drawer__head">
+    <h2 class="h4">{{ 'sections.cart.title' | t | default: 'Your cart' }} <span class="muted" data-cart-count>{{ cart.item_count }}</span></h2>
+    <button class="icon-btn" data-close="cart-drawer" aria-label="{{ 'accessibility.close' | t | default: 'Close' }}">{% render 'icon', icon: 'close' %}</button>
+  </div>
+
+  <div id="cart-drawer-content" class="drawer__content" style="display:flex;flex-direction:column;flex:1;min-height:0">
+    {%- if cart.item_count > 0 -%}
+      <div class="drawer__body">
+        {%- if settings.cart_free_shipping_bar -%}
+          <div class="ship-bar" style="margin-bottom:1.2rem">
+            {%- if remaining > 0 -%}
+              <p class="muted" style="font-size:var(--text-sm)">{%- assign remaining_money = remaining | money -%}{{ 'sections.cart.free_ship_progress_html' | t: amount: remaining_money }}</p>
+            {%- else -%}
+              <p style="font-size:var(--text-sm);font-weight:600">{% render 'icon', icon: 'check' %} {{ 'sections.cart.free_ship_unlocked' | t | default: 'Free shipping unlocked!' }}</p>
+            {%- endif -%}
+            <div class="ship-bar__track"><div class="ship-bar__fill" style="width:{% if threshold > 0 %}{{ cart.total_price | times: 100.0 | divided_by: threshold | at_most: 100 }}{% else %}100{% endif %}%"></div></div>
+          </div>
+        {%- endif -%}
+
+        {%- for item in cart.items -%}
+          <div class="line-item" data-line-key="{{ item.key }}">
+            <a href="{{ item.url }}" class="line-item__media media media--square">
+              {%- if item.image -%}{{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: item.title }}{%- endif -%}
+            </a>
+            <div class="line-item__info">
+              <a href="{{ item.url }}" style="font-weight:600">{{ item.product.title }}</a>
+              {%- unless item.variant.title == 'Default Title' -%}<div class="muted" style="font-size:var(--text-sm)">{{ item.variant.title }}</div>{%- endunless -%}
+              {%- if item.selling_plan_allocation -%}<div class="muted" style="font-size:var(--text-xs)">{{ item.selling_plan_allocation.selling_plan.name }}</div>{%- endif -%}
+              <div class="qty" style="margin-top:.5rem">
+                <button data-cart-change="{{ item.quantity | minus: 1 }}" data-line="{{ forloop.index }}" aria-label="Decrease">{% render 'icon', icon: 'minus' %}</button>
+                <input type="text" value="{{ item.quantity }}" readonly aria-label="Quantity">
+                <button data-cart-change="{{ item.quantity | plus: 1 }}" data-line="{{ forloop.index }}" aria-label="Increase">{% render 'icon', icon: 'plus' %}</button>
+              </div>
+            </div>
+            <div class="line-item__price" style="text-align:right">
+              <div style="font-weight:700">{{ item.final_line_price | money }}</div>
+              <button class="link" style="font-size:var(--text-xs);color:var(--text-muted)" data-cart-change="0" data-line="{{ forloop.index }}">{{ 'sections.cart.remove' | t | default: 'Remove' }}</button>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if settings.cart_recommendations and cart.items.first -%}
+        <div class="apex-cart-reco-wrap">
+          <p class="apex-cart-reco__heading">{{ settings.cart_reco_heading | default: 'You may also like' }}</p>
+          <div class="apex-cart-reco" data-cart-reco data-product="{{ cart.items.first.product_id }}" data-limit="{{ settings.cart_reco_limit | default: 4 }}"></div>
+        </div>
+      {%- endif -%}
+
+      <div class="drawer__foot">
+        {%- if settings.cart_note -%}
+          <details style="margin-bottom:.8rem"><summary class="link" style="font-size:var(--text-sm)">{{ 'sections.cart.note' | t | default: 'Add order note' }}</summary>
+            <textarea name="note" form="cart-foot-form" class="input" style="margin-top:.5rem" placeholder="Note">{{ cart.note }}</textarea>
+          </details>
+        {%- endif -%}
+        <div style="display:flex;justify-content:space-between;font-weight:800;font-size:1.1rem;margin-bottom:.8rem">
+          <span>{{ 'sections.cart.subtotal' | t | default: 'Subtotal' }}</span><span>{{ cart.total_price | money }}</span>
+        </div>
+        <p class="muted" style="font-size:var(--text-xs);margin-bottom:.8rem">{{ 'sections.cart.taxes' | t | default: 'Taxes and shipping calculated at checkout.' }}</p>
+        <form action="{{ routes.cart_url }}" method="post" id="cart-foot-form">
+          <button type="submit" name="checkout" class="btn btn--accent btn--block btn--lg">{{ 'sections.cart.checkout' | t | default: 'Checkout' }}</button>
+        </form>
+      </div>
+    {%- else -%}
+      <div class="drawer__body" style="display:grid;place-content:center;text-align:center;gap:.6rem;flex:1">
+        <p class="h4">{{ 'sections.cart.empty' | t | default: 'Your cart is empty' }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--accent" data-close="cart-drawer">{{ 'general.continue_shopping' | t | default: 'Continue shopping' }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</aside>
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": [
+
+  ]
+}
+{% endschema %}

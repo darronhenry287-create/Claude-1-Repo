@@ -1,0 +1,76 @@
+{
+  "sections": {
+    "pagehead": {
+      "type": "aeon-pagehead",
+      "settings": {
+        "kicker": "Privacy",
+        "heading": "Privacy policy.",
+        "subtext": ""
+      }
+    },
+    "main": {
+      "type": "rich-text",
+      "blocks": {
+        "t0": {
+          "type": "text",
+          "settings": {
+            "content": "<p>Your trust is the product. This policy explains what we collect, why, and the control you have.</p>"
+          }
+        },
+        "h1": {
+          "type": "heading",
+          "settings": { "heading": "What we collect" }
+        },
+        "t1": {
+          "type": "text",
+          "settings": {
+            "content": "<ul><li>Order details: name, shipping/billing address, email, and items purchased.</li><li>Payment data, processed securely by our payment provider — we never store full card numbers.</li><li>Usage data: basic analytics about how the site is used, to improve it.</li></ul>"
+          }
+        },
+        "h2": {
+          "type": "heading",
+          "settings": { "heading": "How we use it" }
+        },
+        "t2": {
+          "type": "text",
+          "settings": {
+            "content": "<p>To fulfill and support your orders, manage subscriptions, prevent fraud, and — only if you opt in — send you product and protocol emails. You can unsubscribe anytime.</p>"
+          }
+        },
+        "h3": {
+          "type": "heading",
+          "settings": { "heading": "What we don't do" }
+        },
+        "t3": {
+          "type": "text",
+          "settings": {
+            "content": "<p>We don't sell your personal information. We share data only with the processors needed to run the store (payments, shipping, email), under contract.</p>"
+          }
+        },
+        "h4": {
+          "type": "heading",
+          "settings": { "heading": "Your rights" }
+        },
+        "t4": {
+          "type": "text",
+          "settings": {
+            "content": "<p>You can request access to, correction of, or deletion of your data at <strong>privacy@aeonlabs.example</strong>. We honor applicable privacy rights including GDPR and CCPA.</p>"
+          }
+        },
+        "h5": {
+          "type": "heading",
+          "settings": { "heading": "Cookies" }
+        },
+        "t5": {
+          "type": "text",
+          "settings": {
+            "content": "<p>We use essential cookies to run the cart and checkout, plus optional analytics cookies you can decline.</p>"
+          }
+        }
+      },
+      "block_order": ["t0", "h1", "t1", "h2", "t2", "h3", "t3", "h4", "t4", "h5", "t5"],
+      "settings": {}
+    }
+  },
+  "order": ["pagehead", "main"]
+}

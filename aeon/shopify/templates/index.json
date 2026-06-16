@@ -1,0 +1,188 @@
+{
+  "sections": {
+    "hero": {
+      "type": "aeon-hero",
+      "blocks": {
+        "spec1": { "type": "spec", "settings": { "value": "1000", "unit": "mg", "label": "NMN / serving" } },
+        "spec2": { "type": "spec", "settings": { "value": "60", "unit": "", "label": "servings / bottle" } },
+        "spec3": { "type": "spec", "settings": { "value": "≥99", "unit": "%", "label": "tested purity" } }
+      },
+      "block_order": ["spec1", "spec2", "spec3"],
+      "settings": {}
+    },
+    "logos": {
+      "type": "aeon-logos",
+      "blocks": {
+        "l1": { "type": "logo", "settings": { "name": "Harvard" } },
+        "l2": { "type": "logo", "settings": { "name": "Nature" } },
+        "l3": { "type": "logo", "settings": { "name": "Cell Metab." } },
+        "l4": { "type": "logo", "settings": { "name": "NIH" } },
+        "l5": { "type": "logo", "settings": { "name": "Sinclair Lab" } }
+      },
+      "block_order": ["l1", "l2", "l3", "l4", "l5"],
+      "settings": {}
+    },
+    "statbar": {
+      "type": "aeon-statbar",
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "number": "50", "suffix": "M+", "label": "capsules shipped" } },
+        "s2": { "type": "stat", "settings": { "number": "≥99", "suffix": "%", "label": "assayed β-NMN purity" } },
+        "s3": { "type": "stat", "settings": { "number": "100", "suffix": "%", "label": "batches third-party tested" } },
+        "s4": { "type": "stat", "settings": { "number": "60", "suffix": "-night", "label": "money-back guarantee" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": {}
+    },
+    "decline": {
+      "type": "aeon-decline",
+      "settings": {}
+    },
+    "pathway": {
+      "type": "aeon-pathway",
+      "blocks": {
+        "n1": { "type": "node", "settings": { "step_label": "STEP 01", "molecule": "molecule", "title": "You take NMN", "text": "1000 mg of stabilized β-Nicotinamide Mononucleotide is absorbed and enters your cells." } },
+        "n2": { "type": "node", "settings": { "step_label": "STEP 02", "molecule": "molecule", "title": "It becomes NAD⁺", "text": "Enzymes convert NMN into NAD⁺ — the coenzyme your mitochondria and repair systems depend on." } },
+        "n3": { "type": "node", "settings": { "step_label": "STEP 03", "molecule": "capsule", "title": "Cells get to work", "text": "NAD⁺ powers energy production, activates sirtuins, and supports DNA repair — the hallmarks of cellular youth.†" } }
+      },
+      "block_order": ["n1", "n2", "n3"],
+      "settings": {}
+    },
+    "formula": {
+      "type": "aeon-formula",
+      "blocks": {
+        "z1": { "type": "zero", "settings": { "label": "No fillers" } },
+        "z2": { "type": "zero", "settings": { "label": "No mag. stearate" } },
+        "z3": { "type": "zero", "settings": { "label": "Non-GMO" } },
+        "z4": { "type": "zero", "settings": { "label": "Gluten-free" } },
+        "z5": { "type": "zero", "settings": { "label": "Vegan caps" } },
+        "z6": { "type": "zero", "settings": { "label": "No artificials" } },
+        "r1": { "type": "specrow", "settings": { "key": "NMN (β-Nicotinamide Mononucleotide)", "value": "1000 mg", "highlight": true } },
+        "r2": { "type": "specrow", "settings": { "key": "Capsules per bottle", "value": "120 veggie", "highlight": false } },
+        "r3": { "type": "specrow", "settings": { "key": "Servings per bottle", "value": "60", "highlight": false } },
+        "r4": { "type": "specrow", "settings": { "key": "Serving size", "value": "2 capsules", "highlight": false } },
+        "r5": { "type": "specrow", "settings": { "key": "Assayed purity", "value": "99.6%", "highlight": true } },
+        "r6": { "type": "specrow", "settings": { "key": "Capsule", "value": "vegetable cellulose", "highlight": false } },
+        "r7": { "type": "specrow", "settings": { "key": "Other ingredients", "value": "none", "highlight": false } },
+        "r8": { "type": "specrow", "settings": { "key": "Tested by", "value": "ISO 17025 lab", "highlight": false } }
+      },
+      "block_order": ["z1", "z2", "z3", "z4", "z5", "z6", "r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8"],
+      "settings": {}
+    },
+    "benefits": {
+      "type": "aeon-benefits",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "bolt", "tag": "Mitochondria", "title": "Cellular energy", "text": "NAD⁺ is essential to turn food into ATP — the fuel that runs every cell.†" } },
+        "b2": { "type": "benefit", "settings": { "icon": "sun", "tag": "Sirtuins", "title": "Healthy aging", "text": "NAD⁺ activates sirtuins — longevity proteins tied to how cells age.†" } },
+        "b3": { "type": "benefit", "settings": { "icon": "helix", "tag": "PARPs", "title": "DNA repair", "text": "Repair enzymes consume NAD⁺ to fix daily damage to your genome.†" } },
+        "b4": { "type": "benefit", "settings": { "icon": "clock", "tag": "Metabolism", "title": "Metabolic balance", "text": "NAD⁺ supports the metabolic pathways that keep cells efficient.†" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"],
+      "settings": {}
+    },
+    "coa": {
+      "type": "aeon-coa",
+      "blocks": {
+        "a1": { "type": "assay", "settings": { "name": "NMN purity (HPLC)", "result": "99.6%" } },
+        "a2": { "type": "assay", "settings": { "name": "Heavy metals", "result": "< limits" } },
+        "a3": { "type": "assay", "settings": { "name": "Microbial", "result": "Pass" } },
+        "a4": { "type": "assay", "settings": { "name": "Identity", "result": "Conforms" } }
+      },
+      "block_order": ["a1", "a2", "a3", "a4"],
+      "settings": {}
+    },
+    "evidence": {
+      "type": "aeon-evidence",
+      "blocks": {
+        "e1": { "type": "study", "settings": { "source": "NATURE / CELL METAB.", "meta": "n = preclinical", "text": "Oral NMN raised tissue NAD⁺ levels and improved markers of mitochondrial and metabolic function in animal models.", "cite": "— Mills et al., Cell Metabolism" } },
+        "e2": { "type": "study", "settings": { "source": "HUMAN TRIAL", "meta": "n = 80", "text": "In a randomized human study, NMN supplementation was well-tolerated and increased blood NAD⁺ concentrations over 60 days.", "cite": "— Yoshino et al., Science" } },
+        "e3": { "type": "study", "settings": { "source": "REVIEW", "meta": "2023", "text": "Reviews of NAD⁺ biology link declining NAD⁺ to hallmarks of aging and identify NMN as a leading precursor strategy.", "cite": "— Covarrubias et al., Nat. Rev. Mol. Cell Biol." } }
+      },
+      "block_order": ["e1", "e2", "e3"],
+      "settings": {}
+    },
+    "roadmap": {
+      "type": "aeon-roadmap",
+      "blocks": {
+        "p1": { "type": "phase", "settings": { "day": "Days 1–7", "title": "Establish the habit", "text": "Two capsules each morning. Set a cue — your protocol starts here." } },
+        "p2": { "type": "phase", "settings": { "day": "Weeks 2–4", "title": "NAD⁺ rebuilding", "text": "Blood NAD⁺ rises as your cells restock the coenzyme they were missing.†" } },
+        "p3": { "type": "phase", "settings": { "day": "Weeks 5–8", "title": "Steady state", "text": "Many report smoother daily energy and focus as levels stabilize.†" } },
+        "p4": { "type": "phase", "settings": { "day": "Days 60–90", "title": "The long game", "text": "The point where the cellular benefits of consistent NAD⁺ support compound.†" } }
+      },
+      "block_order": ["p1", "p2", "p3", "p4"],
+      "settings": {}
+    },
+    "comparison": {
+      "type": "aeon-comparison",
+      "blocks": {
+        "c1": { "type": "row", "settings": { "spec": "Dose per serving", "aeon_value": "1000 mg", "us_yes": false, "typical_value": "125–500 mg", "them_no": false } },
+        "c2": { "type": "row", "settings": { "spec": "Assayed purity", "aeon_value": "≥99%", "us_yes": false, "typical_value": "unverified", "them_no": false } },
+        "c3": { "type": "row", "settings": { "spec": "Third-party tested", "aeon_value": "Every batch", "us_yes": true, "typical_value": "Rarely", "them_no": true } },
+        "c4": { "type": "row", "settings": { "spec": "Published COA", "aeon_value": "Yes", "us_yes": true, "typical_value": "No", "them_no": true } },
+        "c5": { "type": "row", "settings": { "spec": "Fillers / flow agents", "aeon_value": "None", "us_yes": true, "typical_value": "Common", "them_no": true } },
+        "c6": { "type": "row", "settings": { "spec": "Guarantee", "aeon_value": "60 nights", "us_yes": false, "typical_value": "14–30 days", "them_no": false } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6"],
+      "settings": {}
+    },
+    "tiers": {
+      "type": "aeon-tiers",
+      "blocks": {
+        "t1": { "type": "tier", "settings": { "supply": "1-month", "name": "Starter", "save_label": "", "price": "$68", "compare": "", "per": "$1.13 / serving · one-time", "features": "120 capsules · 60 servings\nBatch COA included\n60-night guarantee", "best": false, "badge": "Most popular", "cta_label": "Add — $68" } },
+        "t2": { "type": "tier", "settings": { "supply": "3-month", "name": "Protocol", "save_label": "Save 25%", "price": "$153", "compare": "$204", "per": "$0.85 / serving · subscription", "features": "3 bottles · ships every 90 days\nFree priority shipping\nSkip / cancel anytime", "best": true, "badge": "Most popular", "cta_label": "Subscribe — $153" } },
+        "t3": { "type": "tier", "settings": { "supply": "6-month", "name": "Longevity", "save_label": "Save 30%", "price": "$286", "compare": "$408", "per": "$0.79 / serving · subscription", "features": "6 bottles · best value\nFree priority shipping\nLock today's price", "best": false, "badge": "Most popular", "cta_label": "Subscribe — $286" } }
+      },
+      "block_order": ["t1", "t2", "t3"],
+      "settings": {}
+    },
+    "reviews": {
+      "type": "aeon-reviews",
+      "blocks": {
+        "rv1": { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "Three months in and the afternoon crash is just… gone. I checked my NAD⁺ with a test kit and it actually moved.", "author": "Daniel R. · on subscription" } },
+        "rv2": { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "I switched from a 250mg brand. The fact that AEON publishes a COA for my exact lot is why I'll never go back.", "author": "Priya M." } },
+        "rv3": { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "Clean capsules, no weird aftertaste, no fillers. Energy is steadier and my training recovery improved.", "author": "Marcus T." } },
+        "rv4": { "type": "review", "settings": { "stars": "★★★★☆", "verified": true, "text": "Took about a month to notice, but the steady focus is real. Wish the 6-month shipped a little faster.", "author": "Elena V." } },
+        "rv5": { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "My doctor was skeptical until I showed her the third-party testing. Now she recommends it to other patients.", "author": "Dr. Wong, via patient" } },
+        "rv6": { "type": "review", "settings": { "stars": "★★★★★", "verified": true, "text": "68 and keeping up with my grandkids again. The 1000mg dose is what sold me — most are half that.", "author": "Robert H." } }
+      },
+      "block_order": ["rv1", "rv2", "rv3", "rv4", "rv5", "rv6"],
+      "settings": {}
+    },
+    "guarantee": {
+      "type": "aeon-guarantee",
+      "settings": {}
+    },
+    "faq": {
+      "type": "aeon-faq",
+      "blocks": {
+        "q1": { "type": "qa", "settings": { "question": "What exactly is NMN?", "answer": "NMN (β-Nicotinamide Mononucleotide) is a molecule your body uses as the direct precursor to NAD⁺ — a coenzyme essential for cellular energy and DNA repair. NAD⁺ declines with age; supplementing NMN is a researched way to support it." } },
+        "q2": { "type": "qa", "settings": { "question": "How much should I take?", "answer": "Our serving is 2 capsules (1000 mg) once daily, ideally in the morning, with or without food. Consistency matters more than timing." } },
+        "q3": { "type": "qa", "settings": { "question": "When will I feel something?", "answer": "NAD⁺ support is cumulative. Some notice steadier energy in 2–4 weeks; the cellular benefits compound over 60–90 days of daily use.†" } },
+        "q4": { "type": "qa", "settings": { "question": "Is it third-party tested?", "answer": "Yes — every batch is tested by an ISO 17025-accredited lab for purity (≥99%), identity, heavy metals and microbials. Scan the QR on your bottle to see your lot's certificate." } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"],
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "aeon-newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "logos",
+    "statbar",
+    "decline",
+    "pathway",
+    "formula",
+    "benefits",
+    "coa",
+    "evidence",
+    "roadmap",
+    "comparison",
+    "tiers",
+    "reviews",
+    "guarantee",
+    "faq",
+    "newsletter"
+  ]
+}

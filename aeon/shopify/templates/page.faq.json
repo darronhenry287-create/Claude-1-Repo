@@ -1,0 +1,70 @@
+{
+  "sections": {
+    "pagehead": {
+      "type": "aeon-pagehead",
+      "settings": {
+        "kicker": "FAQ",
+        "heading": "Common questions.",
+        "subtext": "NMN, NAD⁺, dosing, testing, shipping and subscriptions — answered plainly."
+      }
+    },
+    "faq_molecule": {
+      "type": "aeon-faq",
+      "blocks": {
+        "q1": { "type": "qa", "settings": { "question": "What is NMN?", "answer": "NMN (β-Nicotinamide Mononucleotide) is a naturally occurring molecule your body uses as the direct precursor to NAD⁺ — a coenzyme essential for cellular energy, repair and signalling. Supplementing NMN is a researched way to support NAD⁺ levels that decline with age." } },
+        "q2": { "type": "qa", "settings": { "question": "NMN vs. NR — what's the difference?", "answer": "Both are NAD⁺ precursors. NR (nicotinamide riboside) is one step further upstream and is converted into NMN, which then becomes NAD⁺. NMN is the more direct precursor and the form with growing human-trial evidence. We use stabilized β-NMN." } },
+        "q3": { "type": "qa", "settings": { "question": "Is NMN safe?", "answer": "Human trials to date report NMN is generally well-tolerated at studied doses. That said, supplements affect people differently — consult your physician before starting, especially if pregnant, nursing, or on medication.†" } }
+      },
+      "block_order": ["q1", "q2", "q3"],
+      "settings": {
+        "kicker": "The molecule",
+        "heading": "",
+        "footer_label": ""
+      }
+    },
+    "faq_dosing": {
+      "type": "aeon-faq",
+      "blocks": {
+        "q4": { "type": "qa", "settings": { "question": "How much should I take?", "answer": "Our serving is 2 capsules (1000 mg NMN) once daily, ideally in the morning, with or without food. Consistency matters more than exact timing." } },
+        "q5": { "type": "qa", "settings": { "question": "When will I notice something?", "answer": "NAD⁺ support is cumulative. Some people report steadier energy or focus within 2–4 weeks; the cellular benefits build over 60–90 days of daily use. Give it a full protocol before judging.†" } },
+        "q6": { "type": "qa", "settings": { "question": "Should I stack it with anything?", "answer": "Many people pair NMN with trans-resveratrol (a sirtuin activator) and TMG (a methyl donor). All three are available in our shop, or bundled as The NAD⁺ Stack." } },
+        "q7": { "type": "qa", "settings": { "question": "Can I take it with coffee / on an empty stomach?", "answer": "Yes to both. NMN doesn't require food, and there's no known issue with caffeine. Take it whenever you'll remember to take it daily." } }
+      },
+      "block_order": ["q4", "q5", "q6", "q7"],
+      "settings": {
+        "kicker": "Dosing & results",
+        "heading": "",
+        "footer_label": ""
+      }
+    },
+    "faq_quality": {
+      "type": "aeon-faq",
+      "blocks": {
+        "q8": { "type": "qa", "settings": { "question": "Is AEON third-party tested?", "answer": "Every batch is tested by an ISO 17025-accredited lab for purity (≥99%), identity, heavy metals and microbials. View a sample COA, or scan the QR on your bottle for your exact lot." } },
+        "q9": { "type": "qa", "settings": { "question": "What's in the capsule besides NMN?", "answer": "Just a vegetable cellulose capsule. No fillers, no magnesium stearate, no flow agents, no artificial colors or preservatives. Non-GMO, gluten-free, vegan." } },
+        "q10": { "type": "qa", "settings": { "question": "How should I store it?", "answer": "Keep it sealed in a cool, dry place away from direct light. Refrigeration isn't required but doesn't hurt. Use by the date on the bottle." } }
+      },
+      "block_order": ["q8", "q9", "q10"],
+      "settings": {
+        "kicker": "Quality & testing",
+        "heading": "",
+        "footer_label": ""
+      }
+    },
+    "faq_orders": {
+      "type": "aeon-faq",
+      "blocks": {
+        "q11": { "type": "qa", "settings": { "question": "How fast do you ship?", "answer": "Orders ship within 24 hours on business days. Free carbon-neutral shipping on orders over $50; subscriptions always ship free." } },
+        "q12": { "type": "qa", "settings": { "question": "What's the guarantee?", "answer": "60 nights, money back. Take it daily — if you don't feel the difference, email us for a full refund and keep the bottle." } },
+        "q13": { "type": "qa", "settings": { "question": "Do you ship internationally?", "answer": "We ship across the US and to most countries. International duties/taxes are calculated at checkout where applicable." } }
+      },
+      "block_order": ["q11", "q12", "q13"],
+      "settings": {
+        "kicker": "Orders & shipping",
+        "heading": "",
+        "footer_label": "Talk to our team →"
+      }
+    }
+  },
+  "order": ["pagehead", "faq_molecule", "faq_dosing", "faq_quality", "faq_orders"]
+}

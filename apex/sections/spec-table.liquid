@@ -1,0 +1,255 @@
+{%- liquid
+  assign s = section.settings
+  assign two_product = s.two_product
+-%}
+<section class="apex-spec-table color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="spec-table-{{ section.id }}">
+  <div class="page-width">
+    <div class="reveal">
+
+      {%- if s.heading != blank or s.eyebrow != blank -%}
+        <div class="section-head{% if s.center_header %} section-head--center{% endif %}">
+          {%- if s.eyebrow != blank -%}<p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>{%- endif -%}
+          {%- if s.heading != blank -%}<h2 class="balance">{{ s.heading }}</h2>{%- endif -%}
+          {%- if s.subheading != blank -%}<p class="subtitle balance">{{ s.subheading }}</p>{%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="apex-spec-table__scroll">
+        <table class="apex-spec-table__table" role="table">
+          {%- if two_product -%}
+            <thead>
+              <tr>
+                <th class="apex-spec-table__label-col" scope="col"><span class="visually-hidden">Specification</span></th>
+                <th class="apex-spec-table__prod-col apex-spec-table__prod-col--primary" scope="col">{{ s.product_1_name | default: 'Product A' }}</th>
+                <th class="apex-spec-table__prod-col" scope="col">{{ s.product_2_name | default: 'Product B' }}</th>
+              </tr>
+            </thead>
+          {%- endif -%}
+          <tbody>
+            {%- for block in section.blocks -%}
+              {%- assign bs = block.settings -%}
+              <tr class="apex-spec-table__row" {{ block.shopify_attributes }}>
+                <td class="apex-spec-table__label">{{ bs.label }}</td>
+                <td class="apex-spec-table__value{% if two_product %} apex-spec-table__value--primary{% endif %}">{{ bs.value }}</td>
+                {%- if two_product -%}
+                  <td class="apex-spec-table__value">{{ bs.value_2 }}</td>
+                {%- endif -%}
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-spec-table__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-card);
+}
+.apex-spec-table__table {
+  width: 100%;
+  min-width: 420px;
+  border-collapse: collapse;
+}
+.apex-spec-table__table thead th {
+  padding: 1rem 1.4rem;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-align: left;
+  background: var(--bg-alt);
+  border-bottom: 2px solid var(--border);
+}
+.apex-spec-table__prod-col--primary {
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg-alt));
+  border-left: 3px solid var(--accent);
+}
+.apex-spec-table__label-col { min-width: 180px; }
+.apex-spec-table__prod-col { min-width: 160px; text-align: center; }
+.apex-spec-table__row:nth-child(even) .apex-spec-table__label,
+.apex-spec-table__row:nth-child(even) .apex-spec-table__value {
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+}
+.apex-spec-table__row:last-child td { border-bottom: none; }
+.apex-spec-table__label,
+.apex-spec-table__value {
+  padding: .9rem 1.4rem;
+  border-bottom: var(--border-width) solid var(--border);
+  vertical-align: middle;
+  font-size: .94rem;
+  line-height: 1.5;
+}
+.apex-spec-table__label {
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+.apex-spec-table__value { color: var(--text-muted); }
+.apex-spec-table__value--primary {
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+  border-left: 3px solid var(--accent);
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Spec table",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Full specifications"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "center_header",
+      "label": "Center header",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "two_product",
+      "label": "Two-product comparison mode",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "product_1_name",
+      "label": "Product 1 column heading",
+      "default": "Standard"
+    },
+    {
+      "type": "text",
+      "id": "product_2_name",
+      "label": "Product 2 column heading",
+      "default": "Pro"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Spec row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Material"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value (or Product 1 value)",
+          "default": "Premium blend"
+        },
+        {
+          "type": "text",
+          "id": "value_2",
+          "label": "Product 2 value (compare mode)",
+          "default": "Standard blend"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spec table",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "label": "Material",
+            "value": "100% organic cotton",
+            "value_2": "Cotton blend"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Weight",
+            "value": "280 gsm",
+            "value_2": "180 gsm"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Dimensions",
+            "value": "30 × 20 × 8 cm",
+            "value_2": "30 × 20 × 8 cm"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Warranty",
+            "value": "Lifetime",
+            "value_2": "1 year"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Country of origin",
+            "value": "Portugal",
+            "value_2": "Varies"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Certification",
+            "value": "GOTS, OEKO-TEX",
+            "value_2": "None"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

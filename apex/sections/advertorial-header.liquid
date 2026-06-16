@@ -1,0 +1,179 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-advertorial-header color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="advertorial-header-{{ section.id }}">
+  <div class="page-width--narrow">
+    <div class="apex-advertorial-header__inner reveal stack">
+
+      {%- if s.label != blank -%}
+        <p class="eyebrow eyebrow--pill apex-advertorial-header__label">{{ s.label }}</p>
+      {%- endif -%}
+
+      {%- if s.headline != blank -%}
+        <h1 class="apex-advertorial-header__headline balance">{{ s.headline }}</h1>
+      {%- endif -%}
+
+      {%- if s.subheadline != blank -%}
+        <p class="apex-advertorial-header__subheadline subtitle balance">{{ s.subheadline }}</p>
+      {%- endif -%}
+
+      {%- if s.author_name != blank or s.publish_date != blank or s.read_time != blank -%}
+        <div class="apex-advertorial-header__byline cluster">
+          {%- if s.author_avatar != blank -%}
+            <div class="apex-advertorial-header__avatar media media--round" style="width:2.8rem;height:2.8rem;flex:none">
+              {{ s.author_avatar | image_url: width: 120 | image_tag: loading: 'eager', width: 56, height: 56, alt: s.author_name }}
+            </div>
+          {%- else -%}
+            <div class="apex-advertorial-header__avatar-placeholder media media--round" aria-hidden="true" style="width:2.8rem;height:2.8rem;flex:none;overflow:hidden">
+              {{ 'customer' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {%- endif -%}
+          <div class="apex-advertorial-header__byline-text stack" style="gap:.15rem">
+            {%- if s.author_name != blank -%}
+              <span class="apex-advertorial-header__author">{{ s.author_name }}</span>
+            {%- endif -%}
+            <span class="muted apex-advertorial-header__meta">
+              {%- if s.publish_date != blank -%}{{ s.publish_date }}{%- endif -%}
+              {%- if s.publish_date != blank and s.read_time != blank -%} &middot; {%- endif -%}
+              {%- if s.read_time != blank -%}{{ s.read_time }}{%- endif -%}
+            </span>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if s.hero_image != blank -%}
+        <div class="apex-advertorial-header__hero media media--wide">
+          {{ s.hero_image | image_url: width: 1200 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600,900,1200', sizes: '(min-width:990px) 760px, 100vw', alt: s.hero_image.alt }}
+        </div>
+      {%- else -%}
+        <div class="apex-advertorial-header__hero media media--wide">
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-advertorial-header__inner { gap: 1.4rem; }
+.apex-advertorial-header__label { align-self: flex-start; }
+.apex-advertorial-header__headline { font-size: clamp(1.9rem, 1.2rem + 3.5vw, 2.9rem); line-height: 1.12; }
+.apex-advertorial-header__subheadline { font-size: clamp(1rem, .9rem + .5vw, 1.2rem); }
+.apex-advertorial-header__byline { gap: .8rem; align-items: center; }
+.apex-advertorial-header__byline-text { gap: .1rem; }
+.apex-advertorial-header__author { font-weight: 600; font-size: .95rem; }
+.apex-advertorial-header__meta { font-size: var(--text-sm); }
+.apex-advertorial-header__avatar img { width: 100%; height: 100%; object-fit: cover; }
+.apex-advertorial-header__avatar-placeholder svg { width: 100%; height: 100%; }
+.apex-advertorial-header__hero { border-radius: var(--radius-card); overflow: hidden; }
+.apex-advertorial-header__hero img,
+.apex-advertorial-header__hero .placeholder-svg { width: 100%; height: 100%; object-fit: cover; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Advertorial header",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Article label",
+      "default": "SPONSORED",
+      "info": "e.g. ADVERTISEMENT, SPONSORED, EDITORIAL"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "headline",
+      "label": "Headline",
+      "default": "The Simple Habit That Helped Over 100,000 People Finally Feel Their Best"
+    },
+    {
+      "type": "text",
+      "id": "subheadline",
+      "label": "Subheadline",
+      "default": "Scientists and everyday customers agree: this is the approach that actually works — and it starts today."
+    },
+    {
+      "type": "header",
+      "content": "Byline"
+    },
+    {
+      "type": "image_picker",
+      "id": "author_avatar",
+      "label": "Author avatar"
+    },
+    {
+      "type": "text",
+      "id": "author_name",
+      "label": "Author name",
+      "default": "Jordan M., Health & Wellness Editor"
+    },
+    {
+      "type": "text",
+      "id": "publish_date",
+      "label": "Publish date",
+      "default": "June 2025"
+    },
+    {
+      "type": "text",
+      "id": "read_time",
+      "label": "Read time",
+      "default": "4 min read"
+    },
+    {
+      "type": "header",
+      "content": "Hero image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Advertorial header",
+      "settings": {
+        "label": "SPONSORED",
+        "headline": "The Simple Habit That Helped Over 100,000 People Finally Feel Their Best",
+        "subheadline": "Scientists and everyday customers agree: this is the approach that actually works — and it starts today.",
+        "author_name": "Jordan M., Health & Wellness Editor",
+        "publish_date": "June 2025",
+        "read_time": "4 min read"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,99 @@
+{%- comment -%} templates/customers/addresses.liquid — Apex address book {%- endcomment -%}
+<div class="page-width page-width--narrow apex-addresses" style="padding-block:clamp(3rem,2rem + 4vw,5rem)">
+
+  <a class="link" href="{{ routes.account_url }}" style="display:inline-flex;align-items:center;gap:.4em;margin-bottom:1.6rem;font-size:var(--text-sm)">
+    {% render 'icon', icon: 'arrow-left' %}
+    {{ 'customer.account.return' | t | default: 'Back to account' }}
+  </a>
+
+  <h1 class="h2" style="margin-bottom:clamp(1.6rem,1rem + 2vw,2.6rem)">{{ 'customer.addresses.title' | t | default: 'Addresses' }}</h1>
+
+  {%- comment -%} Add new address form {%- endcomment -%}
+  <details class="apex-addresses__new accordion__item card bordered" style="padding:1.4rem;margin-bottom:1.6rem">
+    <summary class="accordion__head h5">
+      {% render 'icon', icon: 'plus' %}
+      {{ 'customer.addresses.add_new' | t | default: 'Add new address' }}
+      <span class="accordion__icon" aria-hidden="true"></span>
+    </summary>
+    <div class="accordion__body" style="padding-top:1.4rem">
+      {%- form 'customer_address', customer.new_address -%}
+        {%- if form.errors -%}
+          <div class="apex-customers__error" role="alert">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+        {%- render 'apex-address-fields', form: form -%}
+        <div class="cluster" style="margin-top:1.2rem;gap:.8rem">
+          <button class="btn btn--accent" type="submit">{{ 'customer.addresses.add' | t | default: 'Add address' }}</button>
+        </div>
+      {%- endform -%}
+    </div>
+  </details>
+
+  {%- comment -%} Existing addresses {%- endcomment -%}
+  {%- if customer.addresses.size > 0 -%}
+    <div class="stack apex-addresses__list">
+      {%- for address in customer.addresses -%}
+        <div class="card bordered apex-addresses__address" style="padding:1.4rem">
+          <div class="apex-addresses__address-head cluster">
+            <address style="font-style:normal;font-size:var(--text-sm);line-height:1.8;flex:1">
+              <strong>{{ address.name }}</strong><br>
+              {{ address | format_address }}
+            </address>
+            {%- if address == customer.default_address -%}
+              <span class="badge">{{ 'customer.addresses.default' | t | default: 'Default' }}</span>
+            {%- endif -%}
+          </div>
+
+          <div class="cluster apex-addresses__actions">
+            <button class="btn btn--ghost btn--sm" onclick="apexToggleEdit('{{ address.id }}')">
+              {{ 'customer.addresses.edit' | t | default: 'Edit' }}
+            </button>
+            {%- form 'customer_address', address, id: 'delete-address-' | append: address.id -%}
+              <input type="hidden" name="_method" value="delete">
+              <button class="btn btn--ghost btn--sm" type="submit"
+                onclick="return confirm('{{ 'customer.addresses.delete_confirm' | t | default: 'Delete this address?' }}')">
+                {{ 'customer.addresses.delete' | t | default: 'Delete' }}
+              </button>
+            {%- endform -%}
+            {%- unless address == customer.default_address -%}
+              {%- form 'customer_address', address, id: 'default-address-' | append: address.id -%}
+                <input type="hidden" name="_method" value="put">
+                <input type="hidden" name="address[default]" value="1">
+                <button class="btn btn--ghost btn--sm" type="submit">
+                  {{ 'customer.addresses.set_default' | t | default: 'Set default' }}
+                </button>
+              {%- endform -%}
+            {%- endunless -%}
+          </div>
+
+          <div id="edit-address-{{ address.id }}" hidden style="margin-top:1.2rem;padding-top:1.2rem;border-top:var(--border-width) solid var(--border)">
+            {%- form 'customer_address', address -%}
+              <input type="hidden" name="_method" value="put">
+              {%- if form.errors -%}
+                <div class="apex-customers__error" role="alert">{{ form.errors | default_errors }}</div>
+              {%- endif -%}
+              {%- render 'apex-address-fields', form: form, address: address -%}
+              <div class="cluster" style="margin-top:1.2rem;gap:.8rem">
+                <button class="btn btn--accent" type="submit">{{ 'customer.addresses.update' | t | default: 'Update address' }}</button>
+                <button type="button" class="btn btn--ghost" onclick="apexToggleEdit('{{ address.id }}')">{{ 'customer.addresses.cancel' | t | default: 'Cancel' }}</button>
+              </div>
+            {%- endform -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <p class="muted">{{ 'customer.addresses.none' | t | default: "You haven't added any addresses yet." }}</p>
+  {%- endif -%}
+
+</div>
+<style>
+.apex-addresses__address-head { align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
+.apex-addresses__actions { gap: .5rem; }
+.apex-customers__error { padding: .9rem 1rem; background: color-mix(in srgb, var(--sale) 10%, transparent); color: var(--sale); border-radius: var(--radius-sm); margin-bottom: 1rem; font-size: var(--text-sm); }
+</style>
+<script>
+function apexToggleEdit(id) {
+  var el = document.getElementById('edit-address-' + id);
+  if (el) el.hidden = !el.hidden;
+}
+</script>

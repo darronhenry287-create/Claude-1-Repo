@@ -1,0 +1,187 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="apex-countdown color-{{ s.color_scheme }}"
+  style="padding-top:{{ s.padding_top }}px;padding-bottom:{{ s.padding_bottom }}px"
+  id="countdown-{{ section.id }}"
+  {% if s.hide_when_ended %}data-countdown-hide-ended{% endif %}>
+  <div class="page-width">
+    <div class="apex-countdown__inner reveal">
+      <div class="apex-countdown__content">
+        {%- if s.eyebrow != blank -%}
+          <p class="eyebrow eyebrow--pill">{{ s.eyebrow }}</p>
+        {%- endif -%}
+        {%- if s.heading != blank -%}
+          <h2 class="apex-countdown__heading balance">{{ s.heading }}</h2>
+        {%- endif -%}
+        {%- if s.text != blank -%}
+          <p class="subtitle balance">{{ s.text }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="apex-countdown__timer-wrap">
+        <apex-countdown
+          class="apex-countdown__timer"
+          data-end="{{ s.end_datetime }}"
+          aria-live="polite"
+          aria-label="Countdown timer">
+          <div class="apex-countdown__unit">
+            <span class="apex-countdown__digits" data-unit="days">00</span>
+            <span class="apex-countdown__label">Days</span>
+          </div>
+          <div class="apex-countdown__sep" aria-hidden="true">:</div>
+          <div class="apex-countdown__unit">
+            <span class="apex-countdown__digits" data-unit="hours">00</span>
+            <span class="apex-countdown__label">Hours</span>
+          </div>
+          <div class="apex-countdown__sep" aria-hidden="true">:</div>
+          <div class="apex-countdown__unit">
+            <span class="apex-countdown__digits" data-unit="mins">00</span>
+            <span class="apex-countdown__label">Mins</span>
+          </div>
+          <div class="apex-countdown__sep" aria-hidden="true">:</div>
+          <div class="apex-countdown__unit">
+            <span class="apex-countdown__digits" data-unit="secs">00</span>
+            <span class="apex-countdown__label">Secs</span>
+          </div>
+        </apex-countdown>
+      </div>
+
+      {%- if s.button_label != blank -%}
+        <div class="apex-countdown__cta">
+          <a class="btn btn--accent btn--lg" href="{{ s.button_url }}">{{ s.button_label }}</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.apex-countdown__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.2rem, 3vw, 3rem);
+  text-align: center;
+}
+.apex-countdown__content { display: grid; gap: .6rem; }
+.apex-countdown__heading { font-size: var(--h3); margin: 0; }
+.apex-countdown__timer-wrap { display: flex; align-items: center; }
+.apex-countdown__timer {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+.apex-countdown__unit { display: flex; flex-direction: column; align-items: center; gap: .2rem; }
+.apex-countdown__digits {
+  display: block;
+  min-width: 4rem;
+  padding: .5rem .4rem;
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.apex-countdown__label { font-size: var(--text-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
+.apex-countdown__sep { font-family: var(--font-heading); font-weight: 800; font-size: clamp(1.4rem, 2.5vw, 2rem); color: var(--accent); align-self: flex-start; padding-top: .4rem; }
+.apex-countdown[data-ended] .apex-countdown__digits { color: var(--text-muted); }
+[data-countdown-hide-ended][data-ended] { display: none !important; }
+@media (max-width: 640px) {
+  .apex-countdown__inner { flex-direction: column; }
+  .apex-countdown__digits { min-width: 3.2rem; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Countdown",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Limited time offer"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Sale ends soon — don't miss out"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Subtext",
+      "default": "Use code SAVE20 at checkout for 20% off your entire order."
+    },
+    {
+      "type": "text",
+      "id": "end_datetime",
+      "label": "End date & time (ISO 8601: YYYY-MM-DDTHH:MM)",
+      "default": "2026-12-31T23:59"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_when_ended",
+      "label": "Hide section when countdown ends",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop the sale"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-4"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 56
+    }
+  ],
+  "blocks": [
+
+  ],
+  "presets": [
+    {
+      "name": "Countdown",
+      "settings": {
+        "eyebrow": "Limited time offer",
+        "heading": "Sale ends soon — don't miss out",
+        "text": "Use code SAVE20 at checkout for 20% off your entire order.",
+        "end_datetime": "2026-12-31T23:59",
+        "button_label": "Shop the sale"
+      }
+    }
+  ]
+}
+{% endschema %}

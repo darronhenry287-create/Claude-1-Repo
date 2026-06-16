@@ -1,0 +1,51 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "m1": {
+          "type": "message",
+          "settings": {
+            "text": "Free shipping over $50",
+            "icon": "truck"
+          }
+        },
+        "m2": {
+          "type": "message",
+          "settings": {
+            "text": "30-day easy returns",
+            "icon": "return"
+          }
+        },
+        "m3": {
+          "type": "message",
+          "settings": {
+            "text": "Rated 4.9 by 10,000+ customers",
+            "icon": "star"
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2",
+        "m3"
+      ]
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "layout": "left",
+        "sticky": true,
+        "show_search": true,
+        "show_account": true,
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
+}

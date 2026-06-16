@@ -1,0 +1,45 @@
+<span class="apex-tb-eyebrow eyebrow{% if block.settings.pill %} eyebrow--pill{% endif %}" style="text-align:{{ block.settings.align }};display:block" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</span>
+{% schema %}
+{
+  "name": "Eyebrow",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "New collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill",
+      "label": "Pill style",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Eyebrow"
+    }
+  ]
+}
+{% endschema %}
