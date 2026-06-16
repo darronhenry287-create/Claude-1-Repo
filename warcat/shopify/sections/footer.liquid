@@ -1,6 +1,22 @@
+{%- if section.settings.show_cta -%}
+<section class="cta-band">
+  <div class="wrap wrap-wide cta-band__in">
+    <div class="cta-band__copy">
+      <span class="eyebrow">{{ section.settings.cta_eyebrow }}</span>
+      <h2 class="h-lg">{{ section.settings.cta_heading }}</h2>
+      {%- if section.settings.cta_text != blank -%}<p>{{ section.settings.cta_text }}</p>{%- endif -%}
+    </div>
+    <div class="cta-band__actions">
+      <a href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" class="btn btn-dark btn-lg">{{ section.settings.cta_label | default: 'Shop WARCAT' }}</a>
+      {%- if section.settings.cta_link2_label != blank -%}<a href="{{ section.settings.cta_link2 | default: routes.root_url }}" class="btn btn-outline btn-lg">{{ section.settings.cta_link2_label }}</a>{%- endif -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
 <footer class="footer">
   <div class="wrap wrap-wide">
-    <div class="footer__top">
+    <div class="footer__grid">
       <div class="footer__brand">
         <span class="logo"><svg class="logo__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#0fb5a6"/><path d="M9 13.5 8 8.5l4 3.2a8.5 8.5 0 0 1 8 0l4-3.2-1 5" stroke="#04332e" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="12.5" cy="17" r="1.4" fill="#04332e"/><circle cx="19.5" cy="17" r="1.4" fill="#04332e"/><path d="M16 19.5v1.4m0 0-1.6.8m1.6-.8 1.6.8" stroke="#04332e" stroke-width="1.6" stroke-linecap="round"/></svg><span>{{ section.settings.logo_text | default: shop.name }}</span></span>
         <p>{{ section.settings.tagline }}</p>
@@ -11,14 +27,16 @@
         </div>
       </div>
 
-      {%- for block in section.blocks -%}
-        <div class="footer__col" {{ block.shopify_attributes }}>
-          <h5>{{ block.settings.heading }}</h5>
-          {%- for link in block.settings.menu.links -%}
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          {%- endfor -%}
-        </div>
-      {%- endfor -%}
+      <div class="footer__cols">
+        {%- for block in section.blocks -%}
+          <div class="footer__col" {{ block.shopify_attributes }}>
+            <h5>{{ block.settings.heading }}</h5>
+            {%- for link in block.settings.menu.links -%}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      </div>
     </div>
 
     <div class="footer__bot">
@@ -29,12 +47,23 @@
       <div class="footer__pay"><span>VISA</span><span>MC</span><span>AMEX</span><span>Shop Pay</span><span>Klarna</span></div>
     </div>
   </div>
+  <div class="footer__mega" aria-hidden="true">{{ section.settings.logo_text | default: shop.name }}</div>
 </footer>
 
 {% schema %}
 {
   "name": "Footer",
   "settings": [
+    { "type": "paragraph", "content": "Closing CTA" },
+    { "type": "checkbox", "id": "show_cta", "label": "Show closing CTA band", "default": true },
+    { "type": "text", "id": "cta_eyebrow", "label": "CTA eyebrow", "default": "Ready when you are" },
+    { "type": "text", "id": "cta_heading", "label": "CTA heading", "default": "Never scoop again." },
+    { "type": "textarea", "id": "cta_text", "label": "CTA text", "default": "Set WARCAT up in ten minutes and live scoop-free for 90 nights — on us." },
+    { "type": "text", "id": "cta_label", "label": "CTA button", "default": "Shop WARCAT" },
+    { "type": "url", "id": "cta_link", "label": "CTA button link" },
+    { "type": "text", "id": "cta_link2_label", "label": "Secondary button", "default": "How it works" },
+    { "type": "url", "id": "cta_link2", "label": "Secondary link" },
+    { "type": "paragraph", "content": "Brand" },
     { "type": "text", "id": "logo_text", "label": "Logo text", "default": "WARCAT" },
     { "type": "textarea", "id": "tagline", "label": "Tagline", "default": "The self-cleaning litter box that runs itself — whisper-quiet, app-controlled, and built for multi-cat homes." },
     { "type": "url", "id": "instagram", "label": "Instagram URL" },

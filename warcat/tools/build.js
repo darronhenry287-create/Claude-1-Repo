@@ -60,9 +60,22 @@ function chrome() {
       </div>
     </div>
   </header>`,
-    foot: `  <footer class="footer">
+    foot: `  <section class="cta-band">
+    <div class="wrap wrap-wide cta-band__in">
+      <div class="cta-band__copy">
+        <span class="eyebrow">Ready when you are</span>
+        <h2 class="h-lg">Never scoop again.</h2>
+        <p>Set WARCAT up in ten minutes and live scoop-free for 90 nights — on us.</p>
+      </div>
+      <div class="cta-band__actions">
+        <a href="product.html" class="btn btn-dark btn-lg">Shop WARCAT</a>
+        <a href="how-it-works.html" class="btn btn-outline btn-lg">How it works</a>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
     <div class="wrap wrap-wide">
-      <div class="footer__top">
+      <div class="footer__grid">
         <div class="footer__brand">
           ${wordmarkPlain}
           <p>The self-cleaning litter box that runs itself — whisper-quiet, app-controlled, and built for multi-cat homes.</p>
@@ -72,7 +85,9 @@ function chrome() {
             <a href="#" aria-label="YouTube">${ic.yt}</a>
           </div>
         </div>
-        ${FOOT.map(([h, l]) => `<div class="footer__col"><h5>${h}</h5>${links(l)}</div>`).join('\n        ')}
+        <div class="footer__cols">
+          ${FOOT.map(([h, l]) => `<div class="footer__col"><h5>${h}</h5>${links(l)}</div>`).join('\n          ')}
+        </div>
       </div>
       <div class="footer__bot">
         <p>© 2026 WARCAT Pet Technologies. All rights reserved.</p>
@@ -80,6 +95,7 @@ function chrome() {
         <div class="footer__pay"><span>VISA</span><span>MC</span><span>AMEX</span><span>Shop Pay</span><span>Klarna</span></div>
       </div>
     </div>
+    <div class="footer__mega" aria-hidden="true">WARCAT</div>
   </footer>
 
   <div class="overlay" id="overlay"></div>

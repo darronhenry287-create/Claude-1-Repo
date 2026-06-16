@@ -1,18 +1,17 @@
 {
   "sections": {
     "head": { "type": "main-page", "settings": { "eyebrow": "Bundles & save" } },
-    "offer": {
-      "type": "offer",
-      "settings": { "tag": "Most popular · save $120", "heading": "The Complete WARCAT Kit", "text": "Everything to go scoop-free on day one — the box plus the accessories that keep it running beautifully.", "price_now": "$549", "price_was": "$669", "cta1_label": "Shop the kit", "cta2_label": "Shop the box" },
+    "bundles": {
+      "type": "bundles",
+      "settings": { "eyebrow": "Bundles & save", "heading": "Pick the WARCAT setup that fits your home." },
       "blocks": {
-        "o1": { "type": "item", "settings": { "text": "WARCAT Smart Litter Box (90L)" } },
-        "o2": { "type": "item", "settings": { "text": "Anti-tracking entry mat" } },
-        "o3": { "type": "item", "settings": { "text": "3-month carbon filter set" } },
-        "o4": { "type": "item", "settings": { "text": "30 sealed drawer liners" } }
+        "b1": { "type": "bundle", "settings": { "asset": "hero.webp", "tag": "Starter", "title": "Just the Box", "price": "$499", "was": "$599", "text": "Everything you need to stop scooping today.", "includes": "WARCAT Smart Litter Box (90L)\nStarter pack of drawer liners\nFree WARCAT app", "cta": "Choose Just the Box" } },
+        "b2": { "type": "bundle", "settings": { "asset": "kit.webp", "featured": true, "flag": "Most popular · save $120", "tag": "Complete Kit", "title": "The Complete Kit", "price": "$549", "was": "$669", "text": "Scoop-free on day one, fully accessorized.", "includes": "WARCAT Smart Litter Box (90L)\nAnti-tracking entry mat\n3-month carbon filter set\n30 sealed drawer liners", "cta": "Choose the Complete Kit" } },
+        "b3": { "type": "bundle", "settings": { "asset": "duo.webp", "tag": "Best value", "title": "Multi-Cat Duo", "price": "$898", "was": "$1198", "text": "Two boxes for multi-cat or multi-floor homes — $449 each.", "includes": "Two WARCAT Smart Litter Boxes\nTwo starter liner packs\nMulti-cat tracking in one app", "cta": "Choose the Duo" } }
       },
-      "block_order": ["o1", "o2", "o3", "o4"]
+      "block_order": ["b1", "b2", "b3"]
     },
     "guarantee": { "type": "guarantee" }
   },
-  "order": ["head", "offer", "guarantee"]
+  "order": ["head", "bundles", "guarantee"]
 }

@@ -1,0 +1,82 @@
+<section class="section{% if section.settings.bg == 'soft' %} bg-soft{% endif %}">
+  <div class="wrap wrap-wide">
+    {%- if section.settings.heading != blank -%}
+      <div class="sec-head"><span class="eyebrow">{{ section.settings.eyebrow }}</span><h2 class="h-lg">{{ section.settings.heading }}</h2></div>
+    {%- endif -%}
+    <div class="bundles">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign bimg = block.settings.asset | default: 'hero.webp' | asset_url
+          if block.settings.image
+            assign bimg = block.settings.image | image_url: width: 700
+          endif
+        -%}
+        <div class="bundle{% if block.settings.featured %} bundle--featured{% endif %}" {{ block.shopify_attributes }}>
+          {%- if block.settings.flag != blank -%}<span class="bundle__flag tag">{{ block.settings.flag }}</span>{%- endif -%}
+          <div class="bundle__media"><img src="{{ bimg }}" alt="{{ block.settings.title | escape }}" width="700" height="700" loading="lazy"></div>
+          <div class="bundle__body">
+            {%- if block.settings.tag != blank -%}<span class="tag {% if block.settings.featured %}tag--soft{% else %}tag--ink{% endif %}">{{ block.settings.tag }}</span>{%- endif -%}
+            <h3>{{ block.settings.title }}</h3>
+            <div class="bundle__price"><span class="now tnum">{{ block.settings.price }}</span>{% if block.settings.was != blank %}<span class="was tnum">{{ block.settings.was }}</span>{% endif %}</div>
+            {%- if block.settings.text != blank -%}<p class="muted" style="font-size:.92rem">{{ block.settings.text }}</p>{%- endif -%}
+            {%- if block.settings.includes != blank -%}
+              <ul class="includes">
+                {%- assign rows = block.settings.includes | newline_to_br | split: '<br />' -%}
+                {%- for row in rows -%}{%- assign t = row | strip_newlines | strip -%}{%- if t != blank -%}<li><span class="ck">{% render 'icon', name: 'check' %}</span> {{ t }}</li>{%- endif -%}{%- endfor -%}
+              </ul>
+            {%- endif -%}
+            <a href="{{ block.settings.link | default: routes.all_products_collection_url }}" class="btn {% if block.settings.featured %}btn-primary{% else %}btn-outline{% endif %} btn-block">{{ block.settings.cta | default: 'Choose' }}</a>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="trustrow mt-3">
+      <span class="t">{% render 'icon', name: 'shield' %} 90-night trial on every bundle</span>
+      <span class="t">{% render 'icon', name: 'truck' %} Free 2-day shipping</span>
+      <span class="t">{% render 'icon', name: 'check' %} 2-year warranty</span>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bundles",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Bundles & save" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Pick the setup that fits your home." },
+    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "white", "label": "White" }, { "value": "soft", "label": "Soft" } ], "default": "white" }
+  ],
+  "blocks": [
+    {
+      "type": "bundle",
+      "name": "Bundle",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "asset", "label": "Built-in image fallback", "default": "kit.webp", "info": "hero.webp · kit.webp · duo.webp" },
+        { "type": "checkbox", "id": "featured", "label": "Featured (highlight)", "default": false },
+        { "type": "text", "id": "flag", "label": "Flag (corner)" },
+        { "type": "text", "id": "tag", "label": "Tag", "default": "Bundle" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Bundle name" },
+        { "type": "text", "id": "price", "label": "Price", "default": "$549" },
+        { "type": "text", "id": "was", "label": "Compare price", "default": "$669" },
+        { "type": "text", "id": "text", "label": "Short text" },
+        { "type": "textarea", "id": "includes", "label": "Includes (one per line)", "default": "WARCAT Smart Litter Box (90L)\nAnti-tracking entry mat\n3-month carbon filter set\n30 sealed drawer liners" },
+        { "type": "text", "id": "cta", "label": "Button label", "default": "Choose" },
+        { "type": "url", "id": "link", "label": "Button link" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Bundles",
+      "blocks": [
+        { "type": "bundle", "settings": { "asset": "hero.webp", "tag": "Starter", "title": "Just the Box", "price": "$499", "was": "$599", "text": "Everything you need to stop scooping today.", "includes": "WARCAT Smart Litter Box (90L)\nStarter pack of drawer liners\nFree WARCAT app", "cta": "Choose Just the Box" } },
+        { "type": "bundle", "settings": { "asset": "kit.webp", "featured": true, "flag": "Most popular · save $120", "tag": "Complete Kit", "title": "The Complete Kit", "price": "$549", "was": "$669", "text": "Scoop-free on day one, fully accessorized.", "includes": "WARCAT Smart Litter Box (90L)\nAnti-tracking entry mat\n3-month carbon filter set\n30 sealed drawer liners", "cta": "Choose the Complete Kit" } },
+        { "type": "bundle", "settings": { "asset": "duo.webp", "tag": "Best value", "title": "Multi-Cat Duo", "price": "$898", "was": "$1198", "text": "Two boxes for multi-cat or multi-floor homes.", "includes": "Two WARCAT Smart Litter Boxes\nTwo starter liner packs\nMulti-cat tracking in one app", "cta": "Choose the Duo" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
