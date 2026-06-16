@@ -12,7 +12,7 @@
       },
       "block_order": ["p1", "p2", "p3", "p4", "p5"]
     },
-    "value": { "type": "value-strip" },
+    "value": { "type": "value-strip", "settings": { "bg": "teal" } },
     "split": {
       "type": "split-feature",
       "blocks": {
@@ -25,6 +25,7 @@
     },
     "steps": {
       "type": "steps",
+      "settings": { "bg": "dark" },
       "blocks": {
         "s1": { "type": "step", "settings": { "icon": "shield", "title": "Your cat visits", "text": "Precision weight sensors know the moment a cat steps in — and exactly when they leave." } },
         "s2": { "type": "step", "settings": { "icon": "check", "title": "A safe pause", "text": "WARCAT waits a few minutes, double-checks the chamber is empty, then begins." } },
@@ -77,6 +78,7 @@
     },
     "safety": {
       "type": "safety-grid",
+      "settings": { "bg": "teal" },
       "blocks": {
         "sc1": { "type": "card", "settings": { "icon": "shield", "title": "Triple-sensor protection", "text": "Weight, infrared and anti-pinch sensors must all agree the chamber is empty before the drum ever moves." } },
         "sc2": { "type": "card", "settings": { "icon": "check", "title": "Gentle, slow rotation", "text": "The globe turns at a calm, even pace — no sudden jolts, no loud snaps. Cats habituate within days." } },

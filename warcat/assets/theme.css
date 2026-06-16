@@ -677,3 +677,38 @@ strong,b{font-weight:600;color:var(--ink)}
   body{font-size:16px}
   .section{padding-block:clamp(2.8rem,12vw,4rem)}
 }
+
+/* ============================================================
+   CLEAN color-block layer
+   Distinctive via confident full-bleed teal / ink fields and
+   big type — executed clean (soft shadows, hairlines, space).
+   No heavy borders, no hard shadows, no second accent.
+   ============================================================ */
+h1,h2{letter-spacing:-.032em}
+.h-xl{font-size:clamp(2.8rem,6.6vw,5rem)}
+.h-lg{font-size:clamp(2.2rem,4.7vw,3.6rem)}
+
+/* full-bleed teal field */
+.bg-teal{background:var(--brand);color:#053b35}
+.bg-teal h1,.bg-teal h2,.bg-teal h3,.bg-teal h4{color:#04302b}
+.bg-teal p,.bg-teal .lede,.bg-teal .muted{color:#064a42}
+.bg-teal .eyebrow{color:#04302b}
+.bg-teal .eyebrow::before{background:#04302b}
+.bg-teal .valprop .ic{background:#fff;color:var(--brand-ink)}
+
+/* white cards stay readable inside teal / ink sections */
+.bg-dark .step,.bg-dark .safetycard,.bg-teal .step,.bg-teal .safetycard{color:var(--ink-2)}
+.bg-dark .step h4,.bg-dark .safetycard h4,.bg-teal .step h4,.bg-teal .safetycard h4{color:var(--ink)}
+.bg-dark .step p,.bg-dark .safetycard p,.bg-teal .step p,.bg-teal .safetycard p{color:var(--ink-2)}
+.bg-dark .step__n{background:var(--brand-soft);color:var(--brand-ink)}
+
+/* eyebrow on dark sections */
+.bg-dark .eyebrow,.bg-ink .eyebrow{color:var(--brand)}
+.bg-dark .eyebrow::before,.bg-ink .eyebrow::before{background:var(--brand)}
+
+/* clean teal page header */
+.pagehead{background:var(--brand);border-bottom:none}
+.pagehead .eyebrow{color:#04302b}
+.pagehead .eyebrow::before{background:#04302b}
+.pagehead h1{color:#04302b}
+.pagehead p{color:#064a42}

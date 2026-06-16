@@ -1,4 +1,4 @@
-<section class="section section--tight">
+<section class="section section--tight{% if section.settings.bg == 'teal' %} bg-teal{% elsif section.settings.bg == 'dark' %} bg-dark{% elsif section.settings.bg == 'soft' %} bg-soft{% endif %}">
   <div class="wrap wrap-wide">
     <div class="valstrip">
       <div class="valprop"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M12 19v2M5 12H3M21 12h-2M6 6l-1.5-1.5M18 18l1.5 1.5"/><circle cx="12" cy="12" r="4"/></svg></span><div><b>{{ section.settings.t1 }}</b><p>{{ section.settings.s1 }}</p></div></div>
@@ -13,6 +13,7 @@
 {
   "name": "Value strip",
   "settings": [
+    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "white", "label": "White" }, { "value": "soft", "label": "Soft" }, { "value": "teal", "label": "Teal" }, { "value": "dark", "label": "Dark" } ], "default": "white" },
     { "type": "text", "id": "t1", "label": "Title 1", "default": "Cleans itself" },
     { "type": "text", "id": "s1", "label": "Text 1", "default": "Every visit, automatically — no scoop, no schedule." },
     { "type": "text", "id": "t2", "label": "Title 2", "default": "Whisper-quiet" },
