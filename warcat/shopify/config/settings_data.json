@@ -5,14 +5,7 @@
     "color_brand": "#0fb5a6",
     "color_dark": "#0e1a26",
     "logo_text": "WARCAT",
-    "free_ship_threshold": 49,
-    "sections": {
-      "header": {
-        "type": "header",
-        "blocks": {},
-        "settings": { "cta_label": "Shop now" }
-      }
-    }
+    "free_ship_threshold": 49
   },
   "presets": {
     "WARCAT": {
