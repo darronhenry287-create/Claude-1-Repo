@@ -1,20 +1,17 @@
 {%- liquid
   assign w = 1500
+  assign h = 1000
+  if section.settings.ratio == '4:3'
+    assign h = 1125
+  elsif section.settings.ratio == '4:5'
+    assign h = 1875
+  elsif section.settings.ratio == '1:1'
+    assign h = 1500
+  endif
+  assign src = section.settings.asset | default: 'usp-hero.webp' | asset_url
   if section.settings.image != blank
     assign src = section.settings.image | image_url: width: 1500
     assign h = 1500 | divided_by: section.settings.image.aspect_ratio | round
-  else
-    assign src = section.settings.asset | default: 'usp-hero.webp' | asset_url
-    case section.settings.ratio
-      when '4:3'
-        assign h = 1125
-      when '4:5'
-        assign h = 1875
-      when '1:1'
-        assign h = 1500
-      else
-        assign h = 1000
-    endcase
   endif
 -%}
 <section class="section featband{% if section.settings.bg == 'soft' %} bg-soft{% elsif section.settings.bg == 'dark' %} bg-dark{% endif %}{% if section.settings.tight %} section--tight{% endif %}">
