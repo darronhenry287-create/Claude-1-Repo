@@ -1,0 +1,56 @@
+{%- comment -%} WARCAT page.faq — content inlined so it renders/saves independent of section registration {%- endcomment -%}
+
+{%- comment -%} main-page {%- endcomment -%}
+<section class="pagehead">
+  <div class="wrap pagehead__in"><span class="eyebrow">Help center</span><h1 class="h-lg">{{ page.title }}</h1></div>
+</section>
+
+<section class="section">
+  <div class="wrap prose">
+    {{ page.content }}
+  </div>
+</section>
+
+{%- comment -%} faq {%- endcomment -%}
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Answers</span><h2 class="h-lg">Frequently asked questions.</h2></div>
+    <div class="faq">
+      <div class="acc"><div class="acc__item open" >
+            <button class="acc__head" type="button">How quiet is it, really? <span class="pm">+</span></button>
+            <div class="acc__body"><div class="acc__body-inner"><p>The cleaning cycle runs under 40 dB — quieter than a typical fridge. Most owners can't hear it from another room, and you can set quiet hours so it never runs overnight.</p></div></div>
+          </div><div class="acc__item" >
+            <button class="acc__head" type="button">How often does it clean? <span class="pm">+</span></button>
+            <div class="acc__body"><div class="acc__body-inner"><p>After each visit, following a short safety delay. You can also trigger a manual clean or set a fixed schedule in the app.</p></div></div>
+          </div><div class="acc__item" >
+            <button class="acc__head" type="button">How often do I empty the drawer? <span class="pm">+</span></button>
+            <div class="acc__body"><div class="acc__body-inner"><p>About once a week for one to two cats; more often for larger multi-cat homes. The app warns you before it's full.</p></div></div>
+          </div><div class="acc__item" >
+            <button class="acc__head" type="button">Will it work for multiple cats? <span class="pm">+</span></button>
+            <div class="acc__body"><div class="acc__body-inner"><p>Yes — the 90L globe and large drawer handle up to four cats, and the app tracks each cat individually by weight.</p></div></div>
+          </div><div class="acc__item" >
+            <button class="acc__head" type="button">Is it safe for kittens and senior cats? <span class="pm">+</span></button>
+            <div class="acc__body"><div class="acc__body-inner"><p>Safe for any cat over 1 kg. Triple sensors stop and reverse the drum instantly if a cat enters mid-cycle, and an optional low ramp helps kittens and seniors.</p></div></div>
+          </div><div class="acc__item" >
+            <button class="acc__head" type="button">What litter should I use? <span class="pm">+</span></button>
+            <div class="acc__body"><div class="acc__body-inner"><p>Any quality clumping litter — clay or tofu/plant-based clumping both work. No proprietary refills required.</p></div></div>
+          </div><div class="acc__item" >
+            <button class="acc__head" type="button">How long does setup take? <span class="pm">+</span></button>
+            <div class="acc__body"><div class="acc__body-inner"><p>About 10 minutes and no tools: place it, add litter, connect to Wi-Fi in the app, and choose your quiet hours.</p></div></div>
+          </div><div class="acc__item" >
+            <button class="acc__head" type="button">How does the 90-night trial work? <span class="pm">+</span></button>
+            <div class="acc__body"><div class="acc__body-inner"><p>Use WARCAT for up to 90 nights. If it's not right for you, contact us for a free return and a full refund — no restocking fees.</p></div></div>
+          </div></div></div>
+  </div>
+</section>
+
+{%- comment -%} newsletter {%- endcomment -%}
+<section class="section section--tight">
+  <div class="wrap wrap-wide">
+    <div class="news">
+      <span class="eyebrow eyebrow--light" style="justify-content:center">Join the clowder</span>
+      <h2 class="h-md mt-1">Get $40 off your WARCAT.</h2><p>Sign up for early-access drops, cat-care tips and a welcome code for $40 off your first box.</p>{% form 'customer', class: 'signup' %}<input type="hidden" name="contact[tags]" value="newsletter">
+          <input type="email" name="contact[email]" placeholder="you@email.com" aria-label="Email" required>
+          <button class="btn btn-primary" type="submit">Get $40 off</button>{% endform %}<small>No spam — just the occasional good email. Unsubscribe anytime.</small></div>
+  </div>
+</section>

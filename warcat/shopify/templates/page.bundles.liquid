@@ -1,0 +1,54 @@
+{%- comment -%} WARCAT page.bundles — content inlined so it renders/saves independent of section registration {%- endcomment -%}
+
+{%- comment -%} main-page {%- endcomment -%}
+<section class="pagehead">
+  <div class="wrap pagehead__in"><span class="eyebrow">Bundles & save</span><h1 class="h-lg">{{ page.title }}</h1></div>
+</section>
+
+<section class="section">
+  <div class="wrap prose">
+    {{ page.content }}
+  </div>
+</section>
+
+{%- comment -%} bundles {%- endcomment -%}
+<section class="section">
+  <div class="wrap wrap-wide"><div class="sec-head"><span class="eyebrow">Bundles & save</span><h2 class="h-lg">Pick the WARCAT setup that fits your home.</h2></div><div class="bundles"><div class="bundle" ><div class="bundle__media"><img src="{{ 'hero.webp' | asset_url }}" alt="Just the Box" width="700" height="700" loading="lazy"></div>
+          <div class="bundle__body"><span class="tag tag--ink">Starter</span><h3>Just the Box</h3>
+            <div class="bundle__price"><span class="now tnum">$499</span><span class="was tnum">$599</span></div><p class="muted" style="font-size:.92rem">Everything you need to stop scooping today.</p><ul class="includes"><li><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span> WARCAT Smart Litter Box (90L)</li><li><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span> Starter pack of drawer liners</li><li><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span> Free WARCAT app</li></ul><a href="{{ routes.all_products_collection_url }}" class="btn btn-outline btn-block">Choose Just the Box</a>
+          </div>
+        </div><div class="bundle bundle--featured" ><span class="bundle__flag tag">Most popular · save $120</span><div class="bundle__media"><img src="{{ 'kit.webp' | asset_url }}" alt="The Complete Kit" width="700" height="700" loading="lazy"></div>
+          <div class="bundle__body"><span class="tag tag--soft">Complete Kit</span><h3>The Complete Kit</h3>
+            <div class="bundle__price"><span class="now tnum">$549</span><span class="was tnum">$669</span></div><p class="muted" style="font-size:.92rem">Scoop-free on day one, fully accessorized.</p><ul class="includes"><li><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span> WARCAT Smart Litter Box (90L)</li><li><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span> Anti-tracking entry mat</li><li><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span> 3-month carbon filter set</li><li><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span> 30 sealed drawer liners</li></ul><a href="{{ routes.all_products_collection_url }}" class="btn btn-primary btn-block">Choose the Complete Kit</a>
+          </div>
+        </div><div class="bundle" ><div class="bundle__media"><img src="{{ 'duo.webp' | asset_url }}" alt="Multi-Cat Duo" width="700" height="700" loading="lazy"></div>
+          <div class="bundle__body"><span class="tag tag--ink">Best value</span><h3>Multi-Cat Duo</h3>
+            <div class="bundle__price"><span class="now tnum">$898</span><span class="was tnum">$1198</span></div><p class="muted" style="font-size:.92rem">Two boxes for multi-cat or multi-floor homes — $449 each.</p><ul class="includes"><li><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span> Two WARCAT Smart Litter Boxes</li><li><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span> Two starter liner packs</li><li><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span> Multi-cat tracking in one app</li></ul><a href="{{ routes.all_products_collection_url }}" class="btn btn-outline btn-block">Choose the Duo</a>
+          </div>
+        </div></div>
+
+    <div class="trustrow mt-3">
+      <span class="t"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg> 90-night trial on every bundle</span>
+      <span class="t"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h13v8H3zM16 10h3l2 2v3h-5z"/><circle cx="7" cy="17" r="1.6"/><circle cx="18" cy="17" r="1.6"/></svg> Free 2-day shipping</span>
+      <span class="t"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg> 2-year warranty</span>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} guarantee {%- endcomment -%}
+<section class="section bg-dark">
+  <div class="wrap wrap-narrow">
+    <div class="guarantee">
+      <div class="gseal"><div><div class="big">90</div><small>Night Trial</small></div></div>
+      <div>
+        <h2 class="h-md">Try it for 90 nights. On us.</h2>
+        <p class="lede mt-1">Set it up, let your cats settle in, and live scoop-free for three months. If WARCAT isn't the best thing in your home, send it back for a full refund — we'll even cover return shipping.</p>
+        <div class="trustrow mt-3" style="justify-content:flex-start">
+          <span class="t"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg> 2-year warranty</span>
+          <span class="t"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h13v8H3zM16 10h3l2 2v3h-5z"/><circle cx="7" cy="17" r="1.6"/><circle cx="18" cy="17" r="1.6"/></svg> Free 2-day shipping</span>
+          <span class="t"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg> Lifetime support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,53 @@
+{%- comment -%} WARCAT page.our-story — content inlined so it renders/saves independent of section registration {%- endcomment -%}
+
+{%- comment -%} main-page {%- endcomment -%}
+<section class="pagehead">
+  <div class="wrap pagehead__in"><span class="eyebrow">Our story</span><h1 class="h-lg">{{ page.title }}</h1></div>
+</section>
+
+<section class="section">
+  <div class="wrap prose">
+    {{ page.content }}
+  </div>
+</section>
+
+{%- comment -%} split-feature {%- endcomment -%}
+<section class="section">
+  <div class="wrap wrap-wide">
+    <div class="split">
+      <div class="split__media"><img src="{{ 'lifestyle.webp' | asset_url }}" alt="A chore that never ends deserved a real fix." width="1280" height="960"></div>
+      <div class="split__copy">
+        <span class="eyebrow">Why we built it</span>
+        <h2 class="h-lg">A chore that never ends deserved a real fix.</h2><p class="lede">We loved our cats. We did not love the twice-daily scoop, the smell, or the worry about whether everyone was using the box normally. The auto boxes we tried were loud, cramped or cheap — so we built the one we wished existed.</p></div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} safety-grid {%- endcomment -%}
+<section class="section bg-soft">
+  <div class="wrap wrap-wide">
+    <div class="sec-head">
+      <span class="eyebrow">What we stand for</span>
+      <h2 class="h-lg">Quiet by default. Honest by design.</h2>
+    </div>
+    <div class="safety"><div class="safetycard" ><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span><h4>Cats first</h4><p>Every decision — the slow rotation, the quiet motor, the wide doorway — starts with what's calm and safe for the cat.</p></div><div class="safetycard" ><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><h4>No lock-in</h4><p>No proprietary litter, no mandatory subscriptions. You own it outright and run it your way.</p></div><div class="safetycard" ><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></span><h4>Built to last</h4><p>Replaceable parts, a 2-year warranty and lifetime support — because good hardware shouldn't be disposable.</p></div></div>
+  </div>
+</section>
+
+{%- comment -%} guarantee {%- endcomment -%}
+<section class="section bg-dark">
+  <div class="wrap wrap-narrow">
+    <div class="guarantee">
+      <div class="gseal"><div><div class="big">90</div><small>Night Trial</small></div></div>
+      <div>
+        <h2 class="h-md">Try it for 90 nights. On us.</h2>
+        <p class="lede mt-1">Set it up, let your cats settle in, and live scoop-free for three months. If WARCAT isn't the best thing in your home, send it back for a full refund — we'll even cover return shipping.</p>
+        <div class="trustrow mt-3" style="justify-content:flex-start">
+          <span class="t"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg> 2-year warranty</span>
+          <span class="t"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h13v8H3zM16 10h3l2 2v3h-5z"/><circle cx="7" cy="17" r="1.6"/><circle cx="18" cy="17" r="1.6"/></svg> Free 2-day shipping</span>
+          <span class="t"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg> Lifetime support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

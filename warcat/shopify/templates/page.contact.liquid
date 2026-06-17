@@ -1,0 +1,47 @@
+{%- comment -%} WARCAT page.contact — content inlined so it renders/saves independent of section registration {%- endcomment -%}
+
+{%- comment -%} main-contact {%- endcomment -%}
+<section class="pagehead">
+  <div class="wrap pagehead__in">
+    <span class="eyebrow">Support</span>
+    <h1 class="h-lg">Talk to a real cat person.</h1>
+    <p>Questions before you buy, or help with a box you already own — we're here, and we reply fast.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap wrap-wide">
+    <div class="contact">
+      <div style="background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:1.8rem">{% form 'contact', id: 'contact-form' %}<div class="field"><label for="cf-name">Your name</label><input id="cf-name" type="text" name="contact[name]" required></div>
+            <div class="field"><label for="cf-email">Email</label><input id="cf-email" type="email" name="contact[email]" required></div>
+            <div class="field"><label for="cf-topic">How can we help?</label>
+              <select id="cf-topic" name="contact[topic]">
+                <option>Question before buying</option>
+                <option>Help with my WARCAT</option>
+                <option>Order &amp; shipping</option>
+                <option>Returns &amp; trial</option>
+                <option>Warranty claim</option>
+              </select>
+            </div>
+            <div class="field"><label for="cf-msg">Message</label><textarea id="cf-msg" name="contact[body]" required></textarea></div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Send message</button>{% endform %}</div>
+
+      <aside class="contactside">
+        <div class="ci"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></svg></span><div><b>Email us</b><p>care@warcat.com — replies within one business day.</p></div></div>
+        <div class="ci"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span><div><b>Support hours</b><p>Monday–Saturday, 9am–6pm ET.</p></div></div>
+        <div class="ci"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></span><div><b>Quick answers</b><p>Most questions are covered in our FAQ, shipping &amp; warranty pages.</p></div></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} newsletter {%- endcomment -%}
+<section class="section section--tight">
+  <div class="wrap wrap-wide">
+    <div class="news">
+      <span class="eyebrow eyebrow--light" style="justify-content:center">Join the clowder</span>
+      <h2 class="h-md mt-1">Get $40 off your WARCAT.</h2><p>Sign up for early-access drops, cat-care tips and a welcome code for $40 off your first box.</p>{% form 'customer', class: 'signup' %}<input type="hidden" name="contact[tags]" value="newsletter">
+          <input type="email" name="contact[email]" placeholder="you@email.com" aria-label="Email" required>
+          <button class="btn btn-primary" type="submit">Get $40 off</button>{% endform %}<small>No spam — just the occasional good email. Unsubscribe anytime.</small></div>
+  </div>
+</section>
