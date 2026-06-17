@@ -3,52 +3,183 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "b1": { "type": "accordion", "settings": { "title": "What's in the box", "content": "<p>WARCAT smart litter box (base, globe & sealed drawer), power adapter, starter liners, quick-start guide, and free access to the WARCAT app for iOS & Android.</p>" } },
-        "b2": { "type": "accordion", "settings": { "title": "Dimensions & specs", "content": "<p>26 × 27 × 29 in (66 × 68 × 73 cm). 90L globe. Cleaning noise under 40 dB. For cats 1–11 kg. 2.4GHz Wi-Fi. Works with any clumping clay or tofu litter — no proprietary refills.</p>" } },
-        "b3": { "type": "accordion", "settings": { "title": "Setup & compatibility", "content": "<p>Setup takes about 10 minutes with no tools: place it, add litter, connect to Wi-Fi, pick your quiet hours. Most cats adapt within a week.</p>" } },
-        "b4": { "type": "accordion", "settings": { "title": "Shipping & returns", "content": "<p>Free 2-day shipping. Try it for 90 nights — if it's not for you, we'll arrange a free return and full refund. 2-year warranty.</p>" } }
+        "b1": {
+          "type": "accordion",
+          "settings": {
+            "title": "What's in the box",
+            "content": "<p>WARCAT smart litter box (base, globe & sealed drawer), power adapter, starter liners, quick-start guide, and free access to the WARCAT app for iOS & Android.</p>"
+          }
+        },
+        "b2": {
+          "type": "accordion",
+          "settings": {
+            "title": "Dimensions & specs",
+            "content": "<p>26 × 27 × 29 in (66 × 68 × 73 cm). 90L globe. Cleaning noise under 40 dB. For cats 1–11 kg. 2.4GHz Wi-Fi. Works with any clumping clay or tofu litter — no proprietary refills.</p>"
+          }
+        },
+        "b3": {
+          "type": "accordion",
+          "settings": {
+            "title": "Setup & compatibility",
+            "content": "<p>Setup takes about 10 minutes with no tools: place it, add litter, connect to Wi-Fi, pick your quiet hours. Most cats adapt within a week.</p>"
+          }
+        },
+        "b4": {
+          "type": "accordion",
+          "settings": {
+            "title": "Shipping & returns",
+            "content": "<p>Free 2-day shipping. Try it for 90 nights — if it's not for you, we'll arrange a free return and full refund. 2-year warranty.</p>"
+          }
+        }
       },
-      "block_order": ["b1", "b2", "b3", "b4"]
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
+      "settings": {}
     },
     "spec": {
       "type": "spec-band",
-      "settings": { "eyebrow": "At a glance", "heading": "One machine. Every box ships the same.", "subtitle": "" },
-      "blocks": {
-        "n1": { "type": "stat", "settings": { "number": "90", "unit": "L", "label": "Globe capacity" } },
-        "n2": { "type": "stat", "settings": { "number": "<40", "unit": "dB", "label": "Cleaning noise" } },
-        "n3": { "type": "stat", "settings": { "number": "11", "unit": "kg", "label": "Max cat weight" } },
-        "n4": { "type": "stat", "settings": { "number": "10", "unit": "min", "label": "Setup time" } }
+      "settings": {
+        "eyebrow": "At a glance",
+        "heading": "One machine. Every box ships the same.",
+        "subtitle": ""
       },
-      "block_order": ["n1", "n2", "n3", "n4"]
-    },
-    "usp": {
-      "type": "feature-image",
-      "settings": { "asset": "usp-hero.webp", "ratio": "3:2", "alt": "WARCAT — cleans itself after every visit, whisper-quiet under 40 dB, 90L XL fits every cat, tracks each cat's health, rated 4.8 by 12,000+ homes", "bg": "soft", "tight": true }
+      "blocks": {
+        "n1": {
+          "type": "stat",
+          "settings": {
+            "number": "90",
+            "unit": "L",
+            "label": "Globe capacity"
+          }
+        },
+        "n2": {
+          "type": "stat",
+          "settings": {
+            "number": "<40",
+            "unit": "dB",
+            "label": "Cleaning noise"
+          }
+        },
+        "n3": {
+          "type": "stat",
+          "settings": {
+            "number": "11",
+            "unit": "kg",
+            "label": "Max cat weight"
+          }
+        },
+        "n4": {
+          "type": "stat",
+          "settings": {
+            "number": "10",
+            "unit": "min",
+            "label": "Setup time"
+          }
+        }
+      },
+      "block_order": [
+        "n1",
+        "n2",
+        "n3",
+        "n4"
+      ]
     },
     "app": {
       "type": "app-showcase",
-      "settings": { "eyebrow": "Included free", "heading": "The app that watches the litter box so you don't." },
-      "blocks": {
-        "a1": { "type": "item", "settings": { "icon": "arrow", "title": "Clean & schedule", "text": "Run a cycle or automate it around your day." } },
-        "a2": { "type": "item", "settings": { "icon": "check", "title": "Per-cat health", "text": "Weight & visit trends with early-warning alerts." } },
-        "a3": { "type": "item", "settings": { "icon": "shield", "title": "Smart alerts", "text": "Drawer-full and litter-low nudges before they matter." } }
+      "settings": {
+        "eyebrow": "Included free",
+        "heading": "The app that watches the litter box so you don't."
       },
-      "block_order": ["a1", "a2", "a3"]
+      "blocks": {
+        "a1": {
+          "type": "item",
+          "settings": {
+            "icon": "arrow",
+            "title": "Clean & schedule",
+            "text": "Run a cycle or automate it around your day."
+          }
+        },
+        "a2": {
+          "type": "item",
+          "settings": {
+            "icon": "check",
+            "title": "Per-cat health",
+            "text": "Weight & visit trends with early-warning alerts."
+          }
+        },
+        "a3": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "title": "Smart alerts",
+            "text": "Drawer-full and litter-low nudges before they matter."
+          }
+        }
+      },
+      "block_order": [
+        "a1",
+        "a2",
+        "a3"
+      ]
     },
     "reviews": {
       "type": "review-wall",
-      "settings": { "bg": "soft", "cta_label": "Read all reviews" },
-      "blocks": {
-        "v1": { "type": "review", "settings": { "quote": "Silent, spacious and the app is genuinely useful. I forget the litter box is even a chore now.", "name": "Jordan M.", "initials": "JM", "meta": "2 cats" } },
-        "v2": { "type": "review", "settings": { "quote": "The 90L globe finally fits my Maine Coon. No more cramped auto box he refused to use.", "name": "Derek K.", "initials": "DK", "meta": "1 cat" } },
-        "v3": { "type": "review", "settings": { "quote": "Caught my senior cat's weight loss early through the app. Worth every penny for that alone.", "name": "Priya R.", "initials": "PR", "meta": "3 cats" } }
+      "settings": {
+        "bg": "soft",
+        "cta_label": "Read all reviews"
       },
-      "block_order": ["v1", "v2", "v3"]
+      "blocks": {
+        "v1": {
+          "type": "review",
+          "settings": {
+            "quote": "Silent, spacious and the app is genuinely useful. I forget the litter box is even a chore now.",
+            "name": "Jordan M.",
+            "initials": "JM",
+            "meta": "2 cats"
+          }
+        },
+        "v2": {
+          "type": "review",
+          "settings": {
+            "quote": "The 90L globe finally fits my Maine Coon. No more cramped auto box he refused to use.",
+            "name": "Derek K.",
+            "initials": "DK",
+            "meta": "1 cat"
+          }
+        },
+        "v3": {
+          "type": "review",
+          "settings": {
+            "quote": "Caught my senior cat's weight loss early through the app. Worth every penny for that alone.",
+            "name": "Priya R.",
+            "initials": "PR",
+            "meta": "3 cats"
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3"
+      ]
     },
     "guarantee": {
       "type": "guarantee",
-      "settings": { "heading": "Love it or send it back — free.", "text": "Live scoop-free for 90 nights. If you or your cats aren't sold, we'll arrange a free return and refund every cent. Backed by a 2-year warranty and lifetime support." }
+      "settings": {
+        "heading": "Love it or send it back — free.",
+        "text": "Live scoop-free for 90 nights. If you or your cats aren't sold, we'll arrange a free return and refund every cent. Backed by a 2-year warranty and lifetime support."
+      }
     }
   },
-  "order": ["main", "spec", "usp", "app", "reviews", "guarantee"]
+  "order": [
+    "main",
+    "spec",
+    "app",
+    "reviews",
+    "guarantee"
+  ]
 }
