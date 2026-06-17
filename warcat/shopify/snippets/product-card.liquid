@@ -11,6 +11,8 @@
     {%- if on_sale -%}<span class="pcard__badge tag tag--save">Save {{ pct }}%</span>{%- endif -%}
     {%- if product.featured_image -%}
       <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="600" height="600" loading="lazy">
+    {%- else -%}
+      <img src="{{ 'angle.webp' | asset_url }}" alt="{{ product.title | escape }}" width="600" height="600" loading="lazy">
     {%- endif -%}
   </a>
   <div class="pcard__body">

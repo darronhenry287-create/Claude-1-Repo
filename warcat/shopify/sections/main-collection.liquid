@@ -28,6 +28,36 @@
   </div>
 </section>
 
+{%- comment -%} Baked WARCAT system showcase — full lineup with imagery {%- endcomment -%}
+{%- assign shop_url = collection.products.first.url | default: routes.all_products_collection_url -%}
+<section class="section bg-soft">
+  <div class="wrap wrap-wide">
+    <div class="sec-head left" style="max-width:680px"><span class="eyebrow">Bundles &amp; save</span><h2 class="h-lg">Complete the WARCAT system</h2></div>
+    <div class="prodgrid prodgrid--2">
+      <div class="pcard">
+        <a href="{{ shop_url }}" class="pcard__media"><span class="pcard__badge tag tag--save">Save $120</span><img src="{{ 'kit.webp' | asset_url }}" alt="The Complete WARCAT Kit — box, anti-tracking mat, carbon filters and drawer liners" width="700" height="700" loading="lazy"></a>
+        <div class="pcard__body"><h3><a href="{{ shop_url }}">The Complete Kit</a></h3><div class="pcard__rate"><span class="stars" style="--p:96%;font-size:.8rem"></span> 4.8</div><div class="pcard__foot"><span class="pcard__price tnum">$549<span class="was">$669</span></span><a href="{{ shop_url }}" class="btn btn-primary btn-sm">Shop kit</a></div></div>
+      </div>
+      <div class="pcard">
+        <a href="{{ shop_url }}" class="pcard__media"><span class="pcard__badge tag tag--save">Save $99</span><img src="{{ 'duo.webp' | asset_url }}" alt="The Multi-Cat Duo — two WARCAT smart litter boxes" width="700" height="700" loading="lazy"></a>
+        <div class="pcard__body"><h3><a href="{{ shop_url }}">The Multi-Cat Duo</a></h3><div class="pcard__rate"><span class="stars" style="--p:96%;font-size:.8rem"></span> 4.8</div><div class="pcard__foot"><span class="pcard__price tnum">$899<span class="was">$998</span></span><a href="{{ shop_url }}" class="btn btn-primary btn-sm">Shop duo</a></div></div>
+      </div>
+    </div>
+
+    <div class="sec-head left" style="max-width:680px;margin-top:2.6rem"><span class="eyebrow">Add-ons</span><h2 class="h-md">Accessories &amp; refills</h2></div>
+    <div class="prodgrid prodgrid--4">
+      {%- assign addons ='Anti-Tracking Mat|mat|$39,Carbon Filters · 6-pack|filters|$29,Drawer Liners · 30-pack|liners|$24,Step-In Ramp|ramp|$35' | split: ',' -%}
+      {%- for a in addons -%}
+        {%- assign parts = a | split: '|' -%}
+        <div class="pcard">
+          <a href="{{ shop_url }}" class="pcard__media"><img src="{{ parts[1] | append: '.webp' | asset_url }}" alt="{{ parts[0] | escape }}" width="600" height="600" loading="lazy"></a>
+          <div class="pcard__body"><h3><a href="{{ shop_url }}">{{ parts[0] }}</a></h3><div class="pcard__foot"><span class="pcard__price tnum">{{ parts[2] }}</span><a href="{{ shop_url }}" class="btn btn-outline btn-sm">Shop</a></div></div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
 {% schema %}
 {
   "name": "Collection",

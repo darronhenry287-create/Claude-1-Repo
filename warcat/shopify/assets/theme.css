@@ -755,3 +755,9 @@ h1,h2{letter-spacing:-.032em}
 .addon .p{color:var(--brand-ink);font-weight:600;font-size:.9rem}
 @media(max-width:860px){.bundles{grid-template-columns:1fr;max-width:440px;margin-inline:auto}}
 @media(max-width:720px){.addon-grid{grid-template-columns:1fr 1fr}}
+
+/* catalog showcase grids */
+.prodgrid--2{grid-template-columns:repeat(2,1fr)}
+.prodgrid--4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.prodgrid--4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.prodgrid--2{grid-template-columns:1fr}.prodgrid--4{grid-template-columns:repeat(2,1fr)}}

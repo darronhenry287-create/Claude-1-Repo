@@ -12,17 +12,27 @@
   <div class="wrap wrap-wide">
     <div class="pdp" data-product="{{ product.handle }}">
       <div class="pgallery">
-        <div class="pgallery__main" id="pg-main">
-          {%- if product.featured_image -%}
-            <img src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="900" height="900" fetchpriority="high">
-          {%- else -%}
-            <img src="{{ 'hero.webp' | asset_url }}" alt="{{ product.title | escape }}" width="900" height="900">
+        {%- if product.images.size > 0 -%}
+          <div class="pgallery__main" id="pg-main">
+            <img src="{{ product.images.first | image_url: width: 1000 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="1000" height="1000" fetchpriority="high">
+          </div>
+          {%- if product.images.size > 1 -%}
+            <div class="pgallery__thumbs">
+              {%- for image in product.images -%}
+                <button class="pthumb{% if forloop.first %} active{% endif %}" type="button"><img src="{{ image | image_url: width: 200 }}" data-full="{{ image | image_url: width: 1000 }}" alt="{{ image.alt | escape }}" width="120" height="120" loading="lazy"></button>
+              {%- endfor -%}
+            </div>
           {%- endif -%}
-        </div>
-        {%- if product.images.size > 1 -%}
+        {%- else -%}
+          {%- comment -%} Baked studio gallery — shown until the merchant uploads real product images {%- endcomment -%}
+          {%- assign gallery = 'angle,side,rear,macro,cat,lifestyle' | split: ',' -%}
+          <div class="pgallery__main" id="pg-main">
+            <img src="{{ 'angle.webp' | asset_url }}" alt="{{ product.title | default: 'WARCAT Smart Litter Box' | escape }}" width="1000" height="1000" fetchpriority="high">
+          </div>
           <div class="pgallery__thumbs">
-            {%- for image in product.images -%}
-              <button class="pthumb{% if forloop.first %} active{% endif %}" type="button"><img src="{{ image | image_url: width: 200 }}" data-full="{{ image | image_url: width: 900 }}" alt="{{ image.alt | escape }}" width="120" height="120" loading="lazy"></button>
+            {%- for g in gallery -%}
+              {%- assign gimg = g | append: '.webp' -%}
+              <button class="pthumb{% if forloop.first %} active{% endif %}" type="button"><img src="{{ gimg | asset_url }}" data-full="{{ gimg | asset_url }}" alt="WARCAT view {{ forloop.index }}" width="120" height="120" loading="lazy"></button>
             {%- endfor -%}
           </div>
         {%- endif -%}
@@ -87,6 +97,23 @@
         {%- endif -%}
       </div>
     </div>
+  </div>
+</section>
+
+{%- comment -%} Gummies-style feature / marketing images {%- endcomment -%}
+<section class="section section--tight">
+  <div class="wrap wrap-wide">
+    <div class="featimg"><img src="{{ 'usp-hero.webp' | asset_url }}" alt="WARCAT — never scoop again: cleans itself after every visit, whisper-quiet under 40 dB, 90L XL fits every cat, tracks each cat's health" width="1500" height="1006" loading="lazy"></div>
+  </div>
+</section>
+<section class="section section--tight bg-soft">
+  <div class="wrap wrap-wide">
+    <div class="featimg"><img src="{{ 'callout.webp' | asset_url }}" alt="WARCAT anatomy — low-noise motor under 40 dB, 90L XL sifting globe, carbon-sealed odor drawer, weight and health sensors" width="1500" height="1120" loading="lazy"></div>
+  </div>
+</section>
+<section class="section section--tight">
+  <div class="wrap wrap-wide">
+    <div class="featimg"><img src="{{ 'app-feature.webp' | asset_url }}" alt="The WARCAT app — clean on demand or on a schedule, per-cat weight and health tracking, drawer-full and litter-low alerts, quiet hours while you sleep" width="1500" height="1006" loading="lazy"></div>
   </div>
 </section>
 
