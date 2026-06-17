@@ -1,6 +1,6 @@
 # CLAUDE.md — brand-build playbook
 
-Lessons banked from the SOMNA and PRAIRIE FAT CO. builds. Read before starting a new brand build, and before reaching for a "band-aid" fix on an existing one.
+Lessons banked from the SOMNA, PRAIRIE FAT CO. and WARCAT builds. Read before starting a new brand build, and before reaching for a "band-aid" fix on an existing one.
 
 Each rule is **what went wrong → what to do instead.** Don't ship around these; fix the root cause.
 
@@ -31,6 +31,17 @@ Before writing a single line, lock down:
 
 If the user says "you choose" — choose, but state the choice in one line so they can redirect.
 
+## Working style — non-negotiables (the user has had to repeat these)
+
+These are about *how to operate*, not the code. Each has been corrected more than once. Don't make them say it again.
+
+- **Act, don't pause.** When the user is experienced and says "build it / fix it / go," stop narrating options and asking permission for obvious next steps — make the call and ship. "Why are you always pausing?" means: decide and move.
+- **Get the on-screen error before iterating — one screenshot beats ten re-uploads.** On any "it's broken in Shopify" report, the first move is to see the *actual* editor/storefront error (ask for a screenshot or the exact text). The WARCAT homepage 404 burned ~10 re-ships of locally-"valid" themes; the editor's literal error — *"'hero' is not a valid section type"* — pinpointed it in one read. Local theme-check / Liquid passing does **not** mean Shopify is happy.
+- **Trust the user's domain knowledge.** They know Shopify cold. Don't ask them to "check the template dropdown" or second-guess their setup ("are you sure there's a product?"). If they say the homepage 404s, it 404s — find the cause, don't re-explain their own store to them.
+- **"Do it like [prior brand]" = that brand is the spec.** When they reference creo / SOMNA / a known-good build, match its pattern directly instead of repeating that it isn't in the repo. Find it or replicate its structure.
+- **Ship the complete store, not just the hero product.** "Finished" means the full lineup — bundles + accessories with real imagery, a populated catalog, a populated footer — plus baked fallbacks (gallery images when a product has none, footer fallback links when menus aren't set, a catalog showcase) so nothing looks empty before the merchant provisions products/menus/pages. Don't make the user ask for the obvious missing pieces.
+- **Read what the user actually asked, especially about images.** "Callouts/USPs on the carousel pictures" means *baked onto the carousel images*, not the same content moved into separate sections. Re-read the request before building; don't pattern-match to what's convenient.
+
 ## Shopify hard rules
 
 ### Schema & defaults
@@ -42,6 +53,12 @@ If the user says "you choose" — choose, but state the choice in one line so th
 - Header/footer use **plural** `{% sections 'header-group' %}` (section groups, JSON file). The singular `{% section 'header' %}` (single section) throws *"'header' is not a valid section type"* when paired with a `*-group.json`.
 - Guard every `{% paginate %}`. `{% paginate collection.products by N %}` throws *"Array 'collection.products' is not paginateable"* the instant a `main-collection`-style section renders on a template where no collection is connected (e.g. a generic page template). Wrap in `{% if collection != blank and collection.products_count > 0 %}` and render an empty-state otherwise.
 - Don't gate sections on `forloop`-internal `{% else %}` for "no products yet" — the paginate error fires before the for loop ever runs.
+
+### A JSON template 404s / "'X' is not a valid section type" (custom sections not registering)
+- **Symptom (WARCAT):** the homepage JSON template 404s — or, as a `templates/index.liquid` with `{% section 'hero' %}`, prints *"'hero' is not a valid section type"* in the editor — while product/collection/contact render fine, and **every local check passes** (theme-check 0/0/0, schemas valid, files present in the zip, and the section files even parse clean under Shopify's own Ruby `liquid` gem in strict mode). The failure is Shopify-side **section registration**, which no local tool can see.
+- **Get the editor's literal error first** — it names the offending section type. Don't re-validate locally cycle after cycle; the files are valid.
+- **Robust fix: inline the page content directly into the `.liquid` template.** Ship `templates/index.liquid` with the full homepage markup baked in so it renders through the same plain-Liquid path as `layout/theme.liquid` and the 404 template — **zero dependence on section registration.** Transpile each section + its `{% schema %}` *defaults* to static HTML (Ruby `liquid` render works well for this), keep `asset_url` / `routes` / `{% form 'customer' %}` as live Liquid, and inline `{% render 'icon' %}` SVGs. Escape any setting value containing `<` (e.g. `"<40 dB"`) — a raw `<` before a space/digit is invalid HTML; in the transpile, `gsub(/<(?=[\s\d])/, '&lt;')`. Tradeoff: those sections are no longer customizer-editable — say so.
+- **Verify with the real compiler, not just liquidjs/theme-check:** `gem install liquid`, register the theme tags (`form`/`paginate`/`section`/`sections`/`style`/`javascript`/`stylesheet`) as no-op blocks, strip `{% schema %}`, then `Liquid::Template.parse(src, error_mode: :strict)`. This catches Shopify-strict parse errors the JS tools accept.
 
 ### Cart / checkout buttons
 - `<a href="/cart/{variant_id}:{qty}">` is Shopify's **quick-checkout permalink** — it sends users to checkout, not the cart. For "add to cart" buttons (bundle upsells, quick-adds), use AJAX `POST /cart/add.js` and either reload + open the drawer or update the drawer in place. Use `/cart` (or `/discount/<code>?redirect=/cart`) as the no-JS fallback.
@@ -62,6 +79,24 @@ The merchant wants the **gummies-style** treatment: premium, baked-in marketing 
 - Generate with `nano_banana_pro` (best text rendering) at 2k; **put the exact text and brand hex in the prompt**, and **always open and visually verify the rendered text** before using — regenerate if a word is garbled.
 - Frame them simply (`.featimg`: rounded card, hairline border, soft shadow, `max-width ~1060px`, `img{width:100%;height:auto}`) inside a normal alternating-background section. Keep baked text short/high-contrast — it doesn't reflow on mobile.
 - In Shopify, expose via a reusable **`feature-image`** section (image_picker override + built-in asset fallback + ratio select) so it's swappable.
+
+### The PDP image carousel IS infographics — not plain product shots
+The product-page gallery (top of the PDP, next to the buy box) is the #1 thing the user judges. The user corrected this **twice** on WARCAT.
+- The carousel must **lead with annotated / USP slides — the callouts and benefit text baked ON each carousel image** (creo-style), generated **square 1:1** so they don't crop in the gallery frame (`object-fit:cover`). A good set: USP hero (product + headline + benefit checks + star rating), anatomy callouts (leader lines to 4 parts), a big-spec slide (e.g. a huge `<40 dB` + sound waves), a scale/capacity slide (product + cat silhouette), an app/dashboard slide — plus **one** clean studio shot and **one** lifestyle shot to round it out.
+- **Do NOT** make the carousel plain product photos and move the callouts/USPs into separate sections below the buy box. The annotations belong **on the carousel pictures**. (Plain studio shots are the *fallback* the gallery uses only when real product images exist.)
+- Distinguish the two image kinds explicitly: **carousel/PDP-gallery images** (square, annotated, the buyer's first look) vs **section/marketing bands** (landscape feature images for content rows). Don't blur them.
+
+### Generating product imagery — consistency & text (nano_banana)
+- **Generate every angle/slide from one canonical reference image** so the product is identical across the whole set — a different shape/finish on one slide reads as "horrible product pictures." The higgsfield **upload host is egress-blocked** in this env, so push the canonical shot to the repo and `media_import_url` its **raw GitHub URL** to get a reference `media_id` (download/cloudfront hosts *are* reachable), or pass a prior generation's `job_id` as the reference. Then prompt only for the new angle/overlay.
+- **nano_banana duplicates text** — it will render a headline twice or mirror a line. Put *"render every text element exactly once — never repeat, mirror or duplicate any text"* in the prompt, and **open and read every generated slide before using it**; regenerate any with duplicated or garbled copy. Verify, every single time — never ship an unread generation.
+- Square slides for the carousel; landscape (3:2) for section bands. Optimize to webp (`fit:inside`, quality ~86) and mirror into both `shopify/assets/` and `assets/img/`.
+
+### Baked fallbacks so an un-provisioned store looks complete
+A fresh store has no product images, no prices, no nav menus, no created Pages. Ship fallbacks so nothing looks broken before the merchant provisions it, and list the real setup in SETUP.md:
+- **PDP gallery:** `{% if product.images.size > 0 %}` use the real images, `{% else %}` render the baked square infographic carousel.
+- **product-card:** when `product.featured_image` is blank, fall back to a baked studio shot so collection cards aren't empty boxes.
+- **Footer columns / legal:** when a `link_list` menu isn't connected, render a `links_fallback` richtext of `<a>` links (the PRAIRIE FAT CO. pattern) instead of blank columns.
+- **Catalog:** bake a "complete the system" showcase (bundles + accessories with imagery + prices, linking to the product) below the real products, so the full lineup shows before those become real Shopify products.
 
 ### Positioning & layout
 - Don't put `position: fixed` pseudo-elements (`body::before { position: fixed; inset: 0 }`) for paper/grain overlays. A transformed ancestor in the Shopify editor (and on real storefronts using certain apps) defeats `position: fixed` — fixed elements then fall back into normal flow and add phantom document height (the "huge empty space below the footer" symptom). Bake textures into `body { background-image: url(...) }` instead — backgrounds can never affect layout.
@@ -95,5 +130,7 @@ Before sending the zip, in order:
 - Static-preview builder: `node tools/build.js` from inside the brand folder. Re-runs are cheap; rerun after every CSS/JS/HTML edit.
 - Theme-check: `@shopify/cli theme check` or `theme-check-node` (installed at `/opt/node22/lib/node_modules/@shopify/theme-check-node/`).
 - Headless render harness: `/tmp/render.cjs` (uses `liquidjs` + a small filter mock to compile real Liquid sections), `/tmp/measure.cjs` (Playwright headless Chromium at `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`). Both copy the brand's real `theme.css` / `theme.js` into `/tmp/assets/` before measuring — otherwise the page renders unstyled and every measurement lies.
+- **Strict Shopify Liquid parse:** `gem install liquid` gives the real storefront compiler. Register theme tags (`form`/`paginate`/`section`/`sections`/`style`/`javascript`/`stylesheet`) as no-op blocks, strip `{% schema %}`, then `Liquid::Template.parse(src, error_mode: :strict)` over `sections/`, `snippets/`, `layout/`. Catches Shopify-strict parse errors that liquidjs and theme-check accept. (Force UTF-8: `Encoding.default_external = Encoding::UTF_8`.)
+- **Image generation (higgsfield/nano_banana):** the **upload host is egress-blocked** — to use a local asset as a reference, push it to the repo and `media_import_url` its raw GitHub URL (cloudfront download hosts are reachable), or reuse a prior generation's `job_id`. Always download the result, **open it to verify text**, then `sharp`-optimize to webp into both asset dirs.
 - Git: feature branch is the source of truth. Push with `git push -u origin <branch>`, retry on network errors with exponential backoff (2s, 4s, 8s, 16s) up to 4 times. Never `--no-verify`.
 - Delivery: prefer sending the built zip directly via `SendUserFile` rather than asking the user to clone. They'll re-upload the theme into Shopify's admin; remind them to **hard-refresh** (Cmd/Ctrl+Shift+R) so the new `theme.css` isn't cached.
