@@ -5,14 +5,15 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "shop": { "type": "menu", "settings": { "heading": "Shop", "menu": "footer-shop" } },
-        "learn": { "type": "menu", "settings": { "heading": "Learn", "menu": "footer-learn" } },
-        "support": { "type": "menu", "settings": { "heading": "Support", "menu": "footer-support" } }
+        "shop": { "type": "menu", "settings": { "heading": "Shop", "menu": "footer-shop", "links_fallback": "<p><a href=\"/collections/all\">Shop all</a><a href=\"/pages/bundles\">Bundles + save</a><a href=\"/pages/specs\">Specs</a></p>" } },
+        "learn": { "type": "menu", "settings": { "heading": "Learn", "menu": "footer-learn", "links_fallback": "<p><a href=\"/pages/how-it-works\">How it works</a><a href=\"/pages/our-story\">Our story</a><a href=\"/pages/reviews\">Reviews</a></p>" } },
+        "support": { "type": "menu", "settings": { "heading": "Support", "menu": "footer-support", "links_fallback": "<p><a href=\"/pages/contact\">Contact</a><a href=\"/pages/shipping-returns\">Shipping + returns</a><a href=\"/pages/trial\">90-night trial</a><a href=\"/pages/warranty\">Warranty</a><a href=\"/pages/faq\">FAQ</a></p>" } }
       },
       "block_order": ["shop", "learn", "support"],
       "settings": {
         "logo_text": "WARCAT",
-        "legal_menu": "footer-legal"
+        "legal_menu": "footer-legal",
+        "legal_fallback": "<p><a href=\"/pages/privacy-policy\">Privacy</a> <a href=\"/pages/refund-policy\">Refunds</a> <a href=\"/pages/terms-of-service\">Terms</a></p>"
       }
     }
   },
