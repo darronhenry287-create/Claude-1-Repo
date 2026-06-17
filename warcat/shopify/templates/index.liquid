@@ -14,7 +14,7 @@
         <span class="muted">12,000+ happy cat homes</span>
       </div>
       <div class="hero__cta">
-        <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary btn-lg">Shop WARCAT — $499</a><a href="{{ routes.root_url }}" class="btn btn-ghost btn-lg"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span> See how it works</a></div>
+        <a href="{{ settings.shop_product.url | default: collections.all.products.first.url | default: routes.all_products_collection_url }}" class="btn btn-primary btn-lg">Shop WARCAT — $499</a><a href="/pages/how-it-works" class="btn btn-ghost btn-lg"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span> See how it works</a></div>
       <div class="hero__pills">
         <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5 6 9H3v6h3l5 4zM16 9a4 4 0 0 1 0 6"/></svg> Whisper-quiet &lt;40dB</span>
         <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8 12 3l9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5"/></svg> 90L XL capacity</span>
@@ -57,7 +57,7 @@
       <div class="split__media"><img src="{{ 'lifestyle.webp' | asset_url }}" alt="Your cat&#39;s bathroom, finally handled." width="1280" height="960"></div>
       <div class="split__copy">
         <span class="eyebrow">The end of the daily scoop</span>
-        <h2 class="h-lg">Your cat's bathroom, finally handled.</h2><p class="lede">The litter box is the one chore that never ends. WARCAT ends it — sifting waste into a sealed, odor-locked drawer after every single visit, so all that's left for you is emptying a liner about once a week.</p><ul class="checklist"><li ><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span><span>No scooping, ever. WARCAT does it within minutes of each use.</span></li><li ><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span><span>No more litter-box smell. A carbon-sealed drawer traps odor between empties.</span></li><li ><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span><span>A cleaner bed of litter every time — the way cats actually prefer it.</span></li></ul><div class="btn-row mt-3"><a href="{{ routes.root_url }}" class="tlink">See the full cycle <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
+        <h2 class="h-lg">Your cat's bathroom, finally handled.</h2><p class="lede">The litter box is the one chore that never ends. WARCAT ends it — sifting waste into a sealed, odor-locked drawer after every single visit, so all that's left for you is emptying a liner about once a week.</p><ul class="checklist"><li ><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span><span>No scooping, ever. WARCAT does it within minutes of each use.</span></li><li ><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span><span>No more litter-box smell. A carbon-sealed drawer traps odor between empties.</span></li><li ><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span><span>A cleaner bed of litter every time — the way cats actually prefer it.</span></li></ul><div class="btn-row mt-3"><a href="/pages/how-it-works" class="tlink">See the full cycle <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
     </div>
   </div>
 </section>
@@ -83,7 +83,7 @@
               <div>
                 <span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></span>
                 <h3 class="h-sm">Run it from your phone</h3>
-                <p>Start a clean, set quiet hours, track each cat and get a heads-up before the drawer is full — all from the WARCAT app on iOS and Android.</p><div class="btn-row mt-2"><a href="{{ routes.root_url }}" class="btn btn-primary btn-sm">Explore the app</a></div></div>
+                <p>Start a clean, set quiet hours, track each cat and get a heads-up before the drawer is full — all from the WARCAT app on iOS and Android.</p><div class="btn-row mt-2"><a href="/pages/how-it-works" class="btn btn-primary btn-sm">Explore the app</a></div></div>
               <div class="fw-media"><img src="{{ 'app.webp' | asset_url }}" alt="Run it from your phone" width="900" height="900"></div>
             </div><div class="feature" ><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></svg></span><h4>Smart safety sensors</h4><p>Weight + infrared sensors halt and reverse the drum instantly if a paw or curious kitten enters mid-cycle. Safe for cats over 1 kg.</p></div><div class="feature" ><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><h4>Health insights</h4><p>WARCAT weighs every cat and tracks visit frequency, surfacing the early changes vets ask about — straight to your phone.</p></div></div>
   </div>
@@ -159,7 +159,7 @@
       <div class="rev-score">
         <div class="big tnum">4.8</div>
         <div><div class="stars" style="--p:96%"></div><p class="muted">Based on 12,418 verified reviews</p></div>
-      </div><a href="{{ routes.root_url }}" class="btn btn-outline">Read all reviews</a></div>
+      </div><a href="/pages/reviews" class="btn btn-outline">Read all reviews</a></div>
     <div class="reviews-grid"><div class="rcard" >
           <span class="stars" style="--p:100%"></span>
           <p>"I genuinely forget the litter box exists now. It's silent — runs while I'm on calls and I never notice. Emptying once a week is the whole job."</p>
@@ -195,7 +195,7 @@
       <div class="offer__media"><img src="{{ 'kit.webp' | asset_url }}" alt="The Complete WARCAT Kit" width="900" height="900"></div>
       <div class="offer__copy"><span class="tag tag--soft">Best value · save $120</span><h2 class="h-md mt-2">The Complete WARCAT Kit</h2><p>Everything to go scoop-free on day one: the WARCAT box, a litter-catching mat, three months of carbon filters and a starter pack of drawer liners.</p><ul class="includes"><li ><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span> WARCAT Smart Litter Box (90L)</li><li ><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span> Anti-tracking entry mat</li><li ><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span> 3-month carbon filter set</li><li ><span class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></span> 30 sealed drawer liners</li></ul><div class="offer__price"><span class="now tnum">$549</span><span class="was tnum">$669</span></div>
         <div class="btn-row">
-          <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary btn-lg">Shop the kit</a><a href="{{ routes.root_url }}" class="btn btn-outline btn-lg">Compare bundles</a></div>
+          <a href="{{ settings.shop_product.url | default: collections.all.products.first.url | default: routes.all_products_collection_url }}" class="btn btn-primary btn-lg">Shop the kit</a><a href="/pages/bundles" class="btn btn-outline btn-lg">Compare bundles</a></div>
       </div>
     </div>
   </div>
@@ -239,7 +239,7 @@
           </div><div class="acc__item" >
             <button class="acc__head" type="button">How often do I actually empty it? <span class="pm">+</span></button>
             <div class="acc__body"><div class="acc__body-inner"><p>For one to two cats, about once a week. The app tells you before the drawer is full, so you're never surprised.</p></div></div>
-          </div></div><div class="center mt-3"><a href="{{ routes.root_url }}" class="tlink">See all FAQs <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
+          </div></div><div class="center mt-3"><a href="/pages/faq" class="tlink">See all FAQs <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
   </div>
 </section>
 
