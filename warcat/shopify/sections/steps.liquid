@@ -17,26 +17,153 @@
 {
   "name": "Steps",
   "settings": [
-    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "white", "label": "White" }, { "value": "soft", "label": "Soft" }, { "value": "teal", "label": "Teal" }, { "value": "dark", "label": "Dark" } ], "default": "white" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How it works" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Four steps. Zero effort." },
-    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Sensors, a slow-turning sift drum and a sealed drawer do the whole job — quietly, and only when it's safe." }
+    {
+      "type": "select",
+      "id": "bg",
+      "label": "Background",
+      "options": [
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "soft",
+          "label": "Soft"
+        },
+        {
+          "value": "teal",
+          "label": "Teal"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        }
+      ],
+      "default": "white"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "How it works"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Four steps. Zero effort."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Sensors, a slow-turning sift drum and a sealed drawer do the whole job — quietly, and only when it's safe."
+    }
   ],
   "blocks": [
-    { "type": "step", "name": "Step", "settings": [
-      { "type": "text", "id": "icon", "label": "Icon (paw, check, arrow, shield, truck, search, user, bag)", "default": "shield" },
-      { "type": "text", "id": "title", "label": "Title", "default": "Step title" },
-      { "type": "textarea", "id": "text", "label": "Text", "default": "Step description." }
-    ] }
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (paw, check, arrow, shield, truck, search, user, bag)",
+          "default": "shield"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Step title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Step description."
+        }
+      ]
+    }
   ],
   "max_blocks": 4,
   "presets": [
-    { "name": "Steps", "blocks": [
-      { "type": "step", "settings": { "icon": "shield", "title": "Your cat visits", "text": "Precision weight sensors know the moment a cat steps in — and exactly when they leave." } },
-      { "type": "step", "settings": { "icon": "check", "title": "A safe pause", "text": "WARCAT waits a few minutes, double-checks the chamber is empty, then begins." } },
-      { "type": "step", "settings": { "icon": "arrow", "title": "Quiet sift & seal", "text": "The drum rotates slowly, sifting clumps into a carbon-sealed drawer below — under 40 dB." } },
-      { "type": "step", "settings": { "icon": "user", "title": "You get a ping", "text": "The app logs the cycle and tells you when the drawer's full. Empty it weekly. Done." } }
-    ] }
-  ]
+    {
+      "name": "Steps",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "icon": "shield",
+            "title": "Your cat visits",
+            "text": "Precision weight sensors know the moment a cat steps in — and exactly when they leave."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "check",
+            "title": "A safe pause",
+            "text": "WARCAT waits a few minutes, double-checks the chamber is empty, then begins."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "arrow",
+            "title": "Quiet sift & seal",
+            "text": "The drum rotates slowly, sifting clumps into a carbon-sealed drawer below — under 40 dB."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "user",
+            "title": "You get a ping",
+            "text": "The app logs the cycle and tells you when the drawer's full. Empty it weekly. Done."
+          }
+        }
+      ]
+    }
+  ],
+  "default": {
+    "settings": {
+      "bg": "dark"
+    },
+    "blocks": [
+      {
+        "type": "step",
+        "settings": {
+          "icon": "shield",
+          "title": "Your cat visits",
+          "text": "Precision weight sensors know the moment a cat steps in — and exactly when they leave."
+        }
+      },
+      {
+        "type": "step",
+        "settings": {
+          "icon": "check",
+          "title": "A safe pause",
+          "text": "WARCAT waits a few minutes, double-checks the chamber is empty, then begins."
+        }
+      },
+      {
+        "type": "step",
+        "settings": {
+          "icon": "arrow",
+          "title": "Quiet sift & seal",
+          "text": "The drum rotates slowly, sifting clumps into a carbon-sealed drawer below — under 40 dB."
+        }
+      },
+      {
+        "type": "step",
+        "settings": {
+          "icon": "user",
+          "title": "You get a ping",
+          "text": "The app logs the cycle and tells you when the drawer's full. Empty it weekly. Done."
+        }
+      }
+    ]
+  }
 }
 {% endschema %}

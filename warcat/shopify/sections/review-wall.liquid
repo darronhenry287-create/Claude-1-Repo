@@ -23,31 +23,211 @@
 {
   "name": "Review wall",
   "settings": [
-    { "type": "text", "id": "score", "label": "Score", "default": "4.8" },
-    { "type": "text", "id": "score_text", "label": "Score text", "default": "Based on 12,418 verified reviews" },
-    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "white", "label": "White" }, { "value": "soft", "label": "Soft" } ], "default": "soft" },
-    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Read all reviews" },
-    { "type": "url", "id": "cta_link", "label": "Button link" }
+    {
+      "type": "text",
+      "id": "score",
+      "label": "Score",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "score_text",
+      "label": "Score text",
+      "default": "Based on 12,418 verified reviews"
+    },
+    {
+      "type": "select",
+      "id": "bg",
+      "label": "Background",
+      "options": [
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "soft",
+          "label": "Soft"
+        }
+      ],
+      "default": "soft"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Read all reviews"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    }
   ],
   "blocks": [
-    { "type": "review", "name": "Review", "settings": [
-      { "type": "textarea", "id": "quote", "label": "Quote", "default": "A great review." },
-      { "type": "text", "id": "name", "label": "Name", "default": "Jordan M." },
-      { "type": "text", "id": "initials", "label": "Initials", "default": "JM" },
-      { "type": "text", "id": "meta", "label": "Meta", "default": "2 cats" },
-      { "type": "range", "id": "stars_pct", "label": "Stars %", "min": 60, "max": 100, "step": 10, "default": 100 }
-    ] }
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "A great review."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Jordan M."
+        },
+        {
+          "type": "text",
+          "id": "initials",
+          "label": "Initials",
+          "default": "JM"
+        },
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Meta",
+          "default": "2 cats"
+        },
+        {
+          "type": "range",
+          "id": "stars_pct",
+          "label": "Stars %",
+          "min": 60,
+          "max": 100,
+          "step": 10,
+          "default": 100
+        }
+      ]
+    }
   ],
   "max_blocks": 9,
   "presets": [
-    { "name": "Review wall", "blocks": [
-      { "type": "review", "settings": { "quote": "I genuinely forget the litter box exists now. It's silent — runs while I'm on calls and I never notice. Emptying once a week is the whole job.", "name": "Jordan M.", "initials": "JM", "meta": "2 cats" } },
-      { "type": "review", "settings": { "quote": "The app told me my older cat's weight was dropping before I'd noticed. Vet caught a thyroid issue early. That alone paid for it.", "name": "Priya R.", "initials": "PR", "meta": "3 cats" } },
-      { "type": "review", "settings": { "quote": "We have a Maine Coon and most auto boxes are too small. The 90L globe fits him easily and the house finally doesn't smell.", "name": "Derek K.", "initials": "DK", "meta": "1 cat" } },
-      { "type": "review", "settings": { "quote": "Took my nervous rescue about a week to trust it. Now she waits by it. The quiet motor is the real deal.", "name": "Amara L.", "initials": "AL", "meta": "2 cats", "stars_pct": 90 } },
-      { "type": "review", "settings": { "quote": "Setup was 10 minutes. Connected to wifi, picked quiet hours, done. Best money I've spent on my cats, full stop.", "name": "Theo T.", "initials": "TT", "meta": "4 cats" } },
-      { "type": "review", "settings": { "quote": "Three cats, one box, and it keeps up easily. The carbon drawer means zero smell in a small apartment.", "name": "Nadia S.", "initials": "NS", "meta": "3 cats" } }
-    ] }
-  ]
+    {
+      "name": "Review wall",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "quote": "I genuinely forget the litter box exists now. It's silent — runs while I'm on calls and I never notice. Emptying once a week is the whole job.",
+            "name": "Jordan M.",
+            "initials": "JM",
+            "meta": "2 cats"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "quote": "The app told me my older cat's weight was dropping before I'd noticed. Vet caught a thyroid issue early. That alone paid for it.",
+            "name": "Priya R.",
+            "initials": "PR",
+            "meta": "3 cats"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "quote": "We have a Maine Coon and most auto boxes are too small. The 90L globe fits him easily and the house finally doesn't smell.",
+            "name": "Derek K.",
+            "initials": "DK",
+            "meta": "1 cat"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "quote": "Took my nervous rescue about a week to trust it. Now she waits by it. The quiet motor is the real deal.",
+            "name": "Amara L.",
+            "initials": "AL",
+            "meta": "2 cats",
+            "stars_pct": 90
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "quote": "Setup was 10 minutes. Connected to wifi, picked quiet hours, done. Best money I've spent on my cats, full stop.",
+            "name": "Theo T.",
+            "initials": "TT",
+            "meta": "4 cats"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "quote": "Three cats, one box, and it keeps up easily. The carbon drawer means zero smell in a small apartment.",
+            "name": "Nadia S.",
+            "initials": "NS",
+            "meta": "3 cats"
+          }
+        }
+      ]
+    }
+  ],
+  "default": {
+    "settings": {
+      "cta_label": "Read all reviews"
+    },
+    "blocks": [
+      {
+        "type": "review",
+        "settings": {
+          "quote": "I genuinely forget the litter box exists now. It's silent — runs while I'm on calls and I never notice. Emptying once a week is the whole job.",
+          "name": "Jordan M.",
+          "initials": "JM",
+          "meta": "2 cats"
+        }
+      },
+      {
+        "type": "review",
+        "settings": {
+          "quote": "The app told me my older cat's weight was dropping before I'd noticed. Vet caught a thyroid issue early. That alone paid for it.",
+          "name": "Priya R.",
+          "initials": "PR",
+          "meta": "3 cats"
+        }
+      },
+      {
+        "type": "review",
+        "settings": {
+          "quote": "We have a Maine Coon and most auto boxes are too small. The 90L globe fits him easily and the house finally doesn't smell.",
+          "name": "Derek K.",
+          "initials": "DK",
+          "meta": "1 cat"
+        }
+      },
+      {
+        "type": "review",
+        "settings": {
+          "quote": "Took my nervous rescue about a week to trust it. Now she waits by it. The quiet motor is the real deal.",
+          "name": "Amara L.",
+          "initials": "AL",
+          "meta": "2 cats",
+          "stars_pct": 90
+        }
+      },
+      {
+        "type": "review",
+        "settings": {
+          "quote": "Setup was 10 minutes. Connected to wifi, picked quiet hours, done. Best money I've spent on my cats, full stop.",
+          "name": "Theo T.",
+          "initials": "TT",
+          "meta": "4 cats"
+        }
+      },
+      {
+        "type": "review",
+        "settings": {
+          "quote": "Three cats, one box, and it keeps up easily. The carbon drawer is the part nobody mentions — zero smell in a small apartment.",
+          "name": "Nadia S.",
+          "initials": "NS",
+          "meta": "3 cats"
+        }
+      }
+    ]
+  }
 }
 {% endschema %}

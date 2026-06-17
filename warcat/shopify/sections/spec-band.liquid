@@ -19,25 +19,126 @@
 {
   "name": "Spec band",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "By the numbers" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Built like a flagship appliance." },
-    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Every WARCAT is the same machine reviewers rate for cats up to 11 kg and homes with up to four of them." }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "By the numbers"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built like a flagship appliance."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Every WARCAT is the same machine reviewers rate for cats up to 11 kg and homes with up to four of them."
+    }
   ],
   "blocks": [
-    { "type": "stat", "name": "Stat", "settings": [
-      { "type": "text", "id": "number", "label": "Number", "default": "90" },
-      { "type": "text", "id": "unit", "label": "Unit", "default": "L" },
-      { "type": "text", "id": "label", "label": "Label", "default": "Globe capacity" }
-    ] }
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "90"
+        },
+        {
+          "type": "text",
+          "id": "unit",
+          "label": "Unit",
+          "default": "L"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Globe capacity"
+        }
+      ]
+    }
   ],
   "max_blocks": 4,
   "presets": [
-    { "name": "Spec band", "blocks": [
-      { "type": "stat", "settings": { "number": "90", "unit": "L", "label": "Globe capacity" } },
-      { "type": "stat", "settings": { "number": "<40", "unit": "dB", "label": "Cleaning noise" } },
-      { "type": "stat", "settings": { "number": "4", "unit": "cats", "label": "Comfortable for" } },
-      { "type": "stat", "settings": { "number": "7", "unit": "days", "label": "Between empties" } }
-    ] }
-  ]
+    {
+      "name": "Spec band",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "90",
+            "unit": "L",
+            "label": "Globe capacity"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "<40",
+            "unit": "dB",
+            "label": "Cleaning noise"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "4",
+            "unit": "cats",
+            "label": "Comfortable for"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "7",
+            "unit": "days",
+            "label": "Between empties"
+          }
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "stat",
+        "settings": {
+          "number": "90",
+          "unit": "L",
+          "label": "Globe capacity"
+        }
+      },
+      {
+        "type": "stat",
+        "settings": {
+          "number": "<40",
+          "unit": "dB",
+          "label": "Cleaning noise"
+        }
+      },
+      {
+        "type": "stat",
+        "settings": {
+          "number": "4",
+          "unit": "cats",
+          "label": "Comfortable for"
+        }
+      },
+      {
+        "type": "stat",
+        "settings": {
+          "number": "7",
+          "unit": "days",
+          "label": "Between empties"
+        }
+      }
+    ]
+  }
 }
 {% endschema %}
