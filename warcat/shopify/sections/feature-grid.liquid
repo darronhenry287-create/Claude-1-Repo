@@ -34,209 +34,35 @@
 {
   "name": "Feature grid",
   "settings": [
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "Engineered to obsess over"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Big-cat space. Small-room manners."
-    },
-    {
-      "type": "select",
-      "id": "bg",
-      "label": "Background",
-      "options": [
-        {
-          "value": "white",
-          "label": "White"
-        },
-        {
-          "value": "soft",
-          "label": "Soft"
-        }
-      ],
-      "default": "soft"
-    }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Engineered to obsess over" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Big-cat space. Small-room manners." },
+    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "white", "label": "White" }, { "value": "soft", "label": "Soft" } ], "default": "soft" }
   ],
   "blocks": [
-    {
-      "type": "feature",
-      "name": "Feature",
-      "settings": [
-        {
-          "type": "text",
-          "id": "icon",
-          "label": "Icon",
-          "default": "check"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Feature"
-        },
-        {
-          "type": "textarea",
-          "id": "text",
-          "label": "Text",
-          "default": "Feature description."
-        }
-      ]
-    },
-    {
-      "type": "wide",
-      "name": "Wide feature (dark + image)",
-      "settings": [
-        {
-          "type": "text",
-          "id": "icon",
-          "label": "Icon",
-          "default": "bag"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Run it from your phone"
-        },
-        {
-          "type": "textarea",
-          "id": "text",
-          "label": "Text",
-          "default": "Start a clean, set quiet hours, track each cat and get a heads-up before the drawer is full — all from the WARCAT app."
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "text",
-          "id": "cta_label",
-          "label": "Button label",
-          "default": "Explore the app"
-        },
-        {
-          "type": "url",
-          "id": "cta_link",
-          "label": "Button link"
-        }
-      ]
-    }
+    { "type": "feature", "name": "Feature", "settings": [
+      { "type": "text", "id": "icon", "label": "Icon", "default": "check" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Feature" },
+      { "type": "textarea", "id": "text", "label": "Text", "default": "Feature description." }
+    ] },
+    { "type": "wide", "name": "Wide feature (dark + image)", "settings": [
+      { "type": "text", "id": "icon", "label": "Icon", "default": "bag" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Run it from your phone" },
+      { "type": "textarea", "id": "text", "label": "Text", "default": "Start a clean, set quiet hours, track each cat and get a heads-up before the drawer is full — all from the WARCAT app." },
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "cta_label", "label": "Button label", "default": "Explore the app" },
+      { "type": "url", "id": "cta_link", "label": "Button link" }
+    ] }
   ],
   "max_blocks": 7,
   "presets": [
-    {
-      "name": "Feature grid",
-      "blocks": [
-        {
-          "type": "feature",
-          "settings": {
-            "icon": "search",
-            "title": "Low-noise drive",
-            "text": "A gear-damped motor runs the cycle under 40 dB — quieter than a fridge hum. It won't scare a shy cat or wake the house at 3am."
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "icon": "shield",
-            "title": "90L mega chamber",
-            "text": "One of the roomiest globes on the market — comfortable for Maine Coons and big enough that multi-cat homes go a week between empties."
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "icon": "check",
-            "title": "Carbon odor-lock",
-            "text": "Waste drops into a sealed, carbon-filtered drawer the moment it's sifted — so the smell goes with it."
-          }
-        },
-        {
-          "type": "wide",
-          "settings": {
-            "icon": "bag",
-            "title": "Run it from your phone",
-            "text": "Start a clean, set quiet hours, track each cat and get a heads-up before the drawer is full — all from the WARCAT app on iOS and Android."
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "icon": "user",
-            "title": "Smart safety sensors",
-            "text": "Weight + infrared sensors halt and reverse the drum instantly if a paw or curious kitten enters mid-cycle. Safe for cats over 1 kg."
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "icon": "arrow",
-            "title": "Health insights",
-            "text": "WARCAT weighs every cat and tracks visit frequency, surfacing the early changes vets ask about — straight to your phone."
-          }
-        }
-      ]
-    }
-  ],
-  "default": {
-    "blocks": [
-      {
-        "type": "feature",
-        "settings": {
-          "icon": "search",
-          "title": "Low-noise drive",
-          "text": "A gear-damped motor runs the cycle under 40 dB — quieter than a fridge hum. It won't scare a shy cat or wake the house at 3am."
-        }
-      },
-      {
-        "type": "feature",
-        "settings": {
-          "icon": "shield",
-          "title": "90L mega chamber",
-          "text": "One of the roomiest globes on the market — comfortable for Maine Coons and big enough that multi-cat homes go a week between empties."
-        }
-      },
-      {
-        "type": "feature",
-        "settings": {
-          "icon": "check",
-          "title": "Carbon odor-lock",
-          "text": "Waste drops into a sealed, carbon-filtered drawer the moment it's sifted — so the smell goes with it instead of into your living room."
-        }
-      },
-      {
-        "type": "wide",
-        "settings": {
-          "icon": "bag",
-          "title": "Run it from your phone",
-          "text": "Start a clean, set quiet hours, track each cat and get a heads-up before the drawer is full — all from the WARCAT app on iOS and Android.",
-          "cta_label": "Explore the app"
-        }
-      },
-      {
-        "type": "feature",
-        "settings": {
-          "icon": "user",
-          "title": "Smart safety sensors",
-          "text": "Weight + infrared sensors halt and reverse the drum instantly if a paw or curious kitten enters mid-cycle. Safe for cats over 1 kg."
-        }
-      },
-      {
-        "type": "feature",
-        "settings": {
-          "icon": "arrow",
-          "title": "Health insights",
-          "text": "WARCAT weighs every cat and tracks visit frequency, surfacing the early changes vets ask about — straight to your phone."
-        }
-      }
-    ]
-  }
+    { "name": "Feature grid", "blocks": [
+      { "type": "feature", "settings": { "icon": "search", "title": "Low-noise drive", "text": "A gear-damped motor runs the cycle under 40 dB — quieter than a fridge hum. It won't scare a shy cat or wake the house at 3am." } },
+      { "type": "feature", "settings": { "icon": "shield", "title": "90L mega chamber", "text": "One of the roomiest globes on the market — comfortable for Maine Coons and big enough that multi-cat homes go a week between empties." } },
+      { "type": "feature", "settings": { "icon": "check", "title": "Carbon odor-lock", "text": "Waste drops into a sealed, carbon-filtered drawer the moment it's sifted — so the smell goes with it." } },
+      { "type": "wide", "settings": { "icon": "bag", "title": "Run it from your phone", "text": "Start a clean, set quiet hours, track each cat and get a heads-up before the drawer is full — all from the WARCAT app on iOS and Android." } },
+      { "type": "feature", "settings": { "icon": "user", "title": "Smart safety sensors", "text": "Weight + infrared sensors halt and reverse the drum instantly if a paw or curious kitten enters mid-cycle. Safe for cats over 1 kg." } },
+      { "type": "feature", "settings": { "icon": "arrow", "title": "Health insights", "text": "WARCAT weighs every cat and tracks visit frequency, surfacing the early changes vets ask about — straight to your phone." } }
+    ] }
+  ]
 }
 {% endschema %}
