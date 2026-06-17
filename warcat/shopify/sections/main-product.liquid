@@ -24,10 +24,10 @@
             </div>
           {%- endif -%}
         {%- else -%}
-          {%- comment -%} Baked studio gallery — shown until the merchant uploads real product images {%- endcomment -%}
-          {%- assign gallery = 'angle,side,rear,macro,cat,lifestyle' | split: ',' -%}
+          {%- comment -%} Baked gallery — infographic + studio slides, shown until the merchant uploads real product images {%- endcomment -%}
+          {%- assign gallery = 'pdp-usp,pdp-callout,pdp-quiet,pdp-capacity,pdp-app,angle,cat' | split: ',' -%}
           <div class="pgallery__main" id="pg-main">
-            <img src="{{ 'angle.webp' | asset_url }}" alt="{{ product.title | default: 'WARCAT Smart Litter Box' | escape }}" width="1000" height="1000" fetchpriority="high">
+            <img src="{{ 'pdp-usp.webp' | asset_url }}" alt="{{ product.title | default: 'WARCAT Smart Litter Box' | escape }}" width="1000" height="1000" fetchpriority="high">
           </div>
           <div class="pgallery__thumbs">
             {%- for g in gallery -%}
@@ -97,23 +97,6 @@
         {%- endif -%}
       </div>
     </div>
-  </div>
-</section>
-
-{%- comment -%} Gummies-style feature / marketing images {%- endcomment -%}
-<section class="section section--tight">
-  <div class="wrap wrap-wide">
-    <div class="featimg"><img src="{{ 'usp-hero.webp' | asset_url }}" alt="WARCAT — never scoop again: cleans itself after every visit, whisper-quiet under 40 dB, 90L XL fits every cat, tracks each cat's health" width="1500" height="1006" loading="lazy"></div>
-  </div>
-</section>
-<section class="section section--tight bg-soft">
-  <div class="wrap wrap-wide">
-    <div class="featimg"><img src="{{ 'callout.webp' | asset_url }}" alt="WARCAT anatomy — low-noise motor under 40 dB, 90L XL sifting globe, carbon-sealed odor drawer, weight and health sensors" width="1500" height="1120" loading="lazy"></div>
-  </div>
-</section>
-<section class="section section--tight">
-  <div class="wrap wrap-wide">
-    <div class="featimg"><img src="{{ 'app-feature.webp' | asset_url }}" alt="The WARCAT app — clean on demand or on a schedule, per-cat weight and health tracking, drawer-full and litter-low alerts, quiet hours while you sleep" width="1500" height="1006" loading="lazy"></div>
   </div>
 </section>
 
