@@ -2,7 +2,15 @@
   "sections": {
     "main": { "type": "main-product", "settings": {} },
     "benefits": { "type": "benefits", "settings": {} },
+    "zones": { "type": "zones", "settings": {} },
+    "sensory": { "type": "sensory", "settings": {} },
+    "science": { "type": "science", "settings": {} },
+    "steps": { "type": "steps", "settings": {} },
+    "why": { "type": "why", "settings": {} },
+    "proof": { "type": "proof", "settings": {} },
+    "multipack": { "type": "multipack", "settings": {} },
+    "guarantee": { "type": "guarantee", "settings": {} },
     "reviews": { "type": "reviews", "settings": {} }
   },
-  "order": ["main", "benefits", "reviews"]
+  "order": ["main", "benefits", "zones", "sensory", "science", "steps", "why", "proof", "multipack", "guarantee", "reviews"]
 }
