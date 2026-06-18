@@ -49,12 +49,12 @@ function chrome() {
       <div class="footer__top">
         <div class="footer__brand">
           <span class="logo">GLAZE</span>
-          <p>The glazed-skin shop. We hunt the K-beauty that actually goes viral — starting with medicube's PDRN Pink Collagen Volume Multi Balm.</p>
+          <p>The glazed-skin shop. One viral-worthy hero: our PDRN Pink Collagen Glow Balm — plump, dewy, glazed skin in a single swipe.</p>
         </div>
         ${FOOT.map(([h, l]) => `<div class="footer__col"><h4>${h}</h4>${links(l)}</div>`).join('\n        ')}
       </div>
       <div class="footer__bot">
-        <p>© 2026 GLAZE. PDRN Pink Collagen Volume Multi Balm is a product of medicube. GLAZE is an independent retailer.</p>
+        <p>© 2026 GLAZE. All rights reserved. Made for glazed skin.</p>
         <div class="footer__legal">${LEGAL.map(([h, t]) => `<a href="${h}">${t}</a>`).join('')}</div>
       </div>
     </div>
@@ -109,10 +109,10 @@ ${c.foot}
 }
 
 const PAGES = [
-  ['index.html','home.html','GLAZE — The viral PDRN Pink Collagen glow balm','Glazed-skin in one swipe. The medicube PDRN Pink Collagen Volume Multi Balm — PDRN, 5% Volufiline & collagen in a mess-free stick. Buy 3, save 17%.'],
-  ['product.html','product.html','PDRN Pink Collagen Volume Multi Balm — GLAZE','The viral pink collagen glow stick by medicube. Plumps, smooths fine lines and glazes skin anywhere — under-eyes, smile lines, neck. From $18.'],
-  ['how-to.html','how-to.html','How to Use — GLAZE','Swipe, pat, glow. How to get the most from your PDRN Pink Collagen balm.'],
-  ['ingredients.html','ingredients.html','Ingredients — GLAZE','PDRN salmon DNA, 5% Volufiline, collagen, NAD, caffeine & vitamin E — what each one does.'],
+  ['index.html','home.html','GLAZE — Pink Collagen Glow Balm','Glazed skin in one swipe. The GLAZE Pink Collagen Glow Balm — PDRN, collagen & plumping peptides in a mess-free stick. Buy 3, save 17%.'],
+  ['product.html','product.html','Pink Collagen Glow Balm — GLAZE','Our viral pink collagen glow stick. Plumps, smooths the look of fine lines and glazes skin anywhere — under-eyes, smile lines, neck. From $18.'],
+  ['how-to.html','how-to.html','How to Use — GLAZE','Swipe, pat, glow. How to get the most from your Pink Collagen Glow Balm.'],
+  ['ingredients.html','ingredients.html','Ingredients — GLAZE','PDRN salmon DNA, collagen, hyaluronic acid, plumping peptides, caffeine & vitamin E — what each one does.'],
   ['reviews.html','reviews.html','Reviews — GLAZE','4.4 stars and thousands of glazed-skin fans.'],
   ['about.html','about.html','About — GLAZE','Why we built a shop around one viral pink balm.'],
   ['faq.html','faq.html','FAQ — GLAZE','PDRN, skin types, how to use, shipping and returns.'],
