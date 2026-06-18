@@ -565,8 +565,9 @@ em { font-style: italic; }
 .why .no { color: var(--faint); }
 
 /* UGC gallery */
-.gallery__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.7rem; }
-.gallery__grid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: var(--r); }
+.gallery__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; }
+.gtile { aspect-ratio: 4/5; overflow: hidden; border-radius: var(--r); }
+.gtile img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* guarantee band */
 .guarantee { text-align: center; }

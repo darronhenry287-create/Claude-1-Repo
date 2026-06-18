@@ -56,10 +56,7 @@
           {%- endif -%}
 
           <div id="buy-anchor">
-            <div class="qtyrow">
-              <div class="qty"><button type="button" data-step="-" aria-label="Decrease">−</button><input type="text" name="quantity" value="1" inputmode="numeric" aria-label="Quantity"><button type="button" data-step="+" aria-label="Increase">+</button></div>
-              <button type="submit" class="btn btn-pink btn-block btn-lg" {% unless product.available %}disabled{% endunless %}>{% if product.available %}Add to bag{% else %}Sold out{% endif %}</button>
-            </div>
+            <button type="submit" class="btn btn-pink btn-block btn-lg" {% unless product.available %}disabled{% endunless %}>{% if product.available %}Add to bag{% else %}Sold out{% endif %}</button>
           </div>
         {% endform %}
 
