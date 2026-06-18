@@ -1,6 +1,6 @@
 {
   "sections": {
-    "hero": { "type": "page-hero", "settings": { "kicker": "What's inside", "heading": "The pink science.", "subheading": "Every active in the balm earns its keep. Here's what makes medicube's PDRN Pink Collagen formula work." } },
+    "hero": { "type": "page-hero", "settings": { "kicker": "What's inside", "heading": "The pink science.", "subheading": "Every active in the balm earns its keep. Here's what makes our pink collagen formula work." } },
     "science": { "type": "science", "settings": {} }
   },
   "order": ["hero", "science"]

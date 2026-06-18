@@ -2,18 +2,19 @@
   <section class="section" data-product>
     <div class="wrap">
       <div class="pdp">
-        <!-- gallery -->
-        <div class="pgallery">
-          <div class="pgallery__main has-photo" id="pg-main">
-            <span class="pgallery__tag tag">★ 4.9 · bestseller</span>
-            <img src="assets/img/hero-product.jpg" alt="Pink Collagen Glow Balm" width="1080" height="1340">
+        <!-- carousel: marketing slides with USPs + text baked in -->
+        <div class="pcarousel" id="pcarousel">
+          <div class="pcarousel__track" id="pcar-track">
+            <div class="pcarousel__slide"><img src="assets/img/slide-1.jpg" alt="Pink Collagen Glow Balm — 4.9 stars, 124 reviews" width="1080" height="1350"></div>
+            <div class="pcarousel__slide"><img src="assets/img/slide-2.jpg" alt="Plumps & smooths, dewy glazed glow, mess-free" width="1080" height="1350"></div>
+            <div class="pcarousel__slide"><img src="assets/img/slide-3.jpg" alt="Powered by PDRN, collagen, peptides & hyaluronic acid" width="1080" height="1350"></div>
+            <div class="pcarousel__slide"><img src="assets/img/slide-4.jpg" alt="Glaze in 3 steps: swipe, pat, glow" width="1080" height="1350"></div>
+            <div class="pcarousel__slide"><img src="assets/img/slide-5.jpg" alt="30-day glow guarantee, cruelty-free, no-mess" width="1080" height="1350"></div>
+            <div class="pcarousel__slide"><img src="assets/img/slide-6.jpg" alt="Loved by glow chasers — 5-star review" width="1080" height="1350"></div>
           </div>
-          <div class="pgallery__thumbs">
-            <button class="pthumb has-photo active" aria-label="Balm"><img src="assets/img/hero-product.jpg" data-full="assets/img/hero-product.jpg" alt="" width="1080" height="1340"></button>
-            <button class="pthumb has-photo" aria-label="Texture"><img src="assets/img/texture.jpg" data-full="assets/img/texture.jpg" alt="" width="1024" height="1024"></button>
-            <button class="pthumb has-photo" aria-label="Trio"><img src="assets/img/pack-trio.jpg" data-full="assets/img/pack-trio.jpg" alt="" width="1024" height="1024"></button>
-            <button class="pthumb has-photo" aria-label="On skin"><img src="assets/img/model-apply.jpg" data-full="assets/img/model-apply.jpg" alt="" width="1080" height="1440"></button>
-          </div>
+          <button class="pcarousel__nav prev" data-car="prev" aria-label="Previous slide">‹</button>
+          <button class="pcarousel__nav next" data-car="next" aria-label="Next slide">›</button>
+          <div class="pcarousel__dots" id="pcar-dots"></div>
         </div>
 
         <!-- info -->
@@ -52,7 +53,13 @@
               <div class="qty"><button data-step="-" aria-label="Decrease">−</button><input type="text" value="1" inputmode="numeric" aria-label="Quantity"><button data-step="+" aria-label="Increase">+</button></div>
               <button class="btn btn-pink btn-block btn-lg" data-add data-id="balm" data-name="Pink Collagen Glow Balm" data-price="18" data-img="assets/img/hero-product.jpg">Add to bag</button>
             </div>
-            <p class="pinfo__by" style="margin-top:.6rem">Cruelty-free · free shipping over $35 · 30-day glow guarantee</p>
+          </div>
+
+          <div class="usps">
+            <div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.7"/><circle cx="17.5" cy="18" r="1.7"/></svg><span>Free shipping over $35</span></div>
+            <div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6z"/><path d="m9 12 2 2 4-4"/></svg><span>30-day glow guarantee</span></div>
+            <div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C7 17 4 13.5 4 9.5A3.5 3.5 0 0 1 12 7a3.5 3.5 0 0 1 8 2.5c0 4-3 7.5-8 11.5Z"/></svg><span>Cruelty-free formula</span></div>
+            <div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg><span>Ships in 24 hours</span></div>
           </div>
 
           <div class="ptrust">

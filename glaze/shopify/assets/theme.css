@@ -2,7 +2,7 @@
    GLAZE — Pink-glow / viral K-beauty design system
    Fraunces (display serif) · Plus Jakarta Sans (UI/body)
    Blush + petal + confident pink. Pills, soft glows, gloss.
-   Single-product store fronting medicube's PDRN Pink Collagen balm.
+   Single-product store for GLAZE's Pink Collagen Glow Balm.
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -536,6 +536,66 @@ em { font-style: italic; }
 
 .skip { position: absolute; left: -9999px; }
 .skip:focus { left: 8px; top: 8px; background: var(--ink); color: #fff; padding: 0.6rem 1rem; border-radius: var(--r-sm); z-index: 200; }
+
+/* ============================================================
+   PHOTO HERO + NEW SECTIONS (real imagery + more sections)
+   ============================================================ */
+.hero__frame.has-photo { background: none; }
+.hero__frame.has-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--r-lg); filter: none; }
+
+/* full-bleed lifestyle banner */
+.showcase { position: relative; min-height: clamp(360px, 58vh, 560px); display: grid; place-items: center; text-align: center; overflow: hidden; }
+.showcase__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.showcase__veil { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(46,33,41,0.10), rgba(168,52,95,0.52)); z-index: 1; }
+.showcase__in { position: relative; z-index: 2; color: #fff; max-width: 620px; padding: 2rem var(--gap); }
+.showcase__in .kicker { color: #fff; justify-content: center; }
+.showcase__in .kicker::before { background: #fff; }
+.showcase__in h2 { color: #fff; }
+.showcase__in p { color: rgba(255,255,255,0.92); margin: 1rem auto 1.6rem; max-width: 480px; }
+
+/* why GLAZE comparison */
+.why { max-width: 720px; margin-inline: auto; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; background: var(--paper); box-shadow: var(--shadow-sm); }
+.why__row { display: grid; grid-template-columns: 1fr 90px 90px; align-items: center; padding: 0.95rem 1.3rem; border-bottom: 1px solid var(--line); font-size: 0.94rem; }
+.why__row:last-child { border-bottom: 0; }
+.why__row .c { text-align: center; font-weight: 700; }
+.why__head { background: var(--petal); }
+.why__head .c { font-family: var(--serif); font-weight: 500; font-size: 1rem; }
+.why__head .c.us { color: var(--pink-deep); }
+.why .yes { color: var(--pink-deep); }
+.why .no { color: var(--faint); }
+
+/* UGC gallery */
+.gallery__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.7rem; }
+.gallery__grid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: var(--r); }
+
+/* guarantee band */
+.guarantee { text-align: center; }
+.guarantee__badge { width: 80px; height: 80px; border-radius: 50%; background: var(--petal); color: var(--pink-deep); display: grid; place-items: center; margin: 0 auto 1.4rem; }
+.guarantee__badge svg { width: 38px; height: 38px; }
+
+/* PDP marketing carousel (real slides with USPs/text baked in) */
+.pcarousel { position: relative; }
+.pcarousel__track { display: grid; grid-auto-flow: column; grid-auto-columns: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--paper); box-shadow: var(--shadow-sm); }
+.pcarousel__track::-webkit-scrollbar { display: none; }
+.pcarousel__slide { scroll-snap-align: center; aspect-ratio: 4/5; }
+.pcarousel__slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pcarousel__nav { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.9); box-shadow: var(--shadow-sm); display: grid; place-items: center; color: var(--ink); font-size: 1.5rem; line-height: 1; padding-bottom: 3px; transition: background .2s; }
+.pcarousel__nav:hover { background: #fff; }
+.pcarousel__nav.prev { left: 12px; } .pcarousel__nav.next { right: 12px; }
+.pcarousel__dots { display: flex; gap: 0.4rem; justify-content: center; margin-top: 0.9rem; }
+.pcarousel__dots button { width: 8px; height: 8px; border-radius: 100px; background: var(--line-2); transition: all .25s var(--ease); }
+.pcarousel__dots button.active { background: var(--pink-deep); width: 22px; }
+
+/* USP callouts in the buy box */
+.usps { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem 1.1rem; margin: 1.3rem 0; }
+.usp { display: flex; gap: 0.6rem; align-items: center; font-size: 0.86rem; font-weight: 600; color: var(--ink-2); }
+.usp svg { width: 20px; height: 20px; color: var(--pink-deep); flex-shrink: 0; }
+
+@media (max-width: 780px) {
+  .gallery__grid { grid-template-columns: repeat(2, 1fr); }
+  .why__row { grid-template-columns: 1fr 64px 64px; padding-inline: 1rem; font-size: 0.88rem; }
+  .usps { grid-template-columns: 1fr; }
+}
 
 /* ============================================================
    RESPONSIVE

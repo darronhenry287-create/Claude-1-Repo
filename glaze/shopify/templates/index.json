@@ -3,14 +3,19 @@
     "hero": { "type": "hero", "settings": {} },
     "ticker": { "type": "ticker", "settings": {} },
     "benefits": { "type": "benefits", "settings": {} },
+    "showcase": { "type": "showcase", "settings": {} },
     "zones": { "type": "zones", "settings": {} },
+    "sensory": { "type": "sensory", "settings": {} },
     "science": { "type": "science", "settings": {} },
     "steps": { "type": "steps", "settings": {} },
+    "why": { "type": "why", "settings": {} },
     "proof": { "type": "proof", "settings": {} },
     "multipack": { "type": "multipack", "settings": {} },
+    "gallery": { "type": "gallery", "settings": {} },
     "reviews": { "type": "reviews", "settings": {} },
+    "guarantee": { "type": "guarantee", "settings": {} },
     "note": { "type": "note", "settings": {} },
     "newsletter": { "type": "newsletter", "settings": {} }
   },
-  "order": ["hero", "ticker", "benefits", "zones", "science", "steps", "proof", "multipack", "reviews", "note", "newsletter"]
+  "order": ["hero", "ticker", "benefits", "showcase", "zones", "sensory", "science", "steps", "why", "proof", "multipack", "gallery", "reviews", "guarantee", "note", "newsletter"]
 }

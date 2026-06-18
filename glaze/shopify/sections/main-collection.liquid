@@ -17,7 +17,7 @@
                 {%- else -%}<img src="{{ 'balm.svg' | asset_url }}" width="200" height="260" alt="{{ product.title | escape }}">{%- endif -%}
               </div>
               <div class="card__body">
-                <span class="card__type">{{ product.vendor | default: 'medicube' }}</span>
+                <span class="card__type">{{ product.vendor | default: 'GLAZE' }}</span>
                 <span class="card__title">{{ product.title }}</span>
                 <div class="card__foot"><span class="card__price">{{ product.price | money }}</span><span class="tlink">View</span></div>
               </div>

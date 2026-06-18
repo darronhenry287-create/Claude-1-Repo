@@ -1,0 +1,26 @@
+<section class="section">
+    <div class="wrap">
+      <div class="split split--rev">
+        <div class="split__media has-photo reveal"><img src="{{ 'texture.jpg' | asset_url }}" alt="Pink balm glaze texture" width="1024" height="1024"></div>
+        <div class="split__copy">
+          <span class="kicker">The texture</span>
+          <h2>{{ section.settings.heading }}</h2>
+          <p>It goes on like silk and melts straight into skin — cushiony, dewy and weightless, with zero tack or grease.</p>
+          <ul class="checks">
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>Cushiony melting balm</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>Dewy, never sticky</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>Sinks in fast, no white cast</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+{% schema %}
+{
+  "name": "Sensory",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A balm that melts into a glaze." }
+  ],
+  "presets": [ { "name": "Sensory" } ]
+}
+{% endschema %}

@@ -1,0 +1,25 @@
+<section class="section" style="background:var(--petal);border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="kicker" style="justify-content:center">Why GLAZE</span>
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+      <div class="why">
+        <div class="why__row why__head"><div>&nbsp;</div><div class="c us">GLAZE</div><div class="c">Ordinary balms</div></div>
+        <div class="why__row"><div>PDRN + collagen + peptides</div><div class="c yes">✓</div><div class="c no">✗</div></div>
+        <div class="why__row"><div>Plumps &amp; glazes instantly</div><div class="c yes">✓</div><div class="c no">—</div></div>
+        <div class="why__row"><div>Mess-free multi-use stick</div><div class="c yes">✓</div><div class="c no">✗</div></div>
+        <div class="why__row"><div>Works over makeup</div><div class="c yes">✓</div><div class="c no">✗</div></div>
+        <div class="why__row"><div>No greasy residue</div><div class="c yes">✓</div><div class="c no">—</div></div>
+      </div>
+    </div>
+  </section>
+{% schema %}
+{
+  "name": "Why GLAZE",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Not your average balm." }
+  ],
+  "presets": [ { "name": "Why GLAZE" } ]
+}
+{% endschema %}

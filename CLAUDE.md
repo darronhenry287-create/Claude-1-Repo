@@ -33,6 +33,11 @@ If the user says "you choose" — choose, but state the choice in one line so th
 
 ## Shopify hard rules
 
+### PDP / conversion essentials (ALWAYS — don't skip these)
+- **Every product page ships with a marketing image carousel beside the buy box**, not a bare photo gallery. The slides are real product pictures with **USP callouts and text baked into the images** — a set like: hero + rating, key benefits, ingredients/actives, how-to (3 steps), guarantee/trust seals, and a 5-star social-proof quote. Generate them with a text-capable model (e.g. `nano_banana_pro`) and pass ONE canonical product image as a reference (`medias:[{value:<job_id>,role:"image"}]`) so the product stays identical across every slide. Verify the rendered text is correctly spelled before shipping.
+- **Put a USP callout row in the buy box too** (e.g. free shipping over $X · money-back guarantee · cruelty-free · ships fast), with little icons — in addition to the in-image USPs.
+- This was requested repeatedly and forgotten — treat it as a default deliverable for any product/landing build, the same way the cart drawer and sticky add-to-cart are.
+
 ### Schema & defaults
 - Never set `"default": ""` on a schema setting. An empty string can be interpreted as "missing" and silently breaks page templates that expect a value. Either omit `default` or set a real default string.
 - Don't use `"type": "header"` for schema info dividers — it collides with the section type `header`. Use `"type": "paragraph"`.

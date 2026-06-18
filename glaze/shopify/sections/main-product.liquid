@@ -1,30 +1,30 @@
 <section class="section" data-product>
   <div class="wrap">
     <div class="pdp">
-      <!-- gallery -->
-      <div class="pgallery">
-        <div class="pgallery__main {% if product.featured_media %}has-photo{% endif %}" id="pg-main">
-          {%- if section.settings.badge != blank -%}<span class="pgallery__tag tag">{{ section.settings.badge }}</span>{%- endif -%}
-          {%- if product.featured_media -%}
-            <img src="{{ product.featured_media | image_url: width: 900 }}" width="{{ product.featured_media.width }}" height="{{ product.featured_media.height }}" alt="{{ product.featured_media.alt | escape | default: product.title }}">
+      <!-- carousel: marketing slides with USPs + text (uses uploaded product images if present, else bundled slides) -->
+      <div class="pcarousel" id="pcarousel">
+        <div class="pcarousel__track" id="pcar-track">
+          {%- if product.images.size > 0 -%}
+            {%- for image in product.images -%}
+              <div class="pcarousel__slide"><img src="{{ image | image_url: width: 1000 }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt | escape | default: product.title }}"></div>
+            {%- endfor -%}
           {%- else -%}
-            <img src="{{ 'balm.svg' | asset_url }}" width="200" height="260" alt="{{ product.title | escape }}">
+            {%- assign slides = 'slide-1.jpg,slide-2.jpg,slide-3.jpg,slide-4.jpg,slide-5.jpg,slide-6.jpg' | split: ',' -%}
+            {%- for s in slides -%}
+              <div class="pcarousel__slide"><img src="{{ s | asset_url }}" width="1080" height="1350" alt="{{ product.title | default: 'Pink Collagen Glow Balm' }}"></div>
+            {%- endfor -%}
           {%- endif -%}
         </div>
-        {%- if product.images.size > 1 -%}
-        <div class="pgallery__thumbs">
-          {%- for image in product.images -%}
-            <button class="pthumb has-photo {% if forloop.first %}active{% endif %}" aria-label="View image"><img src="{{ image | image_url: width: 200 }}" data-full="{{ image | image_url: width: 900 }}" width="{{ image.width }}" height="{{ image.height }}" alt=""></button>
-          {%- endfor -%}
-        </div>
-        {%- endif -%}
+        <button class="pcarousel__nav prev" data-car="prev" aria-label="Previous slide">‹</button>
+        <button class="pcarousel__nav next" data-car="next" aria-label="Next slide">›</button>
+        <div class="pcarousel__dots" id="pcar-dots"></div>
       </div>
 
       <!-- info -->
       <div class="pinfo">
         <span class="pinfo__type">{{ section.settings.eyebrow }}</span>
-        <h1>{{ product.title }}</h1>
-        <div class="pinfo__rate"><span class="stars">★★★★☆</span> {{ section.settings.rating_text }} {%- if section.settings.reviews_url != blank %} · <a href="{{ section.settings.reviews_url }}">read reviews</a>{% endif -%}</div>
+        <h1>{{ product.title | default: 'Pink Collagen Glow Balm' }}</h1>
+        <div class="pinfo__rate"><span class="stars">★★★★★</span> {{ section.settings.rating_text }} {%- if section.settings.reviews_url != blank %} · <a href="{{ section.settings.reviews_url }}">read reviews</a>{% endif -%}</div>
         {%- assign cv = product.selected_or_first_available_variant -%}
         <div class="pinfo__price">
           <span class="now" id="p-now">{{ cv.price | money }}</span>
@@ -60,9 +60,15 @@
               <div class="qty"><button type="button" data-step="-" aria-label="Decrease">−</button><input type="text" name="quantity" value="1" inputmode="numeric" aria-label="Quantity"><button type="button" data-step="+" aria-label="Increase">+</button></div>
               <button type="submit" class="btn btn-pink btn-block btn-lg" {% unless product.available %}disabled{% endunless %}>{% if product.available %}Add to bag{% else %}Sold out{% endif %}</button>
             </div>
-            <p class="pinfo__by" style="margin-top:.6rem">Made by <b>{{ product.vendor | default: 'medicube' }}</b> · sold &amp; shipped by {{ shop.name | default: 'GLAZE' }}</p>
           </div>
         {% endform %}
+
+        <div class="usps">
+          <div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.7"/><circle cx="17.5" cy="18" r="1.7"/></svg><span>Free shipping over ${{ settings.free_shipping_threshold }}</span></div>
+          <div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6z"/><path d="m9 12 2 2 4-4"/></svg><span>30-day glow guarantee</span></div>
+          <div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C7 17 4 13.5 4 9.5A3.5 3.5 0 0 1 12 7a3.5 3.5 0 0 1 8 2.5c0 4-3 7.5-8 11.5Z"/></svg><span>Cruelty-free formula</span></div>
+          <div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg><span>Ships in 24 hours</span></div>
+        </div>
 
         {%- if section.settings.show_trust -%}
         <div class="ptrust">
@@ -75,7 +81,7 @@
         <div class="acc">
           <div class="acc__item open"><button class="acc__head" type="button">How to use <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">{{ section.settings.how_to_use }}</div></div></div>
           <div class="acc__item"><button class="acc__head" type="button">Key ingredients <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">{{ section.settings.ingredients }}</div></div></div>
-          <div class="acc__item"><button class="acc__head" type="button">About medicube <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">{{ section.settings.about }}</div></div></div>
+          <div class="acc__item"><button class="acc__head" type="button">About the balm <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">{{ section.settings.about }}</div></div></div>
           <div class="acc__item"><button class="acc__head" type="button">Shipping &amp; returns <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">{{ section.settings.shipping }}</div></div></div>
         </div>
       </div>
@@ -86,7 +92,7 @@
   <div class="stickybar" id="stickybar">
     <div class="stickybar__in">
       <div class="stickybar__info">
-        <div class="stickybar__thumb">{% if product.featured_media %}<img src="{{ product.featured_media | image_url: width: 96 }}" width="46" height="46" alt="">{% else %}<img src="{{ 'balm.svg' | asset_url }}" width="46" height="46" alt="">{% endif %}</div>
+        <div class="stickybar__thumb">{% if product.featured_media %}<img src="{{ product.featured_media | image_url: width: 96 }}" width="46" height="46" alt="">{% else %}<img src="{{ 'hero-product.jpg' | asset_url }}" width="46" height="46" alt="">{% endif %}</div>
         <div><div class="stickybar__name">{{ product.title }}</div><div class="stickybar__price" id="sticky-price">{{ cv.price | money }}</div></div>
       </div>
       <button type="submit" form="product-form" class="btn btn-pink">Add to bag</button>
@@ -99,17 +105,17 @@
 {
   "name": "Product",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Pink collagen glow stick · by medicube" },
-    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4.4 · 600+ reviews" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "PDRN pink collagen · multi-use glow stick" },
+    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4.9 · 124 reviews" },
     { "type": "url", "id": "reviews_url", "label": "Reviews link" },
-    { "type": "text", "id": "badge", "label": "Image badge", "default": "★ 4.4 · viral" },
-    { "type": "richtext", "id": "fallback_desc", "label": "Description (used if the product has none)", "default": "<p>The viral melting balm that glazes skin in one swipe. Salmon-DNA PDRN, 5% Volufiline and collagen help skin look instantly plumper, smoother and dewier — anywhere it's dry or creasing. Mess-free stick, glides on over or under makeup.</p>" },
+    { "type": "text", "id": "badge", "label": "Image badge", "default": "★ 4.9 · bestseller" },
+    { "type": "richtext", "id": "fallback_desc", "label": "Description (used if the product has none)", "default": "<p>The melting balm that glazes skin in one swipe. Salmon-DNA PDRN, collagen and plumping peptides help skin look instantly plumper, smoother and dewier — anywhere it's dry or creasing. Mess-free stick, glides on over or under makeup.</p>" },
     { "type": "checkbox", "id": "show_trust", "label": "Show trust row", "default": true },
     { "type": "checkbox", "id": "show_sticky", "label": "Show sticky add-to-cart bar", "default": true },
     { "type": "paragraph", "content": "Sell the 3 SKUs (1 / 2 / 3-pack) as the product's variants — they render as the pack selector automatically." },
     { "type": "richtext", "id": "how_to_use", "label": "How to use", "default": "<p>Swipe directly onto clean skin or over makeup, anywhere you want a plump, dewy boost — under-eyes, smile lines, forehead, neck and lips. Pat in with a fingertip. Use morning and night, as often as you like.</p>" },
-    { "type": "richtext", "id": "ingredients", "label": "Key ingredients", "default": "<p>Salmon PDRN (Polydeoxyribonucleotide), 5% Volufiline, Hydrolyzed Collagen, NAD, Caffeine, Vitamin E (Tocopherol). Always patch test. Full INCI on the carton.</p>" },
-    { "type": "richtext", "id": "about", "label": "About medicube", "default": "<p>medicube is a Korean dermo-cosmetic brand known for clinical, results-driven skincare. This balm is part of its viral Pink PDRN line. We are an independent retailer of medicube products.</p>" },
+    { "type": "richtext", "id": "ingredients", "label": "Key ingredients", "default": "<p>Salmon PDRN (Polydeoxyribonucleotide), Hydrolyzed Collagen, Hyaluronic Acid, plumping peptides, Caffeine, Vitamin E (Tocopherol). Always patch test. Full INCI on the carton.</p>" },
+    { "type": "richtext", "id": "about", "label": "About the balm", "default": "<p>A K-beauty-inspired pink collagen balm in a hygienic, mess-free twist-up stick. Designed to plump, hydrate and glaze on contact — for that glass-skin glow anywhere, anytime.</p>" },
     { "type": "richtext", "id": "shipping", "label": "Shipping & returns", "default": "<p>Free shipping over $35 (and on every trio), flat $4.95 below. Ships in 1–2 business days. Not glowing? Return within 30 days for a full refund.</p>" }
   ]
 }

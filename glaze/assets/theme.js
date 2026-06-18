@@ -254,12 +254,35 @@
   /* ---- qty steppers ---- */
   $$('.qty').forEach(q => { const i = $('input', q); $$('button', q).forEach(b => b.addEventListener('click', () => { let v = parseInt(i.value) || 1; v += b.dataset.step === '+' ? 1 : -1; i.value = Math.max(1, v); })); });
 
-  /* ---- gallery ---- */
+  /* ---- gallery (legacy main+thumbs) ---- */
   $$('.pthumb').forEach(t => t.addEventListener('click', () => {
     $$('.pthumb').forEach(x => x.classList.remove('active')); t.classList.add('active');
     const main = $('#pg-main'), thumb = $('img', t), mainImg = main && main.querySelector('img');
     if (mainImg && thumb) mainImg.src = thumb.dataset.full || thumb.src;
   }));
+
+  /* ---- PDP marketing carousel ---- */
+  const car = $('#pcarousel');
+  if (car) {
+    const track = $('#pcar-track', car), dots = $('#pcar-dots', car);
+    const slides = track ? [...track.children] : [];
+    if (track && dots && slides.length) {
+      slides.forEach((_, i) => {
+        const b = document.createElement('button');
+        b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        if (i === 0) b.classList.add('active');
+        b.addEventListener('click', () => track.scrollTo({ left: track.clientWidth * i, behavior: 'smooth' }));
+        dots.appendChild(b);
+      });
+      const sync = () => { const i = Math.round(track.scrollLeft / track.clientWidth); [...dots.children].forEach((d, x) => d.classList.toggle('active', x === i)); };
+      let raf; track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(sync); });
+      $$('[data-car]', car).forEach(b => b.addEventListener('click', () => {
+        const cur = Math.round(track.scrollLeft / track.clientWidth);
+        const i = Math.max(0, Math.min(slides.length - 1, cur + (b.dataset.car === 'next' ? 1 : -1)));
+        track.scrollTo({ left: track.clientWidth * i, behavior: 'smooth' });
+      }));
+    }
+  }
 
   /* ---- accordions ---- */
   $$('.acc__head').forEach(h => h.addEventListener('click', () => {
