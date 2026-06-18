@@ -1,5 +1,6 @@
 {
   "sections": {
+    "hero": { "type": "hero", "settings": {} },
     "shophero": { "type": "shop-hero", "settings": {} },
     "ticker": { "type": "ticker", "settings": {} },
     "benefits": { "type": "benefits", "settings": {} },
@@ -17,5 +18,5 @@
     "note": { "type": "note", "settings": {} },
     "newsletter": { "type": "newsletter", "settings": {} }
   },
-  "order": ["shophero", "ticker", "benefits", "showcase", "zones", "sensory", "science", "steps", "why", "proof", "multipack", "gallery", "reviews", "guarantee", "note", "newsletter"]
+  "order": ["hero", "shophero", "ticker", "benefits", "showcase", "zones", "sensory", "science", "steps", "why", "proof", "multipack", "gallery", "reviews", "guarantee", "note", "newsletter"]
 }
