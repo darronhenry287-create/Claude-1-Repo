@@ -1,0 +1,83 @@
+{%- assign p = section.settings.product -%}
+<section class="section shophero" data-product>
+  <div class="wrap">
+    <div class="pdp">
+      <!-- carousel: marketing slides (uses the product's uploaded images if present, else bundled slides) -->
+      <div class="pcarousel" id="pcarousel">
+        <div class="pcarousel__track" id="pcar-track">
+          {%- if p != blank and p.images.size > 0 -%}
+            {%- for image in p.images -%}
+              <div class="pcarousel__slide"><img src="{{ image | image_url: width: 1000 }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt | escape | default: p.title }}"></div>
+            {%- endfor -%}
+          {%- else -%}
+            {%- assign slides = 'slide-1.jpg,slide-2.jpg,slide-3.jpg,slide-4.jpg,slide-5.jpg,slide-6.jpg' | split: ',' -%}
+            {%- for s in slides -%}
+              <div class="pcarousel__slide"><img src="{{ s | asset_url }}" width="1080" height="1350" alt="{{ section.settings.heading | default: 'Pink Collagen Glow Balm' }}"></div>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+        <button class="pcarousel__nav prev" data-car="prev" aria-label="Previous slide">‹</button>
+        <button class="pcarousel__nav next" data-car="next" aria-label="Next slide">›</button>
+        <div class="pcarousel__dots" id="pcar-dots"></div>
+      </div>
+
+      <!-- buy box / bundle -->
+      <div class="pinfo">
+        {%- if section.settings.eyebrow != blank -%}<span class="kicker">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h1 style="margin-top:.7rem">{{ p.title | default: section.settings.heading }}</h1>
+        <div class="pinfo__rate"><span class="stars">★★★★★</span> {{ section.settings.rating_text }}</div>
+        {%- if p != blank -%}
+          {%- assign cv = p.selected_or_first_available_variant -%}
+          <div class="pinfo__price"><span class="now" id="p-now">{{ cv.price | money }}</span><span class="was" id="p-was" {% unless cv.compare_at_price > cv.price %}style="display:none"{% endunless %}>{{ cv.compare_at_price | money }}</span><span class="save">Buy more, save more</span></div>
+          <div class="pinfo__desc">{% if p.description != blank %}{{ p.description }}{% else %}{{ section.settings.desc }}{% endif %}</div>
+          {% form 'product', p, id: 'product-form' %}
+            <select name="id" id="variant-id" hidden>
+              {%- for v in p.variants -%}<option value="{{ v.id }}" {% if v == cv %}selected{% endif %} {% unless v.available %}disabled{% endunless %}>{{ v.title }}</option>{%- endfor -%}
+            </select>
+            {%- if p.variants.size > 1 -%}
+            <label class="opt-label">Choose your pack</label>
+            <div class="tiers">
+              {%- for v in p.variants -%}
+                <label class="tier {% if v == cv %}active{% endif %}" data-variant-id="{{ v.id }}" data-price="{{ v.price | divided_by: 100.0 }}" data-qty="1" data-label="{{ v.title | escape }}"><span class="tier__radio"></span><div class="tier__body"><div class="tier__title">{{ v.title }}</div>{%- if v.compare_at_price > v.price %}<div class="tier__sub">Save {{ v.compare_at_price | minus: v.price | money }}</div>{%- endif -%}</div><div class="tier__price"><span class="p">{{ v.price | money }}</span></div></label>
+              {%- endfor -%}
+            </div>
+            {%- endif -%}
+            <div id="buy-anchor">
+              <div class="qtyrow">
+                <div class="qty"><button type="button" data-step="-" aria-label="Decrease">−</button><input type="text" name="quantity" value="1" inputmode="numeric" aria-label="Quantity"><button type="button" data-step="+" aria-label="Increase">+</button></div>
+                <button type="submit" class="btn btn-pink btn-block btn-lg" {% unless p.available %}disabled{% endunless %}>{% if p.available %}Add to bag{% else %}Sold out{% endif %}</button>
+              </div>
+            </div>
+          {% endform %}
+        {%- else -%}
+          <div class="pinfo__price"><span class="now">{{ section.settings.price }}</span><span class="save">Buy more, save more</span></div>
+          <div class="pinfo__desc">{{ section.settings.desc }}</div>
+          <div id="buy-anchor"><a href="{{ routes.all_products_collection_url }}" class="btn btn-pink btn-block btn-lg">Shop now</a></div>
+          <p class="dnote" style="text-align:left;margin-top:.6rem">Tip: connect your product in this section's settings to switch on the pack selector and add-to-cart.</p>
+        {%- endif -%}
+        <div class="usps">
+          <div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.7"/><circle cx="17.5" cy="18" r="1.7"/></svg><span>Free shipping over ${{ settings.free_shipping_threshold }}</span></div>
+          <div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6z"/><path d="m9 12 2 2 4-4"/></svg><span>30-day glow guarantee</span></div>
+          <div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C7 17 4 13.5 4 9.5A3.5 3.5 0 0 1 12 7a3.5 3.5 0 0 1 8 2.5c0 4-3 7.5-8 11.5Z"/></svg><span>Cruelty-free formula</span></div>
+          <div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg><span>Ships in 24 hours</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop hero",
+  "settings": [
+    { "type": "paragraph", "content": "Carousel + bundle buy box at the top of the home page. Connect your product to enable the pack selector and add-to-cart; otherwise the bundled marketing slides + a Shop button are shown." },
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New · the pink glow balm" },
+    { "type": "text", "id": "heading", "label": "Heading (used if no product is connected)", "default": "Pink Collagen Glow Balm" },
+    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4.9 · 124 reviews" },
+    { "type": "text", "id": "price", "label": "Price (used if no product is connected)", "default": "$18" },
+    { "type": "richtext", "id": "desc", "label": "Description", "default": "<p>Glazed skin in one swipe. Salmon-DNA PDRN, collagen and plumping peptides leave skin plump, dewy and glazed — anywhere it's dry or creasing. Mess-free stick, wears over makeup.</p>" }
+  ],
+  "presets": [{ "name": "Shop hero" }]
+}
+{% endschema %}
