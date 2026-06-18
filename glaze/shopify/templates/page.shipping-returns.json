@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "hero": { "type": "page-hero", "settings": { "kicker": "Shipping & Returns", "heading": "Getting your glow to you." } },
+    "main": { "type": "main-page", "settings": {} }
+  },
+  "order": ["hero", "main"]
+}

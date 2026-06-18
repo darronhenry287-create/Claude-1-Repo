@@ -1,0 +1,44 @@
+<section class="section">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="kicker" style="justify-content:center">Stock up &amp; glow</span>
+        <h2>{{ section.settings.heading }}</h2>
+        <p class="lede">Keep one in every bag. Buy three and shipping's on us.</p>
+      </div>
+      <div class="grid packs__grid">
+        <div class="pack reveal">
+          <div class="pack__media"><img src="{{ 'balm.svg' | asset_url }}" alt="One balm" width="200" height="260"></div>
+          <div class="pack__name">Single</div><div class="pack__sub">1 balm · try the hype</div>
+          <div class="pack__price"><span class="now">$18</span></div>
+          <div class="pack__save">&nbsp;</div>
+          <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="btn btn-outline btn-block">Shop single</a>
+        </div>
+        <div class="pack pack--feature reveal">
+          <span class="pack__flag tag">Most popular</span>
+          <div class="pack__media"><img src="{{ 'swatch.svg' | asset_url }}" alt="Two balms" width="220" height="130"></div>
+          <div class="pack__name">Duo</div><div class="pack__sub">2 balms · one to share</div>
+          <div class="pack__price"><span class="now">$32</span><span class="was">$36</span></div>
+          <div class="pack__save">Save $4</div>
+          <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="btn btn-pink btn-block">Shop duo</a>
+        </div>
+        <div class="pack reveal">
+          <span class="pack__flag tag tag-cream">Best value</span>
+          <div class="pack__media"><img src="{{ 'trio.svg' | asset_url }}" alt="Three balms" width="220" height="200"></div>
+          <div class="pack__name">Trio</div><div class="pack__sub">3 balms · free shipping</div>
+          <div class="pack__price"><span class="now">$45</span><span class="was">$54</span></div>
+          <div class="pack__save">Save $9 · 17% off</div>
+          <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="btn btn-outline btn-block">Shop trio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% schema %}
+{
+  "name": "Multipack",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The more you glaze, the more you save." },
+    { "type": "url", "id": "button_link", "label": "Shop button link (all three packs)" }
+  ],
+  "presets": [ { "name": "Multipack" } ]
+}
+{% endschema %}

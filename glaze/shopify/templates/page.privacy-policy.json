@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "hero": { "type": "page-hero", "settings": { "kicker": "Privacy Policy", "heading": "Your data, handled with care." } },
+    "main": { "type": "main-page", "settings": {} }
+  },
+  "order": ["hero", "main"]
+}

@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "hero": { "type": "page-hero", "settings": { "kicker": "How to use", "heading": "Swipe. Pat. Glow.", "subheading": "The whole routine takes about five seconds. Here's how to get the most glaze out of every swipe." } },
+    "steps": { "type": "steps", "settings": {} },
+    "zones": { "type": "zones", "settings": {} }
+  },
+  "order": ["hero", "steps", "zones"]
+}

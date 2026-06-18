@@ -1,0 +1,51 @@
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="logo">{{ shop.name | default: 'GLAZE' }}</span>
+        <p>{{ section.settings.blurb }}</p>
+        {%- if section.settings.show_social -%}
+        <div style="display:flex;gap:1rem;margin-top:1rem">
+          {%- if settings.social_tiktok != blank -%}<a href="{{ settings.social_tiktok }}" class="tlink" style="color:var(--pink-soft);border:none">TikTok</a>{%- endif -%}
+          {%- if settings.social_instagram != blank -%}<a href="{{ settings.social_instagram }}" class="tlink" style="color:var(--pink-soft);border:none">Instagram</a>{%- endif -%}
+        </div>
+        {%- endif -%}
+      </div>
+      <div class="footer__col"><h4>Shop</h4>
+        <a href="{{ routes.all_products_collection_url }}">The Glow Balm</a>
+        <a href="{{ routes.all_products_collection_url }}">Multipacks &amp; Save</a>
+        <a href="/pages/how-to">How to Use</a>
+      </div>
+      <div class="footer__col"><h4>Learn</h4>
+        <a href="/pages/ingredients">Ingredients</a>
+        <a href="/pages/reviews">Reviews</a>
+        <a href="/pages/about">About</a>
+        <a href="/pages/faq">FAQ</a>
+      </div>
+      <div class="footer__col"><h4>Help</h4>
+        <a href="/pages/contact">Contact</a>
+        <a href="/pages/shipping-returns">Shipping &amp; Returns</a>
+        <a href="/pages/refund-policy">Refund Policy</a>
+      </div>
+    </div>
+    <div class="footer__bot">
+      <p>© {{ 'now' | date: '%Y' }} {{ shop.name | default: 'GLAZE' }}. PDRN Pink Collagen Volume Multi Balm is a product of medicube. {{ shop.name | default: 'GLAZE' }} is an independent retailer.</p>
+      <div class="footer__legal">
+        <a href="/pages/privacy-policy">Privacy</a>
+        <a href="/pages/terms-of-service">Terms</a>
+        <a href="/pages/refund-policy">Refund</a>
+        <a href="/pages/shipping-returns">Shipping</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "textarea", "id": "blurb", "label": "Brand blurb", "default": "The glazed-skin shop. We hunt the K-beauty that actually goes viral — starting with medicube's PDRN Pink Collagen Volume Multi Balm." },
+    { "type": "checkbox", "id": "show_social", "label": "Show social links", "default": true }
+  ]
+}
+{% endschema %}

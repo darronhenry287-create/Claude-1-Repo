@@ -1,0 +1,31 @@
+<section class="zones section">
+    <div class="wrap">
+      <div class="zones__grid">
+        <div class="zones__visual reveal"><img src="{{ 'face.svg' | asset_url }}" alt="Where to apply the balm" width="48" height="48"></div>
+        <div>
+          <div class="sec-head" style="margin-bottom:1.6rem">
+            <span class="kicker">One balm, head to toe</span>
+            <h2>{{ section.settings.heading }}</h2>
+            <p class="lede">The mess-free stick means you can glaze on the go — desk, gym bag, plane, purse.</p>
+          </div>
+          <div class="zonelist">
+            <div class="zone"><span class="dot"></span>Under-eyes</div>
+            <div class="zone"><span class="dot"></span>Smile lines</div>
+            <div class="zone"><span class="dot"></span>Forehead</div>
+            <div class="zone"><span class="dot"></span>Neck</div>
+            <div class="zone"><span class="dot"></span>Lips</div>
+            <div class="zone"><span class="dot"></span>Dry patches</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% schema %}
+{
+  "name": "Zones",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Swipe it anywhere it's dry, dull or creasing." }
+  ],
+  "presets": [ { "name": "Zones" } ]
+}
+{% endschema %}

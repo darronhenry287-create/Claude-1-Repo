@@ -1,0 +1,27 @@
+<section class="section">
+  <div class="wrap">
+    {% form 'contact' %}
+      {%- if form.posted_successfully? -%}
+        <div class="note-ok">Thanks — we'll reply within one business day.</div>
+      {%- endif -%}
+      {{ form.errors | default_errors }}
+      <div class="form">
+        <div class="field"><label for="cf-name">Name</label><input id="cf-name" type="text" name="contact[name]" required></div>
+        <div class="field"><label for="cf-email">Email</label><input id="cf-email" type="email" name="contact[email]" required></div>
+        <div class="field"><label for="cf-msg">Message</label><textarea id="cf-msg" name="contact[body]" required></textarea></div>
+        <button class="btn btn-pink btn-block btn-lg" type="submit">Send message</button>
+      </div>
+    {% endform %}
+    <div class="center" style="margin-top:2rem"><p class="muted">Or email <a class="tlink" href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></p></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [
+    { "type": "text", "id": "email", "label": "Support email", "default": "hello@glaze.shop" }
+  ],
+  "presets": [{ "name": "Contact form" }]
+}
+{% endschema %}

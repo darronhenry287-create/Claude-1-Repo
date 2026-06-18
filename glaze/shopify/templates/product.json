@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "main": { "type": "main-product", "settings": {} },
+    "benefits": { "type": "benefits", "settings": {} },
+    "reviews": { "type": "reviews", "settings": {} }
+  },
+  "order": ["main", "benefits", "reviews"]
+}

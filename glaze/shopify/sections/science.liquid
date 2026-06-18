@@ -1,0 +1,30 @@
+<section class="science section">
+    <div class="wrap">
+      <div class="science__grid">
+        <div class="science__visual reveal"><img src="{{ 'dna.svg' | asset_url }}" alt="PDRN salmon DNA" width="48" height="48"></div>
+        <div>
+          <div class="sec-head" style="margin-bottom:1.6rem">
+            <span class="kicker">The pink science</span>
+            <h2>{{ section.settings.heading }}</h2>
+            <p class="lede">It's PDRN — fragments of salmon DNA that are remarkably compatible with skin — teamed with Volufiline™ and collagen for that plumped, glazed look.</p>
+          </div>
+          <div class="actives">
+            <div class="active"><span class="active__name">Salmon PDRN <small>DNA fragments that support a stronger, more resilient barrier</small></span><span class="active__role">Repair</span></div>
+            <div class="active"><span class="active__name">5% Volufiline™ <small>Helps skin look visibly plumper and more cushioned</small></span><span class="active__role">Plump</span></div>
+            <div class="active"><span class="active__name">Collagen + NAD <small>For bounce and that firm, springy finish</small></span><span class="active__role">Firm</span></div>
+            <div class="active"><span class="active__name">Caffeine + Vitamin E <small>Brightens the look of tired, puffy under-eyes</small></span><span class="active__role">Brighten</span></div>
+          </div>
+          <a href="/pages/ingredients" class="tlink" style="margin-top:1.6rem;display:inline-block">See the full ingredient list</a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% schema %}
+{
+  "name": "Science",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why the pink?" }
+  ],
+  "presets": [ { "name": "Science" } ]
+}
+{% endschema %}

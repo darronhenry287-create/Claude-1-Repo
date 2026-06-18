@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "hero": { "type": "page-hero", "settings": { "kicker": "About", "heading": "One viral balm, done right.", "subheading": "We only stock the K-beauty that actually lives up to the hype." } },
+    "note": { "type": "note", "settings": {} }
+  },
+  "order": ["hero", "note"]
+}

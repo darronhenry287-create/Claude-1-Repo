@@ -1,0 +1,23 @@
+<section class="section">
+    <div class="wrap">
+      <div class="note">
+        <span class="kicker" style="justify-content:center">From GLAZE</span>
+        <div class="note__body" style="margin-top:1.6rem">
+          <p>We started GLAZE to do one thing well: track down the K-beauty that actually lives up to the hype, and make it easy to buy.</p>
+          <p>This little pink balm is the one that stopped our scroll — so it's the one we're starting with.</p>
+        </div>
+        <div class="note__sig">{{ section.settings.heading }}</div>
+        <div class="note__role">Curators of glazed skin</div>
+      </div>
+    </div>
+  </section>
+{% schema %}
+{
+  "name": "Note",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Signature", "default": "— the GLAZE team" },
+    { "type": "url", "id": "button_link", "label": "Link (optional)" }
+  ],
+  "presets": [ { "name": "Note" } ]
+}
+{% endschema %}

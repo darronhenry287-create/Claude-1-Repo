@@ -1,0 +1,37 @@
+<section class="page-head">
+  <div class="wrap wrap--narrow">
+    <span class="kicker" style="justify-content:center">Shop</span>
+    <h1>{{ collection.title | default: 'The Glow Balm' }}</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    {%- if collection != blank and collection.products_count > 0 -%}
+      {%- paginate collection.products by 12 -%}
+        <div class="grid products">
+          {%- for product in collection.products -%}
+            <a href="{{ product.url }}" class="card">
+              <div class="card__media">
+                {%- if product.featured_media -%}<img class="has-photo" src="{{ product.featured_media | image_url: width: 600 }}" width="{{ product.featured_media.width }}" height="{{ product.featured_media.height }}" alt="{{ product.title | escape }}" style="width:100%;height:100%;object-fit:cover">
+                {%- else -%}<img src="{{ 'balm.svg' | asset_url }}" width="200" height="260" alt="{{ product.title | escape }}">{%- endif -%}
+              </div>
+              <div class="card__body">
+                <span class="card__type">{{ product.vendor | default: 'medicube' }}</span>
+                <span class="card__title">{{ product.title }}</span>
+                <div class="card__foot"><span class="card__price">{{ product.price | money }}</span><span class="tlink">View</span></div>
+              </div>
+            </a>
+          {%- endfor -%}
+        </div>
+        {{ paginate | default_pagination }}
+      {%- endpaginate -%}
+    {%- else -%}
+      <p class="center lede">Nothing here yet — please check back soon.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Collection", "settings": [] }
+{% endschema %}

@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "hero": { "type": "page-hero", "settings": { "kicker": "Contact", "heading": "Say hi.", "subheading": "Questions about your order, the balm, or your glow routine? A real person replies within one business day." } },
+    "contact": { "type": "contact-form", "settings": {} }
+  },
+  "order": ["hero", "contact"]
+}

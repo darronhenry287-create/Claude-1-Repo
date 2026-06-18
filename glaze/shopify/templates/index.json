@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "hero": { "type": "hero", "settings": {} },
+    "ticker": { "type": "ticker", "settings": {} },
+    "benefits": { "type": "benefits", "settings": {} },
+    "zones": { "type": "zones", "settings": {} },
+    "science": { "type": "science", "settings": {} },
+    "steps": { "type": "steps", "settings": {} },
+    "proof": { "type": "proof", "settings": {} },
+    "multipack": { "type": "multipack", "settings": {} },
+    "reviews": { "type": "reviews", "settings": {} },
+    "note": { "type": "note", "settings": {} },
+    "newsletter": { "type": "newsletter", "settings": {} }
+  },
+  "order": ["hero", "ticker", "benefits", "zones", "science", "steps", "proof", "multipack", "reviews", "note", "newsletter"]
+}

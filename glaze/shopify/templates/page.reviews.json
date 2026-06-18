@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "hero": { "type": "page-hero", "settings": { "kicker": "Reviews", "heading": "Glazed and obsessed." } },
+    "reviews": { "type": "reviews", "settings": {} }
+  },
+  "order": ["hero", "reviews"]
+}

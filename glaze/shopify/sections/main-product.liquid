@@ -1,0 +1,116 @@
+<section class="section" data-product>
+  <div class="wrap">
+    <div class="pdp">
+      <!-- gallery -->
+      <div class="pgallery">
+        <div class="pgallery__main {% if product.featured_media %}has-photo{% endif %}" id="pg-main">
+          {%- if section.settings.badge != blank -%}<span class="pgallery__tag tag">{{ section.settings.badge }}</span>{%- endif -%}
+          {%- if product.featured_media -%}
+            <img src="{{ product.featured_media | image_url: width: 900 }}" width="{{ product.featured_media.width }}" height="{{ product.featured_media.height }}" alt="{{ product.featured_media.alt | escape | default: product.title }}">
+          {%- else -%}
+            <img src="{{ 'balm.svg' | asset_url }}" width="200" height="260" alt="{{ product.title | escape }}">
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+        <div class="pgallery__thumbs">
+          {%- for image in product.images -%}
+            <button class="pthumb has-photo {% if forloop.first %}active{% endif %}" aria-label="View image"><img src="{{ image | image_url: width: 200 }}" data-full="{{ image | image_url: width: 900 }}" width="{{ image.width }}" height="{{ image.height }}" alt=""></button>
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+      </div>
+
+      <!-- info -->
+      <div class="pinfo">
+        <span class="pinfo__type">{{ section.settings.eyebrow }}</span>
+        <h1>{{ product.title }}</h1>
+        <div class="pinfo__rate"><span class="stars">★★★★☆</span> {{ section.settings.rating_text }} {%- if section.settings.reviews_url != blank %} · <a href="{{ section.settings.reviews_url }}">read reviews</a>{% endif -%}</div>
+        {%- assign cv = product.selected_or_first_available_variant -%}
+        <div class="pinfo__price">
+          <span class="now" id="p-now">{{ cv.price | money }}</span>
+          <span class="was" id="p-was" {% unless cv.compare_at_price > cv.price %}style="display:none"{% endunless %}>{{ cv.compare_at_price | money }}</span>
+          <span class="save">Buy more, save more</span>
+        </div>
+        <div class="pinfo__desc">{% if product.description != blank %}{{ product.description }}{% else %}{{ section.settings.fallback_desc }}{% endif %}</div>
+
+        <div class="pinfo__divider"></div>
+
+        {% form 'product', product, id: 'product-form' %}
+          <select name="id" id="variant-id" hidden>
+            {%- for variant in product.variants -%}
+              <option value="{{ variant.id }}" {% if variant == cv %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>{{ variant.title }}</option>
+            {%- endfor -%}
+          </select>
+
+          {%- if product.variants.size > 1 -%}
+          <label class="opt-label">Choose your pack</label>
+          <div class="tiers">
+            {%- for variant in product.variants -%}
+              <label class="tier {% if variant == cv %}active{% endif %}" data-variant-id="{{ variant.id }}" data-price="{{ variant.price | divided_by: 100.0 }}" data-qty="1" data-label="{{ variant.title | escape }}">
+                <span class="tier__radio"></span>
+                <div class="tier__body"><div class="tier__title">{{ variant.title }}</div>{%- if variant.compare_at_price > variant.price %}<div class="tier__sub">Save {{ variant.compare_at_price | minus: variant.price | money }}</div>{%- endif -%}</div>
+                <div class="tier__price"><span class="p">{{ variant.price | money }}</span></div>
+              </label>
+            {%- endfor -%}
+          </div>
+          {%- endif -%}
+
+          <div id="buy-anchor">
+            <div class="qtyrow">
+              <div class="qty"><button type="button" data-step="-" aria-label="Decrease">−</button><input type="text" name="quantity" value="1" inputmode="numeric" aria-label="Quantity"><button type="button" data-step="+" aria-label="Increase">+</button></div>
+              <button type="submit" class="btn btn-pink btn-block btn-lg" {% unless product.available %}disabled{% endunless %}>{% if product.available %}Add to bag{% else %}Sold out{% endif %}</button>
+            </div>
+            <p class="pinfo__by" style="margin-top:.6rem">Made by <b>{{ product.vendor | default: 'medicube' }}</b> · sold &amp; shipped by {{ shop.name | default: 'GLAZE' }}</p>
+          </div>
+        {% endform %}
+
+        {%- if section.settings.show_trust -%}
+        <div class="ptrust">
+          <div><span class="ck"><img src="{{ 'dna.svg' | asset_url }}" alt="" width="16" height="16"></span>PDRN powered</div>
+          <div><span class="ck"><img src="{{ 'sparkle.svg' | asset_url }}" alt="" width="16" height="16"></span>Glides on, no mess</div>
+          <div><span class="ck"><img src="{{ 'heart.svg' | asset_url }}" alt="" width="16" height="16"></span>Cruelty-free</div>
+        </div>
+        {%- endif -%}
+
+        <div class="acc">
+          <div class="acc__item open"><button class="acc__head" type="button">How to use <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">{{ section.settings.how_to_use }}</div></div></div>
+          <div class="acc__item"><button class="acc__head" type="button">Key ingredients <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">{{ section.settings.ingredients }}</div></div></div>
+          <div class="acc__item"><button class="acc__head" type="button">About medicube <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">{{ section.settings.about }}</div></div></div>
+          <div class="acc__item"><button class="acc__head" type="button">Shipping &amp; returns <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">{{ section.settings.shipping }}</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- if section.settings.show_sticky -%}
+  <div class="stickybar" id="stickybar">
+    <div class="stickybar__in">
+      <div class="stickybar__info">
+        <div class="stickybar__thumb">{% if product.featured_media %}<img src="{{ product.featured_media | image_url: width: 96 }}" width="46" height="46" alt="">{% else %}<img src="{{ 'balm.svg' | asset_url }}" width="46" height="46" alt="">{% endif %}</div>
+        <div><div class="stickybar__name">{{ product.title }}</div><div class="stickybar__price" id="sticky-price">{{ cv.price | money }}</div></div>
+      </div>
+      <button type="submit" form="product-form" class="btn btn-pink">Add to bag</button>
+    </div>
+  </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Pink collagen glow stick · by medicube" },
+    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4.4 · 600+ reviews" },
+    { "type": "url", "id": "reviews_url", "label": "Reviews link" },
+    { "type": "text", "id": "badge", "label": "Image badge", "default": "★ 4.4 · viral" },
+    { "type": "richtext", "id": "fallback_desc", "label": "Description (used if the product has none)", "default": "<p>The viral melting balm that glazes skin in one swipe. Salmon-DNA PDRN, 5% Volufiline and collagen help skin look instantly plumper, smoother and dewier — anywhere it's dry or creasing. Mess-free stick, glides on over or under makeup.</p>" },
+    { "type": "checkbox", "id": "show_trust", "label": "Show trust row", "default": true },
+    { "type": "checkbox", "id": "show_sticky", "label": "Show sticky add-to-cart bar", "default": true },
+    { "type": "paragraph", "content": "Sell the 3 SKUs (1 / 2 / 3-pack) as the product's variants — they render as the pack selector automatically." },
+    { "type": "richtext", "id": "how_to_use", "label": "How to use", "default": "<p>Swipe directly onto clean skin or over makeup, anywhere you want a plump, dewy boost — under-eyes, smile lines, forehead, neck and lips. Pat in with a fingertip. Use morning and night, as often as you like.</p>" },
+    { "type": "richtext", "id": "ingredients", "label": "Key ingredients", "default": "<p>Salmon PDRN (Polydeoxyribonucleotide), 5% Volufiline, Hydrolyzed Collagen, NAD, Caffeine, Vitamin E (Tocopherol). Always patch test. Full INCI on the carton.</p>" },
+    { "type": "richtext", "id": "about", "label": "About medicube", "default": "<p>medicube is a Korean dermo-cosmetic brand known for clinical, results-driven skincare. This balm is part of its viral Pink PDRN line. We are an independent retailer of medicube products.</p>" },
+    { "type": "richtext", "id": "shipping", "label": "Shipping & returns", "default": "<p>Free shipping over $35 (and on every trio), flat $4.95 below. Ships in 1–2 business days. Not glowing? Return within 30 days for a full refund.</p>" }
+  ]
+}
+{% endschema %}

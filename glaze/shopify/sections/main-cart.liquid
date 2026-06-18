@@ -1,0 +1,47 @@
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head"><span class="kicker">Your bag</span><h1 style="margin-top:.7rem">Ready to glaze.</h1></div>
+
+    {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" class="cartpage">
+      <div>
+        {%- for item in cart.items -%}
+          <div class="cline">
+            <div class="cline__thumb">
+              {%- if item.image -%}<img src="{{ item.image | image_url: width: 168 }}" width="84" height="84" alt="{{ item.product.title | escape }}">
+              {%- else -%}<img src="{{ 'balm.svg' | asset_url }}" width="84" height="84" alt="">{%- endif -%}
+            </div>
+            <div class="cline__info">
+              <h4><a href="{{ item.url }}">{{ item.product.title }}</a></h4>
+              {%- unless item.variant.title contains 'Default' -%}<div class="muted" style="font-size:.84rem">{{ item.variant.title }}</div>{%- endunless -%}
+              <a class="drm" href="{{ item.url_to_remove }}">Remove</a>
+            </div>
+            <input type="number" min="0" name="updates[{{ item.key }}]" value="{{ item.quantity }}" aria-label="Quantity" style="width:64px;padding:.55rem;border:1.5px solid var(--line-2);border-radius:var(--pill);text-align:center;font-family:var(--sans);font-weight:700;background:var(--paper);color:var(--ink)">
+            <div class="cline__price">{{ item.final_line_price | money }}</div>
+          </div>
+        {%- endfor -%}
+        <div style="margin-top:1.2rem"><button type="submit" name="update" class="btn btn-soft btn-sm">Update bag</button></div>
+      </div>
+
+      <aside class="csum">
+        <h3>Summary</h3>
+        <div class="csum__row"><span>Subtotal</span><span>{{ cart.total_price | money }}</span></div>
+        <div class="csum__row"><span>Shipping</span><span>Calculated at checkout</span></div>
+        <div class="csum__total"><span>Total</span><span>{{ cart.total_price | money }}</span></div>
+        <button type="submit" name="checkout" class="btn btn-pink btn-block btn-lg">Checkout</button>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn-outline btn-block" style="margin-top:.6rem">Keep shopping</a>
+        <p class="dnote" style="margin-top:.9rem">Free shipping over ${{ settings.free_shipping_threshold }} · 30-day returns</p>
+      </aside>
+    </form>
+    {%- else -%}
+    <div class="center" style="padding:3rem 0">
+      <p class="lede">Your bag is empty.</p>
+      <div style="margin-top:1.4rem"><a href="{{ routes.all_products_collection_url }}" class="btn btn-pink btn-lg">Shop the balm</a></div>
+    </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Cart", "settings": [] }
+{% endschema %}

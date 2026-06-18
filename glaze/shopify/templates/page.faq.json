@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "hero": { "type": "page-hero", "settings": { "kicker": "FAQ", "heading": "Good questions." } },
+    "faq": { "type": "faq", "settings": {} }
+  },
+  "order": ["hero", "faq"]
+}

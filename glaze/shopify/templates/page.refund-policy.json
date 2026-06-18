@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "hero": { "type": "page-hero", "settings": { "kicker": "Refund Policy", "heading": "Love it or return it." } },
+    "main": { "type": "main-page", "settings": {} }
+  },
+  "order": ["hero", "main"]
+}

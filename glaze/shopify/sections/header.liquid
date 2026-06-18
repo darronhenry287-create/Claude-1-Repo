@@ -1,0 +1,43 @@
+<header class="header">
+  <div class="header__inner">
+    <div class="header__left">
+      <button class="iconbtn burger" data-action="open-menu" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="nav">
+        <a href="{{ routes.all_products_collection_url }}">Shop</a>
+        <a href="/pages/how-to">How to Use</a>
+      </nav>
+    </div>
+    <a href="{{ routes.root_url }}" class="logo">{{ shop.name | default: 'GLAZE' }}</a>
+    <div class="header__right">
+      <nav class="nav">
+        <a href="/pages/ingredients">Ingredients</a>
+        <a href="/pages/reviews">Reviews</a>
+      </nav>
+      <a class="iconbtn" href="{{ routes.search_url }}" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></a>
+      <a class="iconbtn" href="{{ routes.account_url }}" aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/></svg></a>
+      <button class="iconbtn" data-action="open-cart" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 4 6v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6l-2-4Z"/><path d="M4 6h16M15 10a3 3 0 0 1-6 0"/></svg><span class="cartnum {% if cart.item_count > 0 %}show{% endif %}">{{ cart.item_count }}</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile" id="menu">
+  <div class="mobile__head"><span class="logo">{{ shop.name | default: 'GLAZE' }}</span><button class="iconbtn" data-action="close-menu" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+  <nav>
+    <a href="{{ routes.all_products_collection_url }}">Shop the Balm</a>
+    <a href="/pages/how-to">How to Use</a>
+    <a href="/pages/ingredients">Ingredients</a>
+    <a href="/pages/reviews">Reviews</a>
+    <a href="/pages/about">About</a>
+    <a href="/pages/faq">FAQ</a>
+    <a href="/pages/contact">Contact</a>
+  </nav>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "paragraph", "content": "Navigation links are set in the theme code for this single-product store. The logo uses your store name." }
+  ]
+}
+{% endschema %}

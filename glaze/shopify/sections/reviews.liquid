@@ -1,0 +1,25 @@
+<section class="section" style="background:var(--paper);border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="kicker" style="justify-content:center">The reviews are in</span>
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+      <div class="grid voices__grid">
+        <div class="voice reveal"><div class="stars">★★★★★</div><p>"My under-eyes look so plump and bright. I keep one in my bag and swipe it all day."</p><div class="who"><span class="av">J</span><div>Jenna T.<div class="vmeta">Verified buyer</div></div></div></div>
+        <div class="voice reveal"><div class="stars">★★★★★</div><p>"Glazed-donut skin is REAL. Goes right over makeup and never pills. TikTok was right."</p><div class="who"><span class="av">M</span><div>Mika R.<div class="vmeta">Verified buyer</div></div></div></div>
+        <div class="voice reveal"><div class="stars">★★★★☆</div><p>"Smile lines look softer after a couple of weeks. The no-mess stick is genius for travel."</p><div class="who"><span class="av">A</span><div>Aria L.<div class="vmeta">Verified buyer</div></div></div></div>
+      </div>
+      <div class="center" style="margin-top:2.5rem"><a href="/pages/reviews" class="btn btn-outline">{{ section.settings.button_label }}</a></div>
+    </div>
+  </section>
+{% schema %}
+{
+  "name": "Reviews",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Glazed and obsessed." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Read more reviews" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "presets": [ { "name": "Reviews" } ]
+}
+{% endschema %}

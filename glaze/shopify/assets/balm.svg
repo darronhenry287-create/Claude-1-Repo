@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" fill="none">
+  <!-- twist base -->
+  <rect x="63" y="220" width="74" height="28" rx="13" fill="#E2789F"/>
+  <!-- barrel -->
+  <rect x="66" y="96" width="68" height="142" rx="18" fill="#F39DB8"/>
+  <!-- gloss highlight -->
+  <rect x="74" y="110" width="12" height="118" rx="6" fill="#ffffff" opacity="0.30"/>
+  <!-- collar -->
+  <rect x="63" y="90" width="74" height="16" rx="8" fill="#E2789F"/>
+  <!-- exposed balm nub (slanted) -->
+  <path d="M72 96 V74 Q72 60 86 57 L118 50 Q129 52 129 66 V96 Z" fill="#FAD0DD"/>
+  <!-- slanted dome top -->
+  <ellipse cx="100" cy="71" rx="29" ry="9.5" fill="#FBE0E9" transform="rotate(-9 100 71)"/>
+  <ellipse cx="94" cy="68" rx="9" ry="3.2" fill="#ffffff" opacity="0.65" transform="rotate(-9 94 68)"/>
+  <!-- label -->
+  <rect x="80" y="150" width="40" height="60" rx="9" fill="#FFF6F9"/>
+  <circle cx="100" cy="167" r="7.5" fill="#F39DB8"/>
+  <rect x="86" y="184" width="28" height="4" rx="2" fill="#F3B6CC"/>
+  <rect x="90" y="194" width="20" height="3" rx="1.5" fill="#F6C9D8"/>
+</svg>

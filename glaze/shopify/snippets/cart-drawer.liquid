@@ -1,0 +1,41 @@
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Cart">
+  <div class="drawer__head">
+    <h3>Your bag</h3>
+    <button class="iconbtn" data-action="close-cart" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="drawer__body" id="cart-body">
+    {%- if cart.item_count > 0 -%}
+      {%- for item in cart.items -%}
+        <div class="ditem">
+          <div class="ditem__thumb">
+            {%- if item.image -%}<img src="{{ item.image | image_url: width: 144 }}" width="72" height="72" alt="{{ item.product.title | escape }}">
+            {%- else -%}<img src="{{ 'balm.svg' | asset_url }}" width="72" height="72" alt="">{%- endif -%}
+          </div>
+          <div class="ditem__info">
+            <h4>{{ item.product.title }}</h4>
+            {%- unless item.variant.title contains 'Default' -%}<div class="v">{{ item.variant.title }}</div>{%- endunless -%}
+            <div class="ditem__foot">
+              <span class="v" style="margin:0">Qty {{ item.quantity }}</span>
+              <strong>{{ item.final_line_price | money }}</strong>
+            </div>
+            <a class="drm" href="{{ item.url_to_remove }}">Remove</a>
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      <div class="dempty"><p>Your bag is empty.</p><p style="margin-top:.4rem">A good glaze starts here.</p></div>
+    {%- endif -%}
+  </div>
+  {%- if cart.item_count > 0 -%}
+  <div class="drawer__foot" id="cart-foot">
+    <div class="freebar" id="freebar" data-threshold="{{ settings.free_shipping_threshold }}" data-total="{{ cart.total_price | divided_by: 100.0 }}"></div>
+    <div class="dsub"><span>Subtotal</span><span id="cart-sub">{{ cart.total_price | money }}</span></div>
+    <p class="dnote">Shipping &amp; taxes calculated at checkout</p>
+    <form action="{{ routes.cart_url }}" method="post">
+      <button type="submit" name="checkout" class="btn btn-pink btn-block btn-lg">Checkout</button>
+    </form>
+    <a href="{{ routes.cart_url }}" class="btn btn-outline btn-block" style="margin-top:.6rem">View bag</a>
+  </div>
+  {%- endif -%}
+</aside>

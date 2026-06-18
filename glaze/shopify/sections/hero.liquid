@@ -1,0 +1,36 @@
+<section class="hero">
+    <div class="hero__inner">
+      <div class="hero__copy">
+        <span class="kicker">As seen on TikTok</span>
+        <h1>{{ section.settings.heading }}</h1>
+        <p class="hero__lede lede">The PDRN Pink Collagen Volume Multi Balm by <strong>medicube</strong> — salmon-DNA PDRN, 5% Volufiline™ and collagen packed into a mess-free glow stick you can swipe anywhere.</p>
+        <div class="hero__cta">
+          <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="btn btn-pink btn-lg">{{ section.settings.button_label }}</a>
+          <a href="/pages/how-to" class="btn btn-outline btn-lg">See how it works</a>
+        </div>
+        <div class="hero__meta"><span class="stars">★★★★☆</span> <b>4.4</b> · loved by 12,000+ · <b>from $18</b></div>
+        <div class="hero__pills"><span>Salmon PDRN</span><span>5% Volufiline™</span><span>Glides on, no mess</span><span>Cruelty-free</span></div>
+      </div>
+      <div class="hero__visual">
+        <div class="hero__frame">
+          <img src="{{ 'balm.svg' | asset_url }}" alt="PDRN Pink Collagen Volume Multi Balm" width="200" height="260">
+          <img src="{{ 'swatch.svg' | asset_url }}" alt="" class="hero__swatch" width="220" height="130" aria-hidden="true">
+          <img src="{{ 'sparkle.svg' | asset_url }}" alt="" class="hero__spark s1" width="48" height="48" aria-hidden="true">
+          <img src="{{ 'sparkle.svg' | asset_url }}" alt="" class="hero__spark s2" width="48" height="48" aria-hidden="true">
+          <img src="{{ 'sparkle.svg' | asset_url }}" alt="" class="hero__spark s3" width="48" height="48" aria-hidden="true">
+          <div class="hero__credit">PDRN Pink Collagen Volume Multi Balm · by medicube</div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Glazed skin,<br>in one <em>swipe</em>." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the balm" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "presets": [ { "name": "Hero" } ]
+}
+{% endschema %}

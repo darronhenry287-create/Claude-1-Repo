@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "hero": { "type": "page-hero", "settings": { "kicker": "Terms of Service", "heading": "The house rules." } },
+    "main": { "type": "main-page", "settings": {} }
+  },
+  "order": ["hero", "main"]
+}
