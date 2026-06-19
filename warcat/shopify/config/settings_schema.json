@@ -87,6 +87,108 @@
         "type": "product",
         "id": "shop_product",
         "label": "Shop / buy button product"
+      },
+      {
+        "type": "paragraph",
+        "content": "— Hero —"
+      },
+      {
+        "type": "text",
+        "id": "hero_eyebrow",
+        "label": "Eyebrow",
+        "default": "Smart self-cleaning litter box"
+      },
+      {
+        "type": "text",
+        "id": "hero_heading",
+        "label": "Heading",
+        "default": "Never scoop again."
+      },
+      {
+        "type": "textarea",
+        "id": "hero_subtitle",
+        "label": "Subtitle",
+        "default": "WARCAT detects, cleans and seals away odor the moment your cat steps out — whisper-quiet, app-controlled, and big enough for every cat in the house."
+      },
+      {
+        "type": "text",
+        "id": "hero_rating",
+        "label": "Rating number",
+        "default": "4.8"
+      },
+      {
+        "type": "text",
+        "id": "hero_rating_text",
+        "label": "Rating text",
+        "default": "12,000+ happy cat homes"
+      },
+      {
+        "type": "text",
+        "id": "hero_cta1_label",
+        "label": "Primary button label",
+        "default": "Shop WARCAT — $499"
+      },
+      {
+        "type": "text",
+        "id": "hero_cta2_label",
+        "label": "Secondary button label",
+        "default": "See how it works"
+      },
+      {
+        "type": "url",
+        "id": "hero_cta2_link",
+        "label": "Secondary button link"
+      },
+      {
+        "type": "paragraph",
+        "content": "— Offer / kit —"
+      },
+      {
+        "type": "text",
+        "id": "offer_tag",
+        "label": "Tag",
+        "default": "Best value · save $120"
+      },
+      {
+        "type": "text",
+        "id": "offer_heading",
+        "label": "Heading",
+        "default": "The Complete WARCAT Kit"
+      },
+      {
+        "type": "textarea",
+        "id": "offer_text",
+        "label": "Text",
+        "default": "Everything to go scoop-free on day one: the WARCAT box, a litter-catching mat, three months of carbon filters and a starter pack of drawer liners."
+      },
+      {
+        "type": "text",
+        "id": "offer_price_now",
+        "label": "Price",
+        "default": "$549"
+      },
+      {
+        "type": "text",
+        "id": "offer_price_was",
+        "label": "Compare price",
+        "default": "$669"
+      },
+      {
+        "type": "text",
+        "id": "offer_cta1_label",
+        "label": "Primary button label",
+        "default": "Shop the kit"
+      },
+      {
+        "type": "text",
+        "id": "offer_cta2_label",
+        "label": "Secondary button label",
+        "default": "Compare bundles"
+      },
+      {
+        "type": "url",
+        "id": "offer_cta2_link",
+        "label": "Secondary button link"
       }
     ]
   }

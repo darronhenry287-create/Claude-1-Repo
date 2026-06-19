@@ -6,7 +6,21 @@
     "color_dark": "#0e1a26",
     "logo_text": "WARCAT",
     "free_ship_threshold": 49,
-    "shop_product": "warcat-smart-litter-box"
+    "shop_product": "warcat-smart-litter-box",
+    "hero_eyebrow": "Smart self-cleaning litter box",
+    "hero_heading": "Never scoop again.",
+    "hero_subtitle": "WARCAT detects, cleans and seals away odor the moment your cat steps out — whisper-quiet, app-controlled, and big enough for every cat in the house.",
+    "hero_rating": "4.8",
+    "hero_rating_text": "12,000+ happy cat homes",
+    "hero_cta1_label": "Shop WARCAT — $499",
+    "hero_cta2_label": "See how it works",
+    "offer_tag": "Best value · save $120",
+    "offer_heading": "The Complete WARCAT Kit",
+    "offer_text": "Everything to go scoop-free on day one: the WARCAT box, a litter-catching mat, three months of carbon filters and a starter pack of drawer liners.",
+    "offer_price_now": "$549",
+    "offer_price_was": "$669",
+    "offer_cta1_label": "Shop the kit",
+    "offer_cta2_label": "Compare bundles"
   },
   "presets": {
     "WARCAT": {
