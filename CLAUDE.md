@@ -48,7 +48,7 @@ These are about *how to operate*, not the code. Each has been corrected more tha
 ### Schema & defaults
 - Never set `"default": ""` on a schema setting. An empty string can be interpreted as "missing" and silently breaks page templates that expect a value. Either omit `default` or set a real default string.
 - Don't use `"type": "header"` for schema info dividers — it collides with the section type `header`. Use `"type": "paragraph"`.
-- Don't ship blank `templates/page.<handle>.json` — design the page (rich-text head + designed sections + newsletter). A blank `{ "sections": {} }` is worse than no template.
+- Don't ship blank `templates/page.<handle>.json` — design the page (rich-text head + designed sections + newsletter). A blank `{ "sections": {} }` is worse than no template. **Likewise a `main-page`-only template renders empty until the merchant types a page body** — bake the page's real text into `page.<x>.liquid` with an `{%- if page.content != blank -%}{{ page.content }}{%- else -%}…baked…{%- endif -%}` fallback, so it shows content out of the box but the merchant can still override it.
 
 ### Section groups & tags
 - Header/footer use **plural** `{% sections 'header-group' %}` (section groups, JSON file). The singular `{% section 'header' %}` (single section) throws *"'header' is not a valid section type"* when paired with a `*-group.json`.

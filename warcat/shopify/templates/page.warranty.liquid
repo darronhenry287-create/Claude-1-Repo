@@ -1,0 +1,34 @@
+<section class="pagehead">
+  <div class="wrap pagehead__in">
+    <span class="eyebrow">Peace of mind</span>
+    <h1 class="h-lg">{{ page.title | default: "2-year warranty &amp; lifetime support." }}</h1>
+  </div>
+</section>
+{%- if page.content != blank -%}
+<section class="section"><div class="wrap prose">{{ page.content }}</div></section>
+{%- else -%}
+<section class="section">
+    <div class="wrap prose">
+      <p class="legal-meta">Applies to WARCAT smart litter boxes purchased from warcat.com or authorized retailers.</p>
+      <h2>What's covered</h2>
+      <p>Your WARCAT is warranted against defects in materials and workmanship for <strong>two years</strong> from the date of delivery. If a covered part fails under normal use, we'll repair or replace it free of charge — including parts and labor.</p>
+      <ul>
+        <li>Motor, drive and gear assembly</li>
+        <li>Sensors (weight, infrared, anti-pinch) and control board</li>
+        <li>Power adapter and wiring</li>
+        <li>Globe, base and waste-drawer mechanism</li>
+      </ul>
+      <h2>What's not covered</h2>
+      <ul>
+        <li>Normal wear of consumables (carbon filters, liners)</li>
+        <li>Accidental damage, misuse, or use outside the product guidelines</li>
+        <li>Damage from unauthorized repairs or modifications</li>
+        <li>Cosmetic wear that doesn't affect function</li>
+      </ul>
+      <h2>How to make a claim</h2>
+      <p>Reach out via our <a href="/pages/contact">support page</a> with your order number and a short description (a photo or video helps). Most claims are resolved within a couple of business days, and we cover shipping on warranty replacements.</p>
+      <h2>Beyond two years</h2>
+      <p>Replacement parts — globes, filters, drawers and more — remain available in our <a href="{{ routes.all_products_collection_url }}">accessories shop</a>, and our support team is here for the life of your machine.</p>
+    </div>
+  </section>
+{%- endif -%}

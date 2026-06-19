@@ -1,0 +1,30 @@
+<section class="pagehead">
+  <div class="wrap pagehead__in">
+    <span class="eyebrow">Legal</span>
+    <h1 class="h-lg">{{ page.title | default: "Refund policy." }}</h1>
+  </div>
+</section>
+{%- if page.content != blank -%}
+<section class="section"><div class="wrap prose">{{ page.content }}</div></section>
+{%- else -%}
+<section class="section">
+    <div class="wrap prose">
+      <p class="legal-meta">Last updated: June 2026</p>
+      <p>We want you and your cats to love WARCAT. If you're not satisfied, here's how refunds work.</p>
+      <h2>90-night trial refunds</h2>
+      <p>WARCAT smart litter boxes are eligible for a full refund within 90 nights of delivery under our <a href="/pages/trial">home trial</a>. Contact us to start a return; once the box is received, we'll refund the full purchase price to your original payment method within 5–10 business days.</p>
+      <h2>Accessories</h2>
+      <p>Unopened accessories (mats, filters, liners, replacement parts) may be returned within 30 days for a full refund. Opened consumables are non-refundable for hygiene reasons unless defective.</p>
+      <h2>Damaged or defective items</h2>
+      <p>If your order arrives damaged or develops a defect covered by our <a href="/pages/warranty">warranty</a>, we'll repair, replace or refund it at no cost to you.</p>
+      <h2>How refunds are issued</h2>
+      <ul>
+        <li>Refunds go back to the original payment method.</li>
+        <li>Processing takes 5–10 business days after we receive your return; your bank may take a little longer to post it.</li>
+        <li>Original shipping was free, and we cover return shipping on the box.</li>
+      </ul>
+      <h2>Questions</h2>
+      <p>Email <a href="/pages/contact">care@warcat.com</a> and a real person will help you sort it out.</p>
+    </div>
+  </section>
+{%- endif -%}

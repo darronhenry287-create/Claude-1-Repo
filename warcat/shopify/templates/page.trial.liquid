@@ -1,0 +1,39 @@
+<section class="pagehead">
+  <div class="wrap pagehead__in">
+    <span class="eyebrow">Risk-free</span>
+    <h1 class="h-lg">{{ page.title | default: "The 90-night home trial." }}</h1>
+  </div>
+</section>
+{%- if page.content != blank -%}
+<section class="section"><div class="wrap prose">{{ page.content }}</div></section>
+{%- else -%}
+<section class="section">
+    <div class="wrap wrap-narrow">
+      <div class="guarantee" style="margin-bottom:2.6rem">
+        <div class="gseal"><div><div class="big">90</div><small>Night Trial</small></div></div>
+        <div>
+          <h2 class="h-md">Live with it. Then decide.</h2>
+          <p class="lede mt-1">Set up your WARCAT, give your cats time to settle in, and enjoy a scoop-free home for up to 90 nights. If it isn't right, we'll take it back and refund you in full.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <h2>How it works</h2>
+        <ul>
+          <li><strong>Buy and set up</strong> your WARCAT as normal.</li>
+          <li><strong>Try it for up to 90 nights</strong> from the delivery date.</li>
+          <li><strong>Love it?</strong> Do nothing — you're all set.</li>
+          <li><strong>Not for you?</strong> Contact our care team and we'll arrange a free return pickup and a full refund.</li>
+        </ul>
+        <h2>The fine print (the fair kind)</h2>
+        <ul>
+          <li>Available on WARCAT smart litter boxes purchased directly from warcat.com.</li>
+          <li>One trial per household. We just ask that the box is returned in usable condition (normal use is completely fine — your cats are supposed to use it!).</li>
+          <li>Refunds are issued to the original payment method within 5–10 business days of the return being received.</li>
+          <li>Consumable accessories (liners, filters) aren't included in the trial once opened.</li>
+        </ul>
+        <p>Questions before you commit? Our team is happy to help — <a href="/pages/contact">get in touch</a>.</p>
+        <div class="btn-row mt-3"><a href="{{ settings.shop_product.url | default: routes.all_products_collection_url }}" class="btn btn-primary btn-lg">Start your 90 nights</a></div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
