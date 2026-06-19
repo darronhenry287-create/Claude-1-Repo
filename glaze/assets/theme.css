@@ -604,7 +604,6 @@ em { font-style: italic; }
 @media (max-width: 780px) {
   .gallery__grid { grid-template-columns: repeat(2, 1fr); }
   .why__row { grid-template-columns: 1fr 64px 64px; padding-inline: 1rem; font-size: 0.88rem; }
-  .usps { grid-template-columns: 1fr; }
 }
 
 /* ============================================================
@@ -619,7 +618,8 @@ em { font-style: italic; }
   .split--rev .split__media { order: 0; }
   .pgallery, .csum { position: static; }
   .routine__grid { grid-template-columns: repeat(2, 1fr); }
-  .steps__grid, .proof__row, .voices__grid, .packs__grid { grid-template-columns: 1fr; }
+  .steps__grid, .voices__grid, .packs__grid { grid-template-columns: 1fr; }
+  .proof__row { grid-template-columns: repeat(3, 1fr); }
   .packs__grid { max-width: 420px; margin-inline: auto; }
   .footer__top { grid-template-columns: 1fr 1fr; }
   .zonelist { grid-template-columns: 1fr 1fr; }
@@ -628,10 +628,36 @@ em { font-style: italic; }
   .nav { display: none; }
   .header__inner { grid-template-columns: auto 1fr auto; }
   .burger { display: grid; }
-  .benefits__grid, .routine__grid, .ptrust { grid-template-columns: 1fr; }
+  .section { padding-block: clamp(2.2rem, 8vw, 3.4rem); }
+  .topbar { font-size: 0.64rem; letter-spacing: 0.015em; padding: 0.5rem 0.8rem; }
+  .routine__grid { grid-template-columns: 1fr; }
   .products { grid-template-columns: 1fr 1fr; }
+  .pdp { gap: 1.6rem; }
+  .sec-head { margin-bottom: 1.6rem; }
+  /* keep benefits + trust + usps as compact rows, not tall stacks */
+  .benefits__grid { grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+  .benefit { padding: 1.3rem 1.1rem; }
+  .benefit__ic { width: 46px; height: 46px; margin-bottom: 0.8rem; }
+  .benefit h3 { font-size: 1.1rem; }
+  .ptrust { gap: 0.5rem; padding: 1.1rem 0; }
+  .ptrust .ck { width: 28px; height: 28px; margin-bottom: 0.35rem; }
+  .ptrust div { font-size: 0.62rem; }
+  .usps { grid-template-columns: 1fr 1fr; gap: 0.6rem 0.7rem; }
+  .usp { font-size: 0.78rem; gap: 0.45rem; }
+  .usp svg { width: 18px; height: 18px; }
+  .proof__row { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 2rem; }
+  .pstat { padding: 1.1rem 0.4rem; }
+  .pstat .num { font-size: clamp(1.7rem, 9vw, 2.3rem); }
+  .pstat .lbl { font-size: 0.7rem; margin-top: 0.4rem; }
+  .pcarousel__nav { width: 34px; height: 34px; font-size: 1.2rem; }
+  .pcarousel__nav.prev { left: 8px; } .pcarousel__nav.next { right: 8px; }
+  /* compact sticky add-to-cart bar */
+  .stickybar__in { padding: 0.55rem var(--gap); gap: 0.7rem; }
+  .stickybar__thumb { width: 40px; height: 40px; }
+  .stickybar__name { font-size: 0.92rem; line-height: 1.15; }
+  .stickybar__price { font-size: 0.76rem; }
+  .stickybar .btn { padding: 0.7rem 1.1rem; white-space: nowrap; }
   .footer__top { grid-template-columns: 1fr; gap: 1.8rem; }
-  .qtyrow { flex-direction: column; }
   .signup { flex-direction: column; }
   .signup .btn { width: 100%; }
   .rsummary { grid-template-columns: 1fr; text-align: center; }
