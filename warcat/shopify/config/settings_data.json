@@ -5,7 +5,8 @@
     "color_brand": "#0fb5a6",
     "color_dark": "#0e1a26",
     "logo_text": "WARCAT",
-    "free_ship_threshold": 49
+    "free_ship_threshold": 49,
+    "shop_product": "warcat-smart-litter-box"
   },
   "presets": {
     "WARCAT": {
@@ -14,7 +15,8 @@
       "color_brand": "#0fb5a6",
       "color_dark": "#0e1a26",
       "logo_text": "WARCAT",
-      "free_ship_threshold": 49
+      "free_ship_threshold": 49,
+      "shop_product": "warcat-smart-litter-box"
     }
   }
 }
