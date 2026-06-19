@@ -1,0 +1,521 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "press": {
+      "type": "press",
+      "blocks": {
+        "p1": {
+          "type": "logo",
+          "settings": {
+            "name": "The Verge"
+          }
+        },
+        "p2": {
+          "type": "logo",
+          "settings": {
+            "name": "WIRED"
+          }
+        },
+        "p3": {
+          "type": "logo",
+          "settings": {
+            "name": "Mashable"
+          }
+        },
+        "p4": {
+          "type": "logo",
+          "settings": {
+            "name": "Modern Cat"
+          }
+        },
+        "p5": {
+          "type": "logo",
+          "settings": {
+            "name": "TechRadar"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5"
+      ],
+      "settings": {}
+    },
+    "value": {
+      "type": "value-strip",
+      "settings": {
+        "bg": "teal"
+      }
+    },
+    "split": {
+      "type": "split-feature",
+      "blocks": {
+        "c1": {
+          "type": "point",
+          "settings": {
+            "text": "No scooping, ever. WARCAT does it within minutes of each use."
+          }
+        },
+        "c2": {
+          "type": "point",
+          "settings": {
+            "text": "No more litter-box smell. A carbon-sealed drawer traps odor between empties."
+          }
+        },
+        "c3": {
+          "type": "point",
+          "settings": {
+            "text": "A cleaner bed of litter every time — the way cats actually prefer it."
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "link_label": "See the full cycle"
+      }
+    },
+    "steps": {
+      "type": "steps",
+      "settings": {
+        "bg": "dark"
+      },
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "icon": "shield",
+            "title": "Your cat visits",
+            "text": "Precision weight sensors know the moment a cat steps in — and exactly when they leave."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "icon": "check",
+            "title": "A safe pause",
+            "text": "WARCAT waits a few minutes, double-checks the chamber is empty, then begins."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "icon": "arrow",
+            "title": "Quiet sift & seal",
+            "text": "The drum rotates slowly, sifting clumps into a carbon-sealed drawer below — under 40 dB."
+          }
+        },
+        "s4": {
+          "type": "step",
+          "settings": {
+            "icon": "user",
+            "title": "You get a ping",
+            "text": "The app logs the cycle and tells you when the drawer's full. Empty it weekly. Done."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ]
+    },
+    "features": {
+      "type": "feature-grid",
+      "blocks": {
+        "f1": {
+          "type": "feature",
+          "settings": {
+            "icon": "search",
+            "title": "Low-noise drive",
+            "text": "A gear-damped motor runs the cycle under 40 dB — quieter than a fridge hum. It won't scare a shy cat or wake the house at 3am."
+          }
+        },
+        "f2": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "90L mega chamber",
+            "text": "One of the roomiest globes on the market — comfortable for Maine Coons and big enough that multi-cat homes go a week between empties."
+          }
+        },
+        "f3": {
+          "type": "feature",
+          "settings": {
+            "icon": "check",
+            "title": "Carbon odor-lock",
+            "text": "Waste drops into a sealed, carbon-filtered drawer the moment it's sifted — so the smell goes with it instead of into your living room."
+          }
+        },
+        "f4": {
+          "type": "wide",
+          "settings": {
+            "icon": "bag",
+            "title": "Run it from your phone",
+            "text": "Start a clean, set quiet hours, track each cat and get a heads-up before the drawer is full — all from the WARCAT app on iOS and Android.",
+            "cta_label": "Explore the app"
+          }
+        },
+        "f5": {
+          "type": "feature",
+          "settings": {
+            "icon": "user",
+            "title": "Smart safety sensors",
+            "text": "Weight + infrared sensors halt and reverse the drum instantly if a paw or curious kitten enters mid-cycle. Safe for cats over 1 kg."
+          }
+        },
+        "f6": {
+          "type": "feature",
+          "settings": {
+            "icon": "arrow",
+            "title": "Health insights",
+            "text": "WARCAT weighs every cat and tracks visit frequency, surfacing the early changes vets ask about — straight to your phone."
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5",
+        "f6"
+      ],
+      "settings": {}
+    },
+    "spec": {
+      "type": "spec-band",
+      "blocks": {
+        "n1": {
+          "type": "stat",
+          "settings": {
+            "number": "90",
+            "unit": "L",
+            "label": "Globe capacity"
+          }
+        },
+        "n2": {
+          "type": "stat",
+          "settings": {
+            "number": "<40",
+            "unit": "dB",
+            "label": "Cleaning noise"
+          }
+        },
+        "n3": {
+          "type": "stat",
+          "settings": {
+            "number": "4",
+            "unit": "cats",
+            "label": "Comfortable for"
+          }
+        },
+        "n4": {
+          "type": "stat",
+          "settings": {
+            "number": "7",
+            "unit": "days",
+            "label": "Between empties"
+          }
+        }
+      },
+      "block_order": [
+        "n1",
+        "n2",
+        "n3",
+        "n4"
+      ],
+      "settings": {}
+    },
+    "compare": {
+      "type": "compare-table",
+      "blocks": {
+        "r1": {
+          "type": "row",
+          "settings": {
+            "feature": "Cleaning noise",
+            "us": "< 40 dB",
+            "them": "55–65 dB"
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "feature": "Globe capacity",
+            "us": "90 L XL",
+            "them": "55–76 L"
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "feature": "Per-cat health tracking",
+            "us": "Yes",
+            "them": "No"
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "feature": "Anti-pinch safety reverse",
+            "us": "Yes",
+            "them": "Weight only"
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "feature": "Home trial",
+            "us": "90 nights",
+            "them": "14–30 days"
+          }
+        },
+        "r6": {
+          "type": "row",
+          "settings": {
+            "feature": "Warranty",
+            "us": "2 years",
+            "them": "1 year"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6"
+      ],
+      "settings": {}
+    },
+    "safety": {
+      "type": "safety-grid",
+      "settings": {
+        "bg": "teal"
+      },
+      "blocks": {
+        "sc1": {
+          "type": "card",
+          "settings": {
+            "icon": "shield",
+            "title": "Triple-sensor protection",
+            "text": "Weight, infrared and anti-pinch sensors must all agree the chamber is empty before the drum ever moves."
+          }
+        },
+        "sc2": {
+          "type": "card",
+          "settings": {
+            "icon": "check",
+            "title": "Gentle, slow rotation",
+            "text": "The globe turns at a calm, even pace — no sudden jolts, no loud snaps. Cats habituate within days."
+          }
+        },
+        "sc3": {
+          "type": "card",
+          "settings": {
+            "icon": "user",
+            "title": "Kitten & senior friendly",
+            "text": "A low step-in, wide doorway and a 1 kg minimum threshold make it safe for growing kittens and older cats alike."
+          }
+        }
+      },
+      "block_order": [
+        "sc1",
+        "sc2",
+        "sc3"
+      ]
+    },
+    "reviews": {
+      "type": "review-wall",
+      "blocks": {
+        "v1": {
+          "type": "review",
+          "settings": {
+            "quote": "I genuinely forget the litter box exists now. It's silent — runs while I'm on calls and I never notice. Emptying once a week is the whole job.",
+            "name": "Jordan M.",
+            "initials": "JM",
+            "meta": "2 cats"
+          }
+        },
+        "v2": {
+          "type": "review",
+          "settings": {
+            "quote": "The app told me my older cat's weight was dropping before I'd noticed. Vet caught a thyroid issue early. That alone paid for it.",
+            "name": "Priya R.",
+            "initials": "PR",
+            "meta": "3 cats"
+          }
+        },
+        "v3": {
+          "type": "review",
+          "settings": {
+            "quote": "We have a Maine Coon and most auto boxes are too small. The 90L globe fits him easily and the house finally doesn't smell.",
+            "name": "Derek K.",
+            "initials": "DK",
+            "meta": "1 cat"
+          }
+        },
+        "v4": {
+          "type": "review",
+          "settings": {
+            "quote": "Took my nervous rescue about a week to trust it. Now she waits by it. The quiet motor is the real deal.",
+            "name": "Amara L.",
+            "initials": "AL",
+            "meta": "2 cats",
+            "stars_pct": 90
+          }
+        },
+        "v5": {
+          "type": "review",
+          "settings": {
+            "quote": "Setup was 10 minutes. Connected to wifi, picked quiet hours, done. Best money I've spent on my cats, full stop.",
+            "name": "Theo T.",
+            "initials": "TT",
+            "meta": "4 cats"
+          }
+        },
+        "v6": {
+          "type": "review",
+          "settings": {
+            "quote": "Three cats, one box, and it keeps up easily. The carbon drawer is the part nobody mentions — zero smell in a small apartment.",
+            "name": "Nadia S.",
+            "initials": "NS",
+            "meta": "3 cats"
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4",
+        "v5",
+        "v6"
+      ],
+      "settings": {
+        "cta_label": "Read all reviews"
+      }
+    },
+    "offer": {
+      "type": "offer",
+      "blocks": {
+        "o1": {
+          "type": "item",
+          "settings": {
+            "text": "WARCAT Smart Litter Box (90L)"
+          }
+        },
+        "o2": {
+          "type": "item",
+          "settings": {
+            "text": "Anti-tracking entry mat"
+          }
+        },
+        "o3": {
+          "type": "item",
+          "settings": {
+            "text": "3-month carbon filter set"
+          }
+        },
+        "o4": {
+          "type": "item",
+          "settings": {
+            "text": "30 sealed drawer liners"
+          }
+        }
+      },
+      "block_order": [
+        "o1",
+        "o2",
+        "o3",
+        "o4"
+      ],
+      "settings": {}
+    },
+    "guarantee": {
+      "type": "guarantee",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "question": "Is it really quiet enough for a small apartment?",
+            "answer": "<p>Yes. The cleaning cycle runs under 40 dB — quieter than a typical fridge. Most owners can't hear it from the next room, and you can schedule quiet hours so it never runs overnight.</p>"
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "question": "Will it work for multiple cats?",
+            "answer": "<p>Absolutely — it's built for it. The 90L globe and large sealed drawer comfortably handle up to four cats, and the app tracks each cat individually by weight.</p>"
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "question": "What litter does it use?",
+            "answer": "<p>Any quality clumping clip litter (clay or tofu/plant-based clumping). No proprietary refills, no subscriptions.</p>"
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "question": "Is it safe for kittens and senior cats?",
+            "answer": "<p>It's safe for any cat over 1 kg. Triple sensors stop and reverse the drum instantly if a cat enters mid-cycle, and the low, wide entry suits kittens and older cats.</p>"
+          }
+        },
+        "q5": {
+          "type": "qa",
+          "settings": {
+            "question": "How often do I actually empty it?",
+            "answer": "<p>For one to two cats, about once a week. The app tells you before the drawer is full, so you're never surprised.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "settings": {
+        "link_label": "See all FAQs"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "press",
+    "value",
+    "split",
+    "steps",
+    "features",
+    "spec",
+    "compare",
+    "safety",
+    "reviews",
+    "offer",
+    "guarantee",
+    "faq",
+    "newsletter"
+  ]
+}
