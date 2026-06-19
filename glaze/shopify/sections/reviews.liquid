@@ -9,7 +9,11 @@
         <div class="voice reveal"><div class="stars">★★★★★</div><p>"Glazed-donut skin is REAL. Goes right over makeup and never pills. TikTok was right."</p><div class="who"><span class="av">M</span><div>Mika R.<div class="vmeta">Verified buyer</div></div></div></div>
         <div class="voice reveal"><div class="stars">★★★★☆</div><p>"Smile lines look softer after a couple of weeks. The no-mess stick is genius for travel."</p><div class="who"><span class="av">A</span><div>Aria L.<div class="vmeta">Verified buyer</div></div></div></div>
       </div>
-      <div class="center" style="margin-top:2.5rem"><a href="/pages/reviews" class="btn btn-outline">{{ section.settings.button_label }}</a></div>
+      {%- if section.settings.button_link != blank -%}
+        <div class="center" style="margin-top:2.5rem"><a href="{{ section.settings.button_link }}" class="btn btn-outline">{{ section.settings.button_label }}</a></div>
+      {%- elsif pages['reviews'] != blank -%}
+        <div class="center" style="margin-top:2.5rem"><a href="{{ pages['reviews'].url }}" class="btn btn-outline">{{ section.settings.button_label }}</a></div>
+      {%- endif -%}
     </div>
   </section>
 {% schema %}

@@ -1,5 +1,7 @@
 {
   "current": {
+    "brand_name": "GLAZE",
+    "logo_height": 26,
     "color_blush": "#fdf0f4",
     "color_pink": "#f178a2",
     "color_pink_deep": "#d14e83",
@@ -8,6 +10,8 @@
   },
   "presets": {
     "GLAZE": {
+      "brand_name": "GLAZE",
+      "logo_height": 26,
       "color_blush": "#fdf0f4",
       "color_pink": "#f178a2",
       "color_pink_deep": "#d14e83",

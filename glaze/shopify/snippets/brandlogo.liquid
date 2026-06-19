@@ -1,0 +1,2 @@
+{%- comment -%} Logo image if uploaded, otherwise the brand-name text (defaults to GLAZE). {%- endcomment -%}
+{%- if settings.logo != blank -%}<img src="{{ settings.logo | image_url: width: 600 }}" alt="{{ settings.brand_name | default: 'GLAZE' }}" width="{{ settings.logo.width }}" height="{{ settings.logo.height }}" style="height:{{ settings.logo_height | default: 26 }}px;width:auto;display:block">{%- else -%}{{ settings.brand_name | default: 'GLAZE' }}{%- endif -%}

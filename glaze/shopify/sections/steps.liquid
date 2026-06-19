@@ -9,7 +9,11 @@
         <div class="step reveal"><div class="n">2</div><h3>Pat</h3><p>Tap in with a fingertip wherever you want extra plump and glow.</p><div class="when">AM · PM</div></div>
         <div class="step reveal"><div class="n">3</div><h3>Glow</h3><p>Watch it melt in to a dewy, glazed, never-greasy finish.</p><div class="when">Instantly</div></div>
       </div>
-      <div class="center" style="margin-top:2.5rem"><a href="/pages/how-to" class="btn btn-soft">{{ section.settings.button_label }}</a></div>
+      {%- if section.settings.button_link != blank -%}
+        <div class="center" style="margin-top:2.5rem"><a href="{{ section.settings.button_link }}" class="btn btn-soft">{{ section.settings.button_label }}</a></div>
+      {%- elsif pages['how-to'] != blank -%}
+        <div class="center" style="margin-top:2.5rem"><a href="{{ pages['how-to'].url }}" class="btn btn-soft">{{ section.settings.button_label }}</a></div>
+      {%- endif -%}
     </div>
   </section>
 {% schema %}

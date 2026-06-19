@@ -6,7 +6,7 @@
         <p class="hero__lede lede">Meet the <strong>Pink Collagen Glow Balm</strong> — salmon-DNA PDRN, collagen and plumping peptides in a mess-free stick that leaves skin plump, dewy and glazed anywhere you swipe it.</p>
         <div class="hero__cta">
           <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="btn btn-pink btn-lg">{{ section.settings.button_label }}</a>
-          <a href="/pages/how-to" class="btn btn-outline btn-lg">See how it works</a>
+          {% render 'navlink', handle: 'how-to', label: 'See how it works', classes: 'btn btn-outline btn-lg' %}
         </div>
         <div class="hero__meta"><span class="stars">★★★★★</span> <b>4.9</b>/5 from early reviewers · <b>from $18</b></div>
         <div class="hero__pills"><span>Salmon PDRN</span><span>Collagen + peptides</span><span>Glides on, no mess</span><span>Cruelty-free</span></div>

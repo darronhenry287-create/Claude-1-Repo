@@ -2,7 +2,7 @@
   <div class="wrap">
     <div class="footer__top">
       <div class="footer__brand">
-        <span class="logo">{{ shop.name | default: 'GLAZE' }}</span>
+        <span class="logo">{% render 'brandlogo' %}</span>
         <p>{{ section.settings.blurb }}</p>
         {%- if section.settings.show_social -%}
         <div style="display:flex;gap:1rem;margin-top:1rem">
@@ -14,27 +14,27 @@
       <div class="footer__col"><h4>Shop</h4>
         <a href="{{ routes.all_products_collection_url }}">The Glow Balm</a>
         <a href="{{ routes.all_products_collection_url }}">Multipacks &amp; Save</a>
-        <a href="/pages/how-to">How to Use</a>
+        {% render 'navlink', handle: 'how-to', label: 'How to Use' %}
       </div>
       <div class="footer__col"><h4>Learn</h4>
-        <a href="/pages/ingredients">Ingredients</a>
-        <a href="/pages/reviews">Reviews</a>
-        <a href="/pages/about">About</a>
-        <a href="/pages/faq">FAQ</a>
+        {% render 'navlink', handle: 'ingredients', label: 'Ingredients' %}
+        {% render 'navlink', handle: 'reviews', label: 'Reviews' %}
+        {% render 'navlink', handle: 'about', label: 'About' %}
+        {% render 'navlink', handle: 'faq', label: 'FAQ' %}
       </div>
       <div class="footer__col"><h4>Help</h4>
-        <a href="/pages/contact">Contact</a>
-        <a href="/pages/shipping-returns">Shipping &amp; Returns</a>
-        <a href="/pages/refund-policy">Refund Policy</a>
+        {% render 'navlink', handle: 'contact', label: 'Contact' %}
+        {% render 'navlink', handle: 'shipping-returns', label: 'Shipping & Returns' %}
+        {% render 'navlink', handle: 'refund-policy', label: 'Refund Policy' %}
       </div>
     </div>
     <div class="footer__bot">
-      <p>© {{ 'now' | date: '%Y' }} {{ shop.name | default: 'GLAZE' }}. All rights reserved. Made for glazed skin.</p>
+      <p>© {{ 'now' | date: '%Y' }} {{ settings.brand_name | default: 'GLAZE' }}. All rights reserved. Made for glazed skin.</p>
       <div class="footer__legal">
-        <a href="/pages/privacy-policy">Privacy</a>
-        <a href="/pages/terms-of-service">Terms</a>
-        <a href="/pages/refund-policy">Refund</a>
-        <a href="/pages/shipping-returns">Shipping</a>
+        {% render 'navlink', handle: 'privacy-policy', label: 'Privacy' %}
+        {% render 'navlink', handle: 'terms-of-service', label: 'Terms' %}
+        {% render 'navlink', handle: 'refund-policy', label: 'Refund' %}
+        {% render 'navlink', handle: 'shipping-returns', label: 'Shipping' %}
       </div>
     </div>
   </div>

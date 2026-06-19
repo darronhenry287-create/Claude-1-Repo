@@ -1,0 +1,7 @@
+{%- comment -%}
+  Renders a link to a Shopify Page ONLY if that page exists, so the
+  storefront never shows a 404 link before the merchant has created the page.
+  Params: handle (page handle), label (optional, defaults to page title),
+  classes (optional CSS classes), styles (optional inline styles).
+{%- endcomment -%}
+{%- assign target_page = pages[handle] -%}{%- if target_page != blank -%}<a href="{{ target_page.url }}"{% if classes != blank %} class="{{ classes }}"{% endif %}{% if styles != blank %} style="{{ styles }}"{% endif %}>{{ label | default: target_page.title }}</a>{%- endif -%}

@@ -20,6 +20,9 @@
   {
     "name": "Brand",
     "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo image (optional — replaces the text logo)" },
+      { "type": "text", "id": "brand_name", "label": "Brand name (text logo & footer)", "default": "GLAZE" },
+      { "type": "range", "id": "logo_height", "label": "Logo height", "min": 18, "max": 48, "step": 1, "unit": "px", "default": 26 },
       { "type": "image_picker", "id": "favicon", "label": "Favicon" },
       { "type": "text", "id": "free_shipping_threshold", "label": "Free shipping threshold (number, in store currency)", "default": "35" }
     ]

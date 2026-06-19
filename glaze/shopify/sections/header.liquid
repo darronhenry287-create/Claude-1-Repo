@@ -3,15 +3,16 @@
     <div class="header__left">
       <button class="iconbtn burger" data-action="open-menu" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
       <nav class="nav">
+        <a href="{{ routes.root_url }}">Home</a>
         <a href="{{ routes.all_products_collection_url }}">Shop</a>
-        <a href="/pages/how-to">How to Use</a>
+        {% render 'navlink', handle: 'how-to', label: 'How to Use' %}
       </nav>
     </div>
-    <a href="{{ routes.root_url }}" class="logo">{{ shop.name | default: 'GLAZE' }}</a>
+    <a href="{{ routes.root_url }}" class="logo">{% render 'brandlogo' %}</a>
     <div class="header__right">
       <nav class="nav">
-        <a href="/pages/ingredients">Ingredients</a>
-        <a href="/pages/reviews">Reviews</a>
+        {% render 'navlink', handle: 'ingredients', label: 'Ingredients' %}
+        {% render 'navlink', handle: 'reviews', label: 'Reviews' %}
       </nav>
       <a class="iconbtn" href="{{ routes.search_url }}" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></a>
       <a class="iconbtn" href="{{ routes.account_url }}" aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/></svg></a>
@@ -21,15 +22,16 @@
 </header>
 
 <div class="mobile" id="menu">
-  <div class="mobile__head"><span class="logo">{{ shop.name | default: 'GLAZE' }}</span><button class="iconbtn" data-action="close-menu" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+  <div class="mobile__head"><span class="logo">{% render 'brandlogo' %}</span><button class="iconbtn" data-action="close-menu" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
   <nav>
+    <a href="{{ routes.root_url }}">Home</a>
     <a href="{{ routes.all_products_collection_url }}">Shop the Balm</a>
-    <a href="/pages/how-to">How to Use</a>
-    <a href="/pages/ingredients">Ingredients</a>
-    <a href="/pages/reviews">Reviews</a>
-    <a href="/pages/about">About</a>
-    <a href="/pages/faq">FAQ</a>
-    <a href="/pages/contact">Contact</a>
+    {% render 'navlink', handle: 'how-to', label: 'How to Use' %}
+    {% render 'navlink', handle: 'ingredients', label: 'Ingredients' %}
+    {% render 'navlink', handle: 'reviews', label: 'Reviews' %}
+    {% render 'navlink', handle: 'about', label: 'About' %}
+    {% render 'navlink', handle: 'faq', label: 'FAQ' %}
+    {% render 'navlink', handle: 'contact', label: 'Contact' %}
   </nav>
 </div>
 
@@ -37,7 +39,7 @@
 {
   "name": "Header",
   "settings": [
-    { "type": "paragraph", "content": "Navigation links are set in the theme code for this single-product store. The logo uses your store name." }
+    { "type": "paragraph", "content": "Logo & brand name live in Theme settings → Brand. Nav links to How to Use / Ingredients / Reviews appear automatically once you create those Pages (see SETUP.md) — until then they stay hidden so the storefront never 404s." }
   ]
 }
 {% endschema %}

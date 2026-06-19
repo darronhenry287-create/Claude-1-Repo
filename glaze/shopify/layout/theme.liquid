@@ -6,7 +6,8 @@
   <meta name="theme-color" content="{{ settings.color_blush }}">
   <link rel="canonical" href="{{ canonical_url }}">
   {%- if settings.favicon != blank -%}<link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32 }}">{%- endif -%}
-  <title>{{ page_title }}{% unless page_title contains shop.name %} &middot; {{ shop.name }}{% endunless %}</title>
+  {%- assign brand = settings.brand_name | default: shop.name -%}
+  <title>{{ page_title }}{% unless page_title contains brand %} &middot; {{ brand }}{% endunless %}</title>
   {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
   {{ content_for_header }}
   <script>document.documentElement.classList.add('js');</script>

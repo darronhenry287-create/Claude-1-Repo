@@ -27,9 +27,9 @@
         <div class="pinfo__rate"><span class="stars">★★★★★</span> {{ section.settings.rating_text }} {%- if section.settings.reviews_url != blank %} · <a href="{{ section.settings.reviews_url }}">read reviews</a>{% endif -%}</div>
         {%- assign cv = product.selected_or_first_available_variant -%}
         <div class="pinfo__price">
-          <span class="now" id="p-now">{{ cv.price | money }}</span>
+          <span class="now" id="p-now">{% if cv.price > 0 %}{{ cv.price | money }}{% else %}{{ section.settings.price_fallback | default: 'From $18' }}{% endif %}</span>
           <span class="was" id="p-was" {% unless cv.compare_at_price > cv.price %}style="display:none"{% endunless %}>{{ cv.compare_at_price | money }}</span>
-          <span class="save">Buy more, save more</span>
+          {%- if product.variants.size > 1 -%}<span class="save">Buy more, save more</span>{%- endif -%}
         </div>
         <div class="pinfo__desc">{% if product.description != blank %}{{ product.description }}{% else %}{{ section.settings.fallback_desc }}{% endif %}</div>
 
@@ -90,7 +90,7 @@
     <div class="stickybar__in">
       <div class="stickybar__info">
         <div class="stickybar__thumb">{% if product.featured_media %}<img src="{{ product.featured_media | image_url: width: 96 }}" width="46" height="46" alt="">{% else %}<img src="{{ 'hero-product.jpg' | asset_url }}" width="46" height="46" alt="">{% endif %}</div>
-        <div><div class="stickybar__name">{{ product.title }}</div><div class="stickybar__price" id="sticky-price">{{ cv.price | money }}</div></div>
+        <div><div class="stickybar__name">{{ product.title | default: 'Pink Collagen Glow Balm' }}</div><div class="stickybar__price" id="sticky-price">{% if cv.price > 0 %}{{ cv.price | money }}{% else %}{{ section.settings.price_fallback | default: 'From $18' }}{% endif %}</div></div>
       </div>
       <button type="submit" form="product-form" class="btn btn-pink">Add to bag</button>
     </div>
@@ -106,10 +106,11 @@
     { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4.9 · 124 reviews" },
     { "type": "url", "id": "reviews_url", "label": "Reviews link" },
     { "type": "text", "id": "badge", "label": "Image badge", "default": "★ 4.9 · bestseller" },
+    { "type": "text", "id": "price_fallback", "label": "Price placeholder (shown only before a real price is set)", "default": "From $18" },
     { "type": "richtext", "id": "fallback_desc", "label": "Description (used if the product has none)", "default": "<p>The melting balm that glazes skin in one swipe. Salmon-DNA PDRN, collagen and plumping peptides help skin look instantly plumper, smoother and dewier — anywhere it's dry or creasing. Mess-free stick, glides on over or under makeup.</p>" },
     { "type": "checkbox", "id": "show_trust", "label": "Show trust row", "default": true },
     { "type": "checkbox", "id": "show_sticky", "label": "Show sticky add-to-cart bar", "default": true },
-    { "type": "paragraph", "content": "Sell the 3 SKUs (1 / 2 / 3-pack) as the product's variants — they render as the pack selector automatically." },
+    { "type": "paragraph", "content": "Pack selector: add a 'Pack' option to this product with 3 variants — 1 balm / 2 balms / 3 balms — and set a price on each. They render as the buy-more-save-more selector automatically. Until then the price shows the placeholder above. See SETUP.md." },
     { "type": "richtext", "id": "how_to_use", "label": "How to use", "default": "<p>Swipe directly onto clean skin or over makeup, anywhere you want a plump, dewy boost — under-eyes, smile lines, forehead, neck and lips. Pat in with a fingertip. Use morning and night, as often as you like.</p>" },
     { "type": "richtext", "id": "ingredients", "label": "Key ingredients", "default": "<p>Salmon PDRN (Polydeoxyribonucleotide), Hydrolyzed Collagen, Hyaluronic Acid, plumping peptides, Caffeine, Vitamin E (Tocopherol). Always patch test. Full INCI on the carton.</p>" },
     { "type": "richtext", "id": "about", "label": "About the balm", "default": "<p>A K-beauty-inspired pink collagen balm in a hygienic, mess-free twist-up stick. Designed to plump, hydrate and glaze on contact — for that glass-skin glow anywhere, anytime.</p>" },

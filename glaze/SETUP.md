@@ -10,6 +10,21 @@ A single-product Shopify store for the **Pink Collagen Glow Balm**, sold as **1 
 
 ---
 
+## ⚠️ A fresh upload looks "unfinished" until you do steps 2 & 4 — this is expected
+
+When you first connect the theme to a brand-new store, Shopify attaches a placeholder **"Default product"** (£0.00, one variant) and you have **no Pages yet**. So before setup you'll see:
+
+| You see… | Why | Fixed by |
+|----------|-----|----------|
+| Price shows **£0.00** / "From $18" | The placeholder product has no price | **Step 2** — add the product with prices |
+| **No pack selector** (1/2/3-pack) in the buy box | The placeholder product has only one variant | **Step 2** — add the `Pack` option with 3 variants |
+| **Logo says "My Store"** | That's the default store name | **Step 5** — set Brand name / upload a logo (now defaults to **GLAZE**) |
+| Header has **no "How to Use / Ingredients / Reviews"** links | Those Pages don't exist yet | **Step 4** — create the Pages; links appear automatically |
+
+**The home page works** — click the logo or the new **Home** link to reach it. Nav links to pages you haven't created **stay hidden on purpose** so the storefront never shows a broken (404) link. As you create each Page in step 4, its link appears by itself.
+
+---
+
 ## 1. Upload the theme
 Online Store → Themes → **Add theme → Upload zip file** → `glaze-shopify-theme.zip`.
 Click **Customize** to preview, then **Publish** when ready. Hard-refresh (Cmd/Ctrl+Shift+R) after any re-upload so new CSS isn't cached.
@@ -53,7 +68,7 @@ Online Store → **Pages → Add page**. Use these exact **titles** (the handle 
 ## 5. Theme settings
 Customize → **Theme settings**:
 - **Colours** — blush background, brand pink, button pink, ink. (Defaults match the design.)
-- **Brand** — favicon, and **Free shipping threshold** (default `35`) which drives the cart/drawer free-shipping bar.
+- **Brand** — **Logo image** (optional; replaces the text logo), **Brand name** (the text logo & footer name — defaults to **GLAZE**, change it here instead of renaming your store), **Logo height**, favicon, and **Free shipping threshold** (default `35`) which drives the cart/drawer free-shipping bar.
 - **Social** — your TikTok and Instagram URLs (shown in the footer).
 - **Announcement bar** + each home **section** (hero, lifestyle banner, multipack, gallery, guarantee, etc.) are editable in the editor — headings, buttons, and links.
 
