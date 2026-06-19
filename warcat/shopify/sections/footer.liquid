@@ -7,7 +7,7 @@
       {%- if section.settings.cta_text != blank -%}<p>{{ section.settings.cta_text }}</p>{%- endif -%}
     </div>
     <div class="cta-band__actions">
-      <a href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" class="btn btn-dark btn-lg">{{ section.settings.cta_label | default: 'Shop WARCAT' }}</a>
+      <a href="{% if section.settings.cta_link != blank %}{{ section.settings.cta_link }}{% else %}{% render 'shop-url' %}{% endif %}" class="btn btn-dark btn-lg">{{ section.settings.cta_label | default: 'Shop WARCAT' }}</a>
       {%- if section.settings.cta_link2_label != blank -%}<a href="{{ section.settings.cta_link2 | default: routes.root_url }}" class="btn btn-outline btn-lg">{{ section.settings.cta_link2_label }}</a>{%- endif -%}
     </div>
   </div>

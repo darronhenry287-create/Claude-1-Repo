@@ -1,0 +1,16 @@
+{%- liquid
+  assign mp = all_products['warcat-smart-litter-box']
+  unless mp
+    for p in collections.all.products
+      unless p.tags contains 'accessories' or p.tags contains 'bundles' or p.tags contains 'accessory' or p.tags contains 'bundle'
+        assign mp = p
+        break
+      endunless
+    endfor
+  endunless
+  if mp != blank
+    echo mp.url
+  else
+    echo routes.all_products_collection_url
+  endif
+-%}

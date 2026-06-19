@@ -5,7 +5,7 @@
     <p class="lede mt-1" style="margin-inline:auto;max-width:42ch">{{ 'general.404.subtext' | t }}</p>
     <div class="btn-row mt-3" style="justify-content:center">
       <a href="{{ routes.root_url }}" class="btn btn-primary btn-lg">{{ 'general.404.back' | t }}</a>
-      <a href="{{ routes.all_products_collection_url }}" class="btn btn-outline btn-lg">Shop WARCAT</a>
+      <a href="{% render 'shop-url' %}" class="btn btn-outline btn-lg">Shop WARCAT</a>
     </div>
   </div>
 </section>

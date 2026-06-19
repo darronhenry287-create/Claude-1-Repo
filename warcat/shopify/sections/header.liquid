@@ -1,6 +1,5 @@
 {%- liquid
   assign logo_mark = '<svg class="logo__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#0fb5a6"/><path d="M9 13.5 8 8.5l4 3.2a8.5 8.5 0 0 1 8 0l4-3.2-1 5" stroke="#04332e" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="12.5" cy="17" r="1.4" fill="#04332e"/><circle cx="19.5" cy="17" r="1.4" fill="#04332e"/><path d="M16 19.5v1.4m0 0-1.6.8m1.6-.8 1.6.8" stroke="#04332e" stroke-width="1.6" stroke-linecap="round"/></svg>'
-  assign cta_url = section.settings.cta_link | default: routes.all_products_collection_url
 -%}
 <header class="header">
   <div class="header__in">
@@ -26,7 +25,7 @@
       <a class="iconbtn desk" href="{{ routes.search_url }}" aria-label="Search">{% render 'icon', name: 'search' %}</a>
       <a class="iconbtn desk" href="{{ routes.account_url }}" aria-label="Account">{% render 'icon', name: 'user' %}</a>
       <a class="iconbtn" href="{{ routes.cart_url }}" data-action="open-cart" aria-label="Cart">{% render 'icon', name: 'bag' %}<span class="cartnum{% if cart.item_count > 0 %} show{% endif %}">{{ cart.item_count }}</span></a>
-      <a href="{{ cta_url }}" class="btn btn-primary btn-sm cta-mini">{{ section.settings.cta_label | default: 'Shop now' }}</a>
+      <a href="{% if section.settings.cta_link != blank %}{{ section.settings.cta_link }}{% else %}{% render 'shop-url' %}{% endif %}" class="btn btn-primary btn-sm cta-mini">{{ section.settings.cta_label | default: 'Shop now' }}</a>
     </div>
   </div>
 </header>
@@ -41,7 +40,7 @@
       <a href="{{ link.url }}">{{ link.title }}</a>
     {%- endfor -%}
   </nav>
-  <div class="mobile__foot"><a href="{{ cta_url }}" class="btn btn-primary btn-block btn-lg">Shop the WARCAT</a></div>
+  <div class="mobile__foot"><a href="{% if section.settings.cta_link != blank %}{{ section.settings.cta_link }}{% else %}{% render 'shop-url' %}{% endif %}" class="btn btn-primary btn-block btn-lg">Shop the WARCAT</a></div>
 </div>
 
 {% schema %}
