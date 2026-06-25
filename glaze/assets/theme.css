@@ -365,6 +365,7 @@ em { font-style: italic; }
 .tier__price { text-align: right; font-family: var(--serif); }
 .tier__price .p { font-size: 1.15rem; }
 .tier__price .u { font-family: var(--sans); font-size: 0.7rem; color: var(--faint); display: block; }
+.tier__was { font-family: var(--sans); font-size: 0.78rem; color: var(--faint); text-decoration: line-through; margin-left: 0.35rem; }
 .tier__flag { position: absolute; top: -10px; right: 14px; background: var(--pink-deep); color: #fff; font-family: var(--sans); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.06em; padding: 0.22em 0.7em; border-radius: var(--pill); text-transform: uppercase; }
 
 .qtyrow { display: flex; gap: 0.7rem; margin-bottom: 1rem; }

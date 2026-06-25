@@ -42,14 +42,32 @@
             {%- endfor -%}
           </select>
 
-          {%- if product.variants.size > 1 -%}
-          <label class="opt-label">Choose your pack</label>
+          <input type="hidden" name="quantity" id="pack-qty" value="1">
+
+          {%- if section.settings.show_packs -%}
+          <label class="opt-label">{{ section.settings.packs_heading | default: 'Choose your pack' }}</label>
           <div class="tiers">
-            {%- for variant in product.variants -%}
-              <label class="tier {% if variant == cv %}active{% endif %}" data-variant-id="{{ variant.id }}" data-price="{{ variant.price | divided_by: 100.0 }}" data-qty="1" data-label="{{ variant.title | escape }}">
+            {%- assign first_v = product.selected_or_first_available_variant -%}
+            {%- for i in (1..3) -%}
+              {%- assign idx = i | minus: 1 -%}
+              {%- assign v = product.variants[idx] -%}
+              {%- case i -%}
+                {%- when 1 -%}{%- assign pname = section.settings.pack1_name -%}{%- assign pnote = section.settings.pack1_note -%}{%- assign pbadge = section.settings.pack1_badge -%}{%- assign pdemo = section.settings.pack1_price -%}{%- assign pdemo_cmp = section.settings.pack1_compare -%}
+                {%- when 2 -%}{%- assign pname = section.settings.pack2_name -%}{%- assign pnote = section.settings.pack2_note -%}{%- assign pbadge = section.settings.pack2_badge -%}{%- assign pdemo = section.settings.pack2_price -%}{%- assign pdemo_cmp = section.settings.pack2_compare -%}
+                {%- when 3 -%}{%- assign pname = section.settings.pack3_name -%}{%- assign pnote = section.settings.pack3_note -%}{%- assign pbadge = section.settings.pack3_badge -%}{%- assign pdemo = section.settings.pack3_price -%}{%- assign pdemo_cmp = section.settings.pack3_compare -%}
+              {%- endcase -%}
+              {%- if v != blank and v.price > 0 -%}
+                {%- assign add_id = v.id -%}{%- assign add_qty = 1 -%}{%- assign now_c = v.price -%}{%- assign cmp_c = v.compare_at_price -%}
+              {%- elsif first_v.price > 0 -%}
+                {%- assign add_id = first_v.id -%}{%- assign add_qty = i -%}{%- assign now_c = first_v.price | times: i -%}{%- assign cmp_c = 0 -%}
+              {%- else -%}
+                {%- assign add_id = first_v.id -%}{%- assign add_qty = i -%}{%- assign now_c = pdemo | times: 100 -%}{%- if pdemo_cmp != blank -%}{%- assign cmp_c = pdemo_cmp | times: 100 -%}{%- else -%}{%- assign cmp_c = 0 -%}{%- endif -%}
+              {%- endif -%}
+              <label class="tier{% if i == 1 %} active{% endif %}" data-variant-id="{{ add_id }}" data-cart-qty="{{ add_qty }}" data-total="{{ now_c | divided_by: 100.0 }}" data-compare="{{ cmp_c | divided_by: 100.0 }}" data-label="{{ pname | escape }}">
+                {%- if pbadge != blank -%}<span class="tier__flag">{{ pbadge }}</span>{%- endif -%}
                 <span class="tier__radio"></span>
-                <div class="tier__body"><div class="tier__title">{{ variant.title }}</div>{%- if variant.compare_at_price > variant.price %}<div class="tier__sub">Save {{ variant.compare_at_price | minus: variant.price | money }}</div>{%- endif -%}</div>
-                <div class="tier__price"><span class="p">{{ variant.price | money }}</span></div>
+                <div class="tier__body"><div class="tier__title">{{ pname }}</div>{%- if pnote != blank -%}<div class="tier__sub">{{ pnote }}</div>{%- endif -%}</div>
+                <div class="tier__price"><span class="p">{{ now_c | money }}</span>{%- if cmp_c > now_c -%} <span class="tier__was">{{ cmp_c | money }}</span>{%- endif -%}</div>
               </label>
             {%- endfor -%}
           </div>
@@ -110,7 +128,24 @@
     { "type": "richtext", "id": "fallback_desc", "label": "Description (used if the product has none)", "default": "<p>The melting balm that glazes skin in one swipe. Salmon-DNA PDRN, collagen and plumping peptides help skin look instantly plumper, smoother and dewier — anywhere it's dry or creasing. Mess-free stick, glides on over or under makeup.</p>" },
     { "type": "checkbox", "id": "show_trust", "label": "Show trust row", "default": true },
     { "type": "checkbox", "id": "show_sticky", "label": "Show sticky add-to-cart bar", "default": true },
-    { "type": "paragraph", "content": "Pack selector: add a 'Pack' option to this product with 3 variants — 1 balm / 2 balms / 3 balms — and set a price on each. They render as the buy-more-save-more selector automatically. Until then the price shows the placeholder above. See SETUP.md." },
+    { "type": "paragraph", "content": "PACK SELECTOR — always visible. The 3 packs below map to your product's 1st / 2nd / 3rd variant. Add a 'Pack' option with 3 variants (1 / 2 / 3 balms) + real prices and they take over automatically. With one variant, packs add quantities 1/2/3. The prices here only show until real variant prices exist. See SETUP.md." },
+    { "type": "checkbox", "id": "show_packs", "label": "Show pack selector", "default": true },
+    { "type": "text", "id": "packs_heading", "label": "Pack selector heading", "default": "Choose your pack" },
+    { "type": "text", "id": "pack1_name", "label": "Pack 1 · name", "default": "Single balm" },
+    { "type": "text", "id": "pack1_note", "label": "Pack 1 · subtitle", "default": "Try the glow" },
+    { "type": "text", "id": "pack1_price", "label": "Pack 1 · demo price (number)", "default": "18" },
+    { "type": "text", "id": "pack1_compare", "label": "Pack 1 · demo compare-at (number, optional)" },
+    { "type": "text", "id": "pack1_badge", "label": "Pack 1 · badge (optional)" },
+    { "type": "text", "id": "pack2_name", "label": "Pack 2 · name", "default": "Duo — save $4" },
+    { "type": "text", "id": "pack2_note", "label": "Pack 2 · subtitle", "default": "Keep one, share one" },
+    { "type": "text", "id": "pack2_price", "label": "Pack 2 · demo price (number)", "default": "32" },
+    { "type": "text", "id": "pack2_compare", "label": "Pack 2 · demo compare-at (number, optional)", "default": "36" },
+    { "type": "text", "id": "pack2_badge", "label": "Pack 2 · badge (optional)", "default": "Most popular" },
+    { "type": "text", "id": "pack3_name", "label": "Pack 3 · name", "default": "Trio — save $9" },
+    { "type": "text", "id": "pack3_note", "label": "Pack 3 · subtitle", "default": "17% off + free shipping" },
+    { "type": "text", "id": "pack3_price", "label": "Pack 3 · demo price (number)", "default": "45" },
+    { "type": "text", "id": "pack3_compare", "label": "Pack 3 · demo compare-at (number, optional)", "default": "54" },
+    { "type": "text", "id": "pack3_badge", "label": "Pack 3 · badge (optional)", "default": "Best value" },
     { "type": "richtext", "id": "how_to_use", "label": "How to use", "default": "<p>Swipe directly onto clean skin or over makeup, anywhere you want a plump, dewy boost — under-eyes, smile lines, forehead, neck and lips. Pat in with a fingertip. Use morning and night, as often as you like.</p>" },
     { "type": "richtext", "id": "ingredients", "label": "Key ingredients", "default": "<p>Salmon PDRN (Polydeoxyribonucleotide), Hydrolyzed Collagen, Hyaluronic Acid, plumping peptides, Caffeine, Vitamin E (Tocopherol). Always patch test. Full INCI on the carton.</p>" },
     { "type": "richtext", "id": "about", "label": "About the balm", "default": "<p>A K-beauty-inspired pink collagen balm in a hygienic, mess-free twist-up stick. Designed to plump, hydrate and glaze on contact — for that glass-skin glow anywhere, anytime.</p>" },

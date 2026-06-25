@@ -109,7 +109,7 @@
       const tier = $('.tier.active', scope), qin = $('.qty input', scope);
       if (qin) qty = Math.max(1, parseInt(qin.value) || 1);
       if (opts.length) variant = opts.join(' / ');
-      if (tier) { price = parseFloat(tier.dataset.price); qty *= parseInt(tier.dataset.qty || '1'); variant = (variant ? variant + ' · ' : '') + tier.dataset.label; }
+      if (tier) { let t = parseFloat(tier.dataset.total); if (isNaN(t)) t = parseFloat(tier.dataset.price || '0') * parseInt(tier.dataset.qty || '1'); price = t; qty = 1; variant = (variant ? variant + ' · ' : '') + (tier.dataset.label || ''); }
       add({ id, name, price, qty, variant, img });
       openCart();
     }));
@@ -242,12 +242,15 @@
     tiers.forEach(t => t.classList.toggle('active', t === a));
     const vid = a.dataset.variantId, vsel = document.getElementById('variant-id');
     if (vid && vsel) vsel.value = vid; // LIVE: pack tier -> Shopify variant
-    const price = parseFloat(a.dataset.price), qty = parseInt(a.dataset.qty || '1'), tot = price * qty;
+    const qin = document.getElementById('pack-qty');
+    if (qin) qin.value = a.dataset.cartQty || a.dataset.qty || '1'; // LIVE: quantity to add
+    let tot = parseFloat(a.dataset.total);
+    if (isNaN(tot)) tot = parseFloat(a.dataset.price || '0') * parseInt(a.dataset.qty || '1'); // legacy preview tiers
     const now = $('#p-now'), was = $('#p-was'), sp = $('#sticky-price');
-    if (now) now.textContent = money(tot);
+    if (now && tot) now.textContent = money(tot);
     const cmp = parseFloat(a.dataset.compare || '0');
-    if (was && cmp) { was.style.display = ''; was.textContent = money(cmp); } else if (was) was.style.display = 'none';
-    if (sp) sp.textContent = money(tot);
+    if (was) { if (cmp && cmp > tot) { was.style.display = ''; was.textContent = money(cmp); } else was.style.display = 'none'; }
+    if (sp && tot) sp.textContent = money(tot);
   }
   tiers.forEach(t => t.addEventListener('click', () => syncTier(t)));
 
