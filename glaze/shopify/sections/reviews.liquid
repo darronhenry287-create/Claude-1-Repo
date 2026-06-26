@@ -1,13 +1,19 @@
 <section class="section" style="background:var(--paper);border-block:1px solid var(--line)">
     <div class="wrap">
       <div class="sec-head center">
-        <span class="kicker" style="justify-content:center">The reviews are in</span>
+        <span class="kicker" style="justify-content:center">{{ section.settings.kicker }}</span>
         <h2>{{ section.settings.heading }}</h2>
       </div>
       <div class="grid voices__grid">
-        <div class="voice reveal"><div class="stars">★★★★★</div><p>"My under-eyes look so plump and bright. I keep one in my bag and swipe it all day."</p><div class="who"><span class="av">J</span><div>Jenna T.<div class="vmeta">Verified buyer</div></div></div></div>
-        <div class="voice reveal"><div class="stars">★★★★★</div><p>"Glazed-donut skin is REAL. Goes right over makeup and never pills. TikTok was right."</p><div class="who"><span class="av">M</span><div>Mika R.<div class="vmeta">Verified buyer</div></div></div></div>
-        <div class="voice reveal"><div class="stars">★★★★☆</div><p>"Smile lines look softer after a couple of weeks. The no-mess stick is genius for travel."</p><div class="who"><span class="av">A</span><div>Aria L.<div class="vmeta">Verified buyer</div></div></div></div>
+        {%- if section.settings.review1_quote != blank -%}
+        <div class="voice reveal"><div class="stars">{{ section.settings.review1_stars }}</div><p>{{ section.settings.review1_quote }}</p><div class="who"><span class="av">{{ section.settings.review1_name | slice: 0 }}</span><div>{{ section.settings.review1_name }}<div class="vmeta">{{ section.settings.review1_meta }}</div></div></div></div>
+        {%- endif -%}
+        {%- if section.settings.review2_quote != blank -%}
+        <div class="voice reveal"><div class="stars">{{ section.settings.review2_stars }}</div><p>{{ section.settings.review2_quote }}</p><div class="who"><span class="av">{{ section.settings.review2_name | slice: 0 }}</span><div>{{ section.settings.review2_name }}<div class="vmeta">{{ section.settings.review2_meta }}</div></div></div></div>
+        {%- endif -%}
+        {%- if section.settings.review3_quote != blank -%}
+        <div class="voice reveal"><div class="stars">{{ section.settings.review3_stars }}</div><p>{{ section.settings.review3_quote }}</p><div class="who"><span class="av">{{ section.settings.review3_name | slice: 0 }}</span><div>{{ section.settings.review3_name }}<div class="vmeta">{{ section.settings.review3_meta }}</div></div></div></div>
+        {%- endif -%}
       </div>
       {%- if section.settings.button_link != blank -%}
         <div class="center" style="margin-top:2.5rem"><a href="{{ section.settings.button_link }}" class="btn btn-outline">{{ section.settings.button_label }}</a></div>
@@ -20,9 +26,25 @@
 {
   "name": "Reviews",
   "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The reviews are in" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Glazed and obsessed." },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Read more reviews" },
-    { "type": "url", "id": "button_link", "label": "Button link" }
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "paragraph", "content": "Review 1" },
+    { "type": "text", "id": "review1_stars", "label": "Stars", "default": "★★★★★" },
+    { "type": "textarea", "id": "review1_quote", "label": "Quote", "default": "\"My under-eyes look so plump and bright. I keep one in my bag and swipe it all day.\"" },
+    { "type": "text", "id": "review1_name", "label": "Reviewer name", "default": "Jenna T." },
+    { "type": "text", "id": "review1_meta", "label": "Meta line", "default": "Verified buyer" },
+    { "type": "paragraph", "content": "Review 2" },
+    { "type": "text", "id": "review2_stars", "label": "Stars", "default": "★★★★★" },
+    { "type": "textarea", "id": "review2_quote", "label": "Quote", "default": "\"Glazed-donut skin is REAL. Goes right over makeup and never pills. TikTok was right.\"" },
+    { "type": "text", "id": "review2_name", "label": "Reviewer name", "default": "Mika R." },
+    { "type": "text", "id": "review2_meta", "label": "Meta line", "default": "Verified buyer" },
+    { "type": "paragraph", "content": "Review 3" },
+    { "type": "text", "id": "review3_stars", "label": "Stars", "default": "★★★★☆" },
+    { "type": "textarea", "id": "review3_quote", "label": "Quote", "default": "\"Smile lines look softer after a couple of weeks. The no-mess stick is genius for travel.\"" },
+    { "type": "text", "id": "review3_name", "label": "Reviewer name", "default": "Aria L." },
+    { "type": "text", "id": "review3_meta", "label": "Meta line", "default": "Verified buyer" }
   ],
   "presets": [ { "name": "Reviews" } ]
 }

@@ -1,18 +1,24 @@
 <section class="hero">
     <div class="hero__inner">
       <div class="hero__copy">
-        <span class="kicker">New · the pink glow balm</span>
-        <h1>{{ section.settings.heading }}</h1>
-        <p class="hero__lede lede">Meet the <strong>Pink Collagen Glow Balm</strong> — salmon-DNA PDRN, collagen and plumping peptides in a mess-free stick that leaves skin plump, dewy and glazed anywhere you swipe it.</p>
+        {%- if section.settings.kicker != blank -%}<span class="kicker">{{ section.settings.kicker }}</span>{%- endif -%}
+        <h1>{{ section.settings.heading_line1 }}{% if section.settings.heading_line2 != blank %}<br>{{ section.settings.heading_line2 }}{% endif %}</h1>
+        {%- if section.settings.lede != blank -%}<div class="hero__lede lede">{{ section.settings.lede }}</div>{%- endif -%}
         <div class="hero__cta">
-          <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="btn btn-pink btn-lg">{{ section.settings.button_label }}</a>
-          {% render 'navlink', handle: 'how-to', label: 'See how it works', classes: 'btn btn-outline btn-lg' %}
+          {%- if section.settings.button_label != blank -%}<a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="btn btn-pink btn-lg">{{ section.settings.button_label }}</a>{%- endif -%}
+          {%- if section.settings.secondary_label != blank -%}{% render 'navlink', handle: section.settings.secondary_page, label: section.settings.secondary_label, classes: 'btn btn-outline btn-lg' %}{%- endif -%}
         </div>
-        <div class="hero__meta"><span class="stars">★★★★★</span> <b>4.9</b>/5 from early reviewers · <b>from $18</b></div>
-        <div class="hero__pills"><span>Salmon PDRN</span><span>Collagen + peptides</span><span>Glides on, no mess</span><span>Cruelty-free</span></div>
+        {%- if section.settings.meta != blank -%}<div class="hero__meta"><span class="stars">★★★★★</span> {{ section.settings.meta }}</div>{%- endif -%}
+        {%- if section.settings.pills != blank -%}<div class="hero__pills">{% assign pills = section.settings.pills | split: ',' %}{% for p in pills %}<span>{{ p | strip }}</span>{% endfor %}</div>{%- endif -%}
       </div>
       <div class="hero__visual">
-        <div class="hero__frame has-photo"><img src="{{ 'model-hero.jpg' | asset_url }}" alt="Model with glazed glowing skin holding the Pink Collagen Glow Balm" width="1080" height="1350"></div>
+        <div class="hero__frame has-photo">
+          {%- if section.settings.image != blank -%}
+            <img src="{{ section.settings.image | image_url: width: 1080 }}" alt="{{ section.settings.image.alt | escape | default: 'GLAZE pink collagen glow balm' }}" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}">
+          {%- else -%}
+            <img src="{{ 'model-hero.jpg' | asset_url }}" alt="Model with glazed glowing skin holding the Pink Collagen Glow Balm" width="1080" height="1350">
+          {%- endif -%}
+        </div>
       </div>
     </div>
   </section>
@@ -20,9 +26,17 @@
 {
   "name": "Hero",
   "settings": [
-    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Glazed skin,<br>in one <em>swipe</em>." },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the balm" },
-    { "type": "url", "id": "button_link", "label": "Button link" }
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "New · the pink glow balm" },
+    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Glazed skin," },
+    { "type": "inline_richtext", "id": "heading_line2", "label": "Heading line 2 (supports italics/bold)", "default": "in one <em>swipe</em>." },
+    { "type": "richtext", "id": "lede", "label": "Intro paragraph", "default": "<p>Meet the <strong>Pink Collagen Glow Balm</strong> — salmon-DNA PDRN, collagen and plumping peptides in a mess-free stick that leaves skin plump, dewy and glazed anywhere you swipe it.</p>" },
+    { "type": "text", "id": "button_label", "label": "Primary button label", "default": "Shop the balm" },
+    { "type": "url", "id": "button_link", "label": "Primary button link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary button label", "default": "See how it works" },
+    { "type": "text", "id": "secondary_page", "label": "Secondary button → page handle", "default": "how-to" },
+    { "type": "text", "id": "meta", "label": "Rating / meta line", "default": "4.9/5 from early reviewers · from $18" },
+    { "type": "text", "id": "pills", "label": "Feature pills (comma-separated)", "default": "Salmon PDRN, Collagen + peptides, Glides on, no mess, Cruelty-free" },
+    { "type": "image_picker", "id": "image", "label": "Hero image" }
   ],
   "presets": [ { "name": "Hero" } ]
 }

@@ -257,12 +257,23 @@
   /* ---- qty steppers ---- */
   $$('.qty').forEach(q => { const i = $('input', q); $$('button', q).forEach(b => b.addEventListener('click', () => { let v = parseInt(i.value) || 1; v += b.dataset.step === '+' ? 1 : -1; i.value = Math.max(1, v); })); });
 
-  /* ---- gallery (legacy main+thumbs) ---- */
+  /* ---- gallery (main image + thumbnails below) ---- */
   $$('.pthumb').forEach(t => t.addEventListener('click', () => {
-    $$('.pthumb').forEach(x => x.classList.remove('active')); t.classList.add('active');
-    const main = $('#pg-main'), thumb = $('img', t), mainImg = main && main.querySelector('img');
+    const scope = t.closest('.pgallery') || document;
+    $$('.pthumb', scope).forEach(x => x.classList.remove('active')); t.classList.add('active');
+    const main = $('#pg-main', scope), thumb = $('img', t), mainImg = main && main.querySelector('img');
     if (mainImg && thumb) mainImg.src = thumb.dataset.full || thumb.src;
   }));
+  /* gallery arrows cycle the thumbnails */
+  const pgal = $('#pgallery-main');
+  if (pgal) {
+    const pthumbs = $$('.pthumb', pgal);
+    $$('[data-pgal]', pgal).forEach(b => b.addEventListener('click', () => {
+      let i = pthumbs.findIndex(t => t.classList.contains('active')); if (i < 0) i = 0;
+      i = (i + (b.dataset.pgal === 'next' ? 1 : -1) + pthumbs.length) % pthumbs.length;
+      pthumbs[i] && pthumbs[i].click();
+    }));
+  }
 
   /* ---- PDP marketing carousel ---- */
   const car = $('#pcarousel');

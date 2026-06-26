@@ -1,18 +1,21 @@
 <section class="section news" style="background:linear-gradient(135deg,var(--pink),var(--pink-deep));color:#fff">
     <div class="wrap wrap--narrow">
-      <span class="kicker" style="justify-content:center;color:#fff">10% off your first glow</span>
-      <h2 style="color:#fff;margin-top:1rem">{{ section.settings.heading }}</h2>
-      <p class="lede" style="color:rgba(255,255,255,0.85);max-width:460px;margin:1rem auto 0">Restock alerts, glow tips and the next viral find — straight to your inbox.</p>
+      {%- if section.settings.kicker != blank -%}<span class="kicker" style="justify-content:center;color:#fff">{{ section.settings.kicker }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 style="color:#fff;margin-top:1rem">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.subtext != blank -%}<p class="lede" style="color:rgba(255,255,255,0.85);max-width:460px;margin:1rem auto 0">{{ section.settings.subtext }}</p>{%- endif -%}
       <form class="signup"><input type="email" placeholder="you@email.com" required aria-label="Email"><button class="btn btn-ink" type="submit">{{ section.settings.button_label }}</button></form>
-      <p class="news__fine" style="color:rgba(255,255,255,0.7)">By subscribing you agree to our privacy policy. Unsubscribe anytime.</p>
+      {%- if section.settings.fine_print != blank -%}<p class="news__fine" style="color:rgba(255,255,255,0.7)">{{ section.settings.fine_print }}</p>{%- endif -%}
     </div>
   </section>
 {% schema %}
 {
   "name": "Newsletter",
   "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "10% off your first glow" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Join the glazed list." },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Get 10% off" }
+    { "type": "text", "id": "subtext", "label": "Subtext", "default": "Restock alerts, glow tips and the next viral find — straight to your inbox." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Get 10% off" },
+    { "type": "text", "id": "fine_print", "label": "Fine print", "default": "By subscribing you agree to our privacy policy. Unsubscribe anytime." }
   ],
   "presets": [ { "name": "Newsletter" } ]
 }

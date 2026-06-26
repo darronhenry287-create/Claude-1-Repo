@@ -1,23 +1,33 @@
 <section class="section" data-product>
   <div class="wrap">
     <div class="pdp">
-      <!-- carousel: marketing slides with USPs + text (uses uploaded product images if present, else bundled slides) -->
-      <div class="pcarousel" id="pcarousel">
-        <div class="pcarousel__track" id="pcar-track">
-          {%- if product.images.size > 0 -%}
+      <!-- gallery: main image + thumbnails (uploaded product images if present, else bundled marketing slides) -->
+      <div class="pgallery" id="pgallery-main">
+        {%- if product.images.size > 0 -%}
+          {%- assign first_img = product.images.first -%}
+          <div class="pgallery__main has-photo" id="pg-main">
+            <img src="{{ first_img | image_url: width: 1080 }}" width="{{ first_img.width }}" height="{{ first_img.height }}" alt="{{ first_img.alt | escape | default: product.title }}">
+            <button type="button" class="pcarousel__nav prev" data-pgal="prev" aria-label="Previous image">‹</button>
+            <button type="button" class="pcarousel__nav next" data-pgal="next" aria-label="Next image">›</button>
+          </div>
+          <div class="pgallery__thumbs">
             {%- for image in product.images -%}
-              <div class="pcarousel__slide"><img src="{{ image | image_url: width: 1000 }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt | escape | default: product.title }}"></div>
+              <button type="button" class="pthumb has-photo{% if forloop.first %} active{% endif %}" data-full="{{ image | image_url: width: 1080 }}"><img src="{{ image | image_url: width: 220 }}" width="220" height="220" alt="{{ image.alt | escape | default: product.title }}"></button>
             {%- endfor -%}
-          {%- else -%}
-            {%- assign slides = 'slide-1.jpg,slide-2.jpg,slide-3.jpg,slide-4.jpg,slide-5.jpg,slide-6.jpg' | split: ',' -%}
+          </div>
+        {%- else -%}
+          {%- assign slides = 'slide-1.jpg,slide-2.jpg,slide-3.jpg,slide-4.jpg,slide-5.jpg,slide-6.jpg' | split: ',' -%}
+          <div class="pgallery__main has-photo" id="pg-main">
+            <img src="{{ slides.first | asset_url }}" width="1080" height="1350" alt="{{ product.title | default: 'Pink Collagen Glow Balm' }}">
+            <button type="button" class="pcarousel__nav prev" data-pgal="prev" aria-label="Previous image">‹</button>
+            <button type="button" class="pcarousel__nav next" data-pgal="next" aria-label="Next image">›</button>
+          </div>
+          <div class="pgallery__thumbs">
             {%- for s in slides -%}
-              <div class="pcarousel__slide"><img src="{{ s | asset_url }}" width="1080" height="1350" alt="{{ product.title | default: 'Pink Collagen Glow Balm' }}"></div>
+              <button type="button" class="pthumb has-photo{% if forloop.first %} active{% endif %}" data-full="{{ s | asset_url }}"><img src="{{ s | asset_url }}" width="220" height="220" alt="{{ product.title | default: 'Pink Collagen Glow Balm' }}"></button>
             {%- endfor -%}
-          {%- endif -%}
-        </div>
-        <button class="pcarousel__nav prev" data-car="prev" aria-label="Previous slide">‹</button>
-        <button class="pcarousel__nav next" data-car="next" aria-label="Next slide">›</button>
-        <div class="pcarousel__dots" id="pcar-dots"></div>
+          </div>
+        {%- endif -%}
       </div>
 
       <!-- info -->
@@ -79,17 +89,17 @@
         {% endform %}
 
         <div class="usps">
-          <div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.7"/><circle cx="17.5" cy="18" r="1.7"/></svg><span>Free shipping over ${{ settings.free_shipping_threshold }}</span></div>
-          <div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6z"/><path d="m9 12 2 2 4-4"/></svg><span>30-day glow guarantee</span></div>
-          <div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C7 17 4 13.5 4 9.5A3.5 3.5 0 0 1 12 7a3.5 3.5 0 0 1 8 2.5c0 4-3 7.5-8 11.5Z"/></svg><span>Cruelty-free formula</span></div>
-          <div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg><span>Ships in 24 hours</span></div>
+          {%- if section.settings.usp1 != blank -%}<div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.7"/><circle cx="17.5" cy="18" r="1.7"/></svg><span>{{ section.settings.usp1 }}</span></div>{%- endif -%}
+          {%- if section.settings.usp2 != blank -%}<div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6z"/><path d="m9 12 2 2 4-4"/></svg><span>{{ section.settings.usp2 }}</span></div>{%- endif -%}
+          {%- if section.settings.usp3 != blank -%}<div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C7 17 4 13.5 4 9.5A3.5 3.5 0 0 1 12 7a3.5 3.5 0 0 1 8 2.5c0 4-3 7.5-8 11.5Z"/></svg><span>{{ section.settings.usp3 }}</span></div>{%- endif -%}
+          {%- if section.settings.usp4 != blank -%}<div class="usp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg><span>{{ section.settings.usp4 }}</span></div>{%- endif -%}
         </div>
 
         {%- if section.settings.show_trust -%}
         <div class="ptrust">
-          <div><span class="ck"><img src="{{ 'dna.svg' | asset_url }}" alt="" width="16" height="16"></span>PDRN powered</div>
-          <div><span class="ck"><img src="{{ 'sparkle.svg' | asset_url }}" alt="" width="16" height="16"></span>Glides on, no mess</div>
-          <div><span class="ck"><img src="{{ 'heart.svg' | asset_url }}" alt="" width="16" height="16"></span>Cruelty-free</div>
+          {%- if section.settings.trust1 != blank -%}<div><span class="ck"><img src="{{ 'dna.svg' | asset_url }}" alt="" width="16" height="16"></span>{{ section.settings.trust1 }}</div>{%- endif -%}
+          {%- if section.settings.trust2 != blank -%}<div><span class="ck"><img src="{{ 'sparkle.svg' | asset_url }}" alt="" width="16" height="16"></span>{{ section.settings.trust2 }}</div>{%- endif -%}
+          {%- if section.settings.trust3 != blank -%}<div><span class="ck"><img src="{{ 'heart.svg' | asset_url }}" alt="" width="16" height="16"></span>{{ section.settings.trust3 }}</div>{%- endif -%}
         </div>
         {%- endif -%}
 
@@ -128,6 +138,15 @@
     { "type": "richtext", "id": "fallback_desc", "label": "Description (used if the product has none)", "default": "<p>The melting balm that glazes skin in one swipe. Salmon-DNA PDRN, collagen and plumping peptides help skin look instantly plumper, smoother and dewier — anywhere it's dry or creasing. Mess-free stick, glides on over or under makeup.</p>" },
     { "type": "checkbox", "id": "show_trust", "label": "Show trust row", "default": true },
     { "type": "checkbox", "id": "show_sticky", "label": "Show sticky add-to-cart bar", "default": true },
+    { "type": "paragraph", "content": "Buy-box USP row (icons are fixed; leave a field blank to hide it)" },
+    { "type": "text", "id": "usp1", "label": "USP 1", "default": "Free shipping over $35" },
+    { "type": "text", "id": "usp2", "label": "USP 2", "default": "30-day glow guarantee" },
+    { "type": "text", "id": "usp3", "label": "USP 3", "default": "Cruelty-free formula" },
+    { "type": "text", "id": "usp4", "label": "USP 4", "default": "Ships in 24 hours" },
+    { "type": "paragraph", "content": "Trust row (under the buy box)" },
+    { "type": "text", "id": "trust1", "label": "Trust 1", "default": "PDRN powered" },
+    { "type": "text", "id": "trust2", "label": "Trust 2", "default": "Glides on, no mess" },
+    { "type": "text", "id": "trust3", "label": "Trust 3", "default": "Cruelty-free" },
     { "type": "paragraph", "content": "PACK SELECTOR — always visible. The 3 packs below map to your product's 1st / 2nd / 3rd variant. Add a 'Pack' option with 3 variants (1 / 2 / 3 balms) + real prices and they take over automatically. With one variant, packs add quantities 1/2/3. The prices here only show until real variant prices exist. See SETUP.md." },
     { "type": "checkbox", "id": "show_packs", "label": "Show pack selector", "default": true },
     { "type": "text", "id": "packs_heading", "label": "Pack selector heading", "default": "Choose your pack" },

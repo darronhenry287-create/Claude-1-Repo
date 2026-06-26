@@ -1,13 +1,13 @@
 <section class="section">
     <div class="wrap">
       <div class="note">
-        <span class="kicker" style="justify-content:center">From GLAZE</span>
+        {%- if section.settings.kicker != blank -%}<span class="kicker" style="justify-content:center">{{ section.settings.kicker }}</span>{%- endif -%}
         <div class="note__body" style="margin-top:1.6rem">
-          <p>We started GLAZE to do one thing well: track down the K-beauty that actually lives up to the hype, and make it easy to buy.</p>
-          <p>This little pink balm is the one that stopped our scroll — so it's the one we're starting with.</p>
+          {%- if section.settings.body_one != blank -%}{{ section.settings.body_one }}{%- endif -%}
+          {%- if section.settings.body_two != blank -%}{{ section.settings.body_two }}{%- endif -%}
         </div>
-        <div class="note__sig">{{ section.settings.heading }}</div>
-        <div class="note__role">Curators of glazed skin</div>
+        {%- if section.settings.signature != blank -%}<div class="note__sig">{{ section.settings.signature }}</div>{%- endif -%}
+        {%- if section.settings.role != blank -%}<div class="note__role">{{ section.settings.role }}</div>{%- endif -%}
       </div>
     </div>
   </section>
@@ -15,8 +15,11 @@
 {
   "name": "Note",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Signature", "default": "— the GLAZE team" },
-    { "type": "url", "id": "button_link", "label": "Link (optional)" }
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "From GLAZE" },
+    { "type": "richtext", "id": "body_one", "label": "Body paragraph 1", "default": "<p>We started GLAZE to do one thing well: track down the K-beauty that actually lives up to the hype, and make it easy to buy.</p>" },
+    { "type": "richtext", "id": "body_two", "label": "Body paragraph 2", "default": "<p>This little pink balm is the one that stopped our scroll — so it's the one we're starting with.</p>" },
+    { "type": "text", "id": "signature", "label": "Signature", "default": "— the GLAZE team" },
+    { "type": "text", "id": "role", "label": "Role", "default": "Curators of glazed skin" }
   ],
   "presets": [ { "name": "Note" } ]
 }

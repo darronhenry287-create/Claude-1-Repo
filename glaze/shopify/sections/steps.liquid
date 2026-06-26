@@ -1,13 +1,19 @@
 <section class="section">
     <div class="wrap">
       <div class="sec-head center">
-        <span class="kicker" style="justify-content:center">How to glaze</span>
+        <span class="kicker" style="justify-content:center">{{ section.settings.kicker }}</span>
         <h2>{{ section.settings.heading }}</h2>
       </div>
       <div class="grid steps__grid">
-        <div class="step reveal"><div class="n">1</div><h3>Swipe</h3><p>Glide the balm directly onto clean skin or right over makeup.</p><div class="when">Anytime</div></div>
-        <div class="step reveal"><div class="n">2</div><h3>Pat</h3><p>Tap in with a fingertip wherever you want extra plump and glow.</p><div class="when">AM · PM</div></div>
-        <div class="step reveal"><div class="n">3</div><h3>Glow</h3><p>Watch it melt in to a dewy, glazed, never-greasy finish.</p><div class="when">Instantly</div></div>
+        {%- if section.settings.step1_title != blank -%}
+        <div class="step reveal"><div class="n">1</div><h3>{{ section.settings.step1_title }}</h3><p>{{ section.settings.step1_text }}</p><div class="when">{{ section.settings.step1_when }}</div></div>
+        {%- endif -%}
+        {%- if section.settings.step2_title != blank -%}
+        <div class="step reveal"><div class="n">2</div><h3>{{ section.settings.step2_title }}</h3><p>{{ section.settings.step2_text }}</p><div class="when">{{ section.settings.step2_when }}</div></div>
+        {%- endif -%}
+        {%- if section.settings.step3_title != blank -%}
+        <div class="step reveal"><div class="n">3</div><h3>{{ section.settings.step3_title }}</h3><p>{{ section.settings.step3_text }}</p><div class="when">{{ section.settings.step3_when }}</div></div>
+        {%- endif -%}
       </div>
       {%- if section.settings.button_link != blank -%}
         <div class="center" style="margin-top:2.5rem"><a href="{{ section.settings.button_link }}" class="btn btn-soft">{{ section.settings.button_label }}</a></div>
@@ -20,7 +26,20 @@
 {
   "name": "Steps",
   "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "How to glaze" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Three steps. Five seconds." },
+    { "type": "paragraph", "content": "Step 1" },
+    { "type": "text", "id": "step1_title", "label": "Step 1 title", "default": "Swipe" },
+    { "type": "text", "id": "step1_text", "label": "Step 1 text", "default": "Glide the balm directly onto clean skin or right over makeup." },
+    { "type": "text", "id": "step1_when", "label": "Step 1 when tag", "default": "Anytime" },
+    { "type": "paragraph", "content": "Step 2" },
+    { "type": "text", "id": "step2_title", "label": "Step 2 title", "default": "Pat" },
+    { "type": "text", "id": "step2_text", "label": "Step 2 text", "default": "Tap in with a fingertip wherever you want extra plump and glow." },
+    { "type": "text", "id": "step2_when", "label": "Step 2 when tag", "default": "AM · PM" },
+    { "type": "paragraph", "content": "Step 3" },
+    { "type": "text", "id": "step3_title", "label": "Step 3 title", "default": "Glow" },
+    { "type": "text", "id": "step3_text", "label": "Step 3 text", "default": "Watch it melt in to a dewy, glazed, never-greasy finish." },
+    { "type": "text", "id": "step3_when", "label": "Step 3 when tag", "default": "Instantly" },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Full how-to guide" },
     { "type": "url", "id": "button_link", "label": "Button link" }
   ],

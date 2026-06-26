@@ -1,14 +1,16 @@
+{%- assign items = section.settings.phrases | split: ',' -%}
 <div class="ticker" aria-hidden="true">
     <div class="ticker__track">
-      <span>glazed-donut skin</span><span>plump in a swipe</span><span>PDRN pink collagen</span><span>no mess, all glow</span><span>smile lines, softened</span><span>that lit-from-within look</span>
-      <span>glazed-donut skin</span><span>plump in a swipe</span><span>PDRN pink collagen</span><span>no mess, all glow</span><span>smile lines, softened</span><span>that lit-from-within look</span>
+      {%- for item in items -%}<span>{{ item | strip }}</span>{%- endfor -%}
+      {%- for item in items -%}<span>{{ item | strip }}</span>{%- endfor -%}
     </div>
   </div>
 {% schema %}
 {
   "name": "Ticker",
   "settings": [
-    { "type": "paragraph", "content": "A scrolling marquee of glow phrases. Edit the phrases directly in the section markup." }
+    { "type": "paragraph", "content": "A scrolling marquee of glow phrases. Separate phrases with commas." },
+    { "type": "textarea", "id": "phrases", "label": "Phrases (comma-separated)", "default": "glazed-donut skin, plump in a swipe, PDRN pink collagen, no mess all glow, smile lines softened, that lit-from-within look" }
   ],
   "presets": [ { "name": "Ticker" } ]
 }

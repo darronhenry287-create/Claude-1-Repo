@@ -2,19 +2,21 @@
   <section class="section" data-product>
     <div class="wrap">
       <div class="pdp">
-        <!-- carousel: marketing slides with USPs + text baked in -->
-        <div class="pcarousel" id="pcarousel">
-          <div class="pcarousel__track" id="pcar-track">
-            <div class="pcarousel__slide"><img src="assets/img/slide-1.jpg" alt="Pink Collagen Glow Balm — 4.9 stars, 124 reviews" width="1080" height="1350"></div>
-            <div class="pcarousel__slide"><img src="assets/img/slide-2.jpg" alt="Plumps & smooths, dewy glazed glow, mess-free" width="1080" height="1350"></div>
-            <div class="pcarousel__slide"><img src="assets/img/slide-3.jpg" alt="Powered by PDRN, collagen, peptides & hyaluronic acid" width="1080" height="1350"></div>
-            <div class="pcarousel__slide"><img src="assets/img/slide-4.jpg" alt="Glaze in 3 steps: swipe, pat, glow" width="1080" height="1350"></div>
-            <div class="pcarousel__slide"><img src="assets/img/slide-5.jpg" alt="30-day glow guarantee, cruelty-free, no-mess" width="1080" height="1350"></div>
-            <div class="pcarousel__slide"><img src="assets/img/slide-6.jpg" alt="Loved by glow chasers — 5-star review" width="1080" height="1350"></div>
+        <!-- gallery: main image + thumbnails below -->
+        <div class="pgallery" id="pgallery-main">
+          <div class="pgallery__main has-photo" id="pg-main">
+            <img src="assets/img/slide-1.jpg" alt="Pink Collagen Glow Balm — 4.9 stars, 124 reviews" width="1080" height="1350">
+            <button type="button" class="pcarousel__nav prev" data-pgal="prev" aria-label="Previous image">‹</button>
+            <button type="button" class="pcarousel__nav next" data-pgal="next" aria-label="Next image">›</button>
           </div>
-          <button class="pcarousel__nav prev" data-car="prev" aria-label="Previous slide">‹</button>
-          <button class="pcarousel__nav next" data-car="next" aria-label="Next slide">›</button>
-          <div class="pcarousel__dots" id="pcar-dots"></div>
+          <div class="pgallery__thumbs">
+            <button type="button" class="pthumb has-photo active" data-full="assets/img/slide-1.jpg"><img src="assets/img/slide-1.jpg" alt="Pink Collagen Glow Balm — 4.9 stars, 124 reviews" width="220" height="220"></button>
+            <button type="button" class="pthumb has-photo" data-full="assets/img/slide-2.jpg"><img src="assets/img/slide-2.jpg" alt="Plumps & smooths, dewy glazed glow, mess-free" width="220" height="220"></button>
+            <button type="button" class="pthumb has-photo" data-full="assets/img/slide-3.jpg"><img src="assets/img/slide-3.jpg" alt="Powered by PDRN, collagen, peptides & hyaluronic acid" width="220" height="220"></button>
+            <button type="button" class="pthumb has-photo" data-full="assets/img/slide-4.jpg"><img src="assets/img/slide-4.jpg" alt="Glaze in 3 steps: swipe, pat, glow" width="220" height="220"></button>
+            <button type="button" class="pthumb has-photo" data-full="assets/img/slide-5.jpg"><img src="assets/img/slide-5.jpg" alt="30-day glow guarantee, cruelty-free, no-mess" width="220" height="220"></button>
+            <button type="button" class="pthumb has-photo" data-full="assets/img/slide-6.jpg"><img src="assets/img/slide-6.jpg" alt="Loved by glow chasers — 5-star review" width="220" height="220"></button>
+          </div>
         </div>
 
         <!-- info -->

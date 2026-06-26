@@ -1,15 +1,27 @@
 <section class="section">
     <div class="wrap">
       <div class="split split--rev">
-        <div class="split__media has-photo reveal"><img src="{{ 'texture.jpg' | asset_url }}" alt="Pink balm glaze texture" width="1024" height="1024"></div>
+        <div class="split__media has-photo reveal">
+          {%- if section.settings.image != blank -%}
+            <img src="{{ section.settings.image | image_url: width: 1080 }}" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" alt="{{ section.settings.image_alt | escape }}">
+          {%- else -%}
+            <img src="{{ 'texture.jpg' | asset_url }}" width="1024" height="1024" alt="{{ section.settings.image_alt | escape }}">
+          {%- endif -%}
+        </div>
         <div class="split__copy">
-          <span class="kicker">The texture</span>
+          <span class="kicker">{{ section.settings.kicker }}</span>
           <h2>{{ section.settings.heading }}</h2>
-          <p>It goes on like silk and melts straight into skin — cushiony, dewy and weightless, with zero tack or grease.</p>
+          <p>{{ section.settings.body }}</p>
           <ul class="checks">
-            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>Cushiony melting balm</li>
-            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>Dewy, never sticky</li>
-            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>Sinks in fast, no white cast</li>
+            {%- if section.settings.check1 != blank -%}
+              <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>{{ section.settings.check1 }}</li>
+            {%- endif -%}
+            {%- if section.settings.check2 != blank -%}
+              <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>{{ section.settings.check2 }}</li>
+            {%- endif -%}
+            {%- if section.settings.check3 != blank -%}
+              <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>{{ section.settings.check3 }}</li>
+            {%- endif -%}
           </ul>
         </div>
       </div>
@@ -19,7 +31,14 @@
 {
   "name": "Sensory",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "A balm that melts into a glaze." }
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The texture" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A balm that melts into a glaze." },
+    { "type": "textarea", "id": "body", "label": "Body text", "default": "It goes on like silk and melts straight into skin — cushiony, dewy and weightless, with zero tack or grease." },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Pink balm glaze texture" },
+    { "type": "text", "id": "check1", "label": "Check 1", "default": "Cushiony melting balm" },
+    { "type": "text", "id": "check2", "label": "Check 2", "default": "Dewy, never sticky" },
+    { "type": "text", "id": "check3", "label": "Check 3", "default": "Sinks in fast, no white cast" }
   ],
   "presets": [ { "name": "Sensory" } ]
 }

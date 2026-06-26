@@ -1,18 +1,32 @@
 <section class="science section">
     <div class="wrap">
       <div class="science__grid">
-        <div class="science__visual has-photo reveal"><img src="{{ 'flatlay.jpg' | asset_url }}" alt="The balm with its key ingredients" width="1024" height="1024"></div>
+        <div class="science__visual has-photo reveal">
+          {%- if section.settings.image != blank -%}
+            <img src="{{ section.settings.image | image_url: width: 1080 }}" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" alt="{{ section.settings.image_alt | escape }}">
+          {%- else -%}
+            <img src="{{ 'flatlay.jpg' | asset_url }}" width="1024" height="1024" alt="{{ section.settings.image_alt | escape }}">
+          {%- endif -%}
+        </div>
         <div>
           <div class="sec-head" style="margin-bottom:1.6rem">
-            <span class="kicker">The pink science</span>
+            <span class="kicker">{{ section.settings.kicker }}</span>
             <h2>{{ section.settings.heading }}</h2>
-            <p class="lede">It's PDRN — fragments of salmon DNA that are remarkably compatible with skin — teamed with collagen and plumping peptides for that glazed, cushioned look.</p>
+            <p class="lede">{{ section.settings.lede }}</p>
           </div>
           <div class="actives">
-            <div class="active"><span class="active__name">Salmon PDRN <small>DNA fragments that support a stronger, more resilient barrier</small></span><span class="active__role">Repair</span></div>
-            <div class="active"><span class="active__name">Collagen + Peptides <small>Help skin look visibly plumper and more cushioned</small></span><span class="active__role">Plump</span></div>
-            <div class="active"><span class="active__name">Hyaluronic Acid <small>Draws in water for a dewy, bouncy finish</small></span><span class="active__role">Hydrate</span></div>
-            <div class="active"><span class="active__name">Caffeine + Vitamin E <small>Brighten the look of tired, puffy under-eyes</small></span><span class="active__role">Brighten</span></div>
+            {%- if section.settings.active1_name != blank -%}
+              <div class="active"><span class="active__name">{{ section.settings.active1_name }} <small>{{ section.settings.active1_desc }}</small></span><span class="active__role">{{ section.settings.active1_role }}</span></div>
+            {%- endif -%}
+            {%- if section.settings.active2_name != blank -%}
+              <div class="active"><span class="active__name">{{ section.settings.active2_name }} <small>{{ section.settings.active2_desc }}</small></span><span class="active__role">{{ section.settings.active2_role }}</span></div>
+            {%- endif -%}
+            {%- if section.settings.active3_name != blank -%}
+              <div class="active"><span class="active__name">{{ section.settings.active3_name }} <small>{{ section.settings.active3_desc }}</small></span><span class="active__role">{{ section.settings.active3_role }}</span></div>
+            {%- endif -%}
+            {%- if section.settings.active4_name != blank -%}
+              <div class="active"><span class="active__name">{{ section.settings.active4_name }} <small>{{ section.settings.active4_desc }}</small></span><span class="active__role">{{ section.settings.active4_role }}</span></div>
+            {%- endif -%}
           </div>
           {% render 'navlink', handle: 'ingredients', label: 'See the full ingredient list', classes: 'tlink', styles: 'margin-top:1.6rem;display:inline-block' %}
         </div>
@@ -23,7 +37,27 @@
 {
   "name": "Science",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Why the pink?" }
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The pink science" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why the pink?" },
+    { "type": "textarea", "id": "lede", "label": "Lede paragraph", "default": "It's PDRN — fragments of salmon DNA that are remarkably compatible with skin — teamed with collagen and plumping peptides for that glazed, cushioned look." },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "The balm with its key ingredients" },
+    { "type": "paragraph", "content": "Active 1" },
+    { "type": "text", "id": "active1_name", "label": "Active 1 name", "default": "Salmon PDRN" },
+    { "type": "text", "id": "active1_desc", "label": "Active 1 description", "default": "DNA fragments that support a stronger, more resilient barrier" },
+    { "type": "text", "id": "active1_role", "label": "Active 1 role tag", "default": "Repair" },
+    { "type": "paragraph", "content": "Active 2" },
+    { "type": "text", "id": "active2_name", "label": "Active 2 name", "default": "Collagen + Peptides" },
+    { "type": "text", "id": "active2_desc", "label": "Active 2 description", "default": "Help skin look visibly plumper and more cushioned" },
+    { "type": "text", "id": "active2_role", "label": "Active 2 role tag", "default": "Plump" },
+    { "type": "paragraph", "content": "Active 3" },
+    { "type": "text", "id": "active3_name", "label": "Active 3 name", "default": "Hyaluronic Acid" },
+    { "type": "text", "id": "active3_desc", "label": "Active 3 description", "default": "Draws in water for a dewy, bouncy finish" },
+    { "type": "text", "id": "active3_role", "label": "Active 3 role tag", "default": "Hydrate" },
+    { "type": "paragraph", "content": "Active 4" },
+    { "type": "text", "id": "active4_name", "label": "Active 4 name", "default": "Caffeine + Vitamin E" },
+    { "type": "text", "id": "active4_desc", "label": "Active 4 description", "default": "Brighten the look of tired, puffy under-eyes" },
+    { "type": "text", "id": "active4_role", "label": "Active 4 role tag", "default": "Brighten" }
   ],
   "presets": [ { "name": "Science" } ]
 }

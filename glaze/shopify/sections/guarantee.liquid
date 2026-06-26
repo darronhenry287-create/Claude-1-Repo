@@ -1,8 +1,9 @@
 <section class="section guarantee" style="background:var(--petal);border-block:1px solid var(--line)">
     <div class="wrap wrap--narrow">
       <div class="guarantee__badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
+      {%- if section.settings.kicker != blank -%}<span class="kicker" style="justify-content:center">{{ section.settings.kicker }}</span>{%- endif -%}
       <h2>{{ section.settings.heading }}</h2>
-      <p class="lede" style="max-width:480px;margin:1rem auto 1.6rem">Swipe it for a month. If your skin isn't glowier, we'll refund you — even an empty stick.</p>
+      <p class="lede" style="max-width:480px;margin:1rem auto 1.6rem">{{ section.settings.body }}</p>
       <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="btn btn-pink btn-lg">{{ section.settings.button_label }}</a>
     </div>
   </section>
@@ -10,7 +11,9 @@
 {
   "name": "Guarantee",
   "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "The 30-day glow guarantee." },
+    { "type": "textarea", "id": "body", "label": "Body text", "default": "Swipe it for a month. If your skin isn't glowier, we'll refund you — even an empty stick." },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Try it risk-free" },
     { "type": "url", "id": "button_link", "label": "Button link" }
   ],
