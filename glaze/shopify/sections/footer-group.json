@@ -2,7 +2,16 @@
   "type": "footer",
   "name": "Footer group",
   "sections": {
-    "footer": { "type": "footer", "settings": {} }
+    "footer": {
+      "type": "footer",
+      "settings": {},
+      "blocks": {
+        "shop": { "type": "column", "settings": { "heading": "Shop", "link1_label": "The Glow Balm", "link1_url": "/collections/all", "link2_label": "Multipacks & Save", "link2_url": "/collections/all", "link3_label": "How to Use", "link3_url": "/pages/how-to" } },
+        "learn": { "type": "column", "settings": { "heading": "Learn", "link1_label": "Ingredients", "link1_url": "/pages/ingredients", "link2_label": "Reviews", "link2_url": "/pages/reviews", "link3_label": "About", "link3_url": "/pages/about", "link4_label": "FAQ", "link4_url": "/pages/faq" } },
+        "help": { "type": "column", "settings": { "heading": "Help", "link1_label": "Contact", "link1_url": "/pages/contact", "link2_label": "Shipping & Returns", "link2_url": "/pages/shipping-returns", "link3_label": "Refund Policy", "link3_url": "/pages/refund-policy" } }
+      },
+      "block_order": ["shop", "learn", "help"]
+    }
   },
   "order": ["footer"]
 }

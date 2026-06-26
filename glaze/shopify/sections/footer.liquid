@@ -11,30 +11,29 @@
         </div>
         {%- endif -%}
       </div>
-      <div class="footer__col"><h4>Shop</h4>
-        <a href="{{ routes.all_products_collection_url }}">The Glow Balm</a>
-        <a href="{{ routes.all_products_collection_url }}">Multipacks &amp; Save</a>
-        {% render 'navlink', handle: 'how-to', label: 'How to Use' %}
-      </div>
-      <div class="footer__col"><h4>Learn</h4>
-        {% render 'navlink', handle: 'ingredients', label: 'Ingredients' %}
-        {% render 'navlink', handle: 'reviews', label: 'Reviews' %}
-        {% render 'navlink', handle: 'about', label: 'About' %}
-        {% render 'navlink', handle: 'faq', label: 'FAQ' %}
-      </div>
-      <div class="footer__col"><h4>Help</h4>
-        {% render 'navlink', handle: 'contact', label: 'Contact' %}
-        {% render 'navlink', handle: 'shipping-returns', label: 'Shipping & Returns' %}
-        {% render 'navlink', handle: 'refund-policy', label: 'Refund Policy' %}
-      </div>
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'column' -%}
+        <div class="footer__col" {{ block.shopify_attributes }}>
+          {%- if block.settings.heading != blank -%}<h4>{{ block.settings.heading }}</h4>{%- endif -%}
+          {%- for i in (1..6) -%}
+            {%- assign lk = 'link' | append: i | append: '_label' -%}
+            {%- assign uk = 'link' | append: i | append: '_url' -%}
+            {%- assign lbl = block.settings[lk] -%}
+            {%- if lbl != blank -%}<a href="{{ block.settings[uk] | default: '#' }}">{{ lbl }}</a>{%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+      {%- endfor -%}
     </div>
     <div class="footer__bot">
-      <p>© {{ 'now' | date: '%Y' }} {{ settings.brand_name | default: 'GLAZE' }}. All rights reserved. Made for glazed skin.</p>
+      <p>© {{ 'now' | date: '%Y' }} {{ settings.brand_name | default: 'GLAZE' }}. All rights reserved. {{ section.settings.tagline }}</p>
       <div class="footer__legal">
-        {% render 'navlink', handle: 'privacy-policy', label: 'Privacy' %}
-        {% render 'navlink', handle: 'terms-of-service', label: 'Terms' %}
-        {% render 'navlink', handle: 'refund-policy', label: 'Refund' %}
-        {% render 'navlink', handle: 'shipping-returns', label: 'Shipping' %}
+        {%- for i in (1..4) -%}
+          {%- assign lk = 'legal' | append: i | append: '_label' -%}
+          {%- assign uk = 'legal' | append: i | append: '_url' -%}
+          {%- assign lbl = section.settings[lk] -%}
+          {%- if lbl != blank -%}<a href="{{ section.settings[uk] | default: '#' }}">{{ lbl }}</a>{%- endif -%}
+        {%- endfor -%}
       </div>
     </div>
   </div>
@@ -43,9 +42,51 @@
 {% schema %}
 {
   "name": "Footer",
+  "max_blocks": 4,
   "settings": [
     { "type": "textarea", "id": "blurb", "label": "Brand blurb", "default": "The glazed-skin shop. One viral-worthy hero: our PDRN Pink Collagen Glow Balm — plump, dewy, glazed skin in a single swipe." },
-    { "type": "checkbox", "id": "show_social", "label": "Show social links", "default": true }
+    { "type": "checkbox", "id": "show_social", "label": "Show social links", "default": true },
+    { "type": "text", "id": "tagline", "label": "Copyright tagline", "default": "Made for glazed skin." },
+    { "type": "paragraph", "content": "Bottom legal links (blank label = hidden)" },
+    { "type": "text", "id": "legal1_label", "label": "Legal 1 label", "default": "Privacy" },
+    { "type": "url", "id": "legal1_url", "label": "Legal 1 URL", "default": "/pages/privacy-policy" },
+    { "type": "text", "id": "legal2_label", "label": "Legal 2 label", "default": "Terms" },
+    { "type": "url", "id": "legal2_url", "label": "Legal 2 URL", "default": "/pages/terms-of-service" },
+    { "type": "text", "id": "legal3_label", "label": "Legal 3 label", "default": "Refund" },
+    { "type": "url", "id": "legal3_url", "label": "Legal 3 URL", "default": "/pages/refund-policy" },
+    { "type": "text", "id": "legal4_label", "label": "Legal 4 label", "default": "Shipping" },
+    { "type": "url", "id": "legal4_url", "label": "Legal 4 URL", "default": "/pages/shipping-returns" }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Link column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Column heading", "default": "Shop" },
+        { "type": "text", "id": "link1_label", "label": "Link 1 label" },
+        { "type": "url", "id": "link1_url", "label": "Link 1 URL" },
+        { "type": "text", "id": "link2_label", "label": "Link 2 label" },
+        { "type": "url", "id": "link2_url", "label": "Link 2 URL" },
+        { "type": "text", "id": "link3_label", "label": "Link 3 label" },
+        { "type": "url", "id": "link3_url", "label": "Link 3 URL" },
+        { "type": "text", "id": "link4_label", "label": "Link 4 label" },
+        { "type": "url", "id": "link4_url", "label": "Link 4 URL" },
+        { "type": "text", "id": "link5_label", "label": "Link 5 label" },
+        { "type": "url", "id": "link5_url", "label": "Link 5 URL" },
+        { "type": "text", "id": "link6_label", "label": "Link 6 label" },
+        { "type": "url", "id": "link6_url", "label": "Link 6 URL" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "column", "settings": { "heading": "Shop", "link1_label": "The Glow Balm", "link1_url": "/collections/all", "link2_label": "Multipacks & Save", "link2_url": "/collections/all", "link3_label": "How to Use", "link3_url": "/pages/how-to" } },
+        { "type": "column", "settings": { "heading": "Learn", "link1_label": "Ingredients", "link1_url": "/pages/ingredients", "link2_label": "Reviews", "link2_url": "/pages/reviews", "link3_label": "About", "link3_url": "/pages/about", "link4_label": "FAQ", "link4_url": "/pages/faq" } },
+        { "type": "column", "settings": { "heading": "Help", "link1_label": "Contact", "link1_url": "/pages/contact", "link2_label": "Shipping & Returns", "link2_url": "/pages/shipping-returns", "link3_label": "Refund Policy", "link3_url": "/pages/refund-policy" } }
+      ]
+    }
   ]
 }
 {% endschema %}
