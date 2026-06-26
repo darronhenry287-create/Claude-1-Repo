@@ -1,16 +1,18 @@
 <section class="section">
   <div class="wrap faqlist">
     <div class="acc">
-      <div class="acc__item open"><button class="acc__head" type="button">What exactly is PDRN? <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">PDRN (polydeoxyribonucleotide) is made of small DNA fragments derived from salmon. They're structurally similar to human DNA, so skin tolerates them well — it's prized in K-beauty for supporting repair, resilience and a plump, glazed look.</div></div></div>
-      <div class="acc__item"><button class="acc__head" type="button">What's in the formula? <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">Salmon-DNA PDRN, hydrolyzed collagen, hyaluronic acid and plumping peptides, plus caffeine and vitamin E — a K-beauty-inspired pink collagen balm. Full ingredients are on every carton{% if pages['ingredients'] != blank %}, and on our <a href="{{ pages['ingredients'].url }}">ingredients page</a>{% endif %}.</div></div></div>
-      <div class="acc__item"><button class="acc__head" type="button">How often can I use it? <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">As often as you like — morning, night, and any time skin feels tight or dull. Swipe, pat in, glow.</div></div></div>
-      <div class="acc__item"><button class="acc__head" type="button">Can I wear it with makeup? <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">Absolutely. It glides on over or under makeup without pilling, so you can refresh your glow throughout the day.</div></div></div>
-      <div class="acc__item"><button class="acc__head" type="button">Is it vegan? <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">No. The PDRN is salmon-derived, so the balm isn't vegan. If you have a fish or marine allergy, please skip it.</div></div></div>
-      <div class="acc__item"><button class="acc__head" type="button">What skin types is it for? <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">All skin types, especially anyone wanting more plump, bounce and dewiness, or to soften the look of fine lines. As always, patch test first.</div></div></div>
-      <div class="acc__item"><button class="acc__head" type="button">When will I see results? <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">Skin looks dewier and more cushioned right after you swipe. For the look of fine lines and firmness, most people use it daily for a few weeks. Results vary.</div></div></div>
-      <div class="acc__item"><button class="acc__head" type="button">Shipping &amp; returns? <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">Free shipping over $35 (and on every trio), flat $4.95 below. Orders ship in 1–2 business days. Not glowing? Return within 30 days for a full refund.</div></div></div>
+      {%- assign shown = 0 -%}
+      {%- for i in (1..8) -%}
+        {%- assign qk = 'faq' | append: i | append: '_q' -%}
+        {%- assign ak = 'faq' | append: i | append: '_a' -%}
+        {%- assign q = section.settings[qk] -%}
+        {%- if q != blank -%}
+          {%- assign shown = shown | plus: 1 -%}
+          <div class="acc__item{% if shown == 1 %} open{% endif %}"><button class="acc__head" type="button">{{ q }} <span class="pm"></span></button><div class="acc__body"><div class="acc__body-inner">{{ section.settings[ak] }}</div></div></div>
+        {%- endif -%}
+      {%- endfor -%}
     </div>
-    {%- if pages['contact'] != blank -%}<div class="center" style="margin-top:2.5rem"><a href="{{ pages['contact'].url }}" class="btn btn-outline">Still curious? Contact us</a></div>{%- endif -%}
+    {%- if pages['contact'] != blank -%}<div class="center" style="margin-top:2.5rem"><a href="{{ pages['contact'].url }}" class="btn btn-outline">{{ section.settings.contact_label | default: 'Still curious? Contact us' }}</a></div>{%- endif -%}
   </div>
 </section>
 
@@ -18,7 +20,31 @@
 {
   "name": "FAQ",
   "settings": [
-    { "type": "paragraph", "content": "Edit the questions and answers directly in this section's code." }
+    { "type": "text", "id": "contact_label", "label": "Contact button label", "default": "Still curious? Contact us" },
+    { "type": "paragraph", "content": "Question 1 (blank question = hidden)" },
+    { "type": "text", "id": "faq1_q", "label": "Q1", "default": "What exactly is PDRN?" },
+    { "type": "richtext", "id": "faq1_a", "label": "A1", "default": "<p>PDRN (polydeoxyribonucleotide) is made of small DNA fragments derived from salmon. They're structurally similar to human DNA, so skin tolerates them well — it's prized in K-beauty for supporting repair, resilience and a plump, glazed look.</p>" },
+    { "type": "paragraph", "content": "Question 2" },
+    { "type": "text", "id": "faq2_q", "label": "Q2", "default": "What's in the formula?" },
+    { "type": "richtext", "id": "faq2_a", "label": "A2", "default": "<p>Salmon-DNA PDRN, hydrolyzed collagen, hyaluronic acid and plumping peptides, plus caffeine and vitamin E — a K-beauty-inspired pink collagen balm. Full ingredients are listed on every carton.</p>" },
+    { "type": "paragraph", "content": "Question 3" },
+    { "type": "text", "id": "faq3_q", "label": "Q3", "default": "How often can I use it?" },
+    { "type": "richtext", "id": "faq3_a", "label": "A3", "default": "<p>As often as you like — morning, night, and any time skin feels tight or dull. Swipe, pat in, glow.</p>" },
+    { "type": "paragraph", "content": "Question 4" },
+    { "type": "text", "id": "faq4_q", "label": "Q4", "default": "Can I wear it with makeup?" },
+    { "type": "richtext", "id": "faq4_a", "label": "A4", "default": "<p>Absolutely. It glides on over or under makeup without pilling, so you can refresh your glow throughout the day.</p>" },
+    { "type": "paragraph", "content": "Question 5" },
+    { "type": "text", "id": "faq5_q", "label": "Q5", "default": "Is it vegan?" },
+    { "type": "richtext", "id": "faq5_a", "label": "A5", "default": "<p>No. The PDRN is salmon-derived, so the balm isn't vegan. If you have a fish or marine allergy, please skip it.</p>" },
+    { "type": "paragraph", "content": "Question 6" },
+    { "type": "text", "id": "faq6_q", "label": "Q6", "default": "What skin types is it for?" },
+    { "type": "richtext", "id": "faq6_a", "label": "A6", "default": "<p>All skin types, especially anyone wanting more plump, bounce and dewiness, or to soften the look of fine lines. As always, patch test first.</p>" },
+    { "type": "paragraph", "content": "Question 7" },
+    { "type": "text", "id": "faq7_q", "label": "Q7", "default": "When will I see results?" },
+    { "type": "richtext", "id": "faq7_a", "label": "A7", "default": "<p>Skin looks dewier and more cushioned right after you swipe. For the look of fine lines and firmness, most people use it daily for a few weeks. Results vary.</p>" },
+    { "type": "paragraph", "content": "Question 8" },
+    { "type": "text", "id": "faq8_q", "label": "Q8", "default": "Shipping & returns?" },
+    { "type": "richtext", "id": "faq8_a", "label": "A8", "default": "<p>Free shipping over $35 (and on every trio), flat $4.95 below. Orders ship in 1–2 business days. Not glowing? Return within 30 days for a full refund.</p>" }
   ],
   "presets": [{ "name": "FAQ" }]
 }
