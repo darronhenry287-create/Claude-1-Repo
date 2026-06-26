@@ -1,9 +1,71 @@
 <section class="section">
   <div class="rte wrap">
-    {{ page.content }}
+    {%- if page.content != blank -%}
+      {{ page.content }}
+    {%- elsif section.settings.body != blank -%}
+      {{ section.settings.body }}
+    {%- else -%}
+      {%- case page.handle -%}
+        {%- when 'terms-of-service' -%}
+          <p>By using this site and buying from {{ shop.name }}, you agree to the following.</p>
+          <h3>Products</h3>
+          <p>We sell the Pink Collagen Glow Balm. The product is a cosmetic, not a medicine — descriptions refer to the look and feel of skin and results vary. Any third-party trademarks or brand names are the property of their respective owners.</p>
+          <h3>Orders &amp; pricing</h3>
+          <p>We reserve the right to refuse or cancel any order and to correct pricing errors. Prices and promotions can change without notice.</p>
+          <h3>Use of site</h3>
+          <p>Content on this site is for your personal, non-commercial use. Don't copy or misuse it.</p>
+          <h3>Liability</h3>
+          <p>Always patch test and follow the directions on the carton. Discontinue use if irritation occurs. To the extent permitted by law, we aren't liable for indirect or incidental damages.</p>
+          <p class="muted" style="font-size:.85rem">This is sample wording for your store. Review and edit it before going live.</p>
+        {%- when 'privacy-policy' -%}
+          <p>We collect only what we need to process your order and improve your experience.</p>
+          <h3>What we collect</h3>
+          <ul>
+            <li>Contact &amp; shipping details you provide at checkout.</li>
+            <li>Order history and payment confirmation (we never store full card numbers).</li>
+            <li>Basic analytics about how the site is used.</li>
+          </ul>
+          <h3>How we use it</h3>
+          <p>To fulfil your orders, provide support, and — only if you opt in — send you restock alerts and offers. You can unsubscribe anytime.</p>
+          <h3>Sharing</h3>
+          <p>We share data only with the services that help us run the shop (payments, shipping, email) and never sell your personal information.</p>
+          <h3>Your rights</h3>
+          <p>Contact us to access, correct or delete your data at any time.</p>
+          <p class="muted" style="font-size:.85rem">This is sample wording for your store. Review and edit it before going live.</p>
+        {%- when 'refund-policy' -%}
+          <p>We want you glazed and happy. If you're not, here's how refunds work.</p>
+          <h3>30-day returns</h3>
+          <p>Return your order within 30 days of delivery for a full refund of the product price. Opened and tried is fine — we'd rather you actually test it.</p>
+          <h3>How to request a refund</h3>
+          <ul>
+            <li>Email us with your order number.</li>
+            <li>We'll send a prepaid return label.</li>
+            <li>Once your return is received, we'll refund your original payment method within 5–10 business days.</li>
+          </ul>
+          <h3>Non-refundable</h3>
+          <p>Original shipping charges (if any) are non-refundable. Gift cards are non-refundable.</p>
+          <p class="muted" style="font-size:.85rem">This is sample wording for your store. Review and edit it before going live.</p>
+        {%- when 'shipping-returns' -%}
+          <h3>Shipping</h3>
+          <p>Free standard shipping on orders over <strong>${{ settings.free_shipping_threshold }}</strong> and on every trio (3-pack). Smaller orders ship at a flat rate shown at checkout.</p>
+          <p>Orders are processed and dispatched within <strong>1–2 business days</strong>. Standard delivery typically takes 3–7 business days depending on your location. You'll get a tracking link by email as soon as your order ships.</p>
+          <h3>Returns</h3>
+          <p>Not glowing? Return your balm within <strong>30 days</strong> of delivery for a full refund, even if it's been opened and tried. Items must be in otherwise resalable condition.</p>
+          <h3>Damaged or wrong item</h3>
+          <p>If anything arrives damaged or incorrect, contact us within 7 days and we'll make it right — no need to send it back.</p>
+          <p class="muted" style="font-size:.85rem">This is sample wording for your store. Review and edit it (and align it with your Shopify policy settings) before going live.</p>
+        {%- else -%}
+          <p>Add this page's content in the page editor (Online Store → Pages), or in this section's Body field in the theme editor.</p>
+      {%- endcase -%}
+    {%- endif -%}
   </div>
 </section>
 
 {% schema %}
-{ "name": "Page content", "settings": [] }
+{
+  "name": "Page content",
+  "settings": [
+    { "type": "richtext", "id": "body", "label": "Body content (used when the page itself has no content)" }
+  ]
+}
 {% endschema %}
