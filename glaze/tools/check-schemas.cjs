@@ -24,6 +24,10 @@ for (const f of fs.readdirSync(DIR).filter(f => f.endsWith('.liquid'))) {
       if (s.id) { if (ids.includes(s.id)) problems.push(`${name}${where}: duplicate id "${s.id}"`); ids.push(s.id); }
       if (s.default === '') problems.push(`${name}${where}: empty-string default on "${s.id}" (omit the default instead)`);
       if (s.type === 'image_picker' && 'default' in s) problems.push(`${name}${where}: image_picker "${s.id}" must not have a default`);
+      if (s.type === 'url' && 'default' in s) {
+        const okRoutes = ['/', '/collections', '/collections/all', '/products', '/blogs/news', '/search', '/cart', '/account'];
+        if (!okRoutes.includes(s.default)) problems.push(`${name}${where}: url "${s.id}" default "${s.default}" is invalid (url-type defaults must be a Shopify route; use a text setting for arbitrary paths)`);
+      }
       if (s.type === 'richtext' && s.default != null && !/^\s*<(p|ul|ol|h[1-6])[\s>]/i.test(s.default))
         problems.push(`${name}${where}: richtext "${s.id}" default must be wrapped in <p>/<ul>/<ol>/<h*>`);
       if (s.type === 'inline_richtext' && s.default != null) {
