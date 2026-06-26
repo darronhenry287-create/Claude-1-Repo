@@ -422,6 +422,12 @@ em { font-style: italic; }
 .voice .who { display: flex; align-items: center; gap: 0.6rem; font-size: 0.84rem; font-weight: 600; }
 .voice .av { width: 34px; height: 34px; border-radius: 50%; background: var(--petal); color: var(--pink-deep); display: grid; place-items: center; font-family: var(--serif); }
 .voice .vmeta { font-size: 0.72rem; color: var(--faint); font-weight: 500; }
+.voice.is-hidden { display: none; }
+.rstat { display: flex; align-items: center; gap: 1.1rem; width: max-content; max-width: 100%; margin: 0 auto clamp(2rem, 4vw, 2.8rem); padding: 1rem 1.6rem; background: #fff; border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow-sm); }
+.rstat__score { font-family: var(--serif); font-size: 2.6rem; line-height: 1; color: var(--pink-deep); }
+.rstat__meta .stars { font-size: 1rem; }
+.rstat__count { font-size: 0.82rem; color: var(--muted); margin-top: 0.25rem; }
+.reviews-actions { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
 
 /* ============================================================
    NOTE / FOUNDER

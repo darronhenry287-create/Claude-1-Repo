@@ -4,22 +4,45 @@
         <span class="kicker" style="justify-content:center">{{ section.settings.kicker }}</span>
         <h2>{{ section.settings.heading }}</h2>
       </div>
-      <div class="grid voices__grid">
-        {%- if section.settings.review1_quote != blank -%}
-        <div class="voice reveal"><div class="stars">{{ section.settings.review1_stars }}</div><p>{{ section.settings.review1_quote }}</p><div class="who"><span class="av">{{ section.settings.review1_name | slice: 0 }}</span><div>{{ section.settings.review1_name }}<div class="vmeta">{{ section.settings.review1_meta }}</div></div></div></div>
-        {%- endif -%}
-        {%- if section.settings.review2_quote != blank -%}
-        <div class="voice reveal"><div class="stars">{{ section.settings.review2_stars }}</div><p>{{ section.settings.review2_quote }}</p><div class="who"><span class="av">{{ section.settings.review2_name | slice: 0 }}</span><div>{{ section.settings.review2_name }}<div class="vmeta">{{ section.settings.review2_meta }}</div></div></div></div>
-        {%- endif -%}
-        {%- if section.settings.review3_quote != blank -%}
-        <div class="voice reveal"><div class="stars">{{ section.settings.review3_stars }}</div><p>{{ section.settings.review3_quote }}</p><div class="who"><span class="av">{{ section.settings.review3_name | slice: 0 }}</span><div>{{ section.settings.review3_name }}<div class="vmeta">{{ section.settings.review3_meta }}</div></div></div></div>
+
+      {%- if section.settings.show_stat -%}
+      <div class="rstat">
+        <div class="rstat__score">{{ section.settings.stat_score }}</div>
+        <div class="rstat__meta">
+          <div class="stars">{{ section.settings.stat_stars }}</div>
+          <div class="rstat__count">{{ section.settings.stat_count }}</div>
+        </div>
+      </div>
+      {%- endif -%}
+
+      <div class="grid voices__grid" id="reviews-grid">
+        {%- assign shown = 0 -%}
+        {%- for i in (1..8) -%}
+          {%- assign qk = 'review' | append: i | append: '_quote' -%}
+          {%- assign quote = section.settings[qk] -%}
+          {%- if quote != blank -%}
+            {%- assign shown = shown | plus: 1 -%}
+            {%- assign sk = 'review' | append: i | append: '_stars' -%}
+            {%- assign nk = 'review' | append: i | append: '_name' -%}
+            {%- assign mk = 'review' | append: i | append: '_meta' -%}
+            {%- assign nameval = section.settings[nk] -%}
+            <div class="voice{% if shown <= section.settings.visible_count %} reveal{% else %} is-hidden{% endif %}">
+              <div class="stars">{{ section.settings[sk] }}</div>
+              <p>{{ quote }}</p>
+              <div class="who"><span class="av">{{ nameval | slice: 0 }}</span><div>{{ nameval }}<div class="vmeta">{{ section.settings[mk] }}</div></div></div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="center reviews-actions" style="margin-top:2.2rem">
+        <button type="button" class="btn btn-outline" data-reviews-more>{{ section.settings.more_label | default: 'See more reviews' }}</button>
+        {%- if section.settings.button_link != blank -%}
+          <a href="{{ section.settings.button_link }}" class="btn btn-soft">{{ section.settings.button_label }}</a>
+        {%- elsif pages['reviews'] != blank -%}
+          <a href="{{ pages['reviews'].url }}" class="btn btn-soft">{{ section.settings.button_label }}</a>
         {%- endif -%}
       </div>
-      {%- if section.settings.button_link != blank -%}
-        <div class="center" style="margin-top:2.5rem"><a href="{{ section.settings.button_link }}" class="btn btn-outline">{{ section.settings.button_label }}</a></div>
-      {%- elsif pages['reviews'] != blank -%}
-        <div class="center" style="margin-top:2.5rem"><a href="{{ pages['reviews'].url }}" class="btn btn-outline">{{ section.settings.button_label }}</a></div>
-      {%- endif -%}
     </div>
   </section>
 {% schema %}
@@ -28,23 +51,56 @@
   "settings": [
     { "type": "text", "id": "kicker", "label": "Kicker", "default": "The reviews are in" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Glazed and obsessed." },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Read more reviews" },
-    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "paragraph", "content": "Rating headline" },
+    { "type": "checkbox", "id": "show_stat", "label": "Show rating headline", "default": true },
+    { "type": "text", "id": "stat_score", "label": "Average score", "default": "4.9" },
+    { "type": "text", "id": "stat_stars", "label": "Stars", "default": "★★★★★" },
+    { "type": "text", "id": "stat_count", "label": "Count line", "default": "Based on 12,000+ verified reviews" },
+    { "type": "paragraph", "content": "How many cards to show before \"See more\"" },
+    { "type": "range", "id": "visible_count", "label": "Reviews shown before expanding", "min": 1, "max": 8, "step": 1, "default": 3 },
+    { "type": "text", "id": "more_label", "label": "Expand button label", "default": "See more reviews" },
+    { "type": "text", "id": "button_label", "label": "Secondary button label", "default": "Read all reviews" },
+    { "type": "url", "id": "button_link", "label": "Secondary button link (defaults to your reviews page)" },
     { "type": "paragraph", "content": "Review 1" },
     { "type": "text", "id": "review1_stars", "label": "Stars", "default": "★★★★★" },
     { "type": "textarea", "id": "review1_quote", "label": "Quote", "default": "\"My under-eyes look so plump and bright. I keep one in my bag and swipe it all day.\"" },
-    { "type": "text", "id": "review1_name", "label": "Reviewer name", "default": "Jenna T." },
-    { "type": "text", "id": "review1_meta", "label": "Meta line", "default": "Verified buyer" },
+    { "type": "text", "id": "review1_name", "label": "Name", "default": "Jenna T." },
+    { "type": "text", "id": "review1_meta", "label": "Meta", "default": "Verified buyer" },
     { "type": "paragraph", "content": "Review 2" },
     { "type": "text", "id": "review2_stars", "label": "Stars", "default": "★★★★★" },
     { "type": "textarea", "id": "review2_quote", "label": "Quote", "default": "\"Glazed-donut skin is REAL. Goes right over makeup and never pills. TikTok was right.\"" },
-    { "type": "text", "id": "review2_name", "label": "Reviewer name", "default": "Mika R." },
-    { "type": "text", "id": "review2_meta", "label": "Meta line", "default": "Verified buyer" },
+    { "type": "text", "id": "review2_name", "label": "Name", "default": "Mika R." },
+    { "type": "text", "id": "review2_meta", "label": "Meta", "default": "Verified buyer" },
     { "type": "paragraph", "content": "Review 3" },
     { "type": "text", "id": "review3_stars", "label": "Stars", "default": "★★★★☆" },
     { "type": "textarea", "id": "review3_quote", "label": "Quote", "default": "\"Smile lines look softer after a couple of weeks. The no-mess stick is genius for travel.\"" },
-    { "type": "text", "id": "review3_name", "label": "Reviewer name", "default": "Aria L." },
-    { "type": "text", "id": "review3_meta", "label": "Meta line", "default": "Verified buyer" }
+    { "type": "text", "id": "review3_name", "label": "Name", "default": "Aria L." },
+    { "type": "text", "id": "review3_meta", "label": "Meta", "default": "Verified buyer" },
+    { "type": "paragraph", "content": "Review 4" },
+    { "type": "text", "id": "review4_stars", "label": "Stars", "default": "★★★★★" },
+    { "type": "textarea", "id": "review4_quote", "label": "Quote", "default": "\"I've repurchased three times now. It lives in my coat pocket all winter.\"" },
+    { "type": "text", "id": "review4_name", "label": "Name", "default": "Sofia D." },
+    { "type": "text", "id": "review4_meta", "label": "Meta", "default": "Verified buyer" },
+    { "type": "paragraph", "content": "Review 5" },
+    { "type": "text", "id": "review5_stars", "label": "Stars", "default": "★★★★★" },
+    { "type": "textarea", "id": "review5_quote", "label": "Quote", "default": "\"Put it on before a long flight and landed looking dewy instead of dead. Obsessed.\"" },
+    { "type": "text", "id": "review5_name", "label": "Name", "default": "Chloe W." },
+    { "type": "text", "id": "review5_meta", "label": "Meta", "default": "Verified buyer" },
+    { "type": "paragraph", "content": "Review 6" },
+    { "type": "text", "id": "review6_stars", "label": "Stars", "default": "★★★★☆" },
+    { "type": "textarea", "id": "review6_quote", "label": "Quote", "default": "\"Subtle but real — my skin looks more lit-from-within in photos now.\"" },
+    { "type": "text", "id": "review6_name", "label": "Name", "default": "Naomi K." },
+    { "type": "text", "id": "review6_meta", "label": "Meta", "default": "Verified buyer" },
+    { "type": "paragraph", "content": "Review 7 (empty = hidden)" },
+    { "type": "text", "id": "review7_stars", "label": "Stars", "default": "★★★★★" },
+    { "type": "textarea", "id": "review7_quote", "label": "Quote" },
+    { "type": "text", "id": "review7_name", "label": "Name" },
+    { "type": "text", "id": "review7_meta", "label": "Meta", "default": "Verified buyer" },
+    { "type": "paragraph", "content": "Review 8 (empty = hidden)" },
+    { "type": "text", "id": "review8_stars", "label": "Stars", "default": "★★★★★" },
+    { "type": "textarea", "id": "review8_quote", "label": "Quote" },
+    { "type": "text", "id": "review8_name", "label": "Name" },
+    { "type": "text", "id": "review8_meta", "label": "Meta", "default": "Verified buyer" }
   ],
   "presets": [ { "name": "Reviews" } ]
 }

@@ -304,6 +304,14 @@
     it.classList.toggle('open'); b.style.maxHeight = open ? null : b.scrollHeight + 'px';
   }));
 
+  /* ---- reviews "see more" ---- */
+  $$('[data-reviews-more]').forEach(btn => {
+    const sec = btn.closest('section') || document;
+    const hidden = () => $$('.voice.is-hidden', sec);
+    if (!hidden().length) { btn.style.display = 'none'; return; }
+    btn.addEventListener('click', () => { hidden().forEach(v => v.classList.remove('is-hidden')); btn.style.display = 'none'; });
+  });
+
   /* ---- sticky add-to-cart bar ---- */
   const sb = $('#stickybar'), anchor = $('#buy-anchor');
   if (sb && anchor) new IntersectionObserver(([e]) => sb.classList.toggle('show', !e.isIntersecting && e.boundingClientRect.top < 0), { threshold: 0 }).observe(anchor);
