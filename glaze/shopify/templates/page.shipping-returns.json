@@ -1,7 +1,21 @@
 {
   "sections": {
-    "hero": { "type": "page-hero", "settings": { "kicker": "Shipping & Returns", "heading": "Getting your glow to you." } },
-    "main": { "type": "main-page", "settings": {} }
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "kicker": "Shipping & Returns",
+        "heading": "Getting your glow to you."
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "body": "<p><em>Last updated: June 2026</em></p><p>Here is everything about how your order gets to you, and how returns work.</p><h3>1. Order processing</h3><p>Orders are processed and dispatched within <strong>1&ndash;2 business days</strong>. Orders placed on weekends or holidays are processed the next business day. You will receive a confirmation email when you order and a shipping email with tracking once it is on the way.</p><h3>2. Shipping rates</h3><p>Enjoy <strong>free standard shipping on orders over $35</strong> and on every trio (3-pack). Orders below the threshold ship at a flat rate shown at checkout. Final shipping options and costs are calculated at checkout based on your address.</p><h3>3. Delivery estimates</h3><p>Standard domestic delivery typically takes 3&ndash;7 business days after dispatch, depending on your location and carrier. These are estimates, not guarantees — delivery times can vary during sales, holidays and peak periods.</p><h3>4. Order tracking</h3><p>As soon as your order ships, we will email you a tracking link so you can follow it to your door.</p><h3>5. International shipping</h3><p>Where international shipping is offered, delivery times vary by destination and customs processing. Any import duties, taxes or customs fees are the responsibility of the recipient and are not included in our prices or shipping charges.</p><h3>6. Address accuracy</h3><p>Please double-check your shipping address at checkout. We are not able to cover the cost of reshipping orders returned to us due to an incorrect or incomplete address, though we will always help where we can.</p><h3>7. Delays, lost or stolen packages</h3><p>Once an order is handed to the carrier, delivery is in their hands and we cannot control carrier delays. If tracking shows delivered but you cannot find your parcel, check with neighbours and your carrier first, then contact us at <a href=\"mailto:hello@glaze.shop\">hello@glaze.shop</a> and we will help investigate or file a claim.</p><h3>8. Returns</h3><p>Not glowing? You can return your balm within <strong>30 days</strong> of delivery for a refund — see our Refund Policy for full details and how to start a return.</p><h3>9. Contact us</h3><p>Shipping questions? Email <a href=\"mailto:hello@glaze.shop\">hello@glaze.shop</a>.</p><p>This policy is a template provided as a starting point. Please review it and align it with your carriers, rates and local laws before relying on it.</p>"
+      }
+    }
   },
-  "order": ["hero", "main"]
+  "order": [
+    "hero",
+    "main"
+  ]
 }
